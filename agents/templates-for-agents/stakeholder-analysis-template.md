@@ -33,6 +33,7 @@
 | SH-004 | [Name] | Low | Low | **Monitor** |
 
 **Classifications Explained**:
+
 * **Manage Closely** (High Power, High Interest): Key decision-makers requiring frequent engagement
 * **Keep Satisfied** (High Power, Low Interest): Must be kept satisfied but not overwhelmed with details
 * **Keep Informed** (Low Power, High Interest): Regular updates to maintain support
@@ -53,11 +54,13 @@
 [What does this stakeholder stand to gain or lose from the project?]
 
 **Expectations**:
+
 * [Expectation 1]
 * [Expectation 2]
 * [Expectation 3]
 
 **Concerns/Objections**:
+
 * [Concern 1]
 * [Concern 2]
 
@@ -65,6 +68,7 @@
 [How can this stakeholder impact the project? What authority do they have?]
 
 **Current Attitude**:
+
 * ☐ Champion (Actively promotes the project)
 * ☐ Supporter (Agrees with project goals)
 * ☐ Neutral (No strong opinion)
@@ -74,6 +78,7 @@
 **Desired Attitude**: [What attitude change is needed?]
 
 **Communication Preferences**:
+
 * **Frequency**: [Daily / Weekly / Bi-weekly / Monthly / As needed]
 * **Method**: [Email / Meetings / Reports / Dashboard / Presentations]
 * **Level of Detail**: [High-level summary / Detailed status / Specific metrics]
@@ -81,6 +86,7 @@
 
 **Engagement Strategy**:
 [How will you keep this stakeholder engaged and supportive?]
+
 * [Strategy 1]
 * [Strategy 2]
 
@@ -102,6 +108,7 @@
 * [Stakeholder E] and [Stakeholder F] have conflicting interests regarding [issue]
 
 **Coalition Analysis**:
+
 * **Supporting Coalition**: [List stakeholders likely to support the project]
 * **Neutral Group**: [List stakeholders who are neutral]
 * **Opposing Coalition**: [List stakeholders with concerns or opposition]
@@ -150,10 +157,12 @@
 ### Resistance Management
 
 **Potential Sources of Resistance**:
+
 * [Resistance 1]: [Description and affected stakeholders]
 * [Resistance 2]: [Description and affected stakeholders]
 
 **Mitigation Strategies**:
+
 * [Strategy 1]: [How to address resistance]
 * [Strategy 2]: [How to build support]
 
@@ -191,6 +200,7 @@
 ## 11. Success Metrics
 
 **Stakeholder Engagement Metrics**:
+
 * **Participation Rate**: [% of stakeholders attending meetings/reviews]
 * **Feedback Quality**: [Number of actionable inputs received]
 * **Attitude Shifts**: [Number of stakeholders moving to more supportive positions]
@@ -204,6 +214,7 @@
 **Next Review Date**: [YYYY-MM-DD]
 
 **Update Triggers**:
+
 * Significant project changes
 * New stakeholders identified
 * Major shift in stakeholder attitudes

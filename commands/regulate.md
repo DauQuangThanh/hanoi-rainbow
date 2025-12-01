@@ -29,7 +29,7 @@ Follow this execution flow:
    - If user input (conversation) supplies a value, use it.
    - If `memory/ground-rules.md` exists, extract current values from it (preserve existing principles unless user requests changes).
    - Otherwise infer from existing repo context (README, docs, project structure).
-   - For governance dates: 
+   - For governance dates:
      - `RATIFICATION_DATE` is the original adoption date (if unknown and this is first creation, use today; if updating existing ground-rules, preserve original date).
      - `LAST_AMENDED_DATE` is today if changes are made, otherwise keep previous date.
    - `CONSTITUTION_VERSION` must increment according to semantic versioning rules:

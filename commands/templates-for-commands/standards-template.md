@@ -15,6 +15,7 @@
 | | | | |
 
 **Related Documents**:
+
 - Architecture: `/docs/architecture.md`
 - Ground Rules: `/memory/ground-rules.md`
 - Feature Specifications: `/specs/[###-feature]/spec.md`
@@ -53,6 +54,7 @@ This document establishes comprehensive coding standards and naming conventions 
 ### 1.2 Scope
 
 These standards apply to:
+
 - All source code in the repository
 - All documentation
 - All configuration files
@@ -99,6 +101,7 @@ These standards apply to:
 **Convention**: [e.g., "PascalCase for component names and files"]
 
 **Component Names**:
+
 ```typescript
 // ✅ Good - PascalCase, descriptive, noun-based
 <UserProfile />
@@ -115,6 +118,7 @@ These standards apply to:
 ```
 
 **Component Files**:
+
 ```
 // ✅ Good - Match component name exactly
 UserProfile.tsx
@@ -130,6 +134,7 @@ prod-card.tsx
 #### 2.1.2 Component Types and Suffixes
 
 **Naming by Purpose**:
+
 ```typescript
 // Page/Screen components - suffix with Page or Screen
 HomePage.tsx
@@ -159,6 +164,7 @@ withTheme.tsx
 #### 2.1.3 Composition and Subcomponents
 
 **Dot Notation for Related Components**:
+
 ```typescript
 // Parent component
 export const Card = ({ children }) => {
@@ -936,6 +942,7 @@ See Section 2.10 for detailed frontend structure.
 ### 4.3 Project Organization Patterns
 
 **Feature-Based** (Recommended for large projects):
+
 ```
 src/
 ├── features/
@@ -956,6 +963,7 @@ src/
 ```
 
 **Layer-Based** (Traditional):
+
 ```
 src/
 ├── components/
@@ -1182,7 +1190,8 @@ CREATE TABLE users (
 
 ### 6.3 Primary and Foreign Keys
 
-**Convention**: 
+**Convention**:
+
 - Primary key: `id`
 - Foreign key: `{table_name}_id`
 
@@ -1224,7 +1233,8 @@ CREATE INDEX idx1 ON orders(user_id);
 
 ### 6.5 Constraints
 
-**Convention**: 
+**Convention**:
+
 - Unique: `uq_{table}_{column}`
 - Check: `chk_{table}_{column}`
 - Foreign key: `fk_{table}_{ref_table}`
@@ -1348,6 +1358,7 @@ new-feature
 ```
 
 **Branch Types**:
+
 - `feature/` - New features
 - `bugfix/` - Bug fixes
 - `hotfix/` - Critical production fixes
@@ -1367,6 +1378,7 @@ new-feature
 ```
 
 **Types**:
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -1376,6 +1388,7 @@ new-feature
 - `chore`: Maintenance tasks
 
 **Examples**:
+
 ```bash
 # ✅ Good - clear, conventional commits
 feat(auth): add password reset functionality
@@ -1416,7 +1429,8 @@ docs(api): Update endpoint documentation
 
 ### 9.1 Code Comments
 
-**Convention**: 
+**Convention**:
+
 - Use comments to explain "why", not "what"
 - Keep comments up-to-date with code changes
 
@@ -1660,12 +1674,14 @@ function example()
 ### 11.1 Automated Tools
 
 **Linters**:
+
 - JavaScript/TypeScript: ESLint
 - Python: Pylint, Flake8
 - Ruby: RuboCop
 - Java: Checkstyle
 
 **Formatters**:
+
 - JavaScript/TypeScript: Prettier
 - Python: Black, autopep8
 - Go: gofmt
@@ -1743,6 +1759,7 @@ jobs:
 ### 12.2 Quick Reference Checklist
 
 **UI Naming**:
+
 - [ ] Components: PascalCase
 - [ ] Props: camelCase, boolean with `is`/`has` prefix
 - [ ] Event handlers: `handle` + EventName
@@ -1751,6 +1768,7 @@ jobs:
 - [ ] CSS classes: Follow chosen methodology (BEM/utility)
 
 **Code Naming**:
+
 - [ ] Variables: camelCase (JS/TS) or snake_case (Python)
 - [ ] Constants: SCREAMING_SNAKE_CASE
 - [ ] Functions: Verb-based, camelCase/snake_case
@@ -1758,16 +1776,19 @@ jobs:
 - [ ] Files: Match convention for language
 
 **API**:
+
 - [ ] Endpoints: Plural nouns, lowercase
 - [ ] Query params: Consistent case
 - [ ] Status codes: Appropriate HTTP codes
 
 **Database**:
+
 - [ ] Tables: Plural, snake_case
 - [ ] Columns: snake_case
 - [ ] Keys: `id` for PK, `{table}_id` for FK
 
 **Git**:
+
 - [ ] Branches: `type/ticket-description`
 - [ ] Commits: Conventional Commits format
 - [ ] PRs: Descriptive titles
@@ -1775,6 +1796,7 @@ jobs:
 ### 12.3 Tool Configuration Files
 
 See `/docs/examples/` for sample configuration files:
+
 - `.editorconfig`
 - `.eslintrc.js`
 - `.prettierrc`
@@ -1806,6 +1828,7 @@ See `/docs/examples/` for sample configuration files:
 ## Maintenance Notes
 
 This document should be:
+
 - **Reviewed quarterly** by the team
 - **Updated** when new technologies are adopted
 - **Referenced** in code reviews

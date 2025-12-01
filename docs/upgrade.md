@@ -286,11 +286,13 @@ This tells Hanoi Rainbow which feature directory to use when creating specs, pla
 
 1. **Restart your IDE/editor** completely (not just reload window)
 2. **For CLI-based agents**, verify files exist:
+
    ```bash
    ls -la .claude/commands/      # Claude Code
    ls -la .gemini/commands/       # Gemini
    ls -la .cursor/commands/       # Cursor
    ```
+
 3. **Check agent-specific setup:**
    - Codex requires `CODEX_HOME` environment variable
    - Some agents need workspace restart or cache clearing
@@ -312,6 +314,7 @@ cp /tmp/ground-rules-backup.md .rainbow/memory/ground-rules.md
 ### "Warning: Current directory is not empty"
 
 **Full warning message:**
+
 ```
 Warning: Current directory is not empty (25 items)
 Template files will be merged with existing content and may overwrite existing files
@@ -329,6 +332,7 @@ This warning appears when you run `rainbow init --here` (or `rainbow init .`) in
 **What gets overwritten:**
 
 Only Hanoi Rainbow infrastructure files:
+
 - Agent command files (`.claude/commands/`, `.github/prompts/`, etc.)
 - Scripts in `.rainbow/scripts/`
 - Templates in `.rainbow/templates/`
@@ -346,6 +350,7 @@ Only Hanoi Rainbow infrastructure files:
 - **Type `y` and press Enter** - Proceed with the merge (recommended if upgrading)
 - **Type `n` and press Enter** - Cancel the operation
 - **Use `--force` flag** - Skip this confirmation entirely:
+
   ```bash
   rainbow init --here --force --ai copilot
   ```
@@ -388,6 +393,7 @@ uv tool install rainbow-cli --from git+https://github.com/dauquangthanh/hanoi-ra
 **Explanation:**
 
 The `rainbow` CLI tool is used for:
+
 - **Initial setup:** `rainbow init` to bootstrap Hanoi Rainbow in your project
 - **Upgrades:** `rainbow init --here --force` to update templates and commands
 - **Diagnostics:** `rainbow check` to verify tool installation
@@ -397,6 +403,7 @@ Once you've run `rainbow init`, the slash commands (like `/rainbow.specify`, `/r
 **If your agent isn't recognizing slash commands:**
 
 1. **Verify command files exist:**
+
    ```bash
    # For GitHub Copilot
    ls -la .github/prompts/
@@ -412,6 +419,7 @@ Once you've run `rainbow init`, the slash commands (like `/rainbow.specify`, `/r
 4. **For some agents**, you may need to reload the workspace or clear cache
 
 **Related issue:** If Copilot can't open local files or uses PowerShell commands unexpectedly, this is typically an IDE context issue, not related to `rainbow`. Try:
+
 - Restarting VS Code
 - Checking file permissions
 - Ensuring the workspace folder is properly opened

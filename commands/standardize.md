@@ -78,6 +78,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 **CRITICAL**: This phase is MANDATORY for projects with frontend, UI components, or mockups. Skip this phase ONLY if the project is backend-only with no UI layer (e.g., pure API services, CLI tools, background workers).
 
 **Applicability Check**:
+
 - ✅ REQUIRED: Web applications, mobile apps, desktop apps with GUI, design systems, component libraries
 - ✅ REQUIRED: Projects with HTML/CSS, React/Vue/Angular, iOS/Android UI, Electron/Tauri UI
 - ✅ REQUIRED: Projects with UI mockups, wireframes, or design specifications

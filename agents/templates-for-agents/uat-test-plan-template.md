@@ -12,20 +12,24 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
+
 [State the purpose of this UAT plan and what will be tested]
 
 ### 1.2 Scope
 
 **In Scope**:
+
 * [Feature/Module 1 to be tested]
 * [Feature/Module 2 to be tested]
 * [Feature/Module 3 to be tested]
 
 **Out of Scope**:
+
 * [What will NOT be tested in this UAT]
 * [Features deferred to future testing]
 
 ### 1.3 Objectives
+
 * [Objective 1: e.g., Verify the system meets business requirements]
 * [Objective 2: e.g., Ensure the system is ready for production deployment]
 * [Objective 3: e.g., Validate workflows match real-world business processes]
@@ -35,17 +39,20 @@
 ## 2. Test Environment
 
 ### 2.1 Environment Details
+
 * **Environment URL**: [e.g., https://uat.example.com]
 * **Environment Type**: [UAT/Staging]
 * **Database**: [UAT database name/instance]
 * **Data**: [Production-like test data / Anonymized data]
 
 ### 2.2 Access Requirements
+
 * **User Accounts**: [How testers will receive credentials]
 * **VPN/Network Access**: [Any special network requirements]
 * **Permissions**: [Role-based access for different test scenarios]
 
 ### 2.3 Test Data
+
 * **Data Preparation**: [Who prepares test data and when]
 * **Data Refresh**: [How often data is refreshed]
 * **Data Constraints**: [Limitations or special considerations]
@@ -68,7 +75,9 @@
 ## 4. Entry and Exit Criteria
 
 ### 4.1 Entry Criteria
+
 [Conditions that must be met before UAT can begin]
+
 * ☐ All development complete for in-scope features
 * ☐ System testing (QA) completed with no critical defects
 * ☐ UAT environment ready and stable
@@ -77,7 +86,9 @@
 * ☐ UAT participants trained and available
 
 ### 4.2 Exit Criteria
+
 [Conditions that must be met to complete UAT successfully]
+
 * ☐ All planned test cases executed
 * ☐ No open critical (P1) or high (P2) defects
 * ☐ All medium (P3) defects reviewed and accepted or fixed
@@ -106,6 +117,7 @@
 **Priority**: High / Medium / Low
 
 **Preconditions**:
+
 * [Precondition 1]
 * [Precondition 2]
 
@@ -118,6 +130,7 @@
 **Test Data**: [Reference to specific test data needed]
 
 **Test Steps**:
+
 1. [Step 1 action]
    * **Expected Result**: [What should happen]
 2. [Step 2 action]
@@ -126,6 +139,7 @@
    * **Expected Result**: [What should happen]
 
 **Acceptance Criteria**:
+
 * [Criterion 1]
 * [Criterion 2]
 
@@ -155,6 +169,7 @@
 | **P4 - Low** | Suggestions, enhancements | Improved wording request | As resources permit |
 
 ### 6.2 Defect Logging Process
+
 1. Tester identifies issue during testing
 2. Tester logs defect in [defect tracking tool]
 3. Business Analyst reviews and categorizes
@@ -171,6 +186,7 @@
 **Status**: [Open/In Progress/Fixed/Retest/Closed/Deferred]
 
 **Steps to Reproduce**:
+
 1. [Step 1]
 2. [Step 2]
 3. [Step 3]
@@ -197,6 +213,7 @@
 | **Sign-off** | Approval and closure | [Date] | [Date] | [Name] |
 
 **Daily Testing Sessions**:
+
 * **Time**: [e.g., 2:00 PM - 4:00 PM]
 * **Duration**: [e.g., 2 hours per day]
 * **Location**: [Virtual/In-person, meeting link]
@@ -206,6 +223,7 @@
 ## 8. Communication and Reporting
 
 ### 8.1 Status Meetings
+
 * **Frequency**: [Daily during testing / As needed]
 * **Attendees**: [UAT team, project manager, developers]
 * **Purpose**: Progress updates, issue escalation
@@ -222,7 +240,9 @@
 **Issues/Risks**: [Any blockers or concerns]
 
 ### 8.3 Final UAT Report
+
 To be provided at the end of UAT with:
+
 * Executive summary
 * Test execution metrics
 * Defect summary by severity
@@ -244,10 +264,12 @@ To be provided at the end of UAT with:
 ## 10. Assumptions and Dependencies
 
 **Assumptions**:
+
 * [Assumption 1: e.g., Testers have basic system knowledge]
 * [Assumption 2: e.g., Environment will be stable]
 
 **Dependencies**:
+
 * [Dependency 1: e.g., UAT environment must be ready by [date]]
 * [Dependency 2: e.g., Test data must be loaded by [date]]
 
@@ -272,13 +294,17 @@ To be provided at the end of UAT with:
 ## 12. Appendices
 
 ### Appendix A: Test Case Details
+
 [Link to full test case document or test management tool]
 
 ### Appendix B: Defect Log
+
 [Link to defect tracking system or spreadsheet]
 
 ### Appendix C: Training Materials
+
 [Links to user guides, training videos, or documentation]
 
 ### Appendix D: Test Data Reference
+
 [Links to test data sets or data preparation scripts]

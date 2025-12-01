@@ -15,6 +15,7 @@
 | | | | |
 
 **Related Documents**:
+
 - Architecture: `/docs/architecture.md`
 - Ground Rules: `/memory/ground-rules.md`
 - Feature Specifications: `/specs/[###-feature]/spec.md`
@@ -72,6 +73,7 @@ This document establishes the comprehensive end-to-end (E2E) testing strategy fo
 **Product Description**: [Brief description of the product]
 
 **Key Components** (from architecture):
+
 - Frontend: [e.g., React web app]
 - Backend: [e.g., FastAPI REST API]
 - Database: [e.g., PostgreSQL]
@@ -89,6 +91,7 @@ This document establishes the comprehensive end-to-end (E2E) testing strategy fo
 **E2E Test Philosophy**:
 
 E2E tests in this project focus on:
+
 - ✅ **Critical user paths** that deliver core business value
 - ✅ **System integration points** between major components
 - ✅ **Business workflows** spanning multiple features
@@ -109,12 +112,14 @@ E2E tests are the **smallest layer** of the test pyramid but provide the **highe
 ### 2.2 Testing Types
 
 **Primary E2E Testing**:
+
 - **UI-driven tests**: Simulate real user interactions through the browser/app
 - **API-driven tests**: Validate backend workflows and integrations
 - **Database validation**: Verify data persistence and integrity
 - **Cross-system flows**: Test integrations with external services
 
 **Supplementary Testing** (within E2E scope):
+
 - **Visual regression**: Detect unintended UI changes
 - **Accessibility**: Validate WCAG compliance in user flows
 - **Performance**: Measure response times under realistic load
@@ -132,6 +137,7 @@ E2E tests are the **smallest layer** of the test pyramid but provide the **highe
 ### 2.4 Entry and Exit Criteria
 
 **Entry Criteria** (when to run E2E tests):
+
 - [ ] Unit tests pass ≥ 90%
 - [ ] Integration tests pass ≥ 85%
 - [ ] Code review completed
@@ -139,6 +145,7 @@ E2E tests are the **smallest layer** of the test pyramid but provide the **highe
 - [ ] Test data is prepared
 
 **Exit Criteria** (when E2E test run is complete):
+
 - [ ] Smoke tests pass 100%
 - [ ] Regression tests pass ≥ 95%
 - [ ] No P0 (critical) failures
@@ -247,6 +254,7 @@ graph LR
 **Frequency**: [How often users perform this]
 
 **Happy Path**:
+
 ```mermaid
 graph LR
     A[Start] --> B[Step 1: Action]
@@ -259,6 +267,7 @@ graph LR
 ```
 
 **Steps**:
+
 1. **Step 1**: User performs [action]
    - Expected: [outcome]
 2. **Step 2**: System processes [data]
@@ -267,10 +276,12 @@ graph LR
    - Expected: [final state]
 
 **Alternative Paths**:
+
 - **Alt 1**: [Scenario when X happens]
 - **Alt 2**: [Scenario when Y happens]
 
 **Failure Scenarios**:
+
 - **Fail 1**: [What happens if validation fails]
 - **Fail 2**: [What happens if external service is down]
 
@@ -335,6 +346,7 @@ Scenario: [Descriptive name]
 **Estimated Duration**: 2-3 minutes
 
 **Preconditions**:
+
 - User is not logged in
 - Registration page is accessible
 - Email service is available (mocked if necessary)
@@ -355,6 +367,7 @@ And user account exists in database
 ```
 
 **Expected Results**:
+
 - ✓ Registration form submits successfully
 - ✓ Success message displayed to user
 - ✓ Confirmation email sent (verify in mock email service)
@@ -363,6 +376,7 @@ And user account exists in database
 - ✓ User can log in with new credentials
 
 **Database Validation**:
+
 ```sql
 -- Verify user was created
 SELECT id, email, email_verified, created_at 
@@ -373,6 +387,7 @@ WHERE email = 'test@example.com';
 ```
 
 **Test Data**:
+
 - Email: `test-{timestamp}@example.com` (unique per run)
 - Password: `SecurePass123!`
 
@@ -409,11 +424,13 @@ WHERE email = 'test@example.com';
 **Tags**: [tags]
 
 **Test Steps** (brief):
+
 1. [Step 1]
 2. [Step 2]
 3. [Step 3]
 
 **Expected Results**:
+
 - ✓ [Result 1]
 - ✓ [Result 2]
 
@@ -440,6 +457,7 @@ WHERE email = 'test@example.com';
 **Tags**: `negative`, `validation`, `authentication`
 
 **Test Steps**:
+
 ```gherkin
 Given user "existing@example.com" already exists in database
 When new user attempts to register with "existing@example.com"
@@ -470,6 +488,7 @@ And no duplicate user created in database
 **Features Involved**: [Feature A], [Feature B]
 
 **Workflow**:
+
 ```mermaid
 sequenceDiagram
     participant User
@@ -496,6 +515,7 @@ sequenceDiagram
 **Approach**: [Choose: Fixed fixtures, Factory pattern, Database seeding, API-generated]
 
 **Principles**:
+
 - **Isolation**: Each test uses independent data to avoid conflicts
 - **Repeatability**: Tests produce same results with same data
 - **Cleanup**: Data is cleaned up after test completion
@@ -515,6 +535,7 @@ sequenceDiagram
 ### 6.3 Test Data Generation
 
 **User Data Factory** (example):
+
 ```typescript
 // Example: TypeScript test data factory
 class UserFactory {
@@ -538,12 +559,14 @@ class UserFactory {
 ### 6.4 Test Data Cleanup
 
 **Cleanup Strategy**:
+
 - **Automatic**: Use test framework hooks (afterEach, afterAll)
 - **Database transactions**: Rollback after each test (if possible)
 - **Soft delete**: Mark test data with `is_test_data=true` flag
 - **Scheduled cleanup**: Daily job to remove old test data
 
 **Example Cleanup**:
+
 ```typescript
 afterEach(async () => {
   // Delete test users created in this test
@@ -560,6 +583,7 @@ afterEach(async () => {
 -->
 
 **Rules**:
+
 - ❌ **NEVER** use real user data, emails, or phone numbers
 - ❌ **NEVER** use real payment card numbers (use test cards)
 - ❌ **NEVER** commit secrets, API keys, or passwords to git
@@ -568,6 +592,7 @@ afterEach(async () => {
 - ✅ **ALWAYS** use test payment gateways (Stripe test mode, etc.)
 
 **Test Payment Cards**:
+
 | Card Type | Number | CVV | Expiry | Result |
 |-----------|--------|-----|--------|--------|
 | Visa | 4242 4242 4242 4242 | Any 3 digits | Future date | Success |
@@ -594,6 +619,7 @@ afterEach(async () => {
 ### 7.2 Environment Setup
 
 **Local Development Environment**:
+
 ```bash
 # Example: Docker Compose setup
 docker-compose -f docker-compose.test.yml up -d
@@ -609,6 +635,7 @@ npm run start:test
 ```
 
 **CI Environment**:
+
 ```yaml
 # Example: GitHub Actions
 - name: Setup test environment
@@ -621,6 +648,7 @@ npm run start:test
 ### 7.3 Service Mocking Strategy
 
 **When to Mock**:
+
 - External payment gateways (use test mode or mock)
 - Email services (use test inbox or mock SMTP)
 - SMS services (use mock provider)
@@ -628,11 +656,13 @@ npm run start:test
 - Services with costs per request
 
 **When to Use Real Services**:
+
 - Internal microservices (test real integration)
 - Database (use real database, not in-memory)
 - Authentication service (test real auth flow)
 
 **Mocking Tools**:
+
 - **API Mocking**: WireMock, MSW (Mock Service Worker), Nock
 - **Email**: Mailhog, Mailtrap, Ethereal
 - **Database**: Test database instance (not mocked)
@@ -640,16 +670,19 @@ npm run start:test
 ### 7.4 Infrastructure Requirements
 
 **Compute**:
+
 - CPU: [e.g., 4 cores minimum]
 - Memory: [e.g., 8GB RAM minimum]
 - Storage: [e.g., 50GB SSD]
 
 **Network**:
+
 - Stable internet connection for external API calls
 - VPN access if testing internal services
 - Firewall rules for test environment access
 
 **Dependencies**:
+
 - Database: [PostgreSQL 15, Redis 7, etc.]
 - Message Queue: [RabbitMQ, Kafka, etc. if needed]
 - Cache: [Redis, Memcached, etc.]
@@ -668,12 +701,14 @@ npm run start:test
 **Primary Testing Framework**: [e.g., Playwright]
 
 **Justification**:
+
 - ✅ [Reason 1: Cross-browser support]
 - ✅ [Reason 2: Auto-wait for elements]
 - ✅ [Reason 3: Parallel execution]
 - ✅ [Reason 4: Strong TypeScript support]
 
 **Alternative Considered**: [e.g., Cypress]
+
 - ❌ [Why not chosen: Limited cross-browser support]
 
 ### 8.2 Tool Stack
@@ -693,6 +728,7 @@ npm run start:test
 ### 8.3 Framework Configuration
 
 **Example: Playwright Configuration**
+
 ```typescript
 // playwright.config.ts
 import { defineConfig, devices } from '@playwright/test';
@@ -726,6 +762,7 @@ export default defineConfig({
 ### 8.4 Custom Utilities
 
 **Common Utilities to Implement**:
+
 - **Authentication helper**: Reusable login flow
 - **Database helpers**: Seed data, cleanup
 - **API helpers**: Common API calls
@@ -742,6 +779,7 @@ export default defineConfig({
 **Pattern**: [e.g., Page Object Model (POM)]
 
 **Structure**:
+
 ```
 tests/
 ├── e2e/
@@ -806,6 +844,7 @@ export class LoginPage {
 ### 9.3 Test Structure
 
 **AAA Pattern** (Arrange-Act-Assert):
+
 ```typescript
 test('User can login with valid credentials', async ({ page }) => {
   // ARRANGE - Setup test data and preconditions
@@ -829,12 +868,14 @@ test('User can login with valid credentials', async ({ page }) => {
 ### 9.4 Test Organization
 
 **Naming Conventions**:
+
 - Test files: `*.spec.ts` or `*.test.ts`
 - Page objects: `*Page.ts`
 - Helpers: `*.helper.ts`
 - Fixtures: `*.fixture.ts` or `*.json`
 
 **Test Tags**:
+
 ```typescript
 test.describe('Authentication', { tag: '@smoke' }, () => {
   test('Login with valid credentials', { tag: '@critical' }, async () => {
@@ -878,6 +919,7 @@ gantt
 ### 10.3 CI/CD Integration
 
 **GitHub Actions Example**:
+
 ```yaml
 name: E2E Tests
 
@@ -923,11 +965,13 @@ jobs:
 **Strategy**: [e.g., Shard tests across multiple workers]
 
 **Configuration**:
+
 - **Workers**: [e.g., 4 parallel workers]
 - **Sharding**: [e.g., Split by test file]
 - **Retry**: [e.g., 2 retries on failure]
 
 **Example**:
+
 ```bash
 # Run tests in parallel with 4 workers
 npx playwright test --workers=4
@@ -954,18 +998,21 @@ npx playwright test --shard=2/4
 ### 11.1 Test Reports
 
 **Report Types**:
+
 - **HTML Report**: Human-readable test results with screenshots/videos
 - **JSON Report**: Machine-readable for processing
 - **Allure Report**: Rich interactive report with history
 - **JUnit XML**: For CI/CD integration
 
 **Report Storage**:
+
 - CI artifacts: [e.g., 30 days retention]
 - ReportPortal: [e.g., Persistent storage with history]
 
 ### 11.2 Dashboards
 
 **Metrics Dashboard** should display:
+
 - Test pass rate (overall and per suite)
 - Test execution duration trends
 - Flaky test detection
@@ -973,6 +1020,7 @@ npx playwright test --shard=2/4
 - Failure analysis (top failing tests)
 
 **Example Metrics**:
+
 ```
 ┌─────────────────────────────────────────┐
 │ E2E Test Metrics - Last 7 Days          │
@@ -989,11 +1037,13 @@ npx playwright test --shard=2/4
 ### 11.3 Failure Notifications
 
 **Notification Channels**:
+
 - Slack: [e.g., #test-failures channel]
 - Email: [e.g., QA team email]
 - GitHub: PR comments for PR-triggered tests
 
 **Notification Rules**:
+
 - **Smoke failures**: Immediate notification
 - **Regression failures**: Summary after full run
 - **Flaky tests**: Weekly digest
@@ -1017,17 +1067,20 @@ npx playwright test --shard=2/4
 **Definition**: A flaky test passes and fails intermittently without code changes.
 
 **Identification**:
+
 - Track test history in ReportPortal/Allure
 - Flag tests with inconsistent results
 - Monitor retry counts
 
 **Resolution**:
+
 1. **Investigate root cause** (timing, race conditions, external dependencies)
 2. **Fix or quarantine** (mark with `@flaky` tag, run separately)
 3. **Document issue** in test code comments
 4. **Track in backlog** for prioritized fixing
 
 **Example**:
+
 ```typescript
 test('Flaky test example', async ({ page }) => {
   // Known flaky: Sometimes element loads slowly
@@ -1050,12 +1103,14 @@ test('Flaky test example', async ({ page }) => {
 ### 12.3 Test Refactoring
 
 **When to Refactor**:
+
 - Tests become slow (> 5 min per test)
 - Tests are hard to understand
 - High duplication across tests
 - Test maintenance takes > 30% of QA time
 
 **Refactoring Techniques**:
+
 - Extract common actions to helpers
 - Use fixtures for repeated setup
 - Implement Page Object Model
@@ -1065,11 +1120,13 @@ test('Flaky test example', async ({ page }) => {
 ### 12.4 Continuous Improvement
 
 **Review Process**:
+
 1. **Weekly**: Review failed tests and flakiness
 2. **Monthly**: Analyze metrics and trends
 3. **Quarterly**: Evaluate tooling and architecture
 
 **Improvement Areas**:
+
 - Test execution speed optimization
 - Test coverage gap analysis
 - Framework upgrade evaluation
@@ -1096,7 +1153,7 @@ test('Flaky test example', async ({ page }) => {
 
 - **Architecture**: `/docs/architecture.md`
 - **Standards**: `/docs/standards.md`
-- **Playwright Documentation**: https://playwright.dev/
+- **Playwright Documentation**: <https://playwright.dev/>
 - **Test Automation Patterns**: [Link to internal wiki]
 - **CI/CD Pipeline**: [Link to pipeline documentation]
 
@@ -1119,12 +1176,14 @@ test('Flaky test example', async ({ page }) => {
 ### 13.4 Environment Details
 
 **Staging Environment**:
+
 - URL: [staging URL]
 - Credentials: [Link to secure vault]
 - Database: [Connection details]
 - Monitoring: [Dashboard URL]
 
 **QA Environment**:
+
 - URL: [QA URL]
 - Credentials: [Link to secure vault]
 - Database: [Connection details]
@@ -1148,6 +1207,7 @@ test('Flaky test example', async ({ page }) => {
 ## Maintenance Notes
 
 This document should be:
+
 - **Reviewed monthly** by QA team
 - **Updated** when new features are added or architecture changes
 - **Referenced** when implementing new E2E tests

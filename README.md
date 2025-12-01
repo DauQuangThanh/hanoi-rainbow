@@ -73,6 +73,7 @@ uvx --from git+https://github.com/dauquangthanh/hanoi-rainbow.git rainbow init <
 ```
 
 **Why install?**
+
 - ✅ Available everywhere in your terminal
 - ✅ Easy to upgrade with `uv tool upgrade`
 - ✅ Cleaner than shell aliases
@@ -366,10 +367,12 @@ Before you start, make sure you have:
 ## 📚 Learn More
 
 **Deep Dives:**
+
 - 📖 [Complete Spec-Driven Development Guide](./spec-driven.md) - Full methodology explained
 - 🔍 [Step-by-Step Walkthrough](#-detailed-process) - Implementation details below
 
 **Quick Links:**
+
 - 💬 [Get Support](https://github.com/dauquangthanh/hanoi-rainbow/issues/new) - Ask questions or report issues
 - 📄 [View License](./LICENSE) - MIT License
 - 🌟 [Star on GitHub](https://github.com/dauquangthanh/hanoi-rainbow) - Support the project

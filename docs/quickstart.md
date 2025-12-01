@@ -229,10 +229,12 @@ Now specify **how** to build it (tech stack and architecture):
 ## 📚 Next Steps
 
 **Learn more:**
+
 - 📖 [Complete Methodology](../spec-driven.md) - Deep dive into the full process
 - 🔍 [More Examples](../templates) - Explore sample projects
 - 💻 [Source Code](https://github.com/dauquangthanh/hanoi-rainbow) - Contribute to the project
 
 **Get help:**
+
 - 🐛 [Report Issues](https://github.com/dauquangthanh/hanoi-rainbow/issues/new) - Found a bug?
 - 💬 [Ask Questions](https://github.com/dauquangthanh/hanoi-rainbow/discussions) - Need help?

@@ -13,10 +13,13 @@
 ## 1. Overview
 
 ### 1.1 Purpose
+
 [Describe the purpose of this database and what application/system it supports]
 
 ### 1.2 Scope
+
 This document covers:
+
 * Database schema design and relationships
 * Data models and entity definitions
 * Indexes and constraints
@@ -29,9 +32,11 @@ This document covers:
 ## 2. Database Architecture
 
 ### 2.1 Database Technology
+
 **Database System**: [PostgreSQL 15 / MySQL 8.0 / MongoDB 6.0 / etc]
 
 **Rationale**:
+
 * [Reason 1]: [e.g., "ACID compliance required for financial transactions"]
 * [Reason 2]: [e.g., "Strong JSON support needed"]
 * [Reason 3]: [e.g., "Excellent performance for read-heavy workloads"]
@@ -115,19 +120,23 @@ This document covers:
 | `deleted_at` | TIMESTAMP | Yes | NULL | Soft delete timestamp |
 
 **Indexes**:
+
 * `PRIMARY KEY (id)`
 * `UNIQUE INDEX idx_users_email ON users(email)` - Unique email constraint
 * `INDEX idx_users_status ON users(status)` - Filter by status
 * `INDEX idx_users_created_at ON users(created_at)` - Sort by creation date
 
 **Constraints**:
+
 * `CHECK (status IN ('active', 'inactive', 'suspended'))`
 * `CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')` - Email format validation
 
 **Triggers**:
+
 * `update_updated_at_column` - Automatically update `updated_at` on row modification
 
 **SQL Definition**:
+
 ```sql
 CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -180,6 +189,7 @@ CREATE TRIGGER update_users_updated_at
 | `updated_at` | TIMESTAMP | No | CURRENT_TIMESTAMP | Last update timestamp |
 
 **Indexes**:
+
 * `PRIMARY KEY (id)`
 * `UNIQUE INDEX idx_orders_order_number ON orders(order_number)` - Unique order number
 * `INDEX idx_orders_user_id ON orders(user_id)` - Find orders by user
@@ -187,13 +197,16 @@ CREATE TRIGGER update_users_updated_at
 * `INDEX idx_orders_created_at ON orders(created_at DESC)` - Recent orders first
 
 **Foreign Keys**:
+
 * `FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT`
 
 **Constraints**:
+
 * `CHECK (status IN ('pending', 'processing', 'shipped', 'delivered', 'cancelled'))`
 * `CHECK (total_amount >= 0)`
 
 **SQL Definition**:
+
 ```sql
 CREATE TABLE orders (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -228,6 +241,7 @@ CREATE TRIGGER update_orders_updated_at
 ---
 
 ### 4.3 [Additional Tables]
+
 [Repeat the structure above for each table in the database]
 
 ---
@@ -252,6 +266,7 @@ CREATE TRIGGER update_orders_updated_at
 ### 5.3 Referential Integrity
 
 **Cascading Rules**:
+
 * `ON DELETE RESTRICT`: Prevent deletion if referenced (e.g., users with orders)
 * `ON DELETE CASCADE`: Delete child records (e.g., order items when order deleted)
 * `ON DELETE SET NULL`: Set foreign key to NULL (e.g., optional relationships)
@@ -263,10 +278,12 @@ CREATE TRIGGER update_orders_updated_at
 ### 6.1 Index Strategy
 
 **Primary Keys**:
+
 * All tables use UUID primary keys for distributed system compatibility
 * Alternative: Use BIGSERIAL for single-database systems
 
 **Secondary Indexes**:
+
 | Index Name | Table | Columns | Type | Purpose |
 | :--- | :--- | :--- | :--- | :--- |
 | `idx_users_email` | users | email | UNIQUE | Login, user lookup |
@@ -275,6 +292,7 @@ CREATE TRIGGER update_orders_updated_at
 | `idx_orders_created_at` | orders | created_at DESC | BTREE | Recent orders first |
 
 **Composite Indexes**:
+
 ```sql
 -- Find user's orders by status
 CREATE INDEX idx_orders_user_status ON orders(user_id, status);
@@ -288,6 +306,7 @@ CREATE INDEX idx_products_category_price ON products(category_id, price);
 **Common Query Patterns**:
 
 1. **Get user's recent orders**:
+
 ```sql
 SELECT * FROM orders
 WHERE user_id = $1
@@ -296,7 +315,8 @@ LIMIT 10;
 -- Uses: idx_orders_user_id + idx_orders_created_at
 ```
 
-2. **Find pending orders**:
+1. **Find pending orders**:
+
 ```sql
 SELECT * FROM orders
 WHERE status = 'pending'
@@ -305,6 +325,7 @@ WHERE status = 'pending'
 ```
 
 **Avoid**:
+
 * SELECT * (specify needed columns)
 * N+1 queries (use JOINs or batch queries)
 * Unindexed WHERE clauses on large tables
@@ -334,11 +355,13 @@ WHERE status = 'pending'
 ### 7.3 Caching Strategy
 
 **Cache Layers**:
+
 * **Application Cache (Redis)**: User sessions, frequently accessed data
 * **Database Query Cache**: Read replicas for read-heavy queries
 * **CDN**: Static content (product images, etc.)
 
 **Cache Invalidation**:
+
 * TTL-based: [e.g., User profile: 15 minutes]
 * Event-based: Invalidate on write operations
 
@@ -349,14 +372,17 @@ WHERE status = 'pending'
 ### 8.1 Constraints
 
 **NOT NULL Constraints**:
+
 * All foreign keys must be NOT NULL
 * Required business fields (email, names, etc.)
 
 **UNIQUE Constraints**:
+
 * `users.email` - One account per email
 * `orders.order_number` - Unique order identifier
 
 **CHECK Constraints**:
+
 * Enum-like fields (status values)
 * Business rules (e.g., total_amount >= 0)
 * Data format validation (email regex)
@@ -364,6 +390,7 @@ WHERE status = 'pending'
 ### 8.2 Referential Integrity
 
 **Foreign Key Rules**:
+
 ```sql
 -- Prevent user deletion if they have orders
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT
@@ -378,11 +405,13 @@ FOREIGN KEY (assigned_user_id) REFERENCES users(id) ON DELETE SET NULL
 ### 8.3 Data Validation
 
 **Application-Level Validation**:
+
 * Email format (regex in CHECK constraint + application)
 * Password strength (application only, not stored plaintext)
 * Business logic (order total matches item sum)
 
 **Database-Level Validation**:
+
 * Data types (VARCHAR length, DECIMAL precision)
 * CHECK constraints for enum values
 * Triggers for complex validation
@@ -394,11 +423,13 @@ FOREIGN KEY (assigned_user_id) REFERENCES users(id) ON DELETE SET NULL
 ### 9.1 Data Security
 
 **Encryption**:
+
 * **At Rest**: Database-level encryption (e.g., AWS RDS encryption)
 * **In Transit**: TLS 1.3 for all connections
 * **Application-Level**: Sensitive fields (e.g., payment info) encrypted before storage
 
 **Access Control**:
+
 ```sql
 -- Application user (read/write)
 CREATE USER app_user WITH PASSWORD 'secure_password';
@@ -416,11 +447,13 @@ GRANT ALL PRIVILEGES ON DATABASE mydb TO admin_user;
 ### 9.2 Sensitive Data
 
 **PII (Personally Identifiable Information)**:
+
 * `users.email` - Encrypted or pseudonymized in backups
 * `users.first_name`, `users.last_name` - Access logged
 * `orders.shipping_address` - Encrypted in backups
 
 **Compliance Requirements**:
+
 * **GDPR**: Right to be forgotten (soft delete with `deleted_at`)
 * **PCI DSS**: No storage of CVV, full card numbers tokenized
 * **HIPAA**: Audit logging for all PHI access (if applicable)
@@ -428,6 +461,7 @@ GRANT ALL PRIVILEGES ON DATABASE mydb TO admin_user;
 ### 9.3 Audit Logging
 
 **Audit Trail Table**:
+
 ```sql
 CREATE TABLE audit_log (
     id BIGSERIAL PRIMARY KEY,
@@ -454,11 +488,13 @@ CREATE TRIGGER audit_users_changes
 ### 10.1 Backup Strategy
 
 **Backup Schedule**:
+
 * **Full Backup**: Daily at 2:00 AM UTC
 * **Incremental Backup**: Every 4 hours
 * **Transaction Log Backup**: Every 15 minutes
 
 **Retention Policy**:
+
 * Daily backups: 30 days
 * Weekly backups: 3 months
 * Monthly backups: 1 year
@@ -470,18 +506,21 @@ CREATE TRIGGER audit_users_changes
 **Migration Tool**: [Flyway / Liquibase / Alembic / dbmate]
 
 **Migration Process**:
+
 1. Create migration script (versioned: V001__initial_schema.sql)
 2. Test in development environment
 3. Review in staging environment
 4. Apply to production during maintenance window
 
 **Rollback Strategy**:
+
 * All migrations must have corresponding DOWN migration
 * Test rollback in staging before production deployment
 
 ### 10.3 Monitoring and Alerts
 
 **Metrics to Monitor**:
+
 * Query performance (slow query log > 1 second)
 * Connection pool utilization (alert at 80%)
 * Disk space (alert at 75% full)
@@ -489,6 +528,7 @@ CREATE TRIGGER audit_users_changes
 * Failed queries and deadlocks
 
 **Alerting Thresholds**:
+
 | Metric | Warning | Critical |
 | :--- | :--- | :--- |
 | Disk Usage | 75% | 90% |
@@ -501,6 +541,7 @@ CREATE TRIGGER audit_users_changes
 ## 11. Scaling Strategy
 
 ### 11.1 Vertical Scaling
+
 * **Current**: [e.g., db.t3.medium (2 vCPU, 4 GB RAM)]
 * **Next Tier**: [e.g., db.r5.large (2 vCPU, 16 GB RAM)]
 * **Maximum**: [e.g., db.r5.4xlarge (16 vCPU, 128 GB RAM)]
@@ -508,11 +549,13 @@ CREATE TRIGGER audit_users_changes
 ### 11.2 Horizontal Scaling
 
 **Read Replicas**:
+
 * Deploy 2-3 read replicas for read-heavy workloads
 * Route analytics queries to replicas
 * Use connection pooler (e.g., PgBouncer) to manage connections
 
 **Sharding Strategy** (if needed):
+
 * **Shard Key**: `user_id` (partition by user)
 * **Shard Count**: Start with 4 shards, expand as needed
 * **Routing**: Application-level routing based on user_id hash
@@ -520,6 +563,7 @@ CREATE TRIGGER audit_users_changes
 ### 11.3 Partitioning
 
 **Table Partitioning**:
+
 ```sql
 -- Partition orders table by creation date (monthly)
 CREATE TABLE orders (
@@ -534,6 +578,7 @@ CREATE TABLE orders_2025_02 PARTITION OF orders
 ```
 
 **Benefits**:
+
 * Faster queries on recent data
 * Easier archival (detach old partitions)
 * Better index performance
@@ -543,15 +588,19 @@ CREATE TABLE orders_2025_02 PARTITION OF orders
 ## 12. Appendices
 
 ### Appendix A: Complete Schema SQL
+
 [Link to full schema creation script]
 
 ### Appendix B: Sample Data
+
 [Link to seed data script for development/testing]
 
 ### Appendix C: Migration Scripts
+
 [Link to database migration history]
 
 ### Appendix D: Performance Benchmarks
+
 [Link to query performance test results]
 
 ---

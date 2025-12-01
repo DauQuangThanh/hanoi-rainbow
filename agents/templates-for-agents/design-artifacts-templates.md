@@ -7,33 +7,40 @@
 **Role/Job Title**: [Occupation]
 
 ### Demographics
+
 - **Location**: [City/Country]
 - **Education**: [Education level]
 - **Tech Savviness**: [Low/Medium/High]
 
 ### Goals
+
 - [Primary goal 1]
 - [Primary goal 2]
 - [Primary goal 3]
 
 ### Pain Points / Frustrations
+
 - [Pain point 1]
 - [Pain point 2]
 - [Pain point 3]
 
 ### Behaviors
+
 - [Key behavior 1]
 - [Key behavior 2]
 - [Usage pattern]
 
 ### Motivations
+
 - [What drives them]
 - [What they value]
 
 ### Quote
+>
 > "[A characteristic quote that captures their attitude or need]"
 
 ### Devices/Platforms
+
 - Primary: [Device/Platform]
 - Secondary: [Device/Platform]
 
@@ -64,6 +71,7 @@
    - Error Handling: [What happens if something goes wrong]
 
 ### Alternative Flows
+
 - **If [condition]**: [Alternative path]
 - **If [condition]**: [Alternative path]
 
@@ -76,12 +84,14 @@
 **Resolution**: [Width x Height]
 
 ### Layout Structure
+
 - **Header**: [Height, content]
 - **Main Content Area**: [Sections, grid structure]
 - **Sidebar** (if applicable): [Width, content]
 - **Footer**: [Height, content]
 
 ### Components on Page
+
 1. **[Component Name]**
    - Location: [Position on page]
    - Purpose: [What it does]
@@ -95,11 +105,13 @@
    - Interactions: [Click, hover, etc.]
 
 ### Responsive Behavior
+
 - **Mobile (320-767px)**: [How layout adapts]
 - **Tablet (768-1023px)**: [How layout adapts]
 - **Desktop (1024px+)**: [How layout adapts]
 
 ### Annotations
+
 - [Important note 1]
 - [Important note 2]
 - [Developer note]
@@ -113,12 +125,14 @@
 **Last Updated**: [Date]
 
 ### Variants
+
 - **Primary**: [Use case and appearance]
 - **Secondary**: [Use case and appearance]
 - **Tertiary**: [Use case and appearance]
 - **Disabled**: [Appearance]
 
 ### States
+
 - Default
 - Hover
 - Active/Pressed
@@ -128,6 +142,7 @@
 - Error (if applicable)
 
 ### Design Tokens
+
 ```
 Colors:
   Background: [Hex/RGB value]
@@ -157,15 +172,19 @@ Shadow:
 ```
 
 ### Usage Guidelines
+
 **When to use**:
+
 - [Use case 1]
 - [Use case 2]
 
 **When NOT to use**:
+
 - [Anti-pattern 1]
 - [Anti-pattern 2]
 
 ### Accessibility
+
 - Color Contrast Ratio: [Ratio] (WCAG AA/AAA)
 - Keyboard Navigation: [How it works]
 - Screen Reader: [ARIA labels and roles]
@@ -173,11 +192,13 @@ Shadow:
 - Touch Target: [Minimum 44x44px]
 
 ### Code Reference
+
 - React: `<ComponentName />`
 - CSS Class: `.component-name`
 - Figma Link: [Link to Figma component]
 
 ### Examples
+
 [Visual examples or screenshots]
 
 ---
@@ -189,10 +210,12 @@ Shadow:
 **Facilitator**: [Name]
 
 ### Objectives
+
 - [What you want to learn]
 - [What you want to validate]
 
 ### Participants
+
 - **Number**: [5-8 participants recommended]
 - **Criteria**: [Who should participate]
 - **Recruitment**: [How to find them]
@@ -200,23 +223,27 @@ Shadow:
 ### Test Scenarios
 
 #### Scenario 1: [Task Name]
+
 **Goal**: [What user should accomplish]
 **Starting Point**: [Where they begin]
 **Success Criteria**: [What indicates success]
 
-**Task Instructions**: 
+**Task Instructions**:
 "[Exact instructions to give participant]"
 
 **Metrics**:
+
 - Task Completion: Yes/No
 - Time on Task: [Target time]
 - Errors: [Count]
 - Satisfaction: [Rating scale]
 
 #### Scenario 2: [Task Name]
+
 [Repeat structure]
 
 ### Test Flow
+
 1. **Introduction** (5 min)
    - Welcome participant
    - Explain think-aloud protocol
@@ -240,6 +267,7 @@ Shadow:
    - Compensation
 
 ### Data to Collect
+
 - Task completion rate
 - Time to complete tasks
 - Number and type of errors
@@ -248,6 +276,7 @@ Shadow:
 - Observations of confusion/frustration
 
 ### Analysis Plan
+
 - Identify common patterns across participants
 - Calculate success metrics
 - Prioritize issues by severity and frequency

@@ -13,15 +13,18 @@
 **Version**: [1.0]
 
 ### 2. Process Purpose
+
 [Describe the business purpose and objectives of this process. Why does this process exist?]
 
 ### 3. Process Scope
 
 **In Scope**:
+
 * [What is included in this process]
 * [Boundaries and starting/ending points]
 
 **Out of Scope**:
+
 * [What is explicitly excluded]
 * [Related processes that are separate]
 
@@ -34,7 +37,9 @@
 | [Name/Title] | [Informed] | [What they need to know] |
 
 ### 5. Process Triggers
+
 [What events or conditions initiate this process?]
+
 * **Trigger 1**: [e.g., Customer submits order]
 * **Trigger 2**: [e.g., Daily scheduled job at 8:00 AM]
 * **Trigger 3**: [e.g., Inventory level falls below threshold]
@@ -56,6 +61,7 @@
 ### 8. Current State (As-Is) Process Flow
 
 **High-Level Steps**:
+
 1. [Step 1: Process is triggered]
 2. [Step 2: Initial data collection/validation]
 3. [Step 3: Processing/decision point]
@@ -65,6 +71,7 @@
 **Detailed Process Map**: [Link to BPMN diagram, flowchart, or swimlane diagram]
 
 **Decision Points**:
+
 * **Decision 1**: [What decision is made]
   * **Option A**: [Path if condition is true]
   * **Option B**: [Path if condition is false]
@@ -87,20 +94,24 @@
 | BP-I-002 | [Problem description] | [Business impact] | High/Medium/Low | [Why it happens] |
 
 **Bottlenecks**:
+
 * [Bottleneck 1]: [Description and impact]
 * [Bottleneck 2]: [Description and impact]
 
 **Manual/Repetitive Tasks**:
+
 * [Task 1]: [How much time it consumes]
 * [Task 2]: [Automation opportunity]
 
 ### 11. Future State (To-Be) Process Flow
 
 **Proposed Improvements**:
+
 * [Improvement 1]: [Description and expected benefit]
 * [Improvement 2]: [Description and expected benefit]
 
 **High-Level Steps** (Improved):
+
 1. [Step 1: Improved trigger mechanism]
 2. [Step 2: Automated data collection]
 3. [Step 3: Streamlined decision point]
@@ -119,11 +130,13 @@
 ### 13. Expected Benefits
 
 **Quantitative Benefits**:
+
 * [Benefit 1]: [Measurable improvement, e.g., "Reduce cycle time by 60%"]
 * [Benefit 2]: [Cost savings, e.g., "Save $100K annually"]
 * [Benefit 3]: [Increased throughput, e.g., "Handle 50% more volume"]
 
 **Qualitative Benefits**:
+
 * [Benefit 1]: [e.g., "Improved customer satisfaction"]
 * [Benefit 2]: [e.g., "Reduced employee frustration"]
 * [Benefit 3]: [e.g., "Better compliance and audit trail"]
@@ -131,15 +144,18 @@
 ### 14. Implementation Requirements
 
 **Technology Requirements**:
+
 * [System 1]: [What's needed]
 * [Integration]: [Systems that must connect]
 
 **Training Requirements**:
+
 * [Who needs training]
 * [Training topics]
 * [Duration and delivery method]
 
 **Resource Requirements**:
+
 * [Human resources needed]
 * [Budget allocation]
 * [Timeline]
@@ -154,22 +170,25 @@
 ### 16. Process Controls and Governance
 
 **Quality Controls**:
+
 * [Control 1]: [How quality is ensured]
 * [Control 2]: [Inspection/validation points]
 
 **Compliance Requirements**:
+
 * [Regulation 1]: [How process ensures compliance]
 * [Policy 1]: [Relevant policies]
 
 **Audit Trail**:
+
 * [What is logged]
 * [Retention period]
 * [Access controls]
 
 ### 17. Related Documentation
+
 * [Document 1]: [Link or reference]
 * [Document 2]: [Link or reference]
-* [Standard Operating Procedure (SOP)]: [Link]
 
 ### 18. Revision History
 

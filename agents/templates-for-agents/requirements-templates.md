@@ -1,6 +1,7 @@
 # Requirements Documentation Templates
 
 ## User Story Template
+
 ```markdown
 **As a** [user role]
 **I want** [capability]
@@ -11,6 +12,7 @@
 ```
 
 ## Use Case Template
+
 ```markdown
 **Use Case**: [Name]
 **Actor**: [Primary actor]
@@ -21,6 +23,7 @@
 ```
 
 ## Functional Requirement Template
+
 ```markdown
 **FR-XXX**: The system shall [specific capability]
 **Priority**: Must Have / Should Have / Could Have / Won't Have

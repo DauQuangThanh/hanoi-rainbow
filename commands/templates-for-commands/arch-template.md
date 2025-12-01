@@ -15,6 +15,7 @@
 | | | | |
 
 **Related Documents**:
+
 - Ground Rules: `/memory/ground-rules.md`
 - Feature Specifications: `/specs/[###-feature]/spec.md`
 - Implementation Plans: `/specs/[###-feature]/design.md` (created after this document)
@@ -32,7 +33,8 @@
 
 **Scope**: [What is included/excluded from this architecture]
 
-**Key Architectural Decisions**: 
+**Key Architectural Decisions**:
+
 - [Decision 1: e.g., "Microservices architecture chosen for scalability"]
 - [Decision 2: e.g., "Event-driven communication for loose coupling"]
 - [Decision 3: e.g., "Cloud-native deployment on AWS/Azure/GCP"]
@@ -74,11 +76,13 @@ This document describes the software architecture for [PRODUCT/PROJECT NAME]. It
 -->
 
 **In Scope**:
+
 - [System boundary 1: e.g., "Web application and API backend"]
 - [System boundary 2: e.g., "Data persistence and caching layers"]
 - [System boundary 3: e.g., "Integration with third-party services"]
 
 **Out of Scope**:
+
 - [Exclusion 1: e.g., "Legacy system migration details"]
 - [Exclusion 2: e.g., "Third-party service internal architectures"]
 - [Exclusion 3: e.g., "Network infrastructure below application layer"]
@@ -92,6 +96,7 @@ This document describes the software architecture for [PRODUCT/PROJECT NAME]. It
 This architecture follows [ARCHITECTURAL STYLE: e.g., "a layered, microservices-based approach" or "a modular monolith pattern" or "an event-driven architecture"].
 
 **Key Principles**:
+
 1. [Principle 1: e.g., "Separation of concerns"]
 2. [Principle 2: e.g., "Loose coupling, high cohesion"]
 3. [Principle 3: e.g., "Design for failure and resilience"]
@@ -194,16 +199,19 @@ This architecture follows [ARCHITECTURAL STYLE: e.g., "a layered, microservices-
 -->
 
 **Technical Constraints**:
+
 - **TC-001**: [e.g., "Must use existing PostgreSQL database infrastructure"]
 - **TC-002**: [e.g., "Must integrate with legacy SOAP-based authentication system"]
 - **TC-003**: [e.g., "Must run on Kubernetes 1.25+"]
 
 **Organizational Constraints**:
+
 - **OC-001**: [e.g., "Development team limited to 5 engineers"]
 - **OC-002**: [e.g., "Must use company-approved AWS services only"]
 - **OC-003**: [e.g., "Must follow internal security review process"]
 
 **Business Constraints**:
+
 - **BC-001**: [e.g., "Budget limited to $X for infrastructure"]
 - **BC-002**: [e.g., "Must launch MVP within 6 months"]
 - **BC-003**: [e.g., "Cannot require users to install native apps"]
@@ -211,11 +219,13 @@ This architecture follows [ARCHITECTURAL STYLE: e.g., "a layered, microservices-
 ### 2.5 Assumptions and Dependencies
 
 **Assumptions**:
+
 - **AS-001**: [e.g., "Users have broadband internet connectivity (5+ Mbps)"]
 - **AS-002**: [e.g., "Third-party payment API has 99.9% availability"]
 - **AS-003**: [e.g., "Database can handle projected growth for 2 years"]
 
 **Dependencies**:
+
 - **DE-001**: [e.g., "Depends on Stripe API for payment processing"]
 - **DE-002**: [e.g., "Depends on SendGrid for email delivery"]
 - **DE-003**: [e.g., "Depends on Auth0 for identity management"]
@@ -269,6 +279,7 @@ This architecture follows [ARCHITECTURAL STYLE: e.g., "a layered, microservices-
       Admins[Admin Users] --> System
       System --> ExtSystem1[External System 1]
       System --> ExtSystem2[External System 2]
+
   ```
   
   Alternatives: ASCII art (shown above), C4-PlantUML, or Draw.io/Lucidchart (link to image)
@@ -355,6 +366,7 @@ This architecture follows [ARCHITECTURAL STYLE: e.g., "a layered, microservices-
       WebApp -->|REST/GraphQL| API[API Application<br/>FastAPI/Express<br/>Port: 8000]
       API -->|SQL| DB[(Database<br/>PostgreSQL<br/>Port: 5432)]
       API -->|Redis Protocol| Cache[(Cache<br/>Redis<br/>Port: 6379)]
+
   ```
   
   Include all applications, databases, message queues, caches, etc.
@@ -490,6 +502,7 @@ This architecture follows [ARCHITECTURAL STYLE: e.g., "a layered, microservices-
       S1 --> R1
       S2 --> R2
       S3 --> R3
+
   ```
   
   Show the major components and their relationships.
@@ -615,11 +628,13 @@ project-root/
 ### 6.2 Naming Conventions
 
 **Files**:
+
 - [Convention 1: e.g., "PascalCase for classes: `UserService.ts`"]
 - [Convention 2: e.g., "kebab-case for components: `user-profile.tsx`"]
 - [Convention 3: e.g., "camelCase for utilities: `formatDate.ts`"]
 
 **Code**:
+
 - [Convention 1: e.g., "PascalCase for classes/interfaces: `class UserService`"]
 - [Convention 2: e.g., "camelCase for functions/variables: `function getUserById()`"]
 - [Convention 3: e.g., "UPPER_SNAKE_CASE for constants: `const MAX_RETRY_COUNT`"]
@@ -792,15 +807,18 @@ graph TB
 ### 7.5 Disaster Recovery
 
 **Backup Strategy**:
+
 - **Database**: [e.g., "Automated daily snapshots, retained for 30 days, backed up to S3"]
 - **Files**: [e.g., "S3 with versioning enabled, cross-region replication to us-west-2"]
 - **Configuration**: [e.g., "Infrastructure code in Git, secrets in AWS Secrets Manager"]
 
 **Recovery Objectives**:
+
 - **RTO (Recovery Time Objective)**: [e.g., "4 hours for full system restoration"]
 - **RPO (Recovery Point Objective)**: [e.g., "15 minutes of data loss maximum"]
 
 **Disaster Recovery Plan**:
+
 1. [Step 1: e.g., "Detect failure via monitoring alerts"]
 2. [Step 2: e.g., "Initiate incident response process"]
 3. [Step 3: e.g., "Restore database from latest snapshot"]
@@ -845,16 +863,19 @@ graph TB
 **Consequences**:
 
 *Positive*:
+
 - [Benefit 1]
 - [Benefit 2]
 - [Benefit 3]
 
 *Negative*:
+
 - [Trade-off 1]
 - [Trade-off 2]
 - [Trade-off 3]
 
 *Neutral*:
+
 - [Impact 1]
 - [Impact 2]
 
@@ -871,6 +892,7 @@ graph TB
    - Why rejected: [Reason]
 
 **Related Decisions**:
+
 - [ADR-XXX]: [Related decision]
 
 ---
@@ -888,6 +910,7 @@ The system needs to scale independently by function (user management, order proc
 Adopt a microservices architecture with independent services for user management, orders, payments, and notifications. Services communicate via REST APIs and asynchronous message queues.
 
 **Rationale**:
+
 - Teams can work independently with minimal coordination
 - Services can scale based on individual load patterns
 - Technology stack can be optimized per service
@@ -896,18 +919,21 @@ Adopt a microservices architecture with independent services for user management
 **Consequences**:
 
 *Positive*:
+
 - Independent deployment and scaling per service
 - Team autonomy and faster development cycles
 - Technology flexibility per service
 - Better fault isolation
 
 *Negative*:
+
 - Increased operational complexity (more services to monitor)
 - Distributed system challenges (network latency, partial failures)
 - Data consistency across services requires careful design
 - Increased infrastructure costs
 
 *Neutral*:
+
 - Need for robust DevOps practices and tooling
 - API versioning and backward compatibility required
 
@@ -924,6 +950,7 @@ Adopt a microservices architecture with independent services for user management
    - Why rejected: Not suitable for long-running operations and complex workflows
 
 **Related Decisions**:
+
 - ADR-003: API Gateway for Service Communication
 - ADR-005: Event-Driven Architecture for Async Communication
 
@@ -943,46 +970,55 @@ Adopt a microservices architecture with independent services for user management
 ### 9.1 Performance Strategies
 
 **Strategy 1: Caching**
+
 - **Implementation**: Redis cache for frequently accessed data (user sessions, product catalogs)
 - **Cache Invalidation**: Time-based expiration (5 minutes) + event-based invalidation
 - **Expected Impact**: Reduce database load by 70%, API response time from 200ms to 50ms
 
 **Strategy 2: Database Optimization**
+
 - **Implementation**: Read replicas for analytics queries, connection pooling (100 connections)
 - **Indexes**: On `user_id`, `email`, `order_date`, `product_id`
 - **Expected Impact**: Query performance <50ms for 99th percentile
 
 **Strategy 3: Asynchronous Processing**
+
 - **Implementation**: Message queue (RabbitMQ) for email notifications, report generation
 - **Expected Impact**: Immediate API responses, background processing up to 10k messages/sec
 
 ### 9.2 Scalability Strategies
 
 **Strategy 1: Horizontal Scaling**
+
 - **Implementation**: Stateless API servers with Kubernetes auto-scaling (3-10 pods)
 - **Trigger**: CPU >70% or requests >1000/sec
 - **Expected Impact**: Support 100k concurrent users
 
 **Strategy 2: Database Sharding**
+
 - **Implementation**: Shard user data by user_id (hash-based sharding) across 4 shards
 - **Expected Impact**: Linear scaling of database write capacity
 
 **Strategy 3: Content Delivery Network**
+
 - **Implementation**: CloudFront CDN for static assets (images, CSS, JS)
 - **Expected Impact**: Reduce origin load by 90%, improve global latency
 
 ### 9.3 Availability & Reliability Strategies
 
 **Strategy 1: Redundancy**
+
 - **Implementation**: Multi-AZ deployment, 3 API replicas, database with read replicas
 - **Expected Impact**: 99.9% availability (8.76 hours downtime/year max)
 
 **Strategy 2: Health Checks & Auto-Recovery**
+
 - **Implementation**: Kubernetes liveness/readiness probes, automatic pod restart
 - **Interval**: Health check every 10 seconds
 - **Expected Impact**: Failed containers restarted within 30 seconds
 
 **Strategy 3: Circuit Breakers**
+
 - **Implementation**: Resilience4j circuit breaker for external API calls
 - **Threshold**: Open after 50% failure rate over 10 requests
 - **Expected Impact**: Prevent cascading failures, graceful degradation
@@ -990,20 +1026,24 @@ Adopt a microservices architecture with independent services for user management
 ### 9.4 Security Strategies
 
 **Strategy 1: Authentication & Authorization**
+
 - **Implementation**: OAuth 2.0 with JWT tokens, RBAC with roles (admin, user, guest)
 - **Token Expiry**: Access token 15 minutes, refresh token 7 days
 - **Expected Impact**: Secure user authentication, fine-grained access control
 
 **Strategy 2: Encryption**
+
 - **Implementation**: TLS 1.3 for data in transit, AES-256 for data at rest
 - **Certificate Management**: AWS Certificate Manager, auto-renewal
 - **Expected Impact**: Protection against eavesdropping and data breaches
 
 **Strategy 3: Input Validation & Output Encoding**
+
 - **Implementation**: Pydantic models for input validation, parameterized queries
 - **Expected Impact**: Protection against SQL injection, XSS attacks
 
 **Strategy 4: Security Scanning**
+
 - **Implementation**: SAST (SonarQube), DAST (OWASP ZAP), dependency scanning (Snyk)
 - **Frequency**: On every commit (SAST), weekly (DAST)
 - **Expected Impact**: Early detection of security vulnerabilities
@@ -1011,16 +1051,19 @@ Adopt a microservices architecture with independent services for user management
 ### 9.5 Maintainability Strategies
 
 **Strategy 1: Automated Testing**
+
 - **Implementation**: Unit tests (pytest), integration tests, E2E tests (Playwright)
 - **Coverage Target**: >80% for critical paths
 - **Expected Impact**: Catch regressions early, enable confident refactoring
 
 **Strategy 2: Observability**
+
 - **Implementation**: Structured logging (JSON), metrics (Prometheus), tracing (Jaeger)
 - **Log Retention**: 30 days in Elasticsearch
 - **Expected Impact**: Faster troubleshooting, proactive issue detection
 
 **Strategy 3: Documentation**
+
 - **Implementation**: OpenAPI specs for APIs, ADRs for decisions, inline code comments
 - **Automation**: Auto-generate API docs from code annotations
 - **Expected Impact**: Reduce onboarding time, improve knowledge sharing
@@ -1049,6 +1092,7 @@ Adopt a microservices architecture with independent services for user management
 ### 10.3 Open Questions & Future Considerations
 
 **Open Questions**:
+
 1. [Question 1: e.g., "How to handle eventual consistency in distributed transactions?"]
    - Status: Under investigation
    - Decision deadline: [DATE]
@@ -1058,6 +1102,7 @@ Adopt a microservices architecture with independent services for user management
    - Decision deadline: [DATE]
 
 **Future Enhancements**:
+
 - [Enhancement 1: e.g., "Multi-region active-active deployment for global users"]
   - Timeframe: Year 2
   - Depends on: Business expansion to Asia/Europe
@@ -1089,9 +1134,9 @@ Adopt a microservices architecture with independent services for user management
    - ISO/IEC 25010:2011 - Systems and software Quality Requirements and Evaluation (SQuaRE)
 
 2. **Methodologies**:
-   - C4 Model for visualizing software architecture: https://c4model.com/
-   - Arc42 architecture template: https://arc42.org/
-   - Architecture Decision Records (ADR): https://adr.github.io/
+   - C4 Model for visualizing software architecture: <https://c4model.com/>
+   - Arc42 architecture template: <https://arc42.org/>
+   - Architecture Decision Records (ADR): <https://adr.github.io/>
 
 3. **Project References**:
    - [Reference 1: e.g., "Company Security Standards v2.0"]
@@ -1123,6 +1168,7 @@ Adopt a microservices architecture with independent services for user management
 **Mermaid Diagram Examples**:
 
 For sequence diagrams showing interactions between components:
+
 ```mermaid
 sequenceDiagram
     participant User
@@ -1138,6 +1184,7 @@ sequenceDiagram
 ```
 
 For entity-relationship diagrams:
+
 ```mermaid
 erDiagram
     USER ||--o{ ORDER : places

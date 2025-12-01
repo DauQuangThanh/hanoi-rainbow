@@ -16,6 +16,7 @@
 **Migration Type**: [e.g., Cloud migration, Database migration, Platform modernization, Monolith to Microservices]
 
 **Key Objectives**:
+
 * [Objective 1]: [e.g., "Improve system performance by 50%"]
 * [Objective 2]: [e.g., "Reduce infrastructure costs by 30%"]
 * [Objective 3]: [e.g., "Enable continuous deployment"]
@@ -31,6 +32,7 @@
 **Architecture**: [Brief description of current architecture]
 
 **Technology Stack**:
+
 | Component | Technology | Version |
 | :--- | :--- | :--- |
 | Frontend | [Technology] | [Version] |
@@ -39,6 +41,7 @@
 | Infrastructure | [On-premise/Cloud] | [Details] |
 
 **System Metrics**:
+
 * **Users**: [Number of active users]
 * **Data Volume**: [Total data size]
 * **Transaction Volume**: [Requests per day/month]
@@ -53,10 +56,12 @@
 | [Issue 3] | [Business/technical impact] | High/Med/Low |
 
 **Technical Debt**:
+
 * [Technical debt item 1]
 * [Technical debt item 2]
 
 **Scalability Constraints**:
+
 * [Constraint 1]
 * [Constraint 2]
 
@@ -69,6 +74,7 @@
 **Architecture Pattern**: [e.g., Microservices, Event-driven, Serverless]
 
 **Technology Stack**:
+
 | Component | Technology | Version | Rationale |
 | :--- | :--- | :--- | :--- |
 | Frontend | [Technology] | [Version] | [Why chosen] |
@@ -82,12 +88,14 @@
 ### 3.2 Expected Benefits
 
 **Quantitative Benefits**:
+
 * **Performance**: [e.g., "50% reduction in API response time"]
 * **Cost**: [e.g., "30% reduction in infrastructure costs"]
 * **Scalability**: [e.g., "Support 10x current user load"]
 * **Availability**: [e.g., "Improve uptime from 99.5% to 99.95%"]
 
 **Qualitative Benefits**:
+
 * [Benefit 1]: [e.g., "Faster feature delivery"]
 * [Benefit 2]: [e.g., "Improved developer experience"]
 * [Benefit 3]: [e.g., "Better system observability"]
@@ -105,6 +113,7 @@
 ### 4.2 Migration Patterns
 
 #### Strangler Pattern (Recommended for Monolith → Microservices)
+
 ```
 ┌─────────────────────────────────────────┐
 │         Load Balancer / Router          │
@@ -117,6 +126,7 @@
 ```
 
 **Process**:
+
 1. Route new features to new services
 2. Gradually extract existing features
 3. Eventually decommission legacy system
@@ -124,6 +134,7 @@
 ---
 
 #### Phased Migration
+
 ```
 Phase 1: Non-critical services → Cloud
 Phase 2: Customer-facing services → Cloud
@@ -136,11 +147,13 @@ Phase 4: Decommission legacy infrastructure
 ### 4.3 Rollback Strategy
 
 **Rollback Triggers**:
+
 * [Trigger 1]: [e.g., "Error rate exceeds 5%"]
 * [Trigger 2]: [e.g., "Performance degradation > 20%"]
 * [Trigger 3]: [e.g., "Data integrity issues detected"]
 
 **Rollback Procedure**:
+
 1. [Step 1]: [e.g., "Switch traffic back to legacy system"]
 2. [Step 2]: [e.g., "Restore database from backup"]
 3. [Step 3]: [e.g., "Notify stakeholders"]
@@ -155,12 +168,14 @@ Phase 4: Decommission legacy infrastructure
 ### Phase 1: Preparation and Planning (Weeks 1-4)
 
 **Objectives**:
+
 * Finalize migration plan
 * Set up target infrastructure
 * Establish monitoring and observability
 * Prepare team and stakeholders
 
 **Activities**:
+
 | Activity | Owner | Duration | Status |
 | :--- | :--- | :--- | :--- |
 | Detailed architecture design | [Name] | 1 week | Not Started |
@@ -170,6 +185,7 @@ Phase 4: Decommission legacy infrastructure
 | Communication plan execution | [Name] | Ongoing | Not Started |
 
 **Success Criteria**:
+
 * ☐ Target infrastructure provisioned and tested
 * ☐ CI/CD pipeline operational
 * ☐ Team trained on new technologies
@@ -180,17 +196,20 @@ Phase 4: Decommission legacy infrastructure
 ### Phase 2: Data Migration (Weeks 5-8)
 
 **Objectives**:
+
 * Migrate data to target system
 * Validate data integrity
 * Establish data synchronization
 
 **Data Migration Approach**:
+
 1. **Schema Mapping**: Map source schema to target schema
 2. **ETL Pipeline**: Extract, Transform, Load data
 3. **Validation**: Compare checksums, row counts, sample data
 4. **Sync Strategy**: [Real-time replication / Batch sync / Dual-write]
 
 **Data Categories**:
+
 | Category | Volume | Strategy | Owner | Duration |
 | :--- | ---: | :--- | :--- | :--- |
 | User Data | [X GB] | [One-time load] | [Name] | [X days] |
@@ -198,6 +217,7 @@ Phase 4: Decommission legacy infrastructure
 | Archival Data | [X TB] | [Batch migration] | [Name] | [X weeks] |
 
 **Data Validation Checklist**:
+
 * ☐ Row counts match source and target
 * ☐ Data types converted correctly
 * ☐ Foreign key relationships preserved
@@ -209,11 +229,13 @@ Phase 4: Decommission legacy infrastructure
 ### Phase 3: Application Migration (Weeks 9-16)
 
 **Objectives**:
+
 * Migrate application services
 * Conduct thorough testing
 * Optimize performance
 
 **Migration Sequence**:
+
 | Order | Service/Component | Dependencies | Duration | Risk |
 | :---: | :--- | :--- | :--- | :---: |
 | 1 | [Service 1] | [Dependencies] | [X weeks] | Low |
@@ -221,6 +243,7 @@ Phase 4: Decommission legacy infrastructure
 | 3 | [Service 3] | [Service 1, 2] | [X weeks] | High |
 
 **Testing Strategy**:
+
 * **Unit Testing**: [Coverage target: 80%]
 * **Integration Testing**: [Test critical workflows]
 * **Performance Testing**: [Load test at 2x expected traffic]
@@ -232,6 +255,7 @@ Phase 4: Decommission legacy infrastructure
 ### Phase 4: Cutover and Go-Live (Weeks 17-18)
 
 **Objectives**:
+
 * Execute final cutover
 * Monitor system health
 * Provide hypercare support
@@ -239,12 +263,14 @@ Phase 4: Decommission legacy infrastructure
 **Cutover Plan**:
 
 **Pre-Cutover (1 week before)**:
+
 * ☐ Final data sync
 * ☐ Smoke testing in production environment
 * ☐ Communication to users about maintenance window
 * ☐ Prepare rollback scripts and procedures
 
 **Cutover Day**:
+
 | Time | Activity | Owner | Duration |
 | :--- | :--- | :--- | :--- |
 | 00:00 | Freeze source system | [Name] | 5 min |
@@ -257,6 +283,7 @@ Phase 4: Decommission legacy infrastructure
 | 04:30 | Open system to users | [Name] | - |
 
 **Post-Cutover**:
+
 * ☐ Continuous monitoring for 24 hours
 * ☐ Hypercare support team available
 * ☐ Daily status updates for first week
@@ -267,11 +294,13 @@ Phase 4: Decommission legacy infrastructure
 ### Phase 5: Post-Migration Optimization (Weeks 19-20)
 
 **Objectives**:
+
 * Optimize performance
 * Resolve issues
 * Decommission legacy system
 
 **Activities**:
+
 * Performance tuning based on production data
 * Cost optimization
 * Documentation updates
@@ -295,14 +324,17 @@ Phase 4: Decommission legacy infrastructure
 ### 6.2 Contingency Plans
 
 **If data migration fails**:
+
 1. [Action 1]
 2. [Action 2]
 
 **If performance issues arise**:
+
 1. [Action 1]
 2. [Action 2]
 
 **If integration breaks**:
+
 1. [Action 1]
 2. [Action 2]
 
@@ -322,20 +354,24 @@ Phase 4: Decommission legacy infrastructure
 ### 7.2 Test Types
 
 **Functional Testing**:
+
 * Verify all features work as expected
 * Test edge cases and error handling
 
 **Performance Testing**:
+
 * Load testing: [Target load]
 * Stress testing: [150% of target load]
 * Soak testing: [24-hour sustained load]
 
 **Security Testing**:
+
 * Vulnerability scanning
 * Penetration testing
 * Compliance verification
 
 **User Acceptance Testing**:
+
 * [X] business users
 * [Y] test scenarios
 * [Z] days duration
@@ -369,12 +405,14 @@ Phase 4: Decommission legacy infrastructure
 ### 8.3 Data Validation
 
 **Validation Methods**:
+
 * **Row Count**: Compare source and target table row counts
 * **Checksum**: Calculate and compare checksums for data integrity
 * **Sample Verification**: Manual review of sample records
 * **Referential Integrity**: Verify foreign key relationships
 
 **Validation Queries**:
+
 ```sql
 -- Example: Compare row counts
 SELECT COUNT(*) FROM source.users;
@@ -401,6 +439,7 @@ SELECT CHECKSUM_AGG(CHECKSUM(*)) FROM target.users;
 ### 9.2 Communication Templates
 
 **Status Update Email**:
+
 ```
 Subject: [Project Name] Migration - Week [X] Update
 
@@ -412,6 +451,7 @@ Next Steps: [Actions]
 ```
 
 **Go-Live Announcement**:
+
 ```
 Subject: [System Name] Migration Complete
 
@@ -495,21 +535,26 @@ Feedback: [Survey link]
 ## 13. Post-Migration Review
 
 ### 13.1 Lessons Learned
+
 [To be completed after migration]
 
 **What Went Well**:
+
 * [Item 1]
 * [Item 2]
 
 **What Could Be Improved**:
+
 * [Item 1]
 * [Item 2]
 
 **Recommendations for Future Migrations**:
+
 * [Recommendation 1]
 * [Recommendation 2]
 
 ### 13.2 Final Metrics
+
 [To be completed after migration stabilization period]
 
 ---
@@ -517,15 +562,19 @@ Feedback: [Survey link]
 ## 14. Appendices
 
 ### Appendix A: Detailed Technical Specifications
+
 [Link to architecture diagrams, API specs, etc.]
 
 ### Appendix B: Data Mapping Documents
+
 [Link to detailed data mapping spreadsheets]
 
 ### Appendix C: Test Plans and Test Cases
+
 [Link to comprehensive test documentation]
 
 ### Appendix D: Runbooks
+
 [Link to operational runbooks]
 
 ---

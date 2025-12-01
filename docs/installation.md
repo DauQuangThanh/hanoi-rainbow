@@ -63,6 +63,7 @@ uvx --from git+https://github.com/dauquangthanh/hanoi-rainbow.git rainbow init <
 All automation scripts come in both formats:
 
 **Default behavior:**
+
 - 🪟 Windows → PowerShell (`.ps1`)
 - 🐧 Linux/macOS → Bash (`.sh`)
 - 💬 Interactive mode → You'll be asked
@@ -98,6 +99,7 @@ After setup, check that everything works:
 Your AI agent should show these core commands:
 
 **Core Workflow:**
+
 | Command | Purpose |
 |---------|----------|
 | `/rainbow.regulate` | Set project principles |
@@ -107,6 +109,7 @@ Your AI agent should show these core commands:
 | `/rainbow.implement` | Execute the plan |
 
 **Role-Based Agents:**
+
 | Agent   | Role |
 |---------|------|
 | `/rainbow.business-analyst` | Business requirements and analysis |
@@ -124,6 +127,7 @@ Your AI agent should show these core commands:
 ### 2. Check Script Files
 
 The `.rainbow/scripts` directory should contain both:
+
 - ✅ Bash scripts (`.sh`) for Linux/macOS
 - ✅ PowerShell scripts (`.ps1`) for Windows
 
