@@ -335,7 +335,7 @@ def download_and_extract_template(
 
     try:
         if not is_current_dir:
-            project_path.mkdir(parents=True)
+            project_path.mkdir(parents=True, exist_ok=True)
 
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_contents = zip_ref.namelist()
@@ -444,8 +444,8 @@ def download_and_extract_template(
 
         if not is_current_dir and project_path.exists():
             shutil.rmtree(project_path)
-        import typer
-        raise typer.Exit(1)
+        # Re-raise the original exception instead of typer.Exit to preserve error details
+        raise
     else:
         if tracker:
             tracker.complete(f"extract-{ai_assistant}")
