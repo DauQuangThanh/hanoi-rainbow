@@ -1,0 +1,14 @@
+{
+    "chat.promptFilesRecommendations": {
+        "rainbow.regulate": true,
+        "rainbow.specify": true,
+        "rainbow.design": true,
+        "rainbow.taskify": true,
+        "rainbow.implement": true
+    },
+    "chat.tools.terminal.autoApprove": {
+        ".rainbow/scripts/bash/": true,
+        ".rainbow/scripts/powershell/": true
+    }
+}
+

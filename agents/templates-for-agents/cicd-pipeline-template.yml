@@ -1,0 +1,71 @@
+# CI/CD Pipeline Template (GitHub Actions example)
+name: CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up language runtime
+        # Add language-specific setup (Node.js, Python, Java, etc.)
+      
+      - name: Install dependencies
+        run: # Install project dependencies
+      
+      - name: Run linter and code quality checks
+        run: # Run linting tools
+      
+      - name: Run unit tests
+        run: # Execute unit tests
+      
+      - name: Run security scans
+        # SAST, dependency check
+      
+      - name: Build application artifact
+        run: # Build the application
+      
+      - name: Build container image
+        # Build Docker image
+      
+      - name: Push to container registry
+        # Push image to registry
+  
+  deploy-staging:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to staging environment
+        # Deploy application
+      
+      - name: Run integration tests
+        # Execute integration tests
+      
+      - name: Run E2E tests
+        # Execute end-to-end tests
+      
+      - name: Notify team
+        # Send notifications
+  
+  deploy-production:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Require manual approval
+        # Manual gate for production
+      
+      - name: Deploy with canary/blue-green strategy
+        # Deploy to production
+      
+      - name: Run smoke tests
+        # Execute smoke tests
+      
+      - name: Monitor metrics
+        # Check system metrics
+      
+      - name: Auto-rollback on failure
+        # Rollback if issues detected
