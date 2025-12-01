@@ -93,9 +93,15 @@ def copy_local_template(
     script_type: str,
     is_current_dir: bool = False,
     verbose: bool = True,
-    tracker: "StepTracker | None" = None
+    tracker: "StepTracker | None" = None,
+    is_first_agent: bool = True
 ) -> Path:
-    """Copy local template files to the project directory."""
+    """Copy local template files to the project directory.
+
+    Args:
+        is_first_agent: If True, copies shared .rainbow folder. If False, skips it.
+                       This prevents redundant copying when multiple AI assistants are selected.
+    """
 
     # Paths to copy
     commands_dir = source_path / "commands"
@@ -124,60 +130,63 @@ def copy_local_template(
     agent_ext = EXTENSION_MAP.get(ai_assistant, ".md")
     args_format = ARGS_FORMAT_MAP.get(ai_assistant, "$ARGUMENTS")
 
-    # Create .rainbow directory structure
-    rainbow_dir = project_path / ".rainbow"
-    rainbow_dir.mkdir(exist_ok=True)
+    # Only copy shared .rainbow folder for the first AI assistant
+    # This prevents redundant copying when multiple AI assistants are selected
+    if is_first_agent:
+        # Create .rainbow directory structure
+        rainbow_dir = project_path / ".rainbow"
+        rainbow_dir.mkdir(exist_ok=True)
 
-    # Copy memory
-    if memory_dir.exists():
-        dest_memory = rainbow_dir / "memory"
-        if dest_memory.exists():
-            shutil.rmtree(dest_memory)
-        shutil.copytree(memory_dir, dest_memory)
+        # Copy memory
+        if memory_dir.exists():
+            dest_memory = rainbow_dir / "memory"
+            if dest_memory.exists():
+                shutil.rmtree(dest_memory)
+            shutil.copytree(memory_dir, dest_memory)
+            if verbose and not tracker:
+                console.print(f"[green]✓[/green] Copied memory")
+
+        # Copy scripts (filter by script_type)
+        if scripts_dir.exists():
+            dest_scripts = rainbow_dir / "scripts"
+            dest_scripts.mkdir(exist_ok=True)
+
+            # Copy common files
+            for item in scripts_dir.iterdir():
+                if item.is_file():
+                    shutil.copy2(item, dest_scripts / item.name)
+
+            # Copy script variant directory
+            if script_type == "sh" and (scripts_dir / "bash").exists():
+                shutil.copytree(scripts_dir / "bash", dest_scripts / "bash", dirs_exist_ok=True)
+            elif script_type == "ps" and (scripts_dir / "powershell").exists():
+                shutil.copytree(scripts_dir / "powershell", dest_scripts / "powershell", dirs_exist_ok=True)
+
+            if verbose and not tracker:
+                console.print(f"[green]✓[/green] Copied scripts ({script_type})")
+
+        # Copy templates to .rainbow/templates with subdirectories
+        dest_templates = rainbow_dir / "templates"
+        dest_templates.mkdir(exist_ok=True)
+
+        # Copy from commands/templates-for-commands to .rainbow/templates/templates-for-commands
+        cmd_templates = commands_dir / "templates-for-commands"
+        if cmd_templates.exists():
+            dest_cmd_templates = dest_templates / "templates-for-commands"
+            if dest_cmd_templates.exists():
+                shutil.rmtree(dest_cmd_templates)
+            shutil.copytree(cmd_templates, dest_cmd_templates)
+
+        # Copy from agents/templates-for-agents to .rainbow/templates/templates-for-agents
+        agent_templates = agents_dir / "templates-for-agents"
+        if agent_templates.exists():
+            dest_agent_templates = dest_templates / "templates-for-agents"
+            if dest_agent_templates.exists():
+                shutil.rmtree(dest_agent_templates)
+            shutil.copytree(agent_templates, dest_agent_templates)
+
         if verbose and not tracker:
-            console.print(f"[green]✓[/green] Copied memory")
-
-    # Copy scripts (filter by script_type)
-    if scripts_dir.exists():
-        dest_scripts = rainbow_dir / "scripts"
-        dest_scripts.mkdir(exist_ok=True)
-
-        # Copy common files
-        for item in scripts_dir.iterdir():
-            if item.is_file():
-                shutil.copy2(item, dest_scripts / item.name)
-
-        # Copy script variant directory
-        if script_type == "sh" and (scripts_dir / "bash").exists():
-            shutil.copytree(scripts_dir / "bash", dest_scripts / "bash", dirs_exist_ok=True)
-        elif script_type == "ps" and (scripts_dir / "powershell").exists():
-            shutil.copytree(scripts_dir / "powershell", dest_scripts / "powershell", dirs_exist_ok=True)
-
-        if verbose and not tracker:
-            console.print(f"[green]✓[/green] Copied scripts ({script_type})")
-
-    # Copy templates to .rainbow/templates with subdirectories
-    dest_templates = rainbow_dir / "templates"
-    dest_templates.mkdir(exist_ok=True)
-
-    # Copy from commands/templates-for-commands to .rainbow/templates/templates-for-commands
-    cmd_templates = commands_dir / "templates-for-commands"
-    if cmd_templates.exists():
-        dest_cmd_templates = dest_templates / "templates-for-commands"
-        if dest_cmd_templates.exists():
-            shutil.rmtree(dest_cmd_templates)
-        shutil.copytree(cmd_templates, dest_cmd_templates)
-
-    # Copy from agents/templates-for-agents to .rainbow/templates/templates-for-agents
-    agent_templates = agents_dir / "templates-for-agents"
-    if agent_templates.exists():
-        dest_agent_templates = dest_templates / "templates-for-agents"
-        if dest_agent_templates.exists():
-            shutil.rmtree(dest_agent_templates)
-        shutil.copytree(agent_templates, dest_agent_templates)
-
-    if verbose and not tracker:
-        console.print(f"[green]✓[/green] Copied templates")
+            console.print(f"[green]✓[/green] Copied templates")
 
     # Create agent-specific command directory using subfolder from config
     subfolder = agent_config.get("subfolder", "commands")
@@ -256,11 +265,15 @@ def download_and_extract_template(
     debug: bool = False,
     github_token: str = None,
     local_templates: bool = False,
-    template_path: str = None
+    template_path: str = None,
+    is_first_agent: bool = True
 ) -> Path:
     """Download the latest release and extract it to create a new project.
     Returns project_path. Uses tracker if provided (with keys: fetch, download, extract, cleanup)
     If local_templates is True, copies from local template_path instead of downloading.
+
+    Args:
+        is_first_agent: If True, copies shared .rainbow folder. If False, skips it to avoid redundancy.
     """
     current_dir = Path.cwd()
 
@@ -286,7 +299,7 @@ def download_and_extract_template(
             console.print(f"[cyan]Using local templates from:[/cyan] {source_path}")
 
         # Build the template by creating a structure similar to the release package
-        return copy_local_template(project_path, source_path, ai_assistant, script_type, is_current_dir, verbose, tracker)
+        return copy_local_template(project_path, source_path, ai_assistant, script_type, is_current_dir, verbose, tracker, is_first_agent)
 
     # Original GitHub download logic
     if tracker:
@@ -354,6 +367,10 @@ def download_and_extract_template(
                             console.print(f"[cyan]Found nested directory structure[/cyan]")
 
                     for item in source_dir.iterdir():
+                        # Skip .rainbow folder for non-first agents to avoid redundancy
+                        if not is_first_agent and item.name == ".rainbow":
+                            continue
+
                         dest_path = project_path / item.name
                         if item.is_dir():
                             if dest_path.exists():
@@ -378,31 +395,42 @@ def download_and_extract_template(
                     if verbose and not tracker:
                         console.print(f"[cyan]Template files merged into current directory[/cyan]")
             else:
-                zip_ref.extractall(project_path)
+                # Extract to temp directory first so we can selectively copy
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    temp_path = Path(temp_dir)
+                    zip_ref.extractall(temp_path)
 
-                extracted_items = list(project_path.iterdir())
-                if tracker:
-                    tracker.start("extracted-summary")
-                    tracker.complete("extracted-summary", f"{len(extracted_items)} top-level items")
-                elif verbose:
-                    console.print(f"[cyan]Extracted {len(extracted_items)} items to {project_path}:[/cyan]")
-                    for item in extracted_items:
-                        console.print(f"  - {item.name} ({'dir' if item.is_dir() else 'file'})")
-
-                if len(extracted_items) == 1 and extracted_items[0].is_dir():
-                    nested_dir = extracted_items[0]
-                    temp_move_dir = project_path.parent / f"{project_path.name}_temp"
-
-                    shutil.move(str(nested_dir), str(temp_move_dir))
-
-                    project_path.rmdir()
-
-                    shutil.move(str(temp_move_dir), str(project_path))
+                    extracted_items = list(temp_path.iterdir())
                     if tracker:
-                        tracker.add("flatten", "Flatten nested directory")
-                        tracker.complete("flatten")
+                        tracker.start("extracted-summary")
+                        tracker.complete("extracted-summary", f"temp {len(extracted_items)} items")
                     elif verbose:
-                        console.print(f"[cyan]Flattened nested directory structure[/cyan]")
+                        console.print(f"[cyan]Extracted {len(extracted_items)} items to temp:[/cyan]")
+
+                    # Handle nested directory structure
+                    source_dir = temp_path
+                    if len(extracted_items) == 1 and extracted_items[0].is_dir():
+                        source_dir = extracted_items[0]
+                        if tracker:
+                            tracker.add("flatten", "Flatten nested directory")
+                            tracker.complete("flatten")
+                        elif verbose:
+                            console.print(f"[cyan]Found nested directory structure[/cyan]")
+
+                    # Copy items from temp to project_path, skipping .rainbow for non-first agents
+                    for item in source_dir.iterdir():
+                        # Skip .rainbow folder for non-first agents to avoid redundancy
+                        if not is_first_agent and item.name == ".rainbow":
+                            continue
+
+                        dest_path = project_path / item.name
+                        if item.is_dir():
+                            shutil.copytree(item, dest_path, dirs_exist_ok=True)
+                        else:
+                            shutil.copy2(item, dest_path)
+
+                    if verbose and not tracker:
+                        console.print(f"[cyan]Template files copied to {project_path}[/cyan]")
 
     except Exception as e:
         if tracker:

@@ -409,12 +409,15 @@ def init(
                 tracker.complete("backup", f"{backup_count} folder{'s' if backup_count != 1 else ''} backed up")
 
             # Download and extract templates for each selected AI agent
-            for selected_ai in selected_ais:
+            # Only copy shared .rainbow folder for the first agent to avoid redundancy
+            for idx, selected_ai in enumerate(selected_ais):
+                is_first = (idx == 0)
                 download_and_extract_template(
                     project_path, selected_ai, selected_script, here or merge_into_existing,
                     verbose=False, tracker=tracker, client=local_client,
                     debug=debug, github_token=github_token,
-                    local_templates=local_templates, template_path=template_path
+                    local_templates=local_templates, template_path=template_path,
+                    is_first_agent=is_first
                 )
 
             ensure_executable_scripts(project_path, tracker=tracker)
