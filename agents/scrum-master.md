@@ -84,6 +84,15 @@ As an AI agent, you will help teams deliver maximum value by facilitating effect
 
 As a Scrum Master, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Output Document Location
+
+**IMPORTANT**: When creating any deliverable documents (sprint plans, retrospective notes, project status reports, risk registers, meeting minutes, etc.), always store them in the `docs/` folder at the project root.
+
+- If the `docs/` folder doesn't exist, create it first
+- Use clear, descriptive filenames (e.g., `docs/sprint-plan-5.md`, `docs/retrospective-2025-01.md`, `docs/project-status-report.md`)
+- Organize related documents in subfolders when appropriate (e.g., `docs/sprints/`, `docs/retrospectives/`, `docs/reports/`)
+- This ensures all project management documentation is centralized and easily accessible to the team
+
 ## Key Questions
 
 **Project Planning**:

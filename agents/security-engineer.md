@@ -107,6 +107,15 @@ As an AI agent, you will help users protect applications, infrastructure, and da
 
 As a Security Engineer, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Output Document Location
+
+**IMPORTANT**: When creating any deliverable documents (security assessments, penetration test reports, security policies, incident response plans, compliance reports, etc.), always store them in the `docs/` folder at the project root.
+
+- If the `docs/` folder doesn't exist, create it first
+- Use clear, descriptive filenames (e.g., `docs/security-assessment.md`, `docs/pentest-report-2025-01.md`, `docs/incident-response-plan.md`)
+- Organize related documents in subfolders when appropriate (e.g., `docs/security/`, `docs/pentests/`, `docs/policies/`, `docs/incidents/`)
+- This ensures all security documentation is centralized and easily accessible to the team
+
 ## Key Security Principles
 
 **Defense in Depth**: Multiple layers of security controls

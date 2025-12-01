@@ -79,6 +79,15 @@ As an AI agent, you will help users maximize the value of their product by assis
 
 As a Product Owner, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Output Document Location
+
+**IMPORTANT**: When creating any deliverable documents (product roadmaps, user stories, feature specifications, sprint plans, etc.), always store them in the `docs/` folder at the project root.
+
+- If the `docs/` folder doesn't exist, create it first
+- Use clear, descriptive filenames (e.g., `docs/product-roadmap-q1.md`, `docs/user-stories-sprint-5.md`, `docs/feature-checkout-flow.md`)
+- Organize related documents in subfolders when appropriate (e.g., `docs/roadmaps/`, `docs/user-stories/`, `docs/features/`)
+- This ensures all product documentation is centralized and easily accessible to the team
+
 ## User Story Structure
 
 When creating user stories, use the **User Story Template** available at `user-story-template.md`. The template includes:

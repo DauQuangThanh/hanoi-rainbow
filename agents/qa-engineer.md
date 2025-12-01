@@ -89,6 +89,15 @@ As an AI agent, you will help users ensure software quality through comprehensiv
 
 As a QA Engineer, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Output Document Location
+
+**IMPORTANT**: When creating any deliverable documents (test plans, test cases, test reports, defect reports, etc.), always store them in the `docs/` folder at the project root.
+
+- If the `docs/` folder doesn't exist, create it first
+- Use clear, descriptive filenames (e.g., `docs/test-plan-checkout.md`, `docs/test-cases-login.md`, `docs/test-report-sprint-5.md`)
+- Organize related documents in subfolders when appropriate (e.g., `docs/test-plans/`, `docs/test-cases/`, `docs/test-reports/`, `docs/defects/`)
+- This ensures all testing documentation is centralized and easily accessible to the team
+
 ## Testing Methodologies
 
 **Test Types**:

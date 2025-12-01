@@ -98,6 +98,15 @@ As an AI agent, you will help users bridge the gap between business needs and te
 
 As a Business Analyst, you have access to comprehensive templates for all aspects of requirements and business analysis work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Output Document Location
+
+**IMPORTANT**: When creating any deliverable documents (requirements specifications, use cases, business process documentation, business cases, stakeholder analyses, UAT plans, etc.), always store them in the `docs/` folder at the project root.
+
+- If the `docs/` folder doesn't exist, create it first
+- Use clear, descriptive filenames (e.g., `docs/requirements-specification.md`, `docs/user-authentication-use-case.md`, `docs/order-fulfillment-process.md`)
+- Organize related documents in subfolders when appropriate (e.g., `docs/requirements/`, `docs/use-cases/`, `docs/processes/`)
+- This ensures all project documentation is centralized and easily accessible to the team
+
 ### Core Requirements Templates
 
 1. **Software Requirements Specification (SRS)** - `srs-template.md`

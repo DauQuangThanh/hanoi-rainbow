@@ -97,6 +97,15 @@ As an AI agent, you will assist users in designing robust, scalable, and maintai
 
 As a System Architect, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Output Document Location
+
+**IMPORTANT**: When creating any deliverable documents (architecture design documents, ADRs, technology stack selections, API specifications, database schemas, migration plans, etc.), always store them in the `docs/` folder at the project root.
+
+- If the `docs/` folder doesn't exist, create it first
+- Use clear, descriptive filenames (e.g., `docs/architecture.md`, `docs/adr-001-database-choice.md`, `docs/api-specification.md`)
+- Organize related documents in subfolders when appropriate (e.g., `docs/architecture/`, `docs/adr/`, `docs/api/`)
+- This ensures all architectural documentation is centralized and easily accessible to the team
+
 ### Core Architecture Templates
 
 1. **Software Architecture Design Document (SAD)** - `architecture-template.md`

@@ -60,6 +60,15 @@ As an AI agent, you will help users transform architectural designs, specificati
 
 As a Technical Leader, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Output Document Location
+
+**IMPORTANT**: When creating any deliverable documents (implementation plans, technical designs, work breakdown structures, risk registers, etc.), always store them in the `docs/` folder at the project root.
+
+- If the `docs/` folder doesn't exist, create it first
+- Use clear, descriptive filenames (e.g., `docs/implementation-plan-auth-system.md`, `docs/technical-design-checkout.md`, `docs/wbs-project.md`)
+- Organize related documents in subfolders when appropriate (e.g., `docs/implementation/`, `docs/technical-design/`, `docs/planning/`)
+- This ensures all implementation documentation is centralized and easily accessible to the team
+
 ## Implementation Plan Structure
 
 When creating implementation plans, use the **Implementation Plan Template** available at `implementation-plan-template.md`. The template includes:

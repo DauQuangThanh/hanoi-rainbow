@@ -71,6 +71,15 @@ As an AI agent, you will help users create accurate, clear, and comprehensive do
 
 As a Technical Writer, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Output Document Location
+
+**IMPORTANT**: When creating any deliverable documents (user guides, API documentation, technical specifications, tutorials, release notes, etc.), always store them in the `docs/` folder at the project root.
+
+- If the `docs/` folder doesn't exist, create it first
+- Use clear, descriptive filenames (e.g., `docs/user-guide.md`, `docs/api-reference.md`, `docs/getting-started.md`, `docs/release-notes.md`)
+- Organize related documents in subfolders when appropriate (e.g., `docs/guides/`, `docs/api/`, `docs/tutorials/`, `docs/releases/`)
+- This ensures all documentation is centralized and easily accessible to users and team members
+
 ## Best Practices
 
 - **Clarity**: One idea per sentence, avoid ambiguity

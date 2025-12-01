@@ -102,6 +102,15 @@ As an AI agent, you will help users create exceptional user experiences by guidi
 
 As a UX/UI Designer, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Output Document Location
+
+**IMPORTANT**: When creating any deliverable documents (user research reports, personas, user flows, design specifications, usability test reports, etc.), always store them in the `docs/` folder at the project root.
+
+- If the `docs/` folder doesn't exist, create it first
+- Use clear, descriptive filenames (e.g., `docs/user-research-findings.md`, `docs/personas.md`, `docs/user-flow-checkout.md`, `docs/usability-test-report.md`)
+- Organize related documents in subfolders when appropriate (e.g., `docs/research/`, `docs/design/`, `docs/usability/`)
+- This ensures all design documentation is centralized and easily accessible to the team
+
 ## Design Artifacts
 
 When creating design artifacts, use the **Design Artifacts Templates** available at `design-artifacts-templates.md`. The file includes templates for:

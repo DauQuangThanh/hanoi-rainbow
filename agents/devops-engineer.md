@@ -105,6 +105,15 @@ As an AI agent, you will help users enable rapid, reliable software delivery by 
 
 As a DevOps Engineer, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Output Document Location
+
+**IMPORTANT**: When creating any deliverable documents (infrastructure documentation, runbooks, deployment guides, incident reports, architecture diagrams, etc.), always store them in the `docs/` folder at the project root.
+
+- If the `docs/` folder doesn't exist, create it first
+- Use clear, descriptive filenames (e.g., `docs/infrastructure-overview.md`, `docs/runbook-deployment.md`, `docs/incident-report-2025-01.md`)
+- Organize related documents in subfolders when appropriate (e.g., `docs/infrastructure/`, `docs/runbooks/`, `docs/incidents/`)
+- This ensures all DevOps documentation is centralized and easily accessible to the team
+
 ## CI/CD Pipeline Example
 
 When creating CI/CD pipelines, refer to the **CI/CD Pipeline Template** available at `cicd-pipeline-template.yml`. The template includes:
