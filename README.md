@@ -2,7 +2,7 @@
 
 # 🌈 Hanoi Rainbow
 
-### *Build Better Software with AI-Powered Specifications*
+### *Drive Quality Together with AI-Powered Framework*
 
 **Stop guessing. Start specifying.**  
 Turn your ideas into production-ready applications through clear specifications, not trial-and-error coding.
