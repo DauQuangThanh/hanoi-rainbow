@@ -67,6 +67,20 @@ Load only the minimal necessary context from each artifact:
 
 - Load `/memory/ground-rules.md` for principle validation
 
+**From architecture.md (if exists):**
+
+- Architectural patterns and decisions
+- Technology stack choices
+- Component organization
+- Quality attribute requirements
+
+**From standards.md (if exists):**
+
+- UI naming conventions
+- Code naming conventions
+- File structure standards
+- API design standards
+
 ### 3. Build Semantic Models
 
 Create internal representations (do not include raw artifacts in output):
@@ -113,6 +127,9 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 - Data entities referenced in plan but absent in spec (or vice versa)
 - Task ordering contradictions (e.g., integration tasks before foundational setup tasks without dependency note)
 - Conflicting requirements (e.g., one requires Next.js while other specifies Vue)
+- Technology stack misalignment (plan uses tech not defined in architecture.md)
+- Naming convention violations (code/file names not following standards.md)
+- Architectural pattern deviations (implementation not following architecture.md patterns)
 
 ### 5. Severity Assignment
 

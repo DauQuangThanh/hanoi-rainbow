@@ -73,7 +73,12 @@ Given that feature description, do this:
 
 3. Load `.rainbow/templates/templates-for-commands/spec-template.md` to understand required sections.
 
-4. Follow this execution flow:
+4. **Load product-level context (if available)**:
+   - Read `/docs/architecture.md` (if exists) to understand technology stack, architectural patterns, and quality requirements
+   - Read `/docs/standards.md` (if exists) to understand naming conventions and coding standards
+   - Use this context to ensure the spec aligns with established architectural decisions and standards
+
+5. Follow this execution flow:
 
     1. Parse user description from Input
        If empty: ERROR "No feature description provided"
@@ -99,7 +104,7 @@ Given that feature description, do this:
     7. Identify Key Entities (if data involved)
     8. Return: SUCCESS (spec ready for planning)
 
-5. Write the specification to SPEC_FILE using the template structure, replacing placeholders with concrete details derived from the feature description (arguments) while preserving section order and headings.
+5. Write the specification to SPEC_FILE using the template structure, replacing placeholders with concrete details derived from the feature description (arguments) while preserving section order and headings. Ensure consistency with architecture.md (if exists) for technology choices and standards.md (if exists) for naming conventions.
 
 6. **Specification Quality Validation**: After writing the initial spec, validate it against quality criteria:
 
@@ -193,7 +198,7 @@ Given that feature description, do this:
 
    d. **Update Checklist**: After each validation iteration, update the checklist file with current pass/fail status
 
-7. Report completion with branch name, spec file path, checklist results, and readiness for the next phase (`/rainbow.clarify` or `/rainbow.design`).
+7. Report completion with branch name, spec file path, checklist results, and readiness for the next phase (`/rainbow.clarify` or `/rainbow.architect` or `/rainbow.design`).
 
 **NOTE:** The script creates and checks out the new branch and initializes the spec file before writing.
 

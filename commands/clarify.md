@@ -72,6 +72,16 @@ Execution steps:
    - Technical constraints (language, storage, hosting)
    - Explicit tradeoffs or rejected alternatives
 
+   Architecture Alignment (if `/docs/architecture.md` exists):
+   - Alignment with architectural patterns and decisions
+   - Consistency with technology stack choices
+   - Adherence to quality attribute requirements
+
+   Standards Compliance (if `/docs/standards.md` exists):
+   - Naming convention requirements for UI/code/API/database
+   - File structure alignment expectations
+   - Coding standard adherence requirements
+
    Terminology & Consistency:
    - Canonical glossary terms
    - Avoided synonyms / deprecated terms

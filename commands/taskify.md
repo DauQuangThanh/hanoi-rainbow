@@ -29,11 +29,13 @@ You **MUST** consider the user input before proceeding (if not empty).
 2. **Load design documents**: Read from FEATURE_DIR:
    - **Required**: design.md (tech stack, libraries, structure), spec.md (user stories with priorities)
    - **Optional**: data-model.md (entities), contracts/ (API endpoints), research.md (decisions), quickstart.md (test scenarios)
+   - **Product-level**: `/docs/architecture.md` (if exists - architectural patterns, ADRs, deployment architecture)
    - Note: Not all projects have all documents. Generate tasks based on what's available.
 
 3. **Execute task generation workflow**:
    - Load design.md and extract tech stack, libraries, project structure
    - Load spec.md and extract user stories with their priorities (P1, P2, P3, etc.)
+   - If `/docs/architecture.md` exists: Extract architectural patterns, deployment requirements, and ADRs relevant to implementation
    - If data-model.md exists: Extract entities and map to user stories
    - If contracts/ exists: Map endpoints to user stories
    - If research.md exists: Extract decisions for setup tasks
@@ -41,19 +43,21 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Generate dependency graph showing user story completion order
    - Create parallel execution examples per user story
    - Validate task completeness (each user story has all needed tasks, independently testable)
+   - Ensure tasks align with architectural decisions and patterns from architecture.md (if available)
 
 4. **Generate tasks.md**: Use `.rainbow/templates/tasks-template.md` as structure, fill with:
    - Correct feature name from design.md
-   - Phase 1: Setup tasks (project initialization)
-   - Phase 2: Foundational tasks (blocking prerequisites for all user stories)
+   - Phase 1: Setup tasks (project initialization, aligned with deployment architecture if defined)
+   - Phase 2: Foundational tasks (blocking prerequisites for all user stories, following architectural patterns)
    - Phase 3+: One phase per user story (in priority order from spec.md)
    - Each phase includes: story goal, independent test criteria, tests (if requested), implementation tasks
    - Final Phase: Polish & cross-cutting concerns
    - All tasks must follow the strict checklist format (see Task Generation Rules below)
-   - Clear file paths for each task
+   - Clear file paths for each task (following code organization from architecture.md if available)
    - Dependencies section showing story completion order
    - Parallel execution examples per story
    - Implementation strategy section (MVP first, incremental delivery)
+   - Architecture alignment notes (if architecture.md exists)
 
 5. **Report**: Output path to generated tasks.md and summary:
    - Total task count
@@ -129,6 +133,13 @@ Every task MUST strictly follow this format:
    - Shared infrastructure → Setup phase (Phase 1)
    - Foundational/blocking tasks → Foundational phase (Phase 2)
    - Story-specific setup → within that story's phase
+   - If architecture.md exists: Include infrastructure tasks from deployment architecture
+
+5. **From Architecture (if exists)**:
+   - Map deployment requirements → Setup/Foundational tasks
+   - Apply architectural patterns → Implementation tasks across stories
+   - Reference ADRs → Task descriptions where relevant
+   - Align directory structure → File paths in task descriptions
 
 ### Phase Structure
 

@@ -51,12 +51,22 @@ You **MUST** consider the user input before proceeding (if not empty).
 3. Load and analyze the implementation context:
    - **REQUIRED**: Read tasks.md for the complete task list and execution plan
    - **REQUIRED**: Read design.md for tech stack, architecture, and file structure
+   - **PRODUCT-LEVEL**: Read `/docs/architecture.md` (if exists) for architectural patterns, ADRs, deployment architecture, and quality strategies
+   - **PRODUCT-LEVEL**: Read `/docs/standards.md` (if exists) for UI naming, code naming, file structure, API design, database naming, testing, and Git conventions
    - **IF EXISTS**: Read data-model.md for entities and relationships
    - **IF EXISTS**: Read contracts/ for API specifications and test requirements
    - **IF EXISTS**: Read research.md for technical decisions and constraints
    - **IF EXISTS**: Read quickstart.md for integration scenarios
 
 4. **Project Setup Verification**:
+   - **Architecture Alignment** (if `/docs/architecture.md` exists):
+     - Verify directory structure matches code organization from architecture.md
+     - Ensure deployment configuration aligns with deployment architecture
+     - Follow component organization patterns from C4 Component View
+   - **Standards Compliance** (if `/docs/standards.md` exists):
+     - Follow file and directory naming conventions from standards.md
+     - Apply code naming conventions (UI, backend, database)
+     - Follow project structure standards
    - **REQUIRED**: Create/verify ignore files based on actual project setup:
 
    **Detection & Creation Logic**:
@@ -115,10 +125,21 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 7. Implementation execution rules:
    - **Setup first**: Initialize project structure, dependencies, configuration
+     - Follow directory structure from standards.md (if exists) and architecture.md (if exists)
    - **Tests before code**: If you need to write tests for contracts, entities, and integration scenarios
+     - Follow testing standards from standards.md (if exists)
    - **Core development**: Implement models, services, CLI commands, endpoints
+     - Apply UI naming conventions (if UI components) from standards.md (if exists)
+     - Apply code naming conventions from standards.md (if exists)
+     - Follow API design standards from standards.md (if exists)
+     - Follow database naming conventions from standards.md (if exists)
+     - Implement architectural patterns from architecture.md (if exists)
    - **Integration work**: Database connections, middleware, logging, external services
+     - Follow integration patterns from architecture.md (if exists)
+     - Apply quality strategies (security, performance, availability) from architecture.md (if exists)
    - **Polish and validation**: Unit tests, performance optimization, documentation
+     - Follow documentation standards from standards.md (if exists)
+     - Verify quality attribute requirements from architecture.md (if exists)
 
 8. Progress tracking and error handling:
    - Report progress after each completed task
@@ -133,6 +154,20 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Check that implemented features match the original specification
    - Validate that tests pass and coverage meets requirements
    - Confirm the implementation follows the technical plan
+   - **If `/docs/architecture.md` exists**: Verify implementation aligns with:
+     - Architectural patterns and component organization
+     - Technology stack and deployment architecture
+     - Quality attribute requirements (performance, security, scalability)
+     - Architecture Decision Records (ADRs)
+   - **If `/docs/standards.md` exists**: Verify implementation follows:
+     - UI naming conventions (for UI components)
+     - Code naming conventions (variables, functions, classes)
+     - File and directory structure standards
+     - API design standards
+     - Database naming conventions
+     - Testing standards
+     - Git commit message conventions
+     - Documentation standards
    - Report final status with summary of completed work
 
 Note: This command assumes a complete task breakdown exists in tasks.md. If tasks are incomplete or missing, suggest running `/rainbow.taskify` first to regenerate the task list.

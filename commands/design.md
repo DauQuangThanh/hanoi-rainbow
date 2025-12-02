@@ -28,11 +28,12 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read FEATURE_SPEC and `/memory/ground-rules.md`. Load IMPL_PLAN template (already copied).
+2. **Load context**: Read FEATURE_SPEC, `/memory/ground-rules.md`, and `/docs/architecture.md` (if it exists). Load IMPL_PLAN template (already copied).
 
 3. **Execute plan workflow**: Follow the structure in IMPL_PLAN template to:
    - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")
    - Fill Ground-rules Check section from ground-rules
+   - Align with architecture decisions from architecture.md (if available)
    - Evaluate gates (ERROR if violations unjustified)
    - Phase 0: Generate research.md (resolve all NEEDS CLARIFICATION)
    - Phase 1: Generate data-model.md, contracts/, quickstart.md
@@ -49,6 +50,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - For each NEEDS CLARIFICATION → research task
    - For each dependency → best practices task
    - For each integration → patterns task
+   - Review architecture.md (if exists) for relevant architectural decisions and patterns
 
 2. **Generate and dispatch research agents**:
 
@@ -57,12 +59,15 @@ You **MUST** consider the user input before proceeding (if not empty).
      Task: "Research {unknown} for {feature context}"
    For each technology choice:
      Task: "Find best practices for {tech} in {domain}"
+   If architecture.md exists:
+     Review: Architectural patterns, ADRs, and quality strategies relevant to this feature
    ```
 
 3. **Consolidate findings** in `research.md` using format:
    - Decision: [what was chosen]
    - Rationale: [why chosen]
    - Alternatives considered: [what else evaluated]
+   - Architecture alignment: [how decision aligns with architecture.md, if applicable]
 
 **Output**: research.md with all NEEDS CLARIFICATION resolved
 
@@ -74,10 +79,12 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Entity name, fields, relationships
    - Validation rules from requirements
    - State transitions if applicable
+   - Align with data models and component designs from architecture.md (if available)
 
 2. **Generate API contracts** from functional requirements:
    - For each user action → endpoint
    - Use standard REST/GraphQL patterns
+   - Follow API design patterns from architecture.md (if available)
    - Output OpenAPI/GraphQL schema to `/contracts/`
 
 3. **Agent context update**:
@@ -93,3 +100,6 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 - Use absolute paths
 - ERROR on gate failures or unresolved clarifications
+- If `/docs/architecture.md` exists, ensure feature design aligns with architectural decisions, patterns, and quality strategies
+- Reference relevant ADRs (Architecture Decision Records) from architecture.md when making design choices
+- Maintain consistency with the technology stack and deployment architecture defined in architecture.md

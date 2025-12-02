@@ -262,6 +262,26 @@ Sample items:
 - "Are authentication requirements specified for all protected resources? [Coverage]"
 - "Are data protection requirements defined for sensitive information? [Completeness]"
 - "Is the threat model documented and requirements aligned to it? [Traceability]"
+
+**Architecture Alignment Quality:** `architecture-alignment.md`
+
+Sample items:
+
+- "Do component boundaries align with architecture.md container/component views? [Consistency]"
+- "Are technology choices consistent with architecture.md stack decisions? [Consistency]"
+- "Are ADRs referenced for architectural decision points in requirements? [Traceability]"
+- "Are quality attribute requirements aligned with architecture.md quality strategies? [Alignment]"
+- "Is deployment architecture reflected in non-functional requirements? [Completeness]"
+
+**Standards Compliance Quality:** `standards-compliance.md`
+
+Sample items:
+
+- "Do UI component names follow standards.md naming conventions? [Compliance]"
+- "Are API endpoint naming requirements consistent with standards.md? [Consistency]"
+- "Are database entity names compliant with standards.md conventions? [Compliance]"
+- "Is file structure aligned with standards.md directory standards? [Alignment]"
+- "Are testing requirements following standards.md test standards? [Compliance]"
 - "Are security requirements consistent with compliance obligations? [Consistency]"
 - "Are security failure/breach response requirements defined? [Gap, Exception Flow]"
 
