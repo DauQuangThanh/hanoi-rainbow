@@ -79,14 +79,41 @@ As an AI agent, you will help users maximize the value of their product by assis
 
 As a Product Owner, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Feature Branch Workflow
+
+**IMPORTANT**: Before starting work on any deliverable:
+
+1. **Generate a concise short name** (2-4 words) for the feature branch
+2. **Check for existing branches** to determine the next feature number:
+   - Fetch all remote branches: `git fetch --all --prune`
+   - Find highest feature number for the short-name across:
+     - Remote branches: `git ls-remote --heads origin | grep -E 'refs/heads/[0-9]+-<short-name>$'`
+     - Local branches: `git branch | grep -E '^[* ]*[0-9]+-<short-name>$'`
+     - Specs directories: Check `specs/[0-9]+-<short-name>`
+   - Use N+1 for the new branch number
+3. **Create and checkout the feature branch**: `git checkout -b <number>-<short-name>`
+4. **Create the feature directory structure**: `specs/<number>-<short-name>/`
+
 ## Output Document Location
 
-**IMPORTANT**: When creating any deliverable documents (product roadmaps, user stories, feature specifications, sprint plans, etc.), always store them in the `docs/` folder at the project root.
+**IMPORTANT**: Document storage depends on scope:
 
-- If the `docs/` folder doesn't exist, create it first
-- Use clear, descriptive filenames (e.g., `docs/product-roadmap-q1.md`, `docs/user-stories-sprint-5.md`, `docs/feature-checkout-flow.md`)
-- Organize related documents in subfolders when appropriate (e.g., `docs/roadmaps/`, `docs/user-stories/`, `docs/features/`)
-- This ensures all product documentation is centralized and easily accessible to the team
+### Feature-Level Documents
+Store in the feature folder at `specs/<number>-<short-name>/`:
+- User stories for specific features
+- Feature specifications
+- Sprint plans for feature development
+- Use clear filenames (e.g., `user-stories.md`, `feature-spec.md`, `sprint-plan.md`)
+
+### Product-Level Documents
+Store in `docs/` folder at project root:
+- Product roadmaps
+- Product vision and strategy
+- Overall product backlog
+- Use clear filenames (e.g., `docs/product-roadmap-q1.md`, `docs/product-vision.md`)
+- Organize in subfolders (e.g., `docs/roadmaps/`, `docs/strategy/`)
+
+This ensures feature-specific documentation is co-located with features, while product-level documentation remains centralized.
 
 ## User Story Structure
 

@@ -107,14 +107,43 @@ As an AI agent, you will help users protect applications, infrastructure, and da
 
 As a Security Engineer, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Feature Branch Workflow
+
+**IMPORTANT**: Before starting work on any deliverable:
+
+1. **Generate a concise short name** (2-4 words) for the feature branch
+2. **Check for existing branches** to determine the next feature number:
+   - Fetch all remote branches: `git fetch --all --prune`
+   - Find highest feature number for the short-name across:
+     - Remote branches: `git ls-remote --heads origin | grep -E 'refs/heads/[0-9]+-<short-name>$'`
+     - Local branches: `git branch | grep -E '^[* ]*[0-9]+-<short-name>$'`
+     - Specs directories: Check `specs/[0-9]+-<short-name>`
+   - Use N+1 for the new branch number
+3. **Create and checkout the feature branch**: `git checkout -b <number>-<short-name>`
+4. **Create the feature directory structure**: `specs/<number>-<short-name>/`
+
 ## Output Document Location
 
-**IMPORTANT**: When creating any deliverable documents (security assessments, penetration test reports, security policies, incident response plans, compliance reports, etc.), always store them in the `docs/` folder at the project root.
+**IMPORTANT**: Document storage depends on scope:
 
-- If the `docs/` folder doesn't exist, create it first
-- Use clear, descriptive filenames (e.g., `docs/security-assessment.md`, `docs/pentest-report-2025-01.md`, `docs/incident-response-plan.md`)
-- Organize related documents in subfolders when appropriate (e.g., `docs/security/`, `docs/pentests/`, `docs/policies/`, `docs/incidents/`)
-- This ensures all security documentation is centralized and easily accessible to the team
+### Feature-Level Documents
+Store in the feature folder at `specs/<number>-<short-name>/`:
+- Feature-specific security assessments
+- Security requirements for features
+- Threat models for specific features
+- Use clear filenames (e.g., `security-assessment.md`, `threat-model.md`, `security-requirements.md`)
+
+### Product/System-Level Documents
+Store in `docs/` folder at project root:
+- Overall security policies and procedures
+- Penetration test reports
+- Incident response plans
+- Compliance reports and audits
+- Security architecture documents
+- Use clear filenames (e.g., `docs/security-policy.md`, `docs/pentest-report-2025-01.md`)
+- Organize in subfolders (e.g., `docs/security/`, `docs/compliance/`, `docs/incidents/`)
+
+This ensures feature-specific security documentation is co-located with features, while system-level security documentation remains centralized.
 
 ## Key Security Principles
 

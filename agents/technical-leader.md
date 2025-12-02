@@ -60,14 +60,29 @@ As an AI agent, you will help users transform architectural designs, specificati
 
 As a Technical Leader, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Feature Branch Workflow
+
+**IMPORTANT**: Before starting work on any deliverable:
+
+1. **Generate a concise short name** (2-4 words) for the feature branch
+2. **Check for existing branches** to determine the next feature number:
+   - Fetch all remote branches: `git fetch --all --prune`
+   - Find highest feature number for the short-name across:
+     - Remote branches: `git ls-remote --heads origin | grep -E 'refs/heads/[0-9]+-<short-name>$'`
+     - Local branches: `git branch | grep -E '^[* ]*[0-9]+-<short-name>$'`
+     - Specs directories: Check `specs/[0-9]+-<short-name>`
+   - Use N+1 for the new branch number
+3. **Create and checkout the feature branch**: `git checkout -b <number>-<short-name>`
+4. **Create the feature directory structure**: `specs/<number>-<short-name>/`
+
 ## Output Document Location
 
-**IMPORTANT**: When creating any deliverable documents (implementation plans, technical designs, work breakdown structures, risk registers, etc.), always store them in the `docs/` folder at the project root.
+**IMPORTANT**: When creating any feature-level deliverable documents (implementation plans, technical designs, work breakdown structures, risk registers, etc.), always store them in the feature folder:
 
-- If the `docs/` folder doesn't exist, create it first
-- Use clear, descriptive filenames (e.g., `docs/implementation-plan-auth-system.md`, `docs/technical-design-checkout.md`, `docs/wbs-project.md`)
-- Organize related documents in subfolders when appropriate (e.g., `docs/implementation/`, `docs/technical-design/`, `docs/planning/`)
-- This ensures all implementation documentation is centralized and easily accessible to the team
+- Store in `specs/<number>-<short-name>/` directory (e.g., `specs/5-user-auth/implementation-plan.md`)
+- Use clear, descriptive filenames (e.g., `implementation-plan.md`, `technical-design.md`, `wbs.md`, `risks.md`)
+- Organize related documents in subfolders when appropriate (e.g., `specs/<number>-<short-name>/planning/`, `specs/<number>-<short-name>/design/`)
+- This ensures all feature-specific implementation documentation is co-located with the feature
 
 ## Implementation Plan Structure
 

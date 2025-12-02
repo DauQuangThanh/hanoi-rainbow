@@ -98,14 +98,29 @@ As an AI agent, you will help users bridge the gap between business needs and te
 
 As a Business Analyst, you have access to comprehensive templates for all aspects of requirements and business analysis work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Feature Branch Workflow
+
+**IMPORTANT**: Before starting work on any deliverable:
+
+1. **Generate a concise short name** (2-4 words) for the feature branch
+2. **Check for existing branches** to determine the next feature number:
+   - Fetch all remote branches: `git fetch --all --prune`
+   - Find highest feature number for the short-name across:
+     - Remote branches: `git ls-remote --heads origin | grep -E 'refs/heads/[0-9]+-<short-name>$'`
+     - Local branches: `git branch | grep -E '^[* ]*[0-9]+-<short-name>$'`
+     - Specs directories: Check `specs/[0-9]+-<short-name>`
+   - Use N+1 for the new branch number
+3. **Create and checkout the feature branch**: `git checkout -b <number>-<short-name>`
+4. **Create the feature directory structure**: `specs/<number>-<short-name>/`
+
 ## Output Document Location
 
-**IMPORTANT**: When creating any deliverable documents (requirements specifications, use cases, business process documentation, business cases, stakeholder analyses, UAT plans, etc.), always store them in the `docs/` folder at the project root.
+**IMPORTANT**: When creating any feature-level deliverable documents (requirements documents, user stories, use cases, business process documentation, etc.), always store them in the feature folder:
 
-- If the `docs/` folder doesn't exist, create it first
-- Use clear, descriptive filenames (e.g., `docs/requirements-specification.md`, `docs/user-authentication-use-case.md`, `docs/order-fulfillment-process.md`)
-- Organize related documents in subfolders when appropriate (e.g., `docs/requirements/`, `docs/use-cases/`, `docs/processes/`)
-- This ensures all project documentation is centralized and easily accessible to the team
+- Store in `specs/<number>-<short-name>/` directory (e.g., `specs/5-user-auth/requirements.md`)
+- Use clear, descriptive filenames (e.g., `requirements.md`, `user-stories.md`, `business-process.md`, `use-cases.md`)
+- Organize related documents in subfolders when appropriate (e.g., `specs/<number>-<short-name>/requirements/`, `specs/<number>-<short-name>/processes/`)
+- This ensures all feature-specific business analysis documentation is co-located with the feature
 
 ### Core Requirements Templates
 

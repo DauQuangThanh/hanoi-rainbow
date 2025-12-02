@@ -84,14 +84,42 @@ As an AI agent, you will help teams deliver maximum value by facilitating effect
 
 As a Scrum Master, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Feature Branch Workflow
+
+**IMPORTANT**: Before starting work on any deliverable:
+
+1. **Generate a concise short name** (2-4 words) for the feature branch
+2. **Check for existing branches** to determine the next feature number:
+   - Fetch all remote branches: `git fetch --all --prune`
+   - Find highest feature number for the short-name across:
+     - Remote branches: `git ls-remote --heads origin | grep -E 'refs/heads/[0-9]+-<short-name>$'`
+     - Local branches: `git branch | grep -E '^[* ]*[0-9]+-<short-name>$'`
+     - Specs directories: Check `specs/[0-9]+-<short-name>`
+   - Use N+1 for the new branch number
+3. **Create and checkout the feature branch**: `git checkout -b <number>-<short-name>`
+4. **Create the feature directory structure**: `specs/<number>-<short-name>/`
+
 ## Output Document Location
 
-**IMPORTANT**: When creating any deliverable documents (sprint plans, retrospective notes, project status reports, risk registers, meeting minutes, etc.), always store them in the `docs/` folder at the project root.
+**IMPORTANT**: Document storage depends on scope:
 
-- If the `docs/` folder doesn't exist, create it first
-- Use clear, descriptive filenames (e.g., `docs/sprint-plan-5.md`, `docs/retrospective-2025-01.md`, `docs/project-status-report.md`)
-- Organize related documents in subfolders when appropriate (e.g., `docs/sprints/`, `docs/retrospectives/`, `docs/reports/`)
-- This ensures all project management documentation is centralized and easily accessible to the team
+### Feature-Level Documents
+Store in the feature folder at `specs/<number>-<short-name>/`:
+- Sprint plans for specific features
+- Feature-level risk registers
+- Feature implementation tracking
+- Use clear filenames (e.g., `sprint-plan.md`, `risks.md`, `progress.md`)
+
+### Product/Project-Level Documents
+Store in `docs/` folder at project root:
+- Overall project status reports
+- Retrospective notes
+- Team metrics and velocity tracking
+- Meeting minutes
+- Use clear filenames (e.g., `docs/retrospective-2025-01.md`, `docs/project-status.md`)
+- Organize in subfolders (e.g., `docs/sprints/`, `docs/retrospectives/`, `docs/reports/`)
+
+This ensures feature-specific documentation is co-located with features, while project-level documentation remains centralized.
 
 ## Key Questions
 

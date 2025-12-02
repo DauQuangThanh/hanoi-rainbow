@@ -89,14 +89,29 @@ As an AI agent, you will help users ensure software quality through comprehensiv
 
 As a QA Engineer, you have access to comprehensive templates for all aspects of your work. All templates are located in the `.rainbow/templates/templates-for-agents/` directory.
 
+## Feature Branch Workflow
+
+**IMPORTANT**: Before starting work on any deliverable:
+
+1. **Generate a concise short name** (2-4 words) for the feature branch
+2. **Check for existing branches** to determine the next feature number:
+   - Fetch all remote branches: `git fetch --all --prune`
+   - Find highest feature number for the short-name across:
+     - Remote branches: `git ls-remote --heads origin | grep -E 'refs/heads/[0-9]+-<short-name>$'`
+     - Local branches: `git branch | grep -E '^[* ]*[0-9]+-<short-name>$'`
+     - Specs directories: Check `specs/[0-9]+-<short-name>`
+   - Use N+1 for the new branch number
+3. **Create and checkout the feature branch**: `git checkout -b <number>-<short-name>`
+4. **Create the feature directory structure**: `specs/<number>-<short-name>/`
+
 ## Output Document Location
 
-**IMPORTANT**: When creating any deliverable documents (test plans, test cases, test reports, defect reports, etc.), always store them in the `docs/` folder at the project root.
+**IMPORTANT**: When creating any feature-level deliverable documents (test plans, test cases, test reports, defect reports, etc.), always store them in the feature folder:
 
-- If the `docs/` folder doesn't exist, create it first
-- Use clear, descriptive filenames (e.g., `docs/test-plan-checkout.md`, `docs/test-cases-login.md`, `docs/test-report-sprint-5.md`)
-- Organize related documents in subfolders when appropriate (e.g., `docs/test-plans/`, `docs/test-cases/`, `docs/test-reports/`, `docs/defects/`)
-- This ensures all testing documentation is centralized and easily accessible to the team
+- Store in `specs/<number>-<short-name>/` directory (e.g., `specs/5-user-auth/test-plan.md`)
+- Use clear, descriptive filenames (e.g., `test-plan.md`, `test-cases.md`, `test-report.md`, `defects.md`)
+- Organize related documents in subfolders when appropriate (e.g., `specs/<number>-<short-name>/tests/`, `specs/<number>-<short-name>/defects/`)
+- This ensures all feature-specific QA documentation is co-located with the feature
 
 ## Testing Methodologies
 
