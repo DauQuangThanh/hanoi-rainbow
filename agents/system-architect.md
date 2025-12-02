@@ -111,6 +111,8 @@ As a System Architect, you have access to comprehensive templates for all aspect
    - Use N+1 for the new branch number
 3. **Create and checkout the feature branch**: `git checkout -b <number>-<short-name>`
 
+**CRITICAL**: Never commit directly to the main branch. All architectural work must be done in feature branches and reviewed before merging.
+
 ## Output Document Location
 
 **IMPORTANT**: When creating any deliverable documents (architecture design documents, ADRs, technology stack selections, API specifications, database schemas, migration plans, etc.), always store them in the `docs/` folder at the project root.
