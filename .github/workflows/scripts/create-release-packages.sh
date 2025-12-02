@@ -120,11 +120,11 @@ generate_agents() {
         # Extract description for TOML format
         description=$(printf '%s\n' "$file_content" | awk '/^description:/ {sub(/^description:[[:space:]]*/, ""); gsub(/"/, ""); print; exit}')
         body=$(printf '%s\n' "$body" | sed 's/\\/\\\\/g')
-        { echo "description = \"$description\""; echo; echo "prompt = \"\"\""; echo "$body"; echo "\"\"\""; } > "$output_dir/rainbow.$name.$ext" ;;
+        { echo "description = \"$description\""; echo; echo "prompt = \"\"\""; echo "$body"; echo "\"\"\""; } > "$output_dir/hanoi.$name.$ext" ;;
       md)
-        echo "$body" > "$output_dir/rainbow.$name.$ext" ;;
+        echo "$body" > "$output_dir/hanoi.$name.$ext" ;;
       agent.md)
-        echo "$body" > "$output_dir/rainbow.$name.$ext" ;;
+        echo "$body" > "$output_dir/hanoi.$name.$ext" ;;
     esac
   done
 }
@@ -134,7 +134,7 @@ generate_copilot_prompts() {
   mkdir -p "$prompts_dir"
 
   # Generate a .prompt.md file for each .agent.md file
-  for agent_file in "$agents_dir"/rainbow.*.agent.md; do
+  for agent_file in "$agents_dir"/hanoi.*.agent.md; do
     [[ -f "$agent_file" ]] || continue
 
     local basename=$(basename "$agent_file" .agent.md)
