@@ -30,29 +30,29 @@ Need specialized help? Use these role-based agents:
 
 | Agent         | When to Use |
 |---------------|-------------|
-| `/rainbow.business-analyst` | Analyze business requirements, gather stakeholder needs |
-| `/rainbow.product-owner` | Define product vision, prioritize features |
-| `/rainbow.system-architect` | Design architecture, make technology decisions |
-| `/rainbow.technical-leader` | Review code, guide engineering practices |
-| `/rainbow.software-engineer` | Implement features, write code |
-| `/rainbow.qa-engineer` | Design tests, ensure quality standards |
-| `/rainbow.devops-engineer` | Set up CI/CD, manage infrastructure |
-| `/rainbow.security-engineer` | Assess security, identify vulnerabilities |
-| `/rainbow.ux-ui-designer` | Design interfaces, create wireframes |
-| `/rainbow.technical-writer` | Write documentation, create user guides |
-| `/rainbow.scrum-master` | Facilitate ceremonies, remove blockers |
+| `/hanoi.business-analyst` | Analyze business requirements, gather stakeholder needs |
+| `/hanoi.product-owner` | Define product vision, prioritize features |
+| `/hanoi.system-architect` | Design architecture, make technology decisions |
+| `/hanoi.technical-leader` | Review code, guide engineering practices |
+| `/hanoi.software-engineer` | Implement features, write code |
+| `/hanoi.qa-engineer` | Design tests, ensure quality standards |
+| `/hanoi.devops-engineer` | Set up CI/CD, manage infrastructure |
+| `/hanoi.security-engineer` | Assess security, identify vulnerabilities |
+| `/hanoi.ux-ui-designer` | Design interfaces, create wireframes |
+| `/hanoi.technical-writer` | Write documentation, create user guides |
+| `/hanoi.scrum-master` | Facilitate ceremonies, remove blockers |
 
 **Example usage:**
 
 ```bash
 # Get help with business requirements
-/rainbow.business-analyst Analyze the current requirements and identify gaps in our user story coverage
+/hanoi.business-analyst Analyze the current requirements and identify gaps in our user story coverage
 
 # Review architecture decisions
-/rainbow.system-architect Review our microservices design and suggest improvements for scalability
+/hanoi.system-architect Review our microservices design and suggest improvements for scalability
 
 # Get security assessment
-/rainbow.security-engineer Assess our authentication implementation for security vulnerabilities
+/hanoi.security-engineer Assess our authentication implementation for security vulnerabilities
 ```
 
 ---

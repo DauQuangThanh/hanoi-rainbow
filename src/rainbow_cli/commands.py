@@ -560,10 +560,10 @@ def init(
     agent_lines = [
         "Use role-based agents for specialized tasks [bright_black](invoke as needed)[/bright_black]",
         "",
-        "○ [cyan]/rainbow.business-analyst[/], [cyan]/rainbow.product-owner[/], [cyan]/rainbow.system-architect[/]",
-        "○ [cyan]/rainbow.technical-leader[/], [cyan]/rainbow.software-engineer[/], [cyan]/rainbow.qa-engineer[/]",
-        "○ [cyan]/rainbow.devops-engineer[/], [cyan]/rainbow.security-engineer[/], [cyan]/rainbow.ux-ui-designer[/]",
-        "○ [cyan]/rainbow.technical-writer[/], [cyan]/rainbow.scrum-master[/]"
+        "○ [cyan]/hanoi.business-analyst[/], [cyan]/hanoi.product-owner[/], [cyan]/hanoi.system-architect[/]",
+        "○ [cyan]/hanoi.technical-leader[/], [cyan]/hanoi.software-engineer[/], [cyan]/hanoi.qa-engineer[/]",
+        "○ [cyan]/hanoi.devops-engineer[/], [cyan]/hanoi.security-engineer[/], [cyan]/hanoi.ux-ui-designer[/]",
+        "○ [cyan]/hanoi.technical-writer[/], [cyan]/hanoi.scrum-master[/]"
     ]
     agent_panel = Panel("\n".join(agent_lines), title="Role-Based Agent Commands", border_style="cyan", padding=(1,2))
     console.print()

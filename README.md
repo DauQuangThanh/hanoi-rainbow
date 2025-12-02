@@ -300,17 +300,17 @@ Specialized agents for specific team roles in your development workflow:
 
 | Agent                             | Description                                                           |
 |----------------------------------|-----------------------------------------------------------------------|
-| `/rainbow.business-analyst`      | Analyze business requirements, gather stakeholder needs, and create comprehensive business documentation |
-| `/rainbow.product-owner`         | Define product vision, manage backlog, prioritize features, and create user stories |
-| `/rainbow.system-architect`      | Design system architecture, make technology decisions, and create architectural documentation |
-| `/rainbow.technical-leader`      | Provide technical leadership, code reviews, and guide engineering best practices |
-| `/rainbow.software-engineer`     | Implement features, write code, and create technical documentation |
-| `/rainbow.qa-engineer`           | Design test strategies, create test cases, and ensure quality standards |
-| `/rainbow.devops-engineer`       | Design CI/CD pipelines, manage infrastructure, and automate deployment processes |
-| `/rainbow.security-engineer`     | Conduct security assessments, identify vulnerabilities, and implement security measures |
-| `/rainbow.ux-ui-designer`        | Design user interfaces, create wireframes, and ensure consistent user experience |
-| `/rainbow.technical-writer`      | Create and maintain technical documentation, user guides, and API documentation |
-| `/rainbow.scrum-master`          | Facilitate agile ceremonies, remove impediments, and support team collaboration |
+| `/hanoi.business-analyst`      | Analyze business requirements, gather stakeholder needs, and create comprehensive business documentation |
+| `/hanoi.product-owner`         | Define product vision, manage backlog, prioritize features, and create user stories |
+| `/hanoi.system-architect`      | Design system architecture, make technology decisions, and create architectural documentation |
+| `/hanoi.technical-leader`      | Provide technical leadership, code reviews, and guide engineering best practices |
+| `/hanoi.software-engineer`     | Implement features, write code, and create technical documentation |
+| `/hanoi.qa-engineer`           | Design test strategies, create test cases, and ensure quality standards |
+| `/hanoi.devops-engineer`       | Design CI/CD pipelines, manage infrastructure, and automate deployment processes |
+| `/hanoi.security-engineer`     | Conduct security assessments, identify vulnerabilities, and implement security measures |
+| `/hanoi.ux-ui-designer`        | Design user interfaces, create wireframes, and ensure consistent user experience |
+| `/hanoi.technical-writer`      | Create and maintain technical documentation, user guides, and API documentation |
+| `/hanoi.scrum-master`          | Facilitate agile ceremonies, remove impediments, and support team collaboration |
 
 ### Environment Variables
 
