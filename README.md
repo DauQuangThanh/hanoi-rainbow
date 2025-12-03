@@ -85,6 +85,8 @@ uvx --from git+https://github.com/dauquangthanh/hanoi-rainbow.git rainbow init <
 
 ### Your First Project in 8 Steps
 
+> **💡 Automatic Version Control:** All Rainbow commands automatically generate appropriate git commit messages and commit changes upon completion. Commands use semantic commit prefixes (`docs:`, `feat:`, `test:`, `chore:`) to maintain a clear project history.
+
 #### 1️⃣ **Set Project Rules**
 
 Launch your AI assistant in the project. You'll see `/rainbow.*` commands available.
@@ -260,43 +262,48 @@ rainbow version
 
 After running `rainbow init`, your AI coding agent will have access to these slash commands for structured development:
 
+> **💡 Automatic Commits:** All commands automatically generate semantic commit messages and commit their changes upon completion, maintaining a clear project history without manual intervention.
+
 #### Core Workflow Commands
 
 Essential commands for the Spec-Driven Development workflow:
 
-| Command                  | Description                                                           |
-|--------------------------|-----------------------------------------------------------------------|
-| `/rainbow.regulate`      | Create or update project governing principles and development guidelines |
-| `/rainbow.specify`       | Define what you want to build (requirements and user stories)        |
-| `/rainbow.design`        | Create technical implementation plans with your chosen tech stack     |
-| `/rainbow.taskify`       | Generate actionable task lists for implementation                     |
-| `/rainbow.implement`     | Execute all tasks to build the feature according to the plan         |
+| Command                  | Description                                                           | Auto Commit Prefix |
+|--------------------------|-----------------------------------------------------------------------|--------------------|
+| `/rainbow.regulate`      | Create or update project governing principles and development guidelines | `docs:` |
+| `/rainbow.specify`       | Define what you want to build (requirements and user stories)        | `docs:` |
+| `/rainbow.design`        | Create technical implementation plans with your chosen tech stack     | `docs:` |
+| `/rainbow.taskify`       | Generate actionable task lists for implementation                     | `docs:` |
+| `/rainbow.implement`     | Execute all tasks to build the feature according to the plan         | `feat:`, `fix:`, `test:` (context-dependent) |
 
 #### Product-Level Commands
 
 Commands for comprehensive product-wide documentation (run once per product, not per feature):
 
-| Command                      | Description                                                           |
-|------------------------------|-----------------------------------------------------------------------|
-| `/rainbow.architect`         | Create comprehensive system architecture documentation for the entire product |
-| `/rainbow.standardize`       | Create comprehensive coding standards and conventions documentation |
-| `/rainbow.design-e2e-test`   | Design comprehensive end-to-end test specifications for the entire product |
-| `/rainbow.perform-e2e-test`  | Execute end-to-end tests and generate detailed test result reports |
+| Command                      | Description                                                           | Auto Commit Prefix |
+|------------------------------|-----------------------------------------------------------------------|--------------------|
+| `/rainbow.architect`         | Create comprehensive system architecture documentation for the entire product | `docs:` |
+| `/rainbow.standardize`       | Create comprehensive coding standards and conventions documentation | `docs:` |
+| `/rainbow.design-e2e-test`   | Design comprehensive end-to-end test specifications for the entire product | `test:` |
+| `/rainbow.perform-e2e-test`  | Execute end-to-end tests and generate detailed test result reports | `test:` |
 
 #### Quality & Enhancement Commands
 
 Additional commands for enhanced quality, validation, and project management:
 
-| Command                  | Description                                                           |
-|--------------------------|-----------------------------------------------------------------------|
-| `/rainbow.clarify`       | Clarify underspecified areas (recommended before `/rainbow.design`; formerly `/quizme`) |
-| `/rainbow.analyze`       | Cross-artifact consistency & coverage analysis (run after `/rainbow.taskify`, before `/rainbow.implement`) |
-| `/rainbow.checklist`     | Generate custom quality checklists that validate requirements completeness, clarity, and consistency |
-| `/rainbow.taskstoissues` | Convert existing tasks into actionable GitHub issues with dependency tracking |
+| Command                  | Description                                                           | Auto Commit Prefix |
+|--------------------------|-----------------------------------------------------------------------|--------------------|---|
+| `/rainbow.clarify`       | Clarify underspecified areas (recommended before `/rainbow.design`; formerly `/quizme`) | `docs:` |
+| `/rainbow.analyze`       | Cross-artifact consistency & coverage analysis (run after `/rainbow.taskify`, before `/rainbow.implement`) | `docs:` |
+| `/rainbow.checklist`     | Generate custom quality checklists that validate requirements completeness, clarity, and consistency | `docs:` |
+| `/rainbow.tasks-to-issues` | Convert existing tasks into actionable GitHub issues with dependency tracking | `chore:` |
+| `/rainbow.tasks-to-ado`  | Convert existing tasks into actionable Azure DevOps work items with dependency tracking | `chore:` |
 
 #### Role-Based Agents
 
 Specialized agents for specific team roles in your development workflow:
+
+> **💡 Note:** All role-based agents automatically generate `docs:` prefixed commit messages and commit their deliverables upon completion.
 
 | Agent                             | Description                                                           |
 |----------------------------------|-----------------------------------------------------------------------|

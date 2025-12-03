@@ -10,6 +10,8 @@
 
 Follow this order for best results:
 
+> **💡 Automatic Version Control:** All Rainbow commands automatically generate appropriate git commit messages and commit changes upon completion using semantic commit prefixes (`docs:`, `feat:`, `test:`, `chore:`).
+
 | Step | Command | Purpose |
 |------|---------|----------|
 | 1️⃣ | `/rainbow.regulate` | Set ground rules |
@@ -27,6 +29,8 @@ Follow this order for best results:
 ## 🎭 Role-Based Agents
 
 Need specialized help? Use these role-based agents:
+
+> **💡 Note:** All role-based agents automatically commit their work with `docs:` prefixed commit messages.
 
 | Agent         | When to Use |
 |---------------|-------------|
