@@ -53,7 +53,7 @@ Running `rainbow init --here --force` will update:
 - ✅ **Slash command files** (`.claude/commands/`, `.github/prompts/`, etc.)
 - ✅ **Script files** (`.rainbow/scripts/`)
 - ✅ **Template files** (`.rainbow/templates/`)
-- ✅ **Shared memory files** (`.rainbow/memory/`) - **⚠️ See warnings below**
+- ✅ **Shared memory files** (`memory/`) - **⚠️ See warnings below**
 
 ### What stays safe?
 
@@ -102,26 +102,26 @@ With `--force`, it skips the confirmation and proceeds immediately.
 
 ### 1. Ground rules file will be overwritten
 
-**Known issue:** `rainbow init --here --force` currently overwrites `.rainbow/memory/ground-rules.md` with the default template, erasing any customizations you made.
+**Known issue:** `rainbow init --here --force` currently overwrites `memory/ground-rules.md` with the default template, erasing any customizations you made.
 
 **Workaround:**
 
 ```bash
 # 1. Back up your ground rules before upgrading
-cp .rainbow/memory/ground-rules.md .rainbow/memory/ground-rules-backup.md
+cp memory/ground-rules.md memory/ground-rules-backup.md
 
 # 2. Run the upgrade
 rainbow init --here --force --ai copilot
 
 # 3. Restore your customized ground rules
-mv .rainbow/memory/ground-rules-backup.md .rainbow/memory/ground-rules.md
+mv memory/ground-rules-backup.md memory/ground-rules.md
 ```
 
 Or use git to restore it:
 
 ```bash
 # After upgrade, restore from git history
-git restore .rainbow/memory/ground-rules.md
+git restore memory/ground-rules.md
 ```
 
 ### 2. Custom template modifications
@@ -171,14 +171,14 @@ uv tool install rainbow-cli --force --from git+https://github.com/dauquangthanh/
 rainbow init --here --force --ai copilot
 
 # Restore your ground rules if customized
-git restore .rainbow/memory/ground-rules.md
+git restore memory/ground-rules.md
 ```
 
 ### Scenario 2: "I customized templates and ground-rules"
 
 ```bash
 # 1. Back up customizations
-cp .rainbow/memory/ground-rules.md /tmp/ground-rules-backup.md
+cp memory/ground-rules.md /tmp/ground-rules-backup.md
 cp -r .rainbow/templates /tmp/templates-backup
 
 # 2. Upgrade CLI
@@ -188,7 +188,7 @@ uv tool install rainbow-cli --force --from git+https://github.com/dauquangthanh/
 rainbow init --here --force --ai copilot
 
 # 4. Restore customizations
-mv /tmp/ground-rules-backup.md .rainbow/memory/ground-rules.md
+mv /tmp/ground-rules-backup.md memory/ground-rules.md
 # Manually merge template changes if needed
 ```
 
@@ -215,13 +215,13 @@ If you initialized your project with `--no-git`, you can still upgrade:
 
 ```bash
 # Manually back up files you customized
-cp .rainbow/memory/ground-rules.md /tmp/ground-rules-backup.md
+cp memory/ground-rules.md /tmp/ground-rules-backup.md
 
 # Run upgrade
 rainbow init --here --force --ai copilot --no-git
 
 # Restore customizations
-mv /tmp/ground-rules-backup.md .rainbow/memory/ground-rules.md
+mv /tmp/ground-rules-backup.md memory/ground-rules.md
 ```
 
 The `--no-git` flag skips git initialization but doesn't affect file updates.
@@ -303,10 +303,10 @@ This tells Hanoi Rainbow which feature directory to use when creating specs, pla
 
 ```bash
 # If you committed before upgrading
-git restore .rainbow/memory/ground-rules.md
+git restore memory/ground-rules.md
 
 # If you backed up manually
-cp /tmp/ground-rules-backup.md .rainbow/memory/ground-rules.md
+cp /tmp/ground-rules-backup.md memory/ground-rules.md
 ```
 
 **Prevention:** Always commit or back up `ground-rules.md` before upgrading.
@@ -336,7 +336,7 @@ Only Hanoi Rainbow infrastructure files:
 - Agent command files (`.claude/commands/`, `.github/prompts/`, etc.)
 - Scripts in `.rainbow/scripts/`
 - Templates in `.rainbow/templates/`
-- Memory files in `.rainbow/memory/` (including ground-rules)
+- Memory files in `memory/` (including ground-rules)
 
 **What stays untouched:**
 
@@ -361,7 +361,7 @@ Only Hanoi Rainbow infrastructure files:
 - ✅ **Expected** when adding Hanoi Rainbow to an existing codebase
 - ⚠️ **Unexpected** if you thought you were creating a new project in an empty directory
 
-**Prevention tip:** Before upgrading, commit or back up your `.rainbow/memory/ground-rules.md` if you customized it.
+**Prevention tip:** Before upgrading, commit or back up your `memory/ground-rules.md` if you customized it.
 
 ### "CLI upgrade doesn't seem to work"
 

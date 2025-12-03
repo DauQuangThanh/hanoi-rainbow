@@ -51,19 +51,19 @@ You **MUST** consider the user input before proceeding (if not empty).
 3. Load and analyze the implementation context:
    - **REQUIRED**: Read tasks.md for the complete task list and execution plan
    - **REQUIRED**: Read design.md for tech stack, architecture, and file structure
-   - **PRODUCT-LEVEL**: Read `/docs/architecture.md` (if exists) for architectural patterns, ADRs, deployment architecture, and quality strategies
-   - **PRODUCT-LEVEL**: Read `/docs/standards.md` (if exists) for UI naming, code naming, file structure, API design, database naming, testing, and Git conventions
+   - **PRODUCT-LEVEL**: Read `docs/architecture.md` (if exists) for architectural patterns, ADRs, deployment architecture, and quality strategies
+   - **PRODUCT-LEVEL**: Read `docs/standards.md` (if exists) for UI naming, code naming, file structure, API design, database naming, testing, and Git conventions
    - **IF EXISTS**: Read data-model.md for entities and relationships
    - **IF EXISTS**: Read contracts/ for API specifications and test requirements
    - **IF EXISTS**: Read research.md for technical decisions and constraints
    - **IF EXISTS**: Read quickstart.md for integration scenarios
 
 4. **Project Setup Verification**:
-   - **Architecture Alignment** (if `/docs/architecture.md` exists):
+   - **Architecture Alignment** (if `docs/architecture.md` exists):
      - Verify directory structure matches code organization from architecture.md
      - Ensure deployment configuration aligns with deployment architecture
      - Follow component organization patterns from C4 Component View
-   - **Standards Compliance** (if `/docs/standards.md` exists):
+   - **Standards Compliance** (if `docs/standards.md` exists):
      - Follow file and directory naming conventions from standards.md
      - Apply code naming conventions (UI, backend, database)
      - Follow project structure standards
@@ -154,12 +154,12 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Check that implemented features match the original specification
    - Validate that tests pass and coverage meets requirements
    - Confirm the implementation follows the technical plan
-   - **If `/docs/architecture.md` exists**: Verify implementation aligns with:
+   - **If `docs/architecture.md` exists**: Verify implementation aligns with:
      - Architectural patterns and component organization
      - Technology stack and deployment architecture
      - Quality attribute requirements (performance, security, scalability)
      - Architecture Decision Records (ADRs)
-   - **If `/docs/standards.md` exists**: Verify implementation follows:
+   - **If `docs/standards.md` exists**: Verify implementation follows:
      - UI naming conventions (for UI components)
      - Code naming conventions (variables, functions, classes)
      - File and directory structure standards

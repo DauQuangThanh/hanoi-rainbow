@@ -29,13 +29,13 @@ You **MUST** consider the user input before proceeding (if not empty).
 2. **Load design documents**: Read from FEATURE_DIR:
    - **Required**: design.md (tech stack, libraries, structure), spec.md (user stories with priorities)
    - **Optional**: data-model.md (entities), contracts/ (API endpoints), research.md (decisions), quickstart.md (test scenarios)
-   - **Product-level**: `/docs/architecture.md` (if exists - architectural patterns, ADRs, deployment architecture)
+   - **Product-level**: `docs/architecture.md` (if exists - architectural patterns, ADRs, deployment architecture)
    - Note: Not all projects have all documents. Generate tasks based on what's available.
 
 3. **Execute task generation workflow**:
    - Load design.md and extract tech stack, libraries, project structure
    - Load spec.md and extract user stories with their priorities (P1, P2, P3, etc.)
-   - If `/docs/architecture.md` exists: Extract architectural patterns, deployment requirements, and ADRs relevant to implementation
+   - If `docs/architecture.md` exists: Extract architectural patterns, deployment requirements, and ADRs relevant to implementation
    - If data-model.md exists: Extract entities and map to user stories
    - If contracts/ exists: Map endpoints to user stories
    - If research.md exists: Extract decisions for setup tasks

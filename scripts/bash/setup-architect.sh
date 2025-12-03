@@ -51,8 +51,8 @@ if [ ! -f "$ARCH_TEMPLATE" ]; then
     exit 1
 fi
 
-if [ ! -f ".rainbow/memory/ground-rules.md" ]; then
-    echo "ERROR: Ground rules file not found: .rainbow/memory/ground-rules.md. Run /rainbow.regulate first." >&2
+if [ ! -f "memory/ground-rules.md" ]; then
+    echo "ERROR: Ground rules file not found: memory/ground-rules.md. Run /rainbow.regulate first." >&2
     exit 1
 fi
 

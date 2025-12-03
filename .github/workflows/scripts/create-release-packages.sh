@@ -32,7 +32,7 @@ rm -rf "$GENRELEASES_DIR"/* || true
 
 rewrite_paths() {
   sed -E \
-    -e 's@(/?)memory/@.rainbow/memory/@g' \
+    -e 's@(/?)memory/@memory/@g' \
     -e 's@(/?)scripts/@.rainbow/scripts/@g' \
     -e 's@(/?)templates/@.rainbow/templates/@g'
 }

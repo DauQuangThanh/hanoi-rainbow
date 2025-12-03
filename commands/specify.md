@@ -74,8 +74,8 @@ Given that feature description, do this:
 3. Load `.rainbow/templates/templates-for-commands/spec-template.md` to understand required sections.
 
 4. **Load product-level context (if available)**:
-   - Read `/docs/architecture.md` (if exists) to understand technology stack, architectural patterns, and quality requirements
-   - Read `/docs/standards.md` (if exists) to understand naming conventions and coding standards
+   - Read `docs/architecture.md` (if exists) to understand technology stack, architectural patterns, and quality requirements
+   - Read `docs/standards.md` (if exists) to understand naming conventions and coding standards
    - Use this context to ensure the spec aligns with established architectural decisions and standards
 
 5. Follow this execution flow:

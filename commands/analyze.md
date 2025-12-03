@@ -21,7 +21,7 @@ Identify inconsistencies, duplications, ambiguities, and underspecified items ac
 
 **STRICTLY READ-ONLY**: Do **not** modify any files. Output a structured analysis report. Offer an optional remediation plan (user must explicitly approve before any follow-up editing commands would be invoked manually).
 
-**Ground Rules Authority**: The project ground rules (`/memory/ground-rules.md`) are **non-negotiable** within this analysis scope. Ground rules conflicts are automatically CRITICAL and require adjustment of the spec, plan, or tasks—not dilution, reinterpretation, or silent ignoring of the principle. If a principle itself needs to change, that must occur in a separate, explicit ground rules update outside `/rainbow.analyze`.
+**Ground Rules Authority**: The project ground rules (`memory/ground-rules.md`) are **non-negotiable** within this analysis scope. Ground rules conflicts are automatically CRITICAL and require adjustment of the spec, plan, or tasks—not dilution, reinterpretation, or silent ignoring of the principle. If a principle itself needs to change, that must occur in a separate, explicit ground rules update outside `/rainbow.analyze`.
 
 ## Execution Steps
 
@@ -65,7 +65,7 @@ Load only the minimal necessary context from each artifact:
 
 **From ground-rules:**
 
-- Load `/memory/ground-rules.md` for principle validation
+- Load `memory/ground-rules.md` for principle validation
 
 **From architecture.md (if exists):**
 

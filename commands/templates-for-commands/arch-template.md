@@ -16,9 +16,9 @@
 
 **Related Documents**:
 
-- Ground Rules: `/memory/ground-rules.md`
-- Feature Specifications: `/specs/[###-feature]/spec.md`
-- Implementation Plans: `/specs/[###-feature]/design.md` (created after this document)
+- Ground Rules: `memory/ground-rules.md`
+- Feature Specifications: `specs/[###-feature]/spec.md`
+- Implementation Plans: `specs/[###-feature]/design.md` (created after this document)
 
 ---
 
@@ -1145,9 +1145,9 @@ Adopt a microservices architecture with independent services for user management
 
 ### 11.3 Related Documents
 
-- **Ground Rules**: `/memory/ground-rules.md` - Project constraints and principles
-- **Feature Specifications**: `/specs/*/spec.md` - Individual feature requirements
-- **Implementation Plans**: `/specs/*/design.md` - Feature implementation strategies
+- **Ground Rules**: `memory/ground-rules.md` - Project constraints and principles
+- **Feature Specifications**: `specs/*/spec.md` - Individual feature requirements
+- **Implementation Plans**: `specs/*/design.md` - Feature implementation strategies
 - **API Documentation**: [Link to OpenAPI/Swagger docs]
 - **Runbooks**: [Link to operational procedures]
 
@@ -1244,10 +1244,10 @@ erDiagram
 
 ### Relationship to Other Documents
 
-- **Ground Rules** (`/memory/ground-rules.md`): Defines project-wide constraints that this architecture must respect
-- **Feature Specs** (`/specs/*/spec.md`): Define individual features; this architecture shows how they fit together
-- **Implementation Plans** (`/specs/*/design.md`): Tactical plans for building features; guided by this architecture
-- **Tasks** (`/specs/*/tasks.md`): Individual work items; derived from plans that follow this architecture
+- **Ground Rules** (`memory/ground-rules.md`): Defines project-wide constraints that this architecture must respect
+- **Feature Specs** (`specs/*/spec.md`): Define individual features; this architecture shows how they fit together
+- **Implementation Plans** (`specs/*/design.md`): Tactical plans for building features; guided by this architecture
+- **Tasks** (`specs/*/tasks.md`): Individual work items; derived from plans that follow this architecture
 
 ### Tips for Success
 

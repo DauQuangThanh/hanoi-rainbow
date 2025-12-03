@@ -24,7 +24,7 @@ setup_standardize() {
     local docs_dir="$repo_root/docs"
     local standards_file="$docs_dir/standards.md"
     local template_file="$repo_root/.rainbow/templates/templates-for-commands/standards-template.md"
-    local ground_rules_file="$repo_root/.rainbow/memory/ground-rules.md"
+    local ground_rules_file="$repo_root/memory/ground-rules.md"
     local architecture_file="$docs_dir/architecture.md"
     local specs_dir="$repo_root/specs"
     

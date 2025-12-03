@@ -16,9 +16,9 @@
 
 **Related Documents**:
 
-- Architecture: `/docs/architecture.md`
-- Ground Rules: `/memory/ground-rules.md`
-- Feature Specifications: `/specs/[###-feature]/spec.md`
+- Architecture: `docs/architecture.md`
+- Ground Rules: `memory/ground-rules.md`
+- Feature Specifications: `specs/[###-feature]/spec.md`
 
 ---
 
@@ -1795,7 +1795,7 @@ jobs:
 
 ### 12.3 Tool Configuration Files
 
-See `/docs/examples/` for sample configuration files:
+See `docs/examples/` for sample configuration files:
 
 - `.editorconfig`
 - `.eslintrc.js`

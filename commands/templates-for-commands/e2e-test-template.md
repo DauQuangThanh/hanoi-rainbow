@@ -16,10 +16,10 @@
 
 **Related Documents**:
 
-- Architecture: `/docs/architecture.md`
-- Ground Rules: `/memory/ground-rules.md`
-- Feature Specifications: `/specs/[###-feature]/spec.md`
-- Standards: `/docs/standards.md`
+- Architecture: `docs/architecture.md`
+- Ground Rules: `memory/ground-rules.md`
+- Feature Specifications: `specs/[###-feature]/spec.md`
+- Standards: `docs/standards.md`
 
 ---
 
@@ -80,7 +80,7 @@ This document establishes the comprehensive end-to-end (E2E) testing strategy fo
 - External Integrations: [e.g., Payment gateway, Email service]
 - Mobile: [e.g., React Native app (if applicable)]
 
-**Reference Architecture**: See `/docs/architecture.md` for detailed system architecture.
+**Reference Architecture**: See `docs/architecture.md` for detailed system architecture.
 
 ---
 
@@ -1151,8 +1151,8 @@ test('Flaky test example', async ({ page }) => {
 
 ### 13.2 References
 
-- **Architecture**: `/docs/architecture.md`
-- **Standards**: `/docs/standards.md`
+- **Architecture**: `docs/architecture.md`
+- **Standards**: `docs/standards.md`
 - **Playwright Documentation**: <https://playwright.dev/>
 - **Test Automation Patterns**: [Link to internal wiki]
 - **CI/CD Pipeline**: [Link to pipeline documentation]
@@ -1163,7 +1163,7 @@ test('Flaky test example', async ({ page }) => {
   ACTION REQUIRED: Maintain a catalog of all test scenarios
 -->
 
-**Complete Scenario List**: See `/docs/e2e-test-scenarios.md`
+**Complete Scenario List**: See `docs/e2e-test-scenarios.md`
 
 **Scenario Coverage by Feature**:
 

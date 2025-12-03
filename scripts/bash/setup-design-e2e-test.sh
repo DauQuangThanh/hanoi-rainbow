@@ -24,7 +24,7 @@ setup_design_e2e_test() {
     local docs_dir="$repo_root/docs"
     local e2e_test_file="$docs_dir/e2e-test-plan.md"
     local template_file="$repo_root/.rainbow/templates/templates-for-commands/e2e-test-template.md"
-    local ground_rules_file="$repo_root/.rainbow/memory/ground-rules.md"
+    local ground_rules_file="$repo_root/memory/ground-rules.md"
     local architecture_file="$docs_dir/architecture.md"
     local specs_dir="$repo_root/specs"
     

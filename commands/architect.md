@@ -28,7 +28,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for ARCH_DOC, DOCS_DIR, SPECS_DIR. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read `/memory/ground-rules.md` and all feature specifications from `/specs/*/spec.md`. Load ARCH_DOC template (already copied to docs/).
+2. **Load context**: Read `memory/ground-rules.md` and all feature specifications from `specs/*/spec.md`. Load ARCH_DOC template (already copied to docs/).
 
 3. **Execute architecture workflow**: Follow the structure in ARCH_DOC template to:
    - Fill Executive Summary with product overview
@@ -47,7 +47,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 ### Phase 0: Architecture Analysis & Stakeholder Identification
 
 1. **Analyze feature specifications**:
-   - Read all `/specs/*/spec.md` files
+   - Read all `specs/*/spec.md` files
    - Extract common patterns and requirements
    - Identify system boundaries
    - List all external integrations
