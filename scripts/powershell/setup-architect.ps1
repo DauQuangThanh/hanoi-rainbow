@@ -13,7 +13,7 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 # Configuration
 $docsDir = "docs"
 $archDoc = Join-Path $docsDir "architecture.md"
-$archTemplate = "commands\templates-for-commands\arch-template.md"
+$archTemplate = ".rainbow\templates\templates-for-commands\arch-template.md"
 $adrDir = Join-Path $docsDir "adr"
 $specsDir = "specs"
 
@@ -21,7 +21,7 @@ $specsDir = "specs"
 try {
     $null = git rev-parse --git-dir 2>&1
 } catch {
-    Write-ErrorMessage "Not in a git repository. Please run this from the repository root."
+    Write-Error "Not in a git repository. Please run this from the repository root."
     exit 1
 }
 
@@ -30,12 +30,12 @@ Set-Location $repoRoot
 
 # Verify required files exist
 if (-not (Test-Path $archTemplate)) {
-    Write-ErrorMessage "Architecture template not found: $archTemplate"
+    Write-Error "Architecture template not found: $archTemplate"
     exit 1
 }
 
-if (-not (Test-Path "memory\ground-rules.md")) {
-    Write-ErrorMessage "Ground rules file not found: memory\ground-rules.md. Run /rainbow.regulate first."
+if (-not (Test-Path ".rainbow\memory\ground-rules.md")) {
+    Write-Error "Ground rules file not found: .rainbow\memory\ground-rules.md. Run /rainbow.regulate first."
     exit 1
 }
 
@@ -45,13 +45,13 @@ if ([string]::IsNullOrEmpty($Product)) {
 }
 
 # Create docs directory structure
-Write-InfoMessage "Creating architecture documentation structure..."
+Write-Host "INFO: Creating architecture documentation structure..."
 New-Item -ItemType Directory -Path $docsDir -Force | Out-Null
 New-Item -ItemType Directory -Path $adrDir -Force | Out-Null
 
 # Copy architecture template if it doesn't exist
 if (-not (Test-Path $archDoc)) {
-    Write-InfoMessage "Creating architecture document from template..."
+    Write-Host "INFO: Creating architecture document from template..."
     Copy-Item $archTemplate $archDoc
     
     # Replace placeholder with product name and date
@@ -60,9 +60,9 @@ if (-not (Test-Path $archDoc)) {
     $content = $content -replace '\[DATE\]', (Get-Date -Format "yyyy-MM-dd")
     Set-Content -Path $archDoc -Value $content
     
-    Write-SuccessMessage "Created: $archDoc"
+    Write-Host "✓ Created: $archDoc"
 } else {
-    Write-InfoMessage "Architecture document already exists: $archDoc"
+    Write-Host "INFO: Architecture document already exists: $archDoc"
 }
 
 # Count existing feature specs
@@ -134,7 +134,7 @@ if ($Json) {
 } else {
     # Human-readable output
     Write-Host ""
-    Write-InfoMessage "Architecture Documentation Setup Complete"
+    Write-Host "INFO: Architecture Documentation Setup Complete"
     Write-Host ""
     Write-Host "📋 Configuration:"
     Write-Host "   Product Name:       $Product"

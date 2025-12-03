@@ -60,7 +60,7 @@ $SHAI_FILE     = Join-Path $REPO_ROOT 'SHAI.md'
 $Q_FILE        = Join-Path $REPO_ROOT 'AGENTS.md'
 $BOB_FILE      = Join-Path $REPO_ROOT 'AGENTS.md'
 
-$TEMPLATE_FILE = Join-Path $REPO_ROOT '.rainbow/templates/agent-file-template.md'
+$TEMPLATE_FILE = Join-Path $REPO_ROOT '.rainbow/templates/templates-for-commands/agent-file-template.md'
 
 # Parsed plan data placeholders
 $script:NEW_LANG = ''
@@ -114,7 +114,7 @@ function Validate-Environment {
     }
     if (-not (Test-Path $TEMPLATE_FILE)) {
         Write-Err "Template file not found at $TEMPLATE_FILE"
-        Write-Info 'Run rainbow init to scaffold .rainbow/templates, or add agent-file-template.md there.'
+        Write-Info 'Run rainbow init to scaffold .rainbow/templates/templates-for-commands, or add agent-file-template.md there.'
         exit 1
     }
 }

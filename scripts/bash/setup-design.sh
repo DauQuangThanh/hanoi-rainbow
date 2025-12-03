@@ -37,7 +37,7 @@ check_feature_branch "$CURRENT_BRANCH" "$HAS_GIT" || exit 1
 mkdir -p "$FEATURE_DIR"
 
 # Copy design template if it exists
-TEMPLATE="$REPO_ROOT/.rainbow/templates/design-template.md"
+TEMPLATE="$REPO_ROOT/.rainbow/templates/templates-for-commands/design-template.md"
 if [[ -f "$TEMPLATE" ]]; then
     cp "$TEMPLATE" "$IMPL_PLAN"
     echo "Copied design template to $IMPL_PLAN"

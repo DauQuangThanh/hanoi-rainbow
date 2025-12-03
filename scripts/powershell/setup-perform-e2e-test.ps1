@@ -191,7 +191,7 @@ function Setup-PerformE2ETest {
     $e2eTestPlan = Join-Path $docsDir 'e2e-test-plan.md'
     $testResultsDir = Join-Path $repoRoot 'test-results'
     $testsE2EDir = Join-Path $repoRoot 'tests\e2e'
-    $groundRulesFile = Join-Path $repoRoot 'memory\ground-rules.md'
+    $groundRulesFile = Join-Path $repoRoot '.rainbow\memory\ground-rules.md'
     $architectureFile = Join-Path $docsDir 'architecture.md'
     
     # Generate timestamp for this test run
@@ -200,12 +200,12 @@ function Setup-PerformE2ETest {
     # Check for required files
     if (-not (Test-Path $e2eTestPlan)) {
         Write-Error "E2E test plan not found at: $e2eTestPlan"
-        Write-Info "Please run the design-e2e-test command first."
+        Write-Host "INFO: Please run the design-e2e-test command first."
         exit 1
     }
     
-    if (-not (Test-Path $constitutionFile)) {
-        Write-Warning "Ground-rules file not found at: $constitutionFile"
+    if (-not (Test-Path $groundRulesFile)) {
+        Write-Warning "Ground-rules file not found at: $groundRulesFile"
     }
     
     if (-not (Test-Path $architectureFile)) {

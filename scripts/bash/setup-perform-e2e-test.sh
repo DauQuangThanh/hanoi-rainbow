@@ -25,7 +25,7 @@ setup_perform_e2e_test() {
     local e2e_test_plan="$docs_dir/e2e-test-plan.md"
     local test_results_dir="$repo_root/test-results"
     local tests_e2e_dir="$repo_root/tests/e2e"
-    local ground_rules_file="$repo_root/memory/ground-rules.md"
+    local ground_rules_file="$repo_root/.rainbow/memory/ground-rules.md"
     local architecture_file="$docs_dir/architecture.md"
     
     # Generate timestamp for this test run
@@ -39,8 +39,8 @@ setup_perform_e2e_test() {
         exit 1
     fi
     
-    if [ ! -f "$constitution_file" ]; then
-        print_warning "Ground-rules file not found at: $constitution_file"
+    if [ ! -f "$ground_rules_file" ]; then
+        print_warning "Ground-rules file not found at: $ground_rules_file"
     fi
     
     if [ ! -f "$architecture_file" ]; then

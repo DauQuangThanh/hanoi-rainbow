@@ -12,7 +12,7 @@ source "$SCRIPT_DIR/common.sh"
 # Configuration
 DOCS_DIR="docs"
 ARCH_DOC="$DOCS_DIR/architecture.md"
-ARCH_TEMPLATE="commands/templates-for-commands/arch-template.md"
+ARCH_TEMPLATE=".rainbow/templates/templates-for-commands/arch-template.md"
 ADR_DIR="$DOCS_DIR/adr"
 SPECS_DIR="specs"
 
@@ -38,7 +38,8 @@ done
 
 # Verify we're in a git repository
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
-    error "Not in a git repository. Please run this from the repository root."
+    echo "ERROR: Not in a git repository. Please run this from the repository root." >&2
+    exit 1
 fi
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
@@ -46,11 +47,13 @@ cd "$REPO_ROOT"
 
 # Verify required files exist
 if [ ! -f "$ARCH_TEMPLATE" ]; then
-    error "Architecture template not found: $ARCH_TEMPLATE"
+    echo "ERROR: Architecture template not found: $ARCH_TEMPLATE" >&2
+    exit 1
 fi
 
-if [ ! -f "memory/ground-rules.md" ]; then
-    error "Ground rules file not found: memory/ground-rules.md. Run /rainbow.regulate first."
+if [ ! -f ".rainbow/memory/ground-rules.md" ]; then
+    echo "ERROR: Ground rules file not found: .rainbow/memory/ground-rules.md. Run /rainbow.regulate first." >&2
+    exit 1
 fi
 
 # Get product name from user input or git repo
@@ -59,13 +62,13 @@ if [ -z "$PRODUCT_NAME" ]; then
 fi
 
 # Create docs directory structure
-info "Creating architecture documentation structure..."
+echo "INFO: Creating architecture documentation structure..."
 mkdir -p "$DOCS_DIR"
 mkdir -p "$ADR_DIR"
 
 # Copy architecture template if it doesn't exist
 if [ ! -f "$ARCH_DOC" ]; then
-    info "Creating architecture document from template..."
+    echo "INFO: Creating architecture document from template..."
     cp "$ARCH_TEMPLATE" "$ARCH_DOC"
     
     # Replace placeholder with product name
@@ -79,9 +82,9 @@ if [ ! -f "$ARCH_DOC" ]; then
         sed -i "s/\[DATE\]/$(date +%Y-%m-%d)/g" "$ARCH_DOC"
     fi
     
-    success "Created: $ARCH_DOC"
+    echo "✓ Created: $ARCH_DOC"
 else
-    info "Architecture document already exists: $ARCH_DOC"
+    echo "INFO: Architecture document already exists: $ARCH_DOC"
 fi
 
 # Count existing feature specs

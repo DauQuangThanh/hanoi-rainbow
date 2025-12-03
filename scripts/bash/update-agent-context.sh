@@ -76,7 +76,7 @@ Q_FILE="$REPO_ROOT/AGENTS.md"
 BOB_FILE="$REPO_ROOT/AGENTS.md"
 
 # Template file
-TEMPLATE_FILE="$REPO_ROOT/.rainbow/templates/agent-file-template.md"
+TEMPLATE_FILE="$REPO_ROOT/.rainbow/templates/templates-for-commands/agent-file-template.md"
 
 # Global variables for parsed plan data
 NEW_LANG=""

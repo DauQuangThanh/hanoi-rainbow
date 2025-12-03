@@ -92,11 +92,53 @@ function Get-FeatureDir {
     Join-Path $RepoRoot "specs/$Branch"
 }
 
+# Find feature directory by numeric prefix instead of exact branch match
+# This allows multiple branches to work on the same spec (e.g., 004-fix-bug, 004-add-feature)
+function Find-FeatureDirByPrefix {
+    param(
+        [string]$RepoRoot,
+        [string]$BranchName
+    )
+    
+    $specsDir = Join-Path $RepoRoot "specs"
+    
+    # Extract numeric prefix from branch (e.g., "004" from "004-whatever")
+    if ($BranchName -notmatch '^(\d{3})-') {
+        # If branch doesn't have numeric prefix, fall back to exact match
+        return (Join-Path $specsDir $BranchName)
+    }
+    
+    $prefix = $matches[1]
+    
+    # Search for directories in specs/ that start with this prefix
+    $matchingDirs = @()
+    if (Test-Path $specsDir) {
+        $matchingDirs = Get-ChildItem -Path $specsDir -Directory | Where-Object { $_.Name -match "^$prefix-" }
+    }
+    
+    # Handle results
+    if ($matchingDirs.Count -eq 0) {
+        # No match found - return the branch name path (will fail later with clear error)
+        return (Join-Path $specsDir $BranchName)
+    }
+    elseif ($matchingDirs.Count -eq 1) {
+        # Exactly one match - perfect!
+        return $matchingDirs[0].FullName
+    }
+    else {
+        # Multiple matches - this shouldn't happen with proper naming convention
+        Write-Error "ERROR: Multiple spec directories found with prefix '$prefix': $($matchingDirs.Name -join ', ')"
+        Write-Error "Please ensure only one spec directory exists per numeric prefix."
+        return (Join-Path $specsDir $BranchName)  # Return something to avoid breaking the script
+    }
+}
+
 function Get-FeaturePathsEnv {
     $repoRoot = Get-RepoRoot
     $currentBranch = Get-CurrentBranch
     $hasGit = Test-HasGit
-    $featureDir = Get-FeatureDir -RepoRoot $repoRoot -Branch $currentBranch
+    # Use prefix-based lookup to support multiple branches per spec
+    $featureDir = Find-FeatureDirByPrefix -RepoRoot $repoRoot -BranchName $currentBranch
     
     [PSCustomObject]@{
         REPO_ROOT     = $repoRoot

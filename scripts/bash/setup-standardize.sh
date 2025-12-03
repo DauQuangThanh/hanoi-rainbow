@@ -15,7 +15,7 @@ source "$SCRIPT_DIR/common.sh"
 # Main setup function
 setup_standardize() {
     local repo_root
-    repo_root=$(find_repo_root)
+    repo_root=$(get_repo_root)
     
     # Navigate to repository root
     cd "$repo_root" || exit 1
@@ -23,8 +23,8 @@ setup_standardize() {
     # Define paths
     local docs_dir="$repo_root/docs"
     local standards_file="$docs_dir/standards.md"
-    local template_file="$repo_root/commands/templates-for-commands/standards-template.md"
-    local ground_rules_file="$repo_root/memory/ground-rules.md"
+    local template_file="$repo_root/.rainbow/templates/templates-for-commands/standards-template.md"
+    local ground_rules_file="$repo_root/.rainbow/memory/ground-rules.md"
     local architecture_file="$docs_dir/architecture.md"
     local specs_dir="$repo_root/specs"
     
@@ -33,33 +33,33 @@ setup_standardize() {
     
     # Check for required files
     if [ ! -f "$template_file" ]; then
-        print_error "Standards template not found at: $template_file"
+        echo "ERROR: Standards template not found at: $template_file" >&2
         exit 1
     fi
     
-    if [ ! -f "$constitution_file" ]; then
-        print_error "Ground-rules file not found at: $constitution_file"
-        print_info "Please run the regulate command first."
+    if [ ! -f "$ground_rules_file" ]; then
+        echo "ERROR: Ground-rules file not found at: $ground_rules_file" >&2
+        echo "INFO: Please run the regulate command first." >&2
         exit 1
     fi
     
     # Create standards document if it doesn't exist
     if [ ! -f "$standards_file" ]; then
-        print_info "Creating standards document from template..."
+        echo "INFO: Creating standards document from template..."
         cp "$template_file" "$standards_file"
-        print_success "Created: $standards_file"
+        echo "✓ Created: $standards_file"
     else
-        print_warning "Standards document already exists: $standards_file"
-        print_info "Will update with latest context."
+        echo "WARNING: Standards document already exists: $standards_file"
+        echo "INFO: Will update with latest context."
     fi
     
     # Detect technology stack from architecture if available
     local tech_stack=""
     if [ -f "$architecture_file" ]; then
-        print_info "Detected architecture document. Extracting technology stack..."
+        echo "INFO: Detected architecture document. Extracting technology stack..."
         tech_stack=$(detect_tech_stack "$architecture_file")
     else
-        print_warning "Architecture document not found. Standards will need manual tech stack updates."
+        echo "WARNING: Architecture document not found. Standards will need manual tech stack updates."
         tech_stack="[Technology stack not detected - please update manually]"
     fi
     

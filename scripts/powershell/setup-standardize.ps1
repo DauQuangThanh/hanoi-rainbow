@@ -12,7 +12,7 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Main setup function
 function Setup-Standardize {
-    $repoRoot = Find-RepoRoot
+    $repoRoot = Get-RepoRoot
     
     # Navigate to repository root
     Set-Location $repoRoot
@@ -20,8 +20,8 @@ function Setup-Standardize {
     # Define paths
     $docsDir = Join-Path $repoRoot "docs"
     $standardsFile = Join-Path $docsDir "standards.md"
-    $templateFile = Join-Path $repoRoot "commands" "templates-for-commands" "standards-template.md"
-    $groundRulesFile = Join-Path $repoRoot "memory" "ground-rules.md"
+    $templateFile = Join-Path $repoRoot ".rainbow" "templates" "templates-for-commands" "standards-template.md"
+    $groundRulesFile = Join-Path $repoRoot ".rainbow" "memory" "ground-rules.md"
     $architectureFile = Join-Path $docsDir "architecture.md"
     $specsDir = Join-Path $repoRoot "specs"
     
@@ -32,35 +32,35 @@ function Setup-Standardize {
     
     # Check for required files
     if (-not (Test-Path $templateFile)) {
-        Print-Error "Standards template not found at: $templateFile"
+        Write-Error "Standards template not found at: $templateFile"
         exit 1
     }
     
-    if (-not (Test-Path $constitutionFile)) {
-        Print-Error "Ground-rules file not found at: $constitutionFile"
-        Print-Info "Please run the regulate command first."
+    if (-not (Test-Path $groundRulesFile)) {
+        Write-Error "Ground-rules file not found at: $groundRulesFile"
+        Write-Host "INFO: Please run the regulate command first."
         exit 1
-    }
+    fi
     
     # Create standards document if it doesn't exist
     if (-not (Test-Path $standardsFile)) {
-        Print-Info "Creating standards document from template..."
+        Write-Host "INFO: Creating standards document from template..."
         Copy-Item $templateFile $standardsFile
-        Print-Success "Created: $standardsFile"
+        Write-Host "✓ Created: $standardsFile"
     }
     else {
-        Print-Warning "Standards document already exists: $standardsFile"
-        Print-Info "Will update with latest context."
+        Write-Warning "Standards document already exists: $standardsFile"
+        Write-Host "INFO: Will update with latest context."
     }
     
     # Detect technology stack from architecture if available
     $techStack = ""
     if (Test-Path $architectureFile) {
-        Print-Info "Detected architecture document. Extracting technology stack..."
+        Write-Host "INFO: Detected architecture document. Extracting technology stack..."
         $techStack = Get-TechStack -ArchFile $architectureFile
     }
     else {
-        Print-Warning "Architecture document not found. Standards will need manual tech stack updates."
+        Write-Warning "Architecture document not found. Standards will need manual tech stack updates."
         $techStack = "[Technology stack not detected - please update manually]"
     }
     

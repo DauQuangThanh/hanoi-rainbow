@@ -20,8 +20,8 @@ function Setup-DesignE2ETest {
     # Define paths
     $docsDir = Join-Path $repoRoot "docs"
     $e2eTestFile = Join-Path $docsDir "e2e-test-plan.md"
-    $templateFile = Join-Path $repoRoot "commands" "templates-for-commands" "e2e-test-template.md"
-    $groundRulesFile = Join-Path $repoRoot "memory" "ground-rules.md"
+    $templateFile = Join-Path $repoRoot ".rainbow" "templates" "templates-for-commands" "e2e-test-template.md"
+    $groundRulesFile = Join-Path $repoRoot ".rainbow" "memory" "ground-rules.md"
     $architectureFile = Join-Path $docsDir "architecture.md"
     $specsDir = Join-Path $repoRoot "specs"
     
@@ -32,13 +32,13 @@ function Setup-DesignE2ETest {
     
     # Check for required files
     if (-not (Test-Path $templateFile)) {
-        Print-Error "E2E test template not found at: $templateFile"
+        Write-Error "E2E test template not found at: $templateFile"
         exit 1
     }
     
-    if (-not (Test-Path $constitutionFile)) {
-        Print-Error "Ground-rules file not found at: $constitutionFile"
-        Print-Info "Please run the regulate command first."
+    if (-not (Test-Path $groundRulesFile)) {
+        Write-Error "Ground-rules file not found at: $groundRulesFile"
+        Write-Host "INFO: Please run the regulate command first."
         exit 1
     }
     
