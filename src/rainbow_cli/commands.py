@@ -16,7 +16,7 @@ from rich.live import Live
 from rich.panel import Panel
 from rich.table import Table
 
-from .config import AGENT_CONFIG, SCRIPT_TYPE_CHOICES
+from .config import AGENT_CONFIG, GITHUB_REPO_NAME, GITHUB_REPO_OWNER, SCRIPT_TYPE_CHOICES
 from .github import _github_auth_headers, ssl_context
 from .system_utils import check_tool, ensure_executable_scripts, init_git_repo, is_git_repo
 from .templates import download_and_extract_template
@@ -636,9 +636,7 @@ def version():
             pass
 
     # Fetch latest template release version
-    repo_owner = "github"
-    repo_name = "spec-kit"
-    api_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/releases/latest"
+    api_url = f"https://api.github.com/repos/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/releases/latest"
 
     template_version = "unknown"
     release_date = "unknown"

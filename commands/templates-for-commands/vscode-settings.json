@@ -2,6 +2,7 @@
     "chat.promptFilesRecommendations": {
         "rainbow.regulate": true,
         "rainbow.specify": true,
+        "rainbow.architect": true,
         "rainbow.design": true,
         "rainbow.taskify": true,
         "rainbow.implement": true

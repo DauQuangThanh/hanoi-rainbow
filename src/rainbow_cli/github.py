@@ -13,6 +13,8 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
+from .config import GITHUB_REPO_NAME, GITHUB_REPO_OWNER
+
 # Create SSL context and client for GitHub API
 ssl_context = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
 
@@ -115,14 +117,12 @@ def download_template_from_github(
     Returns:
         Tuple of (zip_path, metadata_dict)
     """
-    repo_owner = "dauquangthanh"
-    repo_name = "hanoi-rainbow"
     if client is None:
         client = httpx.Client(verify=ssl_context)
 
     if verbose:
         console.print("[cyan]Fetching latest release information...[/cyan]")
-    api_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/releases/latest"
+    api_url = f"https://api.github.com/repos/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/releases/latest"
 
     try:
         response = client.get(

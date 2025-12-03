@@ -172,3 +172,7 @@ BANNER = """
 """
 
 TAGLINE = "Hanoi Rainbow - Drive Quality Together with Agentic AI"
+
+# GitHub repository information
+GITHUB_REPO_OWNER = "dauquangthanh"
+GITHUB_REPO_NAME = "hanoi-rainbow"
