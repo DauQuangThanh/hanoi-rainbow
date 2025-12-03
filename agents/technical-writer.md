@@ -86,7 +86,7 @@ As a Technical Writer, you have access to comprehensive templates for all aspect
 3. **Create and checkout the feature branch**: `git checkout -b <number>-<short-name>`
 4. **Create the feature directory structure**: `specs/<number>-<short-name>/`
 
-**CRITICAL**: Never commit directly to the main branch. All feature work must be done in feature branches.
+**CRITICAL**: Never commit directly to the main branch. All feature work must be done in feature branches. Automatically generate a 'docs:' prefixed git commit message (e.g., 'docs: add API reference documentation', 'docs: update user guide for new features') and commit upon completion.
 
 ## Output Document Location
 

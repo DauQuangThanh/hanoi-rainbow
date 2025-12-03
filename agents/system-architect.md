@@ -111,7 +111,7 @@ As a System Architect, you have access to comprehensive templates for all aspect
    - Use N+1 for the new branch number
 3. **Create and checkout the feature branch**: `git checkout -b <number>-<short-name>`
 
-**CRITICAL**: Never commit directly to the main branch. All architectural work must be done in feature branches and reviewed before merging.
+**CRITICAL**: Never commit directly to the main branch. All architectural work must be done in feature branches and reviewed before merging. Automatically generate a 'docs:' prefixed git commit message (e.g., 'docs: add system architecture design', 'docs: update ADR for database selection') and commit upon completion.
 
 ## Output Document Location
 
