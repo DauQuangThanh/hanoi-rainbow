@@ -292,7 +292,7 @@ Commands for comprehensive product-wide documentation (run once per product, not
 Additional commands for enhanced quality, validation, and project management:
 
 | Command                  | Description                                                           | Auto Commit Prefix |
-|--------------------------|-----------------------------------------------------------------------|--------------------|---|
+|--------------------------|-----------------------------------------------------------------------|--------------------|
 | `/rainbow.clarify`       | Clarify underspecified areas (recommended before `/rainbow.design`; formerly `/quizme`) | `docs:` |
 | `/rainbow.analyze`       | Cross-artifact consistency & coverage analysis (run after `/rainbow.taskify`, before `/rainbow.implement`) | `docs:` |
 | `/rainbow.checklist`     | Generate custom quality checklists that validate requirements completeness, clarity, and consistency | `docs:` |
