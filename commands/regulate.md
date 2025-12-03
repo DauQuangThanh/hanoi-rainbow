@@ -20,6 +20,8 @@ You are creating or updating the project ground rules at `memory/ground-rules.md
 
 Follow this execution flow:
 
+**IMPORTANT**: Automatically generate a 'docs:' prefixed git commit message (e.g., 'docs: establish project ground rules v1.0.0' or 'docs: update ground rules to v1.1.0') and commit memory/ground-rules.md and any updated template files upon completion.
+
 1. Load the ground rules template from `.rainbow/templates/templates-for-commands/ground-rules-template.md`.
    - If `memory/ground-rules.md` already exists, read it to extract current values and version information.
    - Identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]` from the template.

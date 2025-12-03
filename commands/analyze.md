@@ -25,6 +25,8 @@ Identify inconsistencies, duplications, ambiguities, and underspecified items ac
 
 ## Execution Steps
 
+**IMPORTANT**: Automatically generate a 'docs:' prefixed git commit message (e.g., 'docs: add analysis report for feature-name') and commit the analysis report upon completion.
+
 ### 1. Initialize Analysis Context
 
 Run `{SCRIPT}` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:

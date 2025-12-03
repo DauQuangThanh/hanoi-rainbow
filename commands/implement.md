@@ -15,6 +15,8 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
+**IMPORTANT**: Automatically generate appropriately prefixed git commit messages based on the type of changes (e.g., 'feat: implement user authentication', 'fix: resolve login validation bug', 'test: add unit tests for auth service') and commit after completing each logical unit of work or task phase.
+
 1. Run `{SCRIPT}` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
 2. **Check checklists status** (if FEATURE_DIR/checklists/ exists):

@@ -26,6 +26,8 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
+**IMPORTANT**: Automatically generate a 'test:' prefixed git commit message (e.g., 'test: add E2E test plan and specifications') and commit upon completion.
+
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for E2E_TEST_DOC, DOCS_DIR, ARCH_DOC, SPECS_DIR. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
 2. **Load context**: Read `memory/ground-rules.md`, `docs/architecture.md`, `docs/standards.md` (if exists), and all feature specifications from `specs/*/spec.md`. Load E2E_TEST_DOC template (already copied to docs/).

@@ -25,6 +25,8 @@ Note: This clarification workflow is expected to run (and be completed) BEFORE i
 
 Execution steps:
 
+**IMPORTANT**: Automatically generate a 'docs:' prefixed git commit message (e.g., 'docs: clarify requirements for feature-name') and commit spec.md updates upon completion.
+
 1. Run `{SCRIPT}` from repo root **once** (combined `--json --paths-only` mode / `-Json -PathsOnly`). Parse minimal JSON payload fields:
    - `FEATURE_DIR`
    - `FEATURE_SPEC`

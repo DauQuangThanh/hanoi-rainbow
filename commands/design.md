@@ -26,6 +26,8 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
+**IMPORTANT**: Automatically generate a 'docs:' prefixed git commit message (e.g., 'docs: add implementation plan for feature-name') and commit design.md, research.md, data-model.md, and contracts/ upon completion.
+
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
 2. **Load context**: Read FEATURE_SPEC, `memory/ground-rules.md`, and `docs/architecture.md` (if it exists). Load IMPL_PLAN template (already copied).

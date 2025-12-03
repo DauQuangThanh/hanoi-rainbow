@@ -16,6 +16,8 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
+**IMPORTANT**: After creating all GitHub issues, automatically generate a 'chore:' prefixed git commit message (e.g., 'chore: sync tasks to GitHub issues') and commit any tracking files or metadata upon completion.
+
 1. Run `{SCRIPT}` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 1. From the executed script, extract the path to **tasks**.
 1. Get the Git remote by running:

@@ -25,6 +25,8 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
+**IMPORTANT**: Automatically generate a 'test:' prefixed git commit message (e.g., 'test: add E2E test results and execution report') and commit test scripts, results, and reports upon completion.
+
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for E2E_TEST_PLAN, TEST_RESULTS_DIR, TIMESTAMP. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
 2. **Load context**: Read `docs/e2e-test-plan.md`, `docs/architecture.md`, `docs/standards.md` (if exists), and `memory/ground-rules.md`. Parse test scenarios, priorities, and execution requirements.
