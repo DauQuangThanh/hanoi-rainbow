@@ -181,7 +181,7 @@ function Setup-PerformE2ETest {
     param([string]$TestMode)
     
     # Find repository root
-    $repoRoot = Find-RepoRoot
+    $repoRoot = Get-RepoRoot
     
     # Navigate to repository root
     Set-Location $repoRoot

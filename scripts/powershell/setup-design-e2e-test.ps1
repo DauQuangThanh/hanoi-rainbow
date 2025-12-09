@@ -12,7 +12,7 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Main setup function
 function Setup-DesignE2ETest {
-    $repoRoot = Find-RepoRoot
+    $repoRoot = Get-RepoRoot
     
     # Navigate to repository root
     Set-Location $repoRoot

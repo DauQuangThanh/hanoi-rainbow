@@ -15,7 +15,7 @@ source "$SCRIPT_DIR/common.sh"
 # Main setup function
 setup_design_e2e_test() {
     local repo_root
-    repo_root=$(find_repo_root)
+    repo_root=$(get_repo_root)
     
     # Navigate to repository root
     cd "$repo_root" || exit 1
