@@ -59,6 +59,10 @@ rainbow init <PROJECT_NAME>
 rainbow check
 ```
 
+<p align="center">
+  <img src="./media/hanoi-rainbow.png" alt="Hanoi Rainbow Installation" width="100%"/>
+</p>
+
 **Need to upgrade?** See the [Upgrade Guide](./docs/upgrade.md) or run:
 
 ```bash
