@@ -177,6 +177,27 @@ function Test-DirHasFiles {
     }
 }
 
+# Color printing utilities
+function Print-Success {
+    param([string]$Message)
+    Write-Host $Message -ForegroundColor Green
+}
+
+function Print-Info {
+    param([string]$Message)
+    Write-Host $Message -ForegroundColor Cyan
+}
+
+function Print-Warning {
+    param([string]$Message)
+    Write-Host $Message -ForegroundColor Yellow
+}
+
+function Print-Error {
+    param([string]$Message)
+    Write-Host $Message -ForegroundColor Red
+}
+
 # Detect which AI agent is being used based on directory structure
 function Detect-AIAgent {
     param([string]$RepoRoot)
