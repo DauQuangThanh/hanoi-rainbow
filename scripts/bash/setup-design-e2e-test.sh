@@ -37,8 +37,8 @@ setup_design_e2e_test() {
         exit 1
     fi
     
-    if [ ! -f "$constitution_file" ]; then
-        print_error "Ground-rules file not found at: $constitution_file"
+    if [ ! -f "$ground_rules_file" ]; then
+        print_error "Ground-rules file not found at: $ground_rules_file"
         print_info "Please run the regulate command first."
         exit 1
     fi

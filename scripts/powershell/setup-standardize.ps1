@@ -71,7 +71,7 @@ function Setup-Standardize {
     }
     
     # Detect AI agent
-    $detectedAgent = Get-AIAgent -RepoRoot $repoRoot
+    $detectedAgent = Detect-AIAgent -RepoRoot $repoRoot
     
     # Update standards document with context
     Update-StandardsContext -StandardsFile $standardsFile -TechStack $techStack

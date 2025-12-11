@@ -73,7 +73,7 @@ function Setup-DesignE2ETest {
     }
     
     # Detect AI agent
-    $detectedAgent = Get-AIAgent -RepoRoot $repoRoot
+    $detectedAgent = Detect-AIAgent -RepoRoot $repoRoot
     
     # Generate JSON output for AI agents
     New-JsonOutput -E2ETestFile $e2eTestFile -FeatureCount $featureCount -AIAgent $detectedAgent -IntegrationInfo $integrationInfo
