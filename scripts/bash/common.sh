@@ -154,3 +154,46 @@ EOF
 check_file() { [[ -f "$1" ]] && echo "  ✓ $2" || echo "  ✗ $2"; }
 check_dir() { [[ -d "$1" && -n $(ls -A "$1" 2>/dev/null) ]] && echo "  ✓ $2" || echo "  ✗ $2"; }
 
+# Detect which AI agent is being used based on directory structure
+detect_ai_agent() {
+    local repo_root="$1"
+    local agent="unknown"
+    
+    # Check for agent-specific directories in priority order
+    if [[ -d "$repo_root/.claude/commands" ]]; then
+        agent="claude"
+    elif [[ -d "$repo_root/.github/agents" ]]; then
+        agent="copilot"
+    elif [[ -d "$repo_root/.cursor/commands" ]]; then
+        agent="cursor"
+    elif [[ -d "$repo_root/.windsurf/workflows" ]] || [[ -d "$repo_root/.windsurf/rules" ]]; then
+        agent="windsurf"
+    elif [[ -d "$repo_root/.gemini/commands" ]]; then
+        agent="gemini"
+    elif [[ -d "$repo_root/.qwen/commands" ]]; then
+        agent="qwen"
+    elif [[ -d "$repo_root/.opencode/command" ]]; then
+        agent="opencode"
+    elif [[ -d "$repo_root/.codex/commands" ]]; then
+        agent="codex"
+    elif [[ -d "$repo_root/.kilocode/rules" ]]; then
+        agent="kilocode"
+    elif [[ -d "$repo_root/.augment/rules" ]]; then
+        agent="auggie"
+    elif [[ -d "$repo_root/.roo/rules" ]]; then
+        agent="roo"
+    elif [[ -d "$repo_root/.codebuddy/commands" ]]; then
+        agent="codebuddy"
+    elif [[ -d "$repo_root/.amazonq/prompts" ]]; then
+        agent="q"
+    elif [[ -d "$repo_root/.agents/commands" ]]; then
+        agent="amp"
+    elif [[ -d "$repo_root/.shai/commands" ]]; then
+        agent="shai"
+    elif [[ -d "$repo_root/.bob/commands" ]]; then
+        agent="bob"
+    fi
+    
+    echo "$agent"
+}
+

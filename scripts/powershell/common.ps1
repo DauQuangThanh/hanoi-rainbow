@@ -177,3 +177,62 @@ function Test-DirHasFiles {
     }
 }
 
+# Detect which AI agent is being used based on directory structure
+function Detect-AIAgent {
+    param([string]$RepoRoot)
+    
+    $agent = "unknown"
+    
+    # Check for agent-specific directories in priority order
+    if (Test-Path (Join-Path $RepoRoot ".claude/commands")) {
+        $agent = "claude"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".github/agents")) {
+        $agent = "copilot"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".cursor/commands")) {
+        $agent = "cursor"
+    }
+    elseif ((Test-Path (Join-Path $RepoRoot ".windsurf/workflows")) -or (Test-Path (Join-Path $RepoRoot ".windsurf/rules"))) {
+        $agent = "windsurf"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".gemini/commands")) {
+        $agent = "gemini"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".qwen/commands")) {
+        $agent = "qwen"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".opencode/command")) {
+        $agent = "opencode"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".codex/commands")) {
+        $agent = "codex"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".kilocode/rules")) {
+        $agent = "kilocode"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".augment/rules")) {
+        $agent = "auggie"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".roo/rules")) {
+        $agent = "roo"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".codebuddy/commands")) {
+        $agent = "codebuddy"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".amazonq/prompts")) {
+        $agent = "q"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".agents/commands")) {
+        $agent = "amp"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".shai/commands")) {
+        $agent = "shai"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".bob/commands")) {
+        $agent = "bob"
+    }
+    
+    return $agent
+}
+
