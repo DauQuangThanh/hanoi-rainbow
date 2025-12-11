@@ -184,7 +184,7 @@ function New-JsonOutput {
         workflow = @{
             previous_command = "architect"
             current_command = "standardize"
-            next_command = "plan"
+            next_command = "design"
             document_type = "product-level"
             document_location = "docs/"
         }
