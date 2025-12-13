@@ -84,9 +84,10 @@ EOF
     # Parse test execution mode from arguments
     local test_mode="smoke"  # default
     if [ $# -gt 0 ]; then
-        case "${1,,}" in
+        local arg_lower=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+        case "$arg_lower" in
             smoke|regression|full)
-                test_mode="${1,,}"
+                test_mode="$arg_lower"
                 ;;
             *)
                 test_mode="smoke"
