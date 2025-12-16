@@ -30,7 +30,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for STANDARDS_DOC, DOCS_DIR, ARCH_DOC, CONSTITUTION. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read `memory/ground-rules.md`, `docs/architecture.md` (if exists), and all feature specifications from `specs/*/spec.md`. Load STANDARDS_DOC template (already copied to docs/).
+2. **Load context**: Read `memory/ground-rules.md`, `docs/architecture.md` (if exists), and all feature specifications from `specs/*/spec.md`. Load STANDARDS_DOC template (already copied to docs/). Incorporate the essential rules for maximizing source code readability, simplicity and long-term maintainability.
 
 3. **Execute standardization workflow**: Follow the structure in STANDARDS_DOC template to:
    - Define UI naming conventions (MANDATORY)

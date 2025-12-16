@@ -142,6 +142,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - **Polish and validation**: Unit tests, performance optimization, documentation
      - Follow documentation standards from standards.md (if exists)
      - Verify quality attribute requirements from architecture.md (if exists)
+     - Adhere to the principles for maximizing system clarity, structural simplicity, and long-term maintainability
 
 8. Progress tracking and error handling:
    - Report progress after each completed task
