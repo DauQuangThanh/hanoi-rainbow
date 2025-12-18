@@ -398,6 +398,14 @@ Before you start, make sure you have:
 
 ## 📚 Learn More
 
+**Workflows & Guides:**
+
+- 🗺️ **[Workflows Overview](./docs/workflows.md)** - **Choose the right workflow for your project**
+- 🌱 [Greenfield Workflow](./docs/greenfield-workflow.md) - Build new applications (2-4 weeks)
+- 🏗️ [Brownfield Workflow](./docs/brownfield-workflow.md) - Add features to existing apps (1-2 weeks)
+- 🔄 [Legacy Migration Workflow](./docs/legacy-migration-workflow.md) - Migrate from mainframe (4-12 weeks)
+- 🏭 [Legacy Modernization Workflow](./docs/legacy-modernization-workflow.md) - Complete modernization (6-18 months)
+
 **Deep Dives:**
 
 - 📖 [Complete Spec-Driven Development Guide](./spec-driven.md) - Full methodology explained

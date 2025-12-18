@@ -40,7 +40,8 @@
     "untargeted",
     "dpkg",
     "Quang",
-    "dauquangthanh"
+    "dauquangthanh",
+    "gantt"
   ],
   "ignorePaths": [
     "node_modules/**",
