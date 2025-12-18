@@ -303,6 +303,20 @@ Additional commands for enhanced quality, validation, and project management:
 | `/rainbow.tasks-to-issues` | Convert existing tasks into actionable GitHub issues with dependency tracking | `chore:` |
 | `/rainbow.tasks-to-ado`  | Convert existing tasks into actionable Azure DevOps work items with dependency tracking | `chore:` |
 
+#### Mainframe/Midrange Modernization Commands
+
+Commands for systematic legacy system migration and modernization:
+
+| Command                  | Description                                                           | Auto Commit Prefix |
+|--------------------------|-----------------------------------------------------------------------|--------------------|
+| `/rainbow.assess-legacy` | Analyze existing legacy systems (COBOL, RPG, JCL) to understand current state before modernization | `docs:` |
+| `/rainbow.map-business-logic` | Extract and document business rules from legacy code for reimplementation | `docs:` |
+| `/rainbow.design-data-migration` | Create comprehensive data migration strategy from legacy databases (DB2, IMS, VSAM) to modern data stores | `docs:` |
+| `/rainbow.convert-batch` | Design modern equivalents for mainframe batch processing (JCL → Kubernetes/serverless/streaming) | `docs:` |
+| `/rainbow.design-screen-migration` | Convert green-screen/5250 interfaces to modern web/mobile UI | `docs:` |
+| `/rainbow.plan-strangler` | Create detailed strangler pattern implementation plan for phased migration | `docs:` |
+| `/rainbow.validate-modernization` | Verify that modernized system matches legacy behavior and meets quality standards | `test:` |
+
 #### Role-Based Agents
 
 Specialized agents for specific team roles in your development workflow:
@@ -322,6 +336,12 @@ Specialized agents for specific team roles in your development workflow:
 | `/hanoi.ux-ui-designer`        | Design user interfaces, create wireframes, and ensure consistent user experience |
 | `/hanoi.technical-writer`      | Create and maintain technical documentation, user guides, and API documentation |
 | `/hanoi.scrum-master`          | Facilitate agile ceremonies, remove impediments, and support team collaboration |
+| `/hanoi.legacy-analyst`        | Analyze mainframe/midrange codebases (COBOL, RPG, PL/I) to extract business logic and assess modernization complexity |
+| `/hanoi.mainframe-architect`   | Design mainframe-to-cloud migration strategies and hybrid architectures |
+| `/hanoi.data-migration-engineer` | Plan and execute data migrations from legacy databases to modern data platforms |
+| `/hanoi.batch-modernization-engineer` | Convert mainframe batch processing (JCL) to modern batch architectures |
+| `/hanoi.cobol-translator`      | Translate COBOL/RPG/PL/I business logic to modern languages while preserving exact behavior |
+| `/hanoi.mainframe-tester`      | Test and validate modernized systems for functional equivalence and compliance |
 
 ### Environment Variables
 
@@ -349,6 +369,7 @@ Spec-Driven Development is built on these core principles:
 | **🆕 New Projects** | <ul><li>Start with high-level requirements</li><li>Generate complete specifications</li><li>Plan implementation steps</li><li>Build production-ready apps</li></ul> |
 | **🔬 Exploration** | <ul><li>Try different solutions in parallel</li><li>Test multiple tech stacks</li><li>Experiment with UX patterns</li></ul> |
 | **🔧 Existing Projects** | <ul><li>Add new features systematically</li><li>Modernize legacy code</li><li>Adapt processes to your needs</li></ul> |
+| **🏢 Mainframe Modernization** | <ul><li>Assess legacy systems (COBOL, RPG, JCL)</li><li>Extract business logic from code</li><li>Plan data migration strategies</li><li>Modernize batch processing</li><li>Convert green-screen UIs</li><li>Implement strangler pattern migrations</li><li>Validate modernized systems</li></ul> |
 
 ---
 
