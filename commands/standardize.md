@@ -33,7 +33,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 2. **Load context**: Read `memory/ground-rules.md`, `docs/architecture.md` (if exists), and all feature specifications from `specs/*/spec.md`. Load STANDARDS_DOC template (already copied to docs/). Incorporate the essential rules for maximizing source code readability, simplicity and long-term maintainability.
 
 3. **Execute standardization workflow**: Follow the structure in STANDARDS_DOC template to:
-   - Define UI naming conventions (MANDATORY)
+   - Define UI naming conventions (MANDATORY for frontend projects)
    - Establish code naming conventions
    - Document file and directory structure standards
    - Define API design standards
@@ -41,6 +41,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Document testing standards
    - Define Git workflow and commit message conventions
    - Establish documentation standards
+   - Provide a concise, high-signal standards guide for AI agents to ensure consistent, maintainable, and secure code. Exclude overly detailed information and specific examples
 
 4. **Stop and report**: Command ends after standards document completion. Report STANDARDS_DOC path and generated artifacts.
 

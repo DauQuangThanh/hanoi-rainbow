@@ -2,7 +2,7 @@
 
 **Version**: 1.0 | **Date**: [DATE] | **Status**: Active
 
-**Purpose**: A concise, high-signal standards guide for **AI agents** need to ensure consistent, maintainable, and secure code.
+**Purpose**: A concise, high-signal standards guide for **AI agents** to ensure consistent, maintainable, and secure code.
 
 ---
 
