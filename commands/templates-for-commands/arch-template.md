@@ -2,7 +2,7 @@
 
 **Version**: 1.0 | **Date**: [DATE] | **Status**: Draft
 
-**Purpose**: This template captures only the high-signal architectural data AI agents need to implement features correctly and safely.
+**Purpose**: This template captures only the high-signal architectural data **AI agents** need to implement features correctly and safely.
 
 ---
 
