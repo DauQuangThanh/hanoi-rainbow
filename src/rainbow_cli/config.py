@@ -7,6 +7,7 @@ AGENT_CONFIG = {
     "copilot": {
         "name": "GitHub Copilot",
         "agent_folder": ".github/agents/",
+        "prompts_folder": ".github/prompts/",  # Copilot also uses prompts folder for slash commands
         "skills_folder": ".github/skills/",
         "install_url": None,  # IDE-based, no CLI check needed
         "requires_cli": False,

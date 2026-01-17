@@ -33,7 +33,7 @@ Rainbow supports multiple AI agents by generating agent-specific command files a
 |-------|-----------|---------|----------|-------------|
 | **Claude Code** | `.claude/commands/` | Markdown | `claude` | Anthropic's Claude Code CLI |
 | **Gemini CLI** | `.gemini/commands/` | TOML | `gemini` | Google's Gemini CLI |
-| **GitHub Copilot** | `.github/agents/` | Markdown | N/A (IDE-based) | GitHub Copilot in VS Code |
+| **GitHub Copilot** | `.github/agents/` + `.github/prompts/` | Markdown | N/A (IDE-based) | GitHub Copilot in VS Code |
 | **Cursor** | `.cursor/commands/` | Markdown | `cursor-agent` | Cursor CLI |
 | **Qwen Code** | `.qwen/commands/` | TOML | `qwen` | Alibaba's Qwen Code CLI |
 | **opencode** | `.opencode/command/` | Markdown | `opencode` | opencode CLI |
@@ -47,6 +47,12 @@ Rainbow supports multiple AI agents by generating agent-specific command files a
 | **Amp** | `.agents/commands/` | Markdown | `amp` | Amp CLI |
 | **SHAI** | `.shai/commands/` | Markdown | `shai` | SHAI CLI |
 | **IBM Bob** | `.bob/commands/` | Markdown | N/A (IDE-based) | IBM Bob IDE |
+
+**Note on GitHub Copilot:** GitHub Copilot uses two separate folders:
+- **`.github/agents/`** - For custom agents (`.agent.md` files) that define specialized AI personas
+- **`.github/prompts/`** - For prompt files (`.prompt.md` files) that define slash commands
+
+Rainbow CLI automatically copies commands to **both** folders when initializing a Copilot project, ensuring compatibility with both custom agents and prompt-based slash commands.
 
 ### Step-by-Step Integration Guide
 

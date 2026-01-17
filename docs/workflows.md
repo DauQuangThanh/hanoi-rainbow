@@ -182,22 +182,21 @@ Typically **30-50% mainframe cost reduction** from targeted migration.
 
 **Phase 1: Assessment (4 weeks)**
 1. `/rainbow.assess-legacy` - Analyze legacy system
-2. `/hanoi.legacy-analyst` - Deep code analysis
-3. Calculate complexity and readiness
+2. Review assessment results and calculate complexity
 
 **Phase 2: Business Logic Extraction (4 weeks)**
-4. `/rainbow.map-business-logic` - Extract all business rules
-5. `/hanoi.business-analyst` - Validate with SMEs
+3. `/rainbow.map-business-logic` - Extract all business rules
+4. Validate extracted business rules with SMEs
 
 **Phase 3: Architecture Design (3 weeks)**
-6. `/rainbow.architect` - Design modern architecture
-7. `/hanoi.mainframe-architect` - Review migration strategy
+5. `/rainbow.architect` - Design modern architecture
+6. Review and validate migration strategy
 
 **Phase 4: Migration Planning (3 weeks)**
-8. `/rainbow.design-data-migration` - Plan data strategy
-9. `/rainbow.convert-batch` - Plan batch modernization
-10. `/rainbow.design-screen-migration` - Plan UI modernization
-11. `/rainbow.plan-strangler` - Create phased roadmap
+7. `/rainbow.design-data-migration` - Plan data strategy
+8. `/rainbow.convert-batch` - Plan batch modernization
+9. `/rainbow.design-screen-migration` - Plan UI modernization
+10. `/rainbow.plan-strangler` - Create phased roadmap
 
 **Phase 5: Implementation (24+ weeks)**
 12. Execute strangler pattern - service by service
@@ -205,8 +204,7 @@ Typically **30-50% mainframe cost reduction** from targeted migration.
 
 **Phase 6: Validation (8 weeks)**
 14. `/rainbow.validate-modernization` - Comprehensive validation
-15. `/hanoi.mainframe-tester` - Functional equivalence testing
-16. Parallel run for 4+ weeks
+15. Parallel run for 4+ weeks
 
 **Phase 7: Cutover (2 weeks)**
 17. Final cutover
@@ -294,15 +292,12 @@ rainbow init --here --ai claude
 ```bash
 # Assessment Phase
 /rainbow.assess-legacy           # Analyze legacy system
-/hanoi.legacy-analyst            # Deep code analysis
 
 # Business Logic Phase
 /rainbow.map-business-logic      # Extract business rules
-/hanoi.business-analyst          # Validate with SMEs
 
 # Architecture Phase
 /rainbow.architect               # Design modern architecture
-/hanoi.mainframe-architect       # Review migration strategy
 
 # Planning Phase
 /rainbow.design-data-migration   # Data migration strategy
@@ -318,8 +313,6 @@ rainbow init --here --ai claude
 
 # Validation Phase
 /rainbow.validate-modernization  # Validation strategy
-/hanoi.mainframe-tester          # Equivalence testing
-/hanoi.cobol-translator          # Precision validation
 ```
 
 ---

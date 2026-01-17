@@ -108,22 +108,6 @@ Your AI agent should show these core commands:
 | `/rainbow.taskify` | Break down into actionable tasks |
 | `/rainbow.implement` | Execute the plan |
 
-**Role-Based Agents:**
-
-| Agent   | Role |
-|---------|------|
-| `/hanoi.business-analyst` | Business requirements and analysis |
-| `/hanoi.product-owner` | Product vision and backlog |
-| `/hanoi.system-architect` | System architecture and tech decisions |
-| `/hanoi.technical-leader` | Technical leadership and reviews |
-| `/hanoi.software-engineer` | Feature implementation |
-| `/hanoi.qa-engineer` | Testing and quality assurance |
-| `/hanoi.devops-engineer` | CI/CD and infrastructure |
-| `/hanoi.security-engineer` | Security assessments |
-| `/hanoi.ux-ui-designer` | Interface design |
-| `/hanoi.technical-writer` | Documentation |
-| `/hanoi.scrum-master` | Agile facilitation |
-
 ### 2. Check Script Files
 
 The `.rainbow/scripts` directory should contain both:

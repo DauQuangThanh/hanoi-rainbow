@@ -44,6 +44,8 @@ For decades, we treated specifications as throwaway notes—just a formality bef
 
 ## 🚀 Quick Start
 
+**What you get:** 21 slash commands · 41 reusable skills · 19 AI agent integrations
+
 ### Install Rainbow CLI
 
 **Recommended: Install once, use everywhere**
@@ -173,10 +175,12 @@ Run your application and fix any issues. Your AI assistant will help debug.
 | [Cursor](https://cursor.sh/)                              | ✅ |                                                   |
 | [Gemini CLI](https://github.com/google-gemini/gemini-cli) | ✅ |                                                   |
 | [GitHub Copilot](https://code.visualstudio.com/)          | ✅ |                                                   |
+| [Google Antigravity](https://ai.google.dev/)              | ✅ | IDE-based agent with slash command support |
 | [IBM Bob](https://www.ibm.com/products/bob)               | ✅ | IDE-based agent with slash command support |
 | [Jules](https://jules.google.com/)                        | ✅ | |
 | [Kilo Code](https://github.com/Kilo-Org/kilocode)         | ✅ |                                                   |
 | [opencode](https://opencode.ai/)                          | ✅ |                                                   |
+| [Qoder CLI](https://qoder.ai)                             | ✅ |                                                   |
 | [Qwen Code](https://github.com/QwenLM/qwen-code)          | ✅ |                                                   |
 | [Roo Code](https://roocode.com/)                          | ✅ |                                                   |
 | [SHAI (OVHcloud)](https://github.com/ovh/shai)            | ✅ | |
@@ -264,6 +268,13 @@ rainbow version
 
 ### Available Slash Commands
 
+After running `rainbow init`, your AI coding agent will have access to **21 slash commands** organized into four categories:
+
+- **5 Core Workflow Commands** - Essential development cycle (regulate → specify → design → taskify → implement)
+- **4 Product-Level Commands** - Run once per product (architecture, standards, E2E tests)
+- **5 Quality & Enhancement Commands** - Validation, analysis, and project management
+- **7 Legacy Modernization Commands** - Mainframe/midrange migration and modernization
+
 After running `rainbow init`, your AI coding agent will have access to these slash commands for structured development:
 
 > **💡 Automatic Commits:** All commands automatically generate semantic commit messages and commit their changes upon completion, maintaining a clear project history without manual intervention.
@@ -316,32 +327,6 @@ Commands for systematic legacy system migration and modernization:
 | `/rainbow.design-screen-migration` | Convert green-screen/5250 interfaces to modern web/mobile UI | `docs:` |
 | `/rainbow.plan-strangler` | Create detailed strangler pattern implementation plan for phased migration | `docs:` |
 | `/rainbow.validate-modernization` | Verify that modernized system matches legacy behavior and meets quality standards | `test:` |
-
-#### Role-Based Agents
-
-Specialized agents for specific team roles in your development workflow:
-
-> **💡 Note:** All role-based agents automatically generate `docs:` prefixed commit messages and commit their deliverables upon completion.
-
-| Agent                             | Description                                                           |
-|----------------------------------|-----------------------------------------------------------------------|
-| `/hanoi.business-analyst`      | Analyze business requirements, gather stakeholder needs, and create comprehensive business documentation |
-| `/hanoi.product-owner`         | Define product vision, manage backlog, prioritize features, and create user stories |
-| `/hanoi.system-architect`      | Design system architecture, make technology decisions, and create architectural documentation |
-| `/hanoi.technical-leader`      | Provide technical leadership, code reviews, and guide engineering best practices |
-| `/hanoi.software-engineer`     | Implement features, write code, and create technical documentation |
-| `/hanoi.qa-engineer`           | Design test strategies, create test cases, and ensure quality standards |
-| `/hanoi.devops-engineer`       | Design CI/CD pipelines, manage infrastructure, and automate deployment processes |
-| `/hanoi.security-engineer`     | Conduct security assessments, identify vulnerabilities, and implement security measures |
-| `/hanoi.ux-ui-designer`        | Design user interfaces, create wireframes, and ensure consistent user experience |
-| `/hanoi.technical-writer`      | Create and maintain technical documentation, user guides, and API documentation |
-| `/hanoi.scrum-master`          | Facilitate agile ceremonies, remove impediments, and support team collaboration |
-| `/hanoi.legacy-analyst`        | Analyze mainframe/midrange codebases (COBOL, RPG, PL/I) to extract business logic and assess modernization complexity |
-| `/hanoi.mainframe-architect`   | Design mainframe-to-cloud migration strategies and hybrid architectures |
-| `/hanoi.data-migration-engineer` | Plan and execute data migrations from legacy databases to modern data platforms |
-| `/hanoi.batch-modernization-engineer` | Convert mainframe batch processing (JCL) to modern batch architectures |
-| `/hanoi.cobol-translator`      | Translate COBOL/RPG/PL/I business logic to modern languages while preserving exact behavior |
-| `/hanoi.mainframe-tester`      | Test and validate modernized systems for functional equivalence and compliance |
 
 ### Environment Variables
 
@@ -597,11 +582,15 @@ The output of this step will include a number of implementation detail documents
 │      ├── quickstart.md
 │      ├── research.md
 │      └── spec.md
-└── templates
-    ├── CLAUDE-template.md
-    ├── plan-template.md
-    ├── spec-template.md
-    └── tasks-template.md
+└── .rainbow/
+    ├── memory/
+    │   └── ground-rules.md
+    ├── scripts/
+    └── templates/
+        └── templates-for-commands/
+            ├── plan-template.md
+            ├── spec-template.md
+            └── tasks-template.md
 ```
 
 Check the `research.md` document to ensure that the right tech stack is used, based on your instructions. You can ask Claude Code to refine it if any of the components stand out, or even have it check the locally-installed version of the platform/framework you want to use (e.g., .NET).
@@ -694,7 +683,46 @@ Once the implementation is complete, test the application and resolve any runtim
 
 ---
 
-## 🛠️ Troubleshooting
+## � Project Structure
+
+After running `rainbow init`, your project will have the following structure:
+
+```
+<project-root>/
+├── .rainbow/               # Core framework (auto-generated, managed by Rainbow CLI)
+│   ├── memory/            # Project principles and ground rules
+│   ├── scripts/           # Automation scripts (bash or PowerShell)
+│   └── templates/         # Reusable templates for specs, plans, and tasks
+│
+├── .<agent-folder>/       # Agent-specific commands (e.g., .claude/commands/, .github/agents/ or .github/prompts/)
+│   └── rainbow.*.md       # 21 Rainbow slash commands for your AI agent
+│
+├── .<agent-folder>/skills/  # Agent-specific skills (reusable capabilities)
+│   ├── backend-coding/
+│   ├── frontend-design/
+│   ├── database-design/
+│   └── ... (41 skills total)
+│
+└── specs/                 # Your feature specifications (created as you work)
+    └── <feature-name>/
+        ├── spec.md        # Requirements and user stories
+        ├── plan.md        # Technical implementation plan
+        ├── tasks.md       # Task breakdown for execution
+        └── research.md    # Tech stack research notes
+```
+
+**Key Folders:**
+
+- **`.rainbow/`** - Framework core (memory, scripts, templates)
+- **`.<agent>/commands/`** - AI agent slash commands (`.claude/`, `.github/agents/` or `.github/prompts/`, etc.)
+- **`.<agent>/skills/`** - Reusable capabilities for specialized tasks
+- **`specs/`** - Your feature specifications (grows as you build)
+
+**Note:** The `.rainbow/` folder and agent-specific folders are auto-managed by the Rainbow CLI. You primarily work in `specs/` for your features.
+
+---
+
+## �🛠️ Troubleshooting
 
 ### Git Authentication on Linux
 

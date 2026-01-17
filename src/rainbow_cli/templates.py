@@ -202,6 +202,27 @@ def copy_local_template(
     if verbose and not tracker:
         console.print(f"[green]✓[/green] Created {ai_assistant} commands in {agent_folder}")
 
+    # For GitHub Copilot, also copy to prompts folder
+    prompts_folder = agent_config.get("prompts_folder")
+    if prompts_folder and commands_dir.exists():
+        prompts_path = project_path / prompts_folder
+        prompts_path.mkdir(parents=True, exist_ok=True)
+        
+        for cmd_file in commands_dir.glob("*.md"):
+            # Read the command file
+            content = cmd_file.read_text()
+
+            # Replace placeholders
+            content = content.replace("$ARGUMENTS", args_format)
+            content = content.replace("__AGENT__", ai_assistant)
+
+            # Write to prompts directory with .prompt.md extension
+            output_file = prompts_path / f"rainbow.{cmd_file.stem}.prompt.md"
+            output_file.write_text(content)
+        
+        if verbose and not tracker:
+            console.print(f"[green]✓[/green] Created {ai_assistant} prompts in {prompts_folder}")
+
     # Copy skills to agent-specific skills folder
     if skills_dir.exists():
         skills_path = project_path / skills_folder

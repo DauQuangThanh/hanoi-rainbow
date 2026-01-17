@@ -172,7 +172,36 @@ rainbow init demo --skip-tls --ai gemini --ignore-agent-tools --script ps
 
 ---
 
-## 🔄 Quick Reference
+## � Repository Structure
+
+Understanding the Rainbow CLI repository layout:
+
+```
+hanoi-rainbow/
+├── commands/              # Slash command definitions (copied to agent folders)
+│   ├── regulate.md       # Project principles command
+│   ├── specify.md        # Requirements command
+│   ├── design.md         # Technical planning command
+│   └── templates-for-commands/  # Reusable templates
+│
+├── skills/               # Reusable skill modules (copied to agent skills folders)
+│   ├── backend-coding/
+│   ├── frontend-design/
+│   ├── database-design/
+│   └── ... (41 skills total)
+│
+├── memory/              # Default project memory (ground rules, etc.)
+├── scripts/             # Automation scripts (bash + PowerShell)
+├── src/rainbow_cli/     # CLI source code
+├── docs/                # Documentation
+└── .github/workflows/   # CI/CD and release automation
+```
+
+**Note:** The `commands/` and `skills/` folders are source templates. When you run `rainbow init`, these are copied into your project's agent-specific folders (`.claude/`, `.github/agents/`, etc.).
+
+---
+
+## �🔄 Quick Reference
 
 | What You Want | Command |
 |---------------|----------|

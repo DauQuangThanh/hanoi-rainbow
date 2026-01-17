@@ -75,24 +75,6 @@ Run these once per product, not per feature:
 | `/rainbow.checklist` | Generate quality validation checklists |
 | `/rainbow.taskstoissues` | Convert tasks to GitHub issues |
 
-### Role-Based Agent Commands
-
-Specialized agents for different team roles:
-
-| Command | Role | Purpose |
-|---------|------|----------|
-| `/hanoi.business-analyst` | Business Analyst | Analyze business requirements and create documentation |
-| `/hanoi.product-owner` | Product Owner | Define product vision and manage backlog |
-| `/hanoi.system-architect` | System Architect | Design system architecture and make tech decisions |
-| `/hanoi.technical-leader` | Technical Leader | Provide technical leadership and code reviews |
-| `/hanoi.software-engineer` | Software Engineer | Implement features and write code |
-| `/hanoi.qa-engineer` | QA Engineer | Design test strategies and ensure quality |
-| `/hanoi.devops-engineer` | DevOps Engineer | Design CI/CD and manage infrastructure |
-| `/hanoi.security-engineer` | Security Engineer | Assess security and identify vulnerabilities |
-| `/hanoi.ux-ui-designer` | UX/UI Designer | Design interfaces and user experience |
-| `/rainbow.technical-writer` | Technical Writer | Create documentation and user guides |
-| `/rainbow.scrum-master` | Scrum Master | Facilitate agile ceremonies and remove impediments |
-
 ## 🎯 Core Philosophy
 
 Spec-Driven Development is built on these principles:
