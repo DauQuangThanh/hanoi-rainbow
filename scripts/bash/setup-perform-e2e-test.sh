@@ -107,9 +107,9 @@ EOF
         test_framework=$(detect_test_framework "$e2e_test_plan")
     fi
     
-    # Detect AI agent
+    # Detect AI agents (supports multiple agents)
     local detected_agent
-    detected_agent=$(detect_ai_agent "$repo_root")
+    detected_agent=$(detect_all_ai_agents "$repo_root")
     
     # Check if test framework is installed
     local framework_installed="false"

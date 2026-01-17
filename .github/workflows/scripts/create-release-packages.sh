@@ -129,24 +129,19 @@ generate_agents() {
   done
 }
 
-generate_copilot_prompts() {
-  local agents_dir=$1 prompts_dir=$2
-  mkdir -p "$prompts_dir"
-
-  # Generate a .prompt.md file for each .agent.md file
-  for agent_file in "$agents_dir"/hanoi.*.agent.md; do
-    [[ -f "$agent_file" ]] || continue
-
-    local basename=$(basename "$agent_file" .agent.md)
-    local prompt_file="$prompts_dir/${basename}.prompt.md"
-
-    # Create prompt file with agent frontmatter
-    cat > "$prompt_file" <<EOF
----
-agent: ${basename}
----
-EOF
+generate_skills() {
+  local agent=$1 output_dir=$2
+  [[ -d skills ]] || return 0
+  mkdir -p "$output_dir"
+  
+  # Copy all skill subdirectories
+  for skill_dir in skills/*; do
+    [[ -d "$skill_dir" ]] || continue
+    local skill_name=$(basename "$skill_dir")
+    cp -r "$skill_dir" "$output_dir/$skill_name"
   done
+  
+  echo "Copied skills -> $output_dir"
 }
 
 build_variant() {
@@ -200,18 +195,19 @@ build_variant() {
     claude)
       mkdir -p "$base_dir/.claude/commands"
       generate_commands claude md "\$ARGUMENTS" "$base_dir/.claude/commands" "$script"
-      generate_agents claude md "\$ARGUMENTS" "$base_dir/.claude/commands" ;;
+      generate_agents claude md "\$ARGUMENTS" "$base_dir/.claude/commands"
+      generate_skills claude "$base_dir/.claude/skills" ;;
     gemini)
       mkdir -p "$base_dir/.gemini/commands"
       generate_commands gemini toml "{{args}}" "$base_dir/.gemini/commands" "$script"
       generate_agents gemini toml "{{args}}" "$base_dir/.gemini/commands"
+      generate_skills gemini "$base_dir/.gemini/extensions"
       [[ -f agent_templates/gemini/GEMINI.md ]] && cp agent_templates/gemini/GEMINI.md "$base_dir/GEMINI.md" ;;
     copilot)
       mkdir -p "$base_dir/.github/agents"
       generate_commands copilot agent.md "\$ARGUMENTS" "$base_dir/.github/agents" "$script"
       generate_agents copilot agent.md "\$ARGUMENTS" "$base_dir/.github/agents"
-      # Generate companion prompt files
-      generate_copilot_prompts "$base_dir/.github/agents" "$base_dir/.github/prompts"
+      generate_skills copilot "$base_dir/.github/skills"
       # Create VS Code workspace settings
       mkdir -p "$base_dir/.vscode"
       [[ -f commands/templates-for-commands/vscode-settings.json ]] && cp commands/templates-for-commands/vscode-settings.json "$base_dir/.vscode/settings.json"
@@ -219,63 +215,91 @@ build_variant() {
     cursor-agent)
       mkdir -p "$base_dir/.cursor/commands"
       generate_commands cursor-agent md "\$ARGUMENTS" "$base_dir/.cursor/commands" "$script"
-      generate_agents cursor-agent md "\$ARGUMENTS" "$base_dir/.cursor/commands" ;;
+      generate_agents cursor-agent md "\$ARGUMENTS" "$base_dir/.cursor/commands"
+      generate_skills cursor-agent "$base_dir/.cursor/rules" ;;
     qwen)
       mkdir -p "$base_dir/.qwen/commands"
       generate_commands qwen toml "{{args}}" "$base_dir/.qwen/commands" "$script"
       generate_agents qwen toml "{{args}}" "$base_dir/.qwen/commands"
+      generate_skills qwen "$base_dir/.qwen/skills"
       [[ -f agent_templates/qwen/QWEN.md ]] && cp agent_templates/qwen/QWEN.md "$base_dir/QWEN.md" ;;
     opencode)
       mkdir -p "$base_dir/.opencode/command"
       generate_commands opencode md "\$ARGUMENTS" "$base_dir/.opencode/command" "$script"
-      generate_agents opencode md "\$ARGUMENTS" "$base_dir/.opencode/command" ;;
+      generate_agents opencode md "\$ARGUMENTS" "$base_dir/.opencode/command"
+      generate_skills opencode "$base_dir/.opencode/skill" ;;
     windsurf)
       mkdir -p "$base_dir/.windsurf/workflows"
       generate_commands windsurf md "\$ARGUMENTS" "$base_dir/.windsurf/workflows" "$script"
-      generate_agents windsurf md "\$ARGUMENTS" "$base_dir/.windsurf/workflows" ;;
+      generate_agents windsurf md "\$ARGUMENTS" "$base_dir/.windsurf/workflows"
+      generate_skills windsurf "$base_dir/.windsurf/skills" ;;
     codex)
-      mkdir -p "$base_dir/.codex/prompts"
-      generate_commands codex md "\$ARGUMENTS" "$base_dir/.codex/prompts" "$script"
-      generate_agents codex md "\$ARGUMENTS" "$base_dir/.codex/prompts" ;;
+      mkdir -p "$base_dir/.codex/commands"
+      generate_commands codex md "\$ARGUMENTS" "$base_dir/.codex/commands" "$script"
+      generate_agents codex md "\$ARGUMENTS" "$base_dir/.codex/commands"
+      generate_skills codex "$base_dir/.codex/skills" ;;
     kilocode)
-      mkdir -p "$base_dir/.kilocode/workflows"
-      generate_commands kilocode md "\$ARGUMENTS" "$base_dir/.kilocode/workflows" "$script"
-      generate_agents kilocode md "\$ARGUMENTS" "$base_dir/.kilocode/workflows" ;;
+      mkdir -p "$base_dir/.kilocode/rules"
+      generate_commands kilocode md "\$ARGUMENTS" "$base_dir/.kilocode/rules" "$script"
+      generate_agents kilocode md "\$ARGUMENTS" "$base_dir/.kilocode/rules"
+      generate_skills kilocode "$base_dir/.kilocode/skills" ;;
     auggie)
-      mkdir -p "$base_dir/.augment/commands"
-      generate_commands auggie md "\$ARGUMENTS" "$base_dir/.augment/commands" "$script"
-      generate_agents auggie md "\$ARGUMENTS" "$base_dir/.augment/commands" ;;
+      mkdir -p "$base_dir/.augment/rules"
+      generate_commands auggie md "\$ARGUMENTS" "$base_dir/.augment/rules" "$script"
+      generate_agents auggie md "\$ARGUMENTS" "$base_dir/.augment/rules"
+      generate_skills auggie "$base_dir/.augment/rules" ;;
     roo)
-      mkdir -p "$base_dir/.roo/commands"
-      generate_commands roo md "\$ARGUMENTS" "$base_dir/.roo/commands" "$script"
-      generate_agents roo md "\$ARGUMENTS" "$base_dir/.roo/commands" ;;
+      mkdir -p "$base_dir/.roo/rules"
+      generate_commands roo md "\$ARGUMENTS" "$base_dir/.roo/rules" "$script"
+      generate_agents roo md "\$ARGUMENTS" "$base_dir/.roo/rules"
+      generate_skills roo "$base_dir/.roo/skills" ;;
     codebuddy)
       mkdir -p "$base_dir/.codebuddy/commands"
       generate_commands codebuddy md "\$ARGUMENTS" "$base_dir/.codebuddy/commands" "$script"
-      generate_agents codebuddy md "\$ARGUMENTS" "$base_dir/.codebuddy/commands" ;;
+      generate_agents codebuddy md "\$ARGUMENTS" "$base_dir/.codebuddy/commands"
+      generate_skills codebuddy "$base_dir/.codebuddy/skills" ;;
     amp)
       mkdir -p "$base_dir/.agents/commands"
       generate_commands amp md "\$ARGUMENTS" "$base_dir/.agents/commands" "$script"
-      generate_agents amp md "\$ARGUMENTS" "$base_dir/.agents/commands" ;;
+      generate_agents amp md "\$ARGUMENTS" "$base_dir/.agents/commands"
+      generate_skills amp "$base_dir/.agents/skills" ;;
     shai)
       mkdir -p "$base_dir/.shai/commands"
       generate_commands shai md "\$ARGUMENTS" "$base_dir/.shai/commands" "$script"
-      generate_agents shai md "\$ARGUMENTS" "$base_dir/.shai/commands" ;;
+      generate_agents shai md "\$ARGUMENTS" "$base_dir/.shai/commands"
+      generate_skills shai "$base_dir/.shai/commands" ;;
     q)
       mkdir -p "$base_dir/.amazonq/prompts"
       generate_commands q md "\$ARGUMENTS" "$base_dir/.amazonq/prompts" "$script"
-      generate_agents q md "\$ARGUMENTS" "$base_dir/.amazonq/prompts" ;;
+      generate_agents q md "\$ARGUMENTS" "$base_dir/.amazonq/prompts"
+      generate_skills q "$base_dir/.amazonq/cli-agents" ;;
     bob)
       mkdir -p "$base_dir/.bob/commands"
       generate_commands bob md "\$ARGUMENTS" "$base_dir/.bob/commands" "$script"
-      generate_agents bob md "\$ARGUMENTS" "$base_dir/.bob/commands" ;;
+      generate_agents bob md "\$ARGUMENTS" "$base_dir/.bob/commands"
+      generate_skills bob "$base_dir/.bob/skills" ;;
+    jules)
+      mkdir -p "$base_dir/.agent"
+      generate_commands jules md "\$ARGUMENTS" "$base_dir/.agent" "$script"
+      generate_agents jules md "\$ARGUMENTS" "$base_dir/.agent"
+      generate_skills jules "$base_dir/skills" ;;
+    qoder)
+      mkdir -p "$base_dir/.qoder/commands"
+      generate_commands qoder md "\$ARGUMENTS" "$base_dir/.qoder/commands" "$script"
+      generate_agents qoder md "\$ARGUMENTS" "$base_dir/.qoder/commands"
+      generate_skills qoder "$base_dir/.qoder/skills" ;;
+    antigravity)
+      mkdir -p "$base_dir/.agent/rules"
+      generate_commands antigravity md "\$ARGUMENTS" "$base_dir/.agent/rules" "$script"
+      generate_agents antigravity md "\$ARGUMENTS" "$base_dir/.agent/rules"
+      generate_skills antigravity "$base_dir/.agent/skills" ;;
   esac
   ( cd "$base_dir" && zip -r "../rainbow-template-${agent}-${script}-${NEW_VERSION}.zip" . )
   echo "Created $GENRELEASES_DIR/rainbow-template-${agent}-${script}-${NEW_VERSION}.zip"
 }
 
 # Determine agent list
-ALL_AGENTS=(claude gemini copilot cursor-agent qwen opencode windsurf codex kilocode auggie roo codebuddy amp shai q bob)
+ALL_AGENTS=(claude gemini copilot cursor-agent qwen opencode windsurf codex kilocode auggie roo codebuddy amp shai q bob jules qoder antigravity)
 ALL_SCRIPTS=(sh ps)
 
 norm_list() {

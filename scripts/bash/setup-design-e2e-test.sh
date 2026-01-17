@@ -72,9 +72,9 @@ setup_design_e2e_test() {
         integration_info=$(extract_integration_points "$architecture_file")
     fi
     
-    # Detect AI agent
+    # Detect AI agents (supports multiple agents)
     local detected_agent
-    detected_agent=$(detect_ai_agent "$repo_root")
+    detected_agent=$(detect_all_ai_agents "$repo_root")
     
     # Generate JSON output for AI agents
     generate_json_output "$e2e_test_file" "$feature_count" "$detected_agent" "$integration_info"

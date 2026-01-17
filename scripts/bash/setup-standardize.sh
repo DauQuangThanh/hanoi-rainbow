@@ -69,9 +69,9 @@ setup_standardize() {
         feature_count=$(find "$specs_dir" -maxdepth 2 -name "spec.md" | wc -l | tr -d ' ')
     fi
     
-    # Detect AI agent
+    # Detect AI agents (supports multiple agents)
     local detected_agent
-    detected_agent=$(detect_ai_agent "$repo_root")
+    detected_agent=$(detect_all_ai_agents "$repo_root")
     
     # Update standards document with context
     update_standards_context "$standards_file" "$tech_stack"

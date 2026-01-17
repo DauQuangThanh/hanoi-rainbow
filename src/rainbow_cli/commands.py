@@ -36,7 +36,7 @@ client = httpx.Client(verify=ssl_context)
 @app.command()
 def init(
     project_name: str = typer.Argument(None, help="Name for your new project directory (optional if using --here, or use '.' for current directory)"),
-    ai_assistant: str = typer.Option(None, "--ai", help="AI agent(s) to use. Can be a single agent or comma-separated list (e.g., 'claude,gemini,copilot'). Valid options: claude, gemini, copilot, cursor-agent, qwen, opencode, codex, windsurf, kilocode, auggie, codebuddy, amp, shai, q, bob. If not specified, an interactive multi-select menu will appear (default: copilot pre-selected)"),
+    ai_assistant: str = typer.Option(None, "--ai", help="AI agent(s) to use. Can be a single agent or comma-separated list (e.g., 'claude,gemini,copilot'). Valid options: claude, gemini, copilot, cursor-agent, qwen, opencode, codex, windsurf, kilocode, auggie, codebuddy, roo, amp, shai, q, bob, jules, qoder, antigravity. If not specified, an interactive multi-select menu will appear (default: copilot pre-selected)"),
     script_type: str = typer.Option(None, "--script", help="Script type to use: sh or ps"),
     ignore_agent_tools: bool = typer.Option(False, "--ignore-agent-tools", help="Skip checks for AI agent tools like Claude Code"),
     no_git: bool = typer.Option(False, "--no-git", help="Skip git repository initialization"),
@@ -225,9 +225,9 @@ def init(
 
         # Detect existing agent folders
         for agent_key, agent_config in AGENT_CONFIG.items():
-            agent_folder = project_path / agent_config["folder"]
+            agent_folder = project_path / agent_config["agent_folder"]
             if agent_folder.exists():
-                existing_agents.append((agent_key, agent_config["name"], agent_config["folder"]))
+                existing_agents.append((agent_key, agent_config["name"], agent_config["agent_folder"]))
 
         is_upgrade_mode = True
 
@@ -395,6 +395,13 @@ def init(
                     shutil.copytree(rainbow_dir, backup_rainbow)
                     backup_paths[".rainbow"] = backup_rainbow
 
+                # Backup Jules root-level skills folder (special case)
+                jules_skills = project_path / "skills"
+                if jules_skills.exists():
+                    backup_jules_skills = project_path / f"skills.backup.{timestamp}"
+                    shutil.copytree(jules_skills, backup_jules_skills)
+                    backup_paths["skills"] = backup_jules_skills
+
                 # Backup existing agent folders
                 for agent_key, agent_name, agent_folder in existing_agents:
                     source_folder = project_path / agent_folder
@@ -495,7 +502,7 @@ def init(
     # Agent folder security notice
     agent_config = AGENT_CONFIG.get(selected_ais[-1])  # Use last selected AI for the notice
     if agent_config:
-        agent_folder = agent_config["folder"]
+        agent_folder = agent_config["agent_folder"]
         security_notice = Panel(
             f"Some agents may store credentials, auth tokens, or other identifying and private artifacts in the agent folder within your project.\n"
             f"Consider adding [cyan]{agent_folder}[/cyan] (or parts of it) to [cyan].gitignore[/cyan] to prevent accidental credential leakage.",

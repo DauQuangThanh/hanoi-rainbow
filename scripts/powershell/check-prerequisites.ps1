@@ -71,7 +71,7 @@ if ($PathsOnly) {
             BRANCH       = $paths.CURRENT_BRANCH
             FEATURE_DIR  = $paths.FEATURE_DIR
             FEATURE_SPEC = $paths.FEATURE_SPEC
-            IMPL_PLAN    = $paths.IMPL_PLAN
+            FEATURE_DESIGN    = $paths.FEATURE_DESIGN
             TASKS        = $paths.TASKS
         } | ConvertTo-Json -Compress
     } else {
@@ -79,7 +79,7 @@ if ($PathsOnly) {
         Write-Output "BRANCH: $($paths.CURRENT_BRANCH)"
         Write-Output "FEATURE_DIR: $($paths.FEATURE_DIR)"
         Write-Output "FEATURE_SPEC: $($paths.FEATURE_SPEC)"
-        Write-Output "IMPL_PLAN: $($paths.IMPL_PLAN)"
+        Write-Output "FEATURE_DESIGN: $($paths.FEATURE_DESIGN)"
         Write-Output "TASKS: $($paths.TASKS)"
     }
     exit 0
@@ -92,7 +92,7 @@ if (-not (Test-Path $paths.FEATURE_DIR -PathType Container)) {
     exit 1
 }
 
-if (-not (Test-Path $paths.IMPL_PLAN -PathType Leaf)) {
+if (-not (Test-Path $paths.FEATURE_DESIGN -PathType Leaf)) {
     Write-Output "ERROR: design.md not found in $($paths.FEATURE_DIR)"
     Write-Output "Run /rainbow.design first to create the implementation plan."
     exit 1

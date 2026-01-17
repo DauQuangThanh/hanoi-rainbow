@@ -28,11 +28,11 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 **IMPORTANT**: Automatically generate a 'docs:' prefixed git commit message (e.g., 'docs: add implementation plan for feature-name') and commit design.md, research.md, data-model.md, and contracts/ upon completion.
 
-1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_SPEC, FEATURE_DESIGN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read FEATURE_SPEC, `memory/ground-rules.md`, and `docs/architecture.md` (if it exists). Load IMPL_PLAN template (already copied). Adhere to the principles for maximizing system clarity, structural simplicity, and long-term maintainability.
+2. **Load context**: Read FEATURE_SPEC, `memory/ground-rules.md`, and `docs/architecture.md` (if it exists). Load FEATURE_DESIGN template (already copied). Adhere to the principles for maximizing system clarity, structural simplicity, and long-term maintainability.
 
-3. **Execute plan workflow**: Follow the structure in IMPL_PLAN template to:
+3. **Execute plan workflow**: Follow the structure in FEATURE_DESIGN template to:
    - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")
    - Fill Ground-rules Check section from ground-rules
    - Align with architecture decisions from architecture.md (if available)
@@ -42,7 +42,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Phase 1: Update agent context by running the agent script
    - Re-evaluate Ground-rules Check post-design
 
-4. **Stop and report**: Command ends after Phase 2 planning. Report branch, IMPL_PLAN path, and generated artifacts.
+4. **Stop and report**: Command ends after Phase 2 planning. Report branch, FEATURE_DESIGN path, and generated artifacts.
 
 ## Phases
 

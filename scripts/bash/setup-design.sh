@@ -39,21 +39,21 @@ mkdir -p "$FEATURE_DIR"
 # Copy design template if it exists
 TEMPLATE="$REPO_ROOT/.rainbow/templates/templates-for-commands/design-template.md"
 if [[ -f "$TEMPLATE" ]]; then
-    cp "$TEMPLATE" "$IMPL_PLAN"
-    echo "Copied design template to $IMPL_PLAN"
+    cp "$TEMPLATE" "$FEATURE_DESIGN"
+    echo "Copied design template to $FEATURE_DESIGN"
 else
     echo "Warning: Design template not found at $TEMPLATE"
     # Create a basic plan file if template doesn't exist
-    touch "$IMPL_PLAN"
+    touch "$FEATURE_DESIGN"
 fi
 
 # Output results
 if $JSON_MODE; then
-    printf '{"FEATURE_SPEC":"%s","IMPL_PLAN":"%s","SPECS_DIR":"%s","BRANCH":"%s","HAS_GIT":"%s"}\n' \
-        "$FEATURE_SPEC" "$IMPL_PLAN" "$FEATURE_DIR" "$CURRENT_BRANCH" "$HAS_GIT"
+    printf '{"FEATURE_SPEC":"%s","FEATURE_DESIGN":"%s","SPECS_DIR":"%s","BRANCH":"%s","HAS_GIT":"%s"}\n' \
+        "$FEATURE_SPEC" "$FEATURE_DESIGN" "$FEATURE_DIR" "$CURRENT_BRANCH" "$HAS_GIT"
 else
     echo "FEATURE_SPEC: $FEATURE_SPEC"
-    echo "IMPL_PLAN: $IMPL_PLAN" 
+    echo "FEATURE_DESIGN: $FEATURE_DESIGN" 
     echo "SPECS_DIR: $FEATURE_DIR"
     echo "BRANCH: $CURRENT_BRANCH"
     echo "HAS_GIT: $HAS_GIT"

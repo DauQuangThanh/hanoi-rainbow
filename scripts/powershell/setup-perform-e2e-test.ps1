@@ -274,8 +274,8 @@ Hanoi Rainbow ``perform-e2e-test`` command
     # Detect test framework from plan
     $testFramework = Detect-TestFramework -PlanFile $e2eTestPlan
     
-    # Detect AI agent
-    $detectedAgent = Detect-AIAgent -RepoRoot $repoRoot
+    # Detect AI agents (supports multiple agents)
+    $detectedAgent = Detect-AllAIAgents -RepoRoot $repoRoot
     
     # Check if test framework is installed
     $frameworkInstalled = $false

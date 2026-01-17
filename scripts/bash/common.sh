@@ -142,7 +142,7 @@ CURRENT_BRANCH='$current_branch'
 HAS_GIT='$has_git_repo'
 FEATURE_DIR='$feature_dir'
 FEATURE_SPEC='$feature_dir/spec.md'
-IMPL_PLAN='$feature_dir/design.md'
+FEATURE_DESIGN='$feature_dir/design.md'
 TASKS='$feature_dir/tasks.md'
 RESEARCH='$feature_dir/research.md'
 DATA_MODEL='$feature_dir/data-model.md'
@@ -198,8 +198,79 @@ detect_ai_agent() {
         agent="shai"
     elif [[ -d "$repo_root/.bob/commands" ]]; then
         agent="bob"
+    elif [[ -d "$repo_root/.agent" ]] && [[ -f "$repo_root/AGENTS.md" ]]; then
+        agent="jules"
+    elif [[ -d "$repo_root/.qoder/commands" ]]; then
+        agent="qoder"
+    elif [[ -d "$repo_root/.agent/rules" ]] || [[ -d "$repo_root/.agent/skills" ]]; then
+        agent="antigravity"
     fi
     
     echo "$agent"
 }
 
+# Detect ALL installed AI agents (for multi-agent installations)
+# Returns space-separated list of agents
+detect_all_ai_agents() {
+    local repo_root="$1"
+    local agents=()
+    
+    # Check for all agent-specific directories
+    [[ -d "$repo_root/.claude/commands" ]] && agents+=("claude")
+    [[ -d "$repo_root/.github/agents" ]] && agents+=("copilot")
+    [[ -d "$repo_root/.cursor/commands" ]] && agents+=("cursor")
+    ( [[ -d "$repo_root/.windsurf/workflows" ]] || [[ -d "$repo_root/.windsurf/rules" ]] ) && agents+=("windsurf")
+    [[ -d "$repo_root/.gemini/commands" ]] && agents+=("gemini")
+    [[ -d "$repo_root/.qwen/commands" ]] && agents+=("qwen")
+    [[ -d "$repo_root/.opencode/command" ]] && agents+=("opencode")
+    [[ -d "$repo_root/.codex/commands" ]] && agents+=("codex")
+    [[ -d "$repo_root/.kilocode/rules" ]] && agents+=("kilocode")
+    [[ -d "$repo_root/.augment/rules" ]] && agents+=("auggie")
+    [[ -d "$repo_root/.roo/rules" ]] && agents+=("roo")
+    [[ -d "$repo_root/.codebuddy/commands" ]] && agents+=("codebuddy")
+    [[ -d "$repo_root/.amazonq/prompts" ]] && agents+=("q")
+    [[ -d "$repo_root/.agents/commands" ]] && agents+=("amp")
+    [[ -d "$repo_root/.shai/commands" ]] && agents+=("shai")
+    [[ -d "$repo_root/.bob/commands" ]] && agents+=("bob")
+    [[ -d "$repo_root/.agent" ]] && [[ -f "$repo_root/AGENTS.md" ]] && agents+=("jules")
+    [[ -d "$repo_root/.qoder/commands" ]] && agents+=("qoder")
+    ( [[ -d "$repo_root/.agent/rules" ]] || [[ -d "$repo_root/.agent/skills" ]] ) && agents+=("antigravity")
+    
+    # Return space-separated list, or "unknown" if none found
+    if [ ${#agents[@]} -eq 0 ]; then
+        echo "unknown"
+    else
+        echo "${agents[@]}"
+    fi
+}
+
+# Get the skills folder path for a given AI agent
+get_skills_folder() {
+    local agent="$1"
+    local skills_folder=""
+    
+    case "$agent" in
+        copilot) skills_folder=".github/skills" ;;
+        claude) skills_folder=".claude/skills" ;;
+        gemini) skills_folder=".gemini/extensions" ;;
+        cursor) skills_folder=".cursor/rules" ;;
+        qwen) skills_folder=".qwen/skills" ;;
+        opencode) skills_folder=".opencode/skill" ;;
+        codex) skills_folder=".codex/skills" ;;
+        windsurf) skills_folder=".windsurf/skills" ;;
+        kilocode) skills_folder=".kilocode/skills" ;;
+        auggie) skills_folder=".augment/rules" ;;
+        codebuddy) skills_folder=".codebuddy/skills" ;;
+        roo) skills_folder=".roo/skills" ;;
+        q) skills_folder=".amazonq/cli-agents" ;;
+        amp) skills_folder=".agents/skills" ;;
+        shai) skills_folder=".shai/commands" ;;
+        bob) skills_folder=".bob/skills" ;;
+        jules) skills_folder="skills" ;;
+        qoder) skills_folder=".qoder/skills" ;;
+        antigravity) skills_folder=".agent/skills" ;;
+        *) skills_folder="" ;;
+    esac
+    
+    echo "$skills_folder"
+}

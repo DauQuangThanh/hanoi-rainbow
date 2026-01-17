@@ -146,7 +146,7 @@ function Get-FeaturePathsEnv {
         HAS_GIT       = $hasGit
         FEATURE_DIR   = $featureDir
         FEATURE_SPEC  = Join-Path $featureDir 'spec.md'
-        IMPL_PLAN     = Join-Path $featureDir 'design.md'
+        FEATURE_DESIGN     = Join-Path $featureDir 'design.md'
         TASKS         = Join-Path $featureDir 'tasks.md'
         RESEARCH      = Join-Path $featureDir 'research.md'
         DATA_MODEL    = Join-Path $featureDir 'data-model.md'
@@ -253,7 +253,83 @@ function Detect-AIAgent {
     elseif (Test-Path (Join-Path $RepoRoot ".bob/commands")) {
         $agent = "bob"
     }
+    elseif ((Test-Path (Join-Path $RepoRoot ".agent")) -and (Test-Path (Join-Path $RepoRoot "AGENTS.md"))) {
+        $agent = "jules"
+    }
+    elseif (Test-Path (Join-Path $RepoRoot ".qoder/commands")) {
+        $agent = "qoder"
+    }
+    elseif ((Test-Path (Join-Path $RepoRoot ".agent/rules")) -or (Test-Path (Join-Path $RepoRoot ".agent/skills"))) {
+        $agent = "antigravity"
+    }
     
     return $agent
 }
 
+# Detect ALL installed AI agents (for multi-agent installations)
+# Returns array of agent names
+function Detect-AllAIAgents {
+    param([string]$RepoRoot)
+    
+    $agents = @()
+    
+    # Check for all agent-specific directories
+    if (Test-Path (Join-Path $RepoRoot ".claude/commands")) { $agents += "claude" }
+    if (Test-Path (Join-Path $RepoRoot ".github/agents")) { $agents += "copilot" }
+    if (Test-Path (Join-Path $RepoRoot ".cursor/commands")) { $agents += "cursor" }
+    if ((Test-Path (Join-Path $RepoRoot ".windsurf/workflows")) -or (Test-Path (Join-Path $RepoRoot ".windsurf/rules"))) { $agents += "windsurf" }
+    if (Test-Path (Join-Path $RepoRoot ".gemini/commands")) { $agents += "gemini" }
+    if (Test-Path (Join-Path $RepoRoot ".qwen/commands")) { $agents += "qwen" }
+    if (Test-Path (Join-Path $RepoRoot ".opencode/command")) { $agents += "opencode" }
+    if (Test-Path (Join-Path $RepoRoot ".codex/commands")) { $agents += "codex" }
+    if (Test-Path (Join-Path $RepoRoot ".kilocode/rules")) { $agents += "kilocode" }
+    if (Test-Path (Join-Path $RepoRoot ".augment/rules")) { $agents += "auggie" }
+    if (Test-Path (Join-Path $RepoRoot ".roo/rules")) { $agents += "roo" }
+    if (Test-Path (Join-Path $RepoRoot ".codebuddy/commands")) { $agents += "codebuddy" }
+    if (Test-Path (Join-Path $RepoRoot ".amazonq/prompts")) { $agents += "q" }
+    if (Test-Path (Join-Path $RepoRoot ".agents/commands")) { $agents += "amp" }
+    if (Test-Path (Join-Path $RepoRoot ".shai/commands")) { $agents += "shai" }
+    if (Test-Path (Join-Path $RepoRoot ".bob/commands")) { $agents += "bob" }
+    if ((Test-Path (Join-Path $RepoRoot ".agent")) -and (Test-Path (Join-Path $RepoRoot "AGENTS.md"))) { $agents += "jules" }
+    if (Test-Path (Join-Path $RepoRoot ".qoder/commands")) { $agents += "qoder" }
+    if ((Test-Path (Join-Path $RepoRoot ".agent/rules")) -or (Test-Path (Join-Path $RepoRoot ".agent/skills"))) { $agents += "antigravity" }
+    
+    # Return array of agents, or "unknown" if none found
+    if ($agents.Count -eq 0) {
+        return @("unknown")
+    }
+    
+    return $agents
+}
+
+# Get the skills folder path for a given AI agent
+function Get-SkillsFolder {
+    param([string]$Agent)
+    
+    $skillsFolder = ""
+    
+    switch ($Agent) {
+        "copilot" { $skillsFolder = ".github/skills" }
+        "claude" { $skillsFolder = ".claude/skills" }
+        "gemini" { $skillsFolder = ".gemini/extensions" }
+        "cursor" { $skillsFolder = ".cursor/rules" }
+        "qwen" { $skillsFolder = ".qwen/skills" }
+        "opencode" { $skillsFolder = ".opencode/skill" }
+        "codex" { $skillsFolder = ".codex/skills" }
+        "windsurf" { $skillsFolder = ".windsurf/skills" }
+        "kilocode" { $skillsFolder = ".kilocode/skills" }
+        "auggie" { $skillsFolder = ".augment/rules" }
+        "codebuddy" { $skillsFolder = ".codebuddy/skills" }
+        "roo" { $skillsFolder = ".roo/skills" }
+        "q" { $skillsFolder = ".amazonq/cli-agents" }
+        "amp" { $skillsFolder = ".agents/skills" }
+        "shai" { $skillsFolder = ".shai/commands" }
+        "bob" { $skillsFolder = ".bob/skills" }
+        "jules" { $skillsFolder = "skills" }
+        "qoder" { $skillsFolder = ".qoder/skills" }
+        "antigravity" { $skillsFolder = ".agent/skills" }
+        default { $skillsFolder = "" }
+    }
+    
+    return $skillsFolder
+}

@@ -70,8 +70,8 @@ function Setup-Standardize {
         $featureCount = (Get-ChildItem -Path $specsDir -Filter "spec.md" -Recurse -Depth 2).Count
     }
     
-    # Detect AI agent
-    $detectedAgent = Detect-AIAgent -RepoRoot $repoRoot
+    # Detect AI agents (supports multiple agents)
+    $detectedAgent = Detect-AllAIAgents -RepoRoot $repoRoot
     
     # Update standards document with context
     Update-StandardsContext -StandardsFile $standardsFile -TechStack $techStack

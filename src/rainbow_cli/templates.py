@@ -106,6 +106,7 @@ def copy_local_template(
     # Paths to copy
     commands_dir = source_path / "commands"
     agents_dir = source_path / "agents"
+    skills_dir = source_path / "skills"
     memory_dir = source_path / "memory"
     scripts_dir = source_path / "scripts"
 
@@ -125,7 +126,8 @@ def copy_local_template(
     if not agent_config:
         raise ValueError(f"Unknown AI assistant: {ai_assistant}")
 
-    agent_folder = agent_config["folder"]
+    agent_folder = agent_config["agent_folder"]
+    skills_folder = agent_config["skills_folder"]
 
     agent_ext = EXTENSION_MAP.get(ai_assistant, ".md")
     args_format = ARGS_FORMAT_MAP.get(ai_assistant, "$ARGUMENTS")
@@ -188,9 +190,8 @@ def copy_local_template(
         if verbose and not tracker:
             console.print(f"[green]✓[/green] Copied templates")
 
-    # Create agent-specific command directory using subfolder from config
-    subfolder = agent_config.get("subfolder", "commands")
-    agent_path = project_path / agent_folder / subfolder
+    # Create agent-specific command directory
+    agent_path = project_path / agent_folder
     agent_path.mkdir(parents=True, exist_ok=True)
 
     # Copy command files to agent directory
@@ -225,19 +226,27 @@ def copy_local_template(
             output_file.write_text(content)
 
     if verbose and not tracker:
-        console.print(f"[green]✓[/green] Created {ai_assistant} commands and agents in {agent_folder}{subfolder}/")
+        console.print(f"[green]✓[/green] Created {ai_assistant} commands and agents in {agent_folder}")
 
-    # Handle agent-specific files (e.g., vscode-settings.json and prompts for copilot)
+    # Copy skills to agent-specific skills folder
+    if skills_dir.exists():
+        skills_path = project_path / skills_folder
+        skills_path.mkdir(parents=True, exist_ok=True)
+
+        # Copy all skills subdirectories
+        for skill_item in skills_dir.iterdir():
+            if skill_item.is_dir():
+                dest_skill = skills_path / skill_item.name
+                if dest_skill.exists():
+                    shutil.rmtree(dest_skill)
+                shutil.copytree(skill_item, dest_skill)
+
+        if verbose and not tracker:
+            console.print(f"[green]✓[/green] Created {ai_assistant} skills in {skills_folder}")
+
+    # 
+    # Handle agent-specific files (e.g., vscode-settings.json for copilot)
     if ai_assistant == "copilot":
-        # Create companion prompt files
-        prompts_dir = project_path / agent_folder / "prompts"
-        prompts_dir.mkdir(parents=True, exist_ok=True)
-        for agent_file in agent_path.glob("rainbow.*.agent.md"):
-            basename = agent_file.stem  # e.g., "rainbow.specify"
-            prompt_file = prompts_dir / f"{basename}.prompt.md"
-            prompt_content = f"---\nagent: {basename}\n---\n"
-            prompt_file.write_text(prompt_content)
-
         # Create .vscode/settings.json
         vscode_dir = project_path / ".vscode"
         vscode_dir.mkdir(exist_ok=True)
@@ -245,7 +254,7 @@ def copy_local_template(
         if vscode_settings_src.exists():
             shutil.copy2(vscode_settings_src, vscode_dir / "settings.json")
             if verbose and not tracker:
-                console.print(f"[green]✓[/green] Created .vscode/settings.json and .github/prompts/")
+                console.print(f"[green]✓[/green] Created .vscode/settings.json")
 
     if tracker:
         tracker.complete(f"copy-{ai_assistant}", "templates copied")
