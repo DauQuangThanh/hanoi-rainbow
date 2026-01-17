@@ -197,7 +197,9 @@ def copy_local_template(
 
             # Write to agent directory with appropriate extension
             output_file = agent_path / f"rainbow.{cmd_file.stem}{agent_ext}"
-            output_file.write_text(content)
+            # Only write if file doesn't exist or content is different (handles shared folders)
+            if not output_file.exists() or output_file.read_text() != content:
+                output_file.write_text(content)
 
     if verbose and not tracker:
         console.print(f"[green]✓[/green] Created {ai_assistant} commands in {agent_folder}")
@@ -218,7 +220,9 @@ def copy_local_template(
 
             # Write to prompts directory with .prompt.md extension
             output_file = prompts_path / f"rainbow.{cmd_file.stem}.prompt.md"
-            output_file.write_text(content)
+            # Only write if file doesn't exist or content is different (handles shared folders)
+            if not output_file.exists() or output_file.read_text() != content:
+                output_file.write_text(content)
         
         if verbose and not tracker:
             console.print(f"[green]✓[/green] Created {ai_assistant} prompts in {prompts_folder}")
@@ -229,12 +233,12 @@ def copy_local_template(
         skills_path.mkdir(parents=True, exist_ok=True)
 
         # Copy all skills subdirectories
+        # Use dirs_exist_ok=True to handle cases where multiple agents share the same skills folder
         for skill_item in skills_dir.iterdir():
             if skill_item.is_dir():
                 dest_skill = skills_path / skill_item.name
-                if dest_skill.exists():
-                    shutil.rmtree(dest_skill)
-                shutil.copytree(skill_item, dest_skill)
+                # Merge directories instead of removing them when multiple agents share the same folder
+                shutil.copytree(skill_item, dest_skill, dirs_exist_ok=True)
 
         if verbose and not tracker:
             console.print(f"[green]✓[/green] Created {ai_assistant} skills in {skills_folder}")

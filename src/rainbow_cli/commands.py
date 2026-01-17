@@ -300,6 +300,41 @@ def init(
             ["copilot"]
         )
 
+    # Check for overlapping folders when multiple agents are selected
+    if len(selected_ais) > 1:
+        overlapping_agents = []
+        for i, ai1 in enumerate(selected_ais):
+            config1 = AGENT_CONFIG.get(ai1)
+            for ai2 in selected_ais[i+1:]:
+                config2 = AGENT_CONFIG.get(ai2)
+                
+                # Check for overlapping agent folders
+                path1 = Path(config1["agent_folder"])
+                path2 = Path(config2["agent_folder"])
+                
+                try:
+                    if path1 in path2.parents or path2 in path1.parents:
+                        overlapping_agents.append((config1["name"], config1["agent_folder"], config2["name"], config2["agent_folder"]))
+                except ValueError:
+                    pass
+        
+        if overlapping_agents:
+            warning_lines = [
+                "[yellow]Note:[/yellow] Some selected agents use overlapping folder structures:",
+                ""
+            ]
+            for name1, folder1, name2, folder2 in overlapping_agents:
+                warning_lines.append(f"  • [cyan]{name1}[/cyan] ({folder1}) and [cyan]{name2}[/cyan] ({folder2})")
+            warning_lines.extend([
+                "",
+                "Files will be merged into shared folders. This is supported but may cause",
+                "command name conflicts if both agents use similar naming conventions.",
+                ""
+            ])
+            
+            console.print()
+            console.print(Panel("\n".join(warning_lines), title="[yellow]Overlapping Folders Detected[/yellow]", border_style="yellow", padding=(1, 2)))
+
     if not ignore_agent_tools:
         for selected_ai in selected_ais:
             agent_config = AGENT_CONFIG.get(selected_ai)
