@@ -170,7 +170,39 @@ build_variant() {
       [[ -f agent_templates/gemini/GEMINI.md ]] && cp agent_templates/gemini/GEMINI.md "$base_dir/GEMINI.md" ;;
     copilot)
       mkdir -p "$base_dir/.github/agents"
+      mkdir -p "$base_dir/.github/prompts"
       generate_commands copilot agent.md "\$ARGUMENTS" "$base_dir/.github/agents" "$script"
+      # Also generate prompts for slash commands
+      for template in commands/*.md; do
+        [[ -f "$template" ]] || continue
+        local name file_content description script_command agent_script_command body
+        name=$(basename "$template" .md)
+        file_content=$(tr -d '\r' < "$template")
+        description=$(printf '%s\n' "$file_content" | awk '/^description:/ {sub(/^description:[[:space:]]*/, ""); print; exit}')
+        script_command=$(printf '%s\n' "$file_content" | awk -v sv="$script" '/^[[:space:]]*'"$script"':[[:space:]]*/ {sub(/^[[:space:]]*'"$script"':[[:space:]]*/, ""); print; exit}')
+        [[ -z $script_command ]] && script_command="(Missing script command for $script)"
+        agent_script_command=$(printf '%s\n' "$file_content" | awk '
+          /^agent_scripts:$/ { in_agent_scripts=1; next }
+          in_agent_scripts && /^[[:space:]]*'"$script"':[[:space:]]*/ {
+            sub(/^[[:space:]]*'"$script"':[[:space:]]*/, "")
+            print
+            exit
+          }
+          in_agent_scripts && /^[a-zA-Z]/ { in_agent_scripts=0 }
+        ')
+        body=$(printf '%s\n' "$file_content" | sed "s|{SCRIPT}|${script_command}|g")
+        [[ -n $agent_script_command ]] && body=$(printf '%s\n' "$body" | sed "s|{AGENT_SCRIPT}|${agent_script_command}|g")
+        body=$(printf '%s\n' "$body" | awk '
+          /^---$/ { print; if (++dash_count == 1) in_frontmatter=1; else in_frontmatter=0; next }
+          in_frontmatter && /^scripts:$/ { skip_scripts=1; next }
+          in_frontmatter && /^agent_scripts:$/ { skip_scripts=1; next }
+          in_frontmatter && /^[a-zA-Z].*:/ && skip_scripts { skip_scripts=0 }
+          in_frontmatter && skip_scripts && /^[[:space:]]/ { next }
+          { print }
+        ')
+        body=$(printf '%s\n' "$body" | sed "s/{ARGS}/\$ARGUMENTS/g" | sed "s/__AGENT__/copilot/g" | rewrite_paths)
+        echo "$body" > "$base_dir/.github/prompts/rainbow.$name.prompt.md"
+      done
       generate_skills copilot "$base_dir/.github/skills"
       # Create VS Code workspace settings
       mkdir -p "$base_dir/.vscode"

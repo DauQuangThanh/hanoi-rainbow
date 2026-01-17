@@ -48,5 +48,11 @@ gh release create "$VERSION" \
   .genreleases/rainbow-template-q-ps-"$VERSION".zip \
   .genreleases/rainbow-template-bob-sh-"$VERSION".zip \
   .genreleases/rainbow-template-bob-ps-"$VERSION".zip \
+  .genreleases/rainbow-template-jules-sh-"$VERSION".zip \
+  .genreleases/rainbow-template-jules-ps-"$VERSION".zip \
+  .genreleases/rainbow-template-qoder-sh-"$VERSION".zip \
+  .genreleases/rainbow-template-qoder-ps-"$VERSION".zip \
+  .genreleases/rainbow-template-antigravity-sh-"$VERSION".zip \
+  .genreleases/rainbow-template-antigravity-ps-"$VERSION".zip \
   --title "Hanoi Rainbow - $VERSION_NO_V" \
   --notes-file release_notes.md
