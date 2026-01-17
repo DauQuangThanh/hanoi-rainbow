@@ -105,7 +105,6 @@ def copy_local_template(
 
     # Paths to copy
     commands_dir = source_path / "commands"
-    agents_dir = source_path / "agents"
     skills_dir = source_path / "skills"
     memory_dir = source_path / "memory"
     scripts_dir = source_path / "scripts"
@@ -179,14 +178,6 @@ def copy_local_template(
                 shutil.rmtree(dest_cmd_templates)
             shutil.copytree(cmd_templates, dest_cmd_templates)
 
-        # Copy from agents/templates-for-agents to .rainbow/templates/templates-for-agents
-        agent_templates = agents_dir / "templates-for-agents"
-        if agent_templates.exists():
-            dest_agent_templates = dest_templates / "templates-for-agents"
-            if dest_agent_templates.exists():
-                shutil.rmtree(dest_agent_templates)
-            shutil.copytree(agent_templates, dest_agent_templates)
-
         if verbose and not tracker:
             console.print(f"[green]✓[/green] Copied templates")
 
@@ -208,25 +199,8 @@ def copy_local_template(
             output_file = agent_path / f"rainbow.{cmd_file.stem}{agent_ext}"
             output_file.write_text(content)
 
-    # Copy agent files to agent directory (similar to commands)
-    if agents_dir.exists():
-        for agent_file in agents_dir.glob("*.md"):
-            # Skip templates-for-agents directory
-            if agent_file.is_dir():
-                continue
-
-            # Read the agent file
-            content = agent_file.read_text()
-
-            # Replace placeholders
-            content = content.replace("__AGENT__", ai_assistant)
-
-            # Write to agent directory with appropriate extension
-            output_file = agent_path / f"rainbow.{agent_file.stem}{agent_ext}"
-            output_file.write_text(content)
-
     if verbose and not tracker:
-        console.print(f"[green]✓[/green] Created {ai_assistant} commands and agents in {agent_folder}")
+        console.print(f"[green]✓[/green] Created {ai_assistant} commands in {agent_folder}")
 
     # Copy skills to agent-specific skills folder
     if skills_dir.exists():
