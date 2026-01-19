@@ -42,9 +42,99 @@ For decades, we treated specifications as throwaway notes—just a formality bef
 
 > **Think of it like architecture:** You wouldn't build a house without blueprints. Why build software without clear specifications?
 
+### Development Approaches
+
+Hanoi Rainbow supports both **Greenfield** (new projects) and **Brownfield** (existing projects) development:
+
+```mermaid
+flowchart LR
+    Start([Project Type?])
+    Start --> Greenfield[🌱 Greenfield<br/>New Project]
+    Start --> Brownfield[🏗️ Brownfield<br/>Existing Project]
+    
+    Greenfield --> GF1[📋 Regulate<br/>Set Principles]
+    GF1 --> GF2[📝 Architect<br/>System Design]
+    GF2 --> GF3[📏 Standardize<br/>Coding Rules]
+    GF3 --> GF4[🎯 Specify<br/>Define Features]
+    GF4 --> GF5[🔍 Clarify<br/>Refine Requirements]
+    GF5 --> GF6[🛠️ Design<br/>Technical Plan]
+    GF6 --> GF7[📋 Taskify<br/>Break Down Tasks]
+    GF7 --> GF8[⚡ Implement<br/>Build Features]
+    GF8 --> GF9[✅ Test & Deploy]
+    
+    Brownfield --> BF1[📚 Assess Context<br/>Analyze Codebase]
+    BF1 --> BF2[📋 Regulate<br/>Update Principles]
+    BF2 --> BF3[🎯 Specify<br/>New Feature]
+    BF3 --> BF4[🔍 Clarify<br/>Requirements]
+    BF4 --> BF5[🛠️ Design<br/>Integration Plan]
+    BF5 --> BF6[📋 Taskify<br/>Task Breakdown]
+    BF6 --> BF7[⚡ Implement<br/>Add Feature]
+    BF7 --> BF8[✅ Test & Deploy]
+    
+    style Greenfield fill:#90EE90
+    style Brownfield fill:#87CEEB
+    style GF8 fill:#FFD700
+    style BF7 fill:#FFD700
+```
+
+**Greenfield** projects start with establishing principles, architecture, and standards before building features. **Brownfield** projects begin with `/rainbow.assess-context` to understand existing architecture and patterns, then follow a streamlined workflow to add new features while maintaining consistency.
+
 ## 🚀 Quick Start
 
-**What you get:** 21 slash commands · 41 reusable skills · 19 AI agent integrations
+**What you get:** 22 slash commands · 41 reusable skills · 19 AI agent integrations
+
+### Understanding Greenfield vs. Brownfield
+
+```mermaid
+flowchart LR
+    subgraph Greenfield["🌱 GREENFIELD: Starting Fresh"]
+        direction TB
+        GF_Start[Empty Canvas] --> GF_Setup[Setup Phase]
+        GF_Setup --> GF_Regulate[📋 Regulate<br/>Project Principles]
+        GF_Regulate --> GF_Arch[📝 Architect<br/>System Design]
+        GF_Arch --> GF_Std[📏 Standardize<br/>Coding Standards]
+        GF_Std --> GF_Dev[Development Phase]
+        GF_Dev --> GF_Spec[🎯 Specify<br/>Feature]
+        GF_Spec --> GF_Design[🛠️ Design<br/>Technical Plan]
+        GF_Design --> GF_Task[📋 Taskify]
+        GF_Task --> GF_Impl[⚡ Implement]
+        
+        style GF_Setup fill:#E8F5E9,stroke:#4CAF50,stroke-width:2px
+        style GF_Dev fill:#C8E6C9,stroke:#66BB6A,stroke-width:2px
+    end
+    
+    subgraph Brownfield["🏗️ BROWNFIELD: Enhancing Existing"]
+        direction TB
+        BF_Start[Existing Codebase] --> BF_Assess[📚 Assess Context<br/>Analyze Architecture<br/>Extract Patterns<br/>Document Conventions]
+        BF_Assess --> BF_Regulate[📋 Regulate<br/>Update Principles<br/><i>align with findings</i>]
+        BF_Regulate --> BF_Spec[🎯 Specify<br/>New Feature<br/><i>fits existing design</i>]
+        BF_Spec --> BF_Design[🛠️ Design<br/>Integration Plan<br/><i>maintain consistency</i>]
+        BF_Design --> BF_Task[📋 Taskify]
+        BF_Task --> BF_Impl[⚡ Implement<br/><i>follow conventions</i>]
+        
+        style BF_Assess fill:#E3F2FD,stroke:#2196F3,stroke-width:2px
+        style BF_Regulate fill:#E3F2FD,stroke:#2196F3,stroke-width:2px
+    end
+    
+    GF_Impl -.->|Clean Slate<br/>Full Control| Result1[New Application]
+    BF_Impl -.->|Maintains Cohesion<br/>Extends Capabilities| Result2[Enhanced Application]
+    
+    style Greenfield fill:#F1F8E9
+    style Brownfield fill:#E1F5FE
+    style Result1 fill:#FFD700
+    style Result2 fill:#FFD700
+```
+
+**Key Differences:**
+
+| Aspect | 🌱 Greenfield | 🏗️ Brownfield |
+|--------|--------------|---------------|
+| **Starting Point** | Empty project | Existing codebase |
+| **Setup Phase** | `/rainbow.regulate` → `/rainbow.architect` → `/rainbow.standardize` | `/rainbow.assess-context` (once per project) |
+| **Focus** | Establish foundations first | Integrate with existing patterns |
+| **Timeline** | 2-4 weeks (MVP) | 1-2 weeks per feature |
+| **Flexibility** | Complete freedom in design | Must maintain consistency |
+| **Commands Used** | Full workflow (8 core commands) | Streamlined (6 core commands) |
 
 ### Install Rainbow CLI
 
@@ -268,9 +358,9 @@ rainbow version
 
 ### Available Slash Commands
 
-After running `rainbow init`, your AI coding agent will have access to **21 slash commands** organized into four categories:
+After running `rainbow init`, your AI coding agent will have access to **22 slash commands** organized into four categories:
 
-- **5 Core Workflow Commands** - Essential development cycle (regulate → specify → design → taskify → implement)
+- **6 Core Workflow Commands** - Essential development cycle (regulate/assess-context → specify → design → taskify → implement)
 - **4 Product-Level Commands** - Run once per product (architecture, standards, E2E tests)
 - **5 Quality & Enhancement Commands** - Validation, analysis, and project management
 - **7 Legacy Modernization Commands** - Mainframe/midrange migration and modernization
@@ -285,7 +375,8 @@ Essential commands for the Spec-Driven Development workflow:
 
 | Command                  | Description                                                           | Auto Commit Prefix |
 | -------------------------- | ----------------------------------------------------------------------- |--------------------|
-| `/rainbow.regulate`      | Create or update project governing principles and development guidelines | `docs:` |
+| `/rainbow.regulate`      | Create or update project governing principles and development guidelines (Greenfield) | `docs:` |
+| `/rainbow.assess-context` | Analyze existing codebase to understand architecture, patterns, and conventions (Brownfield) | `docs:` |
 | `/rainbow.specify`       | Define what you want to build (requirements and user stories)        | `docs:` |
 | `/rainbow.design`        | Create technical implementation plans with your chosen tech stack     | `docs:` |
 | `/rainbow.taskify`       | Generate actionable task lists for implementation                     | `docs:` |
@@ -349,12 +440,60 @@ Spec-Driven Development is built on these core principles:
 
 ## 🌟 When to Use Spec-Driven Development
 
+Hanoi Rainbow supports three main development scenarios with different workflows:
+
+### Development Workflows Overview
+
+```mermaid
+flowchart TB
+    subgraph Greenfield["🌱 GREENFIELD: New Applications (2-4 weeks)"]
+        direction TB
+        GF1[📋 Regulate: Set Principles] --> GF2[📝 Architect: System Design]
+        GF2 --> GF3[📏 Standardize: Coding Standards]
+        GF3 --> GF4[🎯 Specify: Feature Requirements]
+        GF4 --> GF5[🔍 Clarify: Refine Spec]
+        GF5 --> GF6[🛠️ Design: Technical Plan]
+        GF6 --> GF7[📋 Taskify: Break Down]
+        GF7 --> GF8[⚡ Implement: Build It]
+        GF8 --> GF9[✅ Test & Deploy]
+    end
+    
+    subgraph Brownfield["🏗️ BROWNFIELD: Existing Apps (1-2 weeks/feature)"]
+        direction TB
+        BF1[📚 Assess Context: Analyze Codebase] --> BF2[📋 Regulate: Update Principles]
+        BF2 --> BF3[🎯 Specify: New Feature]
+        BF3 --> BF4[🔍 Clarify: Requirements]
+        BF4 --> BF5[🛠️ Design: Integration Plan]
+        BF5 --> BF6[📋 Taskify: Task List]
+        BF6 --> BF7[⚡ Implement: Add Feature]
+        BF7 --> BF8[✅ Test & Deploy]
+    end
+    
+    subgraph Legacy["🏢 LEGACY MODERNIZATION: Mainframe Migration (6-18 months)"]
+        direction TB
+        LM1[🔍 Assess Legacy: Analyze System] --> LM2[📊 Map Business Logic]
+        LM2 --> LM3[🗄️ Design Data Migration]
+        LM3 --> LM4[⚙️ Convert Batch Jobs]
+        LM4 --> LM5[🖥️ Design Screen Migration]
+        LM5 --> LM6[🔄 Plan Strangler Pattern]
+        LM6 --> LM7[⚡ Implement Modernization]
+        LM7 --> LM8[✅ Validate Modernization]
+    end
+    
+    style Greenfield fill:#E8F5E9
+    style Brownfield fill:#E3F2FD
+    style Legacy fill:#FFF3E0
+    style GF8 fill:#FFD700
+    style BF7 fill:#FFD700
+    style LM7 fill:#FFD700
+```
+
 | Scenario | What You Can Do |
 | ---------- | ----------------- |
-| **🆕 New Projects** | <ul><li>Start with high-level requirements</li><li>Generate complete specifications</li><li>Plan implementation steps</li><li>Build production-ready apps</li></ul> |
-| **🔬 Exploration** | <ul><li>Try different solutions in parallel</li><li>Test multiple tech stacks</li><li>Experiment with UX patterns</li></ul> |
-| **🔧 Existing Projects** | <ul><li>Add new features systematically</li><li>Modernize legacy code</li><li>Adapt processes to your needs</li></ul> |
-| **🏢 Mainframe Modernization** | <ul><li>Assess legacy systems (COBOL, RPG, JCL)</li><li>Extract business logic from code</li><li>Plan data migration strategies</li><li>Modernize batch processing</li><li>Convert green-screen UIs</li><li>Implement strangler pattern migrations</li><li>Validate modernized systems</li></ul> |
+| **🆕 New Projects (Greenfield)** | <ul><li>Start with high-level requirements</li><li>Establish project principles and architecture</li><li>Generate complete specifications</li><li>Plan implementation steps</li><li>Build production-ready apps with clear standards</li></ul> |
+| **🔧 Existing Projects (Brownfield)** | <ul><li>Add new features systematically to existing codebases</li><li>Maintain consistency with existing patterns</li><li>Adapt the SDD process to your current architecture</li><li>Integrate new functionality smoothly</li></ul> |
+| **🏢 Mainframe Modernization (Legacy)** | <ul><li>Assess legacy systems (COBOL, RPG, JCL)</li><li>Extract business logic from code</li><li>Plan data migration strategies (DB2, IMS, VSAM)</li><li>Modernize batch processing (JCL → Cloud-native)</li><li>Convert green-screen UIs to modern web/mobile</li><li>Implement strangler pattern migrations</li><li>Validate modernized systems against legacy</li></ul> |
+| **🔬 Exploration** | <ul><li>Try different solutions in parallel</li><li>Test multiple tech stacks</li><li>Experiment with UX patterns</li><li>Rapid prototyping and validation</li></ul> |
 
 ---
 
@@ -383,18 +522,33 @@ Before you start, make sure you have:
 
 ## 📚 Learn More
 
-**Workflows & Guides:**
+### Choose Your Workflow
 
-- 🗺️ **[Workflows Overview](./docs/workflows.md)** - **Choose the right workflow for your project**
-- 🌱 [Greenfield Workflow](./docs/greenfield-workflow.md) - Build new applications (2-4 weeks)
-- 🏗️ [Brownfield Workflow](./docs/brownfield-workflow.md) - Add features to existing apps (1-2 weeks)
-- 🔄 [Legacy Migration Workflow](./docs/legacy-migration-workflow.md) - Migrate from mainframe (4-12 weeks)
-- 🏭 [Legacy Modernization Workflow](./docs/legacy-modernization-workflow.md) - Complete modernization (6-18 months)
-
-**Deep Dives:**
-
-- 📖 [Complete Spec-Driven Development Guide](./spec-driven.md) - Full methodology explained
-- 🔍 [Step-by-Step Walkthrough](#-detailed-process) - Implementation details below
+```mermaid
+flowchart TD
+    Start{What are you<br/>building?}
+    
+    Start -->|Brand new application| GF[🌱 Greenfield Workflow]
+    Start -->|Adding to existing app| BF[🏗️ Brownfield Workflow]
+    Start -->|Migrating legacy system| Legacy{Legacy Type?}
+    
+    Legacy -->|Mainframe/Midrange<br/>COBOL, RPG, JCL| LM[🏢 Legacy Modernization<br/>Workflow]
+    Legacy -->|Partial migration<br/>data/batch only| LMig[🔄 Legacy Migration<br/>Workflow]
+    
+    GF --> GFDesc["<b>Timeline:</b> 2-4 weeks<br/><b>Steps:</b> Regulate → Architect →<br/>Standardize → Specify →<br/>Design → Implement"]
+    BF --> BFDesc["<b>Timeline:</b> 1-2 weeks/feature<br/><b>Steps:</b> Assess Context →<br/>Regulate → Specify → Design → Implement"]
+    LM --> LMDesc["<b>Timeline:</b> 6-18 months<br/><b>Steps:</b> Assess → Map Logic →<br/>Data/Batch/Screen Migration →<br/>Strangler Pattern → Validate"]
+    LMig --> LMigDesc["<b>Timeline:</b> 4-12 weeks<br/><b>Steps:</b> Assess → Data Migration →<br/>Batch Conversion → Validate"]
+    
+    style GF fill:#90EE90
+    style BF fill:#87CEEB
+    style LM fill:#FFB366
+    style LMig fill:#FFE6CC
+    style GFDesc fill:#E8F5E9
+    style BFDesc fill:#E3F2FD
+    style LMDesc fill:#FFF3E0
+    style LMigDesc fill:#FFF8E1
+```
 
 **Quick Links:**
 
@@ -408,6 +562,8 @@ Before you start, make sure you have:
 
 <details>
 <summary>Click to expand the detailed step-by-step walkthrough</summary>
+
+### Project Setup
 
 You can use the Rainbow CLI to bootstrap your project, which will bring in the required artifacts in your environment. Run:
 
@@ -451,7 +607,13 @@ The CLI will check if you have Claude Code, Gemini CLI, Cursor CLI, Qwen CLI, op
 rainbow init <project_name> --ai claude --ignore-agent-tools
 ```
 
-### **STEP 1:** Establish project principles
+---
+
+### 🌱 Greenfield Workflow (New Projects)
+
+For new projects starting from scratch, follow these steps:
+
+#### **STEP 1:** Establish project principles
 
 Go to the project folder and run your AI agent. In our example, we're using `claude`.
 
@@ -465,7 +627,7 @@ The first step should be establishing your project's governing principles using 
 
 This step creates or updates the `memory/ground-rules.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
 
-### **STEP 2:** Create project specifications
+#### **STEP 2:** Create project specifications
 
 With your project principles established, you can now create the functional specifications. Use the `/rainbow.specify` command and then provide the concrete requirements for the project you want to develop.
 
@@ -520,7 +682,7 @@ At this stage, your project folder contents should resemble the following:
         └── tasks-template.md
 ```
 
-### **STEP 3:** Functional specification clarification (required before planning)
+#### **STEP 3:** Functional specification clarification (required before planning)
 
 With the baseline specification created, you can go ahead and clarify any of the requirements that were not captured properly within the first shot attempt.
 
@@ -549,7 +711,7 @@ Read the review and acceptance checklist, and check off each item in the checkli
 
 It's important to use the interaction with Claude Code as an opportunity to clarify and ask questions around the specification - **do not treat its first attempt as final**.
 
-### **STEP 4:** Generate a plan
+#### **STEP 4:** Generate a plan
 
 You can now be specific about the tech stack and other technical requirements. You can use the `/rainbow.design` command that is built into the project template with a prompt like this:
 
@@ -566,12 +728,6 @@ The output of this step will include a number of implementation detail documents
 ├── CLAUDE.md
 ├── memory
 │  └── ground-rules.md
-├── scripts
-│  ├── check-prerequisites.sh
-│  ├── common.sh
-│  ├── create-new-feature.sh
-│  ├── setup-plan.sh
-│  └── update-claude-md.sh
 ├── specs
 │  └── 001-create-taskify
 │      ├── contracts
@@ -620,7 +776,7 @@ That's way too untargeted research. The research needs to help you solve a speci
 >[!NOTE]
 >Claude Code might be over-eager and add components that you did not ask for. Ask it to clarify the rationale and the source of the change.
 
-### **STEP 5:** Have Claude Code validate the plan
+#### **STEP 5:** Have Claude Code validate the plan
 
 With the plan in place, you should have Claude Code run through it to make sure that there are no missing pieces. You can use a prompt like this:
 
@@ -639,7 +795,7 @@ You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.c
 >[!NOTE]
 >Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [ground rules](base/memory/ground-rules.md) as the foundational piece that it must adhere to when establishing the plan.
 
-### **STEP 6:** Generate task breakdown with /rainbow.taskify
+#### **STEP 6:** Generate task breakdown with /rainbow.taskify
 
 With the implementation plan validated, you can now break down the plan into specific, actionable tasks that can be executed in the correct order. Use the `/rainbow.taskify` command to automatically generate a detailed task breakdown from your implementation plan:
 
@@ -658,7 +814,7 @@ This step creates a `tasks.md` file in your feature specification directory that
 
 The generated tasks.md provides a clear roadmap for the `/rainbow.implement` command, ensuring systematic implementation that maintains code quality and allows for incremental delivery of user stories.
 
-### **STEP 7:** Implementation
+#### **STEP 7:** Implementation
 
 Once ready, use the `/rainbow.implement` command to execute your implementation plan:
 
@@ -679,6 +835,111 @@ The `/rainbow.implement` command will:
 
 Once the implementation is complete, test the application and resolve any runtime errors that may not be visible in CLI logs (e.g., browser console errors). You can copy and paste such errors back to your AI agent for resolution.
 
+---
+
+### 🏗️ Brownfield Workflow (Existing Projects)
+
+For adding new features to existing codebases, follow this streamlined workflow:
+
+#### **STEP 1:** Assess existing codebase
+
+Start by analyzing the existing codebase to understand its architecture, patterns, and conventions:
+
+```text
+/rainbow.assess-context
+```
+
+This command performs a comprehensive analysis of your codebase and creates `docs/context-assessment.md` that documents:
+
+- **Technology Stack** - Languages, frameworks, libraries, and tools in use
+- **Project Structure** - Directory organization and architectural layers
+- **Architecture Patterns** - Design patterns, component relationships, and communication patterns
+- **Coding Conventions** - Naming conventions, file organization, and code quality practices
+- **Data Layer** - ORM/query patterns, schema design, and data access patterns
+- **API Patterns** - Endpoint structure, authentication, and integration patterns
+- **Testing Strategy** - Test organization, coverage, and testing patterns
+- **Build & Deployment** - Build process, environment configuration, and deployment strategy
+- **Technical Health Score** - Overall assessment with strengths and improvement areas
+- **Feature Integration Readiness** - Guidance for adding new features consistently
+
+>[!NOTE]
+>The context assessment serves as the foundation for all subsequent steps. It helps ensure that new features integrate seamlessly with existing patterns and maintain codebase consistency.
+
+#### **STEP 2:** Update project principles
+
+With the codebase context understood, update or establish project principles that align with the existing architecture:
+
+```text
+/rainbow.regulate Review the context assessment and update project principles to align with the existing codebase patterns. 
+Ensure principles cover code quality standards found in the assessment, testing practices currently in use, 
+and architectural decisions that should guide new feature development.
+```
+
+This step creates or updates `.rainbow/memory/ground-rules.md` to reflect:
+
+- Coding standards and conventions discovered in the codebase
+- Architectural patterns and design principles in use
+- Testing practices and quality standards
+- Integration guidelines for maintaining consistency
+
+>[!TIP]
+>The `/rainbow.regulate` command in brownfield projects should reference the context assessment to ensure principles align with existing practices rather than imposing new ones.
+
+#### **STEP 3:** Create feature specification
+
+With both the codebase context and updated principles established, specify the new feature you want to add:
+
+```text
+/rainbow.specify Add a user notification system that sends email alerts when tasks are assigned. 
+Users can configure notification preferences (immediate, daily digest, or disabled) in their profile settings.
+```
+
+The AI agent will reference the context assessment and updated principles to ensure the specification aligns with existing patterns and architecture.
+
+#### **STEP 4:** Clarify requirements
+
+Use the clarification workflow to refine the specification:
+
+```text
+/rainbow.clarify
+```
+
+This ensures all edge cases and integration points with the existing system are properly defined.
+
+#### **STEP 5:** Design integration plan
+
+Create a technical plan that integrates with the existing architecture:
+
+```text
+/rainbow.design Follow the existing email service pattern identified in the context assessment. 
+Use the current user preference storage approach. Integrate with the existing task assignment workflow.
+```
+
+The plan will reference existing components, patterns, and conventions from the context assessment.
+
+#### **STEP 6:** Generate task breakdown
+
+Break down the implementation into specific tasks:
+
+```text
+/rainbow.taskify
+```
+
+Tasks will be organized to integrate with existing code while maintaining consistency with established patterns.
+
+#### **STEP 7:** Implement the feature
+
+Execute the implementation plan:
+
+```text
+/rainbow.implement
+```
+
+The AI agent will build the feature following existing coding conventions and integration patterns identified in the context assessment and established principles.
+
+#### **STEP 8:** Test and validate
+
+Test the new feature in the context of the existing application. Ensure it integrates properly with existing functionality and doesn't break existing workflows.
 </details>
 
 ---
@@ -695,7 +956,7 @@ After running `rainbow init`, your project will have the following structure:
 │   └── templates/         # Reusable templates for specs, plans, and tasks
 │
 ├── .<agent-folder>/       # Agent-specific commands (e.g., .claude/commands/, .github/agents/ or .github/prompts/)
-│   └── rainbow.*.md       # 21 Rainbow slash commands for your AI agent
+│   └── rainbow.*.md       # 22 Rainbow slash commands for your AI agent
 │
 ├── .<agent-folder>/skills/  # Agent-specific skills (reusable capabilities)
 │   ├── backend-coding/
