@@ -441,8 +441,8 @@ def init(
                 for agent_key, agent_name, agent_folder in existing_agents:
                     source_folder = project_path / agent_folder
                     if source_folder.exists():
-                        # Remove trailing slash for backup name
-                        folder_name = agent_folder.rstrip('/')
+                        # Remove trailing slash/backslash for backup name (cross-platform)
+                        folder_name = agent_folder.rstrip('/\\')
                         backup_folder = project_path / f"{folder_name}.backup.{timestamp}"
                         shutil.copytree(source_folder, backup_folder)
                         backup_paths[agent_folder] = backup_folder
