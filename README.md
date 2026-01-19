@@ -8,9 +8,9 @@
 Turn your ideas into production-ready applications through clear specifications, not trial-and-error coding.
 
 [![Release](https://github.com/dauquangthanh/hanoi-rainbow/actions/workflows/release.yml/badge.svg)](https://github.com/dauquangthanh/hanoi-rainbow/actions/workflows/release.yml)
-[![GitHub stars](https://img.shields.io/github/stars/dauquangthanh/hainoi-rainbow?style=social)](https://github.com/dauquangthanh/hanoi-rainbow/stargazers)
-[![License](https://img.shields.io/github/license/dauquangthanh/hainoi-rainbow)](https://github.com/dauquangthanh/hanoi-rainbow/blob/main/LICENSE)
-[![Documentation](https://img.shields.io/badge/docs-GitHub_Pages-blue)](https://dauquangthanh.github.io/hainoi-rainbow/)
+[![GitHub stars](https://img.shields.io/github/stars/dauquangthanh/hanoi-rainbow?style=social)](https://github.com/dauquangthanh/hanoi-rainbow/stargazers)
+[![License](https://img.shields.io/github/license/dauquangthanh/hanoi-rainbow)](https://github.com/dauquangthanh/hanoi-rainbow/blob/main/LICENSE)
+[![Documentation](https://img.shields.io/badge/docs-GitHub_Pages-blue)](https://dauquangthanh.github.io/hanoi-rainbow/)
 
 </div>
 
