@@ -1,6 +1,5 @@
 # Technical Risks
 
-
 Risk: Third-party API has rate limits
 Probability: High | Impact: Medium
 Mitigation: Implement caching, request batching

@@ -404,6 +404,7 @@ export default {
 ### Professional Color Schemes
 
 **Blue Theme (Trust, Corporate):**
+
 ```javascript
 colors: {
   primary: {
@@ -418,6 +419,7 @@ colors: {
 ```
 
 **Green Theme (Growth, Health):**
+
 ```javascript
 colors: {
   primary: {
@@ -429,6 +431,7 @@ colors: {
 ```
 
 **Purple Theme (Creative, Luxury):**
+
 ```javascript
 colors: {
   primary: {

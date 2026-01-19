@@ -1,7 +1,7 @@
 # Common Patterns
 
-
 ### Repository Pattern
+
 ```javascript
 class UserRepository {
   async findById(id) {
@@ -27,6 +27,7 @@ class UserRepository {
 ```
 
 ### Service Layer Pattern
+
 ```javascript
 class UserService {
   constructor(userRepository, emailService) {

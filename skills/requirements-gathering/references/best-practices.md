@@ -1,7 +1,7 @@
 # Best Practices
 
-
 ### Requirements Quality Checklist
+
 - [ ] **Clear**: Unambiguous and easy to understand
 - [ ] **Complete**: All necessary information included
 - [ ] **Consistent**: No contradictions with other requirements
@@ -12,6 +12,7 @@
 - [ ] **Traceable**: Linked to source and downstream artifacts
 
 ### Common Pitfalls to Avoid
+
 1. **Solution-Focused**: Describing HOW instead of WHAT
    - ❌ "System must use React framework"
    - ✅ "System must provide responsive web interface"

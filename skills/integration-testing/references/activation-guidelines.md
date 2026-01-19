@@ -1,7 +1,7 @@
 # Activation Guidelines
 
-
 This skill should be activated when:
+
 - Designing integration test strategies
 - Writing API integration tests
 - Testing database interactions

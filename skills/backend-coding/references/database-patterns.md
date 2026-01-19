@@ -1,6 +1,5 @@
 # Database Patterns
 
-
 ### Transaction Management
 
 ```typescript

@@ -1,6 +1,5 @@
 # Tools and Resources
 
-
 ```markdown
 OS Migration:
 - Leapp (RHEL upgrade tool)

@@ -53,6 +53,7 @@ export function useCounter(initialValue = 0) {
 ```
 
 **Usage:**
+
 ```vue
 <script setup lang="ts">
 import { useCounter } from '@/composables/useCounter'
@@ -121,6 +122,7 @@ export function useLocalStorage<T>(key: string, defaultValue: T) {
 ```
 
 **Usage:**
+
 ```vue
 <script setup lang="ts">
 import { useLocalStorage } from '@/composables/useLocalStorage'
@@ -160,6 +162,7 @@ export function useDebounce<T>(value: Ref<T>, delay = 300) {
 ```
 
 **Usage:**
+
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -207,6 +210,7 @@ export function useClickOutside(
 ```
 
 **Usage:**
+
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -283,6 +287,7 @@ export function useStore() {
 ```
 
 **Usage:**
+
 ```vue
 <script setup lang="ts">
 import { useStore } from '@/stores/useStore'
@@ -336,6 +341,7 @@ export const useUserStore = defineStore('user', {
 ```
 
 **Setup:**
+
 ```typescript
 // main.ts
 import { createPinia } from 'pinia'
@@ -350,6 +356,7 @@ app.mount('#app')
 ```
 
 **Usage:**
+
 ```vue
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
@@ -930,6 +937,7 @@ export function useFetch<T>(url: string) {
 ```
 
 **Usage:**
+
 ```vue
 <script setup lang="ts">
 import { onMounted } from 'vue'
@@ -1175,6 +1183,7 @@ export const match = (otherField: any, message = 'Fields do not match') =>
 ```
 
 **Usage:**
+
 ```vue
 <script setup lang="ts">
 import { useForm, required, minLength, email } from '@/composables/useForm'

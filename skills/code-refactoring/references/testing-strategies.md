@@ -21,6 +21,7 @@ Before refactoring, establish a comprehensive safety net of tests. The goal is t
 ```
 
 **Priorities for Refactoring**:
+
 1. **Before refactoring**: Comprehensive tests at appropriate levels
 2. **During refactoring**: Tests remain green
 3. **After refactoring**: Tests still pass, code is cleaner

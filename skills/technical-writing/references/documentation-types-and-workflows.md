@@ -15,17 +15,21 @@ Comprehensive patterns for creating different types of technical documentation. 
 ## API Documentation
 
 ### Purpose
+
 Enable developers to integrate and use your API effectively by providing complete reference documentation.
 
 ### Target Audience
+
 Software developers, integration engineers, technical architects, DevOps engineers.
 
 ### Essential Components
 
 #### 1. Overview
+
 Brief description of the API's purpose, capabilities, and base information.
 
 **Template:**
+
 ```markdown
 # API Name vX.X
 
@@ -38,9 +42,11 @@ Brief description of what the API does and its primary use cases.
 ```
 
 #### 2. Authentication
+
 Document all authentication methods with examples.
 
 **Template:**
+
 ```markdown
 ## Authentication
 
@@ -52,16 +58,19 @@ Authorization: Bearer YOUR_API_KEY
 ```
 
 **Obtaining Credentials:**
+
 1. Step-by-step instructions
 2. Where to find/generate keys
 3. How to store securely
 
 **Example Request:**
+
 ```bash
 curl https://api.example.com/v1/users \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
-```
+
+```text
 
 #### 3. Endpoints
 Document each endpoint completely.
@@ -88,6 +97,7 @@ Brief description of what this endpoint does.
 ```
 
 **Success Response (200 OK):**
+
 ```json
 {
   "id": "abc123",
@@ -99,6 +109,7 @@ Brief description of what this endpoint does.
 **Error Responses:**
 
 **400 Bad Request:**
+
 ```json
 {
   "error": "invalid_request",
@@ -108,13 +119,15 @@ Brief description of what this endpoint does.
 ```
 
 **Example:**
+
 ```bash
 curl -X POST https://api.example.com/v1/resource \
   -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"field1":"value"}'
 ```
-```
+
+```text
 
 #### 4. Rate Limiting
 Explain limits and how to handle them.
@@ -139,7 +152,8 @@ Explain limits and how to handle them.
   "retry_after": 60
 }
 ```
-```
+
+```text
 
 #### 5. Pagination
 Document pagination strategy for list endpoints.
@@ -164,7 +178,8 @@ Document pagination strategy for list endpoints.
   }
 }
 ```
-```
+
+```text
 
 #### 6. Error Codes
 Complete reference of all error codes.
@@ -187,17 +202,21 @@ Complete reference of all error codes.
 ## User Guides
 
 ### Purpose
+
 Help end users understand and use product features effectively.
 
 ### Target Audience
+
 End users (non-technical), product administrators, customer success teams.
 
 ### Essential Components
 
 #### 1. Feature Overview
+
 Explain what the feature is and why it's valuable.
 
 **Template:**
+
 ```markdown
 # Feature Name
 
@@ -217,9 +236,11 @@ Explain what the feature is and why it's valuable.
 ```
 
 #### 2. Prerequisites
+
 List requirements before starting.
 
 **Template:**
+
 ```markdown
 ## Prerequisites
 
@@ -235,9 +256,11 @@ Before using this feature, ensure you have:
 ```
 
 #### 3. Step-by-Step Instructions
+
 Provide clear, numbered steps with visuals.
 
 **Template:**
+
 ```markdown
 ## How to [Action]
 
@@ -269,9 +292,11 @@ Provide clear, numbered steps with visuals.
 ```
 
 #### 4. Configuration Options
+
 Document all settings and customization.
 
 **Template:**
+
 ```markdown
 ## Configuration
 
@@ -292,9 +317,11 @@ Document all settings and customization.
 ```
 
 #### 5. Troubleshooting
+
 Common issues and solutions.
 
 **Template:**
+
 ```markdown
 ## Troubleshooting
 
@@ -326,9 +353,11 @@ Common issues and solutions.
 ```
 
 #### 6. Best Practices
+
 Tips for optimal usage.
 
 **Template:**
+
 ```markdown
 ## Best Practices
 
@@ -358,17 +387,21 @@ Tips for optimal usage.
 ## Tutorials
 
 ### Purpose
+
 Teach users new skills through hands-on, guided learning.
 
 ### Target Audience
+
 Learners (beginners to intermediate), developers learning new technologies.
 
 ### Essential Components
 
 #### 1. Learning Objectives
+
 Clear statement of what learners will accomplish.
 
 **Template:**
+
 ```markdown
 # Tutorial Title
 
@@ -390,9 +423,11 @@ Clear statement of what learners will accomplish.
 ```
 
 #### 2. Setup Instructions
+
 Get learners ready to start.
 
 **Template:**
+
 ```markdown
 ## Setup
 
@@ -402,6 +437,7 @@ Get learners ready to start.
 ```bash
 # Installation command
 ```
+
 Verify: `tool --version`
 
 **Tool 2:**
@@ -428,7 +464,8 @@ cp .env.example .env
 
 [Commands to verify everything is working]
 Expected output: [What they should see]
-```
+
+```text
 
 #### 3. Step-by-Step Implementation
 Build progressively with explanations.
@@ -446,21 +483,26 @@ Build progressively with explanations.
 ```
 
 **Explanation:**
+
 - Line/section 1: What it does and why
 - Line/section 2: What it does and why
 - Key concept: Deeper explanation
 
 **Test It:**
+
 ```bash
 # Command to test
 ```
+
 Expected output: [What they should see]
 
 **Checkpoint:** At this point, you should have:
+
 - [ ] Thing 1 working
 - [ ] Thing 2 completed
 - [ ] Thing 3 verified
-```
+
+```text
 
 #### 4. Progressive Complexity
 Build on previous steps.
@@ -491,7 +533,8 @@ new_function() {
 
 **Try it:**
 [How to test the new functionality]
-```
+
+```text
 
 #### 5. Complete Solution
 Provide final working code.
@@ -502,6 +545,7 @@ Provide final working code.
 
 ### Final Project Structure
 ```
+
 project/
 ├── src/
 │   ├── file1.js
@@ -510,7 +554,8 @@ project/
 ├── tests/
 ├── package.json
 └── README.md
-```
+
+```text
 
 ### Running the Complete Application
 
@@ -521,8 +566,10 @@ project/
 ```
 
 ### Repository
+
 Complete code available at: [GitHub link]
-```
+
+```text
 
 #### 6. Next Steps
 Guide continued learning.
@@ -559,17 +606,21 @@ Congratulations! You've successfully:
 ## Architecture Documents
 
 ### Purpose
+
 Communicate system design, technical decisions, and architectural patterns.
 
 ### Target Audience
+
 Software architects, senior developers, technical leads, engineering managers.
 
 ### Essential Components
 
 #### 1. Executive Summary
+
 High-level overview for decision makers.
 
 **Template:**
+
 ```markdown
 # System/Project Name Architecture
 
@@ -598,9 +649,11 @@ High-level overview for decision makers.
 ```
 
 #### 2. System Context
+
 How the system fits in the ecosystem.
 
 **Template:**
+
 ```markdown
 ## System Context
 
@@ -632,9 +685,11 @@ How the system fits in the ecosystem.
 ```
 
 #### 3. Architecture Diagrams (Mermaid Format)
+
 Visual representation of system structure.
 
 **Template:**
+
 ```markdown
 ## Architecture Overview
 
@@ -651,7 +706,8 @@ Visual representation of system structure.
 ### Data Flow
 
 [How data moves through the system]
-```
+
+```text
 
 #### 4. Component Descriptions
 Detailed explanation of each major component.
@@ -688,10 +744,12 @@ Detailed explanation of each major component.
 ```
 
 **Scalability:**
+
 - Scaling approach
 - Performance targets
 - Monitoring metrics
-```
+
+```text
 
 #### 5. Technology Stack
 Complete list of technologies with rationale.
@@ -716,9 +774,11 @@ Complete list of technologies with rationale.
 ```
 
 #### 6. Non-Functional Requirements
+
 Performance, scalability, reliability targets.
 
 **Template:**
+
 ```markdown
 ## Non-Functional Requirements
 
@@ -759,17 +819,21 @@ Performance, scalability, reliability targets.
 ## Technical Specifications
 
 ### Purpose
+
 Provide detailed technical requirements for implementation.
 
 ### Target Audience
+
 Software developers, QA engineers, technical leads.
 
 ### Essential Components
 
 #### 1. Requirements
+
 What the system must do.
 
 **Template:**
+
 ```markdown
 # Feature Specification: [Feature Name]
 
@@ -800,9 +864,11 @@ What the system must do.
 ```
 
 #### 2. API Specifications
+
 Detailed API contracts.
 
 **Template:**
+
 ```markdown
 ## API Specification
 
@@ -829,21 +895,25 @@ Detailed API contracts.
 ```
 
 **Response Codes:**
+
 - 200: Success
 - 400: Validation error
 - 404: Not found
 - 500: Server error
 
 **Example Request:**
+
 ```bash
 [Complete curl example]
 ```
 
 **Example Response:**
+
 ```json
 [Complete response example]
 ```
-```
+
+```text
 
 #### 3. Algorithm Details
 How complex logic works.
@@ -863,13 +933,16 @@ How complex logic works.
 
 **Logic:**
 ```
+
 1. Step 1: [What happens]
 2. Step 2: [What happens]
 3. Step 3: [What happens]
-```
+
+```text
 
 **Pseudocode:**
 ```
+
 function algorithm(input):
     // Step-by-step pseudocode
     if condition:
@@ -877,7 +950,8 @@ function algorithm(input):
     else:
         do something else
     return result
-```
+
+```text
 
 **Edge Cases:**
 - Case 1: [How handled]
@@ -889,9 +963,11 @@ function algorithm(input):
 ```
 
 #### 4. Data Models
+
 Structure of data entities.
 
 **Template:**
+
 ```markdown
 ## Data Models
 
@@ -911,18 +987,22 @@ Structure of data entities.
 ```
 
 **Validation Rules:**
+
 - field1: Required, alphanumeric only
 - field2: Optional, must be positive
 
 **Relationships:**
+
 - Entity → Other Entity (one-to-many)
 - Entity → Another Entity (many-to-many through table_name)
 
 **Indexes:**
+
 - Primary: id
 - Unique: field1
 - Index: (field2, created_at)
-```
+
+```text
 
 #### 5. Testing Requirements
 How to verify functionality.
@@ -972,26 +1052,31 @@ How to verify functionality.
 ## Best Practices Across All Documentation
 
 ### Keep Documentation Close to Code
+
 - Store docs in the same repository as code
 - Version documentation with code changes
 - Review docs during code review
 
 ### Update Docs With Code Changes
+
 - Update docs before/with code changes
 - Mark outdated sections clearly
 - Deprecate old documentation properly
 
 ### Use Templates and Standards
+
 - Create reusable templates
 - Enforce documentation standards
 - Use linters for documentation
 
 ### Make Documentation Searchable
+
 - Use clear, descriptive titles
 - Include keywords in content
 - Provide comprehensive index/TOC
 
 ### Gather Feedback
+
 - Track documentation issues
 - Monitor search queries
 - Survey users about doc quality

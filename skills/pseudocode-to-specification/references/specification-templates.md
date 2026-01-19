@@ -142,13 +142,16 @@ Status: [Draft/Review/Approved]
 
 ### 5.1 User Stories
 ```
+
 As a [role]
 I want [capability]
 So that [benefit]
 
 Acceptance Criteria:
+
 - [ ] Criterion 1
 - [ ] Criterion 2
+
 ```
 
 ### 5.2 Detailed Functionality
@@ -220,9 +223,11 @@ Authorization: Bearer {token}
 ## Endpoints
 
 ### [Endpoint Name]
+
 **Purpose:** [What this endpoint does]
 
 #### Request
+
 ```http
 [METHOD] /resource/{id}
 Host: api.example.com
@@ -231,13 +236,16 @@ Authorization: Bearer {token}
 ```
 
 **Path Parameters:**
+
 - `id` (string, required) - [Description]
 
 **Query Parameters:**
+
 - `filter` (string, optional) - [Description]
 - `limit` (integer, optional) - [Description, default, range]
 
 **Request Body:**
+
 ```json
 {
   "field1": "string",
@@ -249,6 +257,7 @@ Authorization: Bearer {token}
 ```
 
 **Field Definitions:**
+
 - `field1` (string, required, max 255) - [Description]
 - `field2` (integer, required, 1-1000) - [Description]
 - `field3` (object, optional) - [Description]
@@ -256,6 +265,7 @@ Authorization: Bearer {token}
 #### Responses
 
 **200 OK - Success**
+
 ```json
 {
   "status": "success",
@@ -267,6 +277,7 @@ Authorization: Bearer {token}
 ```
 
 **400 Bad Request - Validation Error**
+
 ```json
 {
   "status": "error",
@@ -282,6 +293,7 @@ Authorization: Bearer {token}
 ```
 
 **401 Unauthorized**
+
 ```json
 {
   "status": "error",
@@ -291,6 +303,7 @@ Authorization: Bearer {token}
 ```
 
 **500 Internal Server Error**
+
 ```json
 {
   "status": "error",
@@ -302,6 +315,7 @@ Authorization: Bearer {token}
 #### Example Usage
 
 **cURL:**
+
 ```bash
 curl -X [METHOD] \
   https://api.example.com/v1/resource/123 \
@@ -311,6 +325,7 @@ curl -X [METHOD] \
 ```
 
 **JavaScript:**
+
 ```javascript
 const response = await fetch('https://api.example.com/v1/resource/123', {
   method: '[METHOD]',
@@ -323,11 +338,14 @@ const response = await fetch('https://api.example.com/v1/resource/123', {
 ```
 
 #### Rate Limiting
+
 - Limit: [X requests per minute]
 - Header: `X-RateLimit-Remaining`
 
 #### Notes
+
 [Additional context, edge cases, deprecation notices]
+
 ```
 
 ## Data Model Specification Template
@@ -386,6 +404,7 @@ const response = await fetch('https://api.example.com/v1/resource/123', {
   "updated_at": "2024-01-15T10:30:00Z"
 }
 ```
+
 ```
 
 ## Test Case Specification Template
@@ -430,22 +449,28 @@ const response = await fetch('https://api.example.com/v1/resource/123', {
 | 3 | [Verification step] | [Expected state] |
 
 ### Expected Results
+
 - Output: [Expected output data/response]
 - State Changes: [Database or system state changes]
 - Side Effects: [Logs, events, notifications]
 
 ### Actual Results
+
 [To be filled during test execution]
 
 ### Pass/Fail Criteria
+
 - Pass if: [Conditions for success]
 - Fail if: [Conditions for failure]
 
 ### Postconditions
+
 [System state after test, cleanup needed]
 
 ### Notes
+
 [Additional context, edge cases, known issues]
+
 ```
 
 ## Architecture Decision Record (ADR) Template
@@ -517,6 +542,7 @@ Analysis of the algorithm/pattern chosen]
 ## Usage Guidelines
 
 **Choose Template Based on Context:**
+
 - **SRS** - Complete system specification, formal documentation
 - **Functional Spec** - Feature-level detail, agile-friendly
 - **API Spec** - Service interfaces, integration documentation
@@ -525,12 +551,14 @@ Analysis of the algorithm/pattern chosen]
 - **ADR** - Design decisions, architectural choices
 
 **Adapt Templates:**
+
 - Remove sections not relevant to pseudocode analysis
 - Add sections for domain-specific requirements
 - Adjust detail level based on audience
 - Maintain consistency within project
 
 **Traceability:**
+
 - Link specifications back to pseudocode sections
 - Use consistent identifiers (FR-001, TC-001, ADR-001)
 - Reference line numbers or code blocks

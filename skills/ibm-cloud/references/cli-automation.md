@@ -1,6 +1,7 @@
 # CLI & Automation
 
 ## Table of Contents
+
 - [IBM Cloud CLI](#ibm-cloud-cli)
 - [Terraform Provider](#terraform-provider)
 - [Schematics](#schematics)
@@ -100,6 +101,7 @@ ibmcloud config --output json
 ### Scripting with CLI
 
 **Bash Script:**
+
 ```bash
 #!/bin/bash
 set -e
@@ -365,6 +367,7 @@ ibmcloud schematics destroy --id <WORKSPACE-ID>
 ```
 
 **Terraform Configuration:**
+
 ```hcl
 # schematics.tf
 terraform {
@@ -383,6 +386,7 @@ terraform {
 ### REST API Examples
 
 **Python:**
+
 ```python
 import requests
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator

@@ -14,11 +14,13 @@ This skill guides you through systematic requirements gathering and documentatio
 ### 1. Planning & Stakeholder Analysis
 
 **Identify Stakeholders:**
+
 - Map stakeholder categories: executives, users, developers, operations
 - Assess influence, interest, and availability
 - Plan engagement strategy for each stakeholder group
 
 **Select Elicitation Techniques:**
+
 - **Interviews**: One-on-one discussions for deep insights (see [elicitation-techniques.md](references/elicitation-techniques.md))
 - **Workshops**: Collaborative sessions for alignment
 - **Document Analysis**: Review existing systems and documentation
@@ -29,6 +31,7 @@ This skill guides you through systematic requirements gathering and documentatio
 ### 2. Requirements Elicitation
 
 **Conduct Stakeholder Sessions:**
+
 - Prepare structured interview questions
 - Focus on current pain points and desired outcomes
 - Document business context, goals, and constraints
@@ -36,6 +39,7 @@ This skill guides you through systematic requirements gathering and documentatio
 - Follow up with clarifications as needed
 
 **Key Questions to Ask:**
+
 - What problems are you trying to solve?
 - What does success look like?
 - Who will use this system and how?
@@ -49,6 +53,7 @@ This skill guides you through systematic requirements gathering and documentatio
 Choose format based on project methodology:
 
 **For Agile Projects** - Use user stories (see [agile-requirements.md](references/agile-requirements.md)):
+
 ```
 As a [role]
 I want [capability]
@@ -61,12 +66,14 @@ Acceptance Criteria:
 ```
 
 **For Traditional Projects** - Use structured specifications:
+
 - Business Requirements Document (BRD): High-level business needs
 - Functional Requirements: What system must do
 - Non-Functional Requirements: Performance, security, usability
 - Use Cases: Detailed user-system interactions
 
 **Classify Requirements:**
+
 - Functional vs Non-Functional
 - Business vs Technical vs User
 - Must-Have vs Should-Have vs Could-Have vs Won't-Have (MoSCoW)
@@ -83,6 +90,7 @@ Acceptance Criteria:
 ### 5. Validation & Refinement
 
 **Review Requirements Quality:**
+
 - [ ] **Clear**: Unambiguous, easy to understand
 - [ ] **Complete**: All necessary information included
 - [ ] **Consistent**: No contradictions
@@ -91,6 +99,7 @@ Acceptance Criteria:
 - [ ] **Traceable**: Linked to business goals
 
 **Get Stakeholder Sign-Off:**
+
 - Review with each stakeholder group
 - Address conflicts and gaps
 - Document approvals and changes
@@ -99,6 +108,7 @@ Acceptance Criteria:
 ## Key Deliverables
 
 **Depending on project needs, produce:**
+
 - **Stakeholder Analysis**: Categories, needs, engagement plan
 - **Interview Summaries**: Key findings and quotes
 - **User Stories/Use Cases**: Detailed functionality descriptions
@@ -111,6 +121,7 @@ Acceptance Criteria:
 Load these on demand based on specific needs:
 
 ### Process Guidance
+
 - **[elicitation-techniques.md](references/elicitation-techniques.md)** - Detailed interview techniques, workshop facilitation, and observation methods
 - **[agile-requirements.md](references/agile-requirements.md)** - User story writing, backlog management, sprint planning, and acceptance criteria
 - **[prioritization-frameworks.md](references/prioritization-frameworks.md)** - MoSCoW, RICE, Kano, Value/Effort frameworks with examples
@@ -118,12 +129,14 @@ Load these on demand based on specific needs:
 - **[best-practices.md](references/best-practices.md)** - Quality standards, common pitfalls, and validation checklists
 
 ### Documentation Templates
+
 - **[requirements-traceability-matrix.md](references/requirements-traceability-matrix.md)** - Template and examples for tracking requirements
 - **[use-case-overview.md](references/use-case-overview.md)** - Use case structure and examples
 
 ## Best Practices Summary
 
 **Avoid Common Pitfalls:**
+
 - ❌ Solution-focused: "Use React framework" → ✅ "Provide responsive web interface"
 - ❌ Vague language: "System should be fast" → ✅ "System responds within 2 seconds for 95% of requests"
 - ❌ Gold plating: Focus on business value, not nice-to-haves

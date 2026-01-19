@@ -35,11 +35,13 @@ This document provides comprehensive guidance on microservices architecture patt
 ```
 
 **Same Entity, Different Context:**
+
 - **Customer** in Order Context: CustomerId, Name, Email (for orders)
 - **Customer** in Marketing Context: CustomerId, Preferences, Segments
 - **Customer** in Billing Context: CustomerId, PaymentMethods, BillingAddress
 
 **Identifying Bounded Contexts:**
+
 1. Start with business capabilities (e.g., Order Management, Inventory Management)
 2. Look for linguistic boundaries (different teams use different terms)
 3. Identify aggregates (cluster of entities treated as a unit)
@@ -50,16 +52,19 @@ This document provides comprehensive guidance on microservices architecture patt
 **Microservice:** Not too small, not too large
 
 ❌ **Too Small (Nanoservice):**
+
 - Service does trivial task (e.g., "AddTwoNumbers" service)
 - Too many inter-service calls (network overhead)
 - Deployment complexity outweighs benefits
 
 ❌ **Too Large (Monolith):**
+
 - Multiple unrelated business capabilities
 - Many teams working on same codebase
 - Difficult to deploy independently
 
 ✅ **Right Size:**
+
 - Single business capability or bounded context
 - Can be developed by single team (2-pizza team, ~6-10 people)
 - Deployable independently
@@ -139,22 +144,26 @@ Payment Service
 **1. HTTP/REST**
 
 **Use When:**
+
 - Request-response pattern needed
 - Immediate response required
 - Simple CRUD operations
 
 **Example:**
+
 ```
 Order Service → GET /api/inventory/products/123 → Inventory Service
                 ← 200 OK {"id": 123, "stock": 50}
 ```
 
 **Pros:**
+
 - Simple to implement
 - Well-understood
 - Browser-compatible
 
 **Cons:**
+
 - Blocking (caller waits)
 - Temporal coupling (both services must be up)
 - Cascading failures
@@ -162,11 +171,13 @@ Order Service → GET /api/inventory/products/123 → Inventory Service
 **2. gRPC**
 
 **Use When:**
+
 - High performance required
 - Polyglot services (multiple languages)
 - Streaming needed
 
 **Example:**
+
 ```protobuf
 service OrderService {
   rpc GetOrder(GetOrderRequest) returns (Order);
@@ -175,22 +186,26 @@ service OrderService {
 ```
 
 **Pros:**
+
 - Fast (binary protocol, HTTP/2)
 - Strong typing (protobuf)
 - Bi-directional streaming
 
 **Cons:**
+
 - Not browser-compatible (needs grpc-web)
 - More complex than REST
 
 **3. GraphQL**
 
 **Use When:**
+
 - Flexible client queries needed
 - Multiple clients with different data needs
 - Aggregation layer over multiple services
 
 **Example:**
+
 ```graphql
 query {
   user(id: "123") {
@@ -209,11 +224,13 @@ query {
 ```
 
 **Pros:**
+
 - Single endpoint
 - Client specifies data needed
 - Reduces over-fetching/under-fetching
 
 **Cons:**
+
 - Complex to implement
 - Query complexity management needed
 - Caching more difficult
@@ -229,6 +246,7 @@ Order Service → [Order.Created Event] → Queue → Notification Service
 ```
 
 **Use When:**
+
 - Decoupling producer and consumer
 - Load leveling (absorb traffic spikes)
 - Guaranteed delivery needed
@@ -246,6 +264,7 @@ Order Service → [Order.Created Event] → Topic → Notification Service
 ```
 
 **Use When:**
+
 - Multiple services interested in same event
 - Event-driven architecture
 - Fan-out pattern
@@ -262,6 +281,7 @@ Order Service → [Event Stream] → Topic (partitioned) → Consumer Group 1
 ```
 
 **Use When:**
+
 - High throughput needed
 - Event replay required
 - Real-time processing
@@ -300,6 +320,7 @@ Order Service → [Event Stream] → Topic (partitioned) → Consumer Group 1
 ```
 
 **Responsibilities:**
+
 - Request routing
 - Authentication/authorization
 - Rate limiting
@@ -311,11 +332,13 @@ Order Service → [Event Stream] → Topic (partitioned) → Consumer Group 1
 **Technologies:** Kong, Apigee, AWS API Gateway, Azure API Management
 
 **Benefits:**
+
 - Single entry point for clients
 - Centralized cross-cutting concerns
 - Client-specific APIs (BFF pattern)
 
 **Drawbacks:**
+
 - Single point of failure (mitigate with HA)
 - Potential bottleneck
 - Additional network hop
@@ -346,6 +369,7 @@ Order Service → [Event Stream] → Topic (partitioned) → Consumer Group 1
 ```
 
 **Features:**
+
 - Service discovery
 - Load balancing
 - Circuit breaking
@@ -357,12 +381,14 @@ Order Service → [Event Stream] → Topic (partitioned) → Consumer Group 1
 **Technologies:** Istio, Linkerd, Consul
 
 **Benefits:**
+
 - Security (mTLS, authorization)
 - Reliability (retries, circuit breakers)
 - Observability (automatic metrics)
 - Language-agnostic (proxy handles communication)
 
 **Drawbacks:**
+
 - Complexity
 - Resource overhead (sidecar per pod)
 - Learning curve
@@ -387,11 +413,13 @@ Order Service → [Event Stream] → Topic (partitioned) → Consumer Group 1
 ```
 
 **Benefits:**
+
 - Loose coupling (service can change schema independently)
 - Technology diversity (choose database type per service)
 - Independent scaling
 
 **Challenges:**
+
 - No foreign keys across services
 - Joins require application logic or API calls
 - Distributed transactions complex
@@ -419,6 +447,7 @@ Order Service → [Event Stream] → Topic (partitioned) → Consumer Group 1
 ```
 
 **Problems:**
+
 - Tight coupling (schema changes affect all services)
 - No independent deployment
 - Database becomes bottleneck
@@ -454,10 +483,12 @@ Shipping Service → ShipmentCreated event → Order Service
 ```
 
 **Pros:**
+
 - Decentralized (no orchestrator)
 - Simple for small sagas
 
 **Cons:**
+
 - Hard to understand flow (events scattered)
 - Difficult to add new steps
 - Cyclic dependencies risk
@@ -479,6 +510,7 @@ Shipping Service → ShipmentCreated event → Order Service
 ```
 
 **Orchestrator Code:**
+
 ```python
 class OrderSagaOrchestrator:
     def execute_saga(self, order):
@@ -510,11 +542,13 @@ class OrderSagaOrchestrator:
 ```
 
 **Pros:**
+
 - Centralized logic (easy to understand)
 - Easy to add steps
 - Better observability
 
 **Cons:**
+
 - Orchestrator is single point of failure
 - Orchestrator can become complex
 
@@ -525,6 +559,7 @@ class OrderSagaOrchestrator:
 **Concept:** Undo local transaction if saga fails
 
 **Example:**
+
 ```
 Create Order → Reserve Payment → Reserve Stock → ❌ Shipping Failed
                                                    ↓
@@ -532,12 +567,14 @@ Create Order → Reserve Payment → Reserve Stock → ❌ Shipping Failed
 ```
 
 **Compensating Actions:**
+
 - Create Order → Cancel Order
 - Reserve Payment → Refund Payment
 - Reserve Stock → Release Stock
 - Create Shipment → Cancel Shipment
 
 **Best Practices:**
+
 - Design compensating transactions upfront
 - Make operations idempotent (can be retried safely)
 - Log saga state for recovery
@@ -548,6 +585,7 @@ Create Order → Reserve Payment → Reserve Stock → ❌ Shipping Failed
 **Concept:** Store events (state changes) instead of current state
 
 **Traditional (State Storage):**
+
 ```
 accounts table:
 id  | balance
@@ -555,6 +593,7 @@ id  | balance
 ```
 
 **Event Sourcing (Event Storage):**
+
 ```
 account_events table:
 id | account_id | type          | amount | timestamp
@@ -567,17 +606,20 @@ Current balance = sum of events = 500
 ```
 
 **Benefits:**
+
 - Complete audit trail (who, what, when)
 - Time travel (reconstruct state at any point)
 - Event replay (rebuild projections)
 - Event-driven architecture
 
 **Challenges:**
+
 - Query complexity (need to aggregate events)
 - Event schema evolution
 - Snapshots needed for performance
 
 **Use Cases:**
+
 - Financial systems (audit trail critical)
 - Collaborative applications (undo/redo)
 - Analytics (historical data)
@@ -598,16 +640,19 @@ Current balance = sum of events = 500
 ```
 
 **Write Model:**
+
 - Normalized database
 - Business logic validation
 - Event sourcing
 
 **Read Model:**
+
 - Denormalized views (projections)
 - Optimized for queries
 - Eventually consistent
 
 **Example:**
+
 ```python
 # Command (write)
 create_order(user_id, items) → events → OrderCreated event
@@ -617,16 +662,19 @@ get_orders_by_user(user_id) → Read from denormalized view
 ```
 
 **Benefits:**
+
 - Independent scaling (read vs. write)
 - Optimize each model separately
 - Flexibility (different databases for read/write)
 
 **Challenges:**
+
 - Eventual consistency
 - Complexity
 - Data synchronization
 
 **Use Cases:**
+
 - Read-heavy applications (10:1 read/write ratio)
 - Complex queries (multiple aggregations)
 - Different performance needs (reads need caching, writes need ACID)
@@ -642,6 +690,7 @@ get_orders_by_user(user_id) → Read from denormalized view
 **Solution:** Stop calling failing service temporarily
 
 **States:**
+
 ```
    ┌─────────────┐
    │   Closed    │ (Normal)
@@ -664,6 +713,7 @@ get_orders_by_user(user_id) → Read from denormalized view
 ```
 
 **Implementation (Resilience4j):**
+
 ```java
 CircuitBreakerConfig config = CircuitBreakerConfig.custom()
     .failureRateThreshold(50)              // Open after 50% failure
@@ -685,11 +735,13 @@ try {
 ```
 
 **Benefits:**
+
 - Prevents cascading failures
 - Allows failing service to recover
 - Fast failure (don't wait for timeout)
 
 **Best Practices:**
+
 - Set appropriate thresholds (50-80% failure rate)
 - Set reasonable timeout (5-30 seconds)
 - Provide fallback responses
@@ -700,6 +752,7 @@ try {
 **Concept:** Automatically retry failed requests
 
 **Example:**
+
 ```python
 from tenacity import retry, stop_after_attempt, wait_exponential
 
@@ -716,26 +769,31 @@ def call_inventory_service(product_id):
 ```
 
 **Exponential Backoff:**
+
 - Retry 1: Wait 1 second
 - Retry 2: Wait 2 seconds
 - Retry 3: Wait 4 seconds
 - Retry 4: Wait 8 seconds
 
 **Jitter:** Add randomness to avoid thundering herd
+
 ```python
 wait_time = base * (2 ** attempt) + random(0, 1)
 ```
 
 **When to Retry:**
+
 - Transient failures (network timeout, 503 Service Unavailable)
 - Idempotent operations (GET, PUT, DELETE)
 
 **When NOT to Retry:**
+
 - Non-idempotent operations (POST without idempotency key)
 - Client errors (400, 401, 404)
 - Business logic errors
 
 **Best Practices:**
+
 - Limit retry attempts (3-5 max)
 - Use exponential backoff with jitter
 - Only retry idempotent operations
@@ -767,6 +825,7 @@ except requests.Timeout:
 | Async operations | Immediate (return 202 Accepted) |
 
 **Best Practices:**
+
 - Set reasonable timeouts (not too short, not too long)
 - Propagate timeouts (if A calls B with 5s timeout, B calls C with 3s)
 - Return partial results if possible
@@ -777,6 +836,7 @@ except requests.Timeout:
 **Concept:** Isolate resources to prevent one failure affecting others
 
 **Thread Pool Isolation:**
+
 ```
 ┌─────────────────────────────┐
 │ Application                 │
@@ -790,6 +850,7 @@ except requests.Timeout:
 ```
 
 **Implementation (Resilience4j):**
+
 ```java
 ThreadPoolBulkheadConfig config = ThreadPoolBulkheadConfig.custom()
     .maxThreadPoolSize(10)
@@ -805,10 +866,12 @@ CompletableFuture<String> future = bulkhead.executeSupplier(
 ```
 
 **Benefits:**
+
 - Isolate failures (Service A slow doesn't affect Service B)
 - Resource limits (prevent resource exhaustion)
 
 **Semaphore Isolation (Lightweight):**
+
 ```java
 SemaphoreBulkheadConfig config = SemaphoreBulkheadConfig.custom()
     .maxConcurrentCalls(25)
@@ -834,6 +897,7 @@ def get_product_recommendations(user_id):
 ```
 
 **Fallback Strategies:**
+
 - Return cached data
 - Return default/empty response
 - Return data from secondary source
@@ -871,10 +935,12 @@ def get_product_recommendations(user_id):
 **Technologies:** Netflix Eureka, Consul, Zookeeper
 
 **Pros:**
+
 - Client controls load balancing
 - No extra hop (direct to service)
 
 **Cons:**
+
 - Client complexity (discovery logic)
 - Language-specific clients
 
@@ -912,10 +978,12 @@ def get_product_recommendations(user_id):
 **Technologies:** Kubernetes (kube-proxy), AWS ELB, NGINX
 
 **Pros:**
+
 - Simple client (just call load balancer)
 - Language-agnostic
 
 **Cons:**
+
 - Extra network hop
 - Load balancer single point of failure
 
@@ -926,17 +994,20 @@ def get_product_recommendations(user_id):
 **Types:**
 
 **1. Liveness Probe:** Is service running?
+
 ```
 GET /health/live → 200 OK
 ```
 
 **2. Readiness Probe:** Is service ready to accept traffic?
+
 ```
 GET /health/ready → 200 OK (dependencies healthy)
                   → 503 Service Unavailable (database down)
 ```
 
 **Example (Spring Boot):**
+
 ```java
 @RestController
 public class HealthController {
@@ -957,6 +1028,7 @@ public class HealthController {
 ```
 
 **Kubernetes Health Checks:**
+
 ```yaml
 livenessProbe:
   httpGet:
@@ -980,25 +1052,30 @@ readinessProbe:
 ### Queue vs. Topic
 
 **Queue (Point-to-Point):**
+
 ```
 Producer → Queue → Consumer 1 (receives message)
                    Consumer 2 (does not receive same message)
 ```
+
 - One consumer receives message
 - Load balancing (distribute work)
 
 **Topic (Publish-Subscribe):**
+
 ```
 Producer → Topic → Consumer 1 (receives message)
                 → Consumer 2 (receives same message)
                 → Consumer 3 (receives same message)
 ```
+
 - All subscribers receive message
 - Fan-out pattern
 
 ### Message Schema Design
 
 **Example: OrderCreated Event**
+
 ```json
 {
   "eventId": "evt_123456",
@@ -1026,6 +1103,7 @@ Producer → Topic → Consumer 1 (receives message)
 ```
 
 **Best Practices:**
+
 - Include event ID (idempotency)
 - Include timestamp (ordering, debugging)
 - Include version (schema evolution)
@@ -1039,6 +1117,7 @@ Producer → Topic → Consumer 1 (receives message)
 **Solutions:**
 
 **1. Partition Key (Kafka):**
+
 ```
 Messages with same key go to same partition (ordered within partition)
 
@@ -1047,6 +1126,7 @@ Order 456 events → Partition 1 (ordered)
 ```
 
 **2. Sequence Number:**
+
 ```json
 {
   "orderId": "ord_123",
@@ -1058,6 +1138,7 @@ Order 456 events → Partition 1 (ordered)
 Consumer tracks sequence number and processes in order
 
 **3. Single Consumer (Simple):**
+
 - Only one consumer processes messages (ordered)
 - No parallelism (slow)
 
@@ -1073,11 +1154,13 @@ Producer → Queue → Consumer
 ```
 
 **When to Use DLQ:**
+
 - Message processing fails repeatedly
 - Poison message (malformed, invalid)
 - Business logic error (e.g., product not found)
 
 **Best Practices:**
+
 - Set max retry attempts (3-5)
 - Log error reason before sending to DLQ
 - Monitor DLQ depth
@@ -1092,6 +1175,7 @@ Producer → Queue → Consumer
 **Techniques:**
 
 **1. Track Processed Message IDs:**
+
 ```python
 def process_message(message):
     message_id = message['eventId']
@@ -1108,6 +1192,7 @@ def process_message(message):
 ```
 
 **2. Natural Idempotency:**
+
 ```python
 # Idempotent: Running multiple times = same result
 UPDATE users SET email = 'new@example.com' WHERE id = 123;
@@ -1117,6 +1202,7 @@ UPDATE users SET login_count = login_count + 1 WHERE id = 123;
 ```
 
 **3. Idempotency Key (API):**
+
 ```python
 POST /api/orders
 Headers:
@@ -1164,6 +1250,7 @@ Headers:
 **Purpose:** Distribute messages across partitions
 
 **1. Key-Based Partitioning:**
+
 ```python
 # Same key → same partition (ordered)
 producer.send('orders', key=f'order:{order_id}', value=message)
@@ -1172,9 +1259,11 @@ partition = hash(key) % num_partitions
 ```
 
 **2. Round-Robin (Default):**
+
 - Distribute evenly if no key specified
 
 **3. Custom Partitioner:**
+
 ```python
 def custom_partitioner(key, all_partitions, available_partitions):
     # Route VIP customers to partition 0
@@ -1184,6 +1273,7 @@ def custom_partitioner(key, all_partitions, available_partitions):
 ```
 
 **Best Practices:**
+
 - Use key if ordering needed
 - Choose high-cardinality key (many distinct values)
 - Avoid hot partitions (one partition gets most traffic)
@@ -1195,6 +1285,7 @@ def custom_partitioner(key, all_partitions, available_partitions):
 **Solution: Schema Registry** (Confluent Schema Registry, AWS Glue)
 
 **Versioned Schemas:**
+
 ```
 orders-value (Avro schema):
 - Version 1: {orderId, userId, total}
@@ -1211,6 +1302,7 @@ orders-value (Avro schema):
 | FULL | Both directions compatible | Both |
 
 **Example (Avro):**
+
 ```json
 // Version 1
 {
@@ -1239,6 +1331,7 @@ orders-value (Avro schema):
 ### Stream Processing Patterns
 
 **1. Stateless Processing:**
+
 ```python
 # Filter events
 stream.filter(lambda event: event['amount'] > 1000)
@@ -1251,6 +1344,7 @@ stream.map(lambda event: {
 ```
 
 **2. Stateful Processing (Aggregations):**
+
 ```python
 # Count events by user (windowed)
 stream \
@@ -1268,6 +1362,7 @@ stream \
 ```
 
 **3. Stream Joins:**
+
 ```python
 # Join orders with shipments
 orders_stream.join(
@@ -1289,6 +1384,7 @@ orders_stream.join(
 | Exactly-once | Message delivered exactly once |
 
 **Kafka Exactly-Once:**
+
 ```python
 producer = KafkaProducer(
     enable_idempotence=True,        # Deduplication
@@ -1306,10 +1402,12 @@ except:
 ```
 
 **Trade-offs:**
+
 - Performance overhead (~30% throughput reduction)
 - Complexity
 
 **Use When:**
+
 - Financial transactions
 - Critical data (no duplicates acceptable)
 
@@ -1322,12 +1420,14 @@ except:
 **Problem:** Microservices with tight coupling (all must be deployed together)
 
 ❌ **Symptoms:**
+
 - Service A calls Service B synchronously
 - Service B calls Service C synchronously
 - All services must be deployed together
 - Single point of failure cascades
 
 ✅ **Solution:**
+
 - Use asynchronous communication
 - Apply circuit breaker pattern
 - Design for independent deployment
@@ -1337,6 +1437,7 @@ except:
 **Problem:** Too many inter-service calls for single operation
 
 ❌ **Bad:**
+
 ```
 Client → API Gateway → Order Service → User Service
                                     → Product Service (for each item)
@@ -1346,6 +1447,7 @@ Client → API Gateway → Order Service → User Service
 ```
 
 ✅ **Good:**
+
 - Batch APIs (get multiple items in one call)
 - Aggregate data in Order Service (denormalize)
 - Use API Gateway to aggregate (BFF pattern)
@@ -1355,11 +1457,13 @@ Client → API Gateway → Order Service → User Service
 **Problem:** One service with too many responsibilities
 
 ❌ **Symptoms:**
+
 - Service handles multiple business capabilities
 - Large codebase (>100k lines)
 - Many teams working on same service
 
 ✅ **Solution:**
+
 - Decompose by business capability
 - Apply Single Responsibility Principle
 - Split into smaller services
@@ -1375,11 +1479,13 @@ Client → API Gateway → Order Service → User Service
 **Problem:** Too many tiny services (over-decomposition)
 
 ❌ **Symptoms:**
+
 - Service does trivial task
 - More network calls than business logic
 - Deployment overhead > benefit
 
 ✅ **Solution:**
+
 - Start with larger services
 - Decompose only when needed (team scalability, performance)
 
@@ -1388,11 +1494,13 @@ Client → API Gateway → Order Service → User Service
 **Problem:** Clients call services directly
 
 ❌ **Consequences:**
+
 - Tight coupling (clients know all service URLs)
 - Duplicate logic (authentication in every service)
 - Security issues (services exposed publicly)
 
 ✅ **Solution:**
+
 - Implement API Gateway
 - Centralize cross-cutting concerns
 
@@ -1401,6 +1509,7 @@ Client → API Gateway → Order Service → User Service
 **Problem:** Assume strong consistency in distributed system
 
 ❌ **Expecting:**
+
 ```
 Order Service creates order → Immediately visible in Analytics Service
 ```
@@ -1408,6 +1517,7 @@ Order Service creates order → Immediately visible in Analytics Service
 **Reality:** Eventual consistency (may take seconds/minutes)
 
 ✅ **Solution:**
+
 - Design for eventual consistency
 - Use saga pattern for distributed transactions
 - Communicate consistency model to users

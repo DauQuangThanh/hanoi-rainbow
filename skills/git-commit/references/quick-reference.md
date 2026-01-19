@@ -1,6 +1,5 @@
 # Quick Reference
 
-
 ### Type Decision Tree
 
 ```

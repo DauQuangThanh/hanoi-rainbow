@@ -14,6 +14,7 @@ Performs comprehensive security code reviews to identify vulnerabilities, assess
 ### 1. Initial Assessment
 
 Gather context about the application:
+
 - **Application type**: Web app, API, mobile, desktop, embedded
 - **Data sensitivity**: PII, financial data, healthcare records, proprietary information
 - **Compliance requirements**: PCI-DSS, GDPR, HIPAA, SOC 2, ISO 27001
@@ -22,6 +23,7 @@ Gather context about the application:
 - **External integrations**: Third-party APIs, cloud services, payment processors
 
 Perform threat modeling:
+
 - Identify critical assets (data, functions, resources)
 - Map attack surfaces (user inputs, APIs, file uploads, network interfaces)
 - Determine threat actors (external attackers, malicious insiders, automated bots)
@@ -32,6 +34,7 @@ Perform threat modeling:
 Systematically review code for security vulnerabilities:
 
 **Priority Areas:**
+
 1. **Authentication & Authorization** - Login flows, session management, access controls
 2. **Input Validation** - All user inputs, API parameters, file uploads
 3. **Data Protection** - Encryption at rest and in transit, sensitive data handling
@@ -44,6 +47,7 @@ Systematically review code for security vulnerabilities:
 ### 3. Vulnerability Classification
 
 Classify each finding:
+
 - **Severity**: Critical, High, Medium, Low, Informational
 - **CWE ID**: Common Weakness Enumeration identifier
 - **OWASP Category**: Map to OWASP Top 10 if applicable
@@ -54,6 +58,7 @@ Classify each finding:
 ### 4. Documentation
 
 Produce comprehensive security report:
+
 - **Executive Summary** - High-level findings and risk overview
 - **Detailed Findings** - Each vulnerability with code examples and exploit scenarios
 - **Remediation Guidance** - Specific fixes with secure code examples
@@ -64,6 +69,7 @@ Produce comprehensive security report:
 ## Severity Classification
 
 **Critical (CVSS 9.0-10.0):**
+
 - Remote code execution
 - Authentication bypass
 - SQL injection with data access
@@ -71,6 +77,7 @@ Produce comprehensive security report:
 - Complete access control bypass
 
 **High (CVSS 7.0-8.9):**
+
 - Privilege escalation
 - Sensitive data exposure (PII, financial)
 - Cross-site scripting (XSS) with session theft
@@ -78,6 +85,7 @@ Produce comprehensive security report:
 - XML external entity (XXE) injection
 
 **Medium (CVSS 4.0-6.9):**
+
 - Information disclosure
 - Cross-site request forgery (CSRF)
 - Weak cryptography
@@ -85,12 +93,14 @@ Produce comprehensive security report:
 - Missing security headers
 
 **Low (CVSS 0.1-3.9):**
+
 - Version disclosure
 - Verbose error messages
 - Missing best practices
 - Security through obscurity
 
 **Informational:**
+
 - Recommendations for defense in depth
 - Future-proofing suggestions
 - Security hygiene improvements
@@ -100,6 +110,7 @@ Produce comprehensive security report:
 Generate security reports in this format:
 
 ### Executive Summary
+
 - Total vulnerabilities by severity
 - Critical risk areas
 - Compliance status summary
@@ -107,7 +118,9 @@ Generate security reports in this format:
 - Recommended immediate actions
 
 ### Detailed Findings
+
 For each vulnerability:
+
 ```
 ## [SEVERITY] Finding Title (CWE-XXX)
 
@@ -139,12 +152,15 @@ For each vulnerability:
 [Specific steps to fix the vulnerability]
 
 **Secure Code Example**:
+
 ```language
 [Working secure implementation]
 ```
 
 **References**:
+
 - [Relevant CWE, CVE, or documentation links]
+
 ```
 
 ### Remediation Timeline

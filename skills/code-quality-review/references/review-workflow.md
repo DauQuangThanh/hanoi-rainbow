@@ -1,15 +1,16 @@
 # Review Workflow
 
-
 ### Step 1: Initial Assessment
 
 **Gather Context:**
+
 - Identify programming language and framework
 - Understand project type (web app, API, library, CLI, etc.)
 - Note any existing coding standards or style guides
 - Check for configuration files (.eslintrc, .pylintrc, checkstyle.xml, etc.)
 
 **Read the Code:**
+
 - Start with entry points (main files, index files)
 - Review module/package organization
 - Check dependency management
@@ -24,6 +25,7 @@ Analyze code across these key dimensions:
 **Common Code Smells to Identify:**
 
 **Bloaters:**
+
 - Long Method (>50 lines)
 - Large Class (>300 lines or >10 methods)
 - Primitive Obsession (overuse of primitives instead of objects)
@@ -31,17 +33,20 @@ Analyze code across these key dimensions:
 - Data Clumps (groups of variables passed together)
 
 **Object-Orientation Abusers:**
+
 - Switch/Case statements (should use polymorphism)
 - Temporary Field (fields used only in certain cases)
 - Refused Bequest (subclass doesn't use inherited methods)
 - Alternative Classes with Different Interfaces
 
 **Change Preventers:**
+
 - Divergent Change (one class changes for multiple reasons)
 - Shotgun Surgery (one change requires many small changes)
 - Parallel Inheritance Hierarchies
 
 **Dispensables:**
+
 - Comments (excessive or outdated comments)
 - Duplicate Code
 - Lazy Class (class doing too little)
@@ -50,6 +55,7 @@ Analyze code across these key dimensions:
 - Speculative Generality (unused abstractions)
 
 **Couplers:**
+
 - Feature Envy (method using more features from another class)
 - Inappropriate Intimacy (excessive coupling between classes)
 - Message Chains (a.getB().getC().getD())
@@ -58,6 +64,7 @@ Analyze code across these key dimensions:
 #### 2.2 Complexity Analysis
 
 **Cyclomatic Complexity:**
+
 - Calculate decision points (if, for, while, case, &&, ||)
 - **Low Risk**: Complexity 1-10
 - **Moderate Risk**: Complexity 11-20
@@ -65,11 +72,13 @@ Analyze code across these key dimensions:
 - **Very High Risk**: Complexity >50
 
 **Cognitive Complexity:**
+
 - Assess how difficult code is to understand
 - Identify nested conditions, loops, recursion
 - Flag methods with high cognitive load
 
 **Example Analysis:**
+
 ```python
 # High Cyclomatic Complexity (>15)
 def process_order(order):
@@ -89,12 +98,14 @@ def process_order(order):
 #### 2.3 Maintainability Assessment
 
 **Maintainability Index (MI):**
-- Calculate based on: MI = 171 - 5.2 * ln(Halstead Volume) - 0.23 * (Cyclomatic Complexity) - 16.2 * ln(Lines of Code)
+
+- Calculate based on: MI = 171 - 5.2 *ln(Halstead Volume) - 0.23* (Cyclomatic Complexity) - 16.2 * ln(Lines of Code)
 - **Good**: MI > 85
 - **Moderate**: MI 65-85
 - **Difficult**: MI < 65
 
 **Key Factors:**
+
 - Code readability (clear naming, logical structure)
 - Modularity (separation of concerns)
 - Documentation quality
@@ -104,6 +115,7 @@ def process_order(order):
 #### 2.4 Naming Conventions
 
 **Check for:**
+
 - Consistent naming style (camelCase, snake_case, PascalCase)
 - Descriptive names (avoid single letters except loop counters)
 - Appropriate length (not too short, not too long)
@@ -114,6 +126,7 @@ def process_order(order):
 **Examples:**
 
 ❌ **Poor Naming:**
+
 ```javascript
 function proc(d) {  // Unclear function name and parameter
     let x = d * 2;
@@ -126,6 +139,7 @@ class mgr {  // Non-descriptive class name
 ```
 
 ✅ **Good Naming:**
+
 ```javascript
 function calculateDiscountedPrice(originalPrice) {
     const discountMultiplier = 2;
@@ -140,15 +154,18 @@ class OrderManager {
 #### 2.5 Code Duplication
 
 **Detection:**
+
 - Identify duplicate code blocks (>6 lines)
 - Look for similar logic with minor variations
 - Check for copy-paste patterns
 
 **Metrics:**
+
 - Calculate duplication percentage
 - Identify duplication hotspots
 
 **Recommendation Template:**
+
 ```
 Found: 3 instances of duplicate code (45 lines total)
 Location 1: [file1.js#L120-L165]
@@ -163,6 +180,7 @@ Expected reduction: 135 lines → 45 lines (67% reduction)
 #### 2.6 Design Patterns and Architecture
 
 **Evaluate:**
+
 - Appropriate use of design patterns (Strategy, Factory, Observer, etc.)
 - SOLID principles adherence:
   - Single Responsibility Principle
@@ -175,6 +193,7 @@ Expected reduction: 135 lines → 45 lines (67% reduction)
 - Layer separation (presentation, business, data)
 
 **Anti-patterns to Flag:**
+
 - God Object (class doing everything)
 - Spaghetti Code (tangled dependencies)
 - Golden Hammer (overusing one pattern)
@@ -184,6 +203,7 @@ Expected reduction: 135 lines → 45 lines (67% reduction)
 #### 2.7 Error Handling
 
 **Check for:**
+
 - Consistent error handling strategy
 - Appropriate exception types
 - Error messages quality (descriptive, actionable)
@@ -194,6 +214,7 @@ Expected reduction: 135 lines → 45 lines (67% reduction)
 **Examples:**
 
 ❌ **Poor Error Handling:**
+
 ```python
 def read_file(filename):
     f = open(filename)  # No error handling, resource leak
@@ -202,6 +223,7 @@ def read_file(filename):
 ```
 
 ✅ **Good Error Handling:**
+
 ```python
 def read_file(filename):
     try:
@@ -221,6 +243,7 @@ def read_file(filename):
 #### 2.8 Performance Considerations
 
 **Review:**
+
 - Algorithm efficiency (O(n), O(n²), etc.)
 - Database query optimization (N+1 queries, missing indexes)
 - Memory usage patterns
@@ -229,6 +252,7 @@ def read_file(filename):
 - Resource pooling
 
 **Common Issues:**
+
 ```javascript
 // ❌ O(n²) - inefficient
 users.forEach(user => {
@@ -258,6 +282,7 @@ users.forEach(user => {
 Apply language-specific best practices:
 
 **JavaScript/TypeScript:**
+
 - Use strict mode
 - Avoid var, prefer const/let
 - Use async/await over callbacks
@@ -266,6 +291,7 @@ Apply language-specific best practices:
 - Avoid implicit any
 
 **Python:**
+
 - PEP 8 compliance
 - Type hints usage
 - List comprehensions appropriately
@@ -274,6 +300,7 @@ Apply language-specific best practices:
 - Virtual environment usage
 
 **Java:**
+
 - Proper use of collections
 - Stream API usage
 - Exception hierarchy
@@ -282,6 +309,7 @@ Apply language-specific best practices:
 - Immutability where appropriate
 
 **Go:**
+
 - Error handling patterns
 - Goroutine management
 - Defer usage
@@ -290,6 +318,7 @@ Apply language-specific best practices:
 - Effective Go guidelines
 
 **C#:**
+
 - LINQ usage
 - Async/await patterns
 - IDisposable implementation
@@ -300,6 +329,7 @@ Apply language-specific best practices:
 ### Step 4: Documentation Quality
 
 **Assess:**
+
 - Code comments (when needed, not excessive)
 - Function/method documentation
 - Class/module documentation
@@ -308,6 +338,7 @@ Apply language-specific best practices:
 - Inline documentation for complex logic
 
 **Guidelines:**
+
 - Comments explain WHY, not WHAT
 - Public APIs fully documented
 - Complex algorithms explained
@@ -317,6 +348,7 @@ Apply language-specific best practices:
 ### Step 5: Test Quality Assessment
 
 **Review:**
+
 - Test coverage percentage
 - Test organization (unit, integration, e2e)
 - Test naming conventions

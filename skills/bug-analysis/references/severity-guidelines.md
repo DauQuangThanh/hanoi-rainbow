@@ -5,6 +5,7 @@
 ### Critical (P0)
 
 **Criteria:**
+
 - Complete system outage or crash
 - Data loss or corruption
 - Security breach or critical vulnerability
@@ -15,6 +16,7 @@
 **Response Time:** Immediate (< 1 hour)
 
 **Examples:**
+
 - Database connection failure causing site downtime
 - Payment gateway not processing transactions
 - User data exposed to unauthorized access
@@ -22,6 +24,7 @@
 - Critical security vulnerability actively exploited
 
 **Required Actions:**
+
 - Immediate team notification
 - Escalate to on-call engineer
 - Create incident war room
@@ -33,6 +36,7 @@
 ### High (P1)
 
 **Criteria:**
+
 - Major feature completely broken
 - Significant user impact (>25% of users)
 - Moderate security vulnerability
@@ -43,6 +47,7 @@
 **Response Time:** Same day (< 4 hours)
 
 **Examples:**
+
 - Login failure for subset of users
 - Core feature (search, checkout) not working
 - API returning errors for multiple clients
@@ -50,6 +55,7 @@
 - Data sync failures between systems
 
 **Required Actions:**
+
 - Assign to senior engineer
 - Provide status updates every 2 hours
 - Implement fix in hotfix branch
@@ -61,6 +67,7 @@
 ### Medium (P2)
 
 **Criteria:**
+
 - Feature partially broken
 - Moderate user impact (<25% of users)
 - Reasonable workaround available
@@ -70,6 +77,7 @@
 **Response Time:** Within 1 week
 
 **Examples:**
+
 - Secondary feature not working correctly
 - UI element not displaying properly
 - Export feature failing for specific file types
@@ -77,6 +85,7 @@
 - Minor memory leak not causing immediate issues
 
 **Required Actions:**
+
 - Include in next sprint planning
 - Fix in regular release cycle
 - Add to regression test suite
@@ -87,6 +96,7 @@
 ### Low (P3)
 
 **Criteria:**
+
 - Minor issue or edge case
 - Cosmetic problem
 - Minimal user impact
@@ -96,6 +106,7 @@
 **Response Time:** Backlog/next release
 
 **Examples:**
+
 - Spelling/grammar errors
 - Minor alignment issues
 - Console warnings (non-breaking)
@@ -103,6 +114,7 @@
 - Legacy browser compatibility
 
 **Required Actions:**
+
 - Add to backlog
 - Fix when convenient
 - May be combined with other small fixes
@@ -124,48 +136,56 @@
 ### By Type
 
 **Functional Bugs:**
+
 - Feature not working as specified
 - Incorrect business logic
 - Missing validation
 - Wrong calculations or data processing
 
 **Performance Bugs:**
+
 - Slow response times
 - High resource consumption
 - Memory leaks
 - Inefficient algorithms
 
 **Security Bugs:**
+
 - Authentication/authorization failures
 - Data exposure vulnerabilities
 - Injection vulnerabilities (SQL, XSS, etc.)
 - Insecure configurations
 
 **UI/UX Bugs:**
+
 - Visual glitches or misalignments
 - Broken layouts
 - Incorrect styling
 - Accessibility issues
 
 **Data Bugs:**
+
 - Data corruption
 - Data loss
 - Incorrect data transformation
 - Data inconsistency between systems
 
 **Integration Bugs:**
+
 - API failures
 - Third-party service issues
 - Message queue problems
 - Webhook failures
 
 **Configuration Bugs:**
+
 - Environment-specific issues
 - Incorrect settings
 - Deployment problems
 - Infrastructure issues
 
 **Regression Bugs:**
+
 - Previously working feature broken
 - New code breaks existing functionality
 - Deployment breaks production
@@ -173,34 +193,40 @@
 ### By Root Cause Pattern
 
 **Logic Errors:**
+
 - Incorrect conditional logic
 - Missing edge cases
 - Wrong algorithm implementation
 - Calculation errors
 
 **Race Conditions:**
+
 - Concurrent access issues
 - Thread safety problems
 - Timing-dependent bugs
 
 **Resource Issues:**
+
 - Memory leaks
 - Connection pool exhaustion
 - File handle leaks
 - Deadlocks
 
 **Null/Undefined Errors:**
+
 - Null pointer exceptions
 - Undefined variables
 - Missing null checks
 
 **Boundary Conditions:**
+
 - Off-by-one errors
 - Array index out of bounds
 - Integer overflow
 - Empty collection handling
 
 **Integration Failures:**
+
 - API contract changes
 - Version incompatibilities
 - Network failures
@@ -228,6 +254,7 @@
 ### Step 3: Priority Assignment (5 minutes)
 
 Consider:
+
 - Number of users affected
 - Business impact (revenue, reputation)
 - Security implications
@@ -253,6 +280,7 @@ Consider:
 ### Security Vulnerabilities
 
 **Always escalate to security team for:**
+
 - Authentication bypasses
 - Authorization failures
 - Data exposure
@@ -260,6 +288,7 @@ Consider:
 - Known CVEs
 
 **Use CVSS scoring:**
+
 - 9.0-10.0: Critical
 - 7.0-8.9: High
 - 4.0-6.9: Medium
@@ -268,11 +297,13 @@ Consider:
 ### Production vs Non-Production
 
 **Production bugs:**
+
 - Higher priority by default
 - Require faster response
 - May need hotfix deployment
 
 **Non-production bugs:**
+
 - Can wait for regular release
 - Use for testing improvements
 - May indicate test coverage gaps
@@ -280,11 +311,13 @@ Consider:
 ### Customer-Reported vs Internal
 
 **Customer-reported:**
+
 - Higher priority (affects users)
 - Requires customer communication
 - May need workaround documentation
 
 **Internal:**
+
 - Can be fixed proactively
 - Opportunity to prevent customer impact
 - Use for quality improvements

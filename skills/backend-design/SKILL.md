@@ -82,4 +82,3 @@ Load additional resources based on specific needs:
 - **Common Patterns**: See [common-patterns.md](references/common-patterns.md) for code examples of repository pattern, service layer, dependency injection, and other architectural patterns
 
 - **Example Projects**: See [examples.md](references/examples.md) for complete architecture examples including e-commerce systems, real-time chat applications, and microservices implementations
-

@@ -103,6 +103,7 @@ const buttonClasses = computed(() => {
 ```
 
 **Usage:**
+
 ```vue
 <Button variant="primary" size="md" @click="handleClick">
   Click Me
@@ -176,6 +177,7 @@ const cardClasses = computed(() => {
 ```
 
 **Usage:**
+
 ```vue
 <Card hoverable clickable @click="handleCardClick">
   <h3 class="text-xl font-bold">Card Title</h3>
@@ -309,6 +311,7 @@ const sizeClasses = {
 ```
 
 **Usage:**
+
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -409,6 +412,7 @@ const inputClasses = computed(() => {
 ```
 
 **Usage:**
+
 ```vue
 <Input
   v-model="email"
@@ -553,6 +557,7 @@ provide('setActiveTab', setActiveTab)
 ```
 
 **Tab Item:**
+
 ```vue
 <script setup lang="ts">
 import { inject, computed } from 'vue'
@@ -593,6 +598,7 @@ const tabClasses = computed(() => {
 ```
 
 **Tab Panel:**
+
 ```vue
 <script setup lang="ts">
 import { inject, computed } from 'vue'
@@ -616,6 +622,7 @@ const isActive = computed(() => activeTab?.value === props.value)
 ```
 
 **Usage:**
+
 ```vue
 <Tabs v-model="activeTab">
   <template #tabs>
@@ -781,6 +788,7 @@ const props = withDefaults(defineProps<Props>(), {
 ```
 
 **Usage:**
+
 ```vue
 <Hero
   title="Welcome to Our Platform"

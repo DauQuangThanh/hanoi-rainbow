@@ -5,31 +5,37 @@
 ### Instance Types and Families
 
 **General Purpose** (T, M series)
+
 - T4g, T3, T3a: Burstable performance for variable workloads
 - M7g, M6i, M5: Balanced compute, memory, networking
 - Use cases: Web servers, development environments, small databases
 
 **Compute Optimized** (C series)
+
 - C7g, C6i, C5: High-performance processors
 - Use cases: Batch processing, media transcoding, HPC, game servers, scientific modeling
 
 **Memory Optimized** (R, X, High Memory series)
+
 - R7g, R6i, R5: Memory-intensive applications
 - X2idn, X2iedn: Highest memory-to-vCPU ratio
 - Use cases: In-memory databases, big data processing, SAP HANA
 
 **Storage Optimized** (I, D, H series)
+
 - I4i, I3: High IOPS NVMe SSD storage
 - D3: High sequential read/write for data warehouses
 - Use cases: NoSQL databases, data warehousing, Elasticsearch
 
 **Accelerated Computing** (P, G, Inf series)
+
 - P4, P3: GPU for machine learning training
 - G5, G4: Graphics-intensive applications
 - Inf2, Inf1: Machine learning inference
 - Use cases: ML training/inference, video rendering, genomics
 
 **Graviton Processors** (instances ending with 'g')
+
 - ARM-based AWS Graviton2/3 processors
 - Up to 40% better price-performance vs x86
 - Available across T4g, M7g, C7g, R7g families
@@ -37,11 +43,13 @@
 ### Instance Purchasing Options
 
 **On-Demand**
+
 - Pay by the second (Linux) or hour (Windows)
 - No upfront commitment
 - Use for: Short-term, unpredictable workloads
 
 **Reserved Instances**
+
 - 1 or 3-year commitment
 - Up to 75% discount vs On-Demand
 - Standard RI: Specific instance type, region
@@ -49,6 +57,7 @@
 - Use for: Steady-state, predictable workloads
 
 **Savings Plans**
+
 - 1 or 3-year commitment to consistent usage ($$/hour)
 - Up to 72% discount vs On-Demand
 - Compute Savings Plans: Flexible across instance families, regions
@@ -56,11 +65,13 @@
 - Use for: Flexible workloads with predictable usage
 
 **Spot Instances**
+
 - Up to 90% discount vs On-Demand
 - Can be interrupted with 2-minute warning
 - Use for: Fault-tolerant, flexible workloads (batch processing, CI/CD, big data)
 
 **Dedicated Hosts**
+
 - Physical server dedicated for your use
 - Compliance requirements (licensing, regulatory)
 - Most expensive option
@@ -68,6 +79,7 @@
 ### Auto Scaling
 
 **Launch Templates**
+
 ```yaml
 LaunchTemplate:
   Type: AWS::EC2::LaunchTemplate
@@ -96,6 +108,7 @@ LaunchTemplate:
 ```
 
 **Auto Scaling Group**
+
 ```yaml
 AutoScalingGroup:
   Type: AWS::AutoScaling::AutoScalingGroup
@@ -123,6 +136,7 @@ AutoScalingGroup:
 **Scaling Policies**
 
 Target Tracking Scaling:
+
 ```yaml
 ScalingPolicy:
   Type: AWS::AutoScaling::ScalingPolicy
@@ -136,6 +150,7 @@ ScalingPolicy:
 ```
 
 Step Scaling:
+
 ```yaml
 StepScalingPolicy:
   Type: AWS::AutoScaling::ScalingPolicy
@@ -171,17 +186,20 @@ StepScalingPolicy:
 ### Lambda Function Configuration
 
 **Memory and CPU**
+
 - Memory: 128 MB to 10,240 MB (10 GB)
 - CPU scales with memory (1,769 MB = 1 vCPU)
 - Timeout: Maximum 15 minutes (900 seconds)
 - Ephemeral storage (/tmp): 512 MB to 10,240 MB
 
 **Execution Model**
+
 - Synchronous: API Gateway, ALB, SDK invoke
 - Asynchronous: S3, SNS, EventBridge, SES
 - Stream-based: DynamoDB Streams, Kinesis
 
 **Cold Start Optimization**
+
 - Use Provisioned Concurrency for predictable performance
 - Initialize SDK clients outside handler
 - Use Lambda Layers for shared dependencies
@@ -191,6 +209,7 @@ StepScalingPolicy:
 ### Lambda Function Patterns
 
 **API Backend**
+
 ```python
 import json
 import boto3
@@ -218,6 +237,7 @@ def lambda_handler(event, context):
 ```
 
 **S3 Event Processing**
+
 ```python
 import boto3
 import json
@@ -249,6 +269,7 @@ def lambda_handler(event, context):
 ```
 
 **DynamoDB Stream Processing**
+
 ```python
 import boto3
 import json
@@ -290,6 +311,7 @@ def lambda_handler(event, context):
 ## Elastic Beanstalk
 
 ### Platform Support
+
 - Docker, Go, Java, .NET, Node.js, PHP, Python, Ruby
 - Preconfigured platforms with web server (nginx, Apache)
 - Custom platforms with Packer
@@ -297,29 +319,34 @@ def lambda_handler(event, context):
 ### Deployment Strategies
 
 **All at Once**
+
 - Fastest deployment
 - Brief downtime
 - Use for: Development environments
 
 **Rolling**
+
 - Deploy in batches
 - Reduced capacity during deployment
 - No downtime
 - Use for: Production with acceptable temporary capacity reduction
 
 **Rolling with Additional Batch**
+
 - Deploy to new instances first
 - Maintain full capacity
 - No downtime
 - Use for: Production requiring full capacity
 
 **Immutable**
+
 - Deploy to new instances in new ASG
 - Zero downtime
 - Quick rollback
 - Use for: Production requiring safest deployment
 
 **Blue/Green**
+
 - Deploy to separate environment
 - Swap CNAMEs when ready
 - Zero downtime
@@ -329,6 +356,7 @@ def lambda_handler(event, context):
 ### Configuration
 
 **.ebextensions/01-app.config**
+
 ```yaml
 option_settings:
   aws:elasticbeanstalk:container:nodejs:
@@ -353,6 +381,7 @@ Resources:
 ## AWS Batch
 
 ### Use Cases
+
 - Batch processing jobs
 - ETL (Extract, Transform, Load)
 - Financial modeling
@@ -362,22 +391,26 @@ Resources:
 ### Components
 
 **Compute Environment**
+
 - Managed: AWS provisions and manages EC2/Fargate
 - Unmanaged: You manage compute resources
 - Can use Spot Instances for cost savings
 
 **Job Queue**
+
 - Jobs submitted to queue
 - Priority-based scheduling
 - Multiple queues for different workloads
 
 **Job Definition**
+
 - Container properties (image, vCPUs, memory)
 - IAM role for task execution
 - Environment variables and secrets
 - Retry strategy
 
 ### Example Job Definition
+
 ```json
 {
   "jobDefinitionName": "my-batch-job",

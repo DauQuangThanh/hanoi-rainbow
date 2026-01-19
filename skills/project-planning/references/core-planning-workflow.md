@@ -1,9 +1,9 @@
 # Core Planning Workflow
 
-
 ### 1. Initial Project Setup
 
 **Define Project Scope:**
+
 - **Vision Statement**: Clear project purpose and objectives
 - **Success Criteria**: Measurable outcomes that define project success
 - **Stakeholders**: Identify all stakeholders and their roles
@@ -11,6 +11,7 @@
 - **Assumptions**: Document all assumptions being made
 
 **Example Vision Statement:**
+
 ```
 Build a customer relationship management (CRM) system that enables 
 sales teams to track leads, manage customer interactions, and generate 
@@ -19,6 +20,7 @@ improvement in lead conversion rates.
 ```
 
 **Identify Deliverables:**
+
 - Core features and functionality
 - Documentation requirements
 - Training materials
@@ -128,6 +130,7 @@ Use relative sizing (Fibonacci: 1, 2, 3, 5, 8, 13, 21):
 **T-Shirt Sizing (High-Level):**
 
 For early estimation:
+
 - **XS**: 1-2 days
 - **S**: 3-5 days
 - **M**: 1-2 weeks

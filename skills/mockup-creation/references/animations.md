@@ -282,6 +282,7 @@ export default {
 ```
 
 **Usage:**
+
 ```vue
 <template>
   <div class="animate-fade-in">Fades in</div>

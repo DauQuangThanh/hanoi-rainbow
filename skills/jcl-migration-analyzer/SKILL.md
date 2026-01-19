@@ -10,42 +10,52 @@ Analyzes legacy JCL scripts for migration to modern batch processing and workflo
 ## Core Capabilities
 
 ### 1. Job Analysis
+
 Extract job structure (JOB card), step sequences, program invocations (EXEC PGM/PROC), conditional logic (COND, IF/THEN/ELSE), return codes, data sets (DD statements), resource requirements, and symbolic parameters.
 
 ### 2. Data Dependency Mapping
+
 Extract input/output datasets, temporary datasets, GDG handling, concatenation, DISP parameters, and data flow between steps.
 
 ### 3. Procedure Analysis
+
 Parse PROC definitions, symbolic parameters, PROC overrides, nested procedures, INCLUDE statements, and JCLLIB references.
 
 ### 4. Workflow Migration
+
 Generate Spring Batch jobs, Apache Airflow DAGs, Kubernetes Jobs, shell scripts, AWS Step Functions, or Azure Logic Apps.
 
 ### 5. Conditional Logic Translation
+
 **CRITICAL**: COND logic is INVERTED! Map COND parameters, IF/THEN/ELSE, return codes, step bypassing, and restart logic to modern constructs.
 
 ## Quick Usage Guide
 
 ### Find Jobs
+
 ```bash
 find . -name "*.jcl" -o -name "*.JCL"
 find . -name "*.proc" -o -name "*.PROC"
 ```
 
-### Critical: COND Logic is INVERTED!
+### Critical: COND Logic is INVERTED
 
 **JCL COND (inverted):**
+
 ```jcl
 //STEP020 EXEC PGM=PROG2,COND=(0,NE)
 ```
+
 Means: "Run if previous RC ≠ 0" → **Run on ERROR!**
 
 **Modern (normal logic):**
+
 ```bash
 if [ $rc -ne 0 ]; then run_prog2; fi
 ```
 
 **JCL IF/THEN (normal logic):**
+
 ```jcl
 //IF1 IF RC = 0 THEN
 //STEP020 EXEC PGM=PROG2
@@ -53,6 +63,7 @@ if [ $rc -ne 0 ]; then run_prog2; fi
 ```
 
 **Modern:**
+
 ```bash
 if [ $rc -eq 0 ]; then run_prog2; fi
 ```
@@ -60,6 +71,7 @@ if [ $rc -eq 0 ]; then run_prog2; fi
 ### Code Patterns
 
 **Simple Sequential:**
+
 ```jcl
 //STEP010 EXEC PGM=PROG1
 //INPUT   DD DSN=INPUT.FILE,DISP=SHR
@@ -67,6 +79,7 @@ if [ $rc -eq 0 ]; then run_prog2; fi
 //STEP020 EXEC PGM=PROG2
 //INPUT   DD DSN=OUTPUT.FILE,DISP=SHR
 ```
+
 ```bash
 #!/bin/bash
 set -e
@@ -75,10 +88,12 @@ prog2 --input="output.file" || exit 8
 ```
 
 **Conditional (COND - inverted!):**
+
 ```jcl
 //STEP010 EXEC PGM=VALIDATE
 //STEP020 EXEC PGM=PROCESS,COND=(0,NE)
 ```
+
 ```bash
 validate_data
 rc=$?
@@ -86,6 +101,7 @@ if [ $rc -ne 0 ]; then process_data; fi  # INVERTED!
 ```
 
 **IF/THEN/ELSE (normal logic):**
+
 ```jcl
 //STEP010 EXEC PGM=VALIDATE
 //IF1 IF RC = 0 THEN
@@ -94,6 +110,7 @@ if [ $rc -ne 0 ]; then process_data; fi  # INVERTED!
 //STEP030 EXEC PGM=PROCESSERR
 //ENDIF
 ```
+
 ```bash
 validate_data
 rc=$?
@@ -101,12 +118,14 @@ if [ $rc -eq 0 ]; then processok; else processerr; fi
 ```
 
 **Procedure:**
+
 ```jcl
 //MYPROC PROC MEMBER=,INFILE=
 //STEP1  EXEC PGM=PROG1
 //SYSIN  DD DSN=&MEMBER,DISP=SHR
 //       PEND
 ```
+
 ```bash
 function myproc() {
     prog1 --sysin="$1" --input="$2"
@@ -117,6 +136,7 @@ myproc "test.data" "prod.file"
 ### Target Platforms
 
 **Spring Batch:**
+
 ```java
 @Bean
 public Job job() {
@@ -129,6 +149,7 @@ public Job job() {
 ```
 
 **Airflow DAG:**
+
 ```python
 with DAG('job', schedule_interval='@daily') as dag:
     step1 = BashOperator(task_id='step1', bash_command='prog1.sh')
@@ -177,7 +198,9 @@ Provide: Job overview, step sequence, data flow, conditional logic, migration ta
 ## Bundled Resources
 
 ### Scripts (scripts/)
+
 Available automation tools for JCL analysis:
+
 - **analyze-dependencies.sh/.ps1**: Generate dependency graphs in JSON format
 - **extract-structure.py**: Extract structural information from JCL files  
 - **generate-java-classes.py**: Generate Java POJOs from data structures
@@ -186,7 +209,9 @@ Available automation tools for JCL analysis:
 Use these scripts when detailed structural analysis is needed or for batch processing multiple JCL files.
 
 ### References (references/)
+
 Load these on-demand for detailed guidance:
+
 - **pseudocode-common-rules.md**: General pseudocode syntax and conventions
 - **pseudocode-jcl-rules.md**: JCL-specific translation rules and patterns (load when generating pseudocode)
 - **testing-strategy.md**: Comprehensive testing approach for migrated workflows (load when planning testing)
@@ -195,6 +220,7 @@ Load these on-demand for detailed guidance:
 - **performance-patterns.md**: Performance optimization strategies (load when optimizing workflows)
 
 ### Templates (assets/)
+
 - **migration-report-template.md**: Standard format for migration analysis reports
 - **java-class-template.java**: Template for generating Java classes from data structures
 

@@ -1,6 +1,5 @@
 # Common Anti-Patterns to Avoid
 
-
 1. **Big Ball of Mud**: Unstructured, tangled architecture
 2. **Golden Hammer**: Using same solution for all problems
 3. **Premature Optimization**: Optimizing before measuring

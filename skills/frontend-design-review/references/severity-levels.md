@@ -1,7 +1,7 @@
 # Severity Levels
 
-
 ### 🔴 Critical
+
 - **Definition**: Issues that severely impact usability, accessibility, or brand
 - **Examples**:
   - WCAG AA violations blocking users with disabilities
@@ -11,6 +11,7 @@
 - **Action Required**: Must be fixed before launch
 
 ### 🟠 High
+
 - **Definition**: Significant issues affecting user experience or consistency
 - **Examples**:
   - Navigation confusing or inconsistent
@@ -20,6 +21,7 @@
 - **Action Required**: Should be fixed before launch or very soon after
 
 ### 🟡 Medium
+
 - **Definition**: Moderate issues or improvement opportunities
 - **Examples**:
   - Minor inconsistencies in spacing or typography
@@ -29,6 +31,7 @@
 - **Action Required**: Address in next iteration
 
 ### 🟢 Low
+
 - **Definition**: Polish suggestions or nice-to-have improvements
 - **Examples**:
   - Animation polish opportunities

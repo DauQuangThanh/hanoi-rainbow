@@ -1,6 +1,5 @@
 # Backend Design Process
 
-
 Follow this systematic approach when designing backend systems:
 
 ### Phase 1: Requirements Analysis
@@ -32,6 +31,7 @@ Follow this systematic approach when designing backend systems:
 1. **RESTful API Design**
 
 **Resource Modeling**
+
 ```
 Users:
   GET    /api/v1/users           - List users
@@ -48,6 +48,7 @@ Nested Resources:
 ```
 
 **HTTP Status Codes**
+
 - `200 OK`: Successful GET, PUT, PATCH
 - `201 Created`: Successful POST
 - `204 No Content`: Successful DELETE
@@ -62,6 +63,7 @@ Nested Resources:
 - `503 Service Unavailable`: Service down
 
 **Request/Response Format**
+
 ```json
 // POST /api/v1/users
 {
@@ -95,7 +97,7 @@ Nested Resources:
 }
 ```
 
-2. **API Design Best Practices**
+1. **API Design Best Practices**
 
 - Use nouns for resources, not verbs
 - Use plural nouns (`/users`, not `/user`)
@@ -107,7 +109,8 @@ Nested Resources:
 - Document with OpenAPI/Swagger
 - Implement HATEOAS (optional)
 
-3. **Pagination**
+1. **Pagination**
+
 ```json
 // Request: GET /api/v1/users?page=2&limit=20
 
@@ -130,7 +133,8 @@ Nested Resources:
 }
 ```
 
-4. **Filtering & Sorting**
+1. **Filtering & Sorting**
+
 ```
 GET /api/v1/users?status=active&role=admin
 GET /api/v1/users?sort=created_at:desc
@@ -143,12 +147,14 @@ GET /api/v1/users?fields=id,email,name  (sparse fieldsets)
 1. **Relational Database Design**
 
 **Normalization**
+
 - **1NF**: Eliminate repeating groups, atomic values
 - **2NF**: Remove partial dependencies
 - **3NF**: Remove transitive dependencies
 - **BCNF**: Every determinant is a candidate key
 
 **Example Schema**
+
 ```sql
 CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -196,6 +202,7 @@ CREATE TABLE comments (
 ```
 
 **Indexing Strategy**
+
 - Primary key indexes (automatic)
 - Foreign key indexes (for joins)
 - Columns used in WHERE clauses
@@ -204,9 +211,10 @@ CREATE TABLE comments (
 - Partial indexes for subset of rows
 - Full-text indexes for search
 
-2. **NoSQL Database Design**
+1. **NoSQL Database Design**
 
 **Document Database (MongoDB)**
+
 ```javascript
 // User document
 {
@@ -235,6 +243,7 @@ CREATE TABLE comments (
 ```
 
 **Key-Value Store (Redis)**
+
 ```
 // Session storage
 SET session:usr_123 '{"user_id":"usr_123","role":"admin"}' EX 3600
@@ -252,6 +261,7 @@ EXPIRE ratelimit:api:usr_123:2026-01-14-10 3600
 1. **Authentication Strategies**
 
 **JWT-Based Authentication**
+
 ```javascript
 // Login endpoint
 POST /api/v1/auth/login
@@ -283,14 +293,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 ```
 
 **OAuth 2.0 Flows**
+
 - **Authorization Code**: Web applications
 - **PKCE**: Mobile and SPA applications
 - **Client Credentials**: Service-to-service
 - **Refresh Token**: Long-lived sessions
 
-2. **Authorization Patterns**
+1. **Authorization Patterns**
 
 **Role-Based Access Control (RBAC)**
+
 ```javascript
 // Roles and permissions
 const roles = {
@@ -322,6 +334,7 @@ app.delete('/api/v1/posts/:id',
 ```
 
 **Attribute-Based Access Control (ABAC)**
+
 ```javascript
 // More granular control
 function canEditPost(user, post) {
@@ -335,6 +348,7 @@ function canEditPost(user, post) {
 1. **Service Decomposition**
 
 **Domain-Driven Design Approach**
+
 ```
 User Service:
   - User registration and authentication
@@ -362,9 +376,10 @@ Notification Service:
   - Push notifications
 ```
 
-2. **Inter-Service Communication**
+1. **Inter-Service Communication**
 
 **Synchronous (REST)**
+
 ```javascript
 // Order Service calls Product Service
 const response = await fetch('http://product-service/api/v1/products/123', {
@@ -379,6 +394,7 @@ const product = await response.json();
 ```
 
 **Asynchronous (Message Queue)**
+
 ```javascript
 // Order Service publishes event
 await messageQueue.publish('order.created', {
@@ -399,7 +415,8 @@ messageQueue.subscribe('order.created', async (event) => {
 });
 ```
 
-3. **Service Discovery**
+1. **Service Discovery**
+
 ```javascript
 // Service registry (Consul, Eureka)
 const productServiceUrl = await serviceRegistry.discover('product-service');
@@ -408,7 +425,8 @@ const productServiceUrl = await serviceRegistry.discover('product-service');
 const instance = await serviceRegistry.getHealthyInstance('product-service');
 ```
 
-4. **API Gateway Pattern**
+1. **API Gateway Pattern**
+
 ```
 Client → API Gateway → Services
 
@@ -426,6 +444,7 @@ API Gateway responsibilities:
 1. **Cache Levels**
 
 **Application Cache (In-Memory)**
+
 ```javascript
 // Simple in-memory cache
 const cache = new Map();
@@ -445,6 +464,7 @@ function getUser(userId) {
 ```
 
 **Distributed Cache (Redis)**
+
 ```javascript
 // Redis caching
 async function getUser(userId) {
@@ -476,6 +496,7 @@ async function updateUser(userId, data) {
 ```
 
 **HTTP Cache (CDN)**
+
 ```javascript
 // Set cache headers
 app.get('/api/v1/posts/:id', (req, res) => {
@@ -491,7 +512,7 @@ app.get('/api/v1/posts/:id', (req, res) => {
 });
 ```
 
-2. **Cache Patterns**
+1. **Cache Patterns**
 
 - **Cache-Aside**: Application manages cache
 - **Read-Through**: Cache fetches from database on miss
@@ -499,7 +520,7 @@ app.get('/api/v1/posts/:id', (req, res) => {
 - **Write-Behind**: Write to cache first, database asynchronously
 - **Refresh-Ahead**: Automatically refresh before expiration
 
-3. **Cache Invalidation Strategies**
+1. **Cache Invalidation Strategies**
 
 - **TTL (Time-To-Live)**: Automatic expiration
 - **Explicit Invalidation**: Delete on update
@@ -511,6 +532,7 @@ app.get('/api/v1/posts/:id', (req, res) => {
 1. **Message Queue Patterns**
 
 **Job Queue (Bull, BullMQ)**
+
 ```javascript
 // Producer
 await queue.add('send-email', {
@@ -533,6 +555,7 @@ queue.process('send-email', async (job) => {
 ```
 
 **Event Streaming (Kafka)**
+
 ```javascript
 // Producer
 await producer.send({
@@ -560,7 +583,7 @@ await consumer.run({
 });
 ```
 
-2. **Background Jobs**
+1. **Background Jobs**
 
 - Image processing (resize, optimization)
 - Email sending
@@ -572,6 +595,7 @@ await consumer.run({
 ### Phase 8: Security Implementation
 
 1. **Input Validation**
+
 ```javascript
 // Using validation library (Joi, Yup)
 const schema = Joi.object({
@@ -586,7 +610,8 @@ if (error) {
 }
 ```
 
-2. **SQL Injection Prevention**
+1. **SQL Injection Prevention**
+
 ```javascript
 // Bad: String concatenation
 const query = `SELECT * FROM users WHERE email = '${email}'`;
@@ -599,7 +624,8 @@ const [users] = await db.execute(query, [email]);
 const user = await User.findOne({ where: { email } });
 ```
 
-3. **Password Security**
+1. **Password Security**
+
 ```javascript
 const bcrypt = require('bcrypt');
 
@@ -610,7 +636,8 @@ const hashedPassword = await bcrypt.hash(password, 10);
 const isValid = await bcrypt.compare(password, user.password_hash);
 ```
 
-4. **Rate Limiting**
+1. **Rate Limiting**
+
 ```javascript
 const rateLimit = require('express-rate-limit');
 
@@ -623,7 +650,8 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 ```
 
-5. **CORS Configuration**
+1. **CORS Configuration**
+
 ```javascript
 const cors = require('cors');
 
@@ -639,6 +667,7 @@ app.use(cors({
 ### Phase 9: Observability
 
 1. **Structured Logging**
+
 ```javascript
 const logger = require('pino')();
 
@@ -658,7 +687,8 @@ app.use((req, res, next) => {
 });
 ```
 
-2. **Metrics**
+1. **Metrics**
+
 ```javascript
 // Prometheus metrics
 const promClient = require('prom-client');
@@ -682,7 +712,8 @@ app.use((req, res, next) => {
 });
 ```
 
-3. **Distributed Tracing**
+1. **Distributed Tracing**
+
 ```javascript
 // OpenTelemetry
 const { trace } = require('@opentelemetry/api');
@@ -710,7 +741,8 @@ async function processOrder(orderId) {
 }
 ```
 
-4. **Health Checks**
+1. **Health Checks**
+
 ```javascript
 app.get('/health', async (req, res) => {
   const health = {

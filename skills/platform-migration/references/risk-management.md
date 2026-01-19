@@ -1,6 +1,5 @@
 # Risk Management
 
-
 ```markdown
 Common Risks:
 

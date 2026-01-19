@@ -318,18 +318,21 @@ Use this comprehensive template for frontend design review reports.
 ## Usage Notes
 
 **When to use this template:**
+
 - Formal design reviews before development
 - Accessibility audits
 - Design system compliance checks
 - Pre-release design validation
 
 **Customization:**
+
 - Remove sections not relevant to your review scope
 - Add project-specific sections as needed
 - Adjust severity levels to match your team's definitions
 - Include visual examples/screenshots where helpful
 
 **Report delivery tips:**
+
 - Export as PDF for formal documentation
 - Create Figma/Sketch comments linking to specific findings
 - Schedule walkthrough meeting to discuss findings

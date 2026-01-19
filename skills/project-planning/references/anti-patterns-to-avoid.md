@@ -1,6 +1,5 @@
 # Anti-Patterns to Avoid
 
-
 - ❌ **Planning without team input**: Estimating and planning alone
 - ❌ **Overly detailed upfront planning**: Waterfall approach in agile
 - ❌ **Ignoring technical debt**: Only focusing on features

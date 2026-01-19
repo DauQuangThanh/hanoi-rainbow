@@ -1,7 +1,7 @@
 # Common Commands
 
-
 ### Kubernetes
+
 ```bash
 # Get resources
 kubectl get pods -n namespace
@@ -39,6 +39,7 @@ kubectl rollout undo deployment/deployment-name -n namespace
 ```
 
 ### Docker
+
 ```bash
 # Build
 docker build -t image-name:tag .
@@ -70,6 +71,7 @@ docker inspect container-name
 ```
 
 ### Terraform
+
 ```bash
 # Initialize
 terraform init

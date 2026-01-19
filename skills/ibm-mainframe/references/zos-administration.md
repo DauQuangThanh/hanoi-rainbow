@@ -5,6 +5,7 @@
 ### IPL (Initial Program Load)
 
 **Cold start:**
+
 ```
 1. Issue QUIESCE command
 2. Select IPL volume
@@ -13,6 +14,7 @@
 ```
 
 **Warm start (system restart):**
+
 ```
 C U=CPU,RESTART        /* Restart specific CPU */
 ```
@@ -20,6 +22,7 @@ C U=CPU,RESTART        /* Restart specific CPU */
 ### Console Commands
 
 **Display commands:**
+
 ```
 /D A,ALL                /* All active address spaces */
 /D A,L                  /* Address spaces by LPAR */
@@ -33,6 +36,7 @@ C U=CPU,RESTART        /* Restart specific CPU */
 ```
 
 **System control:**
+
 ```
 /V OFFLINE             /* Vary device offline */
 /V ONLINE              /* Vary device online */
@@ -45,6 +49,7 @@ C U=CPU,RESTART        /* Restart specific CPU */
 ### JES2 Commands
 
 **Job management:**
+
 ```
 /$DA                   /* Display active jobs */
 /$DQ                   /* Display job queue */
@@ -54,6 +59,7 @@ C U=CPU,RESTART        /* Restart specific CPU */
 ```
 
 **Device management:**
+
 ```
 /$DSPL                 /* Display spool */
 /$DDEV                 /* Display devices */
@@ -62,6 +68,7 @@ C U=CPU,RESTART        /* Restart specific CPU */
 ```
 
 **Configuration:**
+
 ```
 /$T A=ALL              /* Display all options */
 /$T JOBCLASS(A),QHOLD  /* Hold job class */
@@ -73,6 +80,7 @@ C U=CPU,RESTART        /* Restart specific CPU */
 ### SMS (Storage Management Subsystem)
 
 **Storage groups:**
+
 ```
 DEFINE STORAGEGROUP(STGRP1)
   VOLUMES(VOL001 VOL002 VOL003)
@@ -83,6 +91,7 @@ LISTCAT STORAGEGROUP(STGRP1) ALL
 ```
 
 **Management classes:**
+
 ```
 DEFINE MANAGEMENTCLASS(MGMT1)
   MIGRATION(DAYS(30))
@@ -91,6 +100,7 @@ DEFINE MANAGEMENTCLASS(MGMT1)
 ```
 
 **Data classes:**
+
 ```
 DEFINE DATACLASS(DCLASS1)
   RECFM(FB)
@@ -101,6 +111,7 @@ DEFINE DATACLASS(DCLASS1)
 ### Dataset Migration & Backup
 
 **DFHSM (HSM) commands:**
+
 ```
 HSEND MIGRATE DSN('USER.DATA.**')
 HSEND RECALL DSN('USER.DATA.FILE')
@@ -110,6 +121,7 @@ HSEND DELETE BACKUP DSN('USER.DATA.FILE')
 ```
 
 **ADRDSSU (DSS) backup:**
+
 ```
 //BACKUP   EXEC PGM=ADRDSSU
 //SYSPRINT DD SYSOUT=*
@@ -131,6 +143,7 @@ HSEND DELETE BACKUP DSN('USER.DATA.FILE')
 ### SMP/E (System Modification Program)
 
 **Apply maintenance:**
+
 ```
 SET BDY(GLOBAL)
 RECEIVE S(PTF12345)
@@ -142,6 +155,7 @@ ACCEPT S(PTF12345)
 ```
 
 **List maintenance:**
+
 ```
 LIST PTFS
 LIST SYSMOD(PTF12345)
@@ -151,6 +165,7 @@ LIST MOD(IEFBR14)
 ### LLA (Library Lookaside)
 
 **Refresh LLA:**
+
 ```
 /F LLA,UPDATE=xx
 /F LLA,REFRESH
@@ -160,6 +175,7 @@ LIST MOD(IEFBR14)
 ### System Parameters (PARMLIB)
 
 **IPL parameters (LOADxx):**
+
 ```
 SYSCAT    CATALOG.MASTER
 NUCLEUS   01
@@ -168,6 +184,7 @@ SYSPLEX   PLEXNAME
 ```
 
 **System options (IEASYSxx):**
+
 ```
 APF=00           /* APF list */
 CMD=00           /* Commands */
@@ -196,11 +213,13 @@ SUBSYS SUBNAME(DB2P)
 ### Dynamic Subsystem Control
 
 **Add subsystem:**
+
 ```
 /SETSSI ADD,S=subsys,I=initrtn
 ```
 
 **Delete subsystem:**
+
 ```
 /SETSSI DELETE,S=subsys
 ```
@@ -210,12 +229,14 @@ SUBSYS SUBNAME(DB2P)
 ### RMF (Resource Measurement Facility)
 
 **Start RMF:**
+
 ```
 /S RMF,PARM=xx
 /F RMF,START(type)
 ```
 
 **RMF reports:**
+
 - **Monitor I**: CPU activity
 - **Monitor II**: DASD activity
 - **Monitor III**: Workload activity
@@ -225,6 +246,7 @@ SUBSYS SUBNAME(DB2P)
 ### SMF (System Management Facilities)
 
 **SMF parameters (SMFPRMxx):**
+
 ```
 SYS(INTERVAL(30))
 SUB(TYPE(0,30,70,80,89,90))
@@ -233,6 +255,7 @@ JWT(INTERVAL(15))
 ```
 
 **Extract SMF data:**
+
 ```
 //EXTRACT  EXEC PGM=IFASMFDP
 //SYSPRINT DD SYSOUT=*
@@ -251,6 +274,7 @@ JWT(INTERVAL(15))
 ### Automation Table (ATx00)
 
 **Define automated responses:**
+
 ```
 IF MSGID = 'IEF404I' THEN
   EXEC(PGM=CLEANUP,PARM='&JOBNAME')
@@ -266,6 +290,7 @@ ENDIF
 ### NetView Automation
 
 **AutoOps definitions:**
+
 ```
 IF (MSGID = 'IEE361I') THEN
   DO
@@ -281,6 +306,7 @@ ENDIF
 ### Parallel Sysplex
 
 **Coupling Facility structures:**
+
 ```
 STRNAME  TYPE    SIZE     POLICY
 LOCK01   LOCK    256KB    SIZE(256)
@@ -289,6 +315,7 @@ LOGR01   LOGR    1024KB   SIZE(1024)
 ```
 
 **XCF (Cross-System Coupling Facility):**
+
 ```
 /D XCF                  /* Display XCF status */
 /D XCF,STR,STRNAME=ALL  /* Display structures */
@@ -298,6 +325,7 @@ LOGR01   LOGR    1024KB   SIZE(1024)
 ### GDPS (Geographically Dispersed Parallel Sysplex)
 
 **Configuration:**
+
 - Primary site with active workload
 - Secondary site with standby systems
 - Metro Mirror or Global Mirror for data replication
@@ -308,6 +336,7 @@ LOGR01   LOGR    1024KB   SIZE(1024)
 ### LPAR Configuration
 
 **Adjust LPAR weights:**
+
 ```
 /T LPAR=LPAR1,WEIGHT=50
 /D GRS,RES=(*,*)       /* Display GRS resources */
@@ -316,6 +345,7 @@ LOGR01   LOGR    1024KB   SIZE(1024)
 ### Workload Manager (WLM)
 
 **Service classes:**
+
 ```
 SERVICE CLASS: CICS_PROD
   IMPORTANCE: 1
@@ -327,6 +357,7 @@ SERVICE CLASS: BATCH
 ```
 
 **Application environments:**
+
 - Define Java, CICS, IMS environments
 - Resource limits (CPU, memory, threads)
 - Classification rules
@@ -336,12 +367,14 @@ SERVICE CLASS: BATCH
 ### APF (Authorized Program Facility)
 
 **APF list (PROGxx):**
+
 ```
 APF ADD DSNAME(SYS1.USERLIB) VOLUME(SYSR01)
 APF DELETE DSNAME(OLD.LOAD.LIB)
 ```
 
 **Dynamic APF:**
+
 ```
 SETPROG APF,ADD,DSNAME=SYS1.NEWLIB,VOLUME=VOL001
 SETPROG APF,DELETE,DSNAME=OLD.LOAD.LIB
@@ -350,6 +383,7 @@ SETPROG APF,DELETE,DSNAME=OLD.LOAD.LIB
 ### Program Properties Table (PPT)
 
 **Define in SCHEDxx:**
+
 ```
 PPT PGMNAME(MYPROG)
   KEY(7)
@@ -363,6 +397,7 @@ PPT PGMNAME(MYPROG)
 ### Master Console (MSTR)
 
 **Console definition (CONSOLxx):**
+
 ```
 CONSOLE DEVNUM(001C)
   NAME(MSTCONS)
@@ -380,6 +415,7 @@ CONSOLE DEVNUM(001D)
 ### Console Security
 
 **RACF console profiles:**
+
 ```
 RDEFINE OPERCMDS MVS.VARY.TAPE.* UACC(NONE)
 PERMIT MVS.VARY.TAPE.* CLASS(OPERCMDS) ID(OPERGRP) ACCESS(UPDATE)
@@ -391,16 +427,19 @@ SETROPTS RACLIST(OPERCMDS) REFRESH
 ### Monitoring Points
 
 **CPU:**
+
 - LPAR utilization
 - Service class CPU consumption
 - Transaction response times
 
 **Storage:**
+
 - Real storage usage
 - Auxiliary storage usage
 - Common area usage
 
 **I/O:**
+
 - DASD response times
 - Channel utilization
 - Cache hit ratios
@@ -408,18 +447,21 @@ SETROPTS RACLIST(OPERCMDS) REFRESH
 ### Capacity Modeling
 
 **Data collection:**
+
 1. RMF data (CPU, storage, I/O)
 2. SMF records (workload characteristics)
 3. CICS statistics
 4. DB2 statistics
 
 **Analysis:**
+
 - Peak usage times
 - Growth trends
 - Resource bottlenecks
 - Service level compliance
 
 **Planning:**
+
 - Hardware upgrades
 - LPAR weight adjustments
 - Workload balancing
@@ -430,11 +472,13 @@ SETROPTS RACLIST(OPERCMDS) REFRESH
 ### System Dumps
 
 **Initiate dump:**
+
 ```
 /DUMP COMM=('System dump reason')
 ```
 
 **IPCS (Interactive Problem Control System):**
+
 ```
 IPCS
 SETDEF FILE(dataset) DSNAME('DUMP.DATA')
@@ -447,6 +491,7 @@ VERBEXIT CBFORMAT
 ### Wait States
 
 **Common wait codes:**
+
 - **001**: WTOR (Write To Operator with Reply)
 - **021**: Master trace buffer full
 - **02E**: Trace table full
@@ -455,6 +500,7 @@ VERBEXIT CBFORMAT
 ### Performance Issues
 
 **High CPU:**
+
 ```
 /D A,ALL               /* Check active jobs */
 /F RMF,D              /* RMF display */
@@ -462,6 +508,7 @@ VERBEXIT CBFORMAT
 ```
 
 **Storage shortage:**
+
 ```
 /D M=STOR             /* Display storage */
 /D ASM                /* Display auxiliary storage */
@@ -471,6 +518,7 @@ VERBEXIT CBFORMAT
 ## Best Practices
 
 ### Daily Operations
+
 1. Review system logs (SYSLOG, OPERLOG)
 2. Check job completion status
 3. Monitor space utilization
@@ -478,6 +526,7 @@ VERBEXIT CBFORMAT
 5. Verify backup completion
 
 ### Change Management
+
 1. Test in development environment first
 2. Schedule maintenance windows
 3. Document all changes
@@ -485,6 +534,7 @@ VERBEXIT CBFORMAT
 5. Communicate with stakeholders
 
 ### Security
+
 1. Regular RACF audits
 2. Review unauthorized attempts
 3. Monitor privileged access
@@ -492,6 +542,7 @@ VERBEXIT CBFORMAT
 5. Implement separation of duties
 
 ### Performance
+
 1. Baseline normal operations
 2. Trend analysis
 3. Proactive tuning

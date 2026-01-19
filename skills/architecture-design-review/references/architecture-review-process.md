@@ -1,11 +1,11 @@
 # Architecture Review Process
 
-
 Follow this systematic approach when conducting architecture reviews:
 
 ### Phase 1: Pre-Review Preparation
 
 **1. Gather Architecture Documentation**
+
 ```markdown
 Required Documents:
 - Architecture overview and context
@@ -28,6 +28,7 @@ Optional Documents:
 ```
 
 **2. Understand Context**
+
 ```markdown
 Project Context:
 - Business objectives and goals
@@ -47,6 +48,7 @@ Technical Context:
 ```
 
 **3. Define Review Scope**
+
 ```markdown
 Review Focus Areas:
 ☐ Overall architecture style and patterns

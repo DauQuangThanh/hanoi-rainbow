@@ -7,6 +7,7 @@ This document describes common patterns to recognize in pseudocode and how to ex
 ### 1. CRUD Operations Pattern
 
 **Pseudocode Indicators:**
+
 ```
 create/insert/add
 read/get/fetch/retrieve
@@ -15,6 +16,7 @@ delete/remove
 ```
 
 **Extract:**
+
 - **Data Model:** Entity being manipulated
 - **Operations:** Create, Read, Update, Delete specifications
 - **Validation Rules:** Input constraints
@@ -22,6 +24,7 @@ delete/remove
 - **Audit:** Logging and tracking requirements
 
 **Requirements Template:**
+
 ```
 FR-[ID]: [Entity] Management
 
@@ -54,6 +57,7 @@ Delete Operation:
 ### 2. Validation Pattern
 
 **Pseudocode Indicators:**
+
 ```
 if field is empty/null
 if length > max or < min
@@ -62,12 +66,14 @@ throw error "validation failed"
 ```
 
 **Extract:**
+
 - **Field-Level Rules:** Type, format, length, range
 - **Business Rules:** Cross-field validation, contextual rules
 - **Error Messages:** User-facing validation messages
 - **Error Handling:** How validation failures are reported
 
 **Requirements Template:**
+
 ```
 VR-[ID]: [Field/Entity] Validation
 
@@ -89,6 +95,7 @@ Error Responses:
 ### 3. State Machine Pattern
 
 **Pseudocode Indicators:**
+
 ```
 if state == "initial"
   state = "processing"
@@ -100,6 +107,7 @@ else if state == "processing"
 ```
 
 **Extract:**
+
 - **States:** All possible states
 - **Transitions:** Valid state changes
 - **Triggers:** Events or conditions causing transitions
@@ -107,6 +115,7 @@ else if state == "processing"
 - **Actions:** Side effects during transition
 
 **Requirements Template:**
+
 ```
 SM-[ID]: [Entity] State Machine
 
@@ -135,6 +144,7 @@ Invariants:
 ### 4. Workflow/Pipeline Pattern
 
 **Pseudocode Indicators:**
+
 ```
 step1()
 result1 = process(input)
@@ -143,6 +153,7 @@ output = finalize(result2)
 ```
 
 **Extract:**
+
 - **Stages:** Sequential processing steps
 - **Data Flow:** Input/output at each stage
 - **Transformations:** How data changes
@@ -150,6 +161,7 @@ output = finalize(result2)
 - **Error Handling:** Failure recovery at each stage
 
 **Requirements Template:**
+
 ```
 WF-[ID]: [Process Name] Workflow
 
@@ -188,6 +200,7 @@ Monitoring:
 ### 5. Calculation/Algorithm Pattern
 
 **Pseudocode Indicators:**
+
 ```
 result = 0
 for each item:
@@ -196,6 +209,7 @@ return result
 ```
 
 **Extract:**
+
 - **Inputs:** Parameters and preconditions
 - **Algorithm:** Steps and logic
 - **Outputs:** Results and format
@@ -203,6 +217,7 @@ return result
 - **Edge Cases:** Boundary conditions
 
 **Requirements Template:**
+
 ```
 ALG-[ID]: [Algorithm Name]
 
@@ -242,6 +257,7 @@ Examples:
 ### 6. Authentication/Authorization Pattern
 
 **Pseudocode Indicators:**
+
 ```
 if not authenticated:
   return "Unauthorized"
@@ -250,6 +266,7 @@ if not hasPermission(user, resource):
 ```
 
 **Extract:**
+
 - **Authentication:** How identity is verified
 - **Authorization:** Permission checking
 - **Roles:** User roles and capabilities
@@ -257,6 +274,7 @@ if not hasPermission(user, resource):
 - **Security Rules:** Access control policies
 
 **Requirements Template:**
+
 ```
 SEC-[ID]: [Resource] Access Control
 
@@ -294,6 +312,7 @@ Audit:
 ### 7. Event-Driven Pattern
 
 **Pseudocode Indicators:**
+
 ```
 on event:
   handle(event)
@@ -301,6 +320,7 @@ on event:
 ```
 
 **Extract:**
+
 - **Events:** Event types and payloads
 - **Handlers:** Processing logic for each event
 - **Publishers:** What generates events
@@ -308,6 +328,7 @@ on event:
 - **Event Flow:** Cascading events
 
 **Requirements Template:**
+
 ```
 EV-[ID]: [Event Name]
 
@@ -327,36 +348,44 @@ Event Definition:
   ```
 
 Publishers:
+
 - [System/Component]: Publishes when [condition]
 
 Subscribers:
+
 - [Handler1]: [What it does with the event]
 - [Handler2]: [What it does with the event]
 
 Processing:
+
 - Delivery: [At-least-once, exactly-once, at-most-once]
 - Ordering: [Guaranteed order or not]
 - Retry: [Retry strategy for failures]
 - Dead Letter: [What happens to failed events]
 
 Cascading Events:
+
 - On success: Trigger [next.event]
 - On failure: Trigger [error.event]
 
 Idempotency:
+
 - Handler must be idempotent: [Yes/No]
 - Deduplication: [Strategy using eventId or other key]
+
 ```
 
 ### 8. Caching Pattern
 
 **Pseudocode Indicators:**
 ```
+
 if cache.has(key):
   return cache.get(key)
 result = fetchFromDatabase(key)
 cache.set(key, result)
 return result
+
 ```
 
 **Extract:**
@@ -368,11 +397,13 @@ return result
 
 **Requirements Template:**
 ```
+
 CACHE-[ID]: [Data Type] Caching
 
 Strategy: [Read-through, write-through, write-behind, cache-aside]
 
 Cache Configuration:
+
 - Storage: [In-memory, Redis, Memcached]
 - Key Format: [Pattern for cache keys]
 - TTL: [Time to live in seconds]
@@ -380,30 +411,36 @@ Cache Configuration:
 - Eviction Policy: [LRU, LFU, FIFO]
 
 Caching Rules:
+
 - Cache: [What data to cache]
 - Don't Cache: [What to exclude]
 - Cache if: [Conditional caching rules]
 
 Invalidation:
+
 - On Update: [Clear affected cache entries]
 - On Delete: [Remove from cache]
 - On Schedule: [Periodic refresh]
 
 Fallback:
+
 - Cache miss: [Fetch from source]
 - Cache error: [Bypass cache, use source]
 - Stale data: [Serve stale or refresh]
 
 Monitoring:
+
 - Hit rate: [Target percentage]
 - Miss rate: [Alert threshold]
 - Memory usage: [Alert threshold]
+
 ```
 
 ### 9. Retry/Resilience Pattern
 
 **Pseudocode Indicators:**
 ```
+
 attempts = 0
 while attempts < maxRetries:
   try:
@@ -412,6 +449,7 @@ while attempts < maxRetries:
   catch error:
     attempts++
     wait exponentialBackoff(attempts)
+
 ```
 
 **Extract:**
@@ -423,9 +461,11 @@ while attempts < maxRetries:
 
 **Requirements Template:**
 ```
+
 RES-[ID]: [Operation] Resilience
 
 Retry Configuration:
+
 - Max Attempts: [Number]
 - Backoff Strategy: [Fixed, Exponential, Jittered]
 - Initial Delay: [Milliseconds]
@@ -433,31 +473,38 @@ Retry Configuration:
 - Multiplier: [For exponential backoff]
 
 Retry Conditions:
+
 - Retry on: [Transient errors, timeouts, 5xx responses]
 - Don't retry on: [4xx errors, business logic errors]
 
 Circuit Breaker:
+
 - Failure Threshold: [Number of failures to open circuit]
 - Timeout: [How long circuit stays open]
 - Half-Open: [Test requests before fully closing]
 
 Timeout:
+
 - Operation Timeout: [Max time for single attempt]
 - Total Timeout: [Max time including all retries]
 
 Fallback:
+
 - On exhausted retries: [Return default, cached value, or error]
 - On circuit open: [Fast fail or return fallback]
 
 Monitoring:
+
 - Track: [Success rate, retry rate, circuit state]
 - Alert: [When circuit opens, high retry rate]
+
 ```
 
 ### 10. Batch Processing Pattern
 
 **Pseudocode Indicators:**
 ```
+
 batch = []
 for each item in items:
   batch.add(item)
@@ -466,6 +513,7 @@ for each item in items:
     batch.clear()
 if batch.size > 0:
   processBatch(batch)
+
 ```
 
 **Extract:**
@@ -476,31 +524,38 @@ if batch.size > 0:
 
 **Requirements Template:**
 ```
+
 BATCH-[ID]: [Operation] Batch Processing
 
 Batch Configuration:
+
 - Batch Size: [Number of items]
 - Max Wait Time: [Process incomplete batch after duration]
 - Max Batch Size: [Upper limit]
 
 Batching Strategy:
+
 - Collect: [How items are accumulated]
 - Trigger: [Size threshold OR time threshold]
 - Processing: [How batch is processed]
 
 Error Handling:
+
 - Partial Success: [Continue, rollback all, or mark failed items]
 - Retry: [Retry entire batch or just failed items]
 - Dead Letter: [Failed items moved to error queue]
 
 Ordering:
+
 - Maintain Order: [Yes/No within batch]
 - Process Order: [Sequential or parallel]
 
 Monitoring:
+
 - Batch size: [Average and max]
 - Processing time: [Per batch]
 - Success rate: [Percentage of items processed]
+
 ```
 
 ## Usage Guide

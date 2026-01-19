@@ -5,16 +5,19 @@
 ### Instance Shapes
 
 **Flexible Shapes** (VM.Standard.E4.Flex, VM.Optimized3.Flex):
+
 - Configure custom OCPU and memory allocation
 - Best for cost optimization and workload-specific sizing
 - Memory-to-OCPU ratio: 1:1 to 64:1 GB per OCPU
 
 **Fixed Shapes** (VM.Standard2.x, VM.Standard3.x):
+
 - Pre-configured OCPU and memory
 - Predictable pricing
 - Use when workload requirements are well-defined
 
 **Bare Metal Shapes** (BM.Standard.E4, BM.DenseIO):
+
 - Dedicated physical server
 - No hypervisor overhead
 - Use for high-performance, latency-sensitive workloads
@@ -36,6 +39,7 @@ oci compute instance launch \
 ```
 
 **Terraform Example**:
+
 ```hcl
 resource "oci_core_instance" "web_server" {
   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
@@ -197,6 +201,7 @@ resource "oci_autoscaling_auto_scaling_configuration" "app_autoscaling" {
 ### Boot Volume Backups
 
 **Automatic Backups**:
+
 ```hcl
 resource "oci_core_volume_backup_policy" "daily_backup" {
   compartment_id = var.compartment_id

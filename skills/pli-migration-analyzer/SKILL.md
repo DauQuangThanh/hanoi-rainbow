@@ -29,6 +29,7 @@ For each PL/I program, extract:
 - **Dependencies**: CALL statements, %INCLUDE directives
 
 Use scripts for automation:
+
 - `extract-structure.py <source_file>` - Extract structural information
 - `analyze-dependencies.sh <directory>` - Generate dependency graph
 - `estimate-complexity.py <source_file>` - Estimate migration effort
@@ -44,6 +45,7 @@ Convert PL/I elements to Java:
 - **Arrays** → Lists or arrays (adjust 1-based to 0-based indexing)
 
 **Critical Type Mapping:**
+
 - `FIXED DECIMAL(n,m)` → `BigDecimal` (**NEVER float/double**)
 - `FIXED BINARY(n)` → `int`, `long`
 - `CHARACTER(n)` → `String`
@@ -52,9 +54,11 @@ Convert PL/I elements to Java:
 ### 4. Generate Java Implementation
 
 Create Java classes using:
+
 - `generate-java-classes.py <data_structure_file>` - Generate POJOs from structures
 
 Ensure:
+
 - BigDecimal for all financial calculations
 - Proper exception handling (no GO TO)
 - Array bounds adjustment (1-based → 0-based)
@@ -79,13 +83,16 @@ Use template: `assets/migration-report-template.md`
 ### Common Conversions
 
 **Procedure to Method:**
+
 ```pli
 CALC_TOTAL: PROCEDURE(qty, price) RETURNS(FIXED DECIMAL(15,2));
     result = qty * price;
     RETURN(result);
 END CALC_TOTAL;
 ```
+
 →
+
 ```java
 public BigDecimal calcTotal(BigDecimal qty, BigDecimal price) {
     return qty.multiply(price);
@@ -93,13 +100,16 @@ public BigDecimal calcTotal(BigDecimal qty, BigDecimal price) {
 ```
 
 **File I/O to Streams:**
+
 ```pli
 DO WHILE(¬eof);
     READ FILE(infile) INTO(rec);
     CALL process_record(rec);
 END;
 ```
+
 →
+
 ```java
 try (BufferedReader reader = Files.newBufferedReader(path)) {
     reader.lines().forEach(this::processRecord);

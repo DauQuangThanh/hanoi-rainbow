@@ -108,22 +108,27 @@ graph TB
 ## 6. Quality Attributes (Targets & Strategies)
 
 ### 6.1 Performance
+
 - Targets: [e.g., 95% < 200ms, 10k TPS]
 - Strategies: caching (Redis), DB replicas + indexes, async jobs
 
 ### 6.2 Scalability
+
 - Targets: [e.g., 100k concurrent users]
 - Strategies: stateless API + HPA, sharding (by user_id), CDN
 
 ### 6.3 Availability & Reliability
+
 - Targets: [e.g., 99.9% uptime]
 - Strategies: multi-AZ, health probes, circuit breakers
 
 ### 6.4 Security
+
 - Baseline: OAuth2 + JWT, RBAC, TLS1.3, AES-256 at rest
 - Scans: SAST, DAST, dependency checks; token lifetimes
 
 ### 6.5 Maintainability & Observability
+
 - Tests: unit/integration/E2E; >80% critical coverage
 - Telemetry: structured logs, metrics (Prometheus), tracing (Jaeger)
 
@@ -156,6 +161,7 @@ graph TB
 ---
 
 **Notes**
+
 - Prefer Mermaid diagrams.
 - Keep values concrete (numbers, versions, URLs).
 - Link to code and schemas wherever possible.

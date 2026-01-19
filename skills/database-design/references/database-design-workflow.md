@@ -1,6 +1,5 @@
 # Database Design Workflow
 
-
 ### 1. Requirements Analysis
 
 **Gather Requirements:**
@@ -92,6 +91,7 @@ Order -> Payment: 1:1 (mandatory)
 **Apply Normalization:**
 
 **First Normal Form (1NF):**
+
 - Eliminate repeating groups
 - Each cell contains atomic values
 
@@ -112,6 +112,7 @@ customer_phones (id, customer_id, phone_number, phone_type)
 ```
 
 **Second Normal Form (2NF):**
+
 - Must be in 1NF
 - Remove partial dependencies (non-key attributes depend on entire primary key)
 
@@ -131,6 +132,7 @@ PK: product_id
 ```
 
 **Third Normal Form (3NF):**
+
 - Must be in 2NF
 - Remove transitive dependencies (non-key attributes depend on other non-key attributes)
 

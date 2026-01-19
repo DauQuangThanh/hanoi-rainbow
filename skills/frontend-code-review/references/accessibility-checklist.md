@@ -3,6 +3,7 @@
 Comprehensive guidelines for WCAG 2.1 AA/AAA compliance and inclusive design.
 
 ## Table of Contents
+
 - [Semantic HTML](#semantic-html)
 - [ARIA Best Practices](#aria-best-practices)
 - [Keyboard Navigation](#keyboard-navigation)
@@ -18,6 +19,7 @@ Comprehensive guidelines for WCAG 2.1 AA/AAA compliance and inclusive design.
 ### Proper Document Structure
 
 **Problem:**
+
 ```html
 <!-- ❌ Div soup with no semantic meaning -->
 <div class="header">
@@ -41,6 +43,7 @@ Comprehensive guidelines for WCAG 2.1 AA/AAA compliance and inclusive design.
 ```
 
 **Solution:**
+
 ```html
 <!-- ✅ Semantic HTML5 elements -->
 <header>
@@ -68,6 +71,7 @@ Comprehensive guidelines for WCAG 2.1 AA/AAA compliance and inclusive design.
 ### Heading Hierarchy
 
 **Problem:**
+
 ```html
 <!-- ❌ Skipping heading levels, multiple h1 -->
 <h1>Page Title</h1>
@@ -77,6 +81,7 @@ Comprehensive guidelines for WCAG 2.1 AA/AAA compliance and inclusive design.
 ```
 
 **Solution:**
+
 ```html
 <!-- ✅ Logical heading hierarchy -->
 <h1>Page Title</h1>
@@ -101,6 +106,7 @@ Comprehensive guidelines for WCAG 2.1 AA/AAA compliance and inclusive design.
 ### Lists
 
 **Problem:**
+
 ```html
 <!-- ❌ Not using list elements for lists -->
 <div>
@@ -111,6 +117,7 @@ Comprehensive guidelines for WCAG 2.1 AA/AAA compliance and inclusive design.
 ```
 
 **Solution:**
+
 ```html
 <!-- ✅ Proper list markup -->
 <ul>
@@ -138,6 +145,7 @@ Comprehensive guidelines for WCAG 2.1 AA/AAA compliance and inclusive design.
 Use semantic HTML first, ARIA only when necessary.
 
 **Problem:**
+
 ```html
 <!-- ❌ Unnecessary ARIA on semantic elements -->
 <button role="button" aria-label="Submit">Submit</button>
@@ -146,6 +154,7 @@ Use semantic HTML first, ARIA only when necessary.
 ```
 
 **Solution:**
+
 ```html
 <!-- ✅ Semantic HTML without redundant ARIA -->
 <button>Submit</button>
@@ -156,6 +165,7 @@ Use semantic HTML first, ARIA only when necessary.
 ### ARIA Labels and Descriptions
 
 **Problem:**
+
 ```jsx
 // ❌ Icon buttons without labels
 <button onClick={handleDelete}>
@@ -169,6 +179,7 @@ Use semantic HTML first, ARIA only when necessary.
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Descriptive aria-label
 <button onClick={handleDelete} aria-label="Delete item">
@@ -199,6 +210,7 @@ Use semantic HTML first, ARIA only when necessary.
 ### Live Regions
 
 **Problem:**
+
 ```jsx
 // ❌ No announcement for dynamic updates
 function Notifications() {
@@ -216,6 +228,7 @@ function Notifications() {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Using aria-live for announcements
 function Notifications() {
@@ -256,6 +269,7 @@ function ErrorAlert({ error }) {
 ### ARIA States
 
 **Problem:**
+
 ```jsx
 // ❌ Visual state not conveyed to AT
 <button onClick={toggleMenu}>
@@ -267,6 +281,7 @@ function ErrorAlert({ error }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Proper ARIA states
 <button 
@@ -302,6 +317,7 @@ function ErrorAlert({ error }) {
 #### Focus Order
 
 **Problem:**
+
 ```jsx
 // ❌ Incorrect tab order with tabindex
 <div>
@@ -312,6 +328,7 @@ function ErrorAlert({ error }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Natural DOM order (no positive tabindex)
 <div>
@@ -339,6 +356,7 @@ function ErrorAlert({ error }) {
 ### Keyboard Event Handlers
 
 **Problem:**
+
 ```jsx
 // ❌ Only mouse events
 <div onClick={handleClick}>
@@ -357,6 +375,7 @@ function ErrorAlert({ error }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Use button for interactive elements
 <button onClick={handleClick}>
@@ -403,6 +422,7 @@ function useKeyboardActivation(callback) {
 ### Skip Links
 
 **Problem:**
+
 ```jsx
 // ❌ No way to skip repetitive navigation
 <div>
@@ -414,6 +434,7 @@ function useKeyboardActivation(callback) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Skip link for keyboard users
 <div>
@@ -619,6 +640,7 @@ function Modal({ isOpen, onClose, title, children }) {
 ### Focus Indicators
 
 **Problem:**
+
 ```css
 /* ❌ Removing focus outline */
 *:focus {
@@ -627,6 +649,7 @@ function Modal({ isOpen, onClose, title, children }) {
 ```
 
 **Solution:**
+
 ```css
 /* ✅ Custom focus styles that meet contrast requirements */
 *:focus {
@@ -656,6 +679,7 @@ function Modal({ isOpen, onClose, title, children }) {
 ### Programmatic Focus
 
 **Problem:**
+
 ```jsx
 // ❌ Not managing focus after actions
 function DeleteButton({ itemId, onDelete }) {
@@ -670,6 +694,7 @@ function DeleteButton({ itemId, onDelete }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Restore focus after deletion
 function ItemList({ items }) {
@@ -707,6 +732,7 @@ function ItemList({ items }) {
 ### Accessible Names
 
 **Problem:**
+
 ```jsx
 // ❌ Empty links and buttons
 <a href="/next">
@@ -719,6 +745,7 @@ function ItemList({ items }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Accessible names via multiple methods
 <a href="/next" aria-label="Next page">
@@ -789,10 +816,12 @@ function SaveButton({ onSave }) {
 ### WCAG Contrast Requirements
 
 **Levels:**
+
 - **AA (Minimum):** 4.5:1 for normal text, 3:1 for large text
 - **AAA (Enhanced):** 7:1 for normal text, 4.5:1 for large text
 
 **Problem:**
+
 ```css
 /* ❌ Insufficient contrast */
 .text {
@@ -807,6 +836,7 @@ function SaveButton({ onSave }) {
 ```
 
 **Solution:**
+
 ```css
 /* ✅ Meets WCAG AA contrast */
 .text {
@@ -831,6 +861,7 @@ function SaveButton({ onSave }) {
 ### Color-Independent Information
 
 **Problem:**
+
 ```jsx
 // ❌ Color as only indicator
 <input type="text" style={{ borderColor: isValid ? 'green' : 'red' }} />
@@ -840,6 +871,7 @@ function SaveButton({ onSave }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Multiple indicators (color + icon + text)
 <div>
@@ -871,6 +903,7 @@ function SaveButton({ onSave }) {
 ### Form Labels
 
 **Problem:**
+
 ```jsx
 // ❌ Placeholder as label
 <input type="text" placeholder="Email" />
@@ -881,6 +914,7 @@ function SaveButton({ onSave }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Proper label association
 <label htmlFor="email">Email</label>
@@ -901,6 +935,7 @@ function SaveButton({ onSave }) {
 ### Error Messages
 
 **Problem:**
+
 ```jsx
 // ❌ Errors not associated with inputs
 <input type="email" />
@@ -908,6 +943,7 @@ function SaveButton({ onSave }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Accessible error messages
 <div>
@@ -931,6 +967,7 @@ function SaveButton({ onSave }) {
 ### Images
 
 **Problem:**
+
 ```jsx
 // ❌ Missing or poor alt text
 <img src="photo.jpg" alt="Photo" />
@@ -938,6 +975,7 @@ function SaveButton({ onSave }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Descriptive alt text
 <img src="photo.jpg" alt="Golden retriever playing fetch in a park" />
@@ -961,12 +999,14 @@ function SaveButton({ onSave }) {
 ### Videos
 
 **Problem:**
+
 ```jsx
 // ❌ Video without captions or transcript
 <video src="presentation.mp4" controls />
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Accessible video
 <video controls>

@@ -1,6 +1,5 @@
 # Configuration Management
 
-
 ### Ansible Playbook Example
 
 ```yaml

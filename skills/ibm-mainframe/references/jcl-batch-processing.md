@@ -3,6 +3,7 @@
 ## JCL Fundamentals
 
 ### Job Statement
+
 ```jcl
 //JOBNAME  JOB (account),'programmer-name',
 //         CLASS=A,
@@ -14,6 +15,7 @@
 ```
 
 **Parameters:**
+
 - **CLASS**: Job class for execution priority
 - **MSGCLASS**: Output class for job logs
 - **MSGLEVEL**: (statements,messages) for job log detail
@@ -22,6 +24,7 @@
 - **TIME**: Maximum execution time (minutes,seconds)
 
 ### EXEC Statement
+
 ```jcl
 //STEPNAME EXEC PGM=program-name,
 //         PARM='parameters',
@@ -31,12 +34,14 @@
 ```
 
 **Or call a procedure:**
+
 ```jcl
 //STEPNAME EXEC procedure-name,
 //         PARM.stepname='parameters'
 ```
 
 ### DD Statement
+
 ```jcl
 //ddname   DD DSN=dataset-name,
 //         DISP=(status,normal-end,abnormal-end),
@@ -48,6 +53,7 @@
 ## Common JCL Patterns
 
 ### 1. Copy Dataset
+
 ```jcl
 //COPY     EXEC PGM=IEBGENER
 //SYSPRINT DD SYSOUT=*
@@ -61,6 +67,7 @@
 ```
 
 ### 2. Sort Data
+
 ```jcl
 //SORT     EXEC PGM=SORT
 //SYSOUT   DD SYSOUT=*
@@ -76,6 +83,7 @@
 ```
 
 ### 3. Conditional Execution
+
 ```jcl
 //STEP1    EXEC PGM=PROG1
 //STEP2    EXEC PGM=PROG2,COND=(0,NE,STEP1)
@@ -83,6 +91,7 @@
 ```
 
 **Or using IF/THEN/ELSE:**
+
 ```jcl
 //STEP1    EXEC PGM=PROG1
 //IF1      IF (STEP1.RC = 0) THEN
@@ -91,6 +100,7 @@
 ```
 
 ### 4. GDG (Generation Data Group)
+
 ```jcl
 //DEFINE   EXEC PGM=IDCAMS
 //SYSPRINT DD SYSOUT=*
@@ -114,12 +124,14 @@ data
 ```
 
 **Reference GDG versions:**
+
 - `(0)` = Current generation
 - `(+1)` = New generation
 - `(-1)` = Previous generation
 - `(-2)` = Two generations back
 
 ### 5. Concatenated Datasets
+
 ```jcl
 //INPUT    DD DSN=FILE1.DATA,DISP=SHR
 //         DD DSN=FILE2.DATA,DISP=SHR
@@ -127,6 +139,7 @@ data
 ```
 
 ### 6. In-stream Data
+
 ```jcl
 //SYSIN    DD *
 input data line 1
@@ -140,6 +153,7 @@ $$
 ```
 
 ### 7. Temporary Datasets
+
 ```jcl
 //TEMP1    DD DSN=&&TEMPFILE,
 //         DISP=(NEW,PASS),
@@ -150,6 +164,7 @@ $$
 ## JCL Utilities
 
 ### IEFBR14 - Allocate/Delete
+
 ```jcl
 //ALLOC    EXEC PGM=IEFBR14
 //NEWFILE  DD DSN=MY.NEW.FILE,
@@ -163,6 +178,7 @@ $$
 ```
 
 ### IEBGENER - Copy
+
 ```jcl
 //COPY     EXEC PGM=IEBGENER
 //SYSPRINT DD SYSOUT=*
@@ -175,6 +191,7 @@ $$
 ```
 
 ### IEBCOPY - Copy PDS
+
 ```jcl
 //COPY     EXEC PGM=IEBCOPY
 //SYSPRINT DD SYSOUT=*
@@ -187,6 +204,7 @@ $$
 ```
 
 ### IEBUPDTE - Update PDS
+
 ```jcl
 //UPDATE   EXEC PGM=IEBUPDTE
 //SYSPRINT DD SYSOUT=*
@@ -201,6 +219,7 @@ source line 2
 ```
 
 ### DFSORT - Sort/Merge
+
 ```jcl
 //SORT     EXEC PGM=SORT
 //SYSOUT   DD SYSOUT=*
@@ -214,6 +233,7 @@ source line 2
 ```
 
 **Advanced sort:**
+
 ```jcl
 //SYSIN    DD *
   SORT FIELDS=(1,10,CH,A)
@@ -226,6 +246,7 @@ source line 2
 ```
 
 ### IDCAMS - Catalog Management
+
 ```jcl
 //IDCAMS   EXEC PGM=IDCAMS
 //SYSPRINT DD SYSOUT=*
@@ -257,6 +278,7 @@ source line 2
 ## Procedures (PROCs)
 
 ### Define Procedure
+
 ```jcl
 //MYPROC   PROC MBR=,LIB=USER.LOAD
 //STEP1    EXEC PGM=PROG1
@@ -269,11 +291,13 @@ source line 2
 ```
 
 ### Call Procedure
+
 ```jcl
 //CALL     EXEC MYPROC,MBR=TEST01,LIB=PROD.LOAD
 ```
 
 ### Override DD in Procedure
+
 ```jcl
 //CALL     EXEC MYPROC
 //STEP1.INPUT DD DSN=ALTERNATE.INPUT,DISP=SHR
@@ -283,6 +307,7 @@ source line 2
 ## Symbolic Parameters
 
 ### JCL Symbols
+
 ```jcl
 //SET1     SET ENV='PROD'
 //SET2     SET DATE='&YYMMDD'
@@ -291,6 +316,7 @@ source line 2
 ```
 
 **System symbols:**
+
 - `&SYSUID` - User ID
 - `&SYSDATE` - Current date (yyddd)
 - `&SYSTIME` - Current time (hhmm)
@@ -299,6 +325,7 @@ source line 2
 - `&LYEAR` - Year (yyyy)
 
 ### Example with Symbols
+
 ```jcl
 //BACKUP   JOB
 //SET1     SET DATE='&LYEAR&LMONTH&LDAY'
@@ -315,6 +342,7 @@ source line 2
 ### Job Dependencies
 
 **Using JES2 job dependency:**
+
 ```jcl
 //JOB1     JOB
 //STEP1    EXEC PGM=PROG1
@@ -326,6 +354,7 @@ source line 2
 ```
 
 **Using automation tools:**
+
 - TWS (Tivoli Workload Scheduler)
 - Control-M
 - CA-7
@@ -334,11 +363,13 @@ source line 2
 ### Job Submission Automation
 
 **Submit via TSO SUBMIT:**
+
 ```
 SUBMIT 'MY.JCL(JOBNAME)'
 ```
 
 **Submit via automation:**
+
 ```rexx
 /* REXX script */
 QUEUE "//JOBNAME  JOB"
@@ -351,6 +382,7 @@ QUEUE "//STEP1    EXEC PGM=IEFBR14"
 ### Efficient JCL Practices
 
 1. **Block size optimization:**
+
 ```jcl
 //FILE     DD DSN=MY.DATA,
 //         DCB=(RECFM=FB,LRECL=80,BLKSIZE=27920)
@@ -358,14 +390,16 @@ QUEUE "//STEP1    EXEC PGM=IEFBR14"
 /* For 3390: ~27920 for LRECL=80 */
 ```
 
-2. **Space allocation:**
+1. **Space allocation:**
+
 ```jcl
 //FILE     DD SPACE=(CYL,(primary,secondary),RLSE)
 /* Use RLSE to release unused space */
 /* Allocate enough primary to avoid secondary extends */
 ```
 
-3. **Temporary datasets:**
+1. **Temporary datasets:**
+
 ```jcl
 //TEMP     DD DSN=&&TEMP,
 //         DISP=(NEW,PASS),
@@ -373,7 +407,8 @@ QUEUE "//STEP1    EXEC PGM=IEFBR14"
 //         UNIT=VIO  /* Virtual I/O in memory */
 ```
 
-4. **Concatenation order:**
+1. **Concatenation order:**
+
 ```jcl
 /* Put most frequently accessed first */
 //STEPLIB  DD DSN=FREQUENT.LOAD,DISP=SHR
@@ -383,6 +418,7 @@ QUEUE "//STEP1    EXEC PGM=IEFBR14"
 ### Parallel Execution
 
 **Independent steps:**
+
 ```jcl
 //STEP1A   EXEC PGM=PROG1A
 //STEP1B   EXEC PGM=PROG1B
@@ -397,6 +433,7 @@ Submit multiple independent jobs to run in parallel.
 ### Return Codes
 
 **Check in JCL:**
+
 ```jcl
 //STEP1    EXEC PGM=PROG1
 //IF1      IF (STEP1.RC = 0) THEN
@@ -407,6 +444,7 @@ Submit multiple independent jobs to run in parallel.
 ```
 
 **Condition codes:**
+
 ```jcl
 //STEP2    EXEC PGM=PROG2,COND=(4,LT,STEP1)
 /* Execute STEP2 if STEP1 RC < 4 */
@@ -417,6 +455,7 @@ Submit multiple independent jobs to run in parallel.
 ### ABEND Handling
 
 **Catch ABEND:**
+
 ```jcl
 //STEP1    EXEC PGM=PROG1
 //IF1      IF (STEP1.ABEND = TRUE) THEN
@@ -425,6 +464,7 @@ Submit multiple independent jobs to run in parallel.
 ```
 
 **Common ABENDs:**
+
 - **S0C7**: Data exception (invalid numeric)
 - **S0C4**: Protection exception (memory access)
 - **S806**: Program not found
@@ -436,6 +476,7 @@ Submit multiple independent jobs to run in parallel.
 ### Dynamic Allocation
 
 **IEFBR14 with dynamic:**
+
 ```jcl
 //ALLOC    EXEC PGM=IKJEFT01
 //SYSTSPRT DD SYSOUT=*
@@ -451,6 +492,7 @@ Submit multiple independent jobs to run in parallel.
 ### JCL Include
 
 **Member in JCLLIB:**
+
 ```jcl
 //MYJOB    JOB
 //         JCLLIB ORDER=MY.PROCLIB
@@ -459,6 +501,7 @@ Submit multiple independent jobs to run in parallel.
 ```
 
 **COMMON member:**
+
 ```jcl
 //STEPLIB  DD DSN=MY.LOAD.LIB,DISP=SHR
 //SYSPRINT DD SYSOUT=*
@@ -478,12 +521,14 @@ Submit multiple independent jobs to run in parallel.
 ## Best Practices
 
 ### Naming Conventions
+
 - Job names: 8 characters max, alphanumeric
 - Step names: meaningful, describe function
 - DD names: standard names (SYSOUT, SYSPRINT, etc.)
 - Dataset names: hierarchical, logical grouping
 
 ### Documentation
+
 ```jcl
 //*********************************************************
 //* Job: MONTHEND                                        *
@@ -496,12 +541,14 @@ Submit multiple independent jobs to run in parallel.
 ```
 
 ### Testing
+
 1. Test with small datasets first
 2. Use TYPRUN=SCAN to check syntax
 3. Validate with COND=(0,EQ) for conditional testing
 4. Keep test and production jobs separate
 
 ### Maintenance
+
 1. Use procedures for repeated logic
 2. Symbolic parameters for flexibility
 3. Comment complex logic
@@ -513,33 +560,39 @@ Submit multiple independent jobs to run in parallel.
 ### JCL Errors
 
 **JCL ERROR:**
+
 - Syntax errors in JCL statements
 - Check JESMSGLG for details
 
 **S806 (Program not found):**
+
 ```jcl
 //STEPLIB  DD DSN=CORRECT.LOAD.LIB,DISP=SHR
 ```
 
 **S013 (OPEN error):**
+
 - Dataset not found
 - DISP conflict
 - Volume not mounted
 - Insufficient space
 
 **S0C4 (Protection):**
+
 - Program error accessing memory
 - Check SYSUDUMP/SYSABEND
 
 ### Performance Issues
 
 **Long run time:**
+
 1. Check sort efficiency
 2. Optimize I/O
 3. Review dataset allocation
 4. Check for contention
 
 **Space issues:**
+
 ```jcl
 /* Use RLSE to return unused space */
 //FILE     DD SPACE=(CYL,(10,5),RLSE)
@@ -555,6 +608,7 @@ Submit multiple independent jobs to run in parallel.
 ### Spring Batch Equivalent
 
 **JCL batch job:**
+
 ```jcl
 //DAILY    JOB
 //STEP1    EXEC PGM=EXTRACT
@@ -563,6 +617,7 @@ Submit multiple independent jobs to run in parallel.
 ```
 
 **Spring Batch:**
+
 ```java
 @Bean
 public Job dailyJob() {

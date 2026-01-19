@@ -1,6 +1,7 @@
 # Monitoring & Operations
 
 ## Table of Contents
+
 - [Cloud Monitoring](#cloud-monitoring)
 - [Log Analysis](#log-analysis)
 - [Activity Tracker](#activity-tracker)
@@ -31,6 +32,7 @@ ibmcloud resource service-key-create my-monitoring-key \
 ### Configure Agents
 
 **Kubernetes:**
+
 ```bash
 # Get access key
 MONITORING_KEY=$(ibmcloud resource service-key my-monitoring-key --output json | jq -r '.credentials.Sysdig Access Key')
@@ -46,6 +48,7 @@ kubectl apply -f https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/m
 ```
 
 **Virtual Server:**
+
 ```bash
 # Download and install agent
 curl -sL https://ibm.biz/install-sysdig-agent | \
@@ -57,6 +60,7 @@ curl -sL https://ibm.biz/install-sysdig-agent | \
 ### Metrics and Dashboards
 
 **Key Metrics:**
+
 - CPU utilization
 - Memory usage
 - Disk I/O
@@ -65,6 +69,7 @@ curl -sL https://ibm.biz/install-sysdig-agent | \
 - Error rates
 
 **Create Alert:**
+
 ```bash
 # Via API
 curl -X POST https://us-south.monitoring.cloud.ibm.com/api/alerts \
@@ -106,6 +111,7 @@ ibmcloud resource service-key-create my-logs-key \
 ### Configure Log Sources
 
 **Kubernetes:**
+
 ```bash
 # Get ingestion key
 LOGGING_KEY=$(ibmcloud resource service-key my-logs-key --output json | jq -r '.credentials."ingestion_key"')
@@ -119,6 +125,7 @@ kubectl apply -f https://assets.us-south.logging.cloud.ibm.com/clients/logdna-ag
 ```
 
 **Application Logging (Node.js):**
+
 ```javascript
 const logger = require('@logdna/logger');
 
@@ -138,6 +145,7 @@ log.error('Database connection failed', { error: err.message });
 ### Log Queries
 
 **Search Examples:**
+
 ```
 # Find errors
 level:error
@@ -188,26 +196,31 @@ ibmcloud at route create \
 ### Common Audit Queries
 
 **IAM Changes:**
+
 ```
 action:iam-access-management.policy.*
 ```
 
 **Resource Creation:**
+
 ```
 action:*.create outcome:success
 ```
 
 **Failed Login Attempts:**
+
 ```
 action:iam-identity.user-apikey.login outcome:failure
 ```
 
 **Data Access (COS):**
+
 ```
 target.typeURI:cloud-object-storage/bucket action:cloud-object-storage.object.read
 ```
 
 **Database Changes:**
+
 ```
 target.typeURI:databases-for-postgresql action:databases-for-postgresql.*
 ```
@@ -233,6 +246,7 @@ ibmcloud billing org-usage <ORG-ID> --month 2024-01
 ### Cost Estimation
 
 **Terraform Cost Estimation:**
+
 ```bash
 # Using Infracost
 infracost breakdown --path .
@@ -266,6 +280,7 @@ Project: myapp
 ### Cost Optimization Tips
 
 **Compute:**
+
 - Use Code Engine/Functions for variable workloads
 - Right-size virtual servers and worker nodes
 - Use reserved instances for predictable workloads
@@ -273,18 +288,21 @@ Project: myapp
 - Stop dev/test resources after hours
 
 **Storage:**
+
 - Use Smart Tier for Object Storage
 - Delete unused snapshots
 - Implement lifecycle policies
 - Use appropriate storage classes
 
 **Database:**
+
 - Right-size CPU, memory, disk
 - Use read replicas efficiently
 - Delete old backups
 - Monitor query performance
 
 **Network:**
+
 - Use private endpoints (free data transfer)
 - Enable CDN caching
 - Optimize Direct Link bandwidth
@@ -296,27 +314,32 @@ Project: myapp
 ### Incident Response Process
 
 **1. Detection:**
+
 - Monitoring alerts
 - Log analysis
 - User reports
 - Health checks
 
 **2. Triage:**
+
 - Assess severity (P1-P4)
 - Identify affected services
 - Determine impact
 
 **3. Investigation:**
+
 - Check logs and metrics
 - Review recent changes
 - Analyze error patterns
 
 **4. Resolution:**
+
 - Apply fix
 - Verify recovery
 - Document root cause
 
 **5. Post-Mortem:**
+
 - Root cause analysis
 - Action items
 - Prevention measures
@@ -324,23 +347,27 @@ Project: myapp
 ### Severity Levels
 
 **P1 - Critical:**
+
 - Complete service outage
 - Data loss
 - Security breach
 - Response: Immediate (24/7)
 
 **P2 - High:**
+
 - Significant degradation
 - Partial outage
 - Workaround available
 - Response: < 1 hour
 
 **P3 - Medium:**
+
 - Minor impact
 - Minimal users affected
 - Response: < 4 hours
 
 **P4 - Low:**
+
 - Cosmetic issues
 - Enhancement requests
 - Response: Best effort
@@ -369,6 +396,7 @@ ibmcloud sl ticket update <TICKET-ID> \
 ### Application Performance
 
 **Best Practices:**
+
 1. **Caching**: Use Redis for session/data caching
 2. **CDN**: Serve static assets via Cloud Internet Services
 3. **Database**: Optimize queries, add indexes
@@ -380,6 +408,7 @@ ibmcloud sl ticket update <TICKET-ID> \
 ### Database Performance
 
 **PostgreSQL Optimization:**
+
 ```sql
 -- Analyze table statistics
 ANALYZE users;
@@ -400,6 +429,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = 'user@example.com';
 ### Monitoring Performance
 
 **Key Metrics:**
+
 - Response time (p50, p95, p99)
 - Throughput (requests/sec)
 - Error rate
@@ -409,6 +439,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = 'user@example.com';
 - Cache hit rate
 
 **Set Performance Budgets:**
+
 - Page load: < 2 seconds
 - API response: < 500ms
 - Database query: < 100ms

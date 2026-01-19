@@ -1,11 +1,11 @@
 # Migration Types
 
-
 ### 1. Homogeneous Database Migration
 
 **Definition:** Same database engine, different version or platform
 
 **Examples:**
+
 - PostgreSQL 11 → PostgreSQL 15
 - MySQL 5.7 → MySQL 8.0
 - On-premise PostgreSQL → AWS RDS PostgreSQL

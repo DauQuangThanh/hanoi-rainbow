@@ -10,13 +10,11 @@ description: Designs comprehensive integration testing strategies including API 
 
 Designs comprehensive integration testing strategies including API testing, database testing, microservices testing, end-to-end testing, and test automation frameworks
 
-
 ## Core Capabilities
 
 1. **Core Capability 1** - Description
 2. **Core Capability 2** - Description
 3. **Core Capability 3** - Description
-
 
 ## Quick Start
 
@@ -26,7 +24,6 @@ Designs comprehensive integration testing strategies including API testing, data
 2. Apply appropriate patterns
 3. Validate and test results
 4. Document findings and recommendations
-
 
 ## Detailed Topics
 
@@ -76,4 +73,3 @@ Load reference files based on specific needs:
   - Working with related functionality
   - Need specific patterns or examples
   - Require detailed guidance
-

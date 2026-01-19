@@ -3,6 +3,7 @@
 Practical examples showing common issues and their improvements.
 
 ## Table of Contents
+
 - [Ambiguous Requirements Examples](#ambiguous-requirements-examples)
 - [Untestable Requirements Examples](#untestable-requirements-examples)
 - [Conflict Examples](#conflict-examples)
@@ -15,17 +16,20 @@ Practical examples showing common issues and their improvements.
 ### Example 1: Performance Requirements
 
 **❌ Poor (Ambiguous)**:
+
 ```
 REQ-045: The system shall be fast and responsive.
 ```
 
 **Issues**:
+
 - "Fast" is subjective - what's fast for one user may be slow for another
 - "Responsive" is vague - no measurable criteria
 - No context - fast for which operations?
 - No baseline - how fast is acceptable?
 
 **✅ Good (Clear)**:
+
 ```
 REQ-045: The system shall respond to user search queries within 2 seconds for 95% of requests under normal load (up to 1,000 concurrent users).
 
@@ -40,17 +44,20 @@ Acceptance Criteria:
 ### Example 2: User Interface Requirements
 
 **❌ Poor (Ambiguous)**:
+
 ```
 REQ-067: The application shall have a user-friendly interface that is intuitive and easy to use.
 ```
 
 **Issues**:
+
 - "User-friendly", "intuitive", "easy" are subjective
 - No measurable success criteria
 - Cannot be tested objectively
 - Different users have different skill levels
 
 **✅ Good (Clear)**:
+
 ```
 REQ-067: The application shall enable new users to complete core tasks without training.
 
@@ -65,17 +72,20 @@ Measurable Criteria:
 ### Example 3: Security Requirements
 
 **❌ Poor (Ambiguous)**:
+
 ```
 REQ-089: The system shall be secure and protect user data.
 ```
 
 **Issues**:
+
 - "Secure" is too broad - what aspects of security?
 - "Protect" is vague - protect from what threats?
 - No specific mechanisms defined
 - Not testable as written
 
 **✅ Good (Clear)**:
+
 ```
 REQ-089: The system shall protect user data through the following security controls:
 
@@ -103,17 +113,20 @@ REQ-089: The system shall protect user data through the following security contr
 ### Example 4: Scalability Requirements
 
 **❌ Poor (Untestable)**:
+
 ```
 REQ-102: The system shall be highly scalable to support future growth.
 ```
 
 **Issues**:
+
 - "Highly scalable" has no measurable definition
 - "Future growth" is undefined - how much growth?
 - No clear test pass/fail criteria
 - Cannot verify "shall be scalable"
 
 **✅ Good (Testable)**:
+
 ```
 REQ-102: The system architecture shall support horizontal scaling to handle increased load.
 
@@ -133,17 +146,20 @@ Verification Method:
 ### Example 5: Maintainability Requirements
 
 **❌ Poor (Untestable)**:
+
 ```
 REQ-115: The application code shall be maintainable and follow best practices.
 ```
 
 **Issues**:
+
 - "Maintainable" is subjective
 - "Best practices" vary by team/organization
 - No objective measurement
 - Cannot determine pass/fail
 
 **✅ Good (Testable)**:
+
 ```
 REQ-115: The application code shall meet the following maintainability criteria:
 
@@ -170,18 +186,21 @@ Verification Method:
 ### Example 6: Priority Conflicts
 
 **❌ Conflicting Requirements**:
+
 ```
 REQ-125: Users shall provide a phone number during registration. [Priority: Critical]
 REQ-187: Phone number shall be optional to reduce registration friction. [Priority: Critical]
 ```
 
 **Issues**:
+
 - Direct contradiction: mandatory vs optional
 - Both marked Critical priority - cannot both be essential
 - Different stakeholders likely have different objectives
 - Developers cannot implement both
 
 **✅ Resolved Requirement**:
+
 ```
 REQ-125: Users shall provide an email address during registration (mandatory).
 
@@ -203,18 +222,21 @@ Stakeholders Consulted: Product Owner (Sarah), UX Lead (Mike), Security (Tom)
 ### Example 7: Technical Conflicts
 
 **❌ Conflicting Requirements**:
+
 ```
 REQ-145: System shall provide real-time synchronization across all devices with < 1 second delay.
 REQ-167: System shall work offline and sync changes when connection is restored.
 ```
 
 **Issues**:
+
 - Real-time sync requires constant connection
 - Offline mode means no connectivity
 - Conflict in architectural approach
 - Need to clarify expected behavior
 
 **✅ Resolved Requirements**:
+
 ```
 REQ-145: System shall provide near-real-time synchronization when devices are online.
 
@@ -243,6 +265,7 @@ Architecture: Event sourcing with local-first approach using CRDTs for conflict-
 ### Example 8: User Story with Poor Acceptance Criteria
 
 **❌ Poor User Story**:
+
 ```
 US-045: As a user, I want to search for products so that I can find what I need.
 
@@ -253,6 +276,7 @@ Acceptance Criteria:
 ```
 
 **Issues**:
+
 - Criteria are vague ("search works" - how?)
 - No specific scenarios defined
 - No error cases handled
@@ -260,6 +284,7 @@ Acceptance Criteria:
 - No edge cases
 
 **✅ Good User Story**:
+
 ```
 US-045: As a customer, I want to search for products by keyword so that I can quickly find items I'm interested in purchasing.
 
@@ -313,6 +338,7 @@ Definition of Done:
 ### Example 9: User Story Following INVEST Principles
 
 **✅ Good User Story (INVEST)**:
+
 ```
 US-078: As a returning customer, I want to reorder items from my order history with one click so that I can quickly purchase items I buy regularly.
 
@@ -373,11 +399,13 @@ INVEST Check:
 ### Example 10: Performance Requirements
 
 **❌ Poor NFR**:
+
 ```
 NFR-001: The system shall have good performance.
 ```
 
 **✅ Good NFR**:
+
 ```
 NFR-001: Performance - Response Time
 
@@ -414,11 +442,13 @@ Acceptance: All targets must be met before production release
 ### Example 11: Availability Requirements
 
 **❌ Poor NFR**:
+
 ```
 NFR-015: The system should be highly available.
 ```
 
 **✅ Good NFR**:
+
 ```
 NFR-015: Availability & Uptime
 
@@ -469,6 +499,7 @@ Penalties: SLA credits if uptime < 99.9% (per contract terms)
 ### Example 12: BRD Section Review
 
 **Original BRD Section**:
+
 ```markdown
 ## 3.2 User Management
 
@@ -497,6 +528,7 @@ The system needs user management capabilities. Users should be able to register,
    - No measurable security criteria
 
 **Improved BRD Section**:
+
 ```markdown
 ## 3.2 User Management
 
@@ -640,6 +672,7 @@ REQ-261: The system shall comply with GDPR requirements:
 ```
 
 **Review Summary**:
+
 - Original: 4 vague sentences
 - Improved: 21 specific, testable requirements
 - Added: Security controls, workflows, admin capabilities

@@ -1,6 +1,5 @@
 # Authentication & Authorization
 
-
 ### JWT Authentication
 
 ```typescript

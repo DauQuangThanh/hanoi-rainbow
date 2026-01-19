@@ -1,15 +1,16 @@
 # Migration Strategies
 
-
 ### 1. Rehost (Lift and Shift)
 
 **When to Use:**
+
 - Quick migration needed
 - Minimal changes acceptable
 - Infrastructure cost reduction primary goal
 - Low risk tolerance
 
 **Approach:**
+
 ```markdown
 Steps:
 1. Provision equivalent cloud infrastructure
@@ -30,11 +31,13 @@ Example: Move VM-based app to AWS EC2
 ### 2. Replatform (Lift and Reshape)
 
 **When to Use:**
+
 - Want some cloud benefits without full rewrite
 - Database or runtime modernization beneficial
 - Balanced approach needed
 
 **Approach:**
+
 ```markdown
 Steps:
 1. Identify platform upgrades (e.g., DB2 → PostgreSQL)
@@ -56,11 +59,13 @@ Example: Migrate app to managed services
 ### 3. Refactor (Re-architect)
 
 **When to Use:**
+
 - Significant business value from modernization
 - Current architecture limiting business
 - Long-term investment warranted
 
 **Approach:**
+
 ```markdown
 Steps:
 1. Design target microservices architecture
@@ -83,11 +88,13 @@ Example: Monolith to microservices
 ### 4. Strangler Fig Pattern (Recommended)
 
 **When to Use:**
+
 - Minimize risk during large migrations
 - Maintain business continuity essential
 - Gradual migration preferred
 
 **Approach:**
+
 ```markdown
 Phase 1: Setup Infrastructure
 - Deploy API gateway/proxy
@@ -124,11 +131,13 @@ Week 21-24: Legacy decommissioned
 ### 5. Big Bang Migration
 
 **When to Use:**
+
 - Small, simple application
 - Short maintenance window acceptable
 - Testing fully validates migration
 
 **Approach:**
+
 ```markdown
 Preparation:
 - Build complete target system
@@ -157,6 +166,7 @@ Mon 8am: Users on new system
 ### Mainframe Applications
 
 **Challenges:**
+
 - COBOL, JCL, CICS legacy code
 - Tightly coupled architecture
 - Complex batch processing dependencies
@@ -193,6 +203,7 @@ Phase 4: Data Migration (Months 19-24)
 ```
 
 **Tools:**
+
 - Micro Focus COBOL Compiler for interim modernization
 - AWS Mainframe Modernization or Azure Mainframe Migration
 - Data replication: Precisely Connect, Qlik Replicate, AWS DMS
@@ -203,6 +214,7 @@ Phase 4: Data Migration (Months 19-24)
 ### Monolithic Web Applications
 
 **Challenges:**
+
 - Single deployment unit (can't scale components independently)
 - Shared database (tight coupling)
 - Codebase sprawl (millions of lines)
@@ -247,6 +259,7 @@ Phase 5: Retire Monolith (Months 16-18)
 ```
 
 **Architecture Patterns:**
+
 - API Gateway for request routing (Kong, Apigee)
 - Service mesh for inter-service communication (Istio, Linkerd)
 - Event bus for asynchronous communication (Kafka, RabbitMQ)
@@ -257,6 +270,7 @@ Phase 5: Retire Monolith (Months 16-18)
 ### On-Premise to Cloud Migration
 
 **Challenges:**
+
 - Network connectivity and latency
 - Security and compliance requirements
 - Cost optimization needs
@@ -342,6 +356,7 @@ Priority 3 (Months 9-15): Business-critical applications
 ### Microservices to Microservices (Cloud-to-Cloud)
 
 **Challenges:**
+
 - Different cloud provider APIs and services
 - Data residency and compliance requirements
 - Minimizing downtime during migration
@@ -391,6 +406,7 @@ Phase 5: Decommission Source (Month 10)
 ```
 
 **Multi-Cloud Considerations:**
+
 - Use Kubernetes for portability across clouds
 - Terraform for infrastructure as code
 - Avoid cloud-specific services during migration
@@ -415,24 +431,28 @@ Phase 5: Decommission Source (Month 10)
 ## Key Decision Factors
 
 **Choose Strangler Fig when:**
+
 - Application is business-critical with high uptime requirements (>99.9%)
 - Complexity is high (>100K lines of code, >10 integrations)
 - Risk tolerance is low
 - Team can commit to 12-18 month timeline
 
 **Choose Big Bang when:**
+
 - Application is simple (<10K lines of code, <5 integrations)
 - Maintenance window is acceptable (4-8 hours)
 - Comprehensive testing validates migration
 - Quick migration is priority
 
 **Choose Phased when:**
+
 - Multi-tenant or multi-regional deployment
 - Can isolate users/regions for migration
 - Want to validate approach before full rollout
 - Medium risk tolerance acceptable
 
 **Choose Lift and Shift when:**
+
 - Speed is critical (need to migrate in 1-3 months)
 - Budget is constrained
 - Current architecture is acceptable

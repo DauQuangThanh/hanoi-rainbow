@@ -1,6 +1,5 @@
 # Performance Optimization
 
-
 ### Query Optimization
 
 ```sql

@@ -68,8 +68,7 @@
 ### Edge Cases
 
 <!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
+  ACTION REQUIRED: The content in this section represents placeholders. Fill them out with the right edge cases.
 -->
 
 - What happens when [boundary condition]?
@@ -78,8 +77,7 @@
 ## Requirements *(mandatory)*
 
 <!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right functional requirements.
+  ACTION REQUIRED: The content in this section represents placeholders. Fill them out with the right functional requirements.
 -->
 
 ### Functional Requirements
@@ -103,8 +101,7 @@
 ## Success Criteria *(mandatory)*
 
 <!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
+  ACTION REQUIRED: Define measurable success criteria. These must be technology-agnostic and measurable.
 -->
 
 ### Measurable Outcomes

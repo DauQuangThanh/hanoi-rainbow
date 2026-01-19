@@ -22,6 +22,7 @@ Design tokens are the visual design atoms of a design system—specifically, the
 ### Color Tokens
 
 **Token Structure:**
+
 ```yaml
 # Semantic color tokens (preferred)
 color:
@@ -48,6 +49,7 @@ color:
 ```
 
 **Review Checklist:**
+
 - [ ] Semantic naming used (not colors like "blue-500")
 - [ ] Sufficient contrast ratios for accessibility
 - [ ] Dark mode tokens defined if applicable
@@ -57,6 +59,7 @@ color:
 - [ ] Color tokens documented with usage guidelines
 
 **Common Issues:**
+
 - ❌ Hardcoded hex values instead of token references
 - ❌ Too many color variations (e.g., 15 shades of blue)
 - ❌ Inconsistent semantic naming (success vs. positive)
@@ -66,6 +69,7 @@ color:
 ### Typography Tokens
 
 **Token Structure:**
+
 ```yaml
 typography:
   font-family:
@@ -100,6 +104,7 @@ typography:
 ```
 
 **Review Checklist:**
+
 - [ ] Type scale follows consistent ratio (1.2x, 1.25x, 1.5x)
 - [ ] Line heights appropriate for font sizes
 - [ ] Font weights available and used consistently
@@ -111,6 +116,7 @@ typography:
 ### Spacing Tokens
 
 **Token Structure:**
+
 ```yaml
 spacing:
   0: '0'
@@ -128,6 +134,7 @@ spacing:
 ```
 
 **Review Checklist:**
+
 - [ ] Spacing scale follows consistent progression (typically 4px base)
 - [ ] Limited number of spacing values
 - [ ] Spacing tokens used for margins, padding, gaps
@@ -138,6 +145,7 @@ spacing:
 ### Shadow Tokens
 
 **Token Structure:**
+
 ```yaml
 shadow:
   sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
@@ -148,6 +156,7 @@ shadow:
 ```
 
 **Review Checklist:**
+
 - [ ] Shadow scale indicates elevation hierarchy
 - [ ] Consistent shadow usage across similar components
 - [ ] Shadows subtle and not distracting
@@ -156,6 +165,7 @@ shadow:
 ### Border Radius Tokens
 
 **Token Structure:**
+
 ```yaml
 border-radius:
   none: '0'
@@ -169,6 +179,7 @@ border-radius:
 ```
 
 **Review Checklist:**
+
 - [ ] Consistent border radius usage
 - [ ] Limited number of radius values
 - [ ] Border radius appropriate for component size
@@ -181,6 +192,7 @@ border-radius:
 ### Button Component
 
 **States Required:**
+
 - Default (rest state)
 - Hover
 - Active/Pressed
@@ -189,11 +201,13 @@ border-radius:
 - Loading
 
 **Variants:**
+
 - **Style**: Primary, Secondary, Tertiary, Danger, Ghost
 - **Size**: Small, Medium, Large
 - **Icon**: Icon left, Icon right, Icon only
 
 **Review Checklist:**
+
 - [ ] All states designed and visually distinct
 - [ ] Focus indicator clearly visible (3px outline minimum)
 - [ ] Disabled state clearly indicates unavailability (reduced opacity, no hover)
@@ -205,6 +219,7 @@ border-radius:
 - [ ] Destructive actions use danger variant
 
 **Example Specifications:**
+
 ```yaml
 Button:
   sizes:
@@ -236,6 +251,7 @@ Button:
 ### Input Field Component
 
 **States Required:**
+
 - Empty (placeholder visible)
 - Filled (user entered text)
 - Focus
@@ -245,6 +261,7 @@ Button:
 - Read-only
 
 **Elements:**
+
 - Label (required)
 - Input field
 - Helper text
@@ -254,6 +271,7 @@ Button:
 - Character count (if applicable)
 
 **Review Checklist:**
+
 - [ ] Label always visible (not using placeholder as label)
 - [ ] Placeholder text provides example, not instructions
 - [ ] Error messages specific and actionable
@@ -268,6 +286,7 @@ Button:
 ### Card Component
 
 **Elements:**
+
 - Container
 - Header (optional)
 - Content area
@@ -276,6 +295,7 @@ Button:
 - Actions (optional)
 
 **Review Checklist:**
+
 - [ ] Padding consistent across card sections
 - [ ] Clickable cards have hover state
 - [ ] Shadow or border defines card boundaries
@@ -287,6 +307,7 @@ Button:
 ### Modal/Dialog Component
 
 **Elements:**
+
 - Backdrop (overlay)
 - Container
 - Header with title
@@ -295,6 +316,7 @@ Button:
 - Footer with actions
 
 **Review Checklist:**
+
 - [ ] Backdrop dims background content
 - [ ] Modal centered and responsive
 - [ ] Close button clearly visible (top-right corner)
@@ -308,6 +330,7 @@ Button:
 ### Dropdown/Select Component
 
 **States:**
+
 - Closed
 - Open
 - Selected
@@ -317,6 +340,7 @@ Button:
 - Error
 
 **Review Checklist:**
+
 - [ ] Current selection clearly visible when closed
 - [ ] Dropdown icon indicates interactivity
 - [ ] Options list easy to scan (good spacing, typography)
@@ -334,12 +358,14 @@ Button:
 ### Grid Systems
 
 **Common Grid Systems:**
+
 - 12-column grid (most flexible)
 - 4-column grid mobile, 8-column tablet, 12-column desktop
 - Flexbox-based responsive grid
 - CSS Grid-based layout system
 
 **Review Checklist:**
+
 - [ ] Grid system consistent across designs
 - [ ] Column count appropriate for breakpoint
 - [ ] Gutters (gaps) consistent
@@ -348,6 +374,7 @@ Button:
 - [ ] Maximum content width defined for readability
 
 **Example Specifications:**
+
 ```yaml
 Grid:
   mobile:
@@ -370,11 +397,13 @@ Grid:
 ### Container Patterns
 
 **Container Types:**
+
 - **Fluid Container**: Full width, adapts to viewport
 - **Fixed Container**: Maximum width with centered content
 - **Constrained Container**: Maximum width with side padding
 
 **Review Checklist:**
+
 - [ ] Container type appropriate for content
 - [ ] Maximum width prevents line length issues
 - [ ] Side padding prevents edge collision on mobile
@@ -384,12 +413,14 @@ Grid:
 ### Spacing Patterns
 
 **Vertical Rhythm:**
+
 - Consistent spacing between sections
 - Larger spacing between major sections
 - Smaller spacing between related elements
 - Spacing scales with heading hierarchy
 
 **Review Checklist:**
+
 - [ ] Vertical spacing consistent throughout design
 - [ ] Related content grouped with less spacing
 - [ ] Unrelated content separated with more spacing
@@ -403,12 +434,14 @@ Grid:
 ### Primary Navigation
 
 **Common Patterns:**
+
 - **Horizontal Navigation Bar**: Links in header, always visible
 - **Hamburger Menu**: Mobile menu, expandable sidebar
 - **Tab Navigation**: Content switching within a page
 - **Sidebar Navigation**: Persistent navigation on left/right
 
 **Review Checklist:**
+
 - [ ] Current location clearly indicated (active state)
 - [ ] Navigation structure logical and intuitive
 - [ ] Mobile navigation appropriate (hamburger, bottom nav)
@@ -420,6 +453,7 @@ Grid:
 ### Breadcrumb Navigation
 
 **Review Checklist:**
+
 - [ ] Breadcrumbs show hierarchy, not history
 - [ ] Current page shown but not clickable
 - [ ] Separators clear (/, >, chevron)
@@ -430,12 +464,14 @@ Grid:
 ### Pagination
 
 **Patterns:**
+
 - **Numbered Pages**: 1, 2, 3, 4, 5
 - **Previous/Next**: Simple navigation
 - **Load More**: Button to fetch more results
 - **Infinite Scroll**: Automatic loading
 
 **Review Checklist:**
+
 - [ ] Current page clearly indicated
 - [ ] Previous/Next buttons always available
 - [ ] Total pages visible
@@ -450,12 +486,14 @@ Grid:
 ### Form Layout
 
 **Patterns:**
+
 - **Single Column**: Easiest to scan, recommended for most forms
 - **Two Column**: For related fields (first name/last name)
 - **Multi-step**: Complex forms broken into steps
 - **Inline Editing**: Edit in place without form submission
 
 **Review Checklist:**
+
 - [ ] Single column layout preferred for simplicity
 - [ ] Related fields grouped visually
 - [ ] Required vs. optional fields clearly marked
@@ -466,12 +504,14 @@ Grid:
 ### Form Validation
 
 **Validation Timing:**
+
 - **On Submit**: Validate when user submits form
 - **On Blur**: Validate when user leaves field
 - **On Change**: Real-time validation (passwords, usernames)
 - **Progressive**: More validation as user progresses
 
 **Review Checklist:**
+
 - [ ] Inline validation provides immediate feedback
 - [ ] Error messages specific and actionable
 - [ ] Error styling clear (red border, error icon)
@@ -483,6 +523,7 @@ Grid:
 ### Form States
 
 **Review Checklist:**
+
 - [ ] Empty state (placeholders, helper text)
 - [ ] Filling state (focus indicators, inline validation)
 - [ ] Submitting state (loading spinner, disabled submit)
@@ -497,12 +538,14 @@ Grid:
 ### Toast/Snackbar Notifications
 
 **Properties:**
+
 - **Duration**: 3-5 seconds typically
 - **Position**: Top-right, bottom-center, or top-center
 - **Types**: Success, Error, Warning, Info
 - **Actions**: Optional close button or action button
 
 **Review Checklist:**
+
 - [ ] Icon indicates message type (✓ success, ✕ error)
 - [ ] Color coding semantic (green success, red error)
 - [ ] Message concise and understandable
@@ -514,12 +557,14 @@ Grid:
 ### Loading States
 
 **Patterns:**
+
 - **Spinner**: Indeterminate loading (circular or linear)
 - **Skeleton Screens**: Content placeholders showing layout
 - **Progress Bar**: Determinate loading with percentage
 - **Optimistic UI**: Show expected result immediately
 
 **Review Checklist:**
+
 - [ ] Loading indicator shown for operations > 1 second
 - [ ] Loading message provides context ("Loading users...")
 - [ ] Skeleton screens match final content layout
@@ -530,12 +575,14 @@ Grid:
 ### Empty States
 
 **Elements:**
+
 - Illustration or icon
 - Headline explaining emptiness
 - Description text
 - Primary action (CTA)
 
 **Review Checklist:**
+
 - [ ] Friendly and helpful tone
 - [ ] Illustration appropriate and not distracting
 - [ ] Clear explanation of why state is empty
@@ -545,6 +592,7 @@ Grid:
 ### Error States
 
 **Review Checklist:**
+
 - [ ] Error message explains what went wrong
 - [ ] Error message explains how to fix it
 - [ ] Technical details hidden (shown in details link)
@@ -559,6 +607,7 @@ Grid:
 ### Table Pattern
 
 **Elements:**
+
 - Table header
 - Sortable columns (with indicators)
 - Row selection (checkboxes)
@@ -567,6 +616,7 @@ Grid:
 - Search/filter
 
 **Review Checklist:**
+
 - [ ] Column headers clear and concise
 - [ ] Sortable columns have indicators
 - [ ] Zebra striping or row borders improve scannability
@@ -580,12 +630,14 @@ Grid:
 ### List Pattern
 
 **Types:**
+
 - **Simple List**: Text items only
 - **List with Avatars**: User lists, contact lists
 - **List with Actions**: Buttons or icons per item
 - **List with Sections**: Grouped lists with headers
 
 **Review Checklist:**
+
 - [ ] List items have adequate spacing
 - [ ] Clickable lists show hover state
 - [ ] Selected item clearly indicated
@@ -596,12 +648,14 @@ Grid:
 ### Chart/Graph Pattern
 
 **Common Charts:**
+
 - Line chart (trends over time)
 - Bar chart (comparisons)
 - Pie/donut chart (proportions)
 - Area chart (cumulative values)
 
 **Review Checklist:**
+
 - [ ] Chart type appropriate for data
 - [ ] Axes labeled clearly
 - [ ] Legend provided if needed
@@ -618,6 +672,7 @@ Grid:
 ### Component Approval Process
 
 **Stages:**
+
 1. **Proposal**: Designer proposes new component or variant
 2. **Review**: Design system team reviews for necessity
 3. **Design**: Component designed with all states and variants
@@ -626,6 +681,7 @@ Grid:
 6. **Release**: Component added to library
 
 **Review Checklist:**
+
 - [ ] Clear process for proposing new components
 - [ ] Design system team reviews proposals
 - [ ] Documentation written before release
@@ -635,6 +691,7 @@ Grid:
 ### Documentation Standards
 
 **Required Documentation:**
+
 - **Component Name**: Clear, descriptive name
 - **Description**: What the component does and when to use it
 - **Variants**: All size/style variants documented
@@ -645,6 +702,7 @@ Grid:
 - **Code Examples**: Implementation examples
 
 **Review Checklist:**
+
 - [ ] Complete documentation for all components
 - [ ] Visual examples provided
 - [ ] Code examples provided
@@ -656,11 +714,13 @@ Grid:
 ### Version Management
 
 **Versioning Strategy:**
+
 - **Major Version** (1.0 → 2.0): Breaking changes
 - **Minor Version** (1.0 → 1.1): New features, backward compatible
 - **Patch Version** (1.0.0 → 1.0.1): Bug fixes
 
 **Review Checklist:**
+
 - [ ] Version number follows semantic versioning
 - [ ] Breaking changes clearly documented
 - [ ] Migration guide provided for major versions
@@ -671,6 +731,7 @@ Grid:
 ### Design Token Management
 
 **Governance:**
+
 - Centralized token repository
 - Token naming conventions enforced
 - Token change request process
@@ -678,6 +739,7 @@ Grid:
 - Versioning for token libraries
 
 **Review Checklist:**
+
 - [ ] All colors, spacing, typography defined as tokens
 - [ ] Token naming follows conventions
 - [ ] New tokens justified (not duplicating existing)
@@ -687,6 +749,7 @@ Grid:
 ### Component Library Maintenance
 
 **Activities:**
+
 - Regular audits for unused components
 - Deprecation of redundant components
 - Updates for accessibility improvements
@@ -694,6 +757,7 @@ Grid:
 - Platform consistency checks
 
 **Review Checklist:**
+
 - [ ] Regular component audits scheduled
 - [ ] Unused components identified and removed
 - [ ] Accessibility continuously improved
@@ -707,6 +771,7 @@ Grid:
 Use this comprehensive checklist when reviewing design system compliance:
 
 ### Component Library
+
 - [ ] Components follow design system patterns
 - [ ] No duplicate components created unnecessarily
 - [ ] Component variants purposeful and limited
@@ -715,6 +780,7 @@ Use this comprehensive checklist when reviewing design system compliance:
 - [ ] New components justified and documented
 
 ### Design Tokens
+
 - [ ] Colors reference tokens, not hardcoded values
 - [ ] Spacing uses token values consistently
 - [ ] Typography references token values
@@ -723,6 +789,7 @@ Use this comprehensive checklist when reviewing design system compliance:
 - [ ] No one-off values created outside token system
 
 ### Documentation
+
 - [ ] New components fully documented
 - [ ] Usage guidelines clear and helpful
 - [ ] Do's and don'ts provided
@@ -731,6 +798,7 @@ Use this comprehensive checklist when reviewing design system compliance:
 - [ ] Related components cross-referenced
 
 ### Accessibility
+
 - [ ] WCAG AA compliance verified
 - [ ] Keyboard navigation supported
 - [ ] Focus indicators visible
@@ -739,6 +807,7 @@ Use this comprehensive checklist when reviewing design system compliance:
 - [ ] ARIA labels provided where needed
 
 ### Consistency
+
 - [ ] Visual consistency across all screens
 - [ ] Interaction patterns consistent
 - [ ] Terminology consistent
@@ -747,6 +816,7 @@ Use this comprehensive checklist when reviewing design system compliance:
 - [ ] Typography hierarchy consistent
 
 ### Governance
+
 - [ ] Changes follow approval process
 - [ ] Breaking changes documented
 - [ ] Version numbers appropriate

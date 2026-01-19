@@ -38,12 +38,15 @@
 ## Translation Patterns
 
 ### Job Step Sequence
+
 ```jcl
 //STEP010  EXEC PGM=PROG1
 //STEP020  EXEC PGM=PROG2
 //STEP030  EXEC PGM=PROG3
 ```
+
 →
+
 ```
 JOB JobName
 BEGIN
@@ -64,10 +67,13 @@ END JOB
 ```
 
 ### COND Logic (⚠️ INVERTED!)
+
 ```jcl
 //STEP020  EXEC PGM=PROG2,COND=(0,NE)
 ```
+
 →
+
 ```
 STEP Step020
     IF PREVIOUS_RC = 0 THEN SKIP  // INVERTED: run if condition FALSE!
@@ -78,12 +84,15 @@ END STEP
 **CRITICAL**: COND logic is inverted - step runs if condition is FALSE!
 
 ### IF/THEN/ELSE
+
 ```jcl
 //IF1      IF RC = 0 THEN
 //STEP020  EXEC PGM=PROG2
 //ENDIF
 ```
+
 →
+
 ```
 IF PREVIOUS_RC = 0 THEN
     STEP Step020
@@ -93,11 +102,14 @@ END IF
 ```
 
 ### DD Statement
+
 ```jcl
 //INPUT    DD DSN=PROD.DATA.FILE,DISP=SHR
 //OUTPUT   DD DSN=PROD.OUTPUT.FILE,DISP=(NEW,CATLG,DELETE)
 ```
+
 →
+
 ```
 input = OPEN_DATASET("PROD.DATA.FILE", SHARED, READ)
 output = CREATE_DATASET("PROD.OUTPUT.FILE")
@@ -106,6 +118,7 @@ output = CREATE_DATASET("PROD.OUTPUT.FILE")
 ```
 
 ### Proc Call with Symbolics
+
 ```jcl
 //PROC1    PROC MEMBER=,INFILE=
 //STEP1    EXEC PGM=PROG1
@@ -114,7 +127,9 @@ output = CREATE_DATASET("PROD.OUTPUT.FILE")
 //         PEND
 //CALLPROC EXEC PROC1,MEMBER=TEST.DATA,INFILE=PROD.FILE
 ```
+
 →
+
 ```
 PROCEDURE Proc1(member: STRING, inFile: STRING)
 BEGIN

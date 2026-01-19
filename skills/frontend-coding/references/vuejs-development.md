@@ -1,9 +1,9 @@
 # Vue.js Development
 
-
 ### Composition API
 
 **Modern Vue 3 Component**:
+
 ```vue
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
@@ -91,6 +91,7 @@ onMounted(() => {
 ```
 
 **Composables (Reusable Logic)**:
+
 ```typescript
 // composables/useAsync.ts
 import { ref, Ref } from 'vue';

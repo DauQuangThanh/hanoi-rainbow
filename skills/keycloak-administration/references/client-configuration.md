@@ -25,6 +25,7 @@
 4. Client protocol: openid-connect
 
 **Configuration:**
+
 - Root URL: Base application URL
 - Valid redirect URIs: Allowed callback URLs (e.g., `https://app.example.com/callback`, `http://localhost:3000/callback`)
 - Valid post logout redirect URIs: Allowed logout callbacks
@@ -32,16 +33,19 @@
 - Admin URL: For backchannel communication
 
 **Access Settings:**
+
 - Standard flow: Enable for authorization code flow
 - Direct access grants: Enable for password grant (caution)
 - Implicit flow: Disable (deprecated)
 - Service accounts: Enable for client credentials flow
 
 **Authentication Flow:**
+
 - Client authentication: On (confidential) or Off (public)
 - Client authenticator: Client secret, JWT, or X509 certificate
 
 **Advanced Settings:**
+
 - Access token lifespan: Override realm default if needed
 - Proof Key for Code Exchange (PKCE): Required for public clients
 - OAuth 2.0 Device Authorization Grant: For limited-input devices
@@ -49,6 +53,7 @@
 ## Service Account Clients
 
 **For machine-to-machine authentication:**
+
 1. Create client with service accounts enabled
 2. Disable standard/implicit flows
 3. Assign service account roles in "Service Account Roles" tab
@@ -59,6 +64,7 @@
 **Purpose:** Control what information tokens contain
 
 **Default Scopes:**
+
 - openid: Required for OIDC
 - profile: User profile information
 - email: Email address
@@ -68,6 +74,7 @@
 - web-origins: CORS origins
 
 **Custom Scopes:**
+
 1. Client Scopes → Create
 2. Add protocol mappers for custom claims
 3. Assign to clients (default or optional)

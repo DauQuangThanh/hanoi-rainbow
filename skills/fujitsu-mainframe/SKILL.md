@@ -10,23 +10,29 @@ Analyze and migrate Fujitsu mainframe systems (FACOM, BS2000/OSD, OSIV, NetCOBOL
 ## Core Capabilities
 
 ### 1. Fujitsu COBOL Analysis
+
 Extract NetCOBOL/PowerCOBOL programs, Fujitsu-specific verbs, proprietary file organizations (SAM/PAM/ISAM), SYMFOWARE embedded SQL, screen handling (ACCEPT/DISPLAY with CRT STATUS).
 
 ### 2. Fujitsu JCL Analysis
+
 Parse JOB statements, STEP definitions, ASSIGN/FILEDEF statements, conditional execution, cataloged procedures, resource allocation.
 
 ### 3. BS2000/OSD System Analysis
+
 Analyze ENTER statements, system commands, file handling (PAM, SAM, ISAM), job variables, SDF processing.
 
 ### 4. SYMFOWARE Database Migration
+
 Extract embedded SQL, schemas, stored procedures, transactions. Migrate to PostgreSQL, Oracle, or SQL Server.
 
 ### 5. Migration to Modern Platforms
+
 Generate Spring Boot microservices, REST APIs, cloud-native apps (AWS, Azure, GCP), containerized deployments (Docker, Kubernetes), CI/CD pipelines.
 
 ## Workflow
 
 ### Step 1: Discover Assets
+
 ```bash
 find . -name "*.cbl" -o -name "*.CBL" -o -name "*.cob"  # COBOL
 find . -name "*.ncb" -o -name "*.NCB"  # NetCOBOL
@@ -36,7 +42,9 @@ find . -name "*.sdf" -o -name "*.SDF"  # SDF files
 ```
 
 ### Step 2: Analyze Structure
+
 Extract divisions, data structures, file definitions, screen definitions, embedded SQL, Fujitsu-specific extensions. Key features:
+
 - File organization: SEQUENTIAL, RELATIVE, INDEXED
 - Screen handling: CRT STATUS, screen control
 - Database: SYMFOWARE SQL
@@ -44,26 +52,31 @@ Extract divisions, data structures, file definitions, screen definitions, embedd
 - Error handling: FILE STATUS, DECLARATIVES
 
 ### Step 3: Map Dependencies
+
 Build graphs: CALL hierarchies, copybook usage, file dependencies (FACOM), database access (SYMFOWARE), JCL sequences, screen definitions.
 
 ### Step 4: Create Migration Strategy
+
 Document architecture, Fujitsu-specific features, Java/cloud design, data migration, roadmap. **Load `references/migration-strategy.md` for detailed framework.**
 
 ## Fujitsu-Specific Features
 
 ### NetCOBOL Extensions
+
 - Windowing, GUI support (PowerCOBOL)
 - Enhanced ACCEPT/DISPLAY with positioning
 - Object-oriented: CLASS definitions
 - Extended exception handling
 
 ### SYMFOWARE Database
+
 - Embedded SQL: SELECT, INSERT, UPDATE, DELETE
 - Cursors: DECLARE, OPEN, FETCH, CLOSE
 - Transactions: COMMIT, ROLLBACK
 - Migration: SYMFOWARE → PostgreSQL (cost), Oracle (enterprise), SQL Server
 
 ### File Systems
+
 | Type | Description | Java Equivalent |
 |------|-------------|-----------------|
 | SAM | Sequential | `BufferedReader`/`Writer` |
@@ -74,9 +87,11 @@ Document architecture, Fujitsu-specific features, Java/cloud design, data migrat
 ## Quick Patterns
 
 ### COBOL → Java Spring Boot
+
 **Load `references/migration-patterns.md` for detailed examples.** Quick overview:
 
 **Fujitsu COBOL:**
+
 ```cobol
 SELECT EMPFILE ASSIGN TO "EMPDATA"
     ORGANIZATION IS INDEXED
@@ -85,6 +100,7 @@ SELECT EMPFILE ASSIGN TO "EMPDATA"
 ```
 
 **Java JPA:**
+
 ```java
 @Entity
 @Table(name = "employees")
@@ -97,13 +113,16 @@ public class Employee {
 ```
 
 ### JCL → Shell + Kubernetes
+
 **Fujitsu JCL:**
+
 ```jcl
 //STEP010  EXEC PGM=VALIDATE
 //STEP020  EXEC PGM=PROCESS,COND=(0,EQ,STEP010)
 ```
 
 **Shell:**
+
 ```bash
 ./validate && ./process
 ```
@@ -134,17 +153,21 @@ public class Employee {
 ## Migration Strategies
 
 ### Strangler Fig Pattern (Recommended)
+
 Gradually replace functionality. Lower risk, learn and adjust. **Load `references/migration-strategy.md` for detailed steps.**
 
 ### Big Bang
+
 Complete rewrite, single cutover. Higher risk, clean architecture. For smaller systems.
 
 ### Hybrid
+
 Core services modernized first, periphery later. Balanced risk/reward.
 
 ## Output Requirements
 
 ### Analysis Report Structure
+
 1. **Executive Summary** - Overview, business impact, recommendation
 2. **Current State** - Inventory, architecture, technology, dependencies
 3. **Fujitsu Features** - NetCOBOL/PowerCOBOL, SYMFOWARE, file systems, screens, JCL
@@ -176,6 +199,7 @@ Core services modernized first, periphery later. Balanced risk/reward.
 ## Reference Files
 
 When detailed information needed:
+
 - **`references/migration-patterns.md`** - Complete code examples for all migration patterns
 - **`references/data-mappings.md`** - Comprehensive type mappings, REDEFINES, dates, best practices
 - **`references/migration-strategy.md`** - Full framework: assessment, design, testing, cutover, costs

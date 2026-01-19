@@ -3,21 +3,25 @@
 ## Output Guidelines
 
 **Be Specific:**
+
 - Reference exact line numbers and file paths
 - Quote problematic code snippets
 - Provide concrete examples and metrics
 
 **Be Constructive:**
+
 - Explain WHY something is an issue (impact on maintainability, performance, security)
 - Suggest HOW to fix it with specific recommendations
 - Provide improved code examples showing the solution
 
 **Be Balanced:**
+
 - Acknowledge good practices and strengths
 - Prioritize issues appropriately (P0-P3)
 - Consider effort vs. benefit in recommendations
 
 **Be Professional:**
+
 - Focus on code quality, not developers
 - Use objective criteria and metrics
 - Provide educational context where helpful
@@ -25,6 +29,7 @@
 ## Report Structure
 
 ### Executive Summary
+
 ```
 Code Quality Score: [X/100]
 Maintainability Index: [X]
@@ -57,6 +62,7 @@ For each issue, provide:
 ```
 
 **Impact:**
+
 - Maintainability: [impact level]
 - Readability: [impact level]
 - Performance: [impact level if relevant]
@@ -66,12 +72,14 @@ For each issue, provide:
 [Specific improvement suggestion]
 
 **Improved Code:**
+
 ```[language]
 [suggested improvement]
 ```
 
 **Effort:** Low | Medium | High
 **Priority:** P0 | P1 | P2 | P3
+
 ```
 
 ### Metrics Summary
@@ -90,18 +98,22 @@ For each issue, provide:
 ### Recommendations by Priority
 
 **P0 - Critical (Fix Immediately):**
+
 1. [Issue with major impact]
 2. [Issue with major impact]
 
 **P1 - High (Fix Soon):**
+
 1. [Important issue]
 2. [Important issue]
 
 **P2 - Medium (Plan for Next Sprint):**
+
 1. [Moderate issue]
 2. [Moderate issue]
 
 **P3 - Low (Technical Debt Backlog):**
+
 1. [Minor improvement]
 2. [Minor improvement]
 
@@ -110,6 +122,7 @@ For each issue, provide:
 Always acknowledge good practices found in the code:
 
 **Examples:**
+
 - ✅ **Excellent Test Coverage:** 87% overall coverage with quality assertions
 - ✅ **Clear Naming:** Consistent and descriptive naming throughout
 - ✅ **Good Package Structure:** Clean separation of concerns
@@ -121,18 +134,22 @@ Always acknowledge good practices found in the code:
 ### Recommendations by Priority
 
 **P0 - Critical (Fix Immediately):**
+
 1. [Issue with major impact on security, correctness, or stability]
 2. [Issue causing immediate problems]
 
 **P1 - High (Fix Soon):**
+
 1. [Important maintainability or performance issue]
 2. [Significant code quality problem]
 
 **P2 - Medium (Plan for Next Sprint):**
+
 1. [Moderate improvement opportunity]
 2. [Technical debt item]
 
 **P3 - Low (Technical Debt Backlog):**
+
 1. [Minor improvement]
 2. [Nice-to-have enhancement]
 

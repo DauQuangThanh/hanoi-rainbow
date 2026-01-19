@@ -1,9 +1,9 @@
 # Security Testing Checklist
 
-
 Use this for systematic security reviews:
 
 **Authentication & Authorization:**
+
 - [ ] All endpoints require authentication
 - [ ] Authorization checks on every operation
 - [ ] No horizontal privilege escalation possible
@@ -13,6 +13,7 @@ Use this for systematic security reviews:
 - [ ] MFA available for sensitive operations
 
 **Input Validation:**
+
 - [ ] All input validated (whitelist approach)
 - [ ] SQL injection prevention (parameterized queries)
 - [ ] XSS prevention (output encoding)
@@ -21,6 +22,7 @@ Use this for systematic security reviews:
 - [ ] File upload restrictions
 
 **Cryptography:**
+
 - [ ] Strong algorithms only (AES-256, RSA-2048+)
 - [ ] Secure password hashing (bcrypt, Argon2)
 - [ ] TLS 1.2+ enforced
@@ -29,6 +31,7 @@ Use this for systematic security reviews:
 - [ ] Certificate validation
 
 **Session Management:**
+
 - [ ] Secure session ID generation
 - [ ] Session fixation protection
 - [ ] Proper session timeout
@@ -37,12 +40,14 @@ Use this for systematic security reviews:
 - [ ] Session invalidation on logout
 
 **Error Handling:**
+
 - [ ] Generic error messages to users
 - [ ] Detailed errors logged server-side
 - [ ] No stack traces exposed
 - [ ] No sensitive data in errors
 
 **Logging & Monitoring:**
+
 - [ ] Security events logged
 - [ ] Sufficient log detail
 - [ ] Logs protected from tampering
@@ -50,6 +55,7 @@ Use this for systematic security reviews:
 - [ ] Log retention policy
 
 **API Security:**
+
 - [ ] API authentication required
 - [ ] Rate limiting implemented
 - [ ] Input validation on all endpoints
@@ -58,6 +64,7 @@ Use this for systematic security reviews:
 - [ ] API versioning
 
 **Data Protection:**
+
 - [ ] Sensitive data encrypted at rest
 - [ ] Sensitive data encrypted in transit
 - [ ] PII handling compliant with regulations
@@ -65,12 +72,14 @@ Use this for systematic security reviews:
 - [ ] Backup encryption
 
 **Dependencies:**
+
 - [ ] No known vulnerable dependencies
 - [ ] Dependency scanning in CI/CD
 - [ ] Regular dependency updates
 - [ ] SCA (Software Composition Analysis) tools
 
 **Configuration:**
+
 - [ ] Security headers configured
 - [ ] Default credentials changed
 - [ ] Unnecessary features disabled

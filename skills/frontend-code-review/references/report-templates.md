@@ -3,6 +3,7 @@
 Templates and examples for frontend code review reports.
 
 ## Table of Contents
+
 - [Executive Summary Template](#executive-summary-template)
 - [Detailed Review Report](#detailed-review-report)
 - [Quick Checklist Report](#quick-checklist-report)
@@ -126,11 +127,13 @@ interface UserProfileProps {
 #### ⚠️ Issues Found
 
 **Issue 1: God Component**
+
 - **Location:** `src/components/Dashboard.tsx` (lines 45-350)
 - **Severity:** High
 - **Description:** Dashboard component handles too many responsibilities
 - **Impact:** Hard to maintain, test, and reuse
 - **Recommendation:**
+
 ```typescript
 // Split into smaller components:
 - DashboardHeader
@@ -140,6 +143,7 @@ interface UserProfileProps {
 ```
 
 **Issue 2: Prop Drilling**
+
 - **Location:** `src/components/Layout.tsx` → `Sidebar.tsx` → `UserMenu.tsx`
 - **Severity:** Medium
 - **Description:** User state passed through 3 levels unnecessarily
@@ -148,16 +152,19 @@ interface UserProfileProps {
 ### TypeScript Usage
 
 #### ✅ Good Practices
+
 - Strict mode enabled
 - No use of `any` in core business logic
 - Good use of discriminated unions
 
 #### ⚠️ Issues
+
 - 12 instances of `any` type in `src/utils/` directory
 - Missing return types on several functions
 - Inconsistent use of interfaces vs types
 
 **Recommendations:**
+
 ```typescript
 // Fix: Add explicit return types
 function calculateTotal(items: Item[]): number {
@@ -179,11 +186,13 @@ function processData(data: ApiResponse) { ... }
 ### State Management
 
 #### Analysis
+
 - Using Redux Toolkit (good choice)
 - Selectors properly memoized
 - Actions well-typed
 
 #### Issues
+
 - Too much state in global store (UI state should be local)
 - Some components accessing store directly instead of props
 
@@ -192,7 +201,9 @@ function processData(data: ApiResponse) { ... }
 ## 2. Performance
 
 ### Overview
+
 **Current Performance:**
+
 - LCP: 3.2s (⚠️ Should be < 2.5s)
 - FID: 85ms (✅ Good)
 - CLS: 0.08 (✅ Good)
@@ -211,6 +222,7 @@ Largest dependencies:
 ### Issues Found
 
 **Issue 1: Large Bundle Size**
+
 - **Severity:** High
 - **Impact:** Slow initial load time
 - **Files:** webpack.config.js, package.json
@@ -220,6 +232,7 @@ Largest dependencies:
   3. Implement code splitting for routes
 
 **Issue 2: Unoptimized Images**
+
 - **Location:** `/public/images/`
 - **Severity:** Medium
 - **Impact:** Slow LCP, unnecessary bandwidth
@@ -229,6 +242,7 @@ Largest dependencies:
   3. Add lazy loading for below-fold images
 
 **Issue 3: No Virtualization for Long Lists**
+
 - **Location:** `src/components/DataTable.tsx`
 - **Severity:** Medium
 - **Impact:** Poor performance with 1000+ rows
@@ -237,10 +251,12 @@ Largest dependencies:
 ### Rendering Performance
 
 **Unnecessary Re-renders Found:**
+
 - `ProductCard` re-renders on every parent update (line 45)
 - Inline function creation in render (15 instances)
 
 **Recommendations:**
+
 ```typescript
 // Use React.memo
 const ProductCard = React.memo(({ product }) => {
@@ -260,16 +276,19 @@ const handleClick = useCallback(() => {
 ### WCAG Compliance Level: **AA (Partial)**
 
 ### Automated Testing Results
+
 - axe-core: 23 issues found
 - Lighthouse: Accessibility score 78/100
 
 ### Critical Issues
 
 **Issue 1: Missing Form Labels**
+
 - **Location:** `src/components/SearchForm.tsx` (lines 34-42)
 - **WCAG:** 3.3.2 (Level A)
 - **Impact:** Screen readers cannot identify input purpose
 - **Recommendation:**
+
 ```tsx
 // Add proper labels
 <label htmlFor="search-input">Search products</label>
@@ -282,12 +301,14 @@ const handleClick = useCallback(() => {
 ```
 
 **Issue 2: Insufficient Color Contrast**
+
 - **Location:** `src/styles/theme.css` (lines 23-45)
 - **WCAG:** 1.4.3 (Level AA)
 - **Contrast Ratio:** 3.2:1 (should be 4.5:1)
 - **Recommendation:** Change secondary text color from `#999` to `#666`
 
 **Issue 3: Keyboard Navigation Issues**
+
 - **Location:** `src/components/Dropdown.tsx`
 - **WCAG:** 2.1.1 (Level A)
 - **Impact:** Cannot navigate dropdown with keyboard
@@ -312,6 +333,7 @@ const handleClick = useCallback(() => {
 ### Findings
 
 #### ✅ Good Security Practices
+
 - Using HTTPS exclusively
 - HttpOnly cookies for authentication
 - Input sanitization with DOMPurify
@@ -320,15 +342,19 @@ const handleClick = useCallback(() => {
 #### 🚨 Critical Security Issues
 
 **Issue 1: XSS Vulnerability**
+
 - **Location:** `src/components/UserComment.tsx` (line 67)
 - **Severity:** Critical
 - **CWE:** CWE-79 (Cross-site Scripting)
 - **Description:**
+
 ```tsx
 // Vulnerable code:
 <div dangerouslySetInnerHTML={{ __html: comment }} />
 ```
+
 - **Recommendation:**
+
 ```tsx
 // Sanitize before rendering:
 import DOMPurify from 'dompurify';
@@ -341,6 +367,7 @@ import DOMPurify from 'dompurify';
 ```
 
 **Issue 2: Insecure Direct Object Reference**
+
 - **Location:** `src/api/users.ts` (line 34)
 - **Severity:** High
 - **Description:** User ID from URL used directly without authorization check
@@ -349,6 +376,7 @@ import DOMPurify from 'dompurify';
 #### ⚠️ Medium Priority Issues
 
 **Issue 3: Sensitive Data in Console Logs**
+
 - **Location:** Multiple files
 - **Severity:** Medium
 - **Found in:**
@@ -376,6 +404,7 @@ High severity:
 ## 5. CSS/Styling
 
 ### Overview
+
 - Using CSS Modules (good choice)
 - Responsive design implemented
 - Some inconsistencies in approach
@@ -383,16 +412,19 @@ High severity:
 ### Issues Found
 
 **Issue 1: Inconsistent Styling Approach**
+
 - **Severity:** Medium
 - **Description:** Mix of inline styles, CSS Modules, and styled-components
 - **Recommendation:** Standardize on one approach (CSS Modules preferred)
 
 **Issue 2: Unused CSS**
+
 - **Impact:** 45 KB of unused CSS in bundle
 - **Files:** `global.css`, `legacy.css`
 - **Recommendation:** Use PurgeCSS or remove unused files
 
 **Issue 3: No Design System**
+
 - **Impact:** Inconsistent spacing, colors, typography
 - **Recommendation:** Create design tokens file
 
@@ -437,12 +469,14 @@ By category:
 ### Issues Found
 
 **Issue 1: Low API Client Coverage**
+
 - **Files:** `src/api/*.ts`
 - **Current:** 45%
 - **Target:** 80%+
 - **Recommendation:** Add integration tests for API clients
 
 **Issue 2: Missing E2E Tests**
+
 - **Severity:** Medium
 - **Impact:** Critical user flows not tested
 - **Recommendation:** Add Playwright/Cypress tests for:
@@ -451,11 +485,13 @@ By category:
   3. User registration
 
 **Issue 3: Incomplete Unit Tests**
+
 - Several components have tests only for happy path
 - Error cases not tested
 - Edge cases missing
 
 **Example:**
+
 ```typescript
 // Add error case tests
 describe('UserProfile', () => {
@@ -474,6 +510,7 @@ describe('UserProfile', () => {
 ### Code Documentation
 
 #### ✅ Good Practices
+
 - JSDoc comments on utility functions
 - README with setup instructions
 - Component props documented with TypeScript
@@ -481,10 +518,12 @@ describe('UserProfile', () => {
 #### ⚠️ Areas for Improvement
 
 **Issue 1: Missing Complex Logic Documentation**
+
 - `src/utils/calculations.ts` - complex algorithms not explained
 - `src/hooks/useDataSync.ts` - intricate state management not documented
 
 **Recommendation:**
+
 ```typescript
 /**
  * Calculates the weighted average of product ratings based on
@@ -509,6 +548,7 @@ export function calculateWeightedRating(ratings: Rating[]): number {
 ```
 
 **Issue 2: No Architecture Documentation**
+
 - Recommendation: Add `ARCHITECTURE.md` explaining:
   - Directory structure
   - State management approach
@@ -516,6 +556,7 @@ export function calculateWeightedRating(ratings: Rating[]): number {
   - Component patterns used
 
 **Issue 3: Missing API Documentation**
+
 - Recommendation: Document API client usage, error handling, authentication
 
 ---
@@ -525,6 +566,7 @@ export function calculateWeightedRating(ratings: Rating[]): number {
 ### Immediate Actions (1-2 weeks)
 
 #### Priority 1: Critical Security Issues
+
 1. **Fix XSS vulnerability in UserComment component**
    - Estimated effort: 2 hours
    - Files: `src/components/UserComment.tsx`
@@ -542,6 +584,7 @@ export function calculateWeightedRating(ratings: Rating[]): number {
    - Implement proper keyboard event handlers
 
 #### Priority 2: Performance Improvements
+
 1. **Optimize bundle size**
    - Estimated effort: 1 day
    - Replace moment.js with date-fns
@@ -585,6 +628,7 @@ export function calculateWeightedRating(ratings: Rating[]): number {
 ## Appendix
 
 ### Files Reviewed
+
 ```
 Total files reviewed: 127
 - Components: 45 files
@@ -596,6 +640,7 @@ Total files reviewed: 127
 ```
 
 ### Review Methodology
+
 - Manual code review
 - Automated testing (ESLint, axe-core, Lighthouse)
 - Performance profiling
@@ -603,6 +648,7 @@ Total files reviewed: 127
 - Dependency audit
 
 ### Tools Used
+
 - ESLint
 - Prettier
 - axe DevTools
@@ -612,7 +658,9 @@ Total files reviewed: 127
 - Snyk
 
 ### Reviewer Notes
+
 [Any additional context or notes for the development team]
+
 ```
 
 ---
@@ -737,15 +785,18 @@ function UserProfile({ userId }) {
 ```
 
 ## Expected Behavior
+
 [Description of what should happen instead]
 
 ## Impact
+
 - **User Impact:** High - Profile may show wrong user data
 - **Performance Impact:** None
 - **Security Impact:** Medium - Can access wrong user data
 - **Accessibility Impact:** None
 
 ## Recommendation
+
 ```typescript
 // Fixed code
 function UserProfile({ userId }) {
@@ -793,15 +844,19 @@ function UserProfile({ userId }) {
 ```
 
 ## Estimated Effort
+
 **Time:** 2 hours
 **Complexity:** Medium
 
 ## Related Issues
+
 - FR-002: Similar issue in UserSettings component
 - FR-015: General patterns for data fetching
 
 ## Notes
+
 [Any additional context or information]
+
 ```
 
 ---
@@ -885,15 +940,19 @@ function UserProfile({ userId }) {
 ### ⚠️ Should Fix (Important)
 
 **1. Type definitions too loose**
+
 - **Location:** `src/types/auth.ts`
 - **Current:**
+
 ```typescript
 interface User {
   id: string;
   data: any; // Too loose!
 }
 ```
+
 - **Suggested:**
+
 ```typescript
 interface User {
   id: string;
@@ -905,6 +964,7 @@ interface User {
 ```
 
 **2. Error messages not user-friendly**
+
 ```typescript
 // Current:
 catch (error) {
@@ -923,6 +983,7 @@ catch (error) {
 ### 💡 Nice to Have (Optional)
 
 **1. Consider extracting validation logic**
+
 ```typescript
 // Current: Validation inline in component
 // Suggested: Extract to separate validator functions
@@ -947,6 +1008,7 @@ export const validators = {
 
 **Summary:**
 Good implementation overall, but needs fixes for:
+
 1. Missing error case tests (blocking)
 2. Accessibility improvements (blocking)
 3. Tighter TypeScript types (important)
@@ -954,7 +1016,9 @@ Good implementation overall, but needs fixes for:
 Please address the "Must Fix" items and we can merge.
 
 ## Additional Comments
+
 [Any other feedback or discussion points]
+
 ```
 
 ---
@@ -991,11 +1055,13 @@ Please address the "Must Fix" items and we can merge.
 // Malicious input:
 const comment = '<img src=x onerror="alert(document.cookie)">';
 ```
+
 - **Remediation:** Add DOMPurify sanitization
 
 ### 2. Authentication & Session Management
 
 #### ⚠️ High: Token Storage in localStorage
+
 - **Location:** `src/utils/auth.ts:23`
 - **Risk:** Tokens accessible via XSS
 - **Recommendation:** Use HttpOnly cookies
@@ -1003,6 +1069,7 @@ const comment = '<img src=x onerror="alert(document.cookie)">';
 ### 3. Data Exposure
 
 #### ⚠️ Medium: Sensitive Data in Redux DevTools
+
 - **Risk:** User data visible in browser tools
 - **Recommendation:** Disable Redux DevTools in production
 
@@ -1019,19 +1086,23 @@ const comment = '<img src=x onerror="alert(document.cookie)">';
 ## Remediation Plan
 
 ### Immediate (24-48 hours)
+
 1. Fix XSS vulnerabilities
 2. Update vulnerable dependencies
 3. Move tokens to HttpOnly cookies
 
 ### Short-term (1-2 weeks)
+
 1. Implement CSP headers
 2. Add rate limiting for API calls
 3. Security headers audit
 
 ### Long-term (1-3 months)
+
 1. Implement automated security scanning in CI/CD
 2. Regular dependency audits
 3. Security awareness training for team
+
 ```
 
 ---
@@ -1074,15 +1145,18 @@ const comment = '<img src=x onerror="alert(document.cookie)">';
 ### Bundle Size Analysis
 
 ```
+
 Current: 512 KB (gzipped: 156 KB)
 Target: < 300 KB (gzipped: < 100 KB)
 
 Breakdown:
+
 - moment.js: 72 KB → Replace with date-fns (15 KB) - Save 57 KB
 - lodash: 48 KB → Individual imports - Save 30 KB
 - Unused code: 35 KB → Tree shaking - Save 35 KB
 
 Total potential savings: 122 KB (23% reduction)
+
 ```
 
 ## Action Plan
@@ -1187,6 +1261,7 @@ Total potential savings: 122 KB (23% reduction)
 ## Notes
 
 These templates can be customized based on:
+
 - Project size and complexity
 - Team preferences
 - Stakeholder requirements
@@ -1194,6 +1269,7 @@ These templates can be customized based on:
 - Specific focus areas
 
 Remember to:
+
 1. Be specific with locations and line numbers
 2. Provide code examples for issues and fixes
 3. Include severity and impact assessments

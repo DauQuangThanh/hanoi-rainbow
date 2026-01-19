@@ -27,6 +27,7 @@ provider "oci" {
 ### Using Instance Principal Authentication
 
 **For compute instances with dynamic groups**:
+
 ```hcl
 provider "oci" {
   region = var.region
@@ -235,6 +236,7 @@ terraform/
 ### Compute Module Example
 
 **modules/compute/main.tf**:
+
 ```hcl
 resource "oci_core_instance" "this" {
   availability_domain = var.availability_domain
@@ -297,6 +299,7 @@ resource "oci_core_volume_attachment" "data_volume_attachment" {
 ```
 
 **modules/compute/variables.tf**:
+
 ```hcl
 variable "compartment_id" {
   description = "Compartment OCID"
@@ -378,6 +381,7 @@ variable "tags" {
 ```
 
 **modules/compute/outputs.tf**:
+
 ```hcl
 output "instance_id" {
   description = "Instance OCID"
@@ -756,6 +760,7 @@ resource "oci_core_instance" "app" {
 
 **Issue**: Terraform state lock
 **Solution**: Force unlock (use with caution)
+
 ```bash
 terraform force-unlock LOCK_ID
 ```

@@ -1,9 +1,9 @@
 # Deployment Strategies
 
-
 ### Blue-Green Deployment
 
 **Kubernetes Implementation:**
+
 ```yaml
 # Blue deployment (current)
 apiVersion: apps/v1
@@ -64,6 +64,7 @@ spec:
 ```
 
 **Switch Script:**
+
 ```bash
 #!/bin/bash
 # Switch traffic from blue to green
@@ -90,6 +91,7 @@ kubectl scale deployment app-blue --replicas=0
 ### Canary Deployment
 
 **Using Istio:**
+
 ```yaml
 apiVersion: v1
 kind: Service

@@ -9,6 +9,7 @@ This guide shows you how to build a complete application from idea to production
 ## 📋 Overview
 
 **Greenfield projects** are brand new applications built from scratch. Hanoi Rainbow helps you:
+
 - Start with clear specifications before coding
 - Build systematically with AI assistance
 - Ensure quality through structured validation
@@ -47,6 +48,7 @@ graph TD
 ## 🎯 When to Use This Workflow
 
 Use the greenfield workflow when you're:
+
 - ✅ Starting a completely new application
 - ✅ Building an MVP or prototype
 - ✅ Creating a microservice from scratch
@@ -82,6 +84,7 @@ claude  # or your chosen AI agent
 ```
 
 **✅ Success Criteria**:
+
 - [ ] Project created with `.rainbow/` directory
 - [ ] Git repository initialized
 - [ ] AI agent recognizes `/rainbow.*` commands
@@ -99,6 +102,7 @@ Launch your AI agent and run:
 ```
 
 **What Gets Created**: `memory/ground-rules.md` with:
+
 - Code quality principles
 - Testing standards
 - UX guidelines
@@ -107,6 +111,7 @@ Launch your AI agent and run:
 - Architecture principles
 
 **Example Principles**:
+
 ```markdown
 ## Code Quality
 - Write self-documenting code with clear naming
@@ -125,6 +130,7 @@ Launch your AI agent and run:
 ```
 
 **✅ Success Criteria**:
+
 - [ ] `memory/ground-rules.md` exists
 - [ ] Principles cover all major areas
 - [ ] Team agrees on the principles
@@ -140,11 +146,13 @@ Launch your AI agent and run:
 ```
 
 **What Gets Created**:
+
 - New git branch: `001-task-management`
 - Feature directory: `specs/001-task-management/`
 - Specification: `specs/001-task-management/spec.md`
 
 **Specification Includes**:
+
 - Executive Summary
 - User Stories
 - Functional Requirements
@@ -154,6 +162,7 @@ Launch your AI agent and run:
 - Out of Scope
 
 **✅ Success Criteria**:
+
 - [ ] Feature branch created
 - [ ] Spec.md is complete and clear
 - [ ] No [NEEDS CLARIFICATION] markers remain
@@ -171,12 +180,14 @@ If specification needs refinement:
 ```
 
 This runs structured questioning to:
+
 - Identify ambiguities
 - Clarify edge cases
 - Define data requirements
 - Specify error handling
 
 **✅ Success Criteria**:
+
 - [ ] All clarifications answered
 - [ ] Spec updated with clarifications
 - [ ] Requirements are unambiguous
@@ -192,6 +203,7 @@ This runs structured questioning to:
 ```
 
 **What Gets Created**:
+
 - `docs/architecture.md` with:
   - C4 Model diagrams (Context, Container, Component)
   - Technology stack decisions
@@ -200,6 +212,7 @@ This runs structured questioning to:
   - Deployment architecture
 
 **Architecture Includes**:
+
 - System context diagram
 - Container architecture
 - Component design
@@ -209,6 +222,7 @@ This runs structured questioning to:
 - Deployment strategy
 
 **✅ Success Criteria**:
+
 - [ ] Architecture document complete
 - [ ] All major decisions documented as ADRs
 - [ ] Technology stack approved by team
@@ -235,6 +249,7 @@ This runs structured questioning to:
 ```
 
 **What Gets Created**:
+
 - `specs/001-task-management/design.md` - Implementation plan
 - `specs/001-task-management/research.md` - Technical research
 - `specs/001-task-management/data-model.md` - Database schema
@@ -242,6 +257,7 @@ This runs structured questioning to:
 - `specs/001-task-management/quickstart.md` - Setup guide
 
 **Plan Includes**:
+
 - Core implementation steps
 - Data model design
 - API contracts (OpenAPI/Swagger)
@@ -250,6 +266,7 @@ This runs structured questioning to:
 - Deployment approach
 
 **✅ Success Criteria**:
+
 - [ ] Implementation plan is detailed and actionable
 - [ ] Data model is normalized and complete
 - [ ] API contracts are fully specified
@@ -265,12 +282,14 @@ This runs structured questioning to:
 ```
 
 Performs cross-artifact analysis:
+
 - Validates consistency between spec and plan
 - Checks requirement coverage
 - Identifies gaps or conflicts
 - Suggests improvements
 
 **✅ Success Criteria**:
+
 - [ ] All requirements covered in plan
 - [ ] No conflicts between spec and plan
 - [ ] Dependencies properly sequenced
@@ -288,6 +307,7 @@ Performs cross-artifact analysis:
 **What Gets Created**: `specs/001-task-management/tasks.md`
 
 **Task List Includes**:
+
 - Tasks organized by user story
 - Dependencies marked
 - Parallel tasks identified with [P]
@@ -296,6 +316,7 @@ Performs cross-artifact analysis:
 - Checkpoints for validation
 
 **Example Tasks**:
+
 ```markdown
 ## Phase 1: Project Setup
 - [ ] T001: Initialize Node.js project with TypeScript
@@ -311,6 +332,7 @@ Performs cross-artifact analysis:
 ```
 
 **✅ Success Criteria**:
+
 - [ ] All user stories have tasks
 - [ ] Dependencies are clear
 - [ ] Tasks are granular (< 1 day each)
@@ -327,6 +349,7 @@ Performs cross-artifact analysis:
 ```
 
 **What Happens**:
+
 1. Validates prerequisites (ground-rules, spec, plan, tasks)
 2. Parses task breakdown
 3. Executes tasks in correct order
@@ -335,6 +358,7 @@ Performs cross-artifact analysis:
 6. Reports progress
 
 **The AI Agent Will**:
+
 - Create project structure
 - Install dependencies
 - Write database schemas
@@ -345,12 +369,14 @@ Performs cross-artifact analysis:
 - Run quality checks
 
 **Your Role**:
+
 - Monitor progress
 - Resolve errors as they occur
 - Test the application manually
 - Provide feedback on implementation
 
 **✅ Success Criteria**:
+
 - [ ] All tasks completed
 - [ ] Tests passing
 - [ ] Application runs locally
@@ -385,6 +411,7 @@ There's a bug when dragging tasks: [describe the issue]. Check the TaskBoard.tsx
 ```
 
 The AI agent will:
+
 - Investigate the issue
 - Fix the bug
 - Run tests
@@ -399,6 +426,7 @@ The AI agent will:
 **What Gets Created**: `specs/001-task-management/checklists/quality.md`
 
 **✅ Success Criteria**:
+
 - [ ] All user acceptance scenarios pass
 - [ ] Performance targets met
 - [ ] Security checklist complete
@@ -426,6 +454,7 @@ The AI agent will:
 **What Gets Created**: `docs/e2e-test-results.md`
 
 **✅ Success Criteria**:
+
 - [ ] All critical user paths tested
 - [ ] E2E tests passing
 - [ ] Test results documented
@@ -437,6 +466,7 @@ The AI agent will:
 #### Step 17: Prepare for Deployment
 
 Review deployment artifacts:
+
 - [ ] Dockerfile and docker-compose.yml
 - [ ] Environment variables documented
 - [ ] Database migrations ready
@@ -455,6 +485,7 @@ npm run smoke-test
 ```
 
 **✅ Success Criteria**:
+
 - [ ] Application deployed successfully
 - [ ] Smoke tests pass
 - [ ] Performance acceptable
@@ -490,6 +521,7 @@ npm run monitor
 - [ ] User feedback collected
 
 **✅ Success Criteria**:
+
 - [ ] Application live in production
 - [ ] Zero downtime deployment
 - [ ] All health checks passing
@@ -536,6 +568,7 @@ After your MVP is live, add new features:
 ```
 
 **Key Differences for Iteration**:
+
 - Ground rules already exist (use them)
 - Architecture already exists (extend it)
 - Standards already exist (follow them)
@@ -593,6 +626,7 @@ gantt
 ### Issue: Implementation Gets Stuck
 
 **Solution**:
+
 1. Check that plan is detailed enough
 2. Verify all dependencies are installed
 3. Ask AI agent to break down complex tasks further
@@ -601,6 +635,7 @@ gantt
 ### Issue: Tests Are Failing
 
 **Solution**:
+
 1. Review test failures with AI agent
 2. Ask agent to fix specific test
 3. Verify test expectations match spec
@@ -608,6 +643,7 @@ gantt
 ### Issue: Application Doesn't Match Spec
 
 **Solution**:
+
 1. Use `/rainbow.analyze` to check spec-plan alignment
 2. Update plan to match spec
 3. Re-run `/rainbow.implement` for affected tasks

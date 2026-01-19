@@ -21,6 +21,7 @@ Choose your task and load the appropriate reference:
 ## Core Mainframe Concepts
 
 ### z/OS Operating System
+
 - **MVS (Multiple Virtual Storage)**: Core OS components
 - **JES2/JES3**: Job Entry Subsystems for batch processing
 - **TSO/ISPF**: Time Sharing Option / Interactive System Productivity Facility
@@ -28,6 +29,7 @@ Choose your task and load the appropriate reference:
 - **Address Spaces**: Isolated execution environments (ASID)
 
 ### Key Subsystems
+
 - **CICS**: Customer Information Control System (transaction processing)
 - **IMS**: Information Management System (hierarchical DB + transaction manager)
 - **DB2**: Relational database management system
@@ -35,12 +37,14 @@ Choose your task and load the appropriate reference:
 - **WebSphere**: Application server for Java applications
 
 ### Data Management
+
 - **VSAM**: Virtual Storage Access Method (indexed, sequential, relative record)
 - **Sequential Files**: PS (Physical Sequential), PDS (Partitioned Data Set), PDSE
 - **GDG**: Generation Data Group (versioned datasets)
 - **SMS**: Storage Management Subsystem (automated data management)
 
 ### Security Systems
+
 - **RACF**: Resource Access Control Facility (IBM)
 - **ACF2**: Access Control Facility 2 (CA Technologies)
 - **Top Secret**: Security system (CA Technologies)
@@ -50,16 +54,19 @@ Choose your task and load the appropriate reference:
 For detailed syntax, examples, and procedures, load the appropriate reference file:
 
 ### Administration & Operations
+
 - **JCL job submission & monitoring**: Load [jcl-batch-processing.md](references/jcl-batch-processing.md)
 - **Dataset management**: Load [zos-administration.md](references/zos-administration.md)
 - **VSAM file operations**: Load [jcl-batch-processing.md](references/jcl-batch-processing.md)
 
 ### Application Development
+
 - **COBOL programming**: Load [cobol-programming.md](references/cobol-programming.md)
 - **CICS transaction management**: Load [cobol-programming.md](references/cobol-programming.md)
 - **DB2 operations**: Load [cobol-programming.md](references/cobol-programming.md)
 
 ### System Management
+
 - **Security (RACF/ACF2)**: Load [zos-administration.md](references/zos-administration.md)
 - **Performance monitoring**: Load [zos-administration.md](references/zos-administration.md)
 
@@ -68,6 +75,7 @@ For detailed syntax, examples, and procedures, load the appropriate reference fi
 For complete development procedures, compile JCL, version control integration, and testing strategies, load [cobol-programming.md](references/cobol-programming.md).
 
 **Typical development cycle:**
+
 1. Edit source code (ISPF or modern IDE)
 2. Compile and link programs
 3. Test in development environment
@@ -75,6 +83,7 @@ For complete development procedures, compile JCL, version control integration, a
 5. Deploy to production
 
 **Modern development approaches:**
+
 - Git integration via USS (Unix System Services)
 - Zowe CLI for remote access and CI/CD
 - DBB (Dependency Based Build) for automated builds
@@ -85,12 +94,14 @@ For complete development procedures, compile JCL, version control integration, a
 For comprehensive migration guidance, assessment procedures, and specific migration patterns, load [mainframe-modernization.md](references/mainframe-modernization.md).
 
 **Key approaches:**
+
 1. **Rehost (Lift & Shift)**: Mainframe emulators on x86/cloud (fastest, minimal changes)
 2. **Replatform**: Migrate to modern languages (Java, C#) with automated conversion
 3. **Refactor**: Redesign as microservices with modern architecture patterns
 4. **Retire/Replace**: Replace with COTS or modern SaaS alternatives
 
 **Integration options:**
+
 - z/OS Connect for RESTful APIs
 - IBM MQ for messaging
 - CDC (Change Data Capture) for data replication
@@ -99,6 +110,7 @@ For comprehensive migration guidance, assessment procedures, and specific migrat
 ## Best Practices
 
 ### Development
+
 1. Use structured programming (avoid ALTER, computed GO TO)
 2. Modular design with focused paragraphs/sections
 3. Comprehensive error handling (EXEC CICS HANDLE, SQL SQLCODE checks)
@@ -106,6 +118,7 @@ For comprehensive migration guidance, assessment procedures, and specific migrat
 5. Performance optimization (minimize I/O, efficient SQL, proper indexing)
 
 ### Operations
+
 1. Automation with JCL procedures, REXX scripts, automation tools
 2. Proactive monitoring with alerts and performance baselines
 3. Regular backup & recovery with DR testing
@@ -113,6 +126,7 @@ For comprehensive migration guidance, assessment procedures, and specific migrat
 5. Security with least privilege, regular audits, compliance
 
 ### Migration
+
 1. Phased approach to reduce risk incrementally
 2. Data integrity validation before and after migration
 3. Parallel running of old and new systems
@@ -124,18 +138,21 @@ For comprehensive migration guidance, assessment procedures, and specific migrat
 ## Tooling Ecosystem
 
 ### IBM Native Tools
+
 - **ISPF**: Primary development interface
 - **SDSF**: Job and output management
 - **RMF/SMF**: Performance monitoring and system logging
 - **OMVS**: Unix shell environment on z/OS
 
 ### Modern Mainframe Tools
+
 - **Zowe**: Open-source framework for mainframe modernization
 - **DBB**: Dependency Based Build for DevOps
 - **IBM Wazi**: Cloud-native development environment
 - **Topaz/IBM Developer for z/OS**: Modern IDEs
 
 ### Migration Tools
+
 - **Micro Focus Enterprise Suite**: Rehost solution
 - **LzLabs/AWS Mainframe Modernization**: Cloud migration platforms
 - **IBM Rational/CAST**: Application analysis tools
@@ -145,17 +162,20 @@ For comprehensive migration guidance, assessment procedures, and specific migrat
 ## Common Issues & Solutions
 
 ### Job Failures
+
 - **S0C7 (Data exception)**: Invalid numeric data, uninitialized variables, data conversion errors
 - **S806 (Program not found)**: Missing STEPLIB/JOBLIB, linking issues, wrong load library
 - **S322 (Time out)**: Infinite loop, long-running query, insufficient TIME parameter
 - **S013/S213/S413 (OPEN failure)**: Dataset allocation issues, DISP conflicts, missing dataset
 
 ### Performance Issues
+
 - **High CPU**: Inefficient code, missing indexes, excessive I/O
 - **Long response time**: Network latency, database contention, poor SQL
 - **Memory constraints**: Virtual storage shortage, insufficient region size
 
 ### Security Issues
+
 - **Access denied**: Check RACF permissions and group memberships
 - **Unauthorized program**: Not in APF library or not properly authorized
 - **Dataset protection**: Review UACC and specific permits
@@ -178,23 +198,27 @@ For comprehensive migration guidance, assessment procedures, and specific migrat
 ## Critical Considerations
 
 ### Data Integrity
+
 - VSAM files require proper SHAREOPTIONS
 - DB2 locking and isolation levels must be configured correctly
 - GDG generation management for versioned datasets
 - Always backup before changes
 
 ### System Performance
+
 - Batch window constraints (limited time for batch jobs)
 - Online transaction response time requirements (sub-second)
 - Resource contention management (CPU, I/O, memory)
 - Capacity planning for growth
 
 ### Security & Compliance
+
 - RACF/ACF2 configuration and maintenance
 - Audit trails and compliance requirements (SOX, PCI-DSS, GDPR)
 - Separation of duties enforcement
 
 ### High Availability
+
 - Parallel Sysplex for redundancy
 - GDPS (Geographically Dispersed Parallel Sysplex) for disaster recovery
 - Continuous availability requirements

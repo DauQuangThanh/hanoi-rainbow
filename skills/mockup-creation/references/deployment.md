@@ -129,8 +129,8 @@ export default defineConfig({
     Cache-Control = "public, max-age=31536000, immutable"
 ```
 
-2. **Connect to Netlify:**
-   - Go to https://app.netlify.com
+1. **Connect to Netlify:**
+   - Go to <https://app.netlify.com>
    - Click "New site from Git"
    - Select your repository
    - Build settings are auto-detected from `netlify.toml`
@@ -195,8 +195,8 @@ netlify domains:add yourdomain.com
 }
 ```
 
-2. **Deploy:**
-   - Go to https://vercel.com
+1. **Deploy:**
+   - Go to <https://vercel.com>
    - Click "New Project"
    - Import your Git repository
    - Settings are auto-detected
@@ -274,7 +274,7 @@ jobs:
         uses: actions/deploy-pages@v2
 ```
 
-2. **Update `vite.config.ts`:**
+1. **Update `vite.config.ts`:**
 
 ```typescript
 export default defineConfig({
@@ -283,7 +283,7 @@ export default defineConfig({
 })
 ```
 
-3. **Enable GitHub Pages:**
+1. **Enable GitHub Pages:**
    - Go to repository Settings
    - Navigate to Pages
    - Source: GitHub Actions

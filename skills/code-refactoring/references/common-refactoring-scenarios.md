@@ -1,11 +1,11 @@
 # Common Refactoring Scenarios
 
-
 ### Legacy Code Refactoring
 
 When working with legacy code without tests:
 
 1. **Add Characterization Tests**
+
    ```typescript
    // Document current behavior before changing
    describe('Legacy calculatePrice', () => {

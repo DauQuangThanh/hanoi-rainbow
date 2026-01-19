@@ -30,6 +30,7 @@ Comprehensive guide to responsive web design patterns and techniques.
 ### Common Breakpoint Sets
 
 **Bootstrap Approach**
+
 ```css
 /* Extra small: <576px */
 /* Small: ≥576px */
@@ -49,6 +50,7 @@ Comprehensive guide to responsive web design patterns and techniques.
 ```
 
 **Tailwind CSS Approach**
+
 ```css
 /* sm: ≥640px */
 /* md: ≥768px */
@@ -93,6 +95,7 @@ Comprehensive guide to responsive web design patterns and techniques.
 ```
 
 **Use Cases**
+
 - Product grids
 - Image galleries
 - Card layouts
@@ -124,6 +127,7 @@ Comprehensive guide to responsive web design patterns and techniques.
 ```
 
 **Use Cases**
+
 - Blog layouts
 - Feature sections
 - Team member grids
@@ -158,6 +162,7 @@ Comprehensive guide to responsive web design patterns and techniques.
 ```
 
 **Use Cases**
+
 - Dashboard layouts
 - Application interfaces
 - Admin panels
@@ -190,6 +195,7 @@ Comprehensive guide to responsive web design patterns and techniques.
 ```
 
 **Use Cases**
+
 - Single-page sites
 - Landing pages
 - Simple layouts
@@ -225,6 +231,7 @@ Comprehensive guide to responsive web design patterns and techniques.
 ```
 
 **Use Cases**
+
 - Mobile navigation
 - Side drawers
 - Filter panels
@@ -236,6 +243,7 @@ Comprehensive guide to responsive web design patterns and techniques.
 ### Fluid Typography
 
 **Using Clamp**
+
 ```css
 /* Formula: clamp(min, preferred, max) */
 h1 {
@@ -250,6 +258,7 @@ body {
 ```
 
 **Using Calc**
+
 ```css
 h1 {
   font-size: calc(1.5rem + 2vw);
@@ -725,16 +734,19 @@ input, select, textarea {
 ## Testing Responsive Designs
 
 ### Browser DevTools
+
 - Chrome DevTools (Device Mode)
 - Firefox Responsive Design Mode
 - Safari Responsive Design Mode
 
 ### Device Testing
+
 - Physical devices (iOS, Android)
 - BrowserStack (cloud testing)
 - Sauce Labs (cloud testing)
 
 ### Viewport Sizes to Test
+
 - 320px (iPhone SE)
 - 375px (iPhone 12/13)
 - 390px (iPhone 14)
@@ -744,6 +756,7 @@ input, select, textarea {
 - 1920px (Desktop)
 
 ### Checklist
+
 - [ ] Text readable at all sizes
 - [ ] Touch targets adequate (44x44px minimum)
 - [ ] Images scale properly
@@ -795,6 +808,7 @@ input, select, textarea {
 ```
 
 **Benefits of Mobile-First**
+
 - Better performance (less CSS for mobile)
 - Progressive enhancement
 - Forces prioritization of content

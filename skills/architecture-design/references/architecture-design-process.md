@@ -1,6 +1,5 @@
 # Architecture Design Process
 
-
 Follow this systematic approach when designing software architectures:
 
 ### Phase 1: Discovery & Requirements
@@ -152,6 +151,7 @@ Produce comprehensive architecture documentation:
    - **Deployment Diagram**: Infrastructure and deployment (use Mermaid flowchart or C4Deployment)
 
 2. **Architecture Decision Records (ADRs)**
+
    ```markdown
    # ADR-001: Use Microservices Architecture
    

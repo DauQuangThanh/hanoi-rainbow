@@ -52,11 +52,13 @@ graph TD
 ### Question 2: Is this a brand new application?
 
 **YES** → Use **[Greenfield Workflow](greenfield-workflow.md)**
+
 - Starting from scratch
 - No existing codebase
 - Clear tech stack choice
 
 **NO** → Use **[Brownfield Workflow](brownfield-workflow.md)**
+
 - Adding features to existing modern application
 - Existing codebase and architecture
 - Extending current functionality
@@ -64,12 +66,14 @@ graph TD
 ### Question 3: What's your goal with the legacy system?
 
 **Migrate specific components only** → Use **[Legacy Migration Workflow](legacy-migration-workflow.md)**
+
 - Just moving data to cloud
 - Just offloading batch processing
 - Want quick wins and cost reduction
 - Keep most of legacy system running
 
 **Complete modernization** → Use **[Legacy Modernization Workflow](legacy-modernization-workflow.md)**
+
 - Eliminate mainframe dependency
 - Redesign to cloud-native architecture
 - Transform COBOL to modern languages
@@ -83,12 +87,14 @@ graph TD
 **[Full Guide →](greenfield-workflow.md)**
 
 ### When to Use
+
 - Building a new application from scratch
 - Creating an MVP or prototype
 - Starting a new microservice
 - No existing codebase
 
 ### Key Steps
+
 1. `rainbow init` - Initialize project
 2. `/rainbow.regulate` - Establish principles
 3. `/rainbow.specify` - Define requirements
@@ -99,9 +105,11 @@ graph TD
 8. Test and deploy
 
 ### Timeline
+
 **2-4 weeks** for MVP
 
 ### Example
+
 Build a task management SaaS application with React frontend, Node.js backend, and PostgreSQL database.
 
 ---
@@ -111,12 +119,14 @@ Build a task management SaaS application with React frontend, Node.js backend, a
 **[Full Guide →](brownfield-workflow.md)**
 
 ### When to Use
+
 - Adding features to existing modern applications
 - Enhancing existing functionality
 - Refactoring existing modules
 - Working with established codebase
 
 ### Key Steps
+
 1. `rainbow init --here` - Add Rainbow to existing project
 2. Document existing architecture (if not done)
 3. `/rainbow.specify` - Define new feature
@@ -127,9 +137,11 @@ Build a task management SaaS application with React frontend, Node.js backend, a
 8. Deploy
 
 ### Timeline
+
 **1-2 weeks** per feature
 
 ### Example
+
 Add user notification system to existing task management app.
 
 ---
@@ -139,6 +151,7 @@ Add user notification system to existing task management app.
 **[Full Guide →](legacy-migration-workflow.md)**
 
 ### When to Use
+
 - Migrating data from mainframe to cloud
 - Offloading batch processing
 - Moving specific workloads
@@ -146,6 +159,7 @@ Add user notification system to existing task management app.
 - Testing migration before full modernization
 
 ### Key Steps
+
 1. `rainbow init` - Initialize migration project
 2. `/rainbow.specify` - Define migration scope
 3. `/rainbow.design-data-migration` - Plan data migration
@@ -157,12 +171,15 @@ Add user notification system to existing task management app.
 9. Validate and optimize
 
 ### Timeline
+
 **4-12 weeks** depending on data volume
 
 ### Example
+
 Migrate 500GB customer database from DB2 on z/OS to PostgreSQL on AWS RDS.
 
 ### Cost Impact
+
 Typically **30-50% mainframe cost reduction** from targeted migration.
 
 ---
@@ -172,6 +189,7 @@ Typically **30-50% mainframe cost reduction** from targeted migration.
 **[Full Guide →](legacy-modernization-workflow.md)**
 
 ### When to Use
+
 - Complete mainframe/midrange modernization
 - Eliminate legacy dependency entirely
 - Transform to cloud-native architecture
@@ -181,6 +199,7 @@ Typically **30-50% mainframe cost reduction** from targeted migration.
 ### Key Steps
 
 **Phase 1: Assessment (4 weeks)**
+
 1. `/rainbow.assess-legacy` - Analyze legacy system
 2. Review assessment results and calculate complexity
 
@@ -212,12 +231,15 @@ Typically **30-50% mainframe cost reduction** from targeted migration.
 19. Decommission legacy
 
 ### Timeline
+
 **6-18 months** for complete system
 
 ### Example
+
 Modernize banking core system from COBOL/CICS/DB2 to Java microservices on Kubernetes.
 
 ### Cost Impact
+
 **40-60% TCO reduction** over 3-5 years after 12-18 month investment.
 
 ---
@@ -251,6 +273,7 @@ graph TD
 ## 🔧 Commands by Workflow
 
 ### Greenfield Commands
+
 ```bash
 /rainbow.regulate          # Establish principles
 /rainbow.specify           # Define requirements
@@ -267,6 +290,7 @@ graph TD
 ```
 
 ### Brownfield Commands
+
 ```bash
 # If Rainbow not initialized:
 rainbow init --here --ai claude
@@ -278,6 +302,7 @@ rainbow init --here --ai claude
 ```
 
 ### Migration Commands
+
 ```bash
 /rainbow.regulate                # Migration principles
 /rainbow.specify                 # Define migration scope
@@ -289,6 +314,7 @@ rainbow init --here --ai claude
 ```
 
 ### Modernization Commands
+
 ```bash
 # Assessment Phase
 /rainbow.assess-legacy           # Analyze legacy system
@@ -320,25 +346,33 @@ rainbow init --here --ai claude
 ## 🎓 Choosing Your Path
 
 ### I'm building a new SaaS application
+
 → **[Greenfield Workflow](greenfield-workflow.md)**
+
 - Start fresh with best practices
 - 2-4 weeks to MVP
 - Full control over tech stack
 
 ### I need to add login to my existing app
+
 → **[Brownfield Workflow](brownfield-workflow.md)**
+
 - Integrate with existing architecture
 - 1-2 weeks to deploy
 - Maintain consistency
 
 ### I need to reduce mainframe costs quickly
+
 → **[Legacy Migration Workflow](legacy-migration-workflow.md)**
+
 - Migrate high-cost databases
 - Offload batch processing
 - 30-50% cost reduction in 2-3 months
 
 ### I want to eliminate our mainframe entirely
+
 → **[Legacy Modernization Workflow](legacy-modernization-workflow.md)**
+
 - Complete transformation
 - Cloud-native architecture
 - 12-18 months, significant investment
@@ -351,16 +385,19 @@ rainbow init --here --ai claude
 You can combine workflows:
 
 **Example 1: Modernize in Phases**
+
 1. Use **Legacy Migration** to offload batch processing (quick win)
 2. Use **Legacy Modernization** for complete transformation (strategic)
 
 **Example 2: Hybrid Approach**
+
 1. Use **Legacy Migration** for data
 2. Use **Greenfield** to build new modern UI
 3. Use **Brownfield** to add features to modern UI
 4. Eventually decommission legacy
 
 **Example 3: Iterative Modernization**
+
 1. Use **Legacy Modernization** to extract first microservice
 2. Use **Greenfield** workflow for each new microservice
 3. Use **Brownfield** to enhance modernized services
@@ -392,6 +429,7 @@ graph LR
 ## 🎯 Success Factors
 
 ### Greenfield Success Factors
+
 - Clear product vision
 - Executive support
 - Dedicated team
@@ -399,6 +437,7 @@ graph LR
 - 2-4 week commitment
 
 ### Brownfield Success Factors
+
 - Understanding existing architecture
 - Comprehensive tests (regression)
 - Feature toggles/flags
@@ -406,6 +445,7 @@ graph LR
 - Code review process
 
 ### Migration Success Factors
+
 - Data profiling and quality assessment
 - Parallel run capability
 - Comprehensive validation
@@ -413,6 +453,7 @@ graph LR
 - 4-8 week timeline commitment
 
 ### Modernization Success Factors
+
 - Executive sponsorship and budget
 - Long-term commitment (12-18 months)
 - Subject matter expert access
@@ -426,24 +467,31 @@ graph LR
 ## 🆘 Common Questions
 
 ### Q: Can I use Rainbow on an existing project?
+
 **A**: Yes! Use `rainbow init --here` to add Rainbow to any existing project, then follow the [Brownfield Workflow](brownfield-workflow.md).
 
 ### Q: Should I modernize all at once or in phases?
+
 **A**: **Always use phased approach** (strangler pattern) for legacy modernization. See [Legacy Modernization Workflow](legacy-modernization-workflow.md).
 
 ### Q: How do I reduce mainframe costs quickly?
+
 **A**: Use [Legacy Migration Workflow](legacy-migration-workflow.md) to migrate high-cost components (databases, batch) first. This provides quick ROI while planning full modernization.
 
 ### Q: What if I just want to move data, not modernize?
+
 **A**: Use [Legacy Migration Workflow](legacy-migration-workflow.md). It focuses on moving components with minimal changes.
 
 ### Q: How long does complete mainframe modernization take?
+
 **A**: Typically 6-18 months depending on system size. See [Legacy Modernization Workflow](legacy-modernization-workflow.md) for detailed timeline.
 
 ### Q: Can I build multiple features in parallel?
+
 **A**: Yes! Each feature gets its own branch. Multiple teams can work on different features simultaneously using the [Brownfield Workflow](brownfield-workflow.md).
 
 ### Q: Do I need to create architecture docs for every feature?
+
 **A**: No. Architecture (`/rainbow.architect`) and Standards (`/rainbow.standardize`) are **product-level** - create once, use for all features. Feature-level docs are specs and plans.
 
 ---
@@ -455,6 +503,7 @@ graph LR
 **Perfect for**: New applications, MVPs, greenfield microservices
 
 **You'll learn**:
+
 - How to go from idea to production in 2-4 weeks
 - How to establish project principles
 - How to create specifications before coding
@@ -470,6 +519,7 @@ graph LR
 **Perfect for**: Existing modern applications, adding features, refactoring
 
 **You'll learn**:
+
 - How to add Rainbow to existing projects
 - How to maintain consistency with existing architecture
 - How to integrate new features without regressions
@@ -485,6 +535,7 @@ graph LR
 **Perfect for**: Targeted component migration, quick wins, cost reduction
 
 **You'll learn**:
+
 - How to migrate data from DB2/IMS/VSAM to cloud databases
 - How to offload batch processing from mainframe
 - How to design ETL/ELT pipelines
@@ -502,6 +553,7 @@ graph LR
 **Perfect for**: Complete mainframe transformation, strategic modernization
 
 **You'll learn**:
+
 - How to assess legacy systems (COBOL, RPG, JCL)
 - How to extract business logic from code
 - How to design cloud-native architecture
@@ -511,6 +563,7 @@ graph LR
 - How to decommission legacy systems
 
 **Key Commands**: All commands, especially:
+
 - assess-legacy
 - map-business-logic
 - design-data-migration
@@ -528,12 +581,14 @@ graph LR
 ## 🔗 Additional Resources
 
 ### Documentation
+
 - [Quick Start Guide](quickstart.md) - Get started in 10 minutes
 - [Installation Guide](installation.md) - Install Rainbow CLI
 - [Upgrade Guide](upgrade.md) - Upgrade existing installations
 - [Local Development](local-development.md) - Contributing to Rainbow
 
 ### Getting Help
+
 - [GitHub Issues](https://github.com/dauquangthanh/hanoi-rainbow/issues) - Report bugs or request features
 - [GitHub Discussions](https://github.com/dauquangthanh/hanoi-rainbow/discussions) - Ask questions
 - [README](../README.md) - Project overview

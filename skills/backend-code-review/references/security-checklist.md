@@ -3,6 +3,7 @@
 Comprehensive security guidelines for backend code review.
 
 ## Table of Contents
+
 - [Authentication](#authentication)
 - [Authorization](#authorization)
 - [Input Validation](#input-validation)
@@ -17,6 +18,7 @@ Comprehensive security guidelines for backend code review.
 ### JWT Implementation
 
 **Good:**
+
 ```typescript
 // ✅ Secure JWT implementation
 import jwt from 'jsonwebtoken';
@@ -83,6 +85,7 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Insecure authentication
 async function login(email: string, password: string) {
@@ -111,6 +114,7 @@ async function login(email: string, password: string) {
 ### Password Hashing
 
 **Good:**
+
 ```typescript
 // ✅ Use bcrypt with proper salt rounds
 import bcrypt from 'bcrypt';
@@ -143,6 +147,7 @@ function validatePassword(password: string): boolean {
 ```
 
 **Bad:**
+
 ```python
 # ❌ Insecure password handling
 import hashlib
@@ -161,6 +166,7 @@ def hash_password_v2(password):
 ### Role-Based Access Control (RBAC)
 
 **Good:**
+
 ```typescript
 // ✅ Proper RBAC implementation
 
@@ -221,6 +227,7 @@ app.delete('/api/users/:id',
 ### Resource-Level Authorization
 
 **Good:**
+
 ```typescript
 // ✅ Verify resource ownership
 async function updatePost(req: Request, res: Response) {
@@ -248,6 +255,7 @@ async function updatePost(req: Request, res: Response) {
 ### Request Validation
 
 **Good:**
+
 ```typescript
 // ✅ Use validation library
 import { z } from 'zod';
@@ -296,6 +304,7 @@ app.post('/api/users',
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ No validation
 app.post('/api/users', async (req, res) => {
@@ -308,6 +317,7 @@ app.post('/api/users', async (req, res) => {
 ### Path Traversal Prevention
 
 **Good:**
+
 ```typescript
 // ✅ Secure file handling
 import path from 'path';
@@ -341,6 +351,7 @@ async function getFile(req: Request, res: Response) {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Path traversal vulnerability
 async function getFile(req: Request, res: Response) {
@@ -358,6 +369,7 @@ async function getFile(req: Request, res: Response) {
 ### SQL Injection
 
 **Good:**
+
 ```typescript
 // ✅ Parameterized queries
 async function getUser(email: string) {
@@ -387,6 +399,7 @@ def get_user(email: str):
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ SQL injection vulnerability!
 async function searchUsers(searchTerm: string) {
@@ -399,6 +412,7 @@ async function searchUsers(searchTerm: string) {
 ### NoSQL Injection
 
 **Good:**
+
 ```typescript
 // ✅ Sanitize MongoDB queries
 import mongoSanitize from 'express-mongo-sanitize';
@@ -416,6 +430,7 @@ async function getUser(email: string) {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ NoSQL injection vulnerability
 async function login(req: Request, res: Response) {
@@ -435,6 +450,7 @@ async function login(req: Request, res: Response) {
 ### Data Encryption
 
 **Good:**
+
 ```typescript
 // ✅ Encrypt sensitive data at rest
 import crypto from 'crypto';
@@ -476,6 +492,7 @@ function decrypt(encrypted: string, ivHex: string, authTagHex: string): string {
 ### Random Token Generation
 
 **Good:**
+
 ```typescript
 // ✅ Cryptographically secure random tokens
 import crypto from 'crypto';
@@ -490,6 +507,7 @@ function generateResetToken(): string {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Predictable tokens
 function generateToken(): string {
@@ -500,6 +518,7 @@ function generateToken(): string {
 ## Secret Management
 
 **Good:**
+
 ```typescript
 // ✅ Use environment variables
 import dotenv from 'dotenv';
@@ -536,6 +555,7 @@ logger.info('Database connection', { host: config.database.host });  // OK
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Hardcoded secrets
 const config = {
@@ -553,6 +573,7 @@ const config = {
 ### Rate Limiting
 
 **Good:**
+
 ```typescript
 // ✅ Implement rate limiting
 import rateLimit from 'express-rate-limit';
@@ -581,6 +602,7 @@ app.use('/api/auth/login', authLimiter);
 ### CORS Configuration
 
 **Good:**
+
 ```typescript
 // ✅ Restrictive CORS
 import cors from 'cors';
@@ -604,6 +626,7 @@ app.use(cors({
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Overly permissive CORS
 app.use(cors({
@@ -615,6 +638,7 @@ app.use(cors({
 ### Security Headers
 
 **Good:**
+
 ```typescript
 // ✅ Use helmet for security headers
 import helmet from 'helmet';
@@ -639,6 +663,7 @@ app.use(helmet({
 ## Secure Dependencies
 
 **Good:**
+
 ```bash
 # ✅ Regularly audit dependencies
 npm audit
@@ -655,6 +680,7 @@ npm update
 ```
 
 **Best Practices:**
+
 1. Pin dependency versions in package.json
 2. Review dependency licenses
 3. Minimize number of dependencies

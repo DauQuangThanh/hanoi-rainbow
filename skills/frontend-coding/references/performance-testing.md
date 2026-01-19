@@ -7,6 +7,7 @@ This reference covers frontend performance optimization techniques, bundle optim
 ### Code Splitting and Lazy Loading
 
 #### React Lazy Loading
+
 ```typescript
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -76,6 +77,7 @@ const { UserList, UserDetail } = lazy(() =>
 ```
 
 #### Vue Lazy Loading
+
 ```typescript
 // Router lazy loading
 import { createRouter, createWebHistory } from 'vue-router';
@@ -137,6 +139,7 @@ router.beforeEach((to, from, next) => {
 ### Bundle Optimization
 
 #### Webpack Configuration
+
 ```javascript
 // webpack.config.js
 const webpack = require('webpack');
@@ -228,6 +231,7 @@ module.exports = {
 ```
 
 #### Vite Configuration
+
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite';

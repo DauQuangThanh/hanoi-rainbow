@@ -1,6 +1,5 @@
 # Design Checklist
 
-
 ### Before Development
 
 - [ ] User research completed and documented

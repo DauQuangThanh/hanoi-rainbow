@@ -1,6 +1,5 @@
 # Test Coverage & Reporting
 
-
 ```javascript
 // Generate coverage report
 npm run test:integration -- --coverage

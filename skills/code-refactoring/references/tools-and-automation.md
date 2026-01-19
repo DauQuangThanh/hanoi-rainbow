@@ -1,6 +1,5 @@
 # Tools and Automation
 
-
 ### Static Analysis Tools
 
 - **JavaScript/TypeScript**: ESLint, TSLint, SonarQube

@@ -7,6 +7,7 @@ Comprehensive guide for designing relational and NoSQL databases.
 ### 1. Normal Forms
 
 **First Normal Form (1NF)**
+
 - Eliminate repeating groups
 - Each column contains atomic values
 - Each row is unique (has primary key)
@@ -35,6 +36,7 @@ CREATE TABLE order_items (
 ```
 
 **Second Normal Form (2NF)**
+
 - Must be in 1NF
 - Remove partial dependencies (non-key attributes depend on entire key)
 
@@ -64,6 +66,7 @@ CREATE TABLE products (
 ```
 
 **Third Normal Form (3NF)**
+
 - Must be in 2NF
 - Remove transitive dependencies (non-key attributes depend only on primary key)
 
@@ -91,6 +94,7 @@ CREATE TABLE zip_codes (
 ```
 
 **Boyce-Codd Normal Form (BCNF)**
+
 - Must be in 3NF
 - Every determinant is a candidate key
 
@@ -99,6 +103,7 @@ CREATE TABLE zip_codes (
 ### 2. Indexing Strategies
 
 **Primary Key Index**
+
 ```sql
 -- Automatically indexed
 CREATE TABLE users (
@@ -107,6 +112,7 @@ CREATE TABLE users (
 ```
 
 **Foreign Key Indexes**
+
 ```sql
 CREATE TABLE posts (
   id UUID PRIMARY KEY,
@@ -119,6 +125,7 @@ CREATE INDEX idx_posts_user_id ON posts(user_id);
 ```
 
 **Single Column Index**
+
 ```sql
 -- Index for WHERE clause
 CREATE INDEX idx_users_email ON users(email);
@@ -127,6 +134,7 @@ CREATE INDEX idx_users_email ON users(email);
 ```
 
 **Composite Index**
+
 ```sql
 -- For queries filtering/sorting multiple columns
 CREATE INDEX idx_posts_user_status_created 
@@ -138,6 +146,7 @@ ON posts(user_id, status, created_at DESC);
 ```
 
 **Partial Index**
+
 ```sql
 -- Index only subset of rows
 CREATE INDEX idx_posts_published 
@@ -146,6 +155,7 @@ WHERE status = 'published';
 ```
 
 **Full-Text Index**
+
 ```sql
 -- PostgreSQL
 CREATE INDEX idx_posts_fulltext 
@@ -158,6 +168,7 @@ WHERE to_tsvector('english', title || ' ' || content)
 ```
 
 **Index Best Practices**
+
 - Index columns used in WHERE, JOIN, ORDER BY
 - Don't over-index (slows writes)
 - Index foreign keys
@@ -170,6 +181,7 @@ WHERE to_tsvector('english', title || ' ' || content)
 ### 3. Common Table Patterns
 
 **Timestamps**
+
 ```sql
 CREATE TABLE base_table (
   id UUID PRIMARY KEY,
@@ -185,6 +197,7 @@ EXECUTE FUNCTION update_updated_at_column();
 ```
 
 **Soft Deletes**
+
 ```sql
 CREATE TABLE users (
   id UUID PRIMARY KEY,
@@ -201,6 +214,7 @@ SELECT * FROM users WHERE deleted_at IS NULL;
 ```
 
 **Versioning/Audit Trail**
+
 ```sql
 CREATE TABLE posts (
   id UUID PRIMARY KEY,
@@ -225,6 +239,7 @@ CREATE TABLE posts_history (
 ```
 
 **Polymorphic Associations**
+
 ```sql
 CREATE TABLE comments (
   id UUID PRIMARY KEY,
@@ -239,6 +254,7 @@ ON comments(commentable_type, commentable_id);
 ```
 
 **Self-Referencing (Tree Structure)**
+
 ```sql
 CREATE TABLE categories (
   id UUID PRIMARY KEY,
@@ -263,6 +279,7 @@ SELECT * FROM category_tree;
 ```
 
 **Many-to-Many (Junction Table)**
+
 ```sql
 CREATE TABLE users (
   id UUID PRIMARY KEY,
@@ -290,6 +307,7 @@ CREATE INDEX idx_user_roles_role ON user_roles(role_id);
 ### 4. Data Types
 
 **PostgreSQL Recommended Types**
+
 ```sql
 CREATE TABLE data_types_example (
   -- Primary keys
@@ -347,6 +365,7 @@ CREATE TYPE status_enum AS ENUM ('draft', 'published', 'archived');
 ### 5. Constraints
 
 **Primary Key**
+
 ```sql
 CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid()
@@ -354,6 +373,7 @@ CREATE TABLE users (
 ```
 
 **Foreign Key**
+
 ```sql
 CREATE TABLE posts (
   id UUID PRIMARY KEY,
@@ -365,6 +385,7 @@ CREATE TABLE posts (
 ```
 
 **Unique**
+
 ```sql
 CREATE TABLE users (
   id UUID PRIMARY KEY,
@@ -382,6 +403,7 @@ CREATE TABLE user_preferences (
 ```
 
 **Check**
+
 ```sql
 CREATE TABLE products (
   id UUID PRIMARY KEY,
@@ -392,6 +414,7 @@ CREATE TABLE products (
 ```
 
 **Not Null**
+
 ```sql
 CREATE TABLE users (
   id UUID PRIMARY KEY,
@@ -405,12 +428,14 @@ CREATE TABLE users (
 ### 6. Transactions
 
 **ACID Properties**
+
 - **Atomicity**: All or nothing
 - **Consistency**: Valid state transitions
 - **Isolation**: Concurrent transactions don't interfere
 - **Durability**: Committed changes persist
 
 **Usage Example**
+
 ```sql
 BEGIN;
 
@@ -427,6 +452,7 @@ COMMIT;
 ```
 
 **Isolation Levels**
+
 ```sql
 -- Read Uncommitted (lowest isolation, dirty reads possible)
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
@@ -446,6 +472,7 @@ SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ### 7. Query Optimization
 
 **Explain Query Plan**
+
 ```sql
 EXPLAIN ANALYZE
 SELECT u.name, COUNT(p.id) as post_count
@@ -458,6 +485,7 @@ LIMIT 10;
 ```
 
 **Avoid N+1 Queries**
+
 ```sql
 -- ❌ Bad (N+1)
 SELECT * FROM posts;
@@ -472,6 +500,7 @@ GROUP BY p.id;
 ```
 
 **Use Covering Indexes**
+
 ```sql
 -- Include all columns needed in query
 CREATE INDEX idx_posts_covering 
@@ -485,6 +514,7 @@ WHERE user_id = ? AND status = 'published';
 ```
 
 **Pagination Optimization**
+
 ```sql
 -- ❌ Bad (OFFSET on large datasets)
 SELECT * FROM posts 
@@ -507,6 +537,7 @@ LIMIT 20;
 **Schema Design Patterns**
 
 **Embedding (Denormalization)**
+
 ```javascript
 // One-to-Few: Embed addresses
 {
@@ -531,6 +562,7 @@ LIMIT 20;
 ```
 
 **Referencing (Normalization)**
+
 ```javascript
 // One-to-Many: Reference posts
 // User document
@@ -550,6 +582,7 @@ LIMIT 20;
 ```
 
 **Two-Way Referencing**
+
 ```javascript
 // Many-to-Many: Users and Groups
 // User document
@@ -568,6 +601,7 @@ LIMIT 20;
 ```
 
 **Extended Reference (Denormalization)**
+
 ```javascript
 // Store frequently accessed fields
 {
@@ -583,6 +617,7 @@ LIMIT 20;
 ```
 
 **Indexing**
+
 ```javascript
 // Single field
 db.users.createIndex({ email: 1 });
@@ -607,6 +642,7 @@ db.users.createIndex({ email: 1 }, { unique: true });
 **Data Structures**
 
 **Strings**
+
 ```redis
 SET user:123:name "John Doe"
 GET user:123:name
@@ -615,6 +651,7 @@ INCR page_views:home
 ```
 
 **Hashes (Objects)**
+
 ```redis
 HSET user:123 name "John Doe" email "john@example.com" age 30
 HGET user:123 name
@@ -623,6 +660,7 @@ HINCRBY user:123 age 1
 ```
 
 **Lists (Ordered)**
+
 ```redis
 LPUSH notifications:user123 "New message"
 LRANGE notifications:user123 0 9  -- Get first 10
@@ -630,6 +668,7 @@ LTRIM notifications:user123 0 99  -- Keep only latest 100
 ```
 
 **Sets (Unique Values)**
+
 ```redis
 SADD tags:post123 "javascript" "nodejs" "api"
 SMEMBERS tags:post123
@@ -637,6 +676,7 @@ SINTER tags:post123 tags:post456  -- Common tags
 ```
 
 **Sorted Sets (Ordered by Score)**
+
 ```redis
 ZADD leaderboard 100 "user123" 95 "user456" 88 "user789"
 ZRANGE leaderboard 0 9 WITHSCORES  -- Top 10
@@ -646,6 +686,7 @@ ZREVRANK leaderboard "user123"  -- User's rank
 **Common Patterns**
 
 **Caching**
+
 ```redis
 -- Cache user data
 SET cache:user:123 '{"name":"John","email":"..."}' EX 300
@@ -659,11 +700,13 @@ if (!user) {
 ```
 
 **Session Storage**
+
 ```redis
 SETEX session:abc123 3600 '{"user_id":"123","role":"admin"}'
 ```
 
 **Rate Limiting**
+
 ```redis
 -- Fixed window
 key = "ratelimit:api:" + userId + ":" + currentHour
@@ -674,6 +717,7 @@ if count > limit: reject()
 ```
 
 **Pub/Sub**
+
 ```redis
 -- Publisher
 PUBLISH notifications "New message"
@@ -687,6 +731,7 @@ SUBSCRIBE notifications
 ### 3. Column-Family (Cassandra)
 
 **Data Modeling**
+
 ```cql
 -- Query-first design
 CREATE TABLE users_by_email (
@@ -717,6 +762,7 @@ LIMIT 10;
 ### 4. Graph Database (Neo4j)
 
 **Data Model**
+
 ```cypher
 // Create nodes
 CREATE (u:User {id: 'user123', name: 'John Doe'})
@@ -747,6 +793,7 @@ RETURN path
 ## Database Scaling Strategies
 
 ### 1. Read Replicas
+
 ```
 Master (Write) ─┬─► Replica 1 (Read)
                 ├─► Replica 2 (Read)
@@ -754,6 +801,7 @@ Master (Write) ─┬─► Replica 1 (Read)
 ```
 
 ### 2. Sharding (Horizontal Partitioning)
+
 ```
 Shard 1: Users A-F
 Shard 2: Users G-M
@@ -762,12 +810,14 @@ Shard 4: Users T-Z
 ```
 
 ### 3. Vertical Partitioning
+
 ```
 Users table ─┬─► Basic info (id, email, name)
              └─► Extended profile (bio, preferences)
 ```
 
 ### 4. Caching Layer
+
 ```
 Application ─► Cache (Redis) ─► Database
 ```

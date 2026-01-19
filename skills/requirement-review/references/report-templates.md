@@ -3,6 +3,7 @@
 Templates for generating comprehensive requirements review reports.
 
 ## Table of Contents
+
 - [Full Review Report Template](#full-review-report-template)
 - [Quick Review Summary Template](#quick-review-summary-template)
 - [Issue Tracking Template](#issue-tracking-template)

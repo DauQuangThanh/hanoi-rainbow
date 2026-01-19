@@ -1,9 +1,9 @@
 # Best Practices
 
-
 ### Atomic Commits
 
 **DO:** One logical change per commit
+
 ```
 ✅ Commit 1: feat(auth): add login endpoint
 ✅ Commit 2: feat(auth): add registration endpoint
@@ -11,6 +11,7 @@
 ```
 
 **DON'T:** Multiple unrelated changes
+
 ```
 ❌ Commit: feat(auth): add login, fix button styling, update docs, refactor utils
 ```
@@ -18,6 +19,7 @@
 ### Meaningful Messages
 
 **DO:** Describe what and why
+
 ```
 ✅ fix(api): handle null values in user preferences
 
@@ -26,6 +28,7 @@ Added null checks and default values.
 ```
 
 **DON'T:** Vague descriptions
+
 ```
 ❌ fix: bug fix
 ❌ update: changes
@@ -35,6 +38,7 @@ Added null checks and default values.
 ### Present Tense, Imperative Mood
 
 **DO:**
+
 ```
 ✅ add feature
 ✅ fix bug
@@ -43,6 +47,7 @@ Added null checks and default values.
 ```
 
 **DON'T:**
+
 ```
 ❌ added feature
 ❌ fixing bug
@@ -53,6 +58,7 @@ Added null checks and default values.
 ### Reference Issues
 
 **Always link to issue tracker:**
+
 ```
 Closes #123
 Fixes #456
@@ -63,6 +69,7 @@ Related to #234
 ### Breaking Changes Visibility
 
 **Use exclamation mark for breaking changes:**
+
 ```
 feat(api)!: change authentication method
 
@@ -70,6 +77,7 @@ BREAKING CHANGE: detailed description
 ```
 
 **Or in footer:**
+
 ```
 feat(api): change authentication method
 

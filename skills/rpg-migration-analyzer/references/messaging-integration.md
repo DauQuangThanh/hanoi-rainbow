@@ -11,6 +11,7 @@ Mainframe systems use IBM MQ, CICS queues, and transient data for asynchronous c
 ### 1. IBM MQ Messages
 
 **COBOL Example**:
+
 ```cobol
 EXEC CICS WRITEQ TS
     QUEUE('ORDERQ')
@@ -40,6 +41,7 @@ END-EXEC.
 ### Pattern 1: Spring JMS with ActiveMQ
 
 **Configuration**:
+
 ```java
 @Configuration
 @EnableJms
@@ -60,6 +62,7 @@ public class JmsConfig {
 ```
 
 **Sender** (equivalent to WRITEQ):
+
 ```java
 @Service
 public class OrderMessageSender {
@@ -78,6 +81,7 @@ public class OrderMessageSender {
 ```
 
 **Receiver** (equivalent to READQ):
+
 ```java
 @Service
 public class OrderMessageReceiver {
@@ -98,6 +102,7 @@ public class OrderMessageReceiver {
 ### Pattern 2: Spring AMQP with RabbitMQ
 
 **Configuration**:
+
 ```java
 @Configuration
 public class RabbitConfig {
@@ -131,6 +136,7 @@ public class RabbitConfig {
 ```
 
 **Sender**:
+
 ```java
 @Service
 public class RabbitOrderSender {
@@ -149,6 +155,7 @@ public class RabbitOrderSender {
 ```
 
 **Receiver**:
+
 ```java
 @Service
 public class RabbitOrderReceiver {
@@ -163,6 +170,7 @@ public class RabbitOrderReceiver {
 ### Pattern 3: Spring Kafka
 
 **Configuration**:
+
 ```java
 @Configuration
 public class KafkaConfig {
@@ -195,6 +203,7 @@ public class KafkaConfig {
 ```
 
 **Producer**:
+
 ```java
 @Service
 public class KafkaOrderProducer {
@@ -213,6 +222,7 @@ public class KafkaOrderProducer {
 ```
 
 **Consumer**:
+
 ```java
 @Service
 public class KafkaOrderConsumer {
@@ -230,6 +240,7 @@ public class KafkaOrderConsumer {
 ### Pattern 1: Request-Reply
 
 **COBOL/MQ**:
+
 ```cobol
 * Send request
 MOVE 'TEMP-REPLY-Q' TO MQMD-REPLYTOQ
@@ -240,6 +251,7 @@ CALL 'MQGET' USING MQMD MQGMO REPLYQ-NAME ...
 ```
 
 **Java/JMS**:
+
 ```java
 @Service
 public class RequestReplyService {
@@ -265,6 +277,7 @@ public class RequestReplyService {
 ### Pattern 2: Dead Letter Queue
 
 **Configuration**:
+
 ```java
 @Bean
 public ReplyingKafkaTemplate<String, Order, OrderResult> replyingKafkaTemplate(
@@ -281,6 +294,7 @@ public DeadLetterPublishingRecoverer deadLetterPublishingRecoverer(
 ```
 
 **Usage**:
+
 ```java
 @KafkaListener(topics = "order-topic")
 public void processOrder(Order order) {
@@ -296,6 +310,7 @@ public void processOrder(Order order) {
 ### Pattern 3: Message Retry
 
 **Configuration**:
+
 ```java
 @Configuration
 public class RetryConfig {
@@ -319,6 +334,7 @@ public class RetryConfig {
 ### COBOL Fixed-Length to JSON
 
 **COBOL Message**:
+
 ```cobol
 01  ORDER-MESSAGE.
     05  ORDER-ID        PIC X(10).
@@ -328,6 +344,7 @@ public class RetryConfig {
 ```
 
 **Java DTO**:
+
 ```java
 @Data
 public class OrderMessage {

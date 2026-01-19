@@ -21,6 +21,7 @@ Provides expert guidance for Oracle Cloud Infrastructure across all major servic
 ## Best Practices
 
 ### Compute
+
 - Use flexible shapes for cost optimization
 - Enable boot volume backups and configure lifecycle policies
 - Use instance pools with autoscaling for dynamic workloads
@@ -28,6 +29,7 @@ Provides expert guidance for Oracle Cloud Infrastructure across all major servic
 - Leverage availability domains for high availability
 
 ### Networking
+
 - Design VCN with proper CIDR blocks (avoid overlaps)
 - Use security lists and network security groups together
 - Implement private subnets for databases and application tiers
@@ -35,6 +37,7 @@ Provides expert guidance for Oracle Cloud Infrastructure across all major servic
 - Configure load balancer health checks with appropriate intervals
 
 ### Storage
+
 - Use block volumes with appropriate performance tiers
 - Implement lifecycle policies for object storage cost savings
 - Enable encryption at rest for all storage services
@@ -42,6 +45,7 @@ Provides expert guidance for Oracle Cloud Infrastructure across all major servic
 - Use file storage for shared application data
 
 ### Database
+
 - Use Autonomous Database for automatic management and tuning
 - Enable automatic backups with point-in-time recovery
 - Configure connection pooling and TLS encryption
@@ -49,6 +53,7 @@ Provides expert guidance for Oracle Cloud Infrastructure across all major servic
 - Monitor database metrics and set up alerts
 
 ### Container Orchestration
+
 - Use managed OKE for Kubernetes workloads
 - Enable cluster autoscaling and pod autoscaling
 - Implement pod security policies and network policies
@@ -56,6 +61,7 @@ Provides expert guidance for Oracle Cloud Infrastructure across all major servic
 - Configure proper resource requests and limits
 
 ### IAM & Security
+
 - Follow principle of least privilege for policies
 - Enable MFA for all users with admin access
 - Use service-level resources for automation
@@ -63,6 +69,7 @@ Provides expert guidance for Oracle Cloud Infrastructure across all major servic
 - Audit IAM policy changes regularly
 
 ### Infrastructure as Code
+
 - Use Terraform OCI provider with remote state
 - Organize resources by compartment and environment
 - Version control all infrastructure code
@@ -70,6 +77,7 @@ Provides expert guidance for Oracle Cloud Infrastructure across all major servic
 - Implement proper variable management and secrets handling
 
 ### Cost Optimization
+
 - Use flexible shapes to match workload requirements
 - Implement autoscaling to scale down during off-peak
 - Use preemptible instances for fault-tolerant workloads

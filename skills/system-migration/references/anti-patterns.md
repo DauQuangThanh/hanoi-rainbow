@@ -1,6 +1,5 @@
 # Anti-Patterns
 
-
 ❌ **No Backups**: Migrate without backups
 ❌ **Big Bang**: Migrate everything simultaneously
 ❌ **Skip Testing**: Go straight to production

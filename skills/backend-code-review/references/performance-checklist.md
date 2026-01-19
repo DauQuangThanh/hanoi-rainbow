@@ -3,6 +3,7 @@
 Guidelines for reviewing backend performance, optimization, and scalability.
 
 ## Table of Contents
+
 - [Caching Strategies](#caching-strategies)
 - [Database Performance](#database-performance)
 - [API Optimization](#api-optimization)
@@ -16,6 +17,7 @@ Guidelines for reviewing backend performance, optimization, and scalability.
 ### Redis Caching
 
 **Good:**
+
 ```typescript
 // ✅ Implement caching layer
 import Redis from 'ioredis';
@@ -72,6 +74,7 @@ async function getUsersBatch(userIds: string[]) {
 ### Cache-Aside Pattern
 
 **Good:**
+
 ```typescript
 // ✅ Cache-aside with automatic refresh
 class CacheService {
@@ -133,6 +136,7 @@ async function updateProduct(id: string, data: any) {
 ### Application-Level Caching
 
 **Good:**
+
 ```typescript
 // ✅ In-memory cache for hot data
 import NodeCache from 'node-cache';
@@ -179,6 +183,7 @@ const expensiveCalculation = memoize((a: number, b: number) => {
 ### Connection Pooling
 
 **Good:**
+
 ```typescript
 // ✅ Proper connection pool configuration
 import { Sequelize } from 'sequelize';
@@ -200,6 +205,7 @@ const sequelize = new Sequelize({
 ### Query Optimization
 
 **Good:**
+
 ```typescript
 // ✅ Efficient queries
 async function getActiveUsers() {
@@ -244,6 +250,7 @@ async function posts(_: any, __: any, context: Context) {
 ### Batch Operations
 
 **Good:**
+
 ```typescript
 // ✅ Bulk inserts
 async function createUsers(users: UserData[]) {
@@ -263,6 +270,7 @@ async function activateUsers(userIds: string[]) {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Individual inserts in loop
 async function createUsers(users: UserData[]) {
@@ -277,6 +285,7 @@ async function createUsers(users: UserData[]) {
 ### Response Compression
 
 **Good:**
+
 ```typescript
 // ✅ Enable compression
 import compression from 'compression';
@@ -296,6 +305,7 @@ app.use(compression({
 ### Pagination
 
 **Good:**
+
 ```typescript
 // ✅ Cursor-based pagination for large datasets
 interface PaginationParams {
@@ -338,6 +348,7 @@ async function getUsers({ limit = 20, cursor }: PaginationParams) {
 ### Field Selection
 
 **Good:**
+
 ```typescript
 // ✅ Allow clients to select fields
 import { Request, Response } from 'express';
@@ -360,6 +371,7 @@ async function getUsers(req: Request, res: Response) {
 ### Partial Responses
 
 **Good:**
+
 ```typescript
 // ✅ GraphQL-style field selection for REST
 interface FieldSelector {
@@ -399,6 +411,7 @@ const partial = selectFields(user, {
 ### Bull Queue
 
 **Good:**
+
 ```typescript
 // ✅ Use queue for long-running tasks
 import Bull from 'bull';
@@ -452,6 +465,7 @@ emailQueue.on('failed', (job, err) => {
 ### Scheduled Jobs
 
 **Good:**
+
 ```typescript
 // ✅ Cron jobs for scheduled tasks
 import cron from 'node-cron';
@@ -483,6 +497,7 @@ dailyQueue.add('cleanup', {}, {
 ### Stream Processing
 
 **Good:**
+
 ```typescript
 // ✅ Use streams for large files
 import { createReadStream, createWriteStream } from 'fs';
@@ -523,6 +538,7 @@ async function processLargeCsv(filePath: string) {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Loading entire file into memory
 async function processLargeCsv(filePath: string) {
@@ -538,6 +554,7 @@ async function processLargeCsv(filePath: string) {
 ### Memory Leaks
 
 **Good:**
+
 ```typescript
 // ✅ Clean up event listeners
 import { EventEmitter } from 'events';
@@ -571,6 +588,7 @@ emitter.setMaxListeners(20);  // Prevent memory leaks from too many listeners
 ### Application Metrics
 
 **Good:**
+
 ```typescript
 // ✅ Collect metrics
 import client from 'prom-client';
@@ -611,6 +629,7 @@ app.get('/metrics', async (req, res) => {
 ### Performance Monitoring
 
 **Good:**
+
 ```typescript
 // ✅ APM integration
 import * as Sentry from '@sentry/node';
@@ -657,6 +676,7 @@ async function processOrder(orderId: string) {
 ### Horizontal Scaling
 
 **Good:**
+
 ```typescript
 // ✅ Stateless application design
 // Store session in Redis, not in-memory
@@ -680,6 +700,7 @@ app.use(session({
 ### Load Balancing
 
 **Good:**
+
 ```typescript
 // ✅ Health check endpoint
 app.get('/health', async (req, res) => {
@@ -724,6 +745,7 @@ process.on('SIGTERM', async () => {
 ### Rate Limiting by User
 
 **Good:**
+
 ```typescript
 // ✅ Per-user rate limiting
 import rateLimit from 'express-rate-limit';
@@ -752,6 +774,7 @@ app.use('/api/', limiter);
 ```
 
 **Key Performance Principles:**
+
 1. Cache frequently accessed data
 2. Use connection pooling
 3. Optimize database queries

@@ -1,6 +1,5 @@
 # Schema Migration Best Practices
 
-
 ```sql
 -- Always use transactions
 BEGIN;

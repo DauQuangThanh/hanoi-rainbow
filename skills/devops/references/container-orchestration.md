@@ -1,9 +1,9 @@
 # Container Orchestration
 
-
 ### Kubernetes Deployments
 
 **Application Deployment:**
+
 ```yaml
 # deployment.yaml
 apiVersion: apps/v1
@@ -156,6 +156,7 @@ spec:
 ### Helm Charts
 
 **Chart Structure:**
+
 ```
 web-app/
 ├── Chart.yaml
@@ -174,6 +175,7 @@ web-app/
 ```
 
 **Chart.yaml:**
+
 ```yaml
 apiVersion: v2
 name: web-app
@@ -184,6 +186,7 @@ appVersion: "1.0.0"
 ```
 
 **values.yaml:**
+
 ```yaml
 replicaCount: 3
 

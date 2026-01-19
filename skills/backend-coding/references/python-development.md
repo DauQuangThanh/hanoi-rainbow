@@ -1,6 +1,5 @@
 # Python Development
 
-
 ### FastAPI Application
 
 ```python

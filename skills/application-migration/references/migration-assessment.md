@@ -1,6 +1,5 @@
 # Migration Assessment
 
-
 ### 1. Current State Analysis
 
 **Inventory Existing Systems:**

@@ -3,10 +3,12 @@
 ## Creating and Configuring Realms
 
 **Realm Hierarchy:**
+
 - Master realm: Administrative realm (do not use for applications)
 - Application realms: Create separate realms per application/environment
 
 **Create New Realm:**
+
 1. Admin Console → Realm dropdown → Create Realm
 2. Set realm name (e.g., `production`, `staging`, `app-name`)
 3. Enable/disable realm as needed
@@ -61,6 +63,7 @@
 ### User Management
 
 **Create Users:**
+
 1. Realm → Users → Add User
 2. Set username (required), email, first/last name
 3. Enable/disable user account
@@ -68,18 +71,21 @@
 5. Required actions: Set password, verify email, update profile, etc.
 
 **User Attributes:**
+
 - Username: Unique identifier (immutable if configured)
 - Email: Must be unique if email as username enabled
 - First Name / Last Name: Display names
 - Custom attributes: Key-value pairs for application metadata
 
 **Manage Credentials:**
+
 - Password: Temporary (user must change) or permanent
 - OTP (One-Time Password): TOTP/HOTP configuration
 - WebAuthn: Hardware security keys, biometrics
 - Reset password: Admin-initiated or user self-service
 
 **User Actions:**
+
 - Send verify email
 - Send password reset
 - Impersonate user (for troubleshooting)
@@ -89,17 +95,20 @@
 ### Group Management
 
 **Create Groups:**
+
 1. Realm → Groups → Create Group
 2. Set group name and attributes
 3. Create subgroups for hierarchical organization
 
 **Group Features:**
+
 - Hierarchical structure: Parent/child relationships
 - Attribute inheritance: Child groups inherit parent attributes
 - Role mapping: Assign realm/client roles to groups
 - Default groups: Auto-assign to new users
 
 **Best Practices:**
+
 - Use groups for organizational structure (departments, teams)
 - Use roles for permissions and access control
 - Assign roles to groups, not individual users when possible

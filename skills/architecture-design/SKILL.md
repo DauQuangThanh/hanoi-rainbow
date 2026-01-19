@@ -81,31 +81,36 @@ Follow this systematic process:
 Select based on requirements and constraints:
 
 **Monolithic**
+
 - Use for: Simple applications, MVPs, small teams, tight deadlines
 - Benefits: Simple deployment, strong consistency, no network overhead
 - Trade-offs: Scaling limitations, technology lock-in
 
 **Modular Monolithic**
+
 - Use for: Medium complexity, clear domain boundaries
 - Benefits: Better organization, some isolation, shared infrastructure
 - Trade-offs: Still single deployment, limited independent scaling
 
 **Microservices**
+
 - Use for: Large scale, multiple teams, different tech stacks
 - Benefits: Independent scaling/deployment, technology flexibility
 - Trade-offs: Distributed complexity, network overhead, eventual consistency
 
 **Serverless**
+
 - Use for: Event-driven, variable load, rapid development
 - Benefits: Auto-scaling, pay-per-use, no infrastructure management
 - Trade-offs: Cold starts, vendor lock-in, debugging complexity
 
 **Event-Driven**
+
 - Use for: Real-time processing, loose coupling, high throughput
 - Benefits: Scalability, flexibility, asynchronous processing
 - Trade-offs: Complexity, eventual consistency, debugging challenges
 
-2. **Design System Components**
+1. **Design System Components**
 
 Define key layers and components:
 
@@ -123,14 +128,14 @@ Define key layers and components:
 └─────────────────────────────────┘
 ```
 
-3. **Define Data Architecture**
+1. **Define Data Architecture**
    - Design data models and schemas
    - Choose database types (relational, document, graph, time-series)
    - Plan data partitioning and sharding strategies
    - Design caching layers (Redis, Memcached)
    - Define data flows and ETL processes
 
-4. **Design Integration Points**
+2. **Design Integration Points**
    - API design (REST, GraphQL, gRPC)
    - Message queues (Kafka, RabbitMQ, SQS)
    - Event streaming architectures
@@ -142,6 +147,7 @@ Define key layers and components:
 1. **Create Architecture Diagrams**
 
 Use C4 model in Mermaid format for comprehensive documentation:
+
 - **Context**: System in environment with users and external systems (use Mermaid C4Context)
 - **Container**: High-level technology choices and communication (use Mermaid C4Container)
 - **Component**: Internal structure of containers (use Mermaid C4Component)
@@ -149,7 +155,7 @@ Use C4 model in Mermaid format for comprehensive documentation:
 
 All diagrams should use Mermaid syntax for easy versioning and rendering in markdown.
 
-2. **Write Architecture Decision Records (ADRs)**
+1. **Write Architecture Decision Records (ADRs)**
 
 Document all significant decisions using structured ADRs:
 
@@ -171,7 +177,7 @@ Proposed | Accepted | Deprecated | Superseded
 
 **Full ADR Template**: See [adr-template.md](references/adr-template.md) for complete structure with examples
 
-3. **Produce Technical Specifications**
+1. **Produce Technical Specifications**
    - System overview and objectives
    - Component descriptions and responsibilities
    - API contracts and interfaces
@@ -192,16 +198,17 @@ Proposed | Accepted | Deprecated | Superseded
 2. **Design Validation Checklist**
 
 Ensure architecture is review-ready:
-   - [ ] All functional and non-functional requirements addressed
-   - [ ] Architecture style justified with trade-offs documented
-   - [ ] Scalability strategy defined (horizontal/vertical, capacity planning)
-   - [ ] Security measures implemented (authentication, authorization, encryption)
-   - [ ] Data architecture validated (storage, consistency, replication)
-   - [ ] Integration patterns specified (sync/async, APIs, events)
-   - [ ] Monitoring and observability planned (metrics, logs, traces, alerts)
-   - [ ] Disaster recovery and backup strategy documented (RPO/RTO)
-   - [ ] Cost estimates provided (infrastructure, operations, scaling)
-   - [ ] Architecture Decision Records (ADRs) created for major decisions
+
+- [ ] All functional and non-functional requirements addressed
+- [ ] Architecture style justified with trade-offs documented
+- [ ] Scalability strategy defined (horizontal/vertical, capacity planning)
+- [ ] Security measures implemented (authentication, authorization, encryption)
+- [ ] Data architecture validated (storage, consistency, replication)
+- [ ] Integration patterns specified (sync/async, APIs, events)
+- [ ] Monitoring and observability planned (metrics, logs, traces, alerts)
+- [ ] Disaster recovery and backup strategy documented (RPO/RTO)
+- [ ] Cost estimates provided (infrastructure, operations, scaling)
+- [ ] Architecture Decision Records (ADRs) created for major decisions
 
 ## Reference Files
 
@@ -282,4 +289,3 @@ Produce clear, comprehensive architecture documentation:
 5. **Architecture Decision Records**
    - Document all significant decisions
    - Include context, alternatives, and trade-offs
-

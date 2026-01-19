@@ -1,6 +1,5 @@
 # Migration Phases
 
-
 ### Phase 1: Assessment and Planning
 
 ```markdown

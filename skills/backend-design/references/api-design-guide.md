@@ -7,6 +7,7 @@ Comprehensive guide for designing robust, scalable, and maintainable APIs.
 ### 1. Resource Naming
 
 **Use Nouns, Not Verbs**
+
 ```
 ✅ Good:
 GET    /users
@@ -24,18 +25,21 @@ DELETE /removeUser/123
 ```
 
 **Use Plural Nouns**
+
 ```
 ✅ Good: /users, /products, /orders
 ❌ Bad: /user, /product, /order
 ```
 
 **Use Hyphens for Multi-Word Resources**
+
 ```
 ✅ Good: /order-items, /user-preferences
 ❌ Bad: /orderItems, /order_items, /OrderItems
 ```
 
 **Avoid Deep Nesting**
+
 ```
 ✅ Good:
 GET /users/123/posts
@@ -50,6 +54,7 @@ GET /users/123/posts/456/comments/789/likes
 ### 2. HTTP Methods
 
 **Standard CRUD Operations**
+
 ```
 POST   /resources         - Create new resource
 GET    /resources         - List resources
@@ -60,11 +65,13 @@ DELETE /resources/{id}    - Delete resource
 ```
 
 **Idempotency**
+
 - GET, PUT, DELETE are idempotent (same result on multiple calls)
 - POST is not idempotent (creates new resource each time)
 - PATCH may or may not be idempotent
 
 **Safe Methods**
+
 - GET, HEAD, OPTIONS are safe (read-only, no side effects)
 
 ---
@@ -72,6 +79,7 @@ DELETE /resources/{id}    - Delete resource
 ### 3. HTTP Status Codes
 
 **Success Codes (2xx)**
+
 ```
 200 OK              - Successful GET, PUT, PATCH, or DELETE
 201 Created         - Successful POST that creates a resource
@@ -81,6 +89,7 @@ DELETE /resources/{id}    - Delete resource
 ```
 
 **Redirection (3xx)**
+
 ```
 301 Moved Permanently   - Resource permanently moved
 302 Found              - Temporary redirect
@@ -88,6 +97,7 @@ DELETE /resources/{id}    - Delete resource
 ```
 
 **Client Errors (4xx)**
+
 ```
 400 Bad Request              - Invalid request syntax
 401 Unauthorized             - Authentication required/failed
@@ -103,6 +113,7 @@ DELETE /resources/{id}    - Delete resource
 ```
 
 **Server Errors (5xx)**
+
 ```
 500 Internal Server Error - Generic server error
 502 Bad Gateway          - Invalid response from upstream
@@ -115,6 +126,7 @@ DELETE /resources/{id}    - Delete resource
 ### 4. Request/Response Format
 
 **Consistent JSON Structure**
+
 ```json
 // Single resource
 {
@@ -155,6 +167,7 @@ DELETE /resources/{id}    - Delete resource
 ```
 
 **Content Negotiation**
+
 ```
 Request:
 Accept: application/json
@@ -169,33 +182,41 @@ Content-Type: application/json; charset=utf-8
 ### 5. Versioning Strategies
 
 **URL Path Versioning (Recommended)**
+
 ```
 /api/v1/users
 /api/v2/users
 ```
+
 ✅ Pros: Clear, easy to route, cacheable
 ❌ Cons: Multiple base URLs
 
 **Header Versioning**
+
 ```
 GET /api/users
 Accept: application/vnd.myapi.v1+json
 ```
+
 ✅ Pros: Clean URLs, RESTful
 ❌ Cons: Less visible, harder to test
 
 **Query Parameter Versioning**
+
 ```
 /api/users?version=1
 ```
+
 ❌ Not recommended: Caching issues, unclear
 
 **When to Version**
+
 - Breaking changes (removed fields, changed data types)
 - Changed business logic
 - Security updates requiring client changes
 
 **When NOT to Version**
+
 - Adding new optional fields
 - Adding new endpoints
 - Bug fixes
@@ -206,6 +227,7 @@ Accept: application/vnd.myapi.v1+json
 ### 6. Filtering, Sorting, Pagination
 
 **Filtering**
+
 ```
 GET /users?status=active
 GET /users?role=admin&status=active
@@ -214,6 +236,7 @@ GET /products?min_price=10&max_price=100
 ```
 
 **Sorting**
+
 ```
 GET /users?sort=created_at        // Ascending (default)
 GET /users?sort=-created_at       // Descending
@@ -221,6 +244,7 @@ GET /users?sort=name,-created_at  // Multiple fields
 ```
 
 **Pagination - Offset/Limit**
+
 ```
 GET /users?page=2&limit=20
 GET /users?offset=40&limit=20
@@ -245,6 +269,7 @@ Response:
 ```
 
 **Pagination - Cursor-Based**
+
 ```
 GET /users?cursor=eyJpZCI6MTIzfQ&limit=20
 
@@ -257,14 +282,17 @@ Response:
   }
 }
 ```
+
 ✅ Better for large datasets, consistent results
 
 **Sparse Fieldsets**
+
 ```
 GET /users?fields=id,email,name
 ```
 
 **Search**
+
 ```
 GET /products?q=laptop
 GET /users?search=john
@@ -275,6 +303,7 @@ GET /users?search=john
 ### 7. HATEOAS (Hypermedia)
 
 **Include Related Links**
+
 ```json
 {
   "id": "usr_123",
@@ -293,6 +322,7 @@ GET /users?search=john
 ### 8. Rate Limiting
 
 **Response Headers**
+
 ```
 X-RateLimit-Limit: 1000
 X-RateLimit-Remaining: 950
@@ -301,6 +331,7 @@ Retry-After: 60
 ```
 
 **429 Response**
+
 ```json
 {
   "error": {
@@ -312,6 +343,7 @@ Retry-After: 60
 ```
 
 **Rate Limiting Strategies**
+
 - Fixed window: 1000 requests per hour
 - Sliding window: More accurate, complex
 - Token bucket: Burst handling
@@ -322,21 +354,25 @@ Retry-After: 60
 ### 9. Authentication & Security
 
 **Bearer Token (JWT)**
+
 ```
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 **API Key**
+
 ```
 X-API-Key: your-api-key-here
 ```
 
 **Basic Auth (Avoid for Production)**
+
 ```
 Authorization: Basic base64(username:password)
 ```
 
 **Security Headers**
+
 ```
 Strict-Transport-Security: max-age=31536000
 X-Content-Type-Options: nosniff
@@ -349,6 +385,7 @@ Content-Security-Policy: default-src 'self'
 ### 10. Caching
 
 **Cache-Control Header**
+
 ```
 Cache-Control: public, max-age=3600          // 1 hour
 Cache-Control: private, max-age=300          // 5 minutes, user-specific
@@ -357,6 +394,7 @@ Cache-Control: no-store                      // Don't cache
 ```
 
 **ETag (Entity Tag)**
+
 ```
 Response:
 ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
@@ -369,6 +407,7 @@ Response:
 ```
 
 **Last-Modified**
+
 ```
 Response:
 Last-Modified: Wed, 14 Jan 2026 10:00:00 GMT
@@ -385,6 +424,7 @@ Response:
 ### 11. Bulk Operations
 
 **Batch Create**
+
 ```
 POST /users/batch
 [
@@ -402,6 +442,7 @@ Response: 207 Multi-Status
 ```
 
 **Batch Update**
+
 ```
 PATCH /users/batch
 [
@@ -411,6 +452,7 @@ PATCH /users/batch
 ```
 
 **Batch Delete**
+
 ```
 DELETE /users/batch
 { "ids": ["usr_123", "usr_456", "usr_789"] }
@@ -421,6 +463,7 @@ DELETE /users/batch
 ### 12. Async Operations
 
 **Accepted for Processing**
+
 ```
 POST /reports/generate
 {
@@ -437,6 +480,7 @@ Response: 202 Accepted
 ```
 
 **Check Status**
+
 ```
 GET /jobs/job_123
 
@@ -453,6 +497,7 @@ Response: 200 OK
 ### 13. Error Handling
 
 **Consistent Error Format**
+
 ```json
 {
   "error": {
@@ -466,6 +511,7 @@ Response: 200 OK
 ```
 
 **Validation Errors**
+
 ```json
 {
   "error": {
@@ -564,6 +610,7 @@ components:
 ## GraphQL API Design
 
 ### Schema Definition
+
 ```graphql
 type User {
   id: ID!
@@ -614,6 +661,7 @@ enum PostStatus {
 ```
 
 ### Queries
+
 ```graphql
 # Get user with nested data
 query {
@@ -642,6 +690,7 @@ query {
 ```
 
 ### Mutations
+
 ```graphql
 mutation {
   createUser(input: {
@@ -661,6 +710,7 @@ mutation {
 ## gRPC API Design
 
 ### Protocol Buffers Definition
+
 ```protobuf
 syntax = "proto3";
 

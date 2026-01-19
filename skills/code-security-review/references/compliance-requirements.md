@@ -21,12 +21,14 @@ This document provides guidance on assessing code security compliance with commo
 **3.4: Render PAN unreadable anywhere it is stored**
 
 **What to Check:**
+
 - Primary Account Number (PAN) encryption at rest
 - Strong cryptography (AES-256, RSA 2048+)
 - Key management practices
 - Avoid storing sensitive authentication data (CVV, PIN)
 
 **Code Review Points:**
+
 ```python
 # ❌ BAD: Weak encryption
 import hashlib
@@ -43,6 +45,7 @@ db.execute("INSERT INTO payments (encrypted_pan) VALUES (?)", (encrypted_pan,))
 ```
 
 **Compliance Validation:**
+
 - [ ] PAN is encrypted using strong cryptography (AES-256 minimum)
 - [ ] Encryption keys stored separately from encrypted data
 - [ ] Key rotation policy implemented
@@ -56,6 +59,7 @@ db.execute("INSERT INTO payments (encrypted_pan) VALUES (?)", (encrypted_pan,))
 **6.5: Address common coding vulnerabilities in software-development processes**
 
 **Required Coverage:**
+
 - 6.5.1: Injection flaws (SQL, OS, LDAP)
 - 6.5.2: Buffer overflows
 - 6.5.3: Insecure cryptographic storage
@@ -68,6 +72,7 @@ db.execute("INSERT INTO payments (encrypted_pan) VALUES (?)", (encrypted_pan,))
 - 6.5.10: Broken authentication and session management
 
 **Compliance Validation:**
+
 - [ ] All inputs validated and sanitized
 - [ ] Parameterized queries used (no dynamic SQL)
 - [ ] TLS 1.2+ for all cardholder data transmission
@@ -82,12 +87,14 @@ db.execute("INSERT INTO payments (encrypted_pan) VALUES (?)", (encrypted_pan,))
 **8.1: Define and implement policies to ensure proper user identification management**
 
 **What to Check:**
+
 - Unique user IDs for all users
 - Multi-factor authentication for remote access
 - Password complexity requirements
 - Account lockout after failed attempts
 
 **Code Review Points:**
+
 ```javascript
 // ❌ BAD: Weak password requirements
 if (password.length >= 6) { /* accept */ }
@@ -115,6 +122,7 @@ if (!validatePasswordComplexity(password)) {
 **8.2: Ensure proper user-authentication management**
 
 **Compliance Validation:**
+
 - [ ] Passwords at least 12 characters or 8 with complexity
 - [ ] MFA required for administrative access
 - [ ] MFA required for all remote network access
@@ -130,6 +138,7 @@ if (!validatePasswordComplexity(password)) {
 **10.1: Implement audit trails to link all access to system components**
 
 **What to Check:**
+
 - User identification logged
 - Event type logged
 - Date and time logged
@@ -138,6 +147,7 @@ if (!validatePasswordComplexity(password)) {
 - Identity or name of affected data/system/resource
 
 **Code Review Points:**
+
 ```python
 # ❌ BAD: No audit logging
 def update_payment(payment_id, amount):
@@ -160,6 +170,7 @@ def update_payment(payment_id, amount, user_id, ip_address):
 ```
 
 **Compliance Validation:**
+
 - [ ] All individual user access logged
 - [ ] All actions by privileged users logged
 - [ ] Access to audit trails logged
@@ -195,6 +206,7 @@ def update_payment(payment_id, amount, user_id, ip_address):
 ### Data Protection Principles (Article 5)
 
 **What to Check:**
+
 - Lawfulness, fairness, transparency
 - Purpose limitation
 - Data minimization
@@ -206,6 +218,7 @@ def update_payment(payment_id, amount, user_id, ip_address):
 ### Technical and Organizational Measures (Article 32)
 
 **Required Security Measures:**
+
 - Pseudonymization and encryption of personal data
 - Ongoing confidentiality, integrity, availability
 - Ability to restore data after incident
@@ -234,6 +247,7 @@ user_data = {
 ```
 
 **Compliance Validation:**
+
 - [ ] Personal data encrypted at rest and in transit
 - [ ] Data retention policies implemented
 - [ ] Right to erasure (deletion) implemented
@@ -249,6 +263,7 @@ user_data = {
 ### Right to Erasure (Article 17)
 
 **Code Review Points:**
+
 ```python
 # ✅ GOOD: Complete data deletion
 def delete_user_data(user_id):
@@ -276,6 +291,7 @@ def delete_user_data(user_id):
 ```
 
 **Compliance Validation:**
+
 - [ ] User can request data deletion
 - [ ] All personal data deleted within 30 days
 - [ ] Data deleted from backups
@@ -311,12 +327,14 @@ def delete_user_data(user_id):
 **Access Control (§ 164.312(a)(1))**
 
 **Required Implementation:**
+
 - Unique user identification (Required)
 - Emergency access procedures (Required)
 - Automatic logoff (Addressable)
 - Encryption and decryption (Addressable)
 
 **Code Review Points:**
+
 ```java
 // ❌ BAD: Shared credentials
 String DB_USER = "app_user";
@@ -344,6 +362,7 @@ public class DataAccess {
 ```
 
 **Compliance Validation:**
+
 - [ ] Unique user ID for all users
 - [ ] Emergency access procedures documented
 - [ ] Session timeout implemented (15 minutes)
@@ -357,6 +376,7 @@ public class DataAccess {
 **Required:** Hardware, software, and procedural mechanisms to record and examine access to ePHI
 
 **Code Review Points:**
+
 ```python
 # ✅ GOOD: Comprehensive HIPAA audit logging
 class HIPAAAuditLogger:
@@ -386,6 +406,7 @@ class HIPAAAuditLogger:
 ```
 
 **Compliance Validation:**
+
 - [ ] All PHI access logged
 - [ ] All modifications to PHI logged
 - [ ] All deletions of PHI logged
@@ -401,6 +422,7 @@ class HIPAAAuditLogger:
 **Required:** Mechanisms to ensure ePHI is not improperly altered or destroyed
 
 **Code Review Points:**
+
 ```python
 # ✅ GOOD: Data integrity controls
 def update_patient_record(patient_id, updates, user_id):
@@ -426,6 +448,7 @@ def update_patient_record(patient_id, updates, user_id):
 ```
 
 **Compliance Validation:**
+
 - [ ] Mechanisms to detect unauthorized alterations
 - [ ] Data integrity verification implemented
 - [ ] Version control for PHI records
@@ -458,12 +481,14 @@ def update_patient_record(patient_id, updates, user_id):
 **CC6.1: Logical and Physical Access Controls**
 
 **What to Check:**
+
 - User authentication (CC6.1)
 - Authorization mechanisms (CC6.1)
 - Access provisioning and termination (CC6.2)
 - Credential lifecycle management (CC6.2)
 
 **Compliance Validation:**
+
 - [ ] Multi-factor authentication implemented
 - [ ] Role-based access control (RBAC)
 - [ ] Least privilege principle enforced
@@ -475,6 +500,7 @@ def update_patient_record(patient_id, updates, user_id):
 **CC6.6: Encryption**
 
 **Code Review Points:**
+
 ```javascript
 // ❌ BAD: No encryption in transit
 app.get('/api/customer-data', (req, res) => {
@@ -501,6 +527,7 @@ app.use((req, res, next) => {
 ```
 
 **Compliance Validation:**
+
 - [ ] TLS 1.2+ for data in transit
 - [ ] AES-256 for data at rest
 - [ ] Key management procedures documented
@@ -511,6 +538,7 @@ app.use((req, res, next) => {
 **CC7.2: System Monitoring**
 
 **Compliance Validation:**
+
 - [ ] Security monitoring implemented
 - [ ] Alerting for suspicious activity
 - [ ] Log aggregation and analysis
@@ -542,6 +570,7 @@ app.use((req, res, next) => {
 ### 1. Identify Applicable Standards
 
 Determine which compliance frameworks apply based on:
+
 - Industry sector (healthcare, finance, retail)
 - Geographic location (EU, US, other)
 - Data types processed (PII, PHI, payment cards)
@@ -550,6 +579,7 @@ Determine which compliance frameworks apply based on:
 ### 2. Map Requirements to Code
 
 For each applicable standard:
+
 - List specific technical requirements
 - Identify relevant code sections
 - Document security controls
@@ -558,6 +588,7 @@ For each applicable standard:
 ### 3. Perform Gap Analysis
 
 Compare current implementation against requirements:
+
 - Compliant: Meets all requirements
 - Partially Compliant: Meets some requirements
 - Non-Compliant: Does not meet requirements
@@ -566,6 +597,7 @@ Compare current implementation against requirements:
 ### 4. Prioritize Remediation
 
 Order by:
+
 1. Regulatory risk (fines, legal action)
 2. Security risk (likelihood × impact)
 3. Effort required (quick wins first)
@@ -574,6 +606,7 @@ Order by:
 ### 5. Document Findings
 
 Include in security report:
+
 - Compliance status summary
 - Specific requirement violations
 - Risk assessment for each gap

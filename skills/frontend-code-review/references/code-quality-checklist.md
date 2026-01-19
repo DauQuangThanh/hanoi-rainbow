@@ -3,6 +3,7 @@
 Comprehensive criteria for assessing frontend code quality.
 
 ## Table of Contents
+
 - [Component Structure](#component-structure)
 - [JavaScript/TypeScript Quality](#javascripttypescript-quality)
 - [State Management](#state-management)
@@ -16,6 +17,7 @@ Comprehensive criteria for assessing frontend code quality.
 #### Single Responsibility Principle
 
 **Good:**
+
 ```jsx
 // ✅ Each component has one clear purpose
 function UserAvatar({ user }) {
@@ -37,6 +39,7 @@ function UserProfile({ user }) {
 ```
 
 **Bad:**
+
 ```jsx
 // ❌ Component doing too much
 function UserProfile({ user }) {
@@ -52,6 +55,7 @@ function UserProfile({ user }) {
 #### Component Composition
 
 **Good:**
+
 ```jsx
 // ✅ Composition over inheritance
 function Card({ children, className }) {
@@ -70,6 +74,7 @@ function ProductCard({ product }) {
 ```
 
 **Bad:**
+
 ```jsx
 // ❌ Trying to use inheritance
 class BaseCard extends React.Component { /* ... */ }
@@ -80,6 +85,7 @@ class UserCard extends BaseCard { /* ... */ }
 #### Props Design
 
 **Good:**
+
 ```tsx
 // ✅ Well-typed, specific props
 interface ButtonProps {
@@ -104,6 +110,7 @@ function Button({ variant, size, onClick, disabled, children }: ButtonProps) {
 ```
 
 **Bad:**
+
 ```jsx
 // ❌ Generic, untyped props
 function Button(props) {
@@ -116,6 +123,7 @@ function Button(props) {
 #### Component Organization
 
 **Good:**
+
 ```vue
 <script setup lang="ts">
 // ✅ Clear organization: imports → types → props → composables → computed → methods
@@ -147,6 +155,7 @@ function toggleEdit() {
 ```
 
 **Bad:**
+
 ```vue
 <script>
 // ❌ Mixed concerns, no types, unclear organization
@@ -168,6 +177,7 @@ export default {
 ### Angular Components
 
 **Good:**
+
 ```typescript
 // ✅ OnPush strategy, typed, clear separation
 @Component({
@@ -189,6 +199,7 @@ export class UserProfileComponent {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Default change detection, any types, mixed concerns
 @Component({
@@ -209,6 +220,7 @@ export class UserProfileComponent {
 ### Type Safety (TypeScript)
 
 **Good:**
+
 ```typescript
 // ✅ Strict types, no any
 interface User {
@@ -234,6 +246,7 @@ type RequestState<T> =
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Using any, loose types
 function getUserRole(user: any): any {
@@ -251,6 +264,7 @@ interface RequestState {
 ### Function Complexity
 
 **Good:**
+
 ```javascript
 // ✅ Small, focused functions (< 50 lines, cyclomatic complexity < 10)
 function validateEmail(email) {
@@ -273,6 +287,7 @@ function validateUser(user) {
 ```
 
 **Bad:**
+
 ```javascript
 // ❌ Large, complex function (100+ lines, high cyclomatic complexity)
 function validateAndProcessUser(user) {
@@ -298,6 +313,7 @@ function validateAndProcessUser(user) {
 ### Error Handling
 
 **Good:**
+
 ```typescript
 // ✅ Proper error handling with types
 async function fetchUser(id: string): Promise<User> {
@@ -330,6 +346,7 @@ function UserProfile({ userId }: { userId: string }) {
 ```
 
 **Bad:**
+
 ```javascript
 // ❌ No error handling, ignoring promises
 async function fetchUser(id) {
@@ -349,6 +366,7 @@ function UserProfile({ userId }) {
 ### Code Duplication (DRY)
 
 **Good:**
+
 ```typescript
 // ✅ DRY - extracted common logic
 function useFormField<T>(initialValue: T) {
@@ -384,6 +402,7 @@ function LoginForm() {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Repeated code across components
 function LoginForm() {
@@ -414,6 +433,7 @@ function SignupForm() {
 ### Local vs Global State
 
 **Good:**
+
 ```typescript
 // ✅ Local state for UI, global for shared data
 // Component-specific UI state
@@ -436,6 +456,7 @@ const useAuthStore = create<AuthStore>((set) => ({
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Everything in global store, including UI state
 const useStore = create((set) => ({
@@ -450,6 +471,7 @@ const useStore = create((set) => ({
 ### Immutability
 
 **Good:**
+
 ```typescript
 // ✅ Immutable updates
 function todosReducer(state: Todo[], action: Action): Todo[] {
@@ -474,6 +496,7 @@ function todosReducer(state: Todo[], action: Action): Todo[] {
 ```
 
 **Bad:**
+
 ```javascript
 // ❌ Mutating state directly
 function todosReducer(state, action) {
@@ -498,6 +521,7 @@ function todosReducer(state, action) {
 ### Issue 1: Unnecessary Re-renders
 
 **Problem:**
+
 ```jsx
 // ❌ Creating new objects/arrays in render
 function TodoList({ todos }) {
@@ -516,6 +540,7 @@ function TodoList({ todos }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Memoize callbacks, use React.memo
 const TodoItem = React.memo(({ todo, onUpdate }) => {
@@ -544,6 +569,7 @@ function TodoList({ todos }) {
 ### Issue 2: Missing Cleanup
 
 **Problem:**
+
 ```jsx
 // ❌ No cleanup for subscriptions/timers
 function Timer() {
@@ -561,6 +587,7 @@ function Timer() {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Proper cleanup
 function Timer() {
@@ -581,6 +608,7 @@ function Timer() {
 ### Issue 3: Prop Drilling
 
 **Problem:**
+
 ```jsx
 // ❌ Passing props through many levels
 function App() {
@@ -602,6 +630,7 @@ function UserMenu({ user, setUser }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Use Context or state management
 const UserContext = createContext();
@@ -686,6 +715,7 @@ renderButton({
 **Indicator:** Mixed conventions (camelCase, snake_case, PascalCase)
 
 **Fix:** Follow consistent conventions:
+
 - Components: PascalCase (UserProfile)
 - Variables/functions: camelCase (getUserProfile)
 - Constants: UPPER_SNAKE_CASE (API_BASE_URL)

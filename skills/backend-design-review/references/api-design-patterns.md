@@ -33,6 +33,7 @@ This document provides comprehensive guidance on API design patterns, best pract
 **Best Practices:**
 
 ✅ **Use Plural Nouns for Collections:**
+
 ```
 GET    /api/users          (get all users)
 POST   /api/users          (create a user)
@@ -42,6 +43,7 @@ DELETE /api/users/123      (delete user)
 ```
 
 ✅ **Use Hierarchical Structure for Relationships:**
+
 ```
 GET /api/users/123/orders           (get orders for user 123)
 GET /api/orders/456/items           (get items for order 456)
@@ -49,6 +51,7 @@ GET /api/users/123/orders/456       (get specific order for user 123)
 ```
 
 ❌ **Avoid:**
+
 - Verbs in URLs: `/api/getUsers`, `/api/createUser`
 - Singular for collections: `/api/user`
 - Deeply nested resources (max 2 levels): `/api/users/123/orders/456/items/789/reviews`
@@ -71,17 +74,20 @@ GET /api/users/123/orders/456       (get specific order for user 123)
 ### HTTP Status Codes
 
 **Success Codes (2xx):**
+
 - **200 OK**: Request successful, response body included
 - **201 Created**: Resource created, `Location` header with new resource URL
 - **202 Accepted**: Request accepted for async processing
 - **204 No Content**: Request successful, no response body
 
 **Redirection Codes (3xx):**
+
 - **301 Moved Permanently**: Resource permanently moved
 - **302 Found**: Temporary redirect
 - **304 Not Modified**: Cached version still valid
 
 **Client Error Codes (4xx):**
+
 - **400 Bad Request**: Invalid request syntax or validation error
 - **401 Unauthorized**: Authentication required or failed
 - **403 Forbidden**: Authenticated but not authorized
@@ -92,6 +98,7 @@ GET /api/users/123/orders/456       (get specific order for user 123)
 - **429 Too Many Requests**: Rate limit exceeded
 
 **Server Error Codes (5xx):**
+
 - **500 Internal Server Error**: Unexpected server error
 - **502 Bad Gateway**: Invalid response from upstream server
 - **503 Service Unavailable**: Server temporarily unavailable
@@ -100,6 +107,7 @@ GET /api/users/123/orders/456       (get specific order for user 123)
 ### Request/Response Design
 
 **Request Body (JSON):**
+
 ```json
 POST /api/users
 Content-Type: application/json
@@ -113,6 +121,7 @@ Content-Type: application/json
 ```
 
 **Success Response:**
+
 ```json
 HTTP/1.1 201 Created
 Location: /api/users/123
@@ -130,6 +139,7 @@ Content-Type: application/json
 ```
 
 **Error Response:**
+
 ```json
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
@@ -157,6 +167,7 @@ Content-Type: application/json
 ### Pagination
 
 **Offset-Based Pagination:**
+
 ```
 GET /api/users?page=2&limit=20
 
@@ -184,6 +195,7 @@ Response:
 **Cons:** Performance degrades with large datasets, inconsistent with data changes
 
 **Cursor-Based Pagination:**
+
 ```
 GET /api/users?cursor=eyJpZCI6MTIzfQ==&limit=20
 
@@ -210,11 +222,13 @@ Response:
 ### Filtering, Sorting, Searching
 
 **Filtering:**
+
 ```
 GET /api/products?category=electronics&inStock=true&minPrice=100&maxPrice=500
 ```
 
 **Sorting:**
+
 ```
 GET /api/users?sort=lastName,firstName    (ascending)
 GET /api/users?sort=-createdAt            (descending, note the minus sign)
@@ -222,12 +236,14 @@ GET /api/users?sort=lastName,-createdAt   (multiple fields)
 ```
 
 **Searching:**
+
 ```
 GET /api/products?search=laptop           (full-text search)
 GET /api/users?q=john                     (query parameter)
 ```
 
 **Field Selection (Sparse Fieldsets):**
+
 ```
 GET /api/users?fields=id,firstName,lastName,email
 (only return specified fields)
@@ -242,6 +258,7 @@ See [API Versioning Strategies](#api-versioning-strategies) section below.
 **Principle:** Responses include links to related resources and available actions.
 
 **Example:**
+
 ```json
 {
   "id": "123",
@@ -267,6 +284,7 @@ See [API Versioning Strategies](#api-versioning-strategies) section below.
 **Non-Idempotent:** POST
 
 **Idempotency Keys (for POST):**
+
 ```
 POST /api/orders
 Idempotency-Key: a1b2c3d4-e5f6-7890-g1h2-i3j4k5l6m7n8
@@ -283,11 +301,13 @@ Server stores the idempotency key and returns the same response for duplicate re
 ### Caching
 
 **Cache-Control Header:**
+
 ```
 Cache-Control: max-age=3600, public
 ```
 
 **ETag (Entity Tag) for Conditional Requests:**
+
 ```
 GET /api/users/123
 Response:
@@ -302,6 +322,7 @@ HTTP/1.1 304 Not Modified
 ```
 
 **Last-Modified:**
+
 ```
 Last-Modified: Tue, 14 Jan 2026 10:00:00 GMT
 
@@ -312,6 +333,7 @@ If-Modified-Since: Tue, 14 Jan 2026 10:00:00 GMT
 ### Rate Limiting
 
 **Headers:**
+
 ```
 X-RateLimit-Limit: 100
 X-RateLimit-Remaining: 87
@@ -319,6 +341,7 @@ X-RateLimit-Reset: 1642161600
 ```
 
 **Response when rate limit exceeded:**
+
 ```
 HTTP/1.1 429 Too Many Requests
 Retry-After: 3600
@@ -338,6 +361,7 @@ Retry-After: 3600
 ### Schema Design Best Practices
 
 **Type Definitions:**
+
 ```graphql
 type User {
   id: ID!
@@ -367,6 +391,7 @@ type Post {
 ```
 
 **Best Practices:**
+
 - Use `!` for non-nullable fields
 - Use clear, descriptive names (nouns for types, verbs for mutations)
 - Use enums for fixed value sets
@@ -376,6 +401,7 @@ type Post {
 ### Query Design
 
 **Simple Query:**
+
 ```graphql
 type Query {
   user(id: ID!): User
@@ -384,6 +410,7 @@ type Query {
 ```
 
 **Relay-Style Connection (Pagination):**
+
 ```graphql
 type UserConnection {
   edges: [UserEdge!]!
@@ -404,6 +431,7 @@ type PageInfo {
 ```
 
 **Query with Arguments:**
+
 ```graphql
 type Query {
   posts(
@@ -429,6 +457,7 @@ enum PostOrderBy {
 **Naming Convention:** `verb + Noun`
 
 **Input Types:**
+
 ```graphql
 type Mutation {
   createUser(input: CreateUserInput!): CreateUserPayload!
@@ -457,6 +486,7 @@ type UserError {
 ```
 
 **Best Practices:**
+
 - Use input types for complex arguments
 - Return payload types (not just the object)
 - Include errors in payload (not just throw exceptions)
@@ -466,6 +496,7 @@ type UserError {
 ### N+1 Query Problem
 
 **Problem:**
+
 ```graphql
 query {
   posts {
@@ -480,6 +511,7 @@ query {
 ```
 
 **Solution: DataLoader**
+
 ```javascript
 const DataLoader = require('dataloader');
 
@@ -498,6 +530,7 @@ const resolvers = {
 ### Query Complexity and Depth Limiting
 
 **Depth Limiting:**
+
 ```javascript
 const depthLimit = require('graphql-depth-limit');
 
@@ -508,6 +541,7 @@ const server = new ApolloServer({
 ```
 
 **Query Cost Analysis:**
+
 ```javascript
 const costAnalysis = require('graphql-cost-analysis');
 
@@ -526,6 +560,7 @@ const server = new ApolloServer({
 ### Error Handling
 
 **Error Response:**
+
 ```json
 {
   "errors": [
@@ -546,6 +581,7 @@ const server = new ApolloServer({
 ```
 
 **Custom Error Codes:**
+
 - `UNAUTHENTICATED`: Not authenticated
 - `FORBIDDEN`: Not authorized
 - `BAD_USER_INPUT`: Validation error
@@ -555,6 +591,7 @@ const server = new ApolloServer({
 ### Subscriptions
 
 **Schema Definition:**
+
 ```graphql
 type Subscription {
   postCreated: Post!
@@ -564,6 +601,7 @@ type Subscription {
 ```
 
 **Client Usage:**
+
 ```graphql
 subscription {
   postCreated {
@@ -577,6 +615,7 @@ subscription {
 ```
 
 **Best Practices:**
+
 - Use subscriptions for real-time updates
 - Filter events server-side (not client-side)
 - Consider scalability (WebSocket connections)
@@ -589,6 +628,7 @@ subscription {
 ### Protocol Buffers (Protobuf)
 
 **Service Definition:**
+
 ```protobuf
 syntax = "proto3";
 
@@ -653,12 +693,14 @@ message ListUsersResponse {
 ### Field Numbering
 
 **Best Practices:**
+
 - Never reuse field numbers (breaks backward compatibility)
 - Reserve numbers 1-15 for frequently used fields (1 byte encoding)
 - Reserve numbers for deleted fields to prevent reuse
 - Group related fields with similar numbers
 
 **Reserved Fields:**
+
 ```protobuf
 message User {
   reserved 4, 5;  // Reserved field numbers
@@ -675,19 +717,25 @@ message User {
 ### Streaming Patterns
 
 **Server Streaming (one request, multiple responses):**
+
 - Use case: Download large dataset, real-time updates
+
 ```protobuf
 rpc StreamOrders(StreamOrdersRequest) returns (stream Order);
 ```
 
 **Client Streaming (multiple requests, one response):**
+
 - Use case: Upload large dataset, batch processing
+
 ```protobuf
 rpc UploadImages(stream Image) returns (UploadImagesResponse);
 ```
 
 **Bidirectional Streaming (multiple requests and responses):**
+
 - Use case: Chat, real-time collaboration
+
 ```protobuf
 rpc Chat(stream ChatMessage) returns (stream ChatMessage);
 ```
@@ -695,6 +743,7 @@ rpc Chat(stream ChatMessage) returns (stream ChatMessage);
 ### Error Handling
 
 **gRPC Status Codes:**
+
 - `OK` (0): Success
 - `CANCELLED` (1): Operation cancelled
 - `INVALID_ARGUMENT` (3): Invalid client argument
@@ -707,6 +756,7 @@ rpc Chat(stream ChatMessage) returns (stream ChatMessage);
 - `INTERNAL` (13): Internal server error
 
 **Error with Details:**
+
 ```protobuf
 message ErrorInfo {
   string reason = 1;
@@ -718,6 +768,7 @@ message ErrorInfo {
 ### Metadata (Headers)
 
 **Setting Metadata (Server):**
+
 ```javascript
 const metadata = new grpc.Metadata();
 metadata.add('x-request-id', '123');
@@ -725,6 +776,7 @@ callback(null, response, metadata);
 ```
 
 **Reading Metadata (Client):**
+
 ```javascript
 const metadata = new grpc.Metadata();
 metadata.add('authorization', 'Bearer token');
@@ -734,12 +786,14 @@ client.getUser(request, metadata, callback);
 ### Service Versioning
 
 **Package Versioning:**
+
 ```protobuf
 package user.v1;  // Version 1
 package user.v2;  // Version 2
 ```
 
 **Running Multiple Versions:**
+
 - Deploy v1 and v2 simultaneously
 - Clients specify version in package name
 - Gradual migration from v1 to v2
@@ -751,6 +805,7 @@ package user.v2;  // Version 2
 ### 1. URL Path Versioning
 
 **Example:**
+
 ```
 /api/v1/users
 /api/v2/users
@@ -764,6 +819,7 @@ package user.v2;  // Version 2
 ### 2. Header Versioning
 
 **Example:**
+
 ```
 GET /api/users
 Accept: application/vnd.api+json; version=1
@@ -777,6 +833,7 @@ Accept: application/vnd.api+json; version=1
 ### 3. Query Parameter Versioning
 
 **Example:**
+
 ```
 /api/users?version=1
 ```
@@ -789,6 +846,7 @@ Accept: application/vnd.api+json; version=1
 ### 4. Content Negotiation (Media Type)
 
 **Example:**
+
 ```
 Accept: application/vnd.company.user.v1+json
 ```
@@ -809,12 +867,14 @@ Accept: application/vnd.company.user.v1+json
 7. **Backward Compatibility**: Prefer non-breaking changes
 
 **Non-Breaking Changes:**
+
 - Adding new endpoints
 - Adding optional fields
 - Adding new values to enums
 - Relaxing validation rules
 
 **Breaking Changes:**
+
 - Removing endpoints or fields
 - Renaming fields
 - Changing field types
@@ -828,6 +888,7 @@ Accept: application/vnd.company.user.v1+json
 ### Authentication Methods
 
 **1. API Keys**
+
 ```
 GET /api/users
 X-API-Key: abc123def456
@@ -837,12 +898,14 @@ X-API-Key: abc123def456
 **Cons:** No user context, revocation difficult
 
 **2. JWT (JSON Web Tokens)**
+
 ```
 GET /api/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 **JWT Structure:**
+
 ```json
 {
   "header": {
@@ -865,6 +928,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 **3. OAuth 2.0**
 
 **Authorization Code Flow (for web apps):**
+
 1. Redirect user to authorization server
 2. User authenticates and grants permissions
 3. Authorization server redirects back with code
@@ -872,6 +936,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 5. Use access token to access API
 
 **Client Credentials Flow (for server-to-server):**
+
 ```
 POST /oauth/token
 Content-Type: application/x-www-form-urlencoded
@@ -892,6 +957,7 @@ Response:
 ### Authorization Models
 
 **RBAC (Role-Based Access Control):**
+
 ```json
 {
   "userId": "123",
@@ -904,6 +970,7 @@ Response:
 ```
 
 **ABAC (Attribute-Based Access Control):**
+
 ```json
 {
   "subject": {"userId": "123", "department": "engineering"},
@@ -914,6 +981,7 @@ Response:
 ```
 
 **Policy Example (OPA Rego):**
+
 ```rego
 allow {
   input.subject.userId == input.resource.ownerId
@@ -939,6 +1007,7 @@ allow {
 ### OpenAPI (Swagger) Specification
 
 **Example:**
+
 ```yaml
 openapi: 3.0.3
 info:
@@ -1103,6 +1172,7 @@ security:
 ### Test Types
 
 **1. Unit Tests (Service Layer)**
+
 ```javascript
 describe('UserService', () => {
   it('should create a user', async () => {
@@ -1119,6 +1189,7 @@ describe('UserService', () => {
 ```
 
 **2. Integration Tests (API Endpoints)**
+
 ```javascript
 describe('POST /api/users', () => {
   it('should create a user and return 201', async () => {
@@ -1152,10 +1223,12 @@ describe('POST /api/users', () => {
 ```
 
 **3. Contract Tests (API Contract)**
+
 - Pact: Consumer-driven contract testing
 - Ensures API matches consumer expectations
 
 **4. Load Tests (Performance)**
+
 ```javascript
 import http from 'k6/http';
 import { check } from 'k6';
@@ -1200,6 +1273,7 @@ export default function() {
 **Problem:** Too many small, fine-grained API calls
 
 **Example (Bad):**
+
 ```javascript
 // 3 API calls to render a user profile
 const user = await fetch('/api/users/123');
@@ -1208,6 +1282,7 @@ const preferences = await fetch('/api/users/123/preferences');
 ```
 
 **Solution:** Composite/aggregate endpoints
+
 ```javascript
 // 1 API call with includes
 const data = await fetch('/api/users/123?include=orders,preferences');
@@ -1218,12 +1293,14 @@ const data = await fetch('/api/users/123?include=orders,preferences');
 **Problem:** Returning too much data
 
 **Example (Bad):**
+
 ```javascript
 // Returns all user fields when only name needed
 GET /api/users/123  // Returns 50 fields
 ```
 
 **Solution:** Field selection (GraphQL or REST with fields parameter)
+
 ```javascript
 GET /api/users/123?fields=id,firstName,lastName
 ```
@@ -1233,6 +1310,7 @@ GET /api/users/123?fields=id,firstName,lastName
 **Problem:** Using POST for everything
 
 **Example (Bad):**
+
 ```
 POST /api/getUser
 POST /api/createUser
@@ -1241,6 +1319,7 @@ POST /api/deleteUser
 ```
 
 **Solution:** Use appropriate HTTP methods
+
 ```
 GET    /api/users/123
 POST   /api/users
@@ -1253,11 +1332,13 @@ DELETE /api/users/123
 **Problem:** Database structure exposed in API
 
 **Example (Bad):**
+
 ```
 GET /api/user_accounts?user_id=123&status_flag=1
 ```
 
 **Solution:** Domain-driven API design
+
 ```
 GET /api/users/123?status=active
 ```
@@ -1267,6 +1348,7 @@ GET /api/users/123?status=active
 **Problem:** Breaking changes without versioning
 
 **Solution:** Version APIs from day one
+
 ```
 /api/v1/users  (initial version)
 /api/v2/users  (breaking change)
@@ -1277,6 +1359,7 @@ GET /api/users/123?status=active
 **Problem:** Mixing conventions
 
 **Example (Bad):**
+
 ```
 /api/users       (plural)
 /api/product     (singular)
@@ -1285,6 +1368,7 @@ GET /api/users/123?status=active
 ```
 
 **Solution:** Consistent naming
+
 ```
 /api/users
 /api/products
@@ -1297,6 +1381,7 @@ GET /api/users/123?status=active
 **Problem:** Generic error messages
 
 **Example (Bad):**
+
 ```json
 {
   "error": "Bad request"
@@ -1304,6 +1389,7 @@ GET /api/users/123?status=active
 ```
 
 **Solution:** Detailed, actionable errors
+
 ```json
 {
   "error": {
@@ -1325,6 +1411,7 @@ GET /api/users/123?status=active
 **Problem:** API timeout on long operations
 
 **Solution:** Async processing with status endpoint
+
 ```
 POST /api/reports
 Response 202 Accepted:

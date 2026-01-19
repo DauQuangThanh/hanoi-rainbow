@@ -5,22 +5,26 @@
 ### Supported Engines
 
 **MySQL**
+
 - Versions: 5.6, 5.7, 8.0
 - Max connections: Up to 10,000
 - Storage: 20GB - 64TB
 - Use cases: Web applications, e-commerce, CMS
 
 **PostgreSQL**
+
 - Versions: 10, 11, 12, 13, 14, 15
 - Advanced features: JSON, full-text search, PostGIS
 - Use cases: Complex queries, geospatial data, data warehousing
 
 **SQL Server**
+
 - Versions: 2008 R2, 2012, 2016, 2017, 2019, 2022
 - Editions: Web, Standard, Enterprise
 - Use cases: .NET applications, Windows environments
 
 **MariaDB**
+
 - Compatible with MySQL
 - Enhanced performance and features
 - Use cases: MySQL migration, high-performance scenarios
@@ -28,16 +32,19 @@
 ### Instance Specifications
 
 **Basic Edition**
+
 - Single node (no HA)
 - Cost-effective for dev/test
 - Not recommended for production
 
 **High-Availability Edition**
+
 - Primary-standby architecture
 - Auto-failover within 30 seconds
 - Recommended for production
 
 **Cluster Edition (MySQL/PostgreSQL)**
+
 - 1 primary + 1+ read replicas
 - Higher read capacity
 - Auto-failover and load balancing
@@ -45,6 +52,7 @@
 ### Storage Types
 
 **ESSD (Enhanced SSD)**
+
 ```
 PL1: 50,000 IOPS, 150 MB/s (standard)
 PL2: 100,000 IOPS, 350 MB/s (high performance)
@@ -52,11 +60,13 @@ PL3: 1,000,000 IOPS, 4,000 MB/s (ultra performance)
 ```
 
 **SSD**
+
 - Legacy option
 - Lower performance than ESSD
 - Consider ESSD PL1 for new deployments
 
 **Selection Guide**
+
 ```
 Workload              Storage Type    Size
 ---------------------------------------------
@@ -70,6 +80,7 @@ Analytics/DW          ESSD PL3        1TB+
 ### Network Configuration
 
 **VPC Setup**
+
 ```
 1. Create RDS in VPC
 2. Select VSwitch in availability zone
@@ -79,6 +90,7 @@ Analytics/DW          ESSD PL3        1TB+
 ```
 
 **Security Group Rules**
+
 ```
 Type: Custom TCP
 Port: 3306 (MySQL), 5432 (PostgreSQL), 1433 (SQL Server)
@@ -89,6 +101,7 @@ Source:
 ```
 
 **IP Whitelist**
+
 ```
 # Internal access
 192.168.0.0/16
@@ -104,6 +117,7 @@ Source:
 ### Read-Only Instances
 
 **Configuration**
+
 ```
 Primary Instance
 ├── Read-Only Instance 1 (same zone)
@@ -112,6 +126,7 @@ Primary Instance
 ```
 
 **Read-Only Routing**
+
 ```
 Read Endpoint: rr-xxxxxx.mysql.rds.aliyuncs.com
 Delay Threshold: 30 seconds
@@ -120,12 +135,14 @@ Weight Distribution: Auto (based on specs)
 ```
 
 **Use Cases**
+
 - Offload read traffic from primary
 - Analytics and reporting queries
 - Read-heavy application scaling
 - Cross-AZ disaster recovery
 
 **Best Practices**
+
 - Match specs with primary for consistent performance
 - Monitor replication lag
 - Route heavy analytics to read replicas
@@ -134,6 +151,7 @@ Weight Distribution: Auto (based on specs)
 ### Backup and Recovery
 
 **Automatic Backup**
+
 ```
 Backup Time: 02:00-03:00 (off-peak)
 Retention: 7-730 days (7 days default)
@@ -144,6 +162,7 @@ Backup Frequency: Daily
 ```
 
 **Snapshot Backup**
+
 ```
 # Manual snapshot
 Create before:
@@ -155,6 +174,7 @@ Retention: Permanent (until manually deleted)
 ```
 
 **Point-in-Time Recovery (PITR)**
+
 ```
 Recovery Window: Within backup retention period
 Granularity: Any point in time (5-minute intervals)
@@ -166,6 +186,7 @@ Use cases:
 ```
 
 **Recovery Procedures**
+
 ```
 1. Clone to New Instance
    - Creates new RDS from backup/snapshot
@@ -181,6 +202,7 @@ Use cases:
 ### Performance Optimization
 
 **Parameter Tuning (MySQL)**
+
 ```sql
 -- Connection pool
 max_connections = 1000
@@ -206,6 +228,7 @@ innodb_io_capacity = 2000
 ```
 
 **Query Optimization**
+
 ```sql
 -- Use EXPLAIN to analyze queries
 EXPLAIN SELECT * FROM users WHERE email = 'user@example.com';
@@ -222,6 +245,7 @@ PREPARE stmt FROM 'SELECT * FROM users WHERE id = ?';
 ```
 
 **Monitoring Metrics**
+
 - CPU utilization (< 70% average)
 - Memory usage (< 80%)
 - IOPS (< 80% of provisioned)
@@ -233,6 +257,7 @@ PREPARE stmt FROM 'SELECT * FROM users WHERE id = ?';
 ### Security
 
 **SSL/TLS Connection**
+
 ```python
 import pymysql
 
@@ -246,6 +271,7 @@ connection = pymysql.connect(
 ```
 
 **Transparent Data Encryption (TDE)**
+
 ```sql
 -- Enable TDE (MySQL 5.7+)
 ALTER TABLE sensitive_data ENCRYPTION='Y';
@@ -255,6 +281,7 @@ ALTER TABLE sensitive_data ENCRYPTION='Y';
 ```
 
 **SQL Audit**
+
 ```
 Enable SQL Audit for compliance:
 - All SQL statements logged
@@ -264,6 +291,7 @@ Enable SQL Audit for compliance:
 ```
 
 **RAM Access Control**
+
 ```json
 {
   "Version": "1",
@@ -293,6 +321,7 @@ Enable SQL Audit for compliance:
 ### Architecture
 
 **Compute-Storage Separation**
+
 ```
 Compute Nodes (1 Primary + N Read-Only)
          ↓
@@ -302,6 +331,7 @@ Shared Storage Pool (up to 100TB)
 ```
 
 **Key Features**
+
 - Storage scales independently
 - Add read nodes without storage copy
 - Faster failover (< 30 seconds)
@@ -310,6 +340,7 @@ Shared Storage Pool (up to 100TB)
 ### Use Cases
 
 **vs RDS MySQL**
+
 ```
 Choose PolarDB when:
 - Need > 10TB storage
@@ -327,6 +358,7 @@ Choose RDS MySQL when:
 ### Cluster Configuration
 
 **Node Specifications**
+
 ```
 polar.mysql.x2.medium: 2 cores, 4GB RAM
 polar.mysql.x4.large: 4 cores, 16GB RAM
@@ -336,6 +368,7 @@ polar.mysql.x8.4xlarge: 32 cores, 256GB RAM
 ```
 
 **Cluster Endpoint Types**
+
 - Primary Endpoint: All write operations
 - Cluster Endpoint: Auto read/write splitting
 - Custom Endpoint: Specific read node group
@@ -343,6 +376,7 @@ polar.mysql.x8.4xlarge: 32 cores, 256GB RAM
 ### Multi-Zone Deployment
 
 **Configuration**
+
 ```
 Primary Node: Zone A
 Read Node 1: Zone B
@@ -355,6 +389,7 @@ Storage Replication:
 ```
 
 **Benefits**
+
 - High availability across AZ failures
 - Lower latency for distributed users
 - Disaster recovery
@@ -364,11 +399,13 @@ Storage Replication:
 ### Editions
 
 **Community Edition**
+
 - Open source Redis compatibility
 - Standard/Cluster architecture
 - Cost-effective
 
 **Enhanced Edition (Tair)**
+
 - Alibaba-optimized
 - Additional data structures
 - Better performance
@@ -376,16 +413,19 @@ Storage Replication:
 ### Architecture Types
 
 **Standard (Master-Replica)**
+
 ```
 Master Node
     ↓
 Replica Node
 ```
+
 - 256MB - 64GB
 - Basic high availability
 - Use for: Small apps, dev/test
 
 **Cluster (Sharded)**
+
 ```
 Shard 1: Master + Replica
 Shard 2: Master + Replica
@@ -393,11 +433,13 @@ Shard 3: Master + Replica
 ...
 Shard 256: Master + Replica (max)
 ```
+
 - 4GB - 8TB
 - Horizontal scaling
 - Use for: Large datasets, high throughput
 
 **Read/Write Splitting**
+
 ```
 Master (writes)
     ↓
@@ -405,6 +447,7 @@ Replica 1 (reads) ─┐
 Replica 2 (reads) ─┼→ Read Endpoint
 Replica 3 (reads) ─┘
 ```
+
 - Offload read traffic
 - Up to 5 read replicas
 - Use for: Read-heavy workloads
@@ -412,6 +455,7 @@ Replica 3 (reads) ─┘
 ### Configuration Best Practices
 
 **Memory Management**
+
 ```
 maxmemory-policy: allkeys-lru
 maxmemory: 80% of instance memory
@@ -424,6 +468,7 @@ maxmemory-policy: noeviction  # Return error when full
 ```
 
 **Connection Pooling**
+
 ```python
 import redis
 
@@ -440,6 +485,7 @@ r = redis.Redis(connection_pool=pool)
 ```
 
 **Persistence**
+
 ```
 # RDB snapshot
 save 900 1      # Save if 1 key changed in 900s
@@ -454,6 +500,7 @@ appendfsync everysec  # Balance between durability and performance
 ### Performance Optimization
 
 **Key Design**
+
 ```
 # Good: Use namespaces
 user:1000:profile
@@ -467,6 +514,7 @@ order2000
 ```
 
 **Data Structure Selection**
+
 ```
 Use Case                  Structure       Command
 --------------------------------------------------
@@ -479,6 +527,7 @@ Unique visitors          Set/HyperLogLog  SADD, PFADD
 ```
 
 **Batch Operations**
+
 ```python
 # Use pipeline for multiple operations
 pipe = r.pipeline()
@@ -492,6 +541,7 @@ values = r.mget(['key1', 'key2', 'key3'])
 ```
 
 **Avoid Large Keys**
+
 ```
 # Problem
 HSET large_hash field1 value1  # Repeat millions of times
@@ -504,6 +554,7 @@ HSET user:1000:data:1 field1001 value1001
 ### Monitoring and Alerts
 
 **Key Metrics**
+
 ```
 CPU Usage: < 70%
 Memory Usage: < 80%
@@ -514,6 +565,7 @@ Slow Queries: < 10ms threshold
 ```
 
 **CloudMonitor Alerts**
+
 ```
 Alert when:
 - Memory usage > 85% for 5 minutes
@@ -527,16 +579,19 @@ Alert when:
 ### Deployment Types
 
 **Standalone**
+
 - Single node
 - Dev/test only
 - Not for production
 
 **Replica Set**
+
 - 1 Primary + 1-5 Secondaries
 - Auto-failover
 - Production ready
 
 **Sharded Cluster**
+
 - Horizontal scaling
 - Multiple shards with replica sets
 - Handle large datasets (> 1TB)
@@ -544,6 +599,7 @@ Alert when:
 ### Sharding Strategy
 
 **Choose Shard Key**
+
 ```javascript
 // Good shard keys (high cardinality, even distribution)
 {userId: 1}  // If users are evenly distributed
@@ -556,6 +612,7 @@ Alert when:
 ```
 
 **Shard Configuration**
+
 ```
 Shard 1: 3-node replica set (Zones A, B, C)
 Shard 2: 3-node replica set (Zones A, B, C)
@@ -568,6 +625,7 @@ Mongos Routers: 2+ nodes
 ### Best Practices
 
 **Schema Design**
+
 ```javascript
 // Embed related data (1:1, 1:few)
 {
@@ -589,6 +647,7 @@ Mongos Routers: 2+ nodes
 ```
 
 **Indexing**
+
 ```javascript
 // Create indexes for queries
 db.users.createIndex({email: 1}, {unique: true})
@@ -605,6 +664,7 @@ db.users.aggregate([{$indexStats: {}}])
 ```
 
 **Read Preference**
+
 ```javascript
 // Primary (default): All reads from primary
 db.collection.find().readPref("primary")
@@ -617,6 +677,7 @@ db.collection.find().readPref("nearest")
 ```
 
 **Write Concern**
+
 ```javascript
 // Acknowledged (default)
 db.collection.insertOne({...}, {writeConcern: {w: 1}})
@@ -631,6 +692,7 @@ db.collection.insertOne({...}, {writeConcern: {w: 3}})
 ### Monitoring
 
 **Key Metrics**
+
 - CPU and memory usage
 - Disk IOPS and throughput
 - Replication lag
@@ -639,6 +701,7 @@ db.collection.insertOne({...}, {writeConcern: {w: 3}})
 - Operation counters (insert/update/delete/query)
 
 **Slow Query Analysis**
+
 ```javascript
 // Enable profiling
 db.setProfilingLevel(1, {slowms: 100})  // Log queries > 100ms

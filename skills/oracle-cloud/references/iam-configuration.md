@@ -25,6 +25,7 @@ Root Compartment (Tenancy)
 ### Creating Compartments
 
 **Terraform**:
+
 ```hcl
 resource "oci_identity_compartment" "network" {
   compartment_id = var.tenancy_ocid
@@ -46,6 +47,7 @@ resource "oci_identity_compartment" "app_prod" {
 ```
 
 **OCI CLI**:
+
 ```bash
 oci iam compartment create \
   --compartment-id ocid1.tenancy... \
@@ -58,6 +60,7 @@ oci iam compartment create \
 ### User Management
 
 **Create User**:
+
 ```hcl
 resource "oci_identity_user" "developer" {
   compartment_id = var.tenancy_ocid
@@ -72,6 +75,7 @@ resource "oci_identity_user" "developer" {
 ```
 
 **Create API Key**:
+
 ```bash
 # Generate key pair
 openssl genrsa -out ~/.oci/oci_api_key.pem 2048
@@ -114,12 +118,14 @@ resource "oci_identity_user_group_membership" "dev_membership" {
 **Format**: `Allow <subject> to <verb> <resource-type> in <location> where <conditions>`
 
 **Subjects**:
+
 - `group <group-name>` - User group
 - `dynamic-group <dynamic-group-name>` - Dynamic group
 - `any-user` - All authenticated users
 - `service <service-name>` - OCI service
 
 **Verbs**:
+
 - `inspect` - List resources
 - `read` - View resource details
 - `use` - Use existing resources
@@ -128,6 +134,7 @@ resource "oci_identity_user_group_membership" "dev_membership" {
 ### Common Policy Examples
 
 **Read-Only Access**:
+
 ```hcl
 resource "oci_identity_policy" "read_only" {
   compartment_id = var.compartment_id
@@ -143,6 +150,7 @@ resource "oci_identity_policy" "read_only" {
 ```
 
 **Developer Policy**:
+
 ```hcl
 resource "oci_identity_policy" "developers" {
   compartment_id = var.compartment_id
@@ -161,6 +169,7 @@ resource "oci_identity_policy" "developers" {
 ```
 
 **Administrator Policy**:
+
 ```hcl
 resource "oci_identity_policy" "admins" {
   compartment_id = var.tenancy_ocid
@@ -174,6 +183,7 @@ resource "oci_identity_policy" "admins" {
 ```
 
 **Network Administrator**:
+
 ```hcl
 resource "oci_identity_policy" "network_admins" {
   compartment_id = var.tenancy_ocid
@@ -196,6 +206,7 @@ resource "oci_identity_policy" "network_admins" {
 ```
 
 **Database Administrator**:
+
 ```hcl
 resource "oci_identity_policy" "db_admins" {
   compartment_id = var.compartment_id
@@ -214,6 +225,7 @@ resource "oci_identity_policy" "db_admins" {
 ### Conditional Policies
 
 **IP-Based Access**:
+
 ```hcl
 resource "oci_identity_policy" "ip_restricted" {
   compartment_id = var.tenancy_ocid
@@ -238,6 +250,7 @@ resource "oci_identity_network_source" "corporate" {
 ```
 
 **Tag-Based Access**:
+
 ```hcl
 resource "oci_identity_policy" "tag_based" {
   compartment_id = var.compartment_id
@@ -255,6 +268,7 @@ resource "oci_identity_policy" "tag_based" {
 ### Create Dynamic Group
 
 **For Compute Instances in Compartment**:
+
 ```hcl
 resource "oci_identity_dynamic_group" "app_instances" {
   compartment_id = var.tenancy_ocid
@@ -266,6 +280,7 @@ resource "oci_identity_dynamic_group" "app_instances" {
 ```
 
 **For OKE Clusters**:
+
 ```hcl
 resource "oci_identity_dynamic_group" "oke_clusters" {
   compartment_id = var.tenancy_ocid
@@ -277,6 +292,7 @@ resource "oci_identity_dynamic_group" "oke_clusters" {
 ```
 
 **Complex Matching Rules**:
+
 ```hcl
 resource "oci_identity_dynamic_group" "complex" {
   compartment_id = var.tenancy_ocid
@@ -350,6 +366,7 @@ oci iam user update-user-capabilities \
 ```
 
 **Policy to Require MFA**:
+
 ```hcl
 resource "oci_identity_policy" "require_mfa" {
   compartment_id = var.tenancy_ocid
@@ -530,6 +547,7 @@ oci audit event list \
 ### Policy Design Patterns
 
 **Principle of Least Privilege**:
+
 ```hcl
 # Good - Specific permissions
 "Allow group Developers to use instances in compartment App1-Dev"
@@ -540,6 +558,7 @@ oci audit event list \
 ```
 
 **Separation of Duties**:
+
 ```hcl
 # Network team manages networking
 "Allow group NetworkAdmins to manage vcns in compartment Network"

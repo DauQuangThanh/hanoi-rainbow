@@ -1,6 +1,5 @@
 # Refactoring Process
 
-
 Follow this systematic approach when refactoring code:
 
 ### Phase 1: Assessment & Planning
@@ -21,6 +20,7 @@ Follow this systematic approach when refactoring code:
    - **Couplers**: Feature envy, inappropriate intimacy, message chains, middle man
 
 3. **Establish Safety Net**
+
    ```typescript
    // Before refactoring, ensure comprehensive tests exist
    describe('UserService', () => {

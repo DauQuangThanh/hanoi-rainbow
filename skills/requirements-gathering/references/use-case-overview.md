@@ -4,11 +4,11 @@
 - **Name**: Generate Customer Quote
 - **Actor**: Sales Representative
 - **Goal**: Create and submit a quote for customer approval
-- **Preconditions**: 
+- **Preconditions**:
   - User is authenticated
   - Customer exists in CRM
   - Product catalog is available
-- **Postconditions**: 
+- **Postconditions**:
   - Quote is created and saved
   - Approval request is submitted
   - Customer is notified

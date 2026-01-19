@@ -1,9 +1,9 @@
 # React Development
 
-
 ### Functional Components and Hooks
 
 **Modern React Component**:
+
 ```typescript
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
@@ -73,6 +73,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ userId, onUpdate }) =>
 ```
 
 **Custom Hooks**:
+
 ```typescript
 // useAsync - Generic async operation hook
 function useAsync<T>(
@@ -182,6 +183,7 @@ function SearchComponent() {
 ```
 
 **Context API for State Management**:
+
 ```typescript
 import React, { createContext, useContext, useReducer } from 'react';
 
@@ -338,6 +340,7 @@ function AddTodo() {
 ### Performance Optimization
 
 **React.memo and useMemo**:
+
 ```typescript
 import React, { memo, useMemo } from 'react';
 
@@ -389,6 +392,7 @@ export const PrimeList = memo<PrimeListProps>(({ max, filter }) => {
 ```
 
 **Code Splitting with React.lazy**:
+
 ```typescript
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';

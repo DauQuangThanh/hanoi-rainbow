@@ -12,6 +12,7 @@ Systematically review requirements to validate quality and identify issues befor
 ### 1. Preparation
 
 Gather all relevant documentation:
+
 - Requirements documents (BRD, SRS, user stories)
 - Non-functional requirements and constraints
 - Requirements Traceability Matrix (if available)
@@ -48,6 +49,7 @@ Identify common requirement problems:
 ### 4. Quality Scoring
 
 Calculate scores for each quality attribute (0-100%):
+
 - **90-100%**: Excellent - minimal issues
 - **75-89%**: Good - minor improvements needed
 - **60-74%**: Fair - notable gaps exist
@@ -71,6 +73,7 @@ Create structured review report with:
 ### 6. Recommendations
 
 Provide clear decision:
+
 - **Approve**: Requirements ≥ 90% quality threshold
 - **Approve with Conditions**: Critical issues must be resolved before design
 - **Major Revision**: 60-74% quality - substantial rework required
@@ -79,12 +82,15 @@ Provide clear decision:
 ## Document-Specific Focus
 
 ### Business Requirements Documents (BRD)
+
 Focus on business objectives, stakeholder needs, scope definition, business case, constraints
 
 ### Software Requirements Specifications (SRS)
+
 Focus on functional requirements, non-functional requirements (performance, security, scalability), system behaviors, integration points, IEEE 830 compliance
 
 ### User Story Backlogs
+
 Focus on INVEST criteria (Independent, Negotiable, Valuable, Estimable, Small, Testable), acceptance criteria format (Given-When-Then), story format, prioritization
 
 > **See [quality-checklists.md](references/quality-checklists.md)** for document-specific assessment criteria
@@ -107,6 +113,7 @@ Focus on INVEST criteria (Independent, Negotiable, Valuable, Estimable, Small, T
 ## Vague Terms to Replace
 
 Always replace with measurable criteria:
+
 - "user-friendly", "intuitive", "easy" → Define usability metrics
 - "fast", "quick", "responsive" → Specify response time targets
 - "secure" → Define specific security controls

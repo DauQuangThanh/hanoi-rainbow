@@ -14,6 +14,7 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 ### 1. Understand Requirements
 
 **Gather Context:**
+
 - Project goals and success metrics
 - Target audience and user personas
 - Technical constraints (frameworks, browsers, devices)
@@ -21,6 +22,7 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 - Accessibility requirements (WCAG level)
 
 **Clarify Scope:**
+
 - Type of deliverable (wireframes, mockups, design system, component library)
 - Fidelity level (low, medium, high)
 - Responsive breakpoints needed
@@ -29,6 +31,7 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 ### 2. Research & Strategy
 
 **User Research:**
+
 - Analyze user needs, goals, and pain points
 - Review existing analytics or user feedback
 - Identify key user journeys and scenarios
@@ -39,12 +42,14 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 ### 3. Design & Prototype
 
 **Create Wireframes:**
+
 - Start with low-fidelity layouts
 - Focus on content hierarchy and structure
 - Define user flows for key tasks
 - Iterate based on feedback
 
 **Apply Visual Design:**
+
 - Define color palette (primary, secondary, semantic colors)
 - Establish typography scale and spacing system
 - Design components with variants and states
@@ -57,6 +62,7 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 ### 4. Ensure Accessibility
 
 **WCAG Compliance:**
+
 - Minimum contrast ratios (4.5:1 for text, 3:1 for large text/UI)
 - Keyboard navigation support
 - Screen reader compatibility (semantic HTML, ARIA labels)
@@ -68,6 +74,7 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 ### 5. Design Responsive Layouts
 
 **Mobile-First Approach:**
+
 - Start with mobile design (320px minimum)
 - Progressively enhance for tablets (768px+)
 - Optimize for desktop (1024px+, 1440px+)
@@ -79,6 +86,7 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 ### 6. Build Component Libraries
 
 **Component Design:**
+
 - Design atomic components (buttons, inputs, icons)
 - Create molecule components (form fields, cards, menus)
 - Build organism components (headers, forms, sections)
@@ -90,6 +98,7 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 ### 7. Optimize Performance
 
 **Performance Considerations:**
+
 - Optimize images (WebP/AVIF, lazy loading, responsive images)
 - Minimize CSS/JS bundle sizes
 - Implement critical CSS for above-the-fold content
@@ -101,6 +110,7 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 ### 8. Document & Handoff
 
 **Design Deliverables:**
+
 - Design specifications (colors, typography, spacing)
 - Component documentation with variants
 - Responsive breakpoint designs
@@ -129,32 +139,37 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 ## Key Principles
 
 **1. User-Centered Design**
+
 - Always start with user needs and goals
 - Validate assumptions through research and testing
 - Prioritize usability over aesthetics
 
 **2. Accessibility First**
+
 - Design for all users, including those with disabilities
 - Follow WCAG 2.1 AA standards minimum
 - Test with keyboard navigation and screen readers
 
 **3. Mobile-First Responsive**
+
 - Start with smallest screen sizes
 - Progressively enhance for larger screens
 - Ensure touch-friendly interactions (44x44px minimum)
 
 **4. Design System Thinking**
+
 - Build reusable, consistent components
 - Document patterns and usage guidelines
 - Maintain design token systems
 
 **5. Performance Matters**
+
 - Optimize images and assets
 - Keep bundle sizes small
 - Monitor and improve Core Web Vitals
 
 **6. Iterative Process**
+
 - Start with low-fidelity, iterate to high-fidelity
 - Gather feedback early and often
 - Refine based on user testing and metrics
-

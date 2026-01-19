@@ -261,6 +261,7 @@ Where:
 ```
 
 **Interpretation**:
+
 - 0-25: Low complexity (Rehost recommended)
 - 26-50: Medium complexity (Replatform recommended)
 - 51-75: High complexity (Refactor recommended)

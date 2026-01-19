@@ -5,6 +5,7 @@
 **Assessor**: [Name]
 
 ## Purpose
+
 Ensure comprehensive legacy system assessment before modernization planning.
 
 ## System Inventory

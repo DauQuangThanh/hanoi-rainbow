@@ -1,6 +1,5 @@
 # Component Patterns
 
-
 ### Forms Best Practices
 
 1. **Input Design**

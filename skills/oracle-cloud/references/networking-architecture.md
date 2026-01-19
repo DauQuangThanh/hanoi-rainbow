@@ -5,12 +5,14 @@
 ### VCN CIDR Planning
 
 **Best Practices**:
+
 - Use RFC 1918 private address space (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16)
 - Plan for growth: Use /16 for VCN, /24 for subnets
 - Avoid overlapping CIDRs with on-premises networks
 - Reserve space for peering with other VCNs
 
 **Example CIDR Layout**:
+
 ```
 VCN: 10.0.0.0/16
 ├── Public Subnet (Web Tier): 10.0.1.0/24
@@ -22,6 +24,7 @@ VCN: 10.0.0.0/16
 ### VCN Creation
 
 **Terraform Example**:
+
 ```hcl
 resource "oci_core_vcn" "main_vcn" {
   compartment_id = var.compartment_id

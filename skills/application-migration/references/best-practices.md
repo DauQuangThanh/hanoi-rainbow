@@ -1,6 +1,5 @@
 # Best Practices
 
-
 ### Do's
 
 ✅ **Start Small**: Pilot with non-critical functionality first

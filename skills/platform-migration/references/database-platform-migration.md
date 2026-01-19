@@ -1,6 +1,5 @@
 # Database Platform Migration
 
-
 ```markdown
 RDS PostgreSQL → Cloud SQL PostgreSQL
 

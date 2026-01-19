@@ -5,6 +5,7 @@
 ### Provider Configuration
 
 **Basic Setup**
+
 ```hcl
 terraform {
   required_providers {
@@ -33,6 +34,7 @@ provider "alicloud" {
 ```
 
 **Environment Variables**
+
 ```bash
 export ALICLOUD_ACCESS_KEY="your-access-key"
 export ALICLOUD_SECRET_KEY="your-secret-key"
@@ -42,6 +44,7 @@ export ALICLOUD_REGION="cn-hangzhou"
 ### State Management
 
 **Remote Backend (OSS)**
+
 ```hcl
 terraform {
   backend "oss" {
@@ -56,6 +59,7 @@ terraform {
 ```
 
 **State Locking with TableStore**
+
 ```hcl
 # Create TableStore for locking
 resource "alicloud_ots_instance" "state_lock" {
@@ -83,6 +87,7 @@ resource "alicloud_ots_table" "state_lock" {
 ### VPC and Networking
 
 **VPC Module**
+
 ```hcl
 module "vpc" {
   source = "./modules/vpc"
@@ -106,6 +111,7 @@ module "vpc" {
 ```
 
 **VPC Resource**
+
 ```hcl
 resource "alicloud_vpc" "main" {
   vpc_name   = var.vpc_name
@@ -191,6 +197,7 @@ resource "alicloud_snat_entry" "private" {
 ### ECS Instance Module
 
 **Module Structure**
+
 ```hcl
 # modules/ecs/main.tf
 resource "alicloud_security_group" "main" {
@@ -348,6 +355,7 @@ output "security_group_id" {
 ```
 
 **Usage Example**
+
 ```hcl
 module "web_servers" {
   source = "./modules/ecs"
@@ -385,6 +393,7 @@ module "web_servers" {
 ### RDS Module
 
 **RDS Instance**
+
 ```hcl
 # modules/rds/main.tf
 resource "alicloud_db_instance" "main" {
@@ -614,6 +623,7 @@ variable "tags" {
 ```
 
 **Usage Example**
+
 ```hcl
 module "database" {
   source = "./modules/rds"
@@ -674,6 +684,7 @@ module "database" {
 ### Best Practices
 
 **Project Structure**
+
 ```
 terraform/
 ├── environments/
@@ -704,6 +715,7 @@ terraform/
 ```
 
 **Variable Management**
+
 ```hcl
 # Use sensitive variables
 variable "db_password" {
@@ -728,6 +740,7 @@ variable "instance_type" {
 ```
 
 **Resource Naming**
+
 ```hcl
 locals {
   name_prefix = "${var.project}-${var.environment}"
@@ -747,6 +760,7 @@ resource "alicloud_vpc" "main" {
 ```
 
 **State Management**
+
 - Use remote state with OSS
 - Enable state locking
 - Use workspaces for environments
@@ -754,6 +768,7 @@ resource "alicloud_vpc" "main" {
 - Regular state backups
 
 **Module Design**
+
 - Keep modules focused and reusable
 - Use semantic versioning for modules
 - Document inputs and outputs
@@ -765,6 +780,7 @@ resource "alicloud_vpc" "main" {
 ### Template Structure
 
 **Basic Template**
+
 ```yaml
 ROSTemplateFormatVersion: '2015-09-01'
 Transform: 'Aliyun::Serverless-2018-04-03'
@@ -850,6 +866,7 @@ Outputs:
 ```
 
 **Nested Stacks**
+
 ```yaml
 # Parent stack
 Resources:
@@ -873,6 +890,7 @@ Resources:
 ### Best Practices
 
 **Template Organization**
+
 - Break large templates into nested stacks
 - Use parameters for flexibility
 - Document all parameters and resources
@@ -880,12 +898,14 @@ Resources:
 - Store templates in OSS for reuse
 
 **Change Sets**
+
 - Preview changes before applying
 - Review all modifications
 - Test in non-production first
 - Have rollback plan ready
 
 **Stack Policies**
+
 - Protect critical resources
 - Prevent accidental deletion
 - Use policies for production stacks

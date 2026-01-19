@@ -1,9 +1,9 @@
 # Troubleshooting Guide
 
-
 ### Pod Issues
 
 **Pod not starting:**
+
 ```bash
 # Check pod status and events
 kubectl describe pod pod-name -n namespace
@@ -15,6 +15,7 @@ kubectl describe pod pod-name -n namespace
 ```
 
 **Application errors:**
+
 ```bash
 # Check application logs
 kubectl logs pod-name -n namespace --tail=100
@@ -29,6 +30,7 @@ kubectl get events -n namespace --sort-by='.lastTimestamp'
 ### Deployment Issues
 
 **Rollout stuck:**
+
 ```bash
 # Check rollout status
 kubectl rollout status deployment/deployment-name -n namespace
@@ -43,6 +45,7 @@ kubectl rollout undo deployment/deployment-name -n namespace
 ### Network Issues
 
 **Service not reachable:**
+
 ```bash
 # Check service endpoints
 kubectl get endpoints service-name -n namespace

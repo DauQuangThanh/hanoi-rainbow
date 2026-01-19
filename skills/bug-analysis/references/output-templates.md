@@ -43,11 +43,15 @@
 - **Videos**: [Screen recording if helpful]
 - **Error Messages**: 
 ```
+
 [Paste exact error messages or stack traces]
+
 ```
 - **Logs**:
 ```
+
 [Relevant log entries with timestamps]
+
 ```
 - **Network Requests**: [API calls, responses]
 
@@ -91,7 +95,9 @@
 ### Evidence
 **Error Messages**:
 ```
+
 [Stack traces, error logs]
+
 ```
 
 **Code Reference**:
@@ -101,40 +107,48 @@
 ```
 
 **Data Evidence**:
+
 - [Database queries showing problematic data]
 - [API responses showing issues]
 - [Log entries showing sequence of events]
 
 **Timeline**:
+
 - [When bug was introduced]
 - [When it was first reported]
 - [Pattern of occurrences]
 
 ### Analysis Process
+
 1. **Initial Hypothesis**: [What you initially suspected]
 2. **Investigation Steps**: [What you checked and tested]
 3. **Findings**: [What you discovered]
 4. **Conclusion**: [How you confirmed the root cause]
 
 ### Impact Analysis
+
 **User Impact**:
+
 - Affected users: [number/percentage]
 - User workflows disrupted: [description]
 - User experience impact: [severity description]
 
 **Business Impact**:
+
 - Revenue impact: [$amount or percentage]
 - SLA violations: [Yes/No - details]
 - Customer satisfaction: [description]
 - Reputation risk: [assessment]
 
 **System Impact**:
+
 - Performance degradation: [metrics]
 - Resource consumption: [details]
 - Cascading failures: [related systems affected]
 - Data integrity: [any data issues]
 
 **Security Impact**:
+
 - Confidentiality: [any data exposure]
 - Integrity: [any unauthorized modifications]
 - Availability: [any service disruptions]
@@ -142,6 +156,7 @@
 ### Recommended Fix
 
 **Immediate Mitigation** (if not already done):
+
 1. [Emergency fix or workaround]
 2. [Configuration changes]
 3. [Feature flag to disable problematic code]
@@ -150,6 +165,7 @@
 **Permanent Solution**:
 
 **Code Changes Required**:
+
 ```[language]
 // Before (problematic code)
 [current code]
@@ -159,20 +175,24 @@
 ```
 
 **Files to Modify**:
+
 - `src/path/to/file1.js` - [description of changes]
 - `src/path/to/file2.js` - [description of changes]
 
 **Database Changes** (if any):
+
 ```sql
 -- Migration script or data fixes
 [SQL or migration commands]
 ```
 
 **Configuration Changes** (if any):
+
 - [Environment variables to update]
 - [Config files to modify]
 
 **Testing Requirements**:
+
 - **Unit Tests**:
   - [Test case 1]
   - [Test case 2]
@@ -186,6 +206,7 @@
   - [Steps to verify fix in each environment]
 
 **Deployment Plan**:
+
 1. [Deploy to dev/test environment]
 2. [Verify fix works]
 3. [Deploy to staging]
@@ -199,12 +220,14 @@
 ### Prevention Measures
 
 **Immediate Actions**:
+
 - [ ] Add validation for [specific input]
 - [ ] Add error handling for [specific scenario]
 - [ ] Add logging for [specific events]
 - [ ] Update documentation for [specific feature]
 
 **Long-term Improvements**:
+
 - **Code Quality**:
   - [Refactoring needed]
   - [Design improvements]
@@ -231,17 +254,20 @@
   - [Training needs identified]
 
 ### Lessons Learned
+
 - [Key takeaway 1]
 - [Key takeaway 2]
 - [Patterns to watch for in future]
 
 ### Estimated Effort
+
 **Fix Implementation**: [X hours/days]
 **Testing**: [X hours/days]
 **Deployment**: [X hours]
 **Total**: [X hours/days]
 
 **Resources Required**: [Team members, approvals, infrastructure access, etc.]
+
 ```
 
 ---
@@ -283,28 +309,34 @@
 ### Impact Assessment
 
 **Confidentiality Impact**: [None/Low/High]
+
 - [What data can be exposed]
 
 **Integrity Impact**: [None/Low/High]
+
 - [What data/systems can be modified]
 
 **Availability Impact**: [None/Low/High]
+
 - [What services can be disrupted]
 
 **Scope**: [Limited to component / Affects other components]
 
 ### Current Security Controls
+
 [What security measures are currently in place (if any)]
 
 ### Recommended Fix
 
 **Immediate Actions** (within 24-48 hours):
+
 1. [Emergency mitigation - WAF rules, rate limiting, etc.]
 2. [Access restrictions]
 3. [Monitoring for exploitation attempts]
 4. [Incident response readiness]
 
 **Permanent Fix**:
+
 - [Secure code changes needed]
 - [Security controls to implement]
 - [Input validation requirements]
@@ -312,6 +344,7 @@
 - [Authentication/authorization fixes]
 
 **Secure Code Example**:
+
 ```[language]
 // Vulnerable code
 [problematic code]
@@ -321,6 +354,7 @@
 ```
 
 ### Verification Testing
+
 - [ ] Verify attack no longer works
 - [ ] Test edge cases
 - [ ] Verify no bypass methods
@@ -328,7 +362,9 @@
 - [ ] Penetration test passed
 
 ### Disclosure Plan
+
 **Timeline**:
+
 - Day 0: Vulnerability discovered
 - Day 1-2: Initial analysis and triage
 - Day 2-7: Develop and test fix
@@ -336,6 +372,7 @@
 - Day 30: Public disclosure (if applicable)
 
 **Notifications**:
+
 - [ ] Internal security team notified
 - [ ] Development team notified
 - [ ] Management notified
@@ -343,16 +380,19 @@
 - [ ] Public disclosure prepared (if required)
 
 **Compliance Requirements**:
+
 - [ ] GDPR notification (if data breach)
 - [ ] PCI-DSS reporting (if payment data)
 - [ ] HIPAA reporting (if health data)
 - [ ] CVE request (if applicable)
 
 ### References
+
 - [OWASP guidelines]
 - [CWE reference]
 - [Related CVEs]
 - [Security advisories]
+
 ```
 
 ---
@@ -408,7 +448,9 @@
 
 **Evidence**:
 ```
+
 [Profiling output, slow query logs, flame graphs]
+
 ```
 
 ### Root Cause
@@ -465,17 +507,23 @@
 
 **Exception/Signal**:
 ```
+
 [Exception type, error code, signal number]
+
 ```
 
 **Stack Trace**:
 ```
+
 [Full stack trace from crash dump]
+
 ```
 
 **Thread State**:
 ```
+
 [Thread information, deadlocks, race conditions]
+
 ```
 
 **Memory State**:

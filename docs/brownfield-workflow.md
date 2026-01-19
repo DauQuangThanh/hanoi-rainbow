@@ -9,6 +9,7 @@ This guide shows you how to add new features to an existing codebase while maint
 ## 📋 Overview
 
 **Brownfield projects** are existing applications that need new features or enhancements. Hanoi Rainbow helps you:
+
 - Add features systematically without breaking existing functionality
 - Maintain consistency with existing architecture
 - Ensure quality through structured validation
@@ -52,6 +53,7 @@ graph TD
 ## 🎯 When to Use This Workflow
 
 Use the brownfield workflow when you're:
+
 - ✅ Adding a new feature to an existing application
 - ✅ Enhancing existing functionality
 - ✅ Refactoring a specific module
@@ -63,6 +65,7 @@ Use the brownfield workflow when you're:
 ## 🔍 Prerequisites
 
 Before starting, ensure your project has:
+
 - [ ] Git repository
 - [ ] Rainbow CLI initialized (`rainbow init --here` if not)
 - [ ] Existing `memory/ground-rules.md` (or create with `/rainbow.regulate`)
@@ -95,11 +98,13 @@ rainbow init --here --force --ai claude
 ```
 
 **What Gets Added**:
+
 - `.rainbow/` directory with templates and scripts
 - Commands available in your AI agent
 - Nothing in your existing codebase is modified
 
 **✅ Success Criteria**:
+
 - [ ] `.rainbow/` directory exists
 - [ ] AI agent recognizes `/rainbow.*` commands
 - [ ] Existing code unchanged
@@ -117,6 +122,7 @@ If you don't have architecture documentation:
 **What Gets Created**: `docs/architecture.md`
 
 This documents:
+
 - Current system architecture
 - Technology stack
 - Architectural decisions (ADRs)
@@ -126,6 +132,7 @@ This documents:
 **Important**: This is done **once per product**, not per feature.
 
 **✅ Success Criteria**:
+
 - [ ] `docs/architecture.md` created
 - [ ] Current architecture accurately documented
 - [ ] Technology stack documented
@@ -145,6 +152,7 @@ If you don't have ground rules:
 If ground rules exist, review and update as needed.
 
 **✅ Success Criteria**:
+
 - [ ] Ground rules reflect current practices
 - [ ] Team agrees on principles
 - [ ] Standards documented
@@ -160,11 +168,13 @@ If ground rules exist, review and update as needed.
 ```
 
 **What Gets Created**:
+
 - New git branch: `002-user-notifications` (auto-incremented number)
 - Feature directory: `specs/002-user-notifications/`
 - Specification: `specs/002-user-notifications/spec.md`
 
 **Specification Includes**:
+
 - Executive Summary
 - User Stories
 - Functional Requirements (technology-agnostic)
@@ -174,6 +184,7 @@ If ground rules exist, review and update as needed.
 - Assumptions
 
 **✅ Success Criteria**:
+
 - [ ] Feature branch created
 - [ ] Spec clearly describes the feature
 - [ ] Integration with existing system is clear
@@ -189,12 +200,14 @@ If ground rules exist, review and update as needed.
 ```
 
 Asks structured questions to clarify:
+
 - Integration with existing features
 - Data requirements
 - Edge cases
 - Backwards compatibility needs
 
 **✅ Success Criteria**:
+
 - [ ] All clarifications answered
 - [ ] Spec updated
 - [ ] Requirements unambiguous
@@ -212,12 +225,14 @@ Asks structured questions to clarify:
 ```
 
 **What Gets Created**:
+
 - `specs/002-user-notifications/design.md`
 - `specs/002-user-notifications/research.md`
 - `specs/002-user-notifications/data-model.md`
 - `specs/002-user-notifications/contracts/` - API specs
 
 **Plan Includes**:
+
 - Integration points with existing services
 - Database schema changes (migrations)
 - New API endpoints
@@ -227,12 +242,14 @@ Asks structured questions to clarify:
 - Deployment changes
 
 **The AI Agent Will Automatically**:
+
 - Review `docs/architecture.md` for architectural patterns
 - Review `docs/standards.md` for coding standards
 - Ensure consistency with existing codebase
 - Design for minimal disruption
 
 **✅ Success Criteria**:
+
 - [ ] Plan aligns with existing architecture
 - [ ] Database migrations defined
 - [ ] API contracts match existing patterns
@@ -248,12 +265,14 @@ Asks structured questions to clarify:
 ```
 
 Validates:
+
 - Consistency with existing architecture
 - Requirement coverage
 - No conflicts with existing features
 - Database schema compatibility
 
 **✅ Success Criteria**:
+
 - [ ] No conflicts detected
 - [ ] All requirements covered
 - [ ] Aligns with architecture
@@ -271,6 +290,7 @@ Validates:
 **What Gets Created**: `specs/002-user-notifications/tasks.md`
 
 **Tasks Will Include**:
+
 - Database migration tasks
 - Backend service tasks
 - Frontend component tasks
@@ -279,6 +299,7 @@ Validates:
 - Deployment configuration tasks
 
 **Example Tasks**:
+
 ```markdown
 ## Phase 1: Database Schema
 - [ ] T001: Create notifications table migration
@@ -305,6 +326,7 @@ Validates:
 ```
 
 **✅ Success Criteria**:
+
 - [ ] Tasks cover all aspects of integration
 - [ ] Dependencies on existing code identified
 - [ ] Migration tasks included
@@ -321,6 +343,7 @@ Validates:
 ```
 
 **The AI Agent Will**:
+
 1. Review existing codebase structure
 2. Create database migrations
 3. Add new backend services
@@ -331,12 +354,14 @@ Validates:
 8. Follow existing naming conventions and patterns
 
 **Your Role**:
+
 - Monitor progress
 - Test integrations manually
 - Verify no regressions in existing features
 - Provide feedback
 
 **✅ Success Criteria**:
+
 - [ ] All tasks completed
 - [ ] New feature works as specified
 - [ ] Existing features still work (no regressions)
@@ -379,6 +404,7 @@ npm run lint
 ```
 
 **✅ Success Criteria**:
+
 - [ ] New feature works end-to-end
 - [ ] All existing tests still pass
 - [ ] No regressions in existing features
@@ -394,6 +420,7 @@ npm run lint
 ```
 
 **✅ Success Criteria**:
+
 - [ ] All checklist items pass
 - [ ] Integration validated
 - [ ] Performance acceptable
@@ -415,11 +442,13 @@ Update docs/architecture.md to include the new notification service in the syste
 #### Step 14: Update User Documentation
 
 Create or update user-facing documentation:
+
 - Feature guides
 - API documentation
 - Configuration guides
 
 **✅ Success Criteria**:
+
 - [ ] Architecture docs updated
 - [ ] API docs updated
 - [ ] User guides created
@@ -451,6 +480,7 @@ npm run smoke-test:staging
 ```
 
 **✅ Success Criteria**:
+
 - [ ] Migrations successful
 - [ ] Feature works in staging
 - [ ] No errors in logs
@@ -481,6 +511,7 @@ npm run monitor
 - [ ] User feedback positive
 
 **✅ Success Criteria**:
+
 - [ ] Zero downtime deployment
 - [ ] Feature live
 - [ ] No regressions
@@ -543,6 +574,7 @@ graph LR
 **Workflow**: Follow complete workflow above
 
 **Key Considerations**:
+
 - Integrate with existing user management
 - Match existing notification patterns (if any)
 - Consider mobile app impact (if exists)
@@ -555,6 +587,7 @@ graph LR
 **Example**: Add filters to existing task list
 
 **Workflow**:
+
 1. Create spec describing enhancement
 2. Design changes to existing components
 3. Implement with minimal disruption
@@ -562,6 +595,7 @@ graph LR
 5. Deploy with feature flag
 
 **Key Considerations**:
+
 - Minimize changes to existing code
 - Maintain backwards compatibility
 - Test all existing use cases
@@ -574,6 +608,7 @@ graph LR
 **Example**: Refactor task service to improve performance
 
 **Workflow**:
+
 1. Create spec describing refactoring goals
 2. Design new structure
 3. Implement incrementally
@@ -581,6 +616,7 @@ graph LR
 5. Monitor performance improvements
 
 **Key Considerations**:
+
 - Behavior must not change (unless that's the goal)
 - Comprehensive testing is critical
 - Consider doing incrementally
@@ -593,6 +629,7 @@ graph LR
 **Example**: Fix drag-and-drop issue in task board
 
 **Approach**:
+
 - Don't need full workflow for bugs
 - Create branch: `fix/drag-drop-issue`
 - Fix the bug
@@ -645,6 +682,7 @@ gantt
 When integrating new features into existing systems:
 
 ### Database Integration
+
 - [ ] Migrations are backwards compatible
 - [ ] Indexes created for performance
 - [ ] Foreign keys properly defined
@@ -652,6 +690,7 @@ When integrating new features into existing systems:
 - [ ] Rollback scripts available
 
 ### API Integration
+
 - [ ] Endpoints follow existing patterns
 - [ ] Authentication/authorization consistent
 - [ ] Error handling matches existing style
@@ -660,6 +699,7 @@ When integrating new features into existing systems:
 - [ ] Swagger/OpenAPI docs updated
 
 ### Frontend Integration
+
 - [ ] Components match existing design system
 - [ ] State management follows existing pattern
 - [ ] Routing integrated properly
@@ -668,6 +708,7 @@ When integrating new features into existing systems:
 - [ ] Responsive design maintained
 
 ### Testing Integration
+
 - [ ] All existing tests pass
 - [ ] New tests follow existing patterns
 - [ ] Test coverage maintained
@@ -675,6 +716,7 @@ When integrating new features into existing systems:
 - [ ] Performance tests pass
 
 ### Deployment Integration
+
 - [ ] CI/CD pipeline updated
 - [ ] Environment variables documented
 - [ ] Deployment scripts updated
@@ -688,6 +730,7 @@ When integrating new features into existing systems:
 ### Issue: New Feature Breaks Existing Functionality
 
 **Solution**:
+
 1. Run full test suite to identify regressions
 2. Review integration points
 3. Check for shared component modifications
@@ -699,6 +742,7 @@ When integrating new features into existing systems:
 ### Issue: Database Migration Fails
 
 **Solution**:
+
 1. Test migration on copy of production data
 2. Check for data compatibility issues
 3. Add data validation before migration
@@ -708,6 +752,7 @@ When integrating new features into existing systems:
 ### Issue: Performance Degradation
 
 **Solution**:
+
 1. Profile before and after
 2. Check for N+1 queries
 3. Add database indexes
@@ -717,6 +762,7 @@ When integrating new features into existing systems:
 ### Issue: Deployment Conflicts
 
 **Solution**:
+
 1. Merge latest main into feature branch
 2. Resolve conflicts
 3. Run full test suite

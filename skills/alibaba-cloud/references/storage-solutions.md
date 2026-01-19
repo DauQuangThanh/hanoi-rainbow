@@ -5,12 +5,14 @@
 ### Bucket Configuration
 
 **Storage Classes**
+
 - **Standard**: Frequent access, low latency, high throughput
 - **Infrequent Access (IA)**: Less frequent access, lower storage cost
 - **Archive**: Long-term archival, lowest cost, retrieval time required
 - **Cold Archive**: Ultra-low cost, longer retrieval time (hours)
 
 **Use Case Mapping**
+
 ```
 Hot data (daily access)      → Standard
 Warm data (monthly access)   → IA
@@ -21,6 +23,7 @@ Compliance archives          → Cold Archive
 ### Access Control
 
 **Bucket Policies**
+
 ```json
 {
   "Version": "1",
@@ -50,6 +53,7 @@ Compliance archives          → Cold Archive
 ```
 
 **RAM Policy Example**
+
 ```json
 {
   "Version": "1",
@@ -80,6 +84,7 @@ Compliance archives          → Cold Archive
 ```
 
 **Signed URLs**
+
 ```python
 import oss2
 
@@ -96,11 +101,13 @@ upload_url = bucket.sign_url('PUT', 'upload.jpg', 3600)
 ### Encryption
 
 **Server-Side Encryption (SSE)**
+
 - **SSE-OSS**: Managed by OSS using AES-256
 - **SSE-KMS**: Managed by KMS with envelope encryption
 - **SSE-C**: Customer-provided keys
 
 **Configuration**
+
 ```python
 # Enable SSE-OSS at bucket level
 bucket.put_bucket_encryption(
@@ -121,6 +128,7 @@ bucket.put_bucket_encryption(
 ### Lifecycle Management
 
 **Example Rules**
+
 ```xml
 <LifecycleConfiguration>
   <Rule>
@@ -157,6 +165,7 @@ bucket.put_bucket_encryption(
 ### Versioning
 
 **Enable Versioning**
+
 ```python
 bucket.put_bucket_versioning(
     oss2.models.BucketVersioningConfig(oss2.BUCKET_VERSIONING_ENABLE)
@@ -178,6 +187,7 @@ bucket.copy_object(
 ### Cross-Region Replication
 
 **Configuration**
+
 ```xml
 <ReplicationConfiguration>
   <Rule>
@@ -194,6 +204,7 @@ bucket.copy_object(
 ```
 
 **Use Cases**
+
 - Disaster recovery and backup
 - Data sovereignty and compliance
 - Latency optimization for global users
@@ -202,6 +213,7 @@ bucket.copy_object(
 ### CDN Integration
 
 **Enable CDN for OSS**
+
 ```
 1. Create CDN domain
 2. Set origin as OSS bucket endpoint
@@ -211,6 +223,7 @@ bucket.copy_object(
 ```
 
 **Cache Rules**
+
 ```
 File Type       TTL     Priority
 --------------------------------
@@ -222,6 +235,7 @@ File Type       TTL     Priority
 ### Performance Optimization
 
 **Multipart Upload**
+
 ```python
 # For files > 100MB
 import oss2
@@ -249,6 +263,7 @@ bucket.complete_multipart_upload('large-file.zip', upload_id, parts)
 ```
 
 **Resumable Upload**
+
 ```python
 # Automatically handles interruption and resume
 oss2.resumable_upload(
@@ -262,6 +277,7 @@ oss2.resumable_upload(
 ```
 
 **Batch Operations**
+
 ```python
 # Delete multiple objects
 bucket.batch_delete_objects(['file1.txt', 'file2.txt', 'file3.txt'])
@@ -274,6 +290,7 @@ for obj in oss2.ObjectIterator(bucket, prefix='documents/', max_keys=100):
 ### Image Processing
 
 **URL-based Processing**
+
 ```
 # Resize to 200x200
 https://bucket.oss-cn-hangzhou.aliyuncs.com/image.jpg?x-oss-process=image/resize,w_200,h_200
@@ -286,6 +303,7 @@ https://bucket.oss-cn-hangzhou.aliyuncs.com/image.jpg?x-oss-process=image/resize
 ```
 
 **Supported Operations**
+
 - Resize, crop, rotate
 - Watermark (text/image)
 - Format conversion
@@ -295,6 +313,7 @@ https://bucket.oss-cn-hangzhou.aliyuncs.com/image.jpg?x-oss-process=image/resize
 ### Monitoring and Logging
 
 **Access Logging**
+
 ```python
 # Enable access logging
 bucket.put_bucket_logging(
@@ -306,6 +325,7 @@ bucket.put_bucket_logging(
 ```
 
 **Real-time Log Service**
+
 ```python
 # Enable real-time logging to SLS
 bucket.put_bucket_logging_config(
@@ -319,6 +339,7 @@ bucket.put_bucket_logging_config(
 ```
 
 **Metrics to Monitor**
+
 - Request count
 - Traffic (inbound/outbound)
 - Error rates (4xx, 5xx)
@@ -330,16 +351,19 @@ bucket.put_bucket_logging_config(
 ### NAS Types
 
 **Capacity NAS**
+
 - Cost-effective for large-scale storage
 - 1PB+ capacity
 - Use cases: Big data, backup, archiving
 
 **Performance NAS**
+
 - High throughput and IOPS
 - < 1ms latency
 - Use cases: Databases, high-performance computing
 
 **Extreme NAS**
+
 - Ultra-high performance
 - Up to 100GB/s throughput
 - Use cases: AI training, HPC, media processing
@@ -347,6 +371,7 @@ bucket.put_bucket_logging_config(
 ### Mount Configuration
 
 **Linux (NFSv3/NFSv4)**
+
 ```bash
 # Install NFS client
 yum install -y nfs-utils
@@ -363,6 +388,7 @@ echo "file-system-id.region.nas.aliyuncs.com:/ /mnt/nas nfs vers=3,nolock,proto=
 ```
 
 **Windows (SMB)**
+
 ```powershell
 # Map network drive
 net use Z: \\file-system-id.region.nas.aliyuncs.com\myshare /persistent:yes
@@ -371,6 +397,7 @@ net use Z: \\file-system-id.region.nas.aliyuncs.com\myshare /persistent:yes
 ### Performance Optimization
 
 **Best Practices**
+
 - Use appropriate mount options (rsize/wsize)
 - Enable async writes for better performance
 - Use multiple mount points for parallelism
@@ -380,6 +407,7 @@ net use Z: \\file-system-id.region.nas.aliyuncs.com\myshare /persistent:yes
 ### Access Control
 
 **Permission Groups**
+
 ```
 Rule Type: IP Address
 IP Address: 192.168.1.0/24
@@ -388,6 +416,7 @@ User Mapping: root -> nobody (squash)
 ```
 
 **VPC Configuration**
+
 - Create NAS file system in VPC
 - Add mount targets in VSwitches
 - Configure security groups to allow NFS/SMB ports
@@ -397,6 +426,7 @@ User Mapping: root -> nobody (squash)
 ### Data Model
 
 **Table Structure**
+
 ```
 Table
 ├── Primary Keys (1-4 columns)
@@ -408,6 +438,7 @@ Table
 ### Use Cases
 
 **Time Series Data**
+
 ```
 Table: metrics
 PK: device_id, timestamp
@@ -416,6 +447,7 @@ TTL: 30 days
 ```
 
 **User Profile**
+
 ```
 Table: users
 PK: user_id
@@ -424,6 +456,7 @@ Global Secondary Index: email
 ```
 
 **Shopping Cart**
+
 ```
 Table: carts
 PK: user_id, item_id
@@ -433,11 +466,13 @@ Attributes: quantity, price, added_at
 ### Index Types
 
 **Global Secondary Index (GSI)**
+
 - Different partition key from main table
 - Supports different attributes
 - Async replication
 
 **Local Secondary Index (LSI)**
+
 - Same partition key as main table
 - Different sort key
 - Strongly consistent reads
@@ -445,6 +480,7 @@ Attributes: quantity, price, added_at
 ### Best Practices
 
 **Schema Design**
+
 - Choose partition key with high cardinality
 - Use sort key for range queries
 - Limit attribute column size (< 2MB per row)
@@ -452,6 +488,7 @@ Attributes: quantity, price, added_at
 - Implement TTL for time-bound data
 
 **Performance**
+
 - Pre-shard tables for high write throughput
 - Use batch operations for bulk reads/writes
 - Enable auto-scaling for capacity units
@@ -459,6 +496,7 @@ Attributes: quantity, price, added_at
 - Use indexes strategically (cost vs query needs)
 
 **Cost Optimization**
+
 - Use reserved capacity for predictable workloads
 - Enable TTL to automatically delete old data
 - Compress large attribute values

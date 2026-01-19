@@ -19,6 +19,7 @@ This document provides a complete example of a security review report. Use this 
 **Security Rating:** 🔴 **HIGH RISK**
 
 **Vulnerability Summary:**
+
 - **Critical:** 2
 - **High:** 5
 - **Medium:** 11
@@ -30,6 +31,7 @@ This document provides a complete example of a security review report. Use this 
 The application contains multiple critical security vulnerabilities that pose significant risk to user data and business operations. Most critical issues involve SQL injection, broken authentication, and insecure cryptographic storage. The application **should NOT be deployed to production** until all critical and high-severity vulnerabilities are remediated.
 
 **Key Findings:**
+
 1. SQL injection vulnerability in user search functionality (CRITICAL)
 2. Authentication bypass through JWT manipulation (CRITICAL)
 3. Sensitive data (credit cards) stored in plain text (HIGH)
@@ -37,11 +39,13 @@ The application contains multiple critical security vulnerabilities that pose si
 5. Cross-site scripting (XSS) in product reviews (HIGH)
 
 **Compliance Status:**
+
 - **PCI-DSS:** ❌ Non-Compliant (3 critical requirements failed)
 - **GDPR:** ⚠️ Partially Compliant (right to erasure not implemented)
 - **OWASP Top 10:** ❌ Multiple vulnerabilities present
 
 **Immediate Actions Required:**
+
 1. Fix SQL injection in user search (Week 1)
 2. Implement proper JWT validation (Week 1)
 3. Encrypt sensitive data at rest (Week 1-2)
@@ -70,6 +74,7 @@ The application contains multiple critical security vulnerabilities that pose si
 The user search functionality constructs SQL queries using unvalidated user input, allowing attackers to inject arbitrary SQL commands. This can lead to unauthorized data access, data modification, or complete database compromise.
 
 **Location:**
+
 - **File:** `src/controllers/userController.js`
 - **Lines:** 45-52
 - **Function:** `searchUsers()`
@@ -100,11 +105,13 @@ Step 4: Attacker downloads entire user database
 ```
 
 **Proof of Concept:**
+
 ```bash
 curl "https://api.example.com/api/users/search?q=test'%20UNION%20SELECT%20id,%20username,%20password_hash,%20email,%20credit_card%20FROM%20users--"
 ```
 
 **Impact:**
+
 - **Confidentiality:** Complete database compromise
 - **Integrity:** Attacker can modify or delete database records
 - **Availability:** Attacker can drop tables or cause denial of service
@@ -151,6 +158,7 @@ async function searchUsers(req, res) {
 ```
 
 **Additional Recommendations:**
+
 - Implement input validation and sanitization
 - Use ORM (Sequelize, TypeORM) with built-in protections
 - Apply least privilege to database user
@@ -158,9 +166,10 @@ async function searchUsers(req, res) {
 - Implement Web Application Firewall (WAF) rules
 
 **References:**
-- CWE-89: https://cwe.mitre.org/data/definitions/89.html
-- OWASP SQL Injection: https://owasp.org/www-community/attacks/SQL_Injection
-- Node.js Parameterized Queries: https://node-postgres.com/features/queries
+
+- CWE-89: <https://cwe.mitre.org/data/definitions/89.html>
+- OWASP SQL Injection: <https://owasp.org/www-community/attacks/SQL_Injection>
+- Node.js Parameterized Queries: <https://node-postgres.com/features/queries>
 
 **Priority:** P0 - Fix immediately before any production deployment
 
@@ -178,6 +187,7 @@ async function searchUsers(req, res) {
 The JWT verification middleware accepts tokens with the "none" algorithm, allowing attackers to forge tokens and authenticate as any user without knowing the secret key.
 
 **Location:**
+
 - **File:** `src/middleware/auth.js`
 - **Lines:** 12-23
 - **Function:** `verifyToken()`
@@ -240,6 +250,7 @@ fetch('/api/admin/users', {
 ```
 
 **Impact:**
+
 - Complete authentication bypass
 - Privilege escalation to administrator
 - Access to all user accounts
@@ -291,6 +302,7 @@ function verifyToken(req, res, next) {
 ```
 
 **Additional Recommendations:**
+
 - Implement token refresh mechanism
 - Add token blacklist/revocation
 - Use short token expiration times (15 minutes)
@@ -299,9 +311,10 @@ function verifyToken(req, res, next) {
 - Monitor for suspicious token usage patterns
 
 **References:**
-- CWE-347: https://cwe.mitre.org/data/definitions/347.html
-- JWT Best Practices: https://datatracker.ietf.org/doc/html/rfc8725
-- OWASP JWT Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
+
+- CWE-347: <https://cwe.mitre.org/data/definitions/347.html>
+- JWT Best Practices: <https://datatracker.ietf.org/doc/html/rfc8725>
+- OWASP JWT Cheat Sheet: <https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html>
 
 **Priority:** P0 - Fix immediately before any production deployment
 
@@ -323,6 +336,7 @@ function verifyToken(req, res, next) {
 Credit card numbers and CVV codes are stored in the database without encryption. If the database is compromised, all payment information is immediately accessible to attackers.
 
 **Location:**
+
 - **File:** `src/models/payment.js`
 - **Lines:** 34-42
 - **Table:** `payments`
@@ -340,6 +354,7 @@ const Payment = sequelize.define('Payment', {
 ```
 
 **Impact:**
+
 - PCI-DSS 3.4 critical violation
 - Immediate fines if discovered during audit
 - Complete exposure of payment data if database compromised
@@ -442,10 +457,12 @@ async function processPayment(cardDetails, amount) {
 API endpoints lack rate limiting, allowing attackers to perform brute force attacks, credential stuffing, and denial of service attacks without restrictions.
 
 **Location:**
+
 - **All API endpoints**
 - **Particularly critical:** `/api/auth/login`, `/api/password/reset`
 
 **Impact:**
+
 - Brute force attacks on user accounts
 - Credential stuffing with leaked passwords
 - API abuse and resource exhaustion
@@ -534,6 +551,7 @@ app.use('/api/', userRateLimiter);
 ## Remediation Timeline
 
 ### Phase 1: Critical Issues (Week 1)
+
 **Risk Reduction:** 70%
 
 - [ ] **CRITICAL-1:** Fix SQL injection in user search
@@ -552,6 +570,7 @@ app.use('/api/', userRateLimiter);
   - **Dependencies:** Key management setup
 
 **Deliverables:**
+
 - Code fixes merged to main branch
 - Unit tests for SQL injection prevention
 - Integration tests for JWT validation
@@ -560,6 +579,7 @@ app.use('/api/', userRateLimiter);
 ---
 
 ### Phase 2: High Priority (Weeks 2-3)
+
 **Risk Reduction:** 20%
 
 - [ ] **HIGH-2:** Implement rate limiting
@@ -568,6 +588,7 @@ app.use('/api/', userRateLimiter);
 - [ ] **HIGH-5:** Implement secure session management
 
 **Deliverables:**
+
 - Rate limiting deployed to all environments
 - XSS test suite
 - CSRF tokens on all forms
@@ -576,6 +597,7 @@ app.use('/api/', userRateLimiter);
 ---
 
 ### Phase 3: Medium Priority (Month 2)
+
 **Risk Reduction:** 8%
 
 - [ ] Fix all medium severity vulnerabilities
@@ -587,6 +609,7 @@ app.use('/api/', userRateLimiter);
 ---
 
 ### Phase 4: Low Priority & Hardening (Month 3)
+
 **Risk Reduction:** 2%
 
 - [ ] Fix low severity issues
@@ -625,6 +648,7 @@ app.use('/api/', userRateLimiter);
 | Breach notification (Art 33) | ✅ Compliant | Process documented |
 
 **Priority Actions:**
+
 1. Implement user data deletion (P1)
 2. Reduce log data retention (P2)
 3. Encrypt all personal data (P1)
@@ -661,6 +685,7 @@ Info:      ████ 4 (14%)
 ### CWE Distribution
 
 Most common vulnerability categories:
+
 1. CWE-89: SQL Injection (2 findings)
 2. CWE-79: Cross-site Scripting (3 findings)
 3. CWE-311: Missing Encryption (3 findings)
@@ -674,6 +699,7 @@ Most common vulnerability categories:
 This application requires immediate security remediation before production deployment. The presence of critical SQL injection and authentication bypass vulnerabilities poses unacceptable risk to user data and business operations.
 
 **Recommendations:**
+
 1. **Immediate:** Fix all critical vulnerabilities (Week 1)
 2. **Short-term:** Address high severity issues (Weeks 2-3)
 3. **Medium-term:** Achieve PCI-DSS and GDPR compliance (4-6 weeks)
@@ -681,6 +707,7 @@ This application requires immediate security remediation before production deplo
 5. **Long-term:** Establish security champions program
 
 **Next Steps:**
+
 1. Convene security review meeting with stakeholders
 2. Assign ownership for each vulnerability
 3. Create JIRA tickets with detailed remediation steps
@@ -692,6 +719,7 @@ This application requires immediate security remediation before production deplo
 ## Appendix A: Testing Methodology
 
 **Tools Used:**
+
 - Manual code review (primary)
 - OWASP ZAP for dynamic testing
 - Snyk for dependency scanning
@@ -699,6 +727,7 @@ This application requires immediate security remediation before production deplo
 - Custom security test scripts
 
 **Limitations:**
+
 - Testing performed in staging environment
 - No social engineering testing
 - No physical security assessment
@@ -710,11 +739,13 @@ This application requires immediate security remediation before production deplo
 ## Appendix B: Security Team Contacts
 
 **Questions or Concerns:**
-- Security Team: security@example.com
-- CISO: ciso@example.com
+
+- Security Team: <security@example.com>
+- CISO: <ciso@example.com>
 - On-call Security: +1-555-SECURITY
 
 **For Urgent Security Issues:**
+
 - Slack: #security-incidents
 - PagerDuty: Security Team escalation
 

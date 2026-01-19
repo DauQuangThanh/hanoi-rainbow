@@ -1,7 +1,7 @@
 # Severity Levels
 
-
 ### 🔴 Critical
+
 - **Definition**: Issues that pose security risks, data loss, or broken core functionality
 - **Examples**:
   - SQL injection vulnerability
@@ -11,6 +11,7 @@
 - **Action Required**: Must be fixed before implementation
 
 ### 🟠 High
+
 - **Definition**: Significant design flaws affecting scalability, performance, or reliability
 - **Examples**:
   - N+1 query problems causing performance issues
@@ -20,6 +21,7 @@
 - **Action Required**: Should be fixed before go-live
 
 ### 🟡 Medium
+
 - **Definition**: Moderate issues or deviations from best practices
 - **Examples**:
   - Inconsistent API naming conventions
@@ -29,6 +31,7 @@
 - **Action Required**: Address in next iteration
 
 ### 🟢 Low
+
 - **Definition**: Minor improvements or optimization opportunities
 - **Examples**:
   - Additional API endpoints for convenience

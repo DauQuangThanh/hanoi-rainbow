@@ -21,6 +21,7 @@ Provides expert guidance for Google Cloud Platform across all major services:
 ## Key Principles
 
 ### General Best Practices
+
 - **Follow least privilege** - Use IAM roles with minimal required permissions
 - **Enable monitoring** - Configure Cloud Monitoring and Logging for all services
 - **Use managed services** - Prefer GKE Autopilot, Cloud SQL, Cloud Run over self-managed
@@ -31,12 +32,14 @@ Provides expert guidance for Google Cloud Platform across all major services:
 - **Optimize costs** - Use committed use discounts, autoscaling, and appropriate resource sizing
 
 ### Architecture Patterns
+
 - **Multi-tier applications**: VPC + Cloud Load Balancer + GKE/Cloud Run + Cloud SQL
 - **Data pipelines**: Pub/Sub → Dataflow → BigQuery with Cloud Storage staging
 - **Serverless APIs**: Cloud Run + Cloud SQL + Secret Manager + Cloud Armor
 - **Hybrid connectivity**: VPN or Cloud Interconnect + Shared VPC + Private Google Access
 
 ### When to Use What
+
 - **Compute Engine**: Full VM control, Windows workloads, lift-and-shift migrations
 - **GKE**: Containerized applications, microservices, Kubernetes workloads
 - **Cloud Run**: Stateless HTTP services, event-driven processing, auto-scaling needs

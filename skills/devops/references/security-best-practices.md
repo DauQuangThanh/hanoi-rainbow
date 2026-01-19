@@ -1,9 +1,9 @@
 # Security Best Practices
 
-
 ### Container Security
 
 **Dockerfile Security:**
+
 ```dockerfile
 # Use specific version tags, not 'latest'
 FROM node:18.17.0-alpine3.18
@@ -45,6 +45,7 @@ CMD ["node", "server.js"]
 ### Kubernetes Security
 
 **Pod Security Standards:**
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -81,6 +82,7 @@ spec:
 ### Secrets Management
 
 **Using External Secrets Operator:**
+
 ```yaml
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore

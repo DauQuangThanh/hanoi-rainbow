@@ -22,6 +22,7 @@ Provides expert guidance for Microsoft Azure infrastructure and services:
 ## Best Practices
 
 ### Azure Virtual Machines
+
 - Select appropriate VM sizes based on workload (D-series, F-series, E-series)
 - Use managed disks for simplified management and availability
 - Enable Azure Backup for VM protection
@@ -31,6 +32,7 @@ Provides expert guidance for Microsoft Azure infrastructure and services:
 - Use proximity placement groups for low latency
 
 ### Azure Storage
+
 - Use storage account types based on use case (Standard vs Premium, Hot/Cool/Archive tiers)
 - Enable soft delete for blob and container protection
 - Use private endpoints for secure access
@@ -40,6 +42,7 @@ Provides expert guidance for Microsoft Azure infrastructure and services:
 - Implement immutable blob storage for compliance
 
 ### Azure SQL Database
+
 - Select appropriate service tier (Basic, Standard, Premium, Hyperscale)
 - Enable automatic backups with long-term retention
 - Use read replicas for read scaling
@@ -49,6 +52,7 @@ Provides expert guidance for Microsoft Azure infrastructure and services:
 - Monitor with Query Performance Insight
 
 ### Azure Virtual Network
+
 - Plan address space carefully using RFC 1918 ranges
 - Use subnets to segment workloads and apply NSGs
 - Configure Network Security Groups (NSGs) with least privilege
@@ -58,6 +62,7 @@ Provides expert guidance for Microsoft Azure infrastructure and services:
 - Implement network watcher for diagnostics
 
 ### AKS (Azure Kubernetes Service)
+
 - Use managed identity for AKS cluster authentication
 - Configure multiple node pools with auto-scaling
 - Enable Azure Policy for Kubernetes
@@ -67,6 +72,7 @@ Provides expert guidance for Microsoft Azure infrastructure and services:
 - Configure ingress controllers with Application Gateway
 
 ### Security
+
 - Enable Azure AD Multi-Factor Authentication (MFA)
 - Use managed identities instead of service principals where possible
 - Implement Role-Based Access Control (RBAC) with least privilege
@@ -77,6 +83,7 @@ Provides expert guidance for Microsoft Azure infrastructure and services:
 - Audit activities with Azure Activity Log
 
 ### Cost Optimization
+
 - Use Azure Reserved Instances for predictable workloads
 - Leverage Azure Spot VMs for fault-tolerant workloads
 - Implement auto-scaling to match demand
@@ -86,6 +93,7 @@ Provides expert guidance for Microsoft Azure infrastructure and services:
 - Configure storage lifecycle policies to reduce costs
 
 ### DevOps Best Practices
+
 - Use Azure DevOps or GitHub Actions for CI/CD pipelines
 - Implement infrastructure as code with Bicep or Terraform
 - Use Azure Key Vault for pipeline secrets

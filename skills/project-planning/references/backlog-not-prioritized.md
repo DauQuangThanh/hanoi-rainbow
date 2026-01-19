@@ -3,6 +3,7 @@
 - [ ] Dark mode support
 - [ ] Email templates customization
 - [ ] Audit logging
+
 ```
 
 **Definition of Ready (DoR):**
@@ -40,15 +41,18 @@ Story is complete when:
 **Value vs. Effort Matrix:**
 
 ```
+
 High Value, Low Effort  → Do First (Quick Wins)
 High Value, High Effort → Do Next (Major Projects)
 Low Value, Low Effort   → Do Later (Fill-ins)
 Low Value, High Effort  → Don't Do (Time Wasters)
+
 ```
 
 **RICE Scoring:**
 
 ```
+
 RICE = (Reach × Impact × Confidence) / Effort
 
 Reach: Number of users affected per time period
@@ -61,6 +65,7 @@ Feature A: (1000 × 2 × 80%) / 2 = 800
 Feature B: (500 × 3 × 60%) / 1 = 900
 
 Feature B has higher RICE score → prioritize first
+
 ```
 
 **Kano Model:**

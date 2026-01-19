@@ -50,24 +50,30 @@
 ## Translation Patterns
 
 ### 88-Level → ENUM
+
 ```cobol
 01 RECORD-TYPE PIC X.
    88 TYPE-HEADER VALUE 'H'.
 IF TYPE-HEADER THEN ...
 ```
+
 →
+
 ```
 ENUM RecordType: HEADER='H', DETAIL='D' END ENUM
 IF recordType == RecordType.HEADER THEN ...
 ```
 
 ### Paragraph → Procedure
+
 ```cobol
 CALC-TOTAL.
     COMPUTE TOTAL = QTY * PRICE.
 PERFORM CALC-TOTAL.
 ```
+
 →
+
 ```
 PROCEDURE CalcTotal()
 BEGIN
@@ -77,6 +83,7 @@ CALL CalcTotal()
 ```
 
 ### File Loop
+
 ```cobol
 PERFORM UNTIL eof = 'Y'
     READ file AT END MOVE 'Y' TO eof
@@ -84,7 +91,9 @@ PERFORM UNTIL eof = 'Y'
     END-READ
 END-PERFORM
 ```
+
 →
+
 ```
 eof = FALSE
 WHILE NOT eof DO

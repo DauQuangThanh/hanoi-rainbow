@@ -26,6 +26,7 @@ This document provides comprehensive guidance on database design patterns, norma
 **Relationship Types:**
 
 **One-to-One (1:1):**
+
 ```
 User ← one-to-one → Profile
 (One user has one profile)
@@ -38,6 +39,7 @@ id | user_id (FK, UNIQUE) | bio | avatar_url
 ```
 
 **One-to-Many (1:N):**
+
 ```
 User ← one-to-many → Orders
 (One user has many orders)
@@ -50,6 +52,7 @@ id | user_id (FK) | total | created_at
 ```
 
 **Many-to-Many (M:N):**
+
 ```
 Students ← many-to-many → Courses
 (Students enroll in many courses, courses have many students)
@@ -68,11 +71,13 @@ UNIQUE(student_id, course_id)
 ### Primary Keys
 
 **Natural Keys** (business data):
+
 - Example: email, SSN, ISBN
 - Pros: Meaningful, no additional column
 - Cons: May change, may be composite, privacy concerns
 
 **Surrogate Keys** (artificial):
+
 - Example: auto-increment INT, UUID
 - Pros: Never changes, simple, no business logic
 - Cons: Additional column, less meaningful
@@ -91,6 +96,7 @@ UNIQUE(student_id, course_id)
 | Index Performance | Excellent (sequential) | Moderate (random inserts) |
 
 **Best Practices:**
+
 - Use BIGINT (8 bytes) for auto-increment to avoid overflow
 - Use UUID v4 for distributed systems
 - Use UUID v7 (time-ordered) for better index performance
@@ -100,6 +106,7 @@ UNIQUE(student_id, course_id)
 **Purpose:** Maintain referential integrity between tables
 
 **Syntax:**
+
 ```sql
 CREATE TABLE orders (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -121,6 +128,7 @@ CREATE TABLE orders (
 | NO ACTION | Same as RESTRICT |
 
 **Example:**
+
 ```sql
 -- When user deleted, delete all their orders
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
@@ -133,6 +141,7 @@ FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT
 ```
 
 **Considerations:**
+
 - Foreign keys enforce integrity but add overhead
 - Indexes automatically created on foreign keys (some databases)
 - May need to manually index foreign keys for join performance
@@ -144,10 +153,12 @@ FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT
 ### Normalization Forms
 
 **1NF (First Normal Form):**
+
 - Atomic values (no repeating groups or arrays in columns)
 - Each column contains only one value
 
 ❌ **Violates 1NF:**
+
 ```sql
 CREATE TABLE orders (
     id INT,
@@ -157,6 +168,7 @@ CREATE TABLE orders (
 ```
 
 ✅ **Conforms to 1NF:**
+
 ```sql
 CREATE TABLE orders (
     id INT,
@@ -171,10 +183,12 @@ CREATE TABLE order_items (
 ```
 
 **2NF (Second Normal Form):**
+
 - Meets 1NF
 - No partial dependencies (non-key columns depend on entire primary key)
 
 ❌ **Violates 2NF:**
+
 ```sql
 CREATE TABLE order_items (
     order_id INT,
@@ -186,6 +200,7 @@ CREATE TABLE order_items (
 ```
 
 ✅ **Conforms to 2NF:**
+
 ```sql
 CREATE TABLE items (
     id INT PRIMARY KEY,
@@ -202,10 +217,12 @@ CREATE TABLE order_items (
 ```
 
 **3NF (Third Normal Form):**
+
 - Meets 2NF
 - No transitive dependencies (non-key columns don't depend on other non-key columns)
 
 ❌ **Violates 3NF:**
+
 ```sql
 CREATE TABLE orders (
     id INT PRIMARY KEY,
@@ -217,6 +234,7 @@ CREATE TABLE orders (
 ```
 
 ✅ **Conforms to 3NF:**
+
 ```sql
 CREATE TABLE customers (
     id INT PRIMARY KEY,
@@ -233,6 +251,7 @@ CREATE TABLE orders (
 ```
 
 **BCNF (Boyce-Codd Normal Form):**
+
 - Stricter version of 3NF
 - Every determinant is a candidate key
 
@@ -241,12 +260,14 @@ CREATE TABLE orders (
 ### Normalization Benefits
 
 ✅ **Pros:**
+
 - Eliminates data redundancy
 - Maintains data integrity
 - Easier updates (update once, not in multiple places)
 - Smaller storage requirements
 
 ❌ **Cons:**
+
 - More tables and joins
 - Complex queries
 - Potentially slower reads
@@ -256,6 +277,7 @@ CREATE TABLE orders (
 **Purpose:** Improve read performance by adding redundancy
 
 **When to Denormalize:**
+
 - Read-heavy workloads (10:1 reads to writes)
 - Expensive join queries affecting performance
 - Frequently accessed computed values
@@ -264,6 +286,7 @@ CREATE TABLE orders (
 **Denormalization Patterns:**
 
 **1. Duplicate Data:**
+
 ```sql
 -- Normalized
 customers: id, name, email
@@ -277,6 +300,7 @@ orders: id, customer_id, customer_name, total
 ```
 
 **2. Precompute Aggregates:**
+
 ```sql
 -- Normalized
 users: id, name
@@ -290,6 +314,7 @@ users: id, name, post_count
 ```
 
 **3. Collapse One-to-One:**
+
 ```sql
 -- Normalized
 users: id, email, name
@@ -310,6 +335,7 @@ users: id, email, name, bio, avatar
 4. **Event Sourcing:** Rebuild denormalized views from event log
 
 **Example Trigger:**
+
 ```sql
 CREATE TRIGGER update_post_count AFTER INSERT ON posts
 FOR EACH ROW
@@ -327,11 +353,13 @@ END;
 ### Index Types
 
 **1. Primary Key Index:**
+
 - Automatically created on PRIMARY KEY
 - Clustered index (data stored in index order) in most databases
 - Unique and non-null
 
 **2. Unique Index:**
+
 - Enforces uniqueness
 - Automatically created on UNIQUE constraint
 
@@ -340,6 +368,7 @@ CREATE UNIQUE INDEX idx_users_email ON users(email);
 ```
 
 **3. Non-Unique Index (Secondary Index):**
+
 - Improves query performance
 - Allows duplicates
 
@@ -349,6 +378,7 @@ CREATE INDEX idx_orders_status ON orders(status);
 ```
 
 **4. Composite Index (Multi-Column):**
+
 - Index on multiple columns
 - Column order matters (left-to-right prefix rule)
 
@@ -366,11 +396,13 @@ SELECT * FROM orders WHERE created_at > '2026-01-01';  -- Missing user_id and st
 ```
 
 **Column Order in Composite Indexes:**
+
 1. Equality conditions first (WHERE column = value)
 2. Range conditions last (WHERE column > value)
 3. Most selective columns first (filters most rows)
 
 **5. Covering Index (Include Columns):**
+
 - Index contains all columns needed by query (no table lookup)
 
 ```sql
@@ -384,6 +416,7 @@ CREATE INDEX idx_orders_covering ON orders(user_id, status, total);
 ```
 
 **6. Partial Index (Filtered Index):**
+
 - Index only subset of rows
 
 ```sql
@@ -395,6 +428,7 @@ SELECT * FROM users WHERE email = 'john@example.com' AND status = 'active';
 ```
 
 **7. Full-Text Index:**
+
 - Optimize text search
 
 ```sql
@@ -404,6 +438,7 @@ SELECT * FROM posts WHERE MATCH(title, content) AGAINST('database design');
 ```
 
 **8. Spatial Index:**
+
 - Optimize geographic queries
 
 ```sql
@@ -416,6 +451,7 @@ WHERE ST_Distance_Sphere(coordinates, POINT(lat, lng)) < 10000;
 ### When to Add Indexes
 
 ✅ **Add Index When:**
+
 - Column used in WHERE clause frequently
 - Column used in JOIN conditions
 - Column used in ORDER BY frequently
@@ -424,6 +460,7 @@ WHERE ST_Distance_Sphere(coordinates, POINT(lat, lng)) < 10000;
 - Queries slow without index (check EXPLAIN plan)
 
 ❌ **Don't Index When:**
+
 - Table very small (< 1000 rows)
 - Column has low cardinality (few distinct values, like boolean)
 - Column updated frequently (index maintenance overhead)
@@ -432,6 +469,7 @@ WHERE ST_Distance_Sphere(coordinates, POINT(lat, lng)) < 10000;
 ### Index Maintenance Overhead
 
 **Write Operations:**
+
 - INSERT: Update all indexes on table
 - UPDATE: Update indexes if indexed columns change
 - DELETE: Update all indexes on table
@@ -443,6 +481,7 @@ WHERE ST_Distance_Sphere(coordinates, POINT(lat, lng)) < 10000;
 ### Analyzing Index Usage
 
 **MySQL:**
+
 ```sql
 -- Check index usage
 SHOW INDEX FROM orders;
@@ -455,6 +494,7 @@ SELECT * FROM information_schema.INNODB_SYS_TABLESTATS WHERE name = 'mydb/orders
 ```
 
 **PostgreSQL:**
+
 ```sql
 -- Explain query
 EXPLAIN ANALYZE SELECT * FROM orders WHERE user_id = 123;
@@ -477,6 +517,7 @@ WHERE idx_scan = 0 AND schemaname NOT IN ('pg_catalog', 'information_schema');
 **Problem:** 1 query to get parent records, then N queries to get related records
 
 ❌ **Bad (N+1 queries):**
+
 ```python
 # 1 query
 users = db.query("SELECT * FROM users LIMIT 10")
@@ -487,6 +528,7 @@ for user in users:
 ```
 
 ✅ **Solution 1: JOIN (1 query):**
+
 ```sql
 SELECT u.*, o.*
 FROM users u
@@ -495,6 +537,7 @@ WHERE u.id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 ```
 
 ✅ **Solution 2: IN clause (2 queries):**
+
 ```python
 # 1 query
 users = db.query("SELECT * FROM users LIMIT 10")
@@ -507,6 +550,7 @@ orders = db.query(f"SELECT * FROM orders WHERE user_id IN ({','.join(map(str, us
 ```
 
 ✅ **Solution 3: ORM Eager Loading:**
+
 ```python
 # Django ORM
 users = User.objects.prefetch_related('orders').all()[:10]
@@ -518,18 +562,21 @@ users = session.query(User).options(joinedload(User.orders)).limit(10).all()
 ### SELECT * Considered Harmful
 
 ❌ **Bad:**
+
 ```sql
 SELECT * FROM users WHERE id = 123;
 -- Returns all 20 columns, even if only need 3
 ```
 
 ✅ **Good:**
+
 ```sql
 SELECT id, first_name, last_name, email FROM users WHERE id = 123;
 -- Returns only needed columns
 ```
 
 **Benefits:**
+
 - Reduces data transfer (network bandwidth)
 - Improves query performance
 - Covering indexes more effective
@@ -538,6 +585,7 @@ SELECT id, first_name, last_name, email FROM users WHERE id = 123;
 ### Query Execution Plans (EXPLAIN)
 
 **MySQL:**
+
 ```sql
 EXPLAIN SELECT * FROM orders WHERE user_id = 123;
 
@@ -549,6 +597,7 @@ EXPLAIN SELECT * FROM orders WHERE user_id = 123;
 ```
 
 **Key Columns:**
+
 - **type**: Access method (const, eq_ref, ref, range, index, ALL)
   - `const`: Best (constant lookup)
   - `eq_ref`: Unique index lookup
@@ -561,6 +610,7 @@ EXPLAIN SELECT * FROM orders WHERE user_id = 123;
 - **Extra**: Additional info (Using filesort, Using temporary - both bad)
 
 **PostgreSQL:**
+
 ```sql
 EXPLAIN ANALYZE SELECT * FROM orders WHERE user_id = 123;
 
@@ -571,6 +621,7 @@ Execution Time: 0.030 ms
 ```
 
 **Red Flags:**
+
 - Seq Scan (sequential scan) on large table
 - Full table scan (type = ALL)
 - Using filesort (sorting without index)
@@ -580,10 +631,12 @@ Execution Time: 0.030 ms
 ### Query Optimization Techniques
 
 **1. Use Indexes:**
+
 - Add indexes on frequently queried columns
 - Check EXPLAIN plan to verify index usage
 
 **2. Optimize JOIN:**
+
 - Join on indexed columns (foreign keys)
 - Filter before joining (WHERE clauses early)
 - Use INNER JOIN when possible (faster than LEFT JOIN)
@@ -591,24 +644,28 @@ Execution Time: 0.030 ms
 **3. Avoid Functions on Indexed Columns:**
 
 ❌ **Bad (index not used):**
+
 ```sql
 SELECT * FROM users WHERE LOWER(email) = 'john@example.com';
 SELECT * FROM orders WHERE YEAR(created_at) = 2026;
 ```
 
 ✅ **Good (index used):**
+
 ```sql
 SELECT * FROM users WHERE email = 'john@example.com';  -- Case-insensitive collation
 SELECT * FROM orders WHERE created_at >= '2026-01-01' AND created_at < '2027-01-01';
 ```
 
 **4. Limit Results:**
+
 - Always use LIMIT for pagination
 - Don't fetch more rows than needed
 
 **5. Avoid Subqueries (sometimes):**
 
 ❌ **Slow (correlated subquery):**
+
 ```sql
 SELECT u.id, u.name,
     (SELECT COUNT(*) FROM orders o WHERE o.user_id = u.id) AS order_count
@@ -617,6 +674,7 @@ FROM users u;
 ```
 
 ✅ **Fast (JOIN with GROUP BY):**
+
 ```sql
 SELECT u.id, u.name, COUNT(o.id) AS order_count
 FROM users u
@@ -625,10 +683,12 @@ GROUP BY u.id, u.name;
 ```
 
 **6. Use UNION ALL instead of UNION:**
+
 - UNION removes duplicates (expensive)
 - UNION ALL keeps duplicates (faster)
 
 **7. Batch Operations:**
+
 - Bulk INSERT instead of individual INSERTs
 - Update multiple rows in one query
 
@@ -650,11 +710,13 @@ INSERT INTO users (name, email) VALUES
 **Approach:** Increase resources (CPU, RAM, disk) of single database server
 
 **Pros:**
+
 - Simple (no code changes)
 - No data distribution complexity
 - Strong consistency
 
 **Cons:**
+
 - Hardware limits (max instance size)
 - Expensive (exponential cost increase)
 - Single point of failure
@@ -667,6 +729,7 @@ INSERT INTO users (name, email) VALUES
 **Approach:** Add more database servers
 
 **Methods:**
+
 1. Read Replicas
 2. Sharding (Partitioning)
 3. Database Clustering
@@ -688,6 +751,7 @@ INSERT INTO users (name, email) VALUES
 ```
 
 **Implementation:**
+
 ```python
 # Write to primary
 primary_db.execute("INSERT INTO users (name) VALUES ('John')")
@@ -697,20 +761,24 @@ user = replica_db.query("SELECT * FROM users WHERE id = 123")
 ```
 
 **Pros:**
+
 - Scale reads horizontally
 - Offload read traffic from primary
 - Geographic distribution (read from nearest replica)
 
 **Cons:**
+
 - Replication lag (eventual consistency)
 - Writes still go to single primary
 - Application must route reads to replicas
 
 **Replication Lag:**
+
 - **Synchronous replication**: Slow (wait for replicas), strong consistency
 - **Asynchronous replication**: Fast (don't wait), eventual consistency
 
 **Strategies for Replication Lag:**
+
 1. **Read from primary for critical reads** (after writes)
 2. **Session stickiness** (same user reads from same replica)
 3. **Read-your-writes consistency** (read from primary briefly after write)
@@ -722,6 +790,7 @@ user = replica_db.query("SELECT * FROM users WHERE id = 123")
 **Sharding Strategies:**
 
 **1. Range-Based Sharding:**
+
 ```
 Shard 1: user_id 1-1,000,000
 Shard 2: user_id 1,000,001-2,000,000
@@ -732,6 +801,7 @@ Shard 3: user_id 2,000,001-3,000,000
 **Cons:** Unbalanced shards (hotspots), resharding complex
 
 **2. Hash-Based Sharding:**
+
 ```
 Shard = hash(user_id) % num_shards
 
@@ -743,6 +813,7 @@ user_id 456 → hash(456) % 3 = Shard 0
 **Cons:** Range queries difficult, resharding requires rehashing
 
 **3. Geographic Sharding:**
+
 ```
 Shard 1: US users
 Shard 2: EU users
@@ -753,6 +824,7 @@ Shard 3: APAC users
 **Cons:** Unbalanced if regions have different usage
 
 **4. Entity-Based Sharding (Lookup Table):**
+
 ```
 Shard lookup table:
 user_id | shard_id
@@ -767,35 +839,42 @@ user_id | shard_id
 **Sharding Challenges:**
 
 **1. Cross-Shard Queries:**
+
 ```sql
 -- Query all orders (requires querying all shards)
 SELECT * FROM orders WHERE status = 'pending';
 ```
 
 **Solution:**
+
 - Avoid cross-shard queries (design around shard key)
 - Query all shards and merge results (slower)
 - Denormalize data to avoid cross-shard joins
 
 **2. Distributed Transactions:**
+
 - 2PC (Two-Phase Commit) slow and complex
 - Prefer eventual consistency, saga pattern
 
 **3. Resharding:**
+
 - Adding/removing shards requires data migration
 - Consistent hashing reduces reshuffling
 
 **4. Shard Key Selection:**
+
 - Choose key that balances load
 - Choose key that isolates queries to single shard
 - Immutable (don't change shard key value)
 
 **Good Shard Keys:**
+
 - `user_id` (if queries scoped to user)
 - `tenant_id` (for multi-tenant apps)
 - `geographic_region`
 
 **Bad Shard Keys:**
+
 - `created_at` (time-based, creates hotspots)
 - Low cardinality columns (status, type)
 
@@ -820,6 +899,7 @@ engine = create_engine(
 ```
 
 **Best Practices:**
+
 - Set `pool_size` based on workload (20-50 typical)
 - Set `max_overflow` for burst traffic
 - Set `pool_recycle` to avoid idle connection timeouts
@@ -834,6 +914,7 @@ engine = create_engine(
 **Partition Types:**
 
 **1. Range Partitioning:**
+
 ```sql
 CREATE TABLE orders (
     id BIGINT,
@@ -848,6 +929,7 @@ CREATE TABLE orders (
 ```
 
 **2. List Partitioning:**
+
 ```sql
 PARTITION BY LIST (region) (
     PARTITION p_us VALUES IN ('US', 'CA', 'MX'),
@@ -857,11 +939,13 @@ PARTITION BY LIST (region) (
 ```
 
 **3. Hash Partitioning:**
+
 ```sql
 PARTITION BY HASH (user_id) PARTITIONS 4;
 ```
 
 **Benefits:**
+
 - Query performance (partition pruning)
 - Maintenance (archive old partitions)
 - Parallel query execution
@@ -875,11 +959,13 @@ PARTITION BY HASH (user_id) PARTITIONS 4;
 **Data Model:** JSON-like documents
 
 **When to Use:**
+
 - Flexible schema (schema evolves frequently)
 - Nested/hierarchical data
 - Document-centric queries
 
 **Example Schema:**
+
 ```json
 {
   "_id": "123",
@@ -910,11 +996,13 @@ PARTITION BY HASH (user_id) PARTITIONS 4;
 **Embed vs. Reference:**
 
 **Embed (denormalize):**
+
 - Use when: Related data always accessed together, 1:few relationship
 - Benefit: Single query, no joins
 - Drawback: Data duplication, large documents
 
 **Reference (normalize):**
+
 - Use when: Many-to-many, 1:many (large), independent access
 - Benefit: No duplication, smaller documents
 - Drawback: Multiple queries (manual joins)
@@ -924,11 +1012,13 @@ PARTITION BY HASH (user_id) PARTITIONS 4;
 **Data Model:** Key → Value
 
 **When to Use:**
+
 - Caching
 - Session storage
 - Simple lookups by key
 
 **Example:**
+
 ```
 user:123:session → {"userId": "123", "token": "abc...", "expiresAt": "..."}
 user:123:cart → [{"productId": "P001", "quantity": 2}]
@@ -939,11 +1029,13 @@ user:123:cart → [{"productId": "P001", "quantity": 2}]
 **Data Model:** Rows with dynamic columns
 
 **When to Use:**
+
 - Time-series data
 - Write-heavy workloads
 - Horizontal scalability critical
 
 **Example:**
+
 ```
 Row Key: user:123
 Columns:
@@ -957,12 +1049,14 @@ Columns:
 **Data Model:** Nodes and relationships
 
 **When to Use:**
+
 - Social networks
 - Recommendation engines
 - Fraud detection
 - Knowledge graphs
 
 **Example:**
+
 ```
 (User:John)-[:FRIENDS_WITH]->(User:Jane)
 (User:John)-[:PURCHASED]->(Product:Laptop)
@@ -976,6 +1070,7 @@ Columns:
 ### Cache-Aside (Lazy Loading)
 
 **Pattern:**
+
 1. Check cache
 2. If miss, load from database
 3. Store in cache
@@ -1004,6 +1099,7 @@ def get_user(user_id):
 ### Write-Through
 
 **Pattern:**
+
 1. Write to cache
 2. Write to database synchronously
 
@@ -1022,6 +1118,7 @@ def update_user(user_id, data):
 ### Write-Behind (Write-Back)
 
 **Pattern:**
+
 1. Write to cache
 2. Write to database asynchronously (batch)
 
@@ -1033,11 +1130,13 @@ def update_user(user_id, data):
 **Strategies:**
 
 **1. TTL (Time-To-Live):**
+
 ```python
 cache.set(f"user:{user_id}", user, ttl=3600)  # Expires in 1 hour
 ```
 
 **2. Explicit Invalidation:**
+
 ```python
 def update_user(user_id, data):
     db.execute("UPDATE users SET ... WHERE id = ?", [user_id])
@@ -1045,6 +1144,7 @@ def update_user(user_id, data):
 ```
 
 **3. Event-Based Invalidation:**
+
 ```python
 @event_handler('user.updated')
 def on_user_updated(event):
@@ -1056,6 +1156,7 @@ def on_user_updated(event):
 **Problem:** Cache expires, many requests hit database simultaneously
 
 **Solution 1: Lock (first request regenerates cache):**
+
 ```python
 def get_user(user_id):
     user = cache.get(f"user:{user_id}")
@@ -1077,6 +1178,7 @@ def get_user(user_id):
 ```
 
 **Solution 2: Probabilistic Early Expiration:**
+
 ```python
 # Regenerate cache before TTL expires (based on probability)
 remaining_ttl = cache.ttl(f"user:{user_id}")
@@ -1125,11 +1227,13 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON mydb.orders TO 'app_user'@'%';
 ### 4. Encryption
 
 **Encryption at Rest:**
+
 - Transparent Data Encryption (TDE)
 - AWS RDS encryption, Azure SQL TDE
 - Encrypt backups
 
 **Encryption in Transit:**
+
 - Require SSL/TLS connections
 - Certificate validation
 
@@ -1144,6 +1248,7 @@ postgresql://user:pass@host/db?sslmode=require
 ### 5. SQL Injection Prevention
 
 ❌ **Vulnerable (string concatenation):**
+
 ```python
 user_id = request.get('user_id')
 query = f"SELECT * FROM users WHERE id = {user_id}"
@@ -1152,6 +1257,7 @@ db.execute(query)
 ```
 
 ✅ **Safe (parameterized queries):**
+
 ```python
 user_id = request.get('user_id')
 query = "SELECT * FROM users WHERE id = ?"
@@ -1160,6 +1266,7 @@ db.execute(query, [user_id])
 ```
 
 ✅ **Safe (ORM):**
+
 ```python
 user_id = request.get('user_id')
 user = User.objects.get(id=user_id)  # ORM uses parameterized queries

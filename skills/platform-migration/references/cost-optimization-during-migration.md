@@ -1,6 +1,5 @@
 # Cost Optimization During Migration
 
-
 ```markdown
 Strategies:
 

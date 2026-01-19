@@ -1,6 +1,5 @@
 # Common Scenarios
 
-
 ### Feature Addition
 
 ```

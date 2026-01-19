@@ -7,6 +7,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### Java Ecosystem
 
 **Spring Boot**
+
 - **Best For**: Enterprise applications, microservices, REST APIs
 - **Strengths**: Mature ecosystem, dependency injection, comprehensive features
 - **Weaknesses**: Slower startup, higher memory usage
@@ -14,6 +15,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Large teams, long-term maintenance, strong typing needs
 
 **Quarkus**
+
 - **Best For**: Cloud-native, serverless, microservices
 - **Strengths**: Fast startup, low memory footprint, Kubernetes-native
 - **Weaknesses**: Smaller ecosystem than Spring
@@ -23,6 +25,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### JavaScript/TypeScript
 
 **Node.js + Express**
+
 - **Best For**: APIs, real-time applications, microservices
 - **Strengths**: Async I/O, JavaScript everywhere, large ecosystem
 - **Weaknesses**: Single-threaded, callback complexity
@@ -30,6 +33,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: JavaScript team, I/O-heavy workloads
 
 **NestJS**
+
 - **Best For**: Enterprise Node.js applications
 - **Strengths**: TypeScript, structured, Angular-like, built-in features
 - **Weaknesses**: Learning curve, opinionated
@@ -37,6 +41,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Need structure, TypeScript preference, large teams
 
 **Fastify**
+
 - **Best For**: High-performance APIs
 - **Strengths**: Very fast, low overhead, schema validation
 - **Weaknesses**: Smaller ecosystem than Express
@@ -46,6 +51,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### Python
 
 **Django**
+
 - **Best For**: Full-featured web applications
 - **Strengths**: Batteries included, ORM, admin interface, rapid development
 - **Weaknesses**: Monolithic, opinionated, slower performance
@@ -53,6 +59,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Rapid development, full-stack framework needed
 
 **FastAPI**
+
 - **Best For**: Modern APIs, microservices
 - **Strengths**: Fast, async, automatic API docs, type hints
 - **Weaknesses**: Newer, smaller ecosystem
@@ -60,6 +67,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Modern Python API, async support, automatic docs
 
 **Flask**
+
 - **Best For**: Lightweight APIs, microservices
 - **Strengths**: Minimal, flexible, easy to learn
 - **Weaknesses**: Less built-in features, more setup needed
@@ -69,6 +77,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### Go
 
 **Gin / Echo / Fiber**
+
 - **Best For**: High-performance APIs, microservices
 - **Strengths**: Fast, concurrent, compiled, low memory
 - **Weaknesses**: Verbose error handling, fewer libraries
@@ -78,6 +87,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### .NET
 
 **ASP.NET Core**
+
 - **Best For**: Enterprise applications, Windows integration
 - **Strengths**: High performance, cross-platform, strong typing
 - **Weaknesses**: Windows-centric historically
@@ -87,6 +97,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### Ruby
 
 **Ruby on Rails**
+
 - **Best For**: Web applications, MVPs
 - **Strengths**: Convention over configuration, rapid development
 - **Weaknesses**: Performance, monolithic
@@ -98,6 +109,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ## Frontend Technologies
 
 ### React
+
 - **Best For**: SPAs, complex UIs, component reusability
 - **Strengths**: Large ecosystem, flexible, virtual DOM, strong community
 - **Weaknesses**: Just a library, boilerplate, rapid changes
@@ -105,6 +117,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Large community, flexibility, component focus
 
 ### Vue.js
+
 - **Best For**: Progressive enhancement, SPAs
 - **Strengths**: Easy to learn, flexible, good docs, gradual adoption
 - **Weaknesses**: Smaller ecosystem, less corporate backing
@@ -112,6 +125,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Easy learning, gradual migration
 
 ### Angular
+
 - **Best For**: Enterprise SPAs
 - **Strengths**: Complete framework, TypeScript, opinionated, structured
 - **Weaknesses**: Steep learning curve, verbose, heavy
@@ -119,6 +133,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Enterprise, TypeScript, full framework
 
 ### Next.js (React)
+
 - **Best For**: SSR, SSG, full-stack React
 - **Strengths**: SEO, fast initial load, API routes, hybrid rendering
 - **Weaknesses**: Vendor lock-in (Vercel), complexity
@@ -126,6 +141,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: SEO important, static + dynamic content
 
 ### Svelte/SvelteKit
+
 - **Best For**: Modern web apps, performance-critical UIs
 - **Strengths**: No virtual DOM, small bundle size, fast, easy syntax
 - **Weaknesses**: Smaller ecosystem, fewer jobs
@@ -133,6 +149,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Performance priority, fresh start
 
 ### Mobile: React Native
+
 - **Best For**: Cross-platform mobile apps
 - **Strengths**: Code sharing, hot reload, native performance
 - **Weaknesses**: Native bridge overhead, platform differences
@@ -140,6 +157,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: React team, cross-platform target
 
 ### Mobile: Flutter
+
 - **Best For**: High-performance cross-platform apps
 - **Strengths**: Beautiful UI, fast, hot reload, single codebase
 - **Weaknesses**: Dart language, large app size
@@ -153,6 +171,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### Relational (SQL)
 
 **PostgreSQL**
+
 - **Best For**: General-purpose, complex queries, data integrity
 - **Strengths**: ACID, JSON support, extensions, reliability
 - **Weaknesses**: Vertical scaling limits
@@ -160,6 +179,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Default choice for relational needs
 
 **MySQL / MariaDB**
+
 - **Best For**: Web applications, read-heavy workloads
 - **Strengths**: Fast reads, widespread adoption, simple replication
 - **Weaknesses**: Less feature-rich than PostgreSQL
@@ -167,6 +187,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Simple relational needs, wide compatibility
 
 **Oracle**
+
 - **Best For**: Enterprise, mission-critical
 - **Strengths**: Feature-rich, scalability, support
 - **Weaknesses**: Expensive, complex, vendor lock-in
@@ -176,6 +197,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### NoSQL Document
 
 **MongoDB**
+
 - **Best For**: Flexible schemas, rapid development
 - **Strengths**: JSON documents, flexible schema, easy to scale
 - **Weaknesses**: No ACID across documents (traditionally)
@@ -183,6 +205,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Flexible schema, rapid iteration
 
 **CouchDB**
+
 - **Best For**: Offline-first applications
 - **Strengths**: Multi-master replication, HTTP API, conflicts handling
 - **Weaknesses**: Less adoption, performance
@@ -192,6 +215,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### NoSQL Key-Value
 
 **Redis**
+
 - **Best For**: Caching, sessions, real-time analytics
 - **Strengths**: In-memory, fast, data structures, pub/sub
 - **Weaknesses**: Data must fit in memory, persistence limitations
@@ -199,6 +223,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Speed critical, caching layer
 
 **Amazon DynamoDB**
+
 - **Best For**: Serverless, predictable performance
 - **Strengths**: Fully managed, auto-scaling, low latency
 - **Weaknesses**: AWS lock-in, query limitations, cost
@@ -208,6 +233,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### NoSQL Column-Family
 
 **Apache Cassandra**
+
 - **Best For**: Time-series, high write throughput
 - **Strengths**: Linear scalability, high availability, distributed
 - **Weaknesses**: Eventual consistency, complex operations
@@ -215,6 +241,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Massive scale, write-heavy, always available
 
 **Apache HBase**
+
 - **Best For**: Big data analytics
 - **Strengths**: Hadoop integration, consistency, scale
 - **Weaknesses**: Complex, operational overhead
@@ -224,6 +251,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### NoSQL Graph
 
 **Neo4j**
+
 - **Best For**: Relationship-heavy data
 - **Strengths**: Relationship queries, Cypher language, performance
 - **Weaknesses**: Scaling challenges, cost
@@ -233,6 +261,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### Search Engines
 
 **Elasticsearch**
+
 - **Best For**: Full-text search, log analytics
 - **Strengths**: Fast search, analytics, scalable, ecosystem (ELK)
 - **Weaknesses**: Memory-hungry, operational complexity
@@ -240,6 +269,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Full-text search, log aggregation
 
 **Apache Solr**
+
 - **Best For**: Enterprise search
 - **Strengths**: Mature, feature-rich, faceted search
 - **Weaknesses**: Complex configuration
@@ -249,6 +279,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### Time-Series
 
 **InfluxDB**
+
 - **Best For**: Time-series data, metrics
 - **Strengths**: Optimized for time-series, retention policies, SQL-like
 - **Weaknesses**: Limited query capabilities
@@ -256,6 +287,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Time-series workload, metrics storage
 
 **TimescaleDB**
+
 - **Best For**: Time-series with SQL
 - **Strengths**: PostgreSQL extension, SQL support, reliability
 - **Weaknesses**: Not as optimized as specialized databases
@@ -267,6 +299,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ## Message Brokers & Event Streaming
 
 **Apache Kafka**
+
 - **Best For**: Event streaming, high throughput
 - **Strengths**: High throughput, durable, scalable, replay
 - **Weaknesses**: Complex setup, operational overhead
@@ -274,6 +307,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Event streaming, high volume, replay needed
 
 **RabbitMQ**
+
 - **Best For**: Traditional messaging, task queues
 - **Strengths**: Flexible routing, reliable, protocols support
 - **Weaknesses**: Lower throughput than Kafka
@@ -281,6 +315,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: Complex routing, traditional messaging
 
 **AWS SQS/SNS**
+
 - **Best For**: Serverless, AWS environments
 - **Strengths**: Fully managed, scalable, reliable
 - **Weaknesses**: AWS lock-in, costs
@@ -288,6 +323,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - **When to Choose**: AWS environment, managed service
 
 **NATS**
+
 - **Best For**: Lightweight messaging, microservices
 - **Strengths**: Simple, fast, lightweight
 - **Weaknesses**: Fewer features, less adoption
@@ -299,18 +335,21 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ## Cloud Platforms
 
 **AWS (Amazon Web Services)**
+
 - **Strengths**: Most mature, comprehensive services, market leader
 - **Best For**: Full cloud adoption, diverse workloads
 - **Key Services**: EC2, S3, RDS, Lambda, EKS, DynamoDB
 - **When to Choose**: Need most services, largest ecosystem
 
 **Microsoft Azure**
+
 - **Strengths**: Microsoft integration, hybrid cloud, enterprise
 - **Best For**: Microsoft shops, hybrid cloud, enterprise
 - **Key Services**: VMs, Blob Storage, SQL Database, Functions, AKS
 - **When to Choose**: Microsoft ecosystem, hybrid needs
 
 **Google Cloud Platform (GCP)**
+
 - **Strengths**: Data analytics, ML, Kubernetes
 - **Best For**: Data science, ML, Kubernetes
 - **Key Services**: Compute Engine, Cloud Storage, BigQuery, GKE
@@ -321,17 +360,20 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ## Container & Orchestration
 
 **Docker**
+
 - **Purpose**: Containerization
 - **When to Use**: All modern applications
 - **Alternatives**: Podman, containerd
 
 **Kubernetes (K8s)**
+
 - **Purpose**: Container orchestration
 - **Best For**: Microservices, cloud-native, production-grade
 - **When to Use**: Multiple containers, auto-scaling, self-healing
 - **Alternatives**: Docker Swarm (simpler), ECS, Nomad
 
 **Docker Compose**
+
 - **Purpose**: Local development, simple deployments
 - **Best For**: Development, small deployments
 - **When to Use**: Local multi-container apps, simple production
@@ -341,21 +383,25 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ## CI/CD Tools
 
 **GitHub Actions**
+
 - **Best For**: GitHub repos, integrated experience
 - **Strengths**: GitHub integration, free for public repos
 - **When to Choose**: Using GitHub, simple workflows
 
 **GitLab CI**
+
 - **Best For**: GitLab users, full DevOps platform
 - **Strengths**: Integrated with GitLab, powerful features
 - **When to Choose**: Using GitLab, comprehensive DevOps
 
 **Jenkins**
+
 - **Best For**: Complex pipelines, self-hosted
 - **Strengths**: Mature, flexible, extensible
 - **When to Choose**: Complex needs, self-hosted, legacy
 
 **CircleCI / Travis CI**
+
 - **Best For**: Cloud-based CI/CD
 - **Strengths**: Easy setup, cloud-hosted
 - **When to Choose**: Quick setup, no maintenance
@@ -365,21 +411,25 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ## Monitoring & Observability
 
 **Prometheus + Grafana**
+
 - **Best For**: Metrics, Kubernetes monitoring
 - **Strengths**: Open-source, powerful, flexible
 - **When to Choose**: Self-hosted, Kubernetes, open-source
 
 **Datadog**
+
 - **Best For**: Full-stack monitoring
 - **Strengths**: Comprehensive, easy setup, integrations
 - **When to Choose**: Budget available, want comprehensive monitoring
 
 **New Relic**
+
 - **Best For**: APM, full-stack observability
 - **Strengths**: APM, easy integration, detailed insights
 - **When to Choose**: APM focus, managed solution
 
 **ELK Stack (Elasticsearch, Logstash, Kibana)**
+
 - **Best For**: Log aggregation and analysis
 - **Strengths**: Powerful search, visualization, open-source
 - **When to Choose**: Log-centric, search capabilities
@@ -391,6 +441,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 ### For Different Project Sizes
 
 **Startup / MVP**
+
 - Backend: Node.js/Express, Python/FastAPI
 - Frontend: Next.js, React
 - Database: PostgreSQL, MongoDB
@@ -398,6 +449,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - Why: Speed to market, flexibility, cost
 
 **Small Business**
+
 - Backend: Ruby on Rails, Django, Laravel
 - Frontend: Vue.js, React
 - Database: PostgreSQL, MySQL
@@ -405,6 +457,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - Why: All-in-one frameworks, simplicity
 
 **Enterprise**
+
 - Backend: Java/Spring, .NET Core
 - Frontend: Angular, React
 - Database: PostgreSQL, Oracle
@@ -412,6 +465,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 - Why: Stability, support, compliance
 
 **High Scale**
+
 - Backend: Go, Java, Node.js microservices
 - Frontend: React, Next.js with CDN
 - Database: PostgreSQL + Redis + DynamoDB

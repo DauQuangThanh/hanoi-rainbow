@@ -90,18 +90,21 @@ KC_DB_POOL_MAX_SIZE=50
 ### Backup Strategy
 
 **Database Backup:**
+
 - Regular automated backups (daily minimum)
 - Point-in-time recovery capability
 - Off-site backup storage
 - Test restore procedures regularly
 
 **Configuration Backup:**
+
 - Export realm configurations periodically
 - Version control for realm exports
 - Document custom configurations
 - Backup custom themes and extensions
 
 **Export Realm:**
+
 ```bash
 # Export single realm
 bin/kc.sh export --dir /backup --realm {realm-name}
@@ -116,6 +119,7 @@ bin/kc.sh export --dir /backup --realm {realm-name} --users realm_file
 ### Disaster Recovery
 
 **Recovery Steps:**
+
 1. Restore database from backup
 2. Deploy KeyCloak with same version
 3. Import realm configurations
@@ -124,6 +128,7 @@ bin/kc.sh export --dir /backup --realm {realm-name} --users realm_file
 6. Validate client integrations
 
 **Recovery Time Objective (RTO):**
+
 - Target: < 4 hours for production
 - Keep documentation updated
 - Maintain runbooks for recovery procedures
@@ -134,6 +139,7 @@ bin/kc.sh export --dir /backup --realm {realm-name} --users realm_file
 ### Version Upgrades
 
 **Pre-Upgrade Checklist:**
+
 - [ ] Backup database
 - [ ] Export realm configurations
 - [ ] Review release notes for breaking changes
@@ -142,6 +148,7 @@ bin/kc.sh export --dir /backup --realm {realm-name} --users realm_file
 - [ ] Schedule maintenance window
 
 **Upgrade Process:**
+
 1. Stop KeyCloak service
 2. Backup database
 3. Deploy new KeyCloak version
@@ -151,6 +158,7 @@ bin/kc.sh export --dir /backup --realm {realm-name} --users realm_file
 7. Monitor logs for errors
 
 **Rollback Plan:**
+
 - Keep previous version binaries
 - Restore database backup
 - Redeploy previous version
@@ -159,6 +167,7 @@ bin/kc.sh export --dir /backup --realm {realm-name} --users realm_file
 ### Migration from Other Systems
 
 **From Legacy IAM (e.g., proprietary systems):**
+
 1. Export users and groups (CSV, LDAP, API)
 2. Map roles and permissions
 3. Import users via Admin API or User Federation
@@ -168,6 +177,7 @@ bin/kc.sh export --dir /backup --realm {realm-name} --users realm_file
 7. Cutover and decommission legacy system
 
 **From Other OAuth/OIDC Providers:**
+
 1. Export client configurations
 2. Recreate clients in KeyCloak
 3. Update application endpoints

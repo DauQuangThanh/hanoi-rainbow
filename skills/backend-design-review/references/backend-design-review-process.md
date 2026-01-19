@@ -1,9 +1,9 @@
 # Backend Design Review Process
 
-
 ### Phase 1: Pre-Review Preparation
 
 **Activities:**
+
 1. **Gather Design Documentation**
    - Collect architecture diagrams (Mermaid C4 model, sequence diagrams)
    - Obtain API specifications (OpenAPI, GraphQL schemas, protobuf definitions)
@@ -26,6 +26,7 @@
    - Identify key stakeholders
 
 **Deliverables:**
+
 - Review scope document
 - Documentation inventory
 - Context summary with constraints
@@ -38,6 +39,7 @@
 **RESTful API Design:**
 
 **Resource Modeling:**
+
 - [ ] Resources represent domain entities clearly
 - [ ] Resource hierarchies logical and intuitive
 - [ ] Nested resources used appropriately (max 2 levels)
@@ -45,6 +47,7 @@
 - [ ] Resource naming follows conventions (plural nouns: `/users`, `/orders`)
 
 **HTTP Method Usage:**
+
 - [ ] GET for retrieval (no side effects, idempotent)
 - [ ] POST for creation (non-idempotent)
 - [ ] PUT for full replacement (idempotent)
@@ -53,6 +56,7 @@
 - [ ] Methods used semantically correctly
 
 **Status Codes:**
+
 - [ ] 200 OK for successful GET, PUT, PATCH
 - [ ] 201 Created for successful POST with `Location` header
 - [ ] 204 No Content for successful DELETE
@@ -66,6 +70,7 @@
 - [ ] 503 Service Unavailable for maintenance or overload
 
 **URL Design:**
+
 - [ ] URLs intuitive and readable
 - [ ] Kebab-case or snake_case consistent (prefer kebab-case)
 - [ ] Query parameters for filtering, sorting, pagination
@@ -73,6 +78,7 @@
 - [ ] Versioning strategy clear (URL path, header, or content negotiation)
 
 **Example URL Patterns:**
+
 ```
 ✅ Good:
 GET    /api/v1/users
@@ -92,6 +98,7 @@ GET    /api/v1/users/{id}/orders/{id2}/items/{id3} (too nested)
 ```
 
 **Request/Response Design:**
+
 - [ ] Request bodies use JSON (or appropriate format)
 - [ ] Response bodies consistent structure
 - [ ] Field naming consistent (camelCase or snake_case)
@@ -102,6 +109,7 @@ GET    /api/v1/users/{id}/orders/{id2}/items/{id3} (too nested)
 - [ ] Null vs. omitting fields strategy defined
 
 **Pagination:**
+
 ```json
 ✅ Good (Cursor-based):
 GET /api/v1/users?cursor=eyJpZCI6MTAwfQ==&limit=20
@@ -133,6 +141,7 @@ Response:
 **GraphQL Schema Design:**
 
 **Type Definitions:**
+
 - [ ] Types represent domain concepts clearly
 - [ ] Scalar types used appropriately (ID, String, Int, Float, Boolean)
 - [ ] Custom scalars defined where needed (DateTime, URL, Email)
@@ -141,6 +150,7 @@ Response:
 - [ ] Lists marked with `[]` appropriately
 
 **Query Design:**
+
 - [ ] Queries follow naming conventions (noun-based)
 - [ ] Arguments documented with descriptions
 - [ ] Pagination implemented (cursor-based recommended)
@@ -149,6 +159,7 @@ Response:
 - [ ] Query depth limits enforced
 
 **Mutation Design:**
+
 - [ ] Mutations follow naming conventions (verb-based: `createUser`, `updateOrder`)
 - [ ] Input types used for complex arguments
 - [ ] Mutations return updated objects or payloads
@@ -156,6 +167,7 @@ Response:
 - [ ] Idempotency considered for critical mutations
 
 **N+1 Query Prevention:**
+
 - [ ] DataLoader pattern implemented
 - [ ] Batching strategy for related data
 - [ ] Resolver complexity analyzed
@@ -164,6 +176,7 @@ Response:
 **gRPC Service Design:**
 
 **Protobuf Definitions:**
+
 - [ ] Message types well-defined and documented
 - [ ] Field numbering consistent and never reused
 - [ ] Required vs. optional fields appropriate
@@ -172,6 +185,7 @@ Response:
 - [ ] Backward compatibility maintained
 
 **Service Definitions:**
+
 - [ ] Service methods clearly named (verb + noun)
 - [ ] Unary, server streaming, client streaming, bidirectional streaming used appropriately
 - [ ] Request/response types specific (not generic)
@@ -179,6 +193,7 @@ Response:
 - [ ] Service versioning strategy clear
 
 **API Security:**
+
 - [ ] Authentication mechanism defined (JWT, OAuth 2.0, API keys)
 - [ ] Authorization checks at API gateway and service level
 - [ ] Input validation comprehensive (type, format, range, length)
@@ -188,6 +203,7 @@ Response:
 - [ ] Sensitive data not logged or exposed in errors
 
 **API Documentation:**
+
 - [ ] OpenAPI/Swagger spec complete and accurate
 - [ ] All endpoints documented with descriptions
 - [ ] Request/response examples provided
@@ -197,6 +213,7 @@ Response:
 - [ ] Changelog maintained for API versions
 
 **Severity Ratings:**
+
 - 🔴 **Critical**: Security vulnerabilities, data loss risks, or broken core functionality
 - 🟠 **High**: Significant design flaws affecting scalability, performance, or reliability
 - 🟡 **Medium**: Moderate issues or deviations from best practices
@@ -209,6 +226,7 @@ Response:
 **Data Modeling:**
 
 **Entity Relationships:**
+
 - [ ] Entities represent domain concepts clearly
 - [ ] Relationships accurately model business rules
 - [ ] One-to-many, many-to-many relationships correct
@@ -216,6 +234,7 @@ Response:
 - [ ] Recursive relationships (hierarchies) designed efficiently
 
 **Normalization:**
+
 - [ ] Appropriate normalization level (typically 3NF)
 - [ ] Functional dependencies identified
 - [ ] Redundancy eliminated where appropriate
@@ -225,6 +244,7 @@ Response:
 **Schema Design:**
 
 **Table Structure:**
+
 - [ ] Table naming conventions followed (plural nouns: `users`, `orders`)
 - [ ] Column naming conventions followed (snake_case typical)
 - [ ] Primary keys defined (prefer surrogate keys: UUID, bigint)
@@ -235,6 +255,7 @@ Response:
 - [ ] Nullable vs. NOT NULL decisions appropriate
 
 **Data Types:**
+
 - [ ] Column types appropriate for data (INT, BIGINT, VARCHAR, TEXT, JSON, etc.)
 - [ ] String lengths appropriate (VARCHAR(255) vs. TEXT)
 - [ ] Numeric precision appropriate (DECIMAL for money)
@@ -246,6 +267,7 @@ Response:
 **Example Schema Issues:**
 
 ❌ **Bad:**
+
 ```sql
 CREATE TABLE user (  -- singular
     id INT,  -- may overflow
@@ -257,6 +279,7 @@ CREATE TABLE user (  -- singular
 ```
 
 ✅ **Good:**
+
 ```sql
 CREATE TABLE users (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -271,6 +294,7 @@ CREATE TABLE users (
 ```
 
 **Indexes:**
+
 - [ ] Primary keys automatically indexed
 - [ ] Foreign keys indexed for join performance
 - [ ] Indexes on frequently queried columns
@@ -281,6 +305,7 @@ CREATE TABLE users (
 - [ ] Index maintenance strategy defined
 
 **Partitioning:**
+
 - [ ] Partitioning strategy defined for large tables (> 100M rows)
 - [ ] Partition key chosen appropriately (date, range, hash)
 - [ ] Partition pruning considered in query design
@@ -290,6 +315,7 @@ CREATE TABLE users (
 **Query Patterns:**
 
 **Query Efficiency:**
+
 - [ ] Queries use indexes effectively
 - [ ] SELECT * avoided (select only needed columns)
 - [ ] N+1 query problem prevented (eager loading, joins, batching)
@@ -301,6 +327,7 @@ CREATE TABLE users (
 **Example N+1 Query Problem:**
 
 ❌ **Bad (N+1 queries):**
+
 ```python
 # 1 query to get users
 users = db.query("SELECT * FROM users")
@@ -311,6 +338,7 @@ for user in users:
 ```
 
 ✅ **Good (2 queries with batching or 1 query with join):**
+
 ```python
 # Approach 1: Batching (2 queries)
 users = db.query("SELECT * FROM users")
@@ -326,6 +354,7 @@ results = db.query("""
 ```
 
 **Data Integrity:**
+
 - [ ] Foreign key constraints enforced
 - [ ] Cascading deletes defined appropriately (CASCADE, SET NULL, RESTRICT)
 - [ ] Check constraints for business rules
@@ -336,6 +365,7 @@ results = db.query("""
 **Scalability Considerations:**
 
 **Database Scaling Strategies:**
+
 - [ ] Vertical scaling limits identified
 - [ ] Horizontal scaling strategy defined (sharding, read replicas)
 - [ ] Sharding key chosen appropriately (balanced distribution, query locality)
@@ -345,6 +375,7 @@ results = db.query("""
 - [ ] Database monitoring and alerting defined
 
 **Caching Strategy:**
+
 - [ ] Cache-aside pattern for reads
 - [ ] Write-through or write-behind for writes
 - [ ] Cache invalidation strategy clear
@@ -359,6 +390,7 @@ results = db.query("""
 **Service Boundaries:**
 
 **Service Decomposition:**
+
 - [ ] Services aligned with bounded contexts (DDD)
 - [ ] Services have clear responsibilities (high cohesion)
 - [ ] Services loosely coupled (low coupling)
@@ -368,6 +400,7 @@ results = db.query("""
 - [ ] Service boundaries stable (infrequent changes)
 
 **Bounded Context Alignment:**
+
 - [ ] Each service represents a bounded context
 - [ ] Domain model clear within each context
 - [ ] Context boundaries well-defined
@@ -375,6 +408,7 @@ results = db.query("""
 - [ ] Context maps document relationships
 
 **Anti-patterns to Avoid:**
+
 - ❌ Distributed monolith (services tightly coupled)
 - ❌ God service (one service doing too much)
 - ❌ Anemic services (services with only CRUD operations)
@@ -383,6 +417,7 @@ results = db.query("""
 **Communication Patterns:**
 
 **Synchronous Communication (HTTP, gRPC):**
+
 - [ ] Used for request/response scenarios
 - [ ] Timeouts configured appropriately
 - [ ] Circuit breakers implemented
@@ -392,6 +427,7 @@ results = db.query("""
 - [ ] API gateway for external access
 
 **Asynchronous Communication (Message Queues, Event Streaming):**
+
 - [ ] Used for fire-and-forget scenarios
 - [ ] Message schemas versioned
 - [ ] Idempotency handled (duplicate message processing)
@@ -401,6 +437,7 @@ results = db.query("""
 - [ ] Poison message handling
 
 **Event-Driven Architecture:**
+
 - [ ] Events represent domain occurrences (past tense: `OrderCreated`, `UserRegistered`)
 - [ ] Event schemas well-defined and versioned
 - [ ] Event sourcing used appropriately (if applicable)
@@ -412,6 +449,7 @@ results = db.query("""
 **Data Management:**
 
 **Database-per-Service Pattern:**
+
 - [ ] Each service has its own database
 - [ ] Services don't access other services' databases directly
 - [ ] Data duplication justified and managed
@@ -419,6 +457,7 @@ results = db.query("""
 - [ ] Data synchronization mechanisms clear
 
 **Distributed Transactions:**
+
 - [ ] Two-phase commit avoided (performance, complexity)
 - [ ] Saga pattern used for distributed transactions
 - [ ] Saga orchestration or choreography chosen
@@ -428,16 +467,19 @@ results = db.query("""
 **Saga Patterns:**
 
 **Orchestration (centralized):**
+
 - Saga orchestrator coordinates transaction steps
 - Simpler to understand and debug
 - Single point of failure (orchestrator)
 
 **Choreography (decentralized):**
+
 - Services react to events and publish new events
 - More resilient (no single point of failure)
 - Complex to understand and debug
 
 **Review Checklist:**
+
 - [ ] Saga pattern chosen appropriately
 - [ ] Compensation actions defined for each step
 - [ ] Saga timeout strategy defined
@@ -447,6 +489,7 @@ results = db.query("""
 **Resilience Patterns:**
 
 **Circuit Breaker:**
+
 - [ ] Circuit breaker configured for external service calls
 - [ ] Failure threshold defined
 - [ ] Timeout configured
@@ -454,6 +497,7 @@ results = db.query("""
 - [ ] Fallback behavior defined
 
 **Retry Logic:**
+
 - [ ] Retries implemented with exponential backoff
 - [ ] Maximum retry attempts defined
 - [ ] Idempotency ensured (retries safe)
@@ -461,18 +505,21 @@ results = db.query("""
 - [ ] Retries only for transient failures (not business errors)
 
 **Timeouts:**
+
 - [ ] Timeouts configured for all external calls
 - [ ] Timeout values appropriate (not too short, not too long)
 - [ ] Cascading timeouts prevented (child timeout < parent timeout)
 - [ ] Timeout errors handled gracefully
 
 **Bulkhead:**
+
 - [ ] Thread pools isolated for different service calls
 - [ ] Connection pools configured per dependency
 - [ ] Resource exhaustion prevented
 - [ ] Bulkhead limits configured appropriately
 
 **Service Discovery:**
+
 - [ ] Service registry mechanism defined (Consul, Eureka, etcd, Kubernetes)
 - [ ] Health check endpoints implemented
 - [ ] Service registration automatic
@@ -487,6 +534,7 @@ results = db.query("""
 **Integration Patterns:**
 
 **API Integration:**
+
 - [ ] REST API integration for synchronous communication
 - [ ] Error handling comprehensive (network errors, API errors, timeouts)
 - [ ] Retry logic with exponential backoff
@@ -497,6 +545,7 @@ results = db.query("""
 - [ ] Webhooks for event notifications (if applicable)
 
 **Message Queue Integration:**
+
 - [ ] Message queue chosen appropriately (RabbitMQ, AWS SQS, Azure Service Bus)
 - [ ] Message schemas defined and versioned
 - [ ] Queue naming conventions followed
@@ -507,6 +556,7 @@ results = db.query("""
 - [ ] Idempotent message processing
 
 **Example Message Schema:**
+
 ```json
 {
   "eventType": "order.created",
@@ -526,6 +576,7 @@ results = db.query("""
 ```
 
 **Event Streaming:**
+
 - [ ] Event streaming platform chosen (Kafka, AWS Kinesis, Azure Event Hubs)
 - [ ] Event schemas defined with schema registry
 - [ ] Topic naming conventions followed
@@ -536,6 +587,7 @@ results = db.query("""
 - [ ] Stream processing framework chosen (Kafka Streams, Flink, Spark)
 
 **Batch Processing:**
+
 - [ ] Batch job scheduling defined (cron, scheduled tasks)
 - [ ] ETL pipelines designed with proper error handling
 - [ ] Incremental processing strategy (delta loads)
@@ -545,6 +597,7 @@ results = db.query("""
 - [ ] Data validation in pipelines
 
 **Third-Party API Integration:**
+
 - [ ] API documentation reviewed
 - [ ] Rate limits understood and respected
 - [ ] API key management (secrets manager)
@@ -562,6 +615,7 @@ results = db.query("""
 **Authentication Design:**
 
 **Authentication Mechanisms:**
+
 - [ ] Mechanism chosen appropriately (JWT, OAuth 2.0, SAML, API keys)
 - [ ] Password hashing with strong algorithm (bcrypt, Argon2, PBKDF2)
 - [ ] Password requirements defined (length, complexity, history)
@@ -572,6 +626,7 @@ results = db.query("""
 - [ ] Account lockout after failed attempts
 
 **JWT Design:**
+
 - [ ] JWT signature algorithm strong (RS256, ES256, not HS256 with weak secret)
 - [ ] JWT claims appropriate (sub, iss, aud, exp, iat)
 - [ ] JWT expiration short (15 minutes for access tokens)
@@ -581,6 +636,7 @@ results = db.query("""
 - [ ] JWT blacklisting for revocation (if needed)
 
 **OAuth 2.0 Design:**
+
 - [ ] Grant type appropriate (authorization code, client credentials)
 - [ ] PKCE used for public clients (mobile, SPA)
 - [ ] Redirect URI validated strictly
@@ -592,6 +648,7 @@ results = db.query("""
 **Authorization Design:**
 
 **Authorization Models:**
+
 - [ ] Model chosen appropriately (RBAC, ABAC, ACL)
 - [ ] Roles/permissions well-defined
 - [ ] Principle of least privilege followed
@@ -601,6 +658,7 @@ results = db.query("""
 - [ ] Permission caching for performance (with invalidation)
 
 **RBAC (Role-Based Access Control):**
+
 - [ ] Roles represent job functions (Admin, Editor, Viewer)
 - [ ] Permissions assigned to roles, not users directly
 - [ ] User-role assignments dynamic
@@ -608,6 +666,7 @@ results = db.query("""
 - [ ] Default role for new users
 
 **ABAC (Attribute-Based Access Control):**
+
 - [ ] Attributes defined (user attributes, resource attributes, environment attributes)
 - [ ] Policies express fine-grained rules
 - [ ] Policy evaluation efficient
@@ -616,18 +675,21 @@ results = db.query("""
 **Data Protection:**
 
 **Encryption at Rest:**
+
 - [ ] Sensitive data encrypted in database (field-level or database-level)
 - [ ] Encryption keys managed securely (KMS, HSM)
 - [ ] Key rotation policy defined
 - [ ] Encryption algorithm strong (AES-256)
 
 **Encryption in Transit:**
+
 - [ ] TLS/SSL for all external communication
 - [ ] TLS version appropriate (TLS 1.2 minimum, TLS 1.3 preferred)
 - [ ] Certificate management automated (Let's Encrypt, cert-manager)
 - [ ] mTLS for service-to-service communication (if needed)
 
 **Secrets Management:**
+
 - [ ] Secrets not hardcoded in source code
 - [ ] Secrets stored in secrets manager (AWS Secrets Manager, HashiCorp Vault, Azure Key Vault)
 - [ ] Secrets rotated regularly
@@ -635,6 +697,7 @@ results = db.query("""
 - [ ] Least privilege access to secrets
 
 **Sensitive Data Handling:**
+
 - [ ] PII (Personally Identifiable Information) identified
 - [ ] PII access logged and audited
 - [ ] Data masking for non-production environments
@@ -645,6 +708,7 @@ results = db.query("""
 **API Security:**
 
 **Input Validation:**
+
 - [ ] All inputs validated (type, format, range, length)
 - [ ] Whitelist validation preferred over blacklist
 - [ ] Parameterized queries for SQL (prevent SQL injection)
@@ -653,6 +717,7 @@ results = db.query("""
 - [ ] JSON schema validation for API requests
 
 **Common Vulnerabilities Prevention:**
+
 - [ ] SQL Injection: Use ORMs or parameterized queries
 - [ ] XSS (Cross-Site Scripting): Output encoding, CSP headers
 - [ ] CSRF (Cross-Site Request Forgery): CSRF tokens, SameSite cookies
@@ -662,6 +727,7 @@ results = db.query("""
 - [ ] Command Injection: Avoid shell execution, sanitize inputs
 
 **Rate Limiting:**
+
 - [ ] Rate limiting per user, per IP, per endpoint
 - [ ] Rate limit thresholds appropriate (100 req/min per user typical)
 - [ ] Rate limit headers included (X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset)
@@ -669,6 +735,7 @@ results = db.query("""
 - [ ] DDoS protection at infrastructure level
 
 **Security Headers:**
+
 - [ ] Content-Security-Policy (CSP) for XSS prevention
 - [ ] X-Content-Type-Options: nosniff
 - [ ] X-Frame-Options: DENY or SAMEORIGIN
@@ -678,6 +745,7 @@ results = db.query("""
 **Security Monitoring:**
 
 **Audit Logging:**
+
 - [ ] Security events logged (authentication, authorization, data access)
 - [ ] Logs include user ID, timestamp, action, resource, outcome
 - [ ] Logs immutable (append-only)
@@ -686,6 +754,7 @@ results = db.query("""
 - [ ] Log analysis automated (alerts for anomalies)
 
 **Security Event Monitoring:**
+
 - [ ] Failed login attempts monitored and alerted
 - [ ] Privilege escalation attempts detected
 - [ ] Unusual data access patterns detected
@@ -697,6 +766,7 @@ results = db.query("""
 **Review Areas:**
 
 **Performance Requirements:**
+
 - [ ] Response time targets defined (p50, p95, p99)
 - [ ] Throughput targets defined (requests per second)
 - [ ] Concurrent user targets defined
@@ -705,6 +775,7 @@ results = db.query("""
 - [ ] Performance budgets defined
 
 **Caching Strategy:**
+
 - [ ] Caching layers defined (CDN, API gateway, application, database)
 - [ ] Cache-aside pattern for reads
 - [ ] Write-through or write-behind for writes
@@ -714,6 +785,7 @@ results = db.query("""
 - [ ] Distributed cache for multi-instance deployments
 
 **Database Performance:**
+
 - [ ] Indexes on frequently queried columns
 - [ ] Query optimization (EXPLAIN plans analyzed)
 - [ ] Connection pooling configured
@@ -723,6 +795,7 @@ results = db.query("""
 - [ ] Database vacuum/optimization scheduled
 
 **API Performance:**
+
 - [ ] Response payloads minimal (only necessary data)
 - [ ] Pagination for large datasets
 - [ ] Compression enabled (gzip, brotli)
@@ -732,6 +805,7 @@ results = db.query("""
 - [ ] Rate limiting prevents abuse
 
 **Asynchronous Processing:**
+
 - [ ] Long-running tasks offloaded to background jobs
 - [ ] Message queues for async processing
 - [ ] Job status tracking for users
@@ -741,6 +815,7 @@ results = db.query("""
 **Scalability Strategy:**
 
 **Horizontal Scaling:**
+
 - [ ] Stateless application design (scale by adding instances)
 - [ ] Load balancer distributes traffic
 - [ ] Auto-scaling policies defined (CPU, memory, request count)
@@ -748,11 +823,13 @@ results = db.query("""
 - [ ] File uploads to object storage (S3, Azure Blob)
 
 **Vertical Scaling:**
+
 - [ ] Vertical scaling limits identified (maximum instance size)
 - [ ] Cost-effectiveness compared to horizontal scaling
 - [ ] Downtime required for vertical scaling
 
 **Database Scaling:**
+
 - [ ] Read replicas for read scaling
 - [ ] Sharding for write scaling and data partitioning
 - [ ] Database connection pooling
@@ -761,6 +838,7 @@ results = db.query("""
 ### Phase 8: Reporting & Recommendations
 
 **Activities:**
+
 1. **Consolidate Findings**
    - Categorize issues by severity and area
    - Document each finding with examples and evidence

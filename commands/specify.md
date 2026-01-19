@@ -106,9 +106,9 @@ Given that feature description, do this:
     7. Identify Key Entities (if data involved)
     8. Return: SUCCESS (spec ready for planning)
 
-5. Write the specification to SPEC_FILE using the template structure, replacing placeholders with concrete details derived from the feature description (arguments) while preserving section order and headings. Ensure consistency with architecture.md (if exists) for technology choices and standards.md (if exists) for naming conventions.
+6. Write the specification to SPEC_FILE using the template structure, replacing placeholders with concrete details derived from the feature description (arguments) while preserving section order and headings. Ensure consistency with architecture.md (if exists) for technology choices and standards.md (if exists) for naming conventions.
 
-6. **Specification Quality Validation**: After writing the initial spec, validate it against quality criteria:
+7. **Specification Quality Validation**: After writing the initial spec, validate it against quality criteria:
 
    a. **Create Spec Quality Checklist**: Generate a checklist file at `FEATURE_DIR/checklists/requirements.md` using the checklist template structure with these validation items:
 
@@ -200,7 +200,7 @@ Given that feature description, do this:
 
    d. **Update Checklist**: After each validation iteration, update the checklist file with current pass/fail status
 
-7. Report completion with branch name, spec file path, checklist results, and readiness for the next phase (`/rainbow.clarify` or `/rainbow.architect` or `/rainbow.design`).
+8. Report completion with branch name, spec file path, checklist results, and readiness for the next phase (`/rainbow.clarify` or `/rainbow.architect` or `/rainbow.design`).
 
 **NOTE:** The script creates and checks out the new branch and initializes the spec file before writing.
 

@@ -1,6 +1,6 @@
 # [PROJECT NAME] Development Guidelines
 
-Auto-generated from all feature plans. Last updated: [DATE]
+Auto-generated from all feature designs. Last updated: [DATE]
 
 ## Active Technologies
 
@@ -9,7 +9,7 @@ Auto-generated from all feature plans. Last updated: [DATE]
 ## Project Structure
 
 ```text
-[ACTUAL STRUCTURE FROM PLANS]
+[ACTUAL STRUCTURE FROM DESIGNS]
 ```
 
 ## Commands

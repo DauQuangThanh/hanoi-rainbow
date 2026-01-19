@@ -5,6 +5,7 @@
 Azure Monitor collects, analyzes, and acts on telemetry data from Azure and on-premises environments.
 
 **Key Components:**
+
 - **Metrics**: Numerical time-series data
 - **Logs**: Event and diagnostic data
 - **Application Insights**: Application performance monitoring
@@ -145,6 +146,7 @@ CONNECTION_STRING=$(az monitor app-insights component show \
 ### Instrumenting Applications
 
 **Node.js:**
+
 ```javascript
 // Import Application Insights
 const appInsights = require('applicationinsights');
@@ -183,6 +185,7 @@ client.trackDependency({
 ```
 
 **Python:**
+
 ```python
 from applicationinsights import TelemetryClient
 from applicationinsights.flask.ext import AppInsights
@@ -211,6 +214,7 @@ tc.flush()
 ```
 
 **.NET:**
+
 ```csharp
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;

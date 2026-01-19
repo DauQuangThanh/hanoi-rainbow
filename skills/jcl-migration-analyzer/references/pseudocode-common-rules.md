@@ -20,6 +20,7 @@
 ## Pseudocode Syntax
 
 ### Structure Definition
+
 ```
 STRUCTURE StructureName:
     field: TYPE[length]    // Description
@@ -27,6 +28,7 @@ END STRUCTURE
 ```
 
 ### Constants
+
 ```
 CONSTANTS:
     NAME = value
@@ -34,6 +36,7 @@ END CONSTANTS
 ```
 
 ### Functions/Procedures
+
 ```
 FUNCTION Name(param: TYPE) RETURNS TYPE
 BEGIN
@@ -47,6 +50,7 @@ END PROCEDURE
 ```
 
 ### Control Flow
+
 ```
 IF condition THEN ... ELSE ... END IF
 WHILE condition DO ... END WHILE
@@ -55,6 +59,7 @@ SWITCH expr: CASE val: ... BREAK; DEFAULT: ... END SWITCH
 ```
 
 ### File Operations
+
 ```
 file = OPEN(path) FOR READING|WRITING|APPENDING
 record = READ_RECORD(file)
@@ -64,6 +69,7 @@ IF END_OF_FILE(file) THEN ...
 ```
 
 ### Error Handling
+
 ```
 TRY:
     statements
@@ -77,12 +83,14 @@ END TRY
 ## Financial Precision Rule
 
 **CRITICAL**: Always use `DECIMAL(n,m)` for money. Never use floating point.
+
 ```
 amount: DECIMAL(15,2)
 result = ROUND(calculation, 2)  // Use HALF_UP rounding
 ```
 
 ## Mermaid Flowchart Template
+
 ````
 ```mermaid
 flowchart TD
@@ -99,6 +107,7 @@ flowchart TD
 ````
 
 ## Document Structure Template
+
 ```
 # [PROGRAM-NAME] - Description
 

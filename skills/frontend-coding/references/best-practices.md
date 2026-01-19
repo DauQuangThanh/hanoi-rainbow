@@ -1,7 +1,7 @@
 # Best Practices
 
-
 ### Code Organization
+
 ```
 src/
 ├── components/
@@ -23,6 +23,7 @@ src/
 ```
 
 ### Performance Tips
+
 1. Use React.memo for expensive components
 2. Implement virtual scrolling for long lists
 3. Code split with React.lazy
@@ -32,6 +33,7 @@ src/
 7. Debounce/throttle expensive operations
 
 ### Accessibility
+
 - Use semantic HTML
 - Add ARIA labels
 - Keyboard navigation support

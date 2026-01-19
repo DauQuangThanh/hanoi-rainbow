@@ -1,6 +1,5 @@
 # Network Infrastructure Migration
 
-
 ### VPC/Network Migration
 
 ```markdown

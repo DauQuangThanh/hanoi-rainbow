@@ -1,6 +1,5 @@
 # Common Issues and Solutions
 
-
 ```markdown
 Issue: Replication Lag Too High
 Solution:

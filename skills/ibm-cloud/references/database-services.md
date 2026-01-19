@@ -1,6 +1,7 @@
 # Database Services
 
 ## Table of Contents
+
 - [Db2 on Cloud](#db2-on-cloud)
 - [Cloudant (NoSQL)](#cloudant-nosql)
 - [Databases for PostgreSQL](#databases-for-postgresql)
@@ -19,6 +20,7 @@
 Enterprise-grade relational database with high availability, automatic scaling, and AI-powered optimization.
 
 **Use Cases:**
+
 - Enterprise applications
 - Data warehousing
 - OLTP workloads
@@ -33,6 +35,7 @@ Enterprise-grade relational database with high availability, automatic scaling, 
 ### Provision Db2
 
 **CLI:**
+
 ```bash
 # Create Db2 instance
 ibmcloud resource service-instance-create my-db2 \
@@ -50,6 +53,7 @@ ibmcloud resource service-key my-db2-creds
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_database" "db2" {
   name              = "my-db2"
@@ -80,6 +84,7 @@ resource "ibm_database" "db2" {
 ### Connect to Db2
 
 **JDBC Connection:**
+
 ```java
 import java.sql.*;
 
@@ -106,6 +111,7 @@ public class Db2Connection {
 ```
 
 **Python Connection:**
+
 ```python
 import ibm_db
 
@@ -144,6 +150,7 @@ ibm_db.close(conn)
 Fully managed NoSQL JSON database based on Apache CouchDB with HTTP API.
 
 **Use Cases:**
+
 - Mobile and web apps
 - IoT data storage
 - Session management
@@ -152,6 +159,7 @@ Fully managed NoSQL JSON database based on Apache CouchDB with HTTP API.
 ### Provision Cloudant
 
 **CLI:**
+
 ```bash
 # Create Cloudant instance
 ibmcloud resource service-instance-create my-cloudant \
@@ -167,6 +175,7 @@ ibmcloud resource service-key my-cloudant-creds
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_cloudant" "cloudant" {
   name              = "my-cloudant"
@@ -187,6 +196,7 @@ resource "ibm_cloudant" "cloudant" {
 ### CRUD Operations
 
 **Node.js:**
+
 ```javascript
 const { CloudantV1 } = require('@ibm-cloud/cloudant');
 const { IamAuthenticator } = require('ibm-cloud-sdk-core');
@@ -247,6 +257,7 @@ console.log(queryResult.docs);
 ```
 
 **Python:**
+
 ```python
 from ibmcloudant.cloudant_v1 import CloudantV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
@@ -284,6 +295,7 @@ print(query_result['docs'])
 ### Indexes and Views
 
 **Create Index:**
+
 ```javascript
 // Create index for fast queries
 await cloudant.postIndex({
@@ -297,6 +309,7 @@ await cloudant.postIndex({
 ```
 
 **MapReduce View:**
+
 ```javascript
 // Create design document with view
 const designDoc = {
@@ -335,6 +348,7 @@ console.log(result.rows);
 ### Provision PostgreSQL
 
 **CLI:**
+
 ```bash
 # Create PostgreSQL instance
 ibmcloud resource service-instance-create my-postgres \
@@ -353,6 +367,7 @@ ibmcloud resource service-key my-postgres-creds
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_database" "postgresql" {
   name              = "my-postgres"
@@ -387,6 +402,7 @@ resource "ibm_database" "postgresql" {
 ### Connect to PostgreSQL
 
 **Python:**
+
 ```python
 import psycopg2
 
@@ -476,6 +492,7 @@ ibmcloud resource service-instance-create my-mysql \
 ### Connect to MySQL
 
 **Python:**
+
 ```python
 import mysql.connector
 
@@ -537,6 +554,7 @@ ibmcloud resource service-instance-create my-mongodb \
 ### Connect to MongoDB
 
 **Python:**
+
 ```python
 from pymongo import MongoClient
 
@@ -593,6 +611,7 @@ ibmcloud resource service-instance-create my-redis \
 ### Connect to Redis
 
 **Python:**
+
 ```python
 import redis
 
@@ -660,6 +679,7 @@ ibmcloud resource service-instance-create my-elasticsearch \
 ### Connect to Elasticsearch
 
 **Python:**
+
 ```python
 from elasticsearch import Elasticsearch
 
@@ -714,6 +734,7 @@ print(agg_results['aggregations'])
 ### From On-Premises to IBM Cloud
 
 **PostgreSQL Migration:**
+
 ```bash
 # Dump on-premises database
 pg_dump -h localhost -U postgres -d mydb > mydb_dump.sql
@@ -731,6 +752,7 @@ psql -h <IBM-CLOUD-HOST> -U admin -d ibmclouddb < mydb_dump.sql
 ```
 
 **MongoDB Migration:**
+
 ```bash
 # Dump on-premises MongoDB
 mongodump --host localhost --db mydb --out /tmp/mongodump
@@ -749,6 +771,7 @@ mongorestore --host <IBM-CLOUD-HOST> \
 ### Database Replication
 
 **PostgreSQL Logical Replication:**
+
 ```sql
 -- On source database
 CREATE PUBLICATION my_pub FOR ALL TABLES;

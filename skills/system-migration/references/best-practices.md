@@ -1,6 +1,5 @@
 # Best Practices
 
-
 ✅ **Thorough Testing**: Test everything in non-prod first
 ✅ **Complete Backups**: Multiple backups before migration
 ✅ **Documentation**: Document every configuration

@@ -3,6 +3,7 @@
 ## COBOL Program Structure
 
 ### Complete Program Template
+
 ```cobol
        IDENTIFICATION DIVISION.
        PROGRAM-ID. CUSTINQ.
@@ -105,6 +106,7 @@
 ## Data Types & Definitions
 
 ### Numeric Types
+
 ```cobol
       * Display numeric (EBCDIC)
        01  WS-AMOUNT-1         PIC 9(07)V99 VALUE ZERO.
@@ -122,6 +124,7 @@
 ```
 
 ### Character Types
+
 ```cobol
       * Alphanumeric
        01  WS-NAME             PIC X(50) VALUE SPACES.
@@ -135,6 +138,7 @@
 ```
 
 ### Group Items & Structures
+
 ```cobol
        01  CUSTOMER-RECORD.
            05  CUST-KEY.
@@ -154,6 +158,7 @@
 ```
 
 ### Arrays (OCCURS)
+
 ```cobol
       * Fixed array
        01  MONTHLY-SALES.
@@ -178,6 +183,7 @@
 ```
 
 ### Condition Names (88 Levels)
+
 ```cobol
        01  RECORD-STATUS           PIC X(01).
            88  STATUS-ACTIVE       VALUE 'A'.
@@ -192,6 +198,7 @@
 ```
 
 ### REDEFINES
+
 ```cobol
        01  DATE-FIELD.
            05  DATE-NUMERIC        PIC 9(08).
@@ -211,6 +218,7 @@
 ## File Processing
 
 ### Sequential File
+
 ```cobol
        FILE-CONTROL.
            SELECT INPUT-FILE
@@ -236,6 +244,7 @@
 ```
 
 ### Indexed File (VSAM KSDS)
+
 ```cobol
        FILE-CONTROL.
            SELECT MASTER-FILE
@@ -296,6 +305,7 @@
 ## DB2 Integration
 
 ### SQL Declaration
+
 ```cobol
        DATA DIVISION.
        WORKING-STORAGE SECTION.
@@ -320,6 +330,7 @@
 ```
 
 ### SQL Operations
+
 ```cobol
        PROCEDURE DIVISION.
       * Single row SELECT
@@ -396,6 +407,7 @@
 ## CICS Programming
 
 ### CICS Commands
+
 ```cobol
        WORKING-STORAGE SECTION.
        01  WS-COMMAREA.
@@ -468,6 +480,7 @@
 ## Copybooks
 
 ### Data Structure Copybook
+
 ```cobol
       *****************************************************************
       * COPYBOOK: CUSTCOPY                                           *
@@ -495,6 +508,7 @@
 ```
 
 ### Using Copybook
+
 ```cobol
        DATA DIVISION.
        FILE SECTION.
@@ -509,6 +523,7 @@
 ## Subprograms & Calls
 
 ### Main Program
+
 ```cobol
        WORKING-STORAGE SECTION.
        01  WS-PARM-AREA.
@@ -531,6 +546,7 @@
 ```
 
 ### Subprogram
+
 ```cobol
        IDENTIFICATION DIVISION.
        PROGRAM-ID. VALIDSUB.
@@ -569,6 +585,7 @@
 ## Date & Time Functions
 
 ### Intrinsic Functions
+
 ```cobol
        01  WS-CURRENT-DATE-TIME.
            05  WS-CURRENT-DATE.
@@ -606,6 +623,7 @@
 ## Error Handling
 
 ### Comprehensive Error Handling
+
 ```cobol
        01  WS-ERROR-HANDLING.
            05  WS-ERROR-OCCURRED       PIC X(01) VALUE 'N'.
@@ -649,6 +667,7 @@
 ## Compilation & Linkage
 
 ### Compile JCL
+
 ```jcl
 //COMPILE  EXEC PGM=IGYCRCTL,
 //         PARM='LIST,MAP,XREF,RENT,SSRANGE'
@@ -664,6 +683,7 @@
 ```
 
 ### Link-Edit JCL
+
 ```jcl
 //LKED     EXEC PGM=IEWL,
 //         PARM='LIST,MAP,XREF,RENT,REUS'

@@ -3,6 +3,7 @@
 Comprehensive guidelines for frontend performance optimization and Web Vitals.
 
 ## Table of Contents
+
 - [Core Web Vitals](#core-web-vitals)
 - [Rendering Performance](#rendering-performance)
 - [Resource Loading](#resource-loading)
@@ -22,12 +23,14 @@ Comprehensive guidelines for frontend performance optimization and Web Vitals.
 #### Issue 1: Large Images
 
 **Problem:**
+
 ```jsx
 // ❌ Large unoptimized image
 <img src="/hero-image.jpg" alt="Hero" />
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Optimized with modern formats, lazy loading, responsive images
 <picture>
@@ -54,6 +57,7 @@ Comprehensive guidelines for frontend performance optimization and Web Vitals.
 #### Issue 2: Blocking Resources
 
 **Problem:**
+
 ```html
 <!-- ❌ Blocking CSS and scripts -->
 <head>
@@ -63,6 +67,7 @@ Comprehensive guidelines for frontend performance optimization and Web Vitals.
 ```
 
 **Solution:**
+
 ```html
 <!-- ✅ Non-blocking resources -->
 <head>
@@ -82,6 +87,7 @@ Comprehensive guidelines for frontend performance optimization and Web Vitals.
 #### Issue 3: Slow Server Response
 
 **Problem:**
+
 ```typescript
 // ❌ No caching, slow data fetching
 export async function getServerSideProps() {
@@ -91,6 +97,7 @@ export async function getServerSideProps() {
 ```
 
 **Solution:**
+
 ```typescript
 // ✅ Static generation with revalidation
 export async function getStaticProps() {
@@ -121,6 +128,7 @@ export async function GET() {
 #### Issue 1: Long Tasks Blocking Main Thread
 
 **Problem:**
+
 ```javascript
 // ❌ Synchronous processing blocking UI
 function processLargeDataset(data) {
@@ -135,6 +143,7 @@ function processLargeDataset(data) {
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Break into chunks using scheduler
 function processLargeDataset(data) {
@@ -182,6 +191,7 @@ worker.onmessage = (e) => updateUI(e.data);
 #### Issue 2: Expensive Event Handlers
 
 **Problem:**
+
 ```javascript
 // ❌ No debouncing on expensive operations
 input.addEventListener('input', (e) => {
@@ -193,6 +203,7 @@ input.addEventListener('input', (e) => {
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Debounce expensive operations
 function debounce(fn, delay) {
@@ -242,12 +253,14 @@ function SearchInput() {
 #### Issue 1: Images Without Dimensions
 
 **Problem:**
+
 ```jsx
 // ❌ No dimensions specified
 <img src="/image.jpg" alt="Content" />
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Always specify dimensions
 <img 
@@ -271,6 +284,7 @@ function SearchInput() {
 #### Issue 2: Dynamic Content Insertion
 
 **Problem:**
+
 ```jsx
 // ❌ Inserting content without reserved space
 function Article() {
@@ -291,6 +305,7 @@ function Article() {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Reserve space for dynamic content
 function Article() {
@@ -316,6 +331,7 @@ function Article() {
 #### Issue 3: Web Fonts Causing FOIT/FOUT
 
 **Problem:**
+
 ```css
 /* ❌ No font loading strategy */
 @font-face {
@@ -329,6 +345,7 @@ body {
 ```
 
 **Solution:**
+
 ```css
 /* ✅ Use font-display for better loading */
 @font-face {
@@ -357,6 +374,7 @@ body {
 #### Issue 1: Unnecessary Re-renders
 
 **Problem:**
+
 ```jsx
 // ❌ Child re-renders on every parent update
 function Parent() {
@@ -372,6 +390,7 @@ function Parent() {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Memoize to prevent unnecessary re-renders
 const ExpensiveChild = React.memo(function ExpensiveChild({ data }) {
@@ -395,6 +414,7 @@ function Parent() {
 #### Issue 2: Large Lists Without Virtualization
 
 **Problem:**
+
 ```jsx
 // ❌ Rendering 10,000 items
 function LargeList({ items }) {
@@ -409,6 +429,7 @@ function LargeList({ items }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Virtual scrolling with react-window
 import { FixedSizeList } from 'react-window';
@@ -438,6 +459,7 @@ function LargeList({ items }) {
 #### Issue 1: Expensive CSS Selectors
 
 **Problem:**
+
 ```css
 /* ❌ Universal selectors, deep descendant selectors */
 * {
@@ -454,6 +476,7 @@ function LargeList({ items }) {
 ```
 
 **Solution:**
+
 ```css
 /* ✅ Specific, shallow selectors */
 html {
@@ -477,6 +500,7 @@ html {
 #### Issue 2: Layout Thrashing
 
 **Problem:**
+
 ```javascript
 // ❌ Interleaving reads and writes
 elements.forEach(el => {
@@ -488,6 +512,7 @@ elements.forEach(el => {
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Batch reads, then batch writes
 const measurements = elements.map(el => ({
@@ -506,6 +531,7 @@ elements.forEach((el, i) => {
 ### Code Splitting
 
 **Problem:**
+
 ```jsx
 // ❌ Single large bundle
 import Dashboard from './Dashboard';
@@ -524,6 +550,7 @@ function App() {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ Route-based code splitting
 const Dashboard = lazy(() => import('./Dashboard'));
@@ -597,6 +624,7 @@ function App() {
 ### Tree Shaking
 
 **Problem:**
+
 ```javascript
 // ❌ Importing entire library
 import _ from 'lodash';
@@ -607,6 +635,7 @@ const formatted = dateFns.format(date, 'yyyy-MM-dd');
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Import only what you need
 import debounce from 'lodash/debounce';
@@ -633,6 +662,7 @@ npx duplicate-package-checker-webpack-plugin
 ```
 
 **Common heavy dependencies to watch:**
+
 - moment.js (replace with date-fns or dayjs)
 - lodash (import individual functions)
 - material-ui (use individual imports)
@@ -646,6 +676,7 @@ npx duplicate-package-checker-webpack-plugin
 #### 1. Event Listeners Not Removed
 
 **Problem:**
+
 ```javascript
 // ❌ Event listener not cleaned up
 useEffect(() => {
@@ -655,6 +686,7 @@ useEffect(() => {
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Proper cleanup
 useEffect(() => {
@@ -666,6 +698,7 @@ useEffect(() => {
 #### 2. Timers Not Cleared
 
 **Problem:**
+
 ```javascript
 // ❌ Timer continues after unmount
 useEffect(() => {
@@ -676,6 +709,7 @@ useEffect(() => {
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Clear timer on cleanup
 useEffect(() => {
@@ -690,6 +724,7 @@ useEffect(() => {
 #### 3. Closures Holding References
 
 **Problem:**
+
 ```javascript
 // ❌ Closure holding reference to large object
 function useDataCache() {
@@ -705,6 +740,7 @@ function useDataCache() {
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Implement cache eviction
 function useDataCache(maxSize = 100) {
@@ -732,6 +768,7 @@ function useDataCache(maxSize = 100) {
 ### API Request Optimization
 
 **Problem:**
+
 ```javascript
 // ❌ Multiple sequential requests
 async function loadUserData(userId) {
@@ -744,6 +781,7 @@ async function loadUserData(userId) {
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Parallel requests
 async function loadUserData(userId) {

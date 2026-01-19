@@ -29,6 +29,7 @@ Choose your task and load the appropriate reference:
 ### Deployment Options
 
 **1. Standalone Mode (Development/Testing)**
+
 ```bash
 # Download and start KeyCloak
 wget https://github.com/keycloak/keycloak/releases/download/[VERSION]/keycloak-[VERSION].tar.gz
@@ -41,6 +42,7 @@ bin/kc.sh start-dev
 ```
 
 **2. Production Mode with Database**
+
 ```bash
 # Configure and build
 bin/kc.sh build --db=postgres
@@ -57,6 +59,7 @@ bin/kc.sh start --optimized
 ```
 
 **3. Docker Deployment**
+
 ```bash
 docker run -d \
   --name keycloak \
@@ -88,23 +91,27 @@ KC_SMTP_STARTTLS=true
 ## Core Concepts
 
 ### Realms
+
 - **Master realm**: Administrative realm (don't use for apps)
 - **Application realms**: Separate realms per app/environment
 - Create: Admin Console → Create Realm
 
 ### Users & Groups
+
 - **Users**: Individual accounts with credentials
 - **Groups**: Organize users hierarchically
 - **Attributes**: Custom key-value pairs
 - **Federation**: Sync from LDAP/AD (see [user-federation.md](references/user-federation.md))
 
 ### Clients
+
 - **OIDC clients**: Modern OAuth 2.0/OIDC applications
 - **SAML clients**: Legacy enterprise applications
 - **Types**: Confidential (server-side) or Public (SPA/mobile)
 - Details: See [client-configuration.md](references/client-configuration.md)
 
 ### Roles & Permissions
+
 - **Realm roles**: Global across all clients
 - **Client roles**: Specific to one client
 - **Composite roles**: Inherit multiple roles
@@ -120,9 +127,11 @@ KC_SMTP_STARTTLS=true
    - Confidential: Server-side apps (need client secret)
    - Public: SPAs/mobile apps (use PKCE)
 4. **Obtain configuration** from realm endpoint:
+
    ```
    https://keycloak.example.com/realms/{realm}/.well-known/openid-configuration
    ```
+
 5. **Integrate** with your app (see [integration-examples.md](references/integration-examples.md))
 
 ### Enable Multi-Factor Authentication
@@ -149,6 +158,7 @@ Details: See [user-federation.md](references/user-federation.md)
 ### Secure Production Deployment
 
 Essential security measures:
+
 - **SSL/TLS**: Required for all production traffic
 - **Password policy**: 12+ chars, complexity requirements
 - **Brute force protection**: Enable with lockout
@@ -171,18 +181,21 @@ Details: See [ha-scalability.md](references/ha-scalability.md)
 ## Troubleshooting Quick Reference
 
 ### Users Can't Login
+
 - Check user enabled status
 - Verify redirect URIs match exactly
 - Review required actions
 - Check Events → Login Events
 
 ### Token Validation Fails
+
 - Verify realm public key
 - Check token expiration
 - Validate issuer URL
 - Confirm audience claim
 
 ### LDAP Sync Issues
+
 - Test LDAP connection
 - Verify bind credentials
 - Check user DN path
@@ -214,12 +227,14 @@ bin/kcadm.sh set-password -r my-realm --username john --new-password secret
 ## Best Practices Summary
 
 ### Architecture
+
 - Separate realms per application/environment
 - Use groups for structure, roles for permissions
 - Plan token lifespans based on security needs
 - Enable session replication in clusters
 
 ### Security
+
 - Always use SSL/TLS in production
 - Enable MFA for privileged accounts
 - Implement brute force protection
@@ -227,6 +242,7 @@ bin/kcadm.sh set-password -r my-realm --username john --new-password secret
 - Principle of least privilege
 
 ### Operations
+
 - Automate backups and test restores
 - Monitor metrics and set alerts
 - Document configurations
@@ -234,6 +250,7 @@ bin/kcadm.sh set-password -r my-realm --username john --new-password secret
 - Capacity planning
 
 ### Development
+
 - Use PKCE for public clients
 - Implement proper token refresh
 - Handle token expiration gracefully
@@ -256,8 +273,7 @@ For detailed guidance, load the appropriate reference file:
 
 ## Additional Resources
 
-- Official documentation: https://www.keycloak.org/documentation
+- Official documentation: <https://www.keycloak.org/documentation>
 - Admin CLI reference for automation
 - Client adapter docs for frameworks
 - Community forums for support
-

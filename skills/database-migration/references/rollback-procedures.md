@@ -1,6 +1,5 @@
 # Rollback Procedures
 
-
 ```markdown
 Rollback Triggers:
 - Data corruption detected

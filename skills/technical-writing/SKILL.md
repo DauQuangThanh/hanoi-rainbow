@@ -12,6 +12,7 @@ Creates professional technical documentation with clear structure, appropriate d
 ### 1. Identify Documentation Type
 
 Determine which type of documentation is needed:
+
 - **API Documentation** - REST, GraphQL, webhooks, authentication
 - **User Guides** - Features, how-tos, troubleshooting
 - **Tutorials** - Learning-focused with hands-on examples
@@ -25,6 +26,7 @@ Determine which type of documentation is needed:
 ### 2. Gather Context
 
 Collect essential information before writing:
+
 - **Audience** - Developers, end-users, managers, administrators
 - **Technical depth** - Beginner, intermediate, advanced
 - **Scope** - Codebase/APIs/systems to document
@@ -34,6 +36,7 @@ Collect essential information before writing:
 ### 3. Structure Content
 
 Apply clear organization principles:
+
 - Lead with overview/introduction
 - Use descriptive heading hierarchy (H1 → H2 → H3)
 - Include table of contents for documents with >3 sections
@@ -44,6 +47,7 @@ Apply clear organization principles:
 ### 4. Write Clear Content
 
 Follow core writing principles:
+
 - **Active voice** - "The API returns..." not "The response is returned..."
 - **Specificity** - "Response time < 200ms" not "Fast response"
 - **Define acronyms** - "API (Application Programming Interface)" on first use
@@ -56,7 +60,8 @@ Follow core writing principles:
 ### 5. Add Code Examples
 
 Code example requirements:
-- Specify language in code blocks: ```python, ```javascript
+
+- Specify language in code blocks: ```python,```javascript
 - Show complete, runnable examples (not fragments)
 - Include input/output pairs
 - Add explanatory comments for complex logic
@@ -65,6 +70,7 @@ Code example requirements:
 ### 6. Review and Validate
 
 Quality assurance checklist:
+
 - ✓ Verify technical accuracy
 - ✓ Test all code examples
 - ✓ Check clarity and completeness
@@ -156,4 +162,3 @@ Documentation quality checklist before publishing:
 
 - **[documentation-types-and-workflows.md](references/documentation-types-and-workflows.md)** - Complete templates and patterns for API docs, user guides, tutorials, architecture docs, and technical specifications
 - **[writing-guidelines.md](references/writing-guidelines.md)** - Detailed style rules for clarity, active voice, specificity, consistency, heading hierarchy, code formatting, and lists
-

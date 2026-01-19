@@ -1,6 +1,5 @@
 # Common Anti-Patterns to Avoid
 
-
 ❌ **Entity-Attribute-Value (EAV)**: Flexible but unqueryable
 ❌ **Storing Arrays as Strings**: '1,2,3' - use arrays or junction tables
 ❌ **Premature Optimization**: Don't add indexes until you measure

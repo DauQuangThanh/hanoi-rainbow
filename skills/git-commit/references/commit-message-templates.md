@@ -1,9 +1,9 @@
 # Commit Message Templates
 
-
 ### Template Setup
 
 Create `.gitmessage` template:
+
 ```
 # <type>(<scope>): <subject> (max 50 chars)
 
@@ -21,6 +21,7 @@ Create `.gitmessage` template:
 ```
 
 Configure git to use template:
+
 ```bash
 git config --global commit.template ~/.gitmessage
 ```

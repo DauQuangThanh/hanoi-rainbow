@@ -49,6 +49,7 @@ Rainbow supports multiple AI agents by generating agent-specific command files a
 | **IBM Bob** | `.bob/commands/` | Markdown | N/A (IDE-based) | IBM Bob IDE |
 
 **Note on GitHub Copilot:** GitHub Copilot uses two separate folders:
+
 - **`.github/agents/`** - For custom agents (`.agent.md` files) that define specialized AI personas
 - **`.github/prompts/`** - For prompt files (`.prompt.md` files) that define slash commands
 

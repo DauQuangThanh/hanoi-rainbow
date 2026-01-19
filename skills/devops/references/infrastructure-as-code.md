@@ -1,9 +1,9 @@
 # Infrastructure as Code
 
-
 ### Terraform
 
 **Project Structure:**
+
 ```
 terraform/
 ├── environments/
@@ -23,6 +23,7 @@ terraform/
 ```
 
 **Example Module (EKS Cluster):**
+
 ```hcl
 # modules/eks/main.tf
 resource "aws_eks_cluster" "main" {
@@ -119,6 +120,7 @@ output "cluster_security_group_id" {
 ```
 
 **Environment Configuration:**
+
 ```hcl
 # environments/production/main.tf
 terraform {

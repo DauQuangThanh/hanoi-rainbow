@@ -10,12 +10,14 @@ description: Conducts comprehensive backend design reviews covering API design q
 Follow this systematic review process:
 
 ### 1. Pre-Review Preparation
+
 - Gather design documentation (architecture diagrams, API specs, database schemas, ADRs)
 - Understand requirements (functional, non-functional, compliance)
 - Define review scope and priorities
 - Identify constraints (technology, budget, timeline)
 
 ### 2. API Design Review
+
 - Evaluate RESTful resource modeling, HTTP method usage, status codes
 - Review GraphQL schema design, type definitions, query patterns
 - Assess gRPC service definitions and protobuf schemas
@@ -23,6 +25,7 @@ Follow this systematic review process:
 - Check authentication, authorization, and security measures
 
 ### 3. Database Design Validation
+
 - Review data modeling, entity relationships, normalization
 - Assess schema design, column types, constraints, indexes
 - Evaluate query patterns and N+1 query prevention
@@ -30,6 +33,7 @@ Follow this systematic review process:
 - Review scalability approach (sharding, replicas, caching)
 
 ### 4. Architecture Assessment
+
 - Evaluate service boundaries and decomposition
 - Review communication patterns (sync/async, event-driven)
 - Assess resilience patterns (circuit breakers, retries, timeouts)
@@ -37,6 +41,7 @@ Follow this systematic review process:
 - Validate data management and consistency strategies
 
 ### 5. Security Review
+
 - Evaluate authentication mechanisms (OAuth 2.0, JWT)
 - Review authorization model (RBAC, ABAC)
 - Assess data protection (encryption at rest/transit, secrets)
@@ -44,6 +49,7 @@ Follow this systematic review process:
 - Review security monitoring and audit logging
 
 ### 6. Performance & Scalability
+
 - Assess caching strategy (layers, invalidation, TTL)
 - Review database indexing and query optimization
 - Evaluate horizontal/vertical scaling approach
@@ -51,6 +57,7 @@ Follow this systematic review process:
 - Review asynchronous processing patterns
 
 ### 7. Report Generation
+
 - Categorize findings by severity (Critical, High, Medium, Low)
 - Document detailed findings with examples
 - Provide specific, actionable recommendations
@@ -60,6 +67,7 @@ Follow this systematic review process:
 ## Review Scope
 
 ### API Design Quality
+
 - RESTful API assessment (resource modeling, HTTP methods, status codes, versioning)
 - GraphQL schema review (types, resolvers, complexity, N+1 prevention)
 - gRPC service review (protobuf definitions, streaming, error handling)
@@ -67,6 +75,7 @@ Follow this systematic review process:
 - API security design (authentication, authorization, rate limiting, validation)
 
 ### Database Architecture
+
 - Data modeling (entity relationships, normalization, domain alignment)
 - Schema design (tables, columns, constraints, indexes, partitioning)
 - Query patterns (efficiency, index usage, N+1 prevention)
@@ -74,6 +83,7 @@ Follow this systematic review process:
 - Scalability (sharding, read replicas, caching)
 
 ### Microservices Patterns
+
 - Service boundaries (decomposition, bounded contexts, DDD alignment)
 - Communication patterns (sync/async, event-driven, orchestration)
 - Data management (database-per-service, eventual consistency, sagas)
@@ -81,6 +91,7 @@ Follow this systematic review process:
 - Resilience (circuit breakers, retries, timeouts, bulkheads)
 
 ### Integration Architecture
+
 - Integration patterns (API, message queues, event streaming, webhooks)
 - Message queue design (selection, schemas, DLQ, idempotency)
 - Event streaming (event sourcing, CQRS, stream processing)
@@ -88,6 +99,7 @@ Follow this systematic review process:
 - Batch processing (ETL, job scheduling, error handling)
 
 ### Security Architecture
+
 - Authentication design (JWT, OAuth 2.0, session management)
 - Authorization design (RBAC, ABAC, permission models)
 - Data protection (encryption at rest/transit, secrets management)
@@ -132,4 +144,3 @@ Load detailed guidance based on specific review needs:
 - **Report Template**: See [report-template.md](references/report-template.md) for complete report structure with sections for executive summary, findings, recommendations, architecture diagrams, and action items
 
 - **Severity Levels**: See [severity-levels.md](references/severity-levels.md) for detailed severity rating criteria (Critical, High, Medium, Low) with examples and action requirements
-

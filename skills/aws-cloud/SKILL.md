@@ -22,6 +22,7 @@ Provides expert guidance for AWS infrastructure and services:
 ## Key Principles
 
 ### General Best Practices
+
 - **Follow least privilege** - Use IAM roles with minimal required permissions
 - **Enable monitoring** - Configure CloudWatch for all services with appropriate alarms
 - **Use managed services** - Prefer RDS over self-managed databases, ECS Fargate over EC2
@@ -32,6 +33,7 @@ Provides expert guidance for AWS infrastructure and services:
 - **Optimize costs** - Use Reserved Instances, Savings Plans, Spot Instances, and right-sizing
 
 ### Architecture Patterns
+
 - **Multi-tier web apps**: VPC + ALB + EC2/ECS + RDS Multi-AZ
 - **Serverless APIs**: API Gateway + Lambda + DynamoDB with CloudFront caching
 - **Container workloads**: ECS/EKS with Fargate + RDS + ElastiCache
@@ -39,6 +41,7 @@ Provides expert guidance for AWS infrastructure and services:
 - **Microservices**: EKS + Service Mesh + RDS Aurora + ElastiCache
 
 ### When to Use What
+
 - **EC2**: Full control, Windows workloads, lift-and-shift migrations, specialized hardware
 - **Lambda**: Event-driven processing, APIs, scheduled tasks, short-lived workloads (<15 min)
 - **ECS/EKS**: Containerized applications, microservices, long-running services

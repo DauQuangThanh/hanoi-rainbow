@@ -5,24 +5,28 @@
 ### Cluster Components
 
 **Control Plane (Microsoft-managed)**
+
 - API Server
 - etcd (cluster state storage)
 - Scheduler
 - Controller Manager
 
 **Node Pools (Customer-managed)**
+
 - System node pool (required, runs system pods)
 - User node pools (optional, runs application workloads)
 
 ### Node Pool Types
 
 **System Node Pool**
+
 - Required for cluster operation
 - Runs CoreDNS, metrics-server, tunnelfront
 - Minimum 2 nodes recommended
 - Use taints to prevent user workloads
 
 **User Node Pools**
+
 - Run application workloads
 - Can be scaled to zero
 - Support Windows and Linux nodes

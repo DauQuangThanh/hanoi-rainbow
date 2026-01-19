@@ -10,17 +10,20 @@ Provides comprehensive guidance for migrating databases between engines, version
 ## Migration Decision Tree
 
 **1. Identify Migration Type:**
+
 - Same engine (PostgreSQL → PostgreSQL)? → Homogeneous migration
 - Different engine (Oracle → PostgreSQL)? → Heterogeneous migration
 - Version upgrade only? → In-place or dump/restore
 - Cloud migration? → Consider cloud-native tools
 
 **2. Assess Downtime Requirements:**
+
 - Can tolerate hours of downtime? → Dump and restore
 - Need minimal downtime (minutes)? → Replication with cutover
 - Require zero downtime? → See [zero-downtime-migration-strategies.md](references/zero-downtime-migration-strategies.md)
 
 **3. Choose Migration Path:**
+
 - Load [migration-types.md](references/migration-types.md) for detailed migration approaches
 - For cloud migrations, load [cloud-specific-migrations.md](references/cloud-specific-migrations.md)
 
@@ -29,6 +32,7 @@ Provides comprehensive guidance for migrating databases between engines, version
 ### Step 1: Assessment and Planning
 
 **Analyze Source Database:**
+
 1. Document current database version, size, and complexity
 2. Identify dependencies (applications, services, integrations)
 3. Review schema: tables, indexes, constraints, triggers, procedures
@@ -36,6 +40,7 @@ Provides comprehensive guidance for migrating databases between engines, version
 5. Document current performance baselines
 
 **Define Requirements:**
+
 - Migration type (homogeneous vs heterogeneous)
 - Acceptable downtime window
 - Data integrity requirements
@@ -47,12 +52,14 @@ Provides comprehensive guidance for migrating databases between engines, version
 ### Step 2: Environment Setup
 
 **Prepare Target Environment:**
+
 1. Provision target database with appropriate sizing
 2. Configure network connectivity and security
 3. Set up monitoring and logging
 4. Create test and staging environments matching production
 
 **Prepare Migration Tools:**
+
 - Native tools (pg_dump, mysqldump, SQL Server bcp)
 - Cloud provider tools (AWS DMS, GCP Database Migration Service)
 - Third-party tools (see [tools-reference.md](references/tools-reference.md))
@@ -60,12 +67,14 @@ Provides comprehensive guidance for migrating databases between engines, version
 ### Step 3: Schema Migration
 
 **For Homogeneous Migration:**
+
 1. Export schema using native tools
 2. Review and optimize schema for target version
 3. Apply schema to target database
 4. Verify all objects created successfully
 
 **For Heterogeneous Migration:**
+
 1. Analyze schema compatibility issues
 2. Convert data types, stored procedures, triggers
 3. Adapt SQL dialects and syntax
@@ -78,6 +87,7 @@ Load [migration-types.md](references/migration-types.md) for engine-specific sch
 **Choose Data Migration Strategy:**
 
 **Option A: Dump and Restore (Full Downtime)**
+
 ```
 1. Stop application writes
 2. Create full backup of source database
@@ -87,9 +97,11 @@ Load [migration-types.md](references/migration-types.md) for engine-specific sch
 6. Update application connection strings
 7. Resume operations
 ```
+
 Best for: Smaller databases, acceptable downtime windows
 
 **Option B: Replication (Minimal Downtime)**
+
 ```
 1. Set up replication from source to target
 2. Monitor replication lag until synchronized
@@ -100,6 +112,7 @@ Best for: Smaller databases, acceptable downtime windows
 7. Update application connections
 8. Resume operations
 ```
+
 Best for: Large databases, minimal downtime requirements
 
 Load [zero-downtime-migration-strategies.md](references/zero-downtime-migration-strategies.md) for advanced zero-downtime patterns.
@@ -107,6 +120,7 @@ Load [zero-downtime-migration-strategies.md](references/zero-downtime-migration-
 ### Step 5: Validation and Testing
 
 **Validate Data Migration:**
+
 1. Compare row counts between source and target
 2. Verify data integrity (checksums, sample queries)
 3. Test application functionality against target database
@@ -114,6 +128,7 @@ Load [zero-downtime-migration-strategies.md](references/zero-downtime-migration-
 5. Check all constraints, indexes, and relationships
 
 **Testing Checklist:**
+
 - [ ] All tables migrated with correct row counts
 - [ ] Schema objects (indexes, constraints, triggers) present
 - [ ] Data types converted correctly
@@ -136,18 +151,21 @@ Load [migration-phases.md](references/migration-phases.md) for detailed phase-by
 ### Step 7: Post-Migration
 
 **Immediate (Day 1):**
+
 1. Monitor performance metrics and error rates
 2. Validate application functionality
 3. Keep source database available (read-only) as safety net
 4. Document any issues and resolutions
 
 **Short-term (Week 1-2):**
+
 1. Continue monitoring for issues
 2. Optimize indexes and queries if needed
 3. Tune database configuration for workload
 4. Conduct parallel run if applicable
 
 **Long-term:**
+
 1. Validate backup and restore procedures
 2. Update disaster recovery plans
 3. Document final configuration and lessons learned
@@ -156,6 +174,7 @@ Load [migration-phases.md](references/migration-phases.md) for detailed phase-by
 ## Key Considerations
 
 **Planning Guidelines:**
+
 - Allow 2-3x estimated time for heterogeneous migrations
 - Plan for extended parallel run period (1-4 weeks minimum)
 - Database migration often triggers application code changes
@@ -163,6 +182,7 @@ Load [migration-phases.md](references/migration-phases.md) for detailed phase-by
 - Consider phased approach: read replica → read/write split → full cutover
 
 **Critical Success Factors:**
+
 - ✅ Multiple backups before migration
 - ✅ Test migration in staging environment first
 - ✅ Monitor metrics during migration (lag, throughput, errors)
@@ -185,4 +205,3 @@ Load these references based on specific needs:
 - **[rollback-procedures.md](references/rollback-procedures.md)** - Step-by-step rollback procedures for different migration strategies
 - **[common-issues-and-solutions.md](references/common-issues-and-solutions.md)** - Troubleshooting guide for common migration problems
 - **[best-practices.md](references/best-practices.md)** - Comprehensive best practices checklist
-

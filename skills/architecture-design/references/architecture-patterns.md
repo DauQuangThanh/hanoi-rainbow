@@ -5,6 +5,7 @@ Detailed descriptions of common architecture patterns with use cases, benefits, 
 ## Visual Overview
 
 ### Layered Architecture
+
 ```
 ┌─────────────────────────────────┐
 │   Presentation Layer            │  (UI, Controllers)
@@ -18,6 +19,7 @@ Detailed descriptions of common architecture patterns with use cases, benefits, 
 ```
 
 ### Microservices Architecture
+
 ```
 ┌──────────┐     ┌──────────┐     ┌──────────┐
 │  API     │────▶│ Service  │────▶│ Service  │
@@ -30,6 +32,7 @@ Detailed descriptions of common architecture patterns with use cases, benefits, 
 ```
 
 ### Event-Driven Architecture
+
 ```
 ┌─────────┐       ┌─────────────┐       ┌─────────┐
 │Producer │──────▶│ Event Bus/  │──────▶│Consumer │
@@ -38,6 +41,7 @@ Detailed descriptions of common architecture patterns with use cases, benefits, 
 ```
 
 ### Hexagonal Architecture (Clean Architecture)
+
 ```
          ┌────────────────────────┐
          │    UI / Controllers    │
@@ -63,9 +67,11 @@ Detailed descriptions of common architecture patterns with use cases, benefits, 
 ## 1. Monolithic Architecture
 
 ### Description
+
 All application components are packaged and deployed as a single unit.
 
 ### When to Use
+
 - Small to medium applications
 - Simple business domain
 - Small development team
@@ -73,6 +79,7 @@ All application components are packaged and deployed as a single unit.
 - Tight deadlines
 
 ### Benefits
+
 - Simple to develop and deploy
 - Easy to test end-to-end
 - Simple debugging
@@ -80,6 +87,7 @@ All application components are packaged and deployed as a single unit.
 - Strong consistency
 
 ### Trade-offs
+
 - Scaling limitations (must scale entire app)
 - Technology lock-in
 - Longer build and deployment times
@@ -87,6 +95,7 @@ All application components are packaged and deployed as a single unit.
 - Team coordination challenges
 
 ### Example Stack
+
 - Backend: Spring Boot monolith
 - Database: PostgreSQL
 - Deployment: Single JAR/WAR on server
@@ -96,9 +105,11 @@ All application components are packaged and deployed as a single unit.
 ## 2. Microservices Architecture
 
 ### Description
+
 Application is composed of small, independently deployable services organized around business capabilities.
 
 ### When to Use
+
 - Large, complex applications
 - Multiple development teams
 - Need for independent scaling
@@ -106,6 +117,7 @@ Application is composed of small, independently deployable services organized ar
 - Long-term projects
 
 ### Benefits
+
 - Independent deployment and scaling
 - Technology diversity
 - Fault isolation
@@ -113,6 +125,7 @@ Application is composed of small, independently deployable services organized ar
 - Easier to understand individual services
 
 ### Trade-offs
+
 - Increased complexity
 - Distributed system challenges
 - Network latency
@@ -121,6 +134,7 @@ Application is composed of small, independently deployable services organized ar
 - Testing complexity
 
 ### Key Components
+
 - API Gateway
 - Service Discovery (Consul, Eureka)
 - Configuration Management
@@ -128,6 +142,7 @@ Application is composed of small, independently deployable services organized ar
 - Distributed Tracing
 
 ### Example Stack
+
 - Services: Node.js, Python, Go
 - Communication: REST, gRPC, Kafka
 - Service Mesh: Istio, Linkerd
@@ -138,9 +153,11 @@ Application is composed of small, independently deployable services organized ar
 ## 3. Event-Driven Architecture
 
 ### Description
+
 Services communicate through events, promoting loose coupling and asynchronous processing.
 
 ### When to Use
+
 - Real-time data processing
 - Loose coupling requirements
 - High scalability needs
@@ -148,6 +165,7 @@ Services communicate through events, promoting loose coupling and asynchronous p
 - Integration with multiple systems
 
 ### Benefits
+
 - Loose coupling
 - High scalability
 - Asynchronous processing
@@ -155,6 +173,7 @@ Services communicate through events, promoting loose coupling and asynchronous p
 - Better fault tolerance
 
 ### Trade-offs
+
 - Eventual consistency
 - Debugging complexity
 - Message ordering challenges
@@ -162,11 +181,13 @@ Services communicate through events, promoting loose coupling and asynchronous p
 - Duplicate message handling
 
 ### Key Patterns
+
 - Event Sourcing
 - CQRS (Command Query Responsibility Segregation)
 - Saga Pattern for distributed transactions
 
 ### Example Stack
+
 - Message Broker: Kafka, RabbitMQ, AWS SNS/SQS
 - Event Store: EventStoreDB, Kafka
 - Processing: Apache Flink, Kafka Streams
@@ -176,9 +197,11 @@ Services communicate through events, promoting loose coupling and asynchronous p
 ## 4. Serverless Architecture
 
 ### Description
+
 Application logic runs in stateless compute containers that are event-triggered and managed by cloud provider.
 
 ### When to Use
+
 - Variable or unpredictable workloads
 - Event-driven workflows
 - Rapid prototyping
@@ -186,6 +209,7 @@ Application logic runs in stateless compute containers that are event-triggered 
 - Infrequent processing
 
 ### Benefits
+
 - No server management
 - Automatic scaling
 - Pay per execution
@@ -193,6 +217,7 @@ Application logic runs in stateless compute containers that are event-triggered 
 - Fast time to market
 
 ### Trade-offs
+
 - Cold start latency
 - Vendor lock-in
 - Limited execution time
@@ -200,6 +225,7 @@ Application logic runs in stateless compute containers that are event-triggered 
 - Testing challenges
 
 ### Example Stack
+
 - Functions: AWS Lambda, Azure Functions, Google Cloud Functions
 - API: API Gateway
 - Storage: S3, DynamoDB
@@ -210,9 +236,11 @@ Application logic runs in stateless compute containers that are event-triggered 
 ## 5. Layered (N-Tier) Architecture
 
 ### Description
+
 Organizes application into horizontal layers, each with specific responsibility.
 
 ### Typical Layers
+
 1. **Presentation Layer**: UI, API controllers
 2. **Application Layer**: Business workflows, use cases
 3. **Domain Layer**: Core business logic and entities
@@ -220,12 +248,14 @@ Organizes application into horizontal layers, each with specific responsibility.
 5. **Infrastructure Layer**: External services, utilities
 
 ### When to Use
+
 - Traditional web applications
 - Enterprise applications
 - Clear separation of concerns needed
 - Team specialization by layer
 
 ### Benefits
+
 - Clear separation of concerns
 - Easy to understand
 - Testability
@@ -233,6 +263,7 @@ Organizes application into horizontal layers, each with specific responsibility.
 - Reusable components
 
 ### Trade-offs
+
 - Can become monolithic
 - Changes may ripple across layers
 - Potentially over-engineered for simple apps
@@ -243,20 +274,24 @@ Organizes application into horizontal layers, each with specific responsibility.
 ## 6. Hexagonal Architecture (Ports and Adapters)
 
 ### Description
+
 Places business logic at the center, with external concerns (UI, database) as adapters connected through ports.
 
 ### Core Concepts
+
 - **Domain Core**: Business logic independent of external concerns
 - **Ports**: Interfaces defining communication
 - **Adapters**: Implementations of ports for specific technologies
 
 ### When to Use
+
 - Domain-driven design
 - Test-driven development
 - Technology-agnostic business logic
 - Long-term maintainability
 
 ### Benefits
+
 - Technology independence
 - Excellent testability
 - Clear boundaries
@@ -264,6 +299,7 @@ Places business logic at the center, with external concerns (UI, database) as ad
 - Business logic isolation
 
 ### Trade-offs
+
 - Initial complexity
 - More abstractions
 - Learning curve
@@ -274,9 +310,11 @@ Places business logic at the center, with external concerns (UI, database) as ad
 ## 7. CQRS (Command Query Responsibility Segregation)
 
 ### Description
+
 Separates read and write operations into different models.
 
 ### When to Use
+
 - Complex domain logic
 - Different read/write patterns
 - High read/write ratio disparity
@@ -284,6 +322,7 @@ Separates read and write operations into different models.
 - Need for different data representations
 
 ### Benefits
+
 - Optimized read and write models
 - Independent scaling
 - Better performance
@@ -291,6 +330,7 @@ Separates read and write operations into different models.
 - Event-driven integration
 
 ### Trade-offs
+
 - Increased complexity
 - Eventual consistency
 - Data synchronization
@@ -302,21 +342,25 @@ Separates read and write operations into different models.
 ## 8. Service-Oriented Architecture (SOA)
 
 ### Description
+
 Services communicate through an Enterprise Service Bus (ESB), providing shared business functionality.
 
 ### When to Use
+
 - Enterprise integration
 - Legacy system integration
 - Shared services across organization
 - Complex protocols and transformations
 
 ### Benefits
+
 - Service reuse
 - Enterprise integration
 - Protocol flexibility
 - Centralized governance
 
 ### Trade-offs
+
 - ESB as single point of failure
 - Performance overhead
 - Complexity
@@ -327,21 +371,25 @@ Services communicate through an Enterprise Service Bus (ESB), providing shared b
 ## 9. Space-Based Architecture
 
 ### Description
+
 Minimizes database bottlenecks by using in-memory data grids and distributed caching.
 
 ### When to Use
+
 - High scalability requirements
 - Elastic scaling needs
 - Variable user loads
 - Read/write intensive applications
 
 ### Benefits
+
 - Near-linear scalability
 - High availability
 - Elastic scalability
 - Reduced database load
 
 ### Trade-offs
+
 - Complex implementation
 - Data consistency challenges
 - Expensive infrastructure
@@ -352,27 +400,32 @@ Minimizes database bottlenecks by using in-memory data grids and distributed cac
 ## 10. Micro-Frontend Architecture
 
 ### Description
+
 Frontend application is composed of independent, loosely coupled micro-apps.
 
 ### When to Use
+
 - Large frontend applications
 - Multiple frontend teams
 - Different framework requirements
 - Independent deployment needs
 
 ### Benefits
+
 - Team autonomy
 - Technology diversity
 - Independent deployment
 - Parallel development
 
 ### Trade-offs
+
 - Increased complexity
 - Code duplication risks
 - Performance overhead
 - Consistent UX challenges
 
 ### Implementation Approaches
+
 - Server-side composition
 - Client-side composition (Module Federation)
 - Web Components

@@ -1,6 +1,5 @@
 # Best Practices
 
-
 1. **Design Principles**
    - SOLID principles for object-oriented design
    - DRY (Don't Repeat Yourself)

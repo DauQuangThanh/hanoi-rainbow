@@ -7,6 +7,7 @@
 Ask "Why?" repeatedly to drill down to root cause:
 
 **Example:**
+
 - **Bug**: User login fails
 - **Why?** Authentication token is invalid
 - **Why?** Token expired before validation
@@ -18,6 +19,7 @@ Ask "Why?" repeatedly to drill down to root cause:
 ### 2. Stack Trace Analysis
 
 **Steps:**
+
 1. **Identify Exception Type**
    - What kind of error occurred?
    - Is it a system exception or application exception?
@@ -36,6 +38,7 @@ Ask "Why?" repeatedly to drill down to root cause:
    - What was the entry point?
 
 **Example Analysis:**
+
 ```
 Exception: NullPointerException at UserService.getUserProfile(UserService.java:45)
   at ProfileController.getProfile(ProfileController.java:23)
@@ -54,6 +57,7 @@ Analysis:
 Compare working vs non-working scenarios:
 
 **What Changed?**
+
 - Code changes (git diff)
 - Configuration changes
 - Data changes
@@ -101,12 +105,14 @@ Compare working vs non-working scenarios:
 For race conditions and performance issues:
 
 **Questions to Ask:**
+
 - Does the bug occur at specific times?
 - Is it load-dependent?
 - Does it happen during concurrent operations?
 - Is there a delay or timing window?
 
 **Investigation Techniques:**
+
 - Add logging with timestamps
 - Use debugger with breakpoints
 - Profile execution time
@@ -118,6 +124,7 @@ For race conditions and performance issues:
 Track data through the system:
 
 **Steps:**
+
 1. **Identify Input Data**
    - What data enters the system?
    - What format is it in?
@@ -138,6 +145,7 @@ Track data through the system:
    - Where did it diverge from expected?
 
 **Example:**
+
 ```
 Input: {"amount": "1,234.56"}
 → Parser: parseFloat("1,234.56") = NaN (Bug: doesn't handle comma)
@@ -151,6 +159,7 @@ Input: {"amount": "1,234.56"}
 ### Log Analysis
 
 **What to Look For:**
+
 - Error messages before the bug
 - Warnings that might indicate issues
 - Unusual patterns or frequencies
@@ -158,6 +167,7 @@ Input: {"amount": "1,234.56"}
 - Correlation with other events
 
 **Techniques:**
+
 - Search for error patterns: `grep -i "error" app.log`
 - Find related errors: `grep -A 5 -B 5 "specific_error" app.log`
 - Count occurrences: `grep "error" app.log | wc -l`
@@ -166,6 +176,7 @@ Input: {"amount": "1,234.56"}
 ### Database Analysis
 
 **Queries to Run:**
+
 - Check data integrity
 - Look for missing or duplicate records
 - Verify relationships (foreign keys)
@@ -173,6 +184,7 @@ Input: {"amount": "1,234.56"}
 - Review recent data changes
 
 **Example Queries:**
+
 ```sql
 -- Find orphaned records
 SELECT * FROM orders WHERE user_id NOT IN (SELECT id FROM users);
@@ -187,12 +199,14 @@ SELECT * FROM transactions WHERE status = 'failed' AND created_at > NOW() - INTE
 ### Performance Analysis
 
 **Profiling:**
+
 - CPU profiling (identify hot spots)
 - Memory profiling (identify leaks)
 - I/O profiling (identify bottlenecks)
 - Database query profiling (slow queries)
 
 **Metrics to Collect:**
+
 - Response times (p50, p95, p99)
 - Throughput (requests per second)
 - Error rates
@@ -201,12 +215,14 @@ SELECT * FROM transactions WHERE status = 'failed' AND created_at > NOW() - INTE
 ### Network Analysis
 
 **Tools:**
+
 - Packet capture (Wireshark, tcpdump)
 - Network monitoring (latency, packet loss)
 - API request/response logging
 - Browser developer tools (Network tab)
 
 **What to Check:**
+
 - Request/response headers
 - Payload sizes
 - HTTP status codes
@@ -220,28 +236,33 @@ SELECT * FROM transactions WHERE status = 'failed' AND created_at > NOW() - INTE
 ### Forming Hypotheses
 
 **Good Hypothesis Characteristics:**
+
 - Specific and testable
 - Based on evidence
 - Falsifiable
 - Explains observed symptoms
 
 **Example:**
+
 - ❌ Bad: "There's a bug in the code"
 - ✅ Good: "The null pointer exception occurs when getUserProfile() is called with a valid user ID but the user record has been soft-deleted, because the query doesn't filter deleted records"
 
 ### Testing Hypotheses
 
 **1. Code Review**
+
 - Read the suspected code section
 - Look for the hypothesized issue
 - Check for similar patterns elsewhere
 
 **2. Experiment**
+
 - Modify code to test hypothesis
 - Add logging to verify assumptions
 - Create unit test that should fail
 
 **3. Verify**
+
 - Does the fix resolve the issue?
 - Does it explain all symptoms?
 - Does it work in all scenarios?
@@ -251,11 +272,13 @@ SELECT * FROM transactions WHERE status = 'failed' AND created_at > NOW() - INTE
 When multiple possible causes exist:
 
 **Prioritize by:**
+
 - Likelihood (how probable)
 - Impact (how severe if true)
 - Ease of testing (quick to verify)
 
 **Document All Hypotheses:**
+
 - Hypothesis description
 - Evidence supporting it
 - Test performed
@@ -268,11 +291,13 @@ When multiple possible causes exist:
 ### Null/Undefined Errors
 
 **Symptoms:**
+
 - NullPointerException, TypeError
 - "Cannot read property of undefined"
 - Unexpected null values
 
 **Common Causes:**
+
 - Missing null checks
 - Uninitialized variables
 - Incorrect default values
@@ -280,6 +305,7 @@ When multiple possible causes exist:
 - Database query returning null
 
 **Investigation:**
+
 - Where was the variable assigned?
 - What conditions lead to null?
 - Are all code paths checked?
@@ -287,18 +313,21 @@ When multiple possible causes exist:
 ### Race Conditions
 
 **Symptoms:**
+
 - Intermittent failures
 - Works most of the time
 - Fails under load
 - Timing-dependent
 
 **Common Causes:**
+
 - Concurrent access to shared resources
 - Missing synchronization
 - Incorrect locking
 - Atomic operation violations
 
 **Investigation:**
+
 - What resources are shared?
 - Are there multiple threads/processes?
 - Is synchronization proper?
@@ -307,12 +336,14 @@ When multiple possible causes exist:
 ### Memory Leaks
 
 **Symptoms:**
+
 - Memory usage grows over time
 - Out of memory errors
 - Performance degradation
 - System slowdown
 
 **Common Causes:**
+
 - Objects not being garbage collected
 - Event listeners not removed
 - Circular references
@@ -320,6 +351,7 @@ When multiple possible causes exist:
 - Unclosed connections/resources
 
 **Investigation:**
+
 - Memory profiling over time
 - Check for retained objects
 - Review lifecycle management
@@ -328,11 +360,13 @@ When multiple possible causes exist:
 ### Configuration Issues
 
 **Symptoms:**
+
 - Works in some environments, not others
 - Fails after deployment
 - Environment-specific behavior
 
 **Common Causes:**
+
 - Missing configuration values
 - Incorrect environment variables
 - Wrong API endpoints
@@ -340,6 +374,7 @@ When multiple possible causes exist:
 - Feature flags misconfigured
 
 **Investigation:**
+
 - Compare configurations across environments
 - Verify all required configs present
 - Check configuration precedence
@@ -348,18 +383,21 @@ When multiple possible causes exist:
 ### Dependency Problems
 
 **Symptoms:**
+
 - Works locally but fails in production
 - "Cannot find module" errors
 - Incompatible versions
 - Unexpected behavior after updates
 
 **Common Causes:**
+
 - Version mismatches
 - Transitive dependency conflicts
 - Breaking changes in dependencies
 - Missing dependencies
 
 **Investigation:**
+
 - Check package lock files
 - Review dependency versions
 - Check for breaking changes in changelogs
@@ -372,6 +410,7 @@ When multiple possible causes exist:
 ### Divide and Conquer
 
 **Break down the problem:**
+
 1. Identify the system boundaries (input → output)
 2. Find the midpoint in the flow
 3. Check if data is correct at midpoint
@@ -383,6 +422,7 @@ When multiple possible causes exist:
 **For finding which commit introduced a bug:**
 
 Use `git bisect`:
+
 ```bash
 git bisect start
 git bisect bad  # Current version has bug
@@ -396,6 +436,7 @@ git bisect good/bad
 ### Rubber Duck Debugging
 
 **Explain the problem out loud:**
+
 1. Describe what the code should do
 2. Explain what it actually does
 3. Walk through the logic step by step
@@ -404,6 +445,7 @@ git bisect good/bad
 ### Add Logging
 
 **Strategic logging:**
+
 - Log inputs at function entry
 - Log outputs before function exit
 - Log intermediate values in complex calculations
@@ -411,6 +453,7 @@ git bisect good/bad
 - Log state changes
 
 **Good log message:**
+
 ```
 // Bad
 console.log(user);
@@ -422,6 +465,7 @@ console.log('[UserService.getProfile] Fetching profile for userId:', userId, 'ti
 ### Breakpoint Debugging
 
 **Use debugger effectively:**
+
 - Set breakpoint before suspected issue
 - Step through code line by line
 - Inspect variable values

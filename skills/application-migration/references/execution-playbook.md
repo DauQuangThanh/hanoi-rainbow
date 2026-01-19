@@ -1,6 +1,5 @@
 # Execution Playbook
 
-
 ### 1. Pre-Migration Checklist
 
 ```markdown
@@ -122,6 +121,7 @@ T+4h: Post-Launch Review
 ### 3. Rollback Procedure
 
 **When to Rollback:**
+
 - Critical functionality not working
 - Data corruption detected
 - Performance below acceptable thresholds

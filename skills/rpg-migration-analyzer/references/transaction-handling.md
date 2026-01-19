@@ -11,6 +11,7 @@ RPG programs running on AS/400 (IBM i) use commitment control for transaction ma
 ### Commitment Control Model
 
 **Key Characteristics**:
+
 - File-level commitment control (COMMIT keyword in F-specs)
 - COMMIT/ROLLBACK operations
 - Journaling requirement for commitment control
@@ -149,6 +150,7 @@ public void readWithConsistency() {
 ### Pattern 1: Batch SYNCPOINT
 
 **COBOL/CICS**:
+
 ```cobol
 PERFORM VARYING WS-COUNTER FROM 1 BY 1
     UNTIL WS-COUNTER > 1000
@@ -163,6 +165,7 @@ END-PERFORM.
 ```
 
 **Java**:
+
 ```java
 @Service
 public class BatchProcessor {
@@ -288,6 +291,7 @@ public class DistributedService {
 ### CICS ABEND → Java Exception
 
 **COBOL/CICS**:
+
 ```cobol
 IF ERROR-CONDITION
     EXEC CICS ABEND ABCODE('APPL') END-EXEC
@@ -295,6 +299,7 @@ END-IF.
 ```
 
 **Java**:
+
 ```java
 @Transactional
 public void process() {

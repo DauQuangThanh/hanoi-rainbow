@@ -14,20 +14,25 @@ Choose your path based on the task:
 ### 1. Service Category Selection
 
 **Compute & Containers** → Load [compute-services.md](references/compute-services.md)
+
 - Virtual Private Cloud (VPC) and Virtual Server Instances
 - IBM Kubernetes Service (IKS) and Red Hat OpenShift
 - Code Engine (serverless containers) and Cloud Functions
 
 **Storage** → Load [storage-services.md](references/storage-services.md)
+
 - Cloud Object Storage, Block Storage, File Storage
 
 **Databases** → Load [database-services.md](references/database-services.md)
+
 - Db2, Cloudant, PostgreSQL, MySQL, MongoDB, Redis
 
 **Security & Access** → Load [iam-security.md](references/iam-security.md)
+
 - IAM, Resource Groups, Service IDs, Key Protect, Secrets Manager
 
 **Networking** → Load [networking.md](references/networking.md)
+
 - VPC Networks, Load Balancers, DNS/CDN, Direct Link
 
 ### 2. Architecture & Deployment Patterns
@@ -47,16 +52,19 @@ Choose your path based on the task:
 ## Core Concepts
 
 ### Resource Hierarchy
+
 ```
 Account → Resource Groups → Services/Resources → Access Groups (IAM)
 ```
 
 ### Regions and Multi-Zone Architecture
+
 - **Primary Regions**: `us-south`, `us-east`, `eu-gb`, `eu-de`, `jp-tok`, `au-syd`
 - **Availability Zones**: 3 zones per region (e.g., `us-south-1`, `us-south-2`, `us-south-3`)
 - **Best Practice**: Deploy across multiple zones for high availability
 
 ### Service Categories
+
 - **IaaS**: VPC, Virtual Servers, Block/File Storage
 - **PaaS**: IKS, OpenShift, Code Engine
 - **SaaS**: Managed Databases, Watson AI, DevOps Tools
@@ -65,6 +73,7 @@ Account → Resource Groups → Services/Resources → Access Groups (IAM)
 ## Quick Start
 
 ### 1. Install and Configure CLI
+
 ```bash
 # Install CLI (macOS/Linux)
 curl -fsSL https://clis.cloud.ibm.com/install/osx | sh
@@ -80,6 +89,7 @@ ibmcloud plugin install container-service vpc-infrastructure
 ```
 
 ### 2. Basic Resource Creation Pattern
+
 ```bash
 # 1. Create VPC
 ibmcloud is vpc-create my-vpc
@@ -97,12 +107,14 @@ ibmcloud iam ...
 ## Essential Guidance
 
 ### Security Best Practices
+
 1. **IAM**: Use Access Groups, apply least privilege, rotate API keys every 90 days
 2. **Network**: Use private endpoints, configure Security Groups and ACLs
 3. **Data**: Enable encryption at rest/transit, use Key Protect for key management
 4. **Compliance**: Choose regions for data residency requirements
 
 ### Cost Optimization
+
 - Right-size instances for workload requirements
 - Use reserved capacity for predictable workloads
 - Leverage serverless (Code Engine/Functions) for variable loads
@@ -122,7 +134,7 @@ Load detailed guidance based on specific needs:
 
 ## Support Resources
 
-- Documentation: https://cloud.ibm.com/docs
-- API Reference: https://cloud.ibm.com/apidocs
-- Terraform Provider: https://registry.terraform.io/providers/IBM-Cloud/ibm
-- CLI Reference: https://cloud.ibm.com/docs/cli
+- Documentation: <https://cloud.ibm.com/docs>
+- API Reference: <https://cloud.ibm.com/apidocs>
+- Terraform Provider: <https://registry.terraform.io/providers/IBM-Cloud/ibm>
+- CLI Reference: <https://cloud.ibm.com/docs/cli>

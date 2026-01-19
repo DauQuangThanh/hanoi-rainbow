@@ -3,6 +3,7 @@
 Guidelines for reviewing backend architecture, design patterns, and system design.
 
 ## Table of Contents
+
 - [Layered Architecture](#layered-architecture)
 - [Design Patterns](#design-patterns)
 - [Microservices](#microservices)
@@ -16,6 +17,7 @@ Guidelines for reviewing backend architecture, design patterns, and system desig
 ### Three-Tier Architecture
 
 **Good:**
+
 ```typescript
 // ✅ Proper separation of concerns
 
@@ -124,6 +126,7 @@ export class UserRepository {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Mixed concerns in controller
 app.get('/users/:id', async (req, res) => {
@@ -148,6 +151,7 @@ app.get('/users/:id', async (req, res) => {
 ### Repository Pattern
 
 **Good:**
+
 ```typescript
 // ✅ Generic repository interface
 export interface IRepository<T> {
@@ -207,6 +211,7 @@ export class UserRepository extends BaseRepository<User> {
 ### Dependency Injection
 
 **Good:**
+
 ```typescript
 // ✅ Dependency injection with InversifyJS
 import { injectable, inject } from 'inversify';
@@ -249,6 +254,7 @@ const userService = container.get<UserService>(TYPES.UserService);
 ### Factory Pattern
 
 **Good:**
+
 ```typescript
 // ✅ Abstract factory for different payment providers
 interface PaymentProvider {
@@ -306,6 +312,7 @@ await provider.processPayment(100, 'USD');
 ### Strategy Pattern
 
 **Good:**
+
 ```typescript
 // ✅ Strategy pattern for different shipping methods
 interface ShippingStrategy {
@@ -362,6 +369,7 @@ const quote = shipping.calculateShipping(5, 100);
 ### Service Boundaries
 
 **Good:**
+
 ```typescript
 // ✅ Well-defined service boundaries
 
@@ -418,6 +426,7 @@ export class UserServiceClient {
 ### Inter-Service Communication
 
 **Good:**
+
 ```typescript
 // ✅ Event-driven communication with message broker
 import { EventEmitter } from 'events';
@@ -462,6 +471,7 @@ queue.subscribe('user.created', notificationService.onUserCreated);
 ### Circuit Breaker Pattern
 
 **Good:**
+
 ```typescript
 // ✅ Circuit breaker for resilient service calls
 import CircuitBreaker from 'opossum';
@@ -504,6 +514,7 @@ const user = await breaker.fire(userId);
 ### Entities and Value Objects
 
 **Good:**
+
 ```typescript
 // ✅ Entity (has identity)
 export class Order {
@@ -571,6 +582,7 @@ export class Money {
 ### Aggregates
 
 **Good:**
+
 ```typescript
 // ✅ Aggregate root
 export class ShoppingCart {
@@ -652,6 +664,7 @@ class CartItem {
 ### Use Cases
 
 **Good:**
+
 ```typescript
 // ✅ Use case (application business rules)
 export class CreateUserUseCase {
@@ -705,6 +718,7 @@ export class CreateUserUseCase {
 ### Ports and Adapters
 
 **Good:**
+
 ```typescript
 // ✅ Port (interface)
 export interface IUserRepository {
@@ -750,6 +764,7 @@ export class PostgresUserRepository implements IUserRepository {
 ### Domain Events
 
 **Good:**
+
 ```typescript
 // ✅ Domain event
 export class OrderPlacedEvent {
@@ -804,6 +819,7 @@ export class EventBus {
 ### Custom Errors
 
 **Good:**
+
 ```typescript
 // ✅ Domain-specific errors
 export class DomainError extends Error {
@@ -856,6 +872,7 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 ```
 
 **Key Architecture Principles:**
+
 1. Separation of concerns
 2. Dependency inversion
 3. Single responsibility

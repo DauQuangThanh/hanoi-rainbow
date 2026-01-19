@@ -1,13 +1,14 @@
 # Common Patterns to Validate
 
-
 ### Monolithic Architecture
+
 ☐ Justified for project size and complexity
 ☐ Modularization strategy defined
 ☐ Scaling strategy documented
 ☐ Migration path considered (if applicable)
 
 ### Microservices Architecture
+
 ☐ Service boundaries follow business domains
 ☐ Services are independently deployable
 ☐ Database per service enforced
@@ -18,6 +19,7 @@
 ☐ Saga pattern for transactions (if needed)
 
 ### Event-Driven Architecture
+
 ☐ Event schemas defined
 ☐ Event sourcing strategy documented
 ☐ Event ordering guarantees defined
@@ -26,6 +28,7 @@
 ☐ Message broker selected appropriately
 
 ### Serverless Architecture
+
 ☐ Function boundaries appropriate
 ☐ Cold start impact assessed
 ☐ Stateless design enforced
@@ -33,10 +36,12 @@
 ☐ Cost model validated
 
 ### Layered Architecture
+
 ☐ Layer responsibilities clearly defined
 ☐ Layer dependencies unidirectional
 ☐ Cross-cutting concerns addressed
 ☐ Layer coupling minimized
+
 ```
 
 **2. Design Principles Assessment**

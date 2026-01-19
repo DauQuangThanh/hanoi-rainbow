@@ -1,6 +1,7 @@
 # IAM & Security
 
 ## Table of Contents
+
 - [Identity and Access Management (IAM)](#identity-and-access-management-iam)
 - [Resource Groups and Access Groups](#resource-groups-and-access-groups)
 - [Service IDs and API Keys](#service-ids-and-api-keys)
@@ -18,6 +19,7 @@
 IAM provides centralized access control for IBM Cloud resources through policies, roles, and access groups.
 
 **Core Concepts:**
+
 - **Users**: Human identities (IBMid, AppID)
 - **Service IDs**: Application identities
 - **Access Groups**: Group users/service IDs for policy assignment
@@ -27,22 +29,26 @@ IAM provides centralized access control for IBM Cloud resources through policies
 ### IAM Roles
 
 **Platform Roles:**
+
 - **Viewer**: Read-only access, view resources
 - **Operator**: Perform actions (start/stop), no modify
 - **Editor**: Modify resources, create/delete
 - **Administrator**: Full control, assign access to others
 
 **Service Roles:**
+
 - **Reader**: Read service data
 - **Writer**: Write service data
 - **Manager**: Full service management
 
 **Custom Roles** (Enterprise plans):
+
 - Define custom permissions
 
 ### Assign Access
 
 **Via CLI:**
+
 ```bash
 # Assign platform role
 ibmcloud iam user-policy-create user@example.com \
@@ -67,6 +73,7 @@ ibmcloud iam user-policies user@example.com
 ```
 
 **Terraform:**
+
 ```hcl
 # IAM policy for user
 resource "ibm_iam_user_policy" "policy" {
@@ -93,6 +100,7 @@ resource "ibm_iam_user_policy" "cos_policy" {
 ### Policy Examples
 
 **Grant Full Access to Resource Group:**
+
 ```bash
 ibmcloud iam user-policy-create user@example.com \
   --roles Administrator,Manager \
@@ -100,6 +108,7 @@ ibmcloud iam user-policy-create user@example.com \
 ```
 
 **Grant Kubernetes Cluster Access:**
+
 ```bash
 ibmcloud iam user-policy-create user@example.com \
   --service-name containers-kubernetes \
@@ -108,6 +117,7 @@ ibmcloud iam user-policy-create user@example.com \
 ```
 
 **Grant COS Bucket Access:**
+
 ```bash
 ibmcloud iam user-policy-create user@example.com \
   --service-name cloud-object-storage \
@@ -137,6 +147,7 @@ ibmcloud target -g production-rg
 ```
 
 **Best Practices:**
+
 - Organize by environment (dev, staging, prod)
 - Or by application/project
 - Or by department/team
@@ -147,6 +158,7 @@ ibmcloud target -g production-rg
 Group users and service IDs for policy assignment.
 
 **CLI:**
+
 ```bash
 # Create access group
 ibmcloud iam access-group-create Developers \
@@ -168,6 +180,7 @@ ibmcloud iam access-groups
 ```
 
 **Terraform:**
+
 ```hcl
 # Create access group
 resource "ibm_iam_access_group" "developers" {
@@ -193,6 +206,7 @@ resource "ibm_iam_access_group_policy" "dev_policy" {
 ```
 
 **Example Access Groups:**
+
 - **Administrators**: Full platform and service access
 - **Developers**: Editor + Writer on dev/staging
 - **Operators**: Operator on production resources
@@ -208,6 +222,7 @@ resource "ibm_iam_access_group_policy" "dev_policy" {
 Non-human identities for applications and services.
 
 **CLI:**
+
 ```bash
 # Create service ID
 ibmcloud iam service-id-create my-app-id \
@@ -228,6 +243,7 @@ ibmcloud iam service-ids
 ```
 
 **Terraform:**
+
 ```hcl
 # Create service ID
 resource "ibm_iam_service_id" "app_id" {
@@ -257,6 +273,7 @@ resource "ibm_iam_service_policy" "app_policy" {
 ### API Keys
 
 **User API Keys:**
+
 ```bash
 # Create user API key
 ibmcloud iam api-key-create my-api-key \
@@ -270,6 +287,7 @@ ibmcloud iam api-key-delete my-api-key
 ```
 
 **Authenticate with API Key:**
+
 ```bash
 # CLI login with API key
 ibmcloud login --apikey @api-key.txt
@@ -280,6 +298,7 @@ ibmcloud login --no-region
 ```
 
 **Best Practices:**
+
 - Rotate API keys every 90 days
 - Use service IDs for applications
 - Store keys in Secrets Manager
@@ -296,6 +315,7 @@ ibmcloud login --no-region
 FIPS 140-2 Level 3 certified key management service for encryption keys.
 
 **Use Cases:**
+
 - Encrypt data at rest (COS, databases, volumes)
 - Bring Your Own Key (BYOK)
 - Keep Your Own Key (KYOK) with Hyper Protect Crypto Services
@@ -304,6 +324,7 @@ FIPS 140-2 Level 3 certified key management service for encryption keys.
 ### Create Key Protect Instance
 
 **CLI:**
+
 ```bash
 # Create Key Protect instance
 ibmcloud resource service-instance-create my-key-protect \
@@ -324,6 +345,7 @@ ibmcloud kp keys --instance-id <KP-INSTANCE-ID>
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_resource_instance" "key_protect" {
   name              = "my-key-protect"
@@ -350,6 +372,7 @@ resource "ibm_kms_key" "standard_key" {
 ### Encrypt Resources
 
 **Cloud Object Storage:**
+
 ```hcl
 resource "ibm_cos_bucket" "encrypted_bucket" {
   bucket_name          = "my-encrypted-bucket"
@@ -362,6 +385,7 @@ resource "ibm_cos_bucket" "encrypted_bucket" {
 ```
 
 **Block Storage:**
+
 ```hcl
 resource "ibm_is_volume" "encrypted_volume" {
   name           = "my-encrypted-volume"
@@ -373,6 +397,7 @@ resource "ibm_is_volume" "encrypted_volume" {
 ```
 
 **Database:**
+
 ```hcl
 resource "ibm_database" "postgresql" {
   name              = "my-postgres"
@@ -406,6 +431,7 @@ ibmcloud kp key-policy-rotation-set <KEY-ID> \
 Centralized secrets management for API keys, passwords, certificates, and credentials.
 
 **Secret Types:**
+
 - Arbitrary (generic secrets)
 - User credentials
 - IAM credentials (automatic rotation)
@@ -415,6 +441,7 @@ Centralized secrets management for API keys, passwords, certificates, and creden
 ### Create Secrets Manager Instance
 
 **CLI:**
+
 ```bash
 # Create Secrets Manager instance
 ibmcloud resource service-instance-create my-secrets-manager \
@@ -439,6 +466,7 @@ ibmcloud secrets-manager secret-get \
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_resource_instance" "secrets_manager" {
   name              = "my-secrets-manager"
@@ -481,6 +509,7 @@ resource "ibm_sm_iam_credentials_secret" "iam_creds" {
 ### Access Secrets in Applications
 
 **Python:**
+
 ```python
 from ibm_secrets_manager_sdk.secrets_manager_v2 import *
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
@@ -500,6 +529,7 @@ print(f"Password: {db_password}")
 ```
 
 **Node.js:**
+
 ```javascript
 const SecretsManagerV2 = require('@ibm-cloud/secrets-manager/secrets-manager/v2');
 const { IamAuthenticator } = require('@ibm-cloud/secrets-manager/auth');
@@ -534,6 +564,7 @@ secretsManager.getSecret(params)
 Unified security and compliance management across IBM Cloud.
 
 **Features:**
+
 - Security posture monitoring
 - Compliance validation
 - Configuration scanning
@@ -564,6 +595,7 @@ ibmcloud scc attachment-create \
 ### Compliance Profiles
 
 **Available Profiles:**
+
 - **CIS IBM Cloud Foundations Benchmark**: 139 controls
 - **IBM Cloud Framework for Financial Services**: 300+ controls
 - **NIST 800-53**: Security controls
@@ -596,6 +628,7 @@ ibmcloud scc report-create \
 Audit trail for IBM Cloud account and resource activities.
 
 **Event Types:**
+
 - Account management
 - IAM activities
 - Resource lifecycle
@@ -617,6 +650,7 @@ ibmcloud at route create \
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_resource_instance" "activity_tracker" {
   name              = "my-activity-tracker"
@@ -644,21 +678,25 @@ ibmcloud at export \
 ### Common Audit Queries
 
 **IAM Policy Changes:**
+
 ```
 action:iam-access-management.policy.*
 ```
 
 **Resource Creation:**
+
 ```
 action:*.create
 ```
 
 **Failed Login Attempts:**
+
 ```
 action:iam-identity.user-apikey.login outcome:failure
 ```
 
 **Data Access (COS):**
+
 ```
 target.typeURI:cloud-object-storage/bucket action:cloud-object-storage.object.read
 ```

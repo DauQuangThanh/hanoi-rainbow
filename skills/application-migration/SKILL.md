@@ -27,6 +27,7 @@ Actions:
 **Output:** Application assessment report with complexity scores (low/medium/high)
 
 **Example Assessment:**
+
 ```
 Application: Customer Portal
 Tech Stack: Java 8, Oracle 11g, Apache Tomcat 7
@@ -41,6 +42,7 @@ Complexity: High (20+ integrations, legacy code)
 Choose the approach based on complexity and business constraints:
 
 **Strangler Fig Pattern** (recommended for complex applications):
+
 - Build new functionality alongside old system
 - Incrementally redirect traffic to new components
 - Retire old components gradually
@@ -48,12 +50,14 @@ Choose the approach based on complexity and business constraints:
 - Risk: Low (gradual transition with rollback capability)
 
 **Big Bang Migration** (for simple applications):
+
 - Complete migration in single cutover event
 - All users switch simultaneously
 - Timeline: 1-3 months
 - Risk: High (no gradual rollback option)
 
 **Phased Migration** (for multi-tenant or regional deployments):
+
 - Migrate one tenant/region at a time
 - Validate each phase before proceeding
 - Timeline: 3-12 months
@@ -94,6 +98,7 @@ Iteration Pattern:
 Execute final switchover with validation:
 
 **Pre-Cutover Checklist:**
+
 - [ ] All automated tests passing (unit, integration, E2E)
 - [ ] Performance meets SLA requirements (response time < 2s for 95th percentile)
 - [ ] Data validation complete (row counts match, checksums verified)
@@ -105,6 +110,7 @@ Execute final switchover with validation:
 **Cutover Window:** Schedule during lowest traffic period (typically Sunday 2-6 AM)
 
 **Post-Cutover Monitoring:** Monitor these metrics for 72 hours:
+
 - Error rate (must be < 0.1%)
 - Response time (must be < 2s for 95th percentile)
 - Database connection pool utilization (must be < 80%)
@@ -142,4 +148,3 @@ Load detailed guides based on migration phase:
 **Budget Reality:** Migrations typically take 1.5-2x initial estimates. Plan accordingly.
 
 **Communication Cadence:** Send status updates to stakeholders weekly during planning, daily during execution.
-

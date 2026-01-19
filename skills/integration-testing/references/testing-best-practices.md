@@ -1,8 +1,9 @@
 # Testing Best Practices
 
-
 ### Test Organization
+
 1. **Arrange-Act-Assert (AAA) Pattern**
+
    ```javascript
    it('should do something', () => {
      // Arrange - Set up test data
@@ -22,6 +23,7 @@
    - Don't rely on test execution order
 
 3. **Descriptive Test Names**
+
    ```javascript
    // ❌ Bad
    it('works', () => { });
@@ -31,6 +33,7 @@
    ```
 
 ### Test Data
+
 1. **Use factories for dynamic data**
 2. **Use fixtures for stable reference data**
 3. **Clean up test data after each test**
@@ -38,6 +41,7 @@
 5. **Use meaningful test data**
 
 ### Performance
+
 1. **Run unit tests before integration tests**
 2. **Use test database snapshots**
 3. **Parallel test execution where possible**
@@ -45,6 +49,7 @@
 5. **Set appropriate timeouts**
 
 ### Maintenance
+
 1. **Keep tests simple and focused**
 2. **Avoid test duplication**
 3. **Refactor tests with code**

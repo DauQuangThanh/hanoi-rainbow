@@ -11,12 +11,14 @@ Code that has grown so large and unwieldy that it's difficult to work with.
 **Symptoms**: Method contains too many lines of code (generally >20-30 lines)
 
 **Problems**:
+
 - Hard to understand
 - Difficult to test
 - Likely violates Single Responsibility Principle
 - Contains hidden duplication
 
 **Detection**:
+
 ```typescript
 // Red flags:
 // - Method spans multiple screens
@@ -60,6 +62,7 @@ async function processOrder(orderId: string) {
 ```
 
 **Solutions**:
+
 1. Extract Method
 2. Replace Temp with Query
 3. Introduce Parameter Object
@@ -83,12 +86,14 @@ async function processOrder(orderId: string) {
 **Symptoms**: Class has many fields, methods, or lines of code (>300 lines)
 
 **Problems**:
+
 - Too many responsibilities
 - Hard to understand and maintain
 - Difficult to test
 - High coupling
 
 **Detection**:
+
 ```typescript
 // Red flags:
 // - More than 10 fields
@@ -143,6 +148,7 @@ class UserManager {
 ```
 
 **Solutions**:
+
 1. Extract Class
 2. Extract Subclass
 3. Extract Interface
@@ -190,12 +196,14 @@ class UserStatistics {
 **Symptoms**: Using primitives instead of small objects for simple tasks
 
 **Problems**:
+
 - Validation logic scattered
 - Type safety issues
 - Harder to extend behavior
 - No encapsulation
 
 **Detection**:
+
 ```typescript
 // Red flags:
 // - String/number used for domain concepts
@@ -235,6 +243,7 @@ const user = new User(
 ```
 
 **Solutions**:
+
 1. Replace Data Value with Object
 2. Replace Type Code with Class
 3. Extract Class
@@ -333,12 +342,14 @@ const user = new User(
 **Symptoms**: Method has more than 3-4 parameters
 
 **Problems**:
+
 - Hard to understand
 - Easy to pass parameters in wrong order
 - Difficult to extend
 - Creates dependencies
 
 **Detection**:
+
 ```typescript
 // Red flags:
 // - More than 3-4 parameters
@@ -362,6 +373,7 @@ function createUser(
 ```
 
 **Solutions**:
+
 1. Replace Parameter with Method Call
 2. Preserve Whole Object
 3. Introduce Parameter Object
@@ -442,11 +454,13 @@ const user = new UserBuilder()
 **Symptoms**: Same group of data items appear together in multiple places
 
 **Problems**:
+
 - Duplication
 - Missing abstraction
 - Hard to maintain
 
 **Detection**:
+
 ```typescript
 // Red flags:
 // - Same parameters appear together
@@ -484,6 +498,7 @@ function printAddress(
 ```
 
 **Solutions**:
+
 1. Extract Class
 2. Introduce Parameter Object
 3. Preserve Whole Object
@@ -540,11 +555,13 @@ Incomplete or incorrect application of object-oriented principles.
 **Symptoms**: Complex switch or if-else chains based on type codes
 
 **Problems**:
+
 - Violates Open/Closed Principle
 - Duplicated switch logic
 - Hard to extend
 
 **Detection**:
+
 ```typescript
 // Red flags:
 // - Switch on type code
@@ -590,6 +607,7 @@ class Employee {
 ```
 
 **Solutions**:
+
 1. Replace Type Code with Polymorphism
 2. Replace Type Code with State/Strategy
 3. Replace Conditional with Polymorphism
@@ -660,11 +678,13 @@ class Salesman extends Employee {
 **Symptoms**: Field used only in certain circumstances
 
 **Problems**:
+
 - Confusing - why is field sometimes empty?
 - Hard to understand when field is valid
 - Often indicates missing abstraction
 
 **Detection**:
+
 ```typescript
 // Red flags:
 // - Fields that are null/undefined most of the time
@@ -705,6 +725,7 @@ class Order {
 ```
 
 **Solutions**:
+
 1. Extract Class
 2. Replace Method with Method Object
 
@@ -778,11 +799,13 @@ class Order {
 **Symptoms**: Subclass uses only some of inherited methods/properties
 
 **Problems**:
+
 - Wrong hierarchy
 - Violates Liskov Substitution Principle
 - Confusing interface
 
 **Detection**:
+
 ```typescript
 // Red flags:
 // - Subclass throws errors for parent methods
@@ -811,6 +834,7 @@ class Penguin extends Bird {
 ```
 
 **Solutions**:
+
 1. Replace Inheritance with Delegation
 2. Extract Superclass
 3. Push Down Method/Field
@@ -859,11 +883,13 @@ These smells make changes difficult - modifying one thing requires changes in ma
 **Symptoms**: One class commonly changed in different ways for different reasons
 
 **Problems**:
+
 - Violates Single Responsibility Principle
 - Hard to maintain
 - Changes affect multiple concerns
 
 **Detection**:
+
 ```typescript
 // Red flags:
 // - "When we add a new database, we change methods X, Y, Z"
@@ -893,6 +919,7 @@ class Product {
 ```
 
 **Solutions**:
+
 1. Extract Class
 2. Split up the behavior
 

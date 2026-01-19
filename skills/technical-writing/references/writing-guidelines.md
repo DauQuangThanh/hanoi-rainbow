@@ -22,12 +22,14 @@ Comprehensive guidelines for clear, consistent, and effective technical writing.
 Active voice makes documentation clearer and more direct.
 
 **✅ Good Examples:**
+
 - "The system processes the request"
 - "Click Save to store your changes"
 - "The API returns a JSON response"
 - "Configure the settings in the dashboard"
 
 **❌ Bad Examples:**
+
 - "The request is processed by the system"
 - "Your changes can be stored by clicking on the Save button"
 - "A JSON response is returned by the API"
@@ -38,12 +40,14 @@ Active voice makes documentation clearer and more direct.
 Eliminate unnecessary words and get to the point.
 
 **✅ Good Examples:**
+
 - "Configure the settings"
 - "Run the command"
 - "The function returns a boolean"
 - "Authentication requires an API key"
 
 **❌ Bad Examples:**
+
 - "Configure the settings and parameters"
 - "You should go ahead and run the command"
 - "The function will go ahead and return a boolean value"
@@ -54,11 +58,13 @@ Eliminate unnecessary words and get to the point.
 Don't repeat information unnecessarily.
 
 **✅ Good Examples:**
+
 - "Create a new user"
 - "Delete the file"
 - "Important: Backup data before upgrading"
 
 **❌ Bad Examples:**
+
 - "Create a new user account" (account is redundant)
 - "Delete and remove the file" (delete and remove mean the same)
 - "Important note: Please note that..." (redundant "note")
@@ -68,12 +74,14 @@ Don't repeat information unnecessarily.
 Always define acronyms on first use and explain technical terms.
 
 **✅ Good Examples:**
+
 - "API (Application Programming Interface)"
 - "JWT (JSON Web Token) for authentication"
 - "Use CRUD (Create, Read, Update, Delete) operations"
 - "Configure the REST (Representational State Transfer) endpoint"
 
 **❌ Bad Examples:**
+
 - "Configure the API" (assumes everyone knows API)
 - "Use JWT for auth" (unexplained acronyms)
 - "Implement CRUD" (no explanation)
@@ -83,11 +91,13 @@ Always define acronyms on first use and explain technical terms.
 Keep sentences concise and focused on one idea.
 
 **✅ Good Example:**
+
 ```markdown
 The API supports pagination. Use the `page` parameter to specify the page number. Each page returns up to 100 results.
 ```
 
 **❌ Bad Example:**
+
 ```markdown
 The API supports pagination and you can use the `page` parameter to specify which page number you want to retrieve, with each page returning up to 100 results depending on your configuration.
 ```
@@ -101,6 +111,7 @@ The API supports pagination and you can use the `page` parameter to specify whic
 Don't alternate between synonyms for the same concept.
 
 **✅ Good (Consistent):**
+
 ```markdown
 ## User Management
 
@@ -110,6 +121,7 @@ To delete a user, click the trash icon next to the user.
 ```
 
 **❌ Bad (Inconsistent):**
+
 ```markdown
 ## User Management
 
@@ -123,6 +135,7 @@ To delete a person, click the trash icon next to the member.
 Document your terminology and share with the team.
 
 **Example Glossary:**
+
 ```markdown
 # Terminology
 
@@ -137,6 +150,7 @@ Document your terminology and share with the team.
 Use standard industry terminology correctly.
 
 **✅ Correct:**
+
 - REST API (not RESTful API or REST endpoint)
 - JSON (all caps, not Json or json)
 - JavaScript (not Javascript or java script)
@@ -153,12 +167,14 @@ Use standard industry terminology correctly.
 Active voice is more engaging and clearer.
 
 **✅ Active Voice:**
+
 - "The API validates the input"
 - "Run the migration script"
 - "The user clicks the button"
 - "Configure the database connection"
 
 **❌ Passive Voice:**
+
 - "The input is validated by the API"
 - "The migration script should be run"
 - "The button is clicked by the user"
@@ -169,6 +185,7 @@ Active voice is more engaging and clearer.
 Use passive voice when the actor is unknown or unimportant.
 
 **Acceptable Examples:**
+
 - "The user was created successfully" (focus on the result)
 - "The file has been deleted" (who deleted it doesn't matter)
 - "An error was encountered" (source of error is unknown)
@@ -182,6 +199,7 @@ Use passive voice when the actor is unknown or unimportant.
 Provide exact numbers instead of vague terms.
 
 **✅ Specific:**
+
 - "Response time < 200ms for 95% of requests"
 - "Retry up to 3 times with 2-second delays"
 - "Password must be 12+ characters"
@@ -189,6 +207,7 @@ Provide exact numbers instead of vague terms.
 - "Cache expires after 5 minutes"
 
 **❌ Vague:**
+
 - "Fast response time"
 - "Retry a few times"
 - "Strong password required"
@@ -200,6 +219,7 @@ Provide exact numbers instead of vague terms.
 Provide exact steps, not general guidance.
 
 **✅ Specific:**
+
 ```markdown
 1. Open terminal
 2. Navigate to project directory: `cd /path/to/project`
@@ -209,6 +229,7 @@ Provide exact steps, not general guidance.
 ```
 
 **❌ Vague:**
+
 ```markdown
 1. Open your terminal
 2. Go to the project folder
@@ -222,12 +243,14 @@ Provide exact steps, not general guidance.
 Always include version numbers and system requirements.
 
 **✅ Specific:**
+
 - "Requires Node.js 18.0 or higher"
 - "Compatible with Python 3.9, 3.10, 3.11"
 - "Tested on Ubuntu 22.04 LTS"
 - "Supports PostgreSQL 14+ and MySQL 8+"
 
 **❌ Vague:**
+
 - "Requires recent Node.js"
 - "Works with Python 3.x"
 - "Compatible with modern Linux"
@@ -242,6 +265,7 @@ Always include version numbers and system requirements.
 Follow semantic heading structure (H1 → H2 → H3).
 
 **✅ Correct Hierarchy:**
+
 ```markdown
 # Main Title (H1)
 
@@ -257,6 +281,7 @@ Follow semantic heading structure (H1 → H2 → H3).
 ```
 
 **❌ Incorrect (Skipping Levels):**
+
 ```markdown
 # Main Title (H1)
 
@@ -270,12 +295,14 @@ Follow semantic heading structure (H1 → H2 → H3).
 Headings should clearly indicate section content.
 
 **✅ Descriptive:**
+
 - "Installing Prerequisites"
 - "Configuring Authentication"
 - "Troubleshooting Connection Errors"
 - "API Rate Limits"
 
 **❌ Vague:**
+
 - "Setup"
 - "Configuration"
 - "Problems"
@@ -290,6 +317,7 @@ Headings should clearly indicate section content.
 Always include language identifier in code blocks.
 
 **✅ With Language:**
+
 ````markdown
 ```javascript
 const result = await fetchData();
@@ -298,6 +326,7 @@ console.log(result);
 ````
 
 **❌ Without Language:**
+
 ````markdown
 ```
 const result = await fetchData();
@@ -310,12 +339,14 @@ console.log(result);
 Wrap code elements in backticks.
 
 **✅ Good:**
+
 - Use the `GET` method to retrieve data
 - Set the `Content-Type` header to `application/json`
 - The `userId` parameter is required
 - Run `npm install` to install dependencies
 
 **❌ Bad:**
+
 - Use the GET method to retrieve data
 - Set the Content-Type header to application/json
 - The userId parameter is required
@@ -326,6 +357,7 @@ Wrap code elements in backticks.
 Show complete, runnable code with proper formatting.
 
 **✅ Complete Example:**
+
 ```javascript
 // Fetch user data
 async function getUserById(id) {
@@ -344,6 +376,7 @@ async function getUserById(id) {
 ```
 
 **❌ Incomplete Example:**
+
 ```javascript
 // Get user
 fetch('/api/users/' + id)
@@ -355,6 +388,7 @@ fetch('/api/users/' + id)
 Show both input and expected output.
 
 **✅ With Input/Output:**
+
 ```javascript
 // Input
 const input = "hello world";
@@ -374,6 +408,7 @@ console.log(result);
 Number lists for steps, bullets for items.
 
 **✅ Numbered for Steps:**
+
 ```markdown
 ## Installation
 
@@ -384,6 +419,7 @@ Number lists for steps, bullets for items.
 ```
 
 **✅ Bullets for Non-Sequential Items:**
+
 ```markdown
 ## Features
 
@@ -398,6 +434,7 @@ Number lists for steps, bullets for items.
 Tables are ideal for parameters, options, and comparisons.
 
 **✅ Good Table:**
+
 ```markdown
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -407,6 +444,7 @@ Tables are ideal for parameters, options, and comparisons.
 ```
 
 **❌ Poor Formatting:**
+
 ```markdown
 Parameters:
 - name (string, required): User's full name
@@ -423,11 +461,13 @@ Parameters:
 Be direct with imperative mood.
 
 **✅ Direct:**
+
 - "Install Node.js 18 or higher"
 - "Configure the database URL"
 - "Run tests before deploying"
 
 **❌ Wishy-Washy:**
+
 - "You should install Node.js 18 or higher"
 - "You might want to configure the database URL"
 - "You should probably run tests before deploying"
@@ -437,11 +477,13 @@ Be direct with imperative mood.
 Use present tense for current functionality.
 
 **✅ Present Tense:**
+
 - "The API returns a JSON response"
 - "The function validates user input"
 - "Authentication requires an API key"
 
 **❌ Future Tense:**
+
 - "The API will return a JSON response"
 - "The function will validate user input"
 - "Authentication will require an API key"
@@ -451,11 +493,13 @@ Use present tense for current functionality.
 Use gender-neutral language.
 
 **✅ Gender-Neutral:**
+
 - "The user enters their email"
 - "Each developer has their own API key"
 - "The admin can configure their preferences"
 
 **❌ Gendered:**
+
 - "The user enters his email"
 - "Each developer has his own API key"
 - "The admin can configure her preferences"
@@ -465,12 +509,14 @@ Use gender-neutral language.
 Use full words in formal documentation.
 
 **✅ Full Words:**
+
 - "do not"
 - "cannot"
 - "it is"
 - "you are"
 
 **❌ Contractions:**
+
 - "don't"
 - "can't"
 - "it's"
@@ -481,11 +527,13 @@ Use full words in formal documentation.
 These words can be condescending or dismissive.
 
 **✅ Without "Just":**
+
 - "Run `npm install` to install dependencies"
 - "Add the API key to your environment variables"
 - "Configure the database connection string"
 
 **❌ With "Just":**
+
 - "Just run `npm install` to install dependencies"
 - "Simply add the API key to your environment variables"
 - "Just configure the database connection string"
@@ -497,31 +545,37 @@ These words can be condescending or dismissive.
 ### Capitalization
 
 **Sentence Case for Headings:**
+
 - ✅ "Getting started with the API"
 - ❌ "Getting Started With The API"
 
 **Exception - Title Case for Main Titles:**
+
 - ✅ "API Reference Guide"
 - ✅ "User Authentication Tutorial"
 
 **Proper Nouns Always Capitalized:**
+
 - JavaScript, Python, PostgreSQL, Docker, AWS
 
 ### Punctuation
 
 **End Sentences with Periods:**
+
 ```markdown
 ✅ Configure the database. Run migrations. Start the server.
 ❌ Configure the database
 ```
 
 **No Period for Headings:**
+
 ```markdown
 ✅ ## Installing Dependencies
 ❌ ## Installing Dependencies.
 ```
 
 **Use Periods in Lists (for Complete Sentences):**
+
 ```markdown
 ✅ 
 - Install Node.js 18 or higher.
@@ -537,6 +591,7 @@ These words can be condescending or dismissive.
 ### Line Length
 
 **Keep Lines Reasonable:**
+
 - Target: 80-100 characters per line in markdown
 - Helps with readability and diffs
 - Exception: URLs and code blocks can be longer
@@ -550,11 +605,13 @@ These words can be condescending or dismissive.
 Always include descriptive alt text.
 
 **✅ With Alt Text:**
+
 ```markdown
 ![Login screen showing username and password fields](images/login-screen.png)
 ```
 
 **❌ Without Alt Text:**
+
 ```markdown
 ![](images/login-screen.png)
 ```
@@ -564,12 +621,14 @@ Always include descriptive alt text.
 Link text should describe the destination.
 
 **✅ Descriptive:**
+
 - See the [API authentication guide](link) for details
 - Download the [installation script](link)
 - View [complete code example](link)
 
 **❌ Non-Descriptive:**
-- See [here](link) for details
+
+- See [documentation](link) for details
 - Click [this link](link)
 - View [example](link)
 
@@ -578,6 +637,7 @@ Link text should describe the destination.
 Screen readers rely on heading hierarchy for navigation.
 
 **✅ Proper Hierarchy:**
+
 - Never skip heading levels (H1 → H2 → H3)
 - Each page has exactly one H1
 - Headings are descriptive

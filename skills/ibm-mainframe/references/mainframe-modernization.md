@@ -5,6 +5,7 @@
 ### Discovery Phase
 
 **1. Application Inventory**
+
 ```
 Component Analysis:
 - Number of programs (COBOL, PL/I, Assembler, REXX)
@@ -18,6 +19,7 @@ Component Analysis:
 ```
 
 **2. Technical Complexity Scoring**
+
 ```
 For each program, score:
 - Lines of code (1-5 points based on size)
@@ -37,6 +39,7 @@ Complexity Rating:
 ```
 
 **3. Business Criticality Matrix**
+
 ```
 Rate each application:
 - Transaction volume (1-5)
@@ -55,6 +58,7 @@ Priority = Sum of ratings
 ### Dependency Analysis
 
 **Program Call Hierarchy:**
+
 ```bash
 # Extract CALL statements from COBOL
 grep -r "CALL '" *.cbl | \
@@ -71,6 +75,7 @@ dot -Tpng calls.dot -o call-hierarchy.png
 ```
 
 **Data Dependencies:**
+
 ```
 Map:
 - VSAM files → Programs that read/write
@@ -81,6 +86,7 @@ Map:
 ```
 
 **Integration Points:**
+
 ```
 Identify:
 - MQ message flows
@@ -96,29 +102,34 @@ Identify:
 ### 1. Rehost (Lift & Shift)
 
 **Approach:**
+
 - Migrate to mainframe emulator (Micro Focus, LzLabs, Raincode)
 - Run on x86 servers or cloud
 - Minimal code changes
 
 **Pros:**
+
 - Fastest migration (6-12 months)
 - Lowest risk
 - Preserve existing skills
 - Quick cloud benefits
 
 **Cons:**
+
 - Technical debt remains
 - Limited modernization
 - Ongoing emulator licensing
 - Performance may vary
 
 **Best For:**
+
 - Time-sensitive migrations
 - Limited budget
 - Stable applications
 - Skills shortage
 
 **Implementation Steps:**
+
 ```
 1. Select emulator platform
 2. Install and configure emulator
@@ -131,6 +142,7 @@ Identify:
 ```
 
 **Example: Micro Focus Enterprise Server**
+
 ```bash
 # Compile COBOL to native code
 cblc -C "anim" CUSTINQ.cbl
@@ -145,23 +157,27 @@ cblc -C "netmf" CUSTINQ.cbl
 ### 2. Replatform
 
 **Approach:**
+
 - Migrate to modern platform
 - Keep similar architecture
 - Update technology stack
 
 **Pros:**
+
 - Moderate risk
 - Some modernization
 - Better performance
 - Cloud-native deployment
 
 **Cons:**
+
 - Longer timeline (12-24 months)
 - More complex
 - Requires reskilling
 - Testing overhead
 
 **Best For:**
+
 - Moderate complexity apps
 - Need for scalability
 - Hybrid approach
@@ -170,6 +186,7 @@ cblc -C "netmf" CUSTINQ.cbl
 **Implementation: COBOL to Java**
 
 **COBOL Source:**
+
 ```cobol
        PROCEDURE DIVISION.
            PERFORM READ-CUSTOMER
@@ -180,6 +197,7 @@ cblc -C "netmf" CUSTINQ.cbl
 ```
 
 **Java Equivalent:**
+
 ```java
 public class CustomerProcessor {
     public void processCustomer(String customerId) {
@@ -201,23 +219,27 @@ public class CustomerProcessor {
 ### 3. Refactor (Microservices)
 
 **Approach:**
+
 - Decompose monolith
 - Build microservices
 - API-first design
 
 **Pros:**
+
 - Full modernization
 - Cloud-native
 - Agile development
 - Technology flexibility
 
 **Cons:**
+
 - Longest timeline (24-36 months)
 - Highest risk
 - Complete reskilling
 - Significant investment
 
 **Best For:**
+
 - Complex applications
 - Long-term strategy
 - Digital transformation
@@ -226,6 +248,7 @@ public class CustomerProcessor {
 **Architecture Transformation:**
 
 **Before (Monolithic):**
+
 ```
 CICS Region
 ├── Customer Management Programs
@@ -235,6 +258,7 @@ CICS Region
 ```
 
 **After (Microservices):**
+
 ```
 API Gateway
 ├── Customer Service (Spring Boot)
@@ -244,6 +268,7 @@ API Gateway
 ```
 
 **Example Microservice:**
+
 ```java
 @RestController
 @RequestMapping("/api/v1/customers")
@@ -283,23 +308,27 @@ public class CustomerController {
 ### 4. Retire & Replace
 
 **Approach:**
+
 - Replace with COTS/SaaS
 - Commercial alternatives
 - Modern platforms
 
 **Pros:**
+
 - No development
 - Modern features
 - Vendor support
 - Quick deployment
 
 **Cons:**
+
 - Customization limits
 - Data migration
 - Process changes
 - Vendor lock-in
 
 **Best For:**
+
 - Commodity functions
 - Standard processes
 - Budget constraints
@@ -310,11 +339,13 @@ public class CustomerController {
 ### Pattern 1: API Wrapper (Strangler Fig)
 
 **Expose mainframe as API:**
+
 ```
 External Systems → API Gateway → z/OS Connect → CICS/IMS
 ```
 
 **z/OS Connect Configuration:**
+
 ```json
 {
   "serviceName": "CustomerInquiry",
@@ -337,6 +368,7 @@ External Systems → API Gateway → z/OS Connect → CICS/IMS
 ```
 
 **API Gateway (Kong/Apigee):**
+
 ```yaml
 services:
   - name: customer-service
@@ -357,11 +389,13 @@ services:
 ### Pattern 2: Data Replication (CDC)
 
 **Real-time data sync:**
+
 ```
 Mainframe DB2 → CDC (IBM InfoSphere) → Kafka → Cloud Database
 ```
 
 **CDC Configuration:**
+
 ```sql
 -- Source (DB2 z/OS)
 CREATE TABLE CUSTOMER (
@@ -379,6 +413,7 @@ CREATE SUBSCRIPTION CUST_SUB FOR TABLE CUSTOMER;
 ```
 
 **Kafka Consumer:**
+
 ```java
 @KafkaListener(topics = "mainframe.customer")
 public void processCustomerUpdate(CustomerEvent event) {
@@ -399,11 +434,13 @@ public void processCustomerUpdate(CustomerEvent event) {
 ### Pattern 3: Event-Driven Integration
 
 **Asynchronous messaging:**
+
 ```
 CICS/IMS → IBM MQ → Message Broker → Cloud Services
 ```
 
 **CICS to MQ:**
+
 ```cobol
        EXEC CICS WRITEQ TS
            QUEUE('CUSTOMER.UPDATES')
@@ -413,6 +450,7 @@ CICS/IMS → IBM MQ → Message Broker → Cloud Services
 ```
 
 **Spring Boot Consumer:**
+
 ```java
 @JmsListener(destination = "CUSTOMER.UPDATES")
 public void handleCustomerUpdate(CustomerMessage msg) {
@@ -424,6 +462,7 @@ public void handleCustomerUpdate(CustomerMessage msg) {
 ## Data Migration Strategy
 
 ### Phase 1: Analysis
+
 ```
 1. Data profiling
    - Volume
@@ -448,6 +487,7 @@ public void handleCustomerUpdate(CustomerMessage msg) {
 **VSAM to Relational Database:**
 
 **Source (VSAM):**
+
 ```cobol
 01  CUSTOMER-RECORD.
     05  CUST-ID             PIC 9(10).
@@ -457,6 +497,7 @@ public void handleCustomerUpdate(CustomerMessage msg) {
 ```
 
 **Target (PostgreSQL):**
+
 ```sql
 CREATE TABLE customer (
     cust_id BIGINT PRIMARY KEY,
@@ -475,6 +516,7 @@ CREATE INDEX idx_customer_name ON customer(cust_name);
 ### Phase 3: ETL Process
 
 **Extract from DB2:**
+
 ```sql
 -- DB2 z/OS
 UNLOAD EXTERNAL TABLE CUSTOMER
@@ -484,6 +526,7 @@ WITH HEADER;
 ```
 
 **Transform & Load:**
+
 ```python
 import pandas as pd
 from sqlalchemy import create_engine
@@ -513,6 +556,7 @@ print(f"Loaded {len(df)} records")
 ### Phase 4: Validation
 
 **Reconciliation Query:**
+
 ```sql
 -- Source count
 SELECT COUNT(*) FROM CUSTOMER WHERE CUST_STATUS = 'A';
@@ -530,6 +574,7 @@ SELECT SUM(cust_balance) FROM customer;
 ### CI/CD Pipeline for Mainframe
 
 **1. Source Control (Git):**
+
 ```bash
 # Clone mainframe source
 git clone https://github.com/company/mainframe-apps.git
@@ -547,6 +592,7 @@ mainframe-apps/
 ```
 
 **2. Build Pipeline (Jenkins):**
+
 ```groovy
 pipeline {
     agent any
@@ -600,6 +646,7 @@ pipeline {
 ```
 
 **3. Testing Strategy:**
+
 ```java
 // Unit test for migrated code
 @Test
@@ -635,6 +682,7 @@ public class CustomerAPITest {
 ### Automated Code Conversion
 
 **1. COBOL to Java (AWS Blu Age):**
+
 ```bash
 # Convert COBOL program
 blu-age convert \
@@ -646,6 +694,7 @@ blu-age convert \
 ```
 
 **2. Micro Focus Visual COBOL:**
+
 ```bash
 # Compile COBOL to .NET
 cobc -m -x CUSTINQ.cbl -o CustomerInquiry.dll
@@ -655,6 +704,7 @@ cobc -m -x CUSTINQ.cbl -t java -o CustomerInquiry.jar
 ```
 
 **3. LzLabs SDM (Software Defined Mainframe):**
+
 ```bash
 # Deploy workload to container
 lzlabs deploy \
@@ -667,6 +717,7 @@ lzlabs deploy \
 ### Static Analysis
 
 **Analyze code quality:**
+
 ```bash
 # SonarQube for COBOL
 sonar-scanner \
@@ -684,6 +735,7 @@ sloccount cobol/
 ### 18-Month Replatform Project
 
 **Months 1-3: Discovery & Planning**
+
 - Application inventory
 - Dependency mapping
 - Complexity assessment
@@ -691,23 +743,27 @@ sloccount cobol/
 - Team training
 
 **Months 4-6: Proof of Concept**
+
 - Select pilot application
 - Convert and deploy
 - Performance testing
 - Lessons learned
 
 **Months 7-12: Bulk Migration**
+
 - Wave 1: Low complexity (months 7-8)
 - Wave 2: Medium complexity (months 9-10)
 - Wave 3: High complexity (months 11-12)
 
 **Months 13-15: Integration & Testing**
+
 - End-to-end testing
 - Performance tuning
 - Security hardening
 - User acceptance testing
 
 **Months 16-18: Cutover & Stabilization**
+
 - Production deployment
 - Parallel running
 - Issue resolution
@@ -716,6 +772,7 @@ sloccount cobol/
 ## Post-Migration
 
 ### Decommissioning Checklist
+
 ```
 □ Verify all data migrated
 □ Confirm all integrations working
@@ -730,6 +787,7 @@ sloccount cobol/
 ```
 
 ### Cost Optimization
+
 ```
 Before (Mainframe):
 - MIPS charges: $1M/year

@@ -20,15 +20,19 @@ This document provides comprehensive guidance on evaluating web accessibility du
 The Web Content Accessibility Guidelines (WCAG) 2.1 are organized around four principles, often abbreviated as **POUR**:
 
 ### 1. **Perceivable**
+
 Information and user interface components must be presentable to users in ways they can perceive.
 
 ### 2. **Operable**
+
 User interface components and navigation must be operable.
 
 ### 3. **Understandable**
+
 Information and the operation of the user interface must be understandable.
 
 ### 4. **Robust**
+
 Content must be robust enough to be interpreted reliably by a wide variety of user agents, including assistive technologies.
 
 ### Conformance Levels
@@ -50,12 +54,14 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 1.1.1 Non-text Content (Level A)
 
 **Requirements:**
+
 - All images must have appropriate alt text
 - Decorative images must have empty alt attribute (`alt=""`)
 - Functional images (buttons, links) must describe function
 - Complex images (charts, diagrams) need detailed descriptions
 
 **Review Checklist:**
+
 - [ ] All informative images have descriptive alt text
 - [ ] Alt text concise and meaningful (not "image of...")
 - [ ] Decorative images marked with `alt=""`
@@ -67,6 +73,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 **Examples:**
 
 ✅ **Good:**
+
 ```html
 <img src="profile.jpg" alt="Sarah Johnson, CEO">
 <img src="chart.png" alt="Sales increased 25% from Q1 to Q2">
@@ -75,6 +82,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ```
 
 ❌ **Bad:**
+
 ```html
 <img src="profile.jpg" alt="image">
 <img src="chart.png" alt="chart">
@@ -100,12 +108,14 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 1.3.1 Info and Relationships (Level A)
 
 **Requirements:**
+
 - Information conveyed through visual layout must be available programmatically
 - Use proper semantic HTML elements
 - Form labels associated with inputs
 - Headings properly nested (h1 → h2 → h3)
 
 **Review Checklist:**
+
 - [ ] Semantic HTML used (header, nav, main, article, section, aside, footer)
 - [ ] Headings create logical document outline
 - [ ] Lists use `<ul>`, `<ol>`, or `<dl>` elements
@@ -117,11 +127,13 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 1.3.2 Meaningful Sequence (Level A)
 
 **Requirements:**
+
 - Reading order makes sense when linearized
 - Tab order follows logical sequence
 - CSS positioning doesn't break content order
 
 **Review Checklist:**
+
 - [ ] DOM order matches visual order
 - [ ] Tab order logical and predictable
 - [ ] CSS absolute/fixed positioning doesn't break flow
@@ -131,10 +143,12 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 1.3.3 Sensory Characteristics (Level A)
 
 **Requirements:**
+
 - Instructions don't rely solely on sensory characteristics
 - Don't use only shape, size, location, or sound to convey information
 
 **Review Checklist:**
+
 - [ ] Instructions don't say "click the round button" (include text label)
 - [ ] Don't say "see the sidebar on the right" (use heading or label)
 - [ ] Color not the only indicator (use icons, text, patterns)
@@ -143,11 +157,13 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 **Examples:**
 
 ❌ **Bad:**
+
 - "Click the green button to continue"
 - "Required fields are marked in red"
 - "See the panel on the right for details"
 
 ✅ **Good:**
+
 - "Click the green Continue button"
 - "Required fields are marked with an asterisk (*) in red"
 - "See the Related Articles section for details"
@@ -159,11 +175,13 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 1.4.3 Contrast (Minimum) (Level AA)
 
 **Requirements:**
+
 - Normal text: Minimum 4.5:1 contrast ratio
 - Large text (18pt+ or 14pt+ bold): Minimum 3:1 contrast ratio
 - UI components and graphical objects: Minimum 3:1 contrast ratio
 
 **Review Checklist:**
+
 - [ ] Body text meets 4.5:1 contrast ratio
 - [ ] Heading text meets 4.5:1 or 3:1 (if large)
 - [ ] Link text meets 4.5:1 contrast ratio
@@ -175,11 +193,13 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 - [ ] Disabled state text may have lower contrast (not required to meet ratio)
 
 **Testing Tools:**
+
 - Chrome DevTools: Inspect element → Contrast ratio shown in color picker
-- WebAIM Contrast Checker: https://webaim.org/resources/contrastchecker/
+- WebAIM Contrast Checker: <https://webaim.org/resources/contrastchecker/>
 - Figma plugins: Stark, A11y - Color Contrast Checker
 
 **Common Issues:**
+
 - Light gray text on white background (#999 on #FFF = 2.8:1 ❌)
 - White text on light blue background
 - Placeholder text too light
@@ -199,10 +219,12 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 1.4.4 Resize Text (Level AA)
 
 **Requirements:**
+
 - Text can be resized up to 200% without loss of content or functionality
 - Users can zoom browser without horizontal scrolling (at 1280px viewport)
 
 **Review Checklist:**
+
 - [ ] Text sizes use relative units (rem, em, %)
 - [ ] Layouts don't break at 200% zoom
 - [ ] No horizontal scrolling at 200% zoom (1280px viewport)
@@ -212,10 +234,12 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 1.4.10 Reflow (Level AA, WCAG 2.1)
 
 **Requirements:**
+
 - Content reflows without horizontal scrolling at 320px width (mobile)
 - Content reflows without vertical scrolling at 256px height (for horizontal content)
 
 **Review Checklist:**
+
 - [ ] No horizontal scrolling on mobile (320px width)
 - [ ] Responsive design adapts to narrow viewports
 - [ ] Data tables may scroll horizontally (exception allowed)
@@ -224,10 +248,12 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 1.4.11 Non-text Contrast (Level AA, WCAG 2.1)
 
 **Requirements:**
+
 - UI components must have 3:1 contrast against adjacent colors
 - Graphical objects must have 3:1 contrast
 
 **Review Checklist:**
+
 - [ ] Button borders meet 3:1 contrast
 - [ ] Form input borders meet 3:1 contrast
 - [ ] Focus indicators meet 3:1 contrast
@@ -238,6 +264,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 1.4.12 Text Spacing (Level AA, WCAG 2.1)
 
 **Requirements:**
+
 - Content must be readable when user overrides spacing:
   - Line height: At least 1.5x font size
   - Paragraph spacing: At least 2x font size
@@ -245,6 +272,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
   - Word spacing: At least 0.16x font size
 
 **Review Checklist:**
+
 - [ ] Designs accommodate increased line height
 - [ ] Text doesn't overlap with increased spacing
 - [ ] Buttons/components don't break with increased spacing
@@ -253,12 +281,14 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 1.4.13 Content on Hover or Focus (Level AA, WCAG 2.1)
 
 **Requirements:**
+
 - Tooltips and popovers must be:
   - **Dismissible**: Can be closed without moving pointer/focus
   - **Hoverable**: User can move pointer over tooltip content
   - **Persistent**: Remains visible until dismissed or no longer relevant
 
 **Review Checklist:**
+
 - [ ] Tooltips dismissible with Escape key
 - [ ] User can move mouse over tooltip without it disappearing
 - [ ] Tooltip doesn't disappear on accidental mouse movement
@@ -276,11 +306,13 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.1.1 Keyboard (Level A)
 
 **Requirements:**
+
 - All interactive elements operable via keyboard
 - No keyboard traps
 - Keyboard shortcuts documented
 
 **Review Checklist:**
+
 - [ ] All buttons keyboard accessible (Enter/Space activates)
 - [ ] All links keyboard accessible (Enter activates)
 - [ ] Form fields keyboard accessible (Tab navigates, arrows select)
@@ -305,10 +337,12 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.1.2 No Keyboard Trap (Level A)
 
 **Requirements:**
+
 - Focus can always move away from any component
 - If focus trapped (modal), Escape key provides exit
 
 **Review Checklist:**
+
 - [ ] Can Tab out of all components
 - [ ] Modals provide Escape key to close
 - [ ] Infinite scrolling allows keyboard exit
@@ -318,9 +352,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.1.4 Character Key Shortcuts (Level A, WCAG 2.1)
 
 **Requirements:**
+
 - Single character shortcuts can be turned off, remapped, or only active when component focused
 
 **Review Checklist:**
+
 - [ ] Single-key shortcuts (like "s" for search) can be disabled
 - [ ] Shortcuts require modifier key (Ctrl, Alt, Cmd)
 - [ ] Shortcuts only active when component has focus
@@ -333,10 +369,12 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.2.1 Timing Adjustable (Level A)
 
 **Requirements:**
+
 - Users can turn off, adjust, or extend time limits
 - Exceptions: Real-time events, essential timing, 20+ hour time limits
 
 **Review Checklist:**
+
 - [ ] Session timeouts can be extended (warning before expiration)
 - [ ] Auto-advancing carousels can be paused
 - [ ] Timed quizzes allow time extension
@@ -345,9 +383,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.2.2 Pause, Stop, Hide (Level A)
 
 **Requirements:**
+
 - Users can pause, stop, or hide moving, blinking, or auto-updating content
 
 **Review Checklist:**
+
 - [ ] Carousels have pause button
 - [ ] Auto-playing videos have pause control
 - [ ] Animations can be paused
@@ -361,10 +401,12 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.3.1 Three Flashes or Below Threshold (Level A)
 
 **Requirements:**
+
 - No content flashes more than 3 times per second
 - Or flashes are below general flash and red flash thresholds
 
 **Review Checklist:**
+
 - [ ] Animations don't flash rapidly
 - [ ] GIFs checked for flash rate
 - [ ] Strobe effects avoided
@@ -377,10 +419,12 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.4.1 Bypass Blocks (Level A)
 
 **Requirements:**
+
 - Skip links to bypass repeated navigation
 - Landmarks allow screen readers to jump to sections
 
 **Review Checklist:**
+
 - [ ] "Skip to main content" link at top of page
 - [ ] Skip link visible on keyboard focus
 - [ ] Landmarks defined (header, nav, main, aside, footer)
@@ -389,9 +433,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.4.2 Page Titled (Level A)
 
 **Requirements:**
+
 - Every page has descriptive, unique title
 
 **Review Checklist:**
+
 - [ ] Page title describes page content
 - [ ] Page title unique across site
 - [ ] Page title format consistent (e.g., "Page Name | Site Name")
@@ -400,9 +446,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.4.3 Focus Order (Level A)
 
 **Requirements:**
+
 - Tab order follows logical, intuitive sequence
 
 **Review Checklist:**
+
 - [ ] Tab order matches visual order
 - [ ] Tab order follows reading order (left-to-right, top-to-bottom)
 - [ ] Hidden elements not in tab order
@@ -412,9 +460,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.4.4 Link Purpose (In Context) (Level A)
 
 **Requirements:**
+
 - Purpose of each link clear from link text or context
 
 **Review Checklist:**
+
 - [ ] Link text describes destination ("Read more about accessibility" not "Click here")
 - [ ] Duplicate link texts lead to same destination
 - [ ] Icon-only links have aria-label
@@ -423,6 +473,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 **Examples:**
 
 ❌ **Bad:**
+
 ```html
 <a href="/article-1">Click here</a>
 <a href="/article-2">Read more</a>
@@ -430,6 +481,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ```
 
 ✅ **Good:**
+
 ```html
 <a href="/article-1">Read our accessibility guide</a>
 <a href="/article-2">Read more about WCAG 2.1</a>
@@ -439,9 +491,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.4.5 Multiple Ways (Level AA)
 
 **Requirements:**
+
 - Multiple ways to locate pages (menu, search, sitemap)
 
 **Review Checklist:**
+
 - [ ] Primary navigation menu present
 - [ ] Search functionality available
 - [ ] Sitemap or breadcrumbs provided
@@ -450,9 +504,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.4.6 Headings and Labels (Level AA)
 
 **Requirements:**
+
 - Headings and labels descriptive
 
 **Review Checklist:**
+
 - [ ] Headings describe topic or purpose
 - [ ] Form labels clearly describe field purpose
 - [ ] Button labels describe action
@@ -461,9 +517,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.4.7 Focus Visible (Level AA)
 
 **Requirements:**
+
 - Keyboard focus indicator clearly visible
 
 **Review Checklist:**
+
 - [ ] Focus indicator visible on all interactive elements
 - [ ] Focus indicator has sufficient contrast (3:1 against background)
 - [ ] Focus indicator not removed with CSS (`outline: none` without alternative)
@@ -471,6 +529,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 - [ ] Focus indicator style consistent across site
 
 **Common Focus Indicator Styles:**
+
 - Outline (default browser style)
 - Border change (thicker, different color)
 - Background color change
@@ -478,6 +537,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 - Combination of above
 
 **Minimum Requirements:**
+
 - Visible change when element receives focus
 - At least 3:1 contrast ratio against background
 - Doesn't obscure the focused element
@@ -489,9 +549,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.5.1 Pointer Gestures (Level A)
 
 **Requirements:**
+
 - All multipoint or path-based gestures have single-pointer alternative
 
 **Review Checklist:**
+
 - [ ] Pinch-to-zoom has +/- buttons alternative
 - [ ] Swipe gestures have button alternatives
 - [ ] Drag-and-drop has keyboard alternative
@@ -500,10 +562,12 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.5.2 Pointer Cancellation (Level A)
 
 **Requirements:**
+
 - Actions triggered on up-event (not down-event)
 - Allows user to abort action by moving away before release
 
 **Review Checklist:**
+
 - [ ] Click actions complete on mouseup (not mousedown)
 - [ ] Touch actions complete on touchend (not touchstart)
 - [ ] User can cancel by moving pointer away before release
@@ -511,9 +575,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.5.3 Label in Name (Level A)
 
 **Requirements:**
+
 - Visible label text included in accessible name
 
 **Review Checklist:**
+
 - [ ] Button visible text matches aria-label (if aria-label used)
 - [ ] Link visible text matches aria-label (if aria-label used)
 - [ ] Voice control users can activate by saying visible label
@@ -521,9 +587,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.5.4 Motion Actuation (Level A)
 
 **Requirements:**
+
 - Functions triggered by device motion (shake, tilt) have UI alternative
 
 **Review Checklist:**
+
 - [ ] Shake-to-undo has button alternative
 - [ ] Tilt controls have button alternatives
 - [ ] Motion can be disabled in settings
@@ -531,9 +599,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 2.5.5 Target Size (Level AAA, but recommended)
 
 **Recommended (not AA):**
+
 - Touch targets at least 44x44 CSS pixels
 
 **Review Checklist:**
+
 - [ ] Buttons at least 44x44px
 - [ ] Links have adequate clickable area
 - [ ] Form controls at least 44px tall
@@ -551,18 +621,22 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 3.1.1 Language of Page (Level A)
 
 **Requirements:**
+
 - Default language of page programmatically determined
 
 **Review Checklist:**
+
 - [ ] `<html lang="en">` attribute set
 - [ ] Correct language code used (en, es, fr, etc.)
 
 #### 3.1.2 Language of Parts (Level AA)
 
 **Requirements:**
+
 - Language changes indicated programmatically
 
 **Review Checklist:**
+
 - [ ] Foreign phrases marked with `lang` attribute
 - [ ] Example: `<span lang="fr">Bonjour</span>`
 
@@ -573,9 +647,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 3.2.1 On Focus (Level A)
 
 **Requirements:**
+
 - Focus doesn't trigger context change
 
 **Review Checklist:**
+
 - [ ] Focusing input doesn't submit form
 - [ ] Focusing link doesn't navigate
 - [ ] Focus doesn't open modals
@@ -584,9 +660,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 3.2.2 On Input (Level A)
 
 **Requirements:**
+
 - Changing input doesn't automatically trigger context change
 
 **Review Checklist:**
+
 - [ ] Typing in search doesn't auto-submit (wait for Enter or button)
 - [ ] Selecting radio button doesn't auto-submit form
 - [ ] Checkbox change doesn't navigate away
@@ -595,9 +673,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 3.2.3 Consistent Navigation (Level AA)
 
 **Requirements:**
+
 - Navigation consistent across pages
 
 **Review Checklist:**
+
 - [ ] Navigation menu same location on all pages
 - [ ] Navigation items same order across pages
 - [ ] Breadcrumbs consistent across pages
@@ -606,9 +686,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 3.2.4 Consistent Identification (Level AA)
 
 **Requirements:**
+
 - Components with same functionality labeled consistently
 
 **Review Checklist:**
+
 - [ ] Submit buttons always labeled "Submit" (not "Submit" on one page, "Send" on another)
 - [ ] Icons used consistently (same icon = same function)
 - [ ] Error messages formatted consistently
@@ -620,9 +702,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 3.3.1 Error Identification (Level A)
 
 **Requirements:**
+
 - Input errors identified and described to user
 
 **Review Checklist:**
+
 - [ ] Required field errors clearly stated
 - [ ] Invalid format errors explain expected format
 - [ ] Errors announced to screen readers
@@ -631,9 +715,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 3.3.2 Labels or Instructions (Level A)
 
 **Requirements:**
+
 - Labels or instructions provided for user input
 
 **Review Checklist:**
+
 - [ ] All form fields have labels
 - [ ] Required fields clearly marked
 - [ ] Expected format explained (e.g., "MM/DD/YYYY")
@@ -643,9 +729,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 3.3.3 Error Suggestion (Level AA)
 
 **Requirements:**
+
 - Suggestions provided for fixing input errors
 
 **Review Checklist:**
+
 - [ ] Error messages explain how to fix
 - [ ] Suggestions specific and actionable
 - [ ] Examples provided for correct format
@@ -654,19 +742,23 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 **Examples:**
 
 ❌ **Bad:**
+
 - "Invalid email"
 - "Error in date field"
 
 ✅ **Good:**
-- "Email address must include @ symbol. For example: user@example.com"
+
+- "Email address must include @ symbol. For example: <user@example.com>"
 - "Date must be in MM/DD/YYYY format. For example: 12/31/2025"
 
 #### 3.3.4 Error Prevention (Legal, Financial, Data) (Level AA)
 
 **Requirements:**
+
 - Submissions reversible, checked, or confirmed for legal, financial, or data transactions
 
 **Review Checklist:**
+
 - [ ] Confirmation page before finalizing purchase
 - [ ] Review step before submitting important data
 - [ ] Ability to edit before final submission
@@ -684,9 +776,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 4.1.1 Parsing (Level A, deprecated in WCAG 2.2)
 
 **Requirements:**
+
 - HTML validates (no duplicate IDs, proper nesting)
 
 **Review Checklist:**
+
 - [ ] No duplicate IDs
 - [ ] Elements properly nested
 - [ ] Closing tags present
@@ -695,9 +789,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 4.1.2 Name, Role, Value (Level A)
 
 **Requirements:**
+
 - UI components have accessible name, role, and state
 
 **Review Checklist:**
+
 - [ ] Custom controls have ARIA roles
 - [ ] Interactive elements have accessible names
 - [ ] State changes announced (checked, expanded, selected)
@@ -717,9 +813,11 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 #### 4.1.3 Status Messages (Level AA, WCAG 2.1)
 
 **Requirements:**
+
 - Status messages announced to screen readers without focus change
 
 **Review Checklist:**
+
 - [ ] Success messages use `role="status"` or `aria-live="polite"`
 - [ ] Error messages use `role="alert"` or `aria-live="assertive"`
 - [ ] Loading states announced
@@ -745,42 +843,52 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ## Common Accessibility Issues
 
 ### 1. Missing Alt Text
+
 **Impact**: Screen reader users can't understand images  
 **Fix**: Add descriptive alt text to all images
 
 ### 2. Low Color Contrast
+
 **Impact**: Users with low vision can't read text  
 **Fix**: Ensure 4.5:1 contrast for text, 3:1 for UI components
 
 ### 3. No Keyboard Access
+
 **Impact**: Keyboard users can't interact with custom controls  
 **Fix**: Make all interactive elements keyboard accessible
 
 ### 4. Missing Focus Indicators
+
 **Impact**: Keyboard users can't see where focus is  
 **Fix**: Ensure visible focus indicators on all interactive elements
 
 ### 5. No Form Labels
+
 **Impact**: Screen reader users don't know field purpose  
 **Fix**: Use `<label>` element for all form inputs
 
 ### 6. Poor Heading Structure
+
 **Impact**: Screen reader users can't navigate by headings  
 **Fix**: Use proper heading hierarchy (h1 → h2 → h3)
 
 ### 7. Non-descriptive Link Text
+
 **Impact**: Screen reader users hear "click here" without context  
 **Fix**: Use descriptive link text that explains destination
 
 ### 8. Auto-playing Media
+
 **Impact**: Distracts users, especially those with cognitive disabilities  
 **Fix**: Don't auto-play, or provide pause control
 
 ### 9. Tiny Touch Targets
+
 **Impact**: Mobile users, especially those with motor disabilities, can't tap accurately  
 **Fix**: Ensure 44x44px minimum touch target size
 
 ### 10. Inaccessible Modals
+
 **Impact**: Keyboard users trapped, screen reader users confused  
 **Fix**: Trap focus within modal, provide Escape key to close
 
@@ -791,17 +899,20 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ### Automated Testing Tools
 
 **Browser Extensions:**
+
 - **axe DevTools**: Comprehensive automated testing
 - **WAVE**: Visual feedback on accessibility issues
 - **Lighthouse**: Built into Chrome DevTools
 
 **Limitations:**
+
 - Automated tools catch only ~30% of issues
 - Manual testing required for full coverage
 
 ### Manual Testing
 
 **Keyboard Testing:**
+
 1. Unplug mouse
 2. Tab through entire page
 3. Verify all interactive elements accessible
@@ -809,11 +920,13 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 5. Ensure no keyboard traps
 
 **Screen Reader Testing:**
+
 - **macOS**: VoiceOver (Cmd+F5)
 - **Windows**: NVDA (free) or JAWS
 - **Mobile**: iOS VoiceOver, Android TalkBack
 
 **Screen Reader Test Checklist:**
+
 - [ ] All content announced
 - [ ] Images have alt text
 - [ ] Headings navigable
@@ -825,11 +938,13 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ### Color Contrast Testing
 
 **Tools:**
+
 - WebAIM Contrast Checker
 - Chrome DevTools color picker
 - Figma plugins (Stark, A11y - Color Contrast Checker)
 
 **Process:**
+
 1. Check all text against background
 2. Check all UI components against adjacent colors
 3. Check focus indicators
@@ -838,6 +953,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ### Zoom Testing
 
 **Process:**
+
 1. Zoom browser to 200%
 2. Verify no horizontal scrolling
 3. Verify content remains readable
@@ -846,6 +962,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ### Mobile Accessibility Testing
 
 **Process:**
+
 1. Test on real devices (iOS, Android)
 2. Enable screen reader (VoiceOver, TalkBack)
 3. Verify touch target sizes (44x44px minimum)
@@ -859,6 +976,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ### Screen Readers
 
 **Popular Screen Readers:**
+
 - **NVDA** (Windows, free)
 - **JAWS** (Windows, commercial)
 - **VoiceOver** (macOS, iOS, built-in)
@@ -866,6 +984,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 - **Narrator** (Windows, built-in)
 
 **Screen Reader Considerations:**
+
 - Semantic HTML crucial for proper announcement
 - ARIA labels supplement visual labels
 - Live regions announce dynamic content
@@ -874,11 +993,13 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ### Voice Control
 
 **Voice Control Software:**
+
 - Dragon NaturallySpeaking
 - iOS Voice Control
 - Android Voice Access
 
 **Voice Control Considerations:**
+
 - Visible labels match accessible names
 - Interactive elements labeled clearly
 - Links and buttons distinguishable
@@ -887,10 +1008,12 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ### Switch Control
 
 **Switch Control Users:**
+
 - Users with motor disabilities
 - May use single switch, sip-and-puff, head pointer
 
 **Switch Control Considerations:**
+
 - All functionality keyboard accessible
 - No time limits or can be extended
 - Grouped actions accessible
@@ -899,11 +1022,13 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ### Screen Magnification
 
 **Screen Magnifier Software:**
+
 - ZoomText (Windows)
 - macOS Zoom
 - Windows Magnifier
 
 **Screen Magnification Considerations:**
+
 - Content doesn't break when zoomed
 - Focus indicators visible when magnified
 - Important info not hidden off-screen
@@ -947,15 +1072,18 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 ## Resources
 
 ### Official Guidelines
-- WCAG 2.1: https://www.w3.org/WAI/WCAG21/quickref/
-- WAI-ARIA Practices: https://www.w3.org/WAI/ARIA/apg/
+
+- WCAG 2.1: <https://www.w3.org/WAI/WCAG21/quickref/>
+- WAI-ARIA Practices: <https://www.w3.org/WAI/ARIA/apg/>
 
 ### Testing Tools
-- axe DevTools: https://www.deque.com/axe/devtools/
-- WAVE: https://wave.webaim.org/
-- WebAIM Contrast Checker: https://webaim.org/resources/contrastchecker/
+
+- axe DevTools: <https://www.deque.com/axe/devtools/>
+- WAVE: <https://wave.webaim.org/>
+- WebAIM Contrast Checker: <https://webaim.org/resources/contrastchecker/>
 
 ### Learning Resources
-- WebAIM: https://webaim.org/
-- A11y Project: https://www.a11yproject.com/
-- Inclusive Components: https://inclusive-components.design/
+
+- WebAIM: <https://webaim.org/>
+- A11y Project: <https://www.a11yproject.com/>
+- Inclusive Components: <https://inclusive-components.design/>

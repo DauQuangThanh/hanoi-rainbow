@@ -7,6 +7,7 @@ This guide covers common patterns, anti-patterns, and best practices for integra
 ### 1. Arrange-Act-Assert (AAA) Pattern
 
 **Structure**
+
 ```javascript
 test('should do something', async () => {
   // Arrange - Set up test data and dependencies
@@ -23,12 +24,14 @@ test('should do something', async () => {
 ```
 
 **Benefits**
+
 - Clear test structure
 - Easy to read and maintain
 - Separates concerns
 - Identifies missing steps
 
 **Anti-pattern: Multiple Acts**
+
 ```javascript
 // ❌ Bad - Multiple acts in one test
 test('user workflow', async () => {
@@ -63,6 +66,7 @@ test('should create order for user', async () => {
 ### 2. Test Data Builder Pattern
 
 **Implementation**
+
 ```javascript
 class UserBuilder {
   constructor() {
@@ -122,6 +126,7 @@ test('should allow admin to delete users', async () => {
 ```
 
 **Benefits**
+
 - Fluent API for test data creation
 - Reduces duplication
 - Default values for common cases
@@ -130,6 +135,7 @@ test('should allow admin to delete users', async () => {
 ### 3. Object Mother Pattern
 
 **Implementation**
+
 ```javascript
 class UserMother {
   static regular() {
@@ -180,6 +186,7 @@ test('should display user orders', async () => {
 ```
 
 **Benefits**
+
 - Pre-defined test data scenarios
 - Named factory methods
 - Reduces test setup code
@@ -188,6 +195,7 @@ test('should display user orders', async () => {
 ### 4. Test Fixture Pattern
 
 **Setup**
+
 ```javascript
 // fixtures/users.js
 module.exports = {
@@ -237,6 +245,7 @@ test('should get user posts', async () => {
 ```
 
 **Benefits**
+
 - Consistent test data across tests
 - Easy to version and update
 - Can be shared across test suites
@@ -245,6 +254,7 @@ test('should get user posts', async () => {
 ### 5. Database Transaction Pattern
 
 **Implementation**
+
 ```javascript
 describe('User Service', () => {
   let transaction;
@@ -274,6 +284,7 @@ describe('User Service', () => {
 ```
 
 **Benefits**
+
 - Fast test cleanup
 - Test isolation
 - No database cleanup needed
@@ -282,6 +293,7 @@ describe('User Service', () => {
 ### 6. Shared Setup Pattern
 
 **Implementation**
+
 ```javascript
 // setup/test-context.js
 class TestContext {
@@ -340,6 +352,7 @@ describe('Post Service', () => {
 ### 7. Page Object Pattern (E2E)
 
 **Implementation**
+
 ```javascript
 // pages/LoginPage.js
 class LoginPage {
@@ -392,6 +405,7 @@ test('should show error for invalid credentials', async ({ page }) => {
 ```
 
 **Benefits**
+
 - Encapsulates page interactions
 - Reduces code duplication
 - Makes tests more maintainable
@@ -402,6 +416,7 @@ test('should show error for invalid credentials', async ({ page }) => {
 ### 1. Test Interdependence
 
 **❌ Bad - Tests depend on each other**
+
 ```javascript
 describe('User workflow', () => {
   let userId;
@@ -420,6 +435,7 @@ describe('User workflow', () => {
 ```
 
 **✅ Good - Independent tests**
+
 ```javascript
 describe('User operations', () => {
   test('should create user', async () => {
@@ -438,6 +454,7 @@ describe('User operations', () => {
 ### 2. Hidden Dependencies
 
 **❌ Bad - Hidden database dependency**
+
 ```javascript
 test('should get user by email', async () => {
   // Assumes user exists in database
@@ -447,6 +464,7 @@ test('should get user by email', async () => {
 ```
 
 **✅ Good - Explicit setup**
+
 ```javascript
 test('should get user by email', async () => {
   // Explicit setup
@@ -460,6 +478,7 @@ test('should get user by email', async () => {
 ### 3. Overly Complex Tests
 
 **❌ Bad - Too much logic in test**
+
 ```javascript
 test('complex workflow', async () => {
   const users = [];
@@ -483,6 +502,7 @@ test('complex workflow', async () => {
 ```
 
 **✅ Good - Simple, focused test**
+
 ```javascript
 test('should assign admin role to user', async () => {
   const user = await createUser();
@@ -497,6 +517,7 @@ test('should assign admin role to user', async () => {
 ### 4. Testing Implementation Details
 
 **❌ Bad - Testing internal implementation**
+
 ```javascript
 test('should call database with correct query', async () => {
   const spy = jest.spyOn(db, 'query');
@@ -511,6 +532,7 @@ test('should call database with correct query', async () => {
 ```
 
 **✅ Good - Testing behavior**
+
 ```javascript
 test('should return user by id', async () => {
   const created = await createUser({ id: '123' });
@@ -525,6 +547,7 @@ test('should return user by id', async () => {
 ### 5. Shared Mutable State
 
 **❌ Bad - Shared state across tests**
+
 ```javascript
 const sharedUser = { email: 'shared@example.com' };
 
@@ -542,6 +565,7 @@ describe('User tests', () => {
 ```
 
 **✅ Good - Fresh state per test**
+
 ```javascript
 describe('User tests', () => {
   let user;
@@ -567,6 +591,7 @@ describe('User tests', () => {
 ### Test Organization
 
 **1. Group Related Tests**
+
 ```javascript
 describe('User API', () => {
   describe('POST /users', () => {
@@ -588,6 +613,7 @@ describe('User API', () => {
 ```
 
 **2. Use Descriptive Test Names**
+
 ```javascript
 // ❌ Bad
 test('user test', () => {});
@@ -601,6 +627,7 @@ test('should require authentication for protected endpoints', () => {});
 ```
 
 **3. Test One Thing at a Time**
+
 ```javascript
 // ❌ Bad - Testing multiple things
 test('user creation', async () => {
@@ -632,6 +659,7 @@ test('should persist user to database', async () => {
 ### Test Data Management
 
 **1. Use Factories for Dynamic Data**
+
 ```javascript
 // factory.js
 const { faker } = require('@faker-js/faker');
@@ -654,6 +682,7 @@ test('should create user', async () => {
 ```
 
 **2. Use Fixtures for Stable Data**
+
 ```javascript
 // fixtures/products.json
 {
@@ -673,6 +702,7 @@ test('should calculate order total', () => {
 ```
 
 **3. Clean Up Test Data**
+
 ```javascript
 // Using transaction rollback
 describe('User tests', () => {
@@ -706,6 +736,7 @@ describe('User tests', () => {
 ### Assertion Best Practices
 
 **1. Use Specific Assertions**
+
 ```javascript
 // ❌ Bad - Too vague
 expect(response.status).toBeTruthy();
@@ -717,6 +748,7 @@ expect(user.email).toBe('test@example.com');
 ```
 
 **2. Assert on Behavior, Not Implementation**
+
 ```javascript
 // ❌ Bad - Implementation detail
 expect(mockFunction).toHaveBeenCalledTimes(1);
@@ -727,6 +759,7 @@ expect(result.success).toBe(true);
 ```
 
 **3. Use Appropriate Matchers**
+
 ```javascript
 // Equality
 expect(value).toBe(1); // Strict equality
@@ -753,6 +786,7 @@ await expect(promise).rejects.toThrow(Error);
 ### Test Performance
 
 **1. Run Fast Tests First**
+
 ```javascript
 // package.json
 {
@@ -765,6 +799,7 @@ await expect(promise).rejects.toThrow(Error);
 ```
 
 **2. Use Parallel Execution**
+
 ```javascript
 // jest.config.js
 module.exports = {
@@ -774,6 +809,7 @@ module.exports = {
 ```
 
 **3. Mock Slow Dependencies**
+
 ```javascript
 // Mock external API
 jest.mock('../services/external-api');
@@ -787,6 +823,7 @@ db.users.findById.mockResolvedValue({ id: '123' });
 ### Test Maintenance
 
 **1. Keep Tests DRY**
+
 ```javascript
 // Extract common setup
 function setupTestUser() {
@@ -802,6 +839,7 @@ function assertValidUser(user) {
 ```
 
 **2. Refactor Tests with Code**
+
 ```javascript
 // When you rename a function
 function createUser() {} // renamed from addUser()
@@ -813,6 +851,7 @@ test('should create user', async () => {
 ```
 
 **3. Remove Obsolete Tests**
+
 ```javascript
 // When feature is removed, remove its tests
 describe('Deprecated feature', () => {
@@ -834,11 +873,13 @@ describe('Deprecated feature', () => {
 ```
 
 **Guidelines**
+
 1. **Unit Tests**: 60-70% of tests, fast, isolated
 2. **Integration Tests**: 20-30% of tests, test component interactions
 3. **E2E Tests**: 5-10% of tests, test critical user journeys
 
 **Integration Test Focus**
+
 - API endpoints
 - Database operations
 - Service communication
@@ -847,6 +888,7 @@ describe('Deprecated feature', () => {
 - External integrations (with mocks)
 
 **When to Write Integration Tests**
+
 - ✅ Testing API contracts
 - ✅ Testing database transactions
 - ✅ Testing service interactions

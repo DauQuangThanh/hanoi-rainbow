@@ -5,11 +5,13 @@
 ### Install OCI CLI
 
 **macOS/Linux**:
+
 ```bash
 bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
 ```
 
 **Python pip**:
+
 ```bash
 pip install oci-cli
 ```
@@ -17,11 +19,13 @@ pip install oci-cli
 ### Configure OCI CLI
 
 **Interactive Setup**:
+
 ```bash
 oci setup config
 ```
 
 **Manual Configuration** (~/.oci/config):
+
 ```ini
 [DEFAULT]
 user=ocid1.user.oc1..aaaa...
@@ -39,6 +43,7 @@ key_file=~/.oci/prod_api_key.pem
 ```
 
 **Use Specific Profile**:
+
 ```bash
 oci compute instance list --profile PRODUCTION
 ```

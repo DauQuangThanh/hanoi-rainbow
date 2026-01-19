@@ -5,6 +5,7 @@ This document provides guidance on creating Mermaid diagrams from pseudocode ana
 ## When to Use Diagrams
 
 **Use diagrams to clarify:**
+
 - Complex workflows with multiple paths
 - Entity relationships and data models
 - System interactions and integrations
@@ -12,6 +13,7 @@ This document provides guidance on creating Mermaid diagrams from pseudocode ana
 - Component architecture and dependencies
 
 **Don't overuse:**
+
 - Simple linear processes (plain text is clearer)
 - When pseudocode is self-explanatory
 - For audiences unfamiliar with diagrams
@@ -23,6 +25,7 @@ This document provides guidance on creating Mermaid diagrams from pseudocode ana
 **Use for:** Interaction flows, API calls, message passing
 
 **When to extract from pseudocode:**
+
 ```
 functionA calls functionB
 functionB queries database
@@ -33,6 +36,7 @@ functionB returns to functionA
 ```
 
 **Mermaid Notation:**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -49,6 +53,7 @@ sequenceDiagram
 ```
 
 **Markdown Format:**
+
 ````markdown
 ## Sequence Diagram: [Process Name]
 
@@ -69,9 +74,10 @@ sequenceDiagram
 ````
 
 **Key Elements:**
+
 - Participants: Systems, actors, components (declared with `participant`)
 - Messages: Synchronous (`->>`) or asynchronous (`-->>`)
-- Return messages: Dashed arrows (`-->>`) 
+- Return messages: Dashed arrows (`-->>`)
 - Activations: Shown automatically or with `activate`/`deactivate`
 
 ### 2. Activity Diagram (Flowchart)
@@ -79,6 +85,7 @@ sequenceDiagram
 **Use for:** Business processes, algorithm flow, decision logic
 
 **When to extract from pseudocode:**
+
 ```
 if condition1:
   action1()
@@ -91,6 +98,7 @@ else:
 ```
 
 **Mermaid Flowchart:**
+
 ```mermaid
 flowchart TD
     Start([Start])
@@ -114,6 +122,7 @@ flowchart TD
 ```
 
 **Markdown Format:**
+
 ````markdown
 ## Activity Diagram: [Process Name]
 
@@ -134,6 +143,7 @@ flowchart TD
 ````
 
 **Key Elements:**
+
 - Start/End nodes: `([Start])`, `([End])`
 - Activities: `[Action]`
 - Decisions: `{Condition?}` with labeled edges
@@ -145,6 +155,7 @@ flowchart TD
 **Use for:** Entity lifecycle, status transitions, mode changes
 
 **When to extract from pseudocode:**
+
 ```
 if state == "pending":
   if approved:
@@ -157,6 +168,7 @@ else if state == "active":
 ```
 
 **Mermaid State Diagram:**
+
 ```mermaid
 stateDiagram-v2
     [*] --> Pending
@@ -176,6 +188,7 @@ stateDiagram-v2
 ```
 
 **Markdown Format:**
+
 ````markdown
 ## State Machine: [Entity Name]
 
@@ -208,6 +221,7 @@ stateDiagram-v2
 ````
 
 **Key Elements:**
+
 - Initial state: `[*]`
 - Final state: `[*]` at end of transition
 - States: Named automatically from transitions
@@ -219,6 +233,7 @@ stateDiagram-v2
 **Use for:** Entity relationships, data structures, object hierarchies
 
 **When to extract from pseudocode:**
+
 ```
 class Order:
   id, customer, items, total
@@ -231,6 +246,7 @@ class Customer:
 ```
 
 **Mermaid Class Diagram:**
+
 ```mermaid
 classDiagram
     class Customer {
@@ -259,6 +275,7 @@ classDiagram
 ```
 
 **Markdown Format:**
+
 ````markdown
 ## Class Diagram: [Domain Name]
 
@@ -303,6 +320,7 @@ classDiagram
 ````
 
 **Relationship Types in Mermaid:**
+
 - Association: `-->` General relationship
 - Aggregation: `o--` Has-a (shared lifetime)
 - Composition: `*--` Part-of (exclusive lifetime)
@@ -315,6 +333,7 @@ classDiagram
 **Use for:** System architecture, module dependencies, service interactions
 
 **When to extract from pseudocode:**
+
 ```
 APIGateway uses AuthService
 APIGateway uses OrderService
@@ -323,6 +342,7 @@ OrderService uses InventoryService
 ```
 
 **Mermaid Component Diagram (using C4):**
+
 ```mermaid
 C4Component
     title Component Diagram for API System
@@ -344,6 +364,7 @@ C4Component
 ```
 
 **Markdown Format:**
+
 ```markdown
 ## Component Diagram: [System Name]
 
@@ -386,6 +407,7 @@ C4Component
 **Use for:** System functionality, user interactions, feature scope
 
 **When to extract from pseudocode:**
+
 ```
 if user.isCustomer():
   can: placeOrder, viewOrders, cancelOrder
@@ -394,6 +416,7 @@ if user.isAdmin():
 ```
 
 **Mermaid Journey or Flowchart (Use Case Alternative):**
+
 ```mermaid
 graph LR
     Customer([Customer])
@@ -418,6 +441,7 @@ graph LR
 **Note:** Mermaid doesn't have a dedicated use case diagram type. Use flowcharts, user journey diagrams, or document use cases in structured markdown as shown below.
 
 **Markdown Format:**
+
 ```markdown
 ## Use Case Diagram: [System Name]
 
@@ -469,21 +493,25 @@ graph LR
 ### Best Practices
 
 **Keep it Simple:**
+
 - One diagram per concept
 - Maximum 7-10 elements per diagram
 - Break complex diagrams into multiple views
 
 **Be Consistent:**
+
 - Use standard Mermaid syntax
 - Consistent naming conventions
 - Same level of abstraction throughout
 
 **Add Context:**
+
 - Title clearly describes what is shown
 - Use notes for additional context
 - Brief description of diagram purpose
 
 **Focus on Clarity:**
+
 - Prioritize readability over completeness
 - Use proper direction (TD, LR, etc.)
 - Label transitions and relationships clearly
@@ -493,6 +521,7 @@ graph LR
 All diagrams should use Mermaid format:
 
 **Sequence Diagrams:**
+
 ````markdown
 ```mermaid
 sequenceDiagram
@@ -508,6 +537,7 @@ sequenceDiagram
 ````
 
 **Flowcharts:**
+
 ````markdown
 ```mermaid
 flowchart TD
@@ -524,6 +554,7 @@ flowchart TD
 ````
 
 **State Diagrams:**
+
 ````markdown
 ```mermaid
 stateDiagram-v2
@@ -534,6 +565,7 @@ stateDiagram-v2
 ````
 
 **Class Diagrams:**
+
 ````markdown
 ```mermaid
 classDiagram
@@ -549,6 +581,7 @@ classDiagram
 ## Integration with Specifications
 
 **Link Diagrams to Requirements:**
+
 ````markdown
 ## FR-010: Order Processing
 
@@ -558,12 +591,14 @@ See [Sequence Diagram: Order Processing](#sequence-diagram-order-processing)
 ````
 
 **Embed in Specification Sections:**
+
 - Overview: User Journey or Component Diagram (C4/Flowchart)
 - Workflow: Flowchart or Sequence Diagram
 - Data Model: Class Diagram
 - State Management: State Diagram
 
 **Traceability:**
+
 - Reference diagram elements in requirements
 - Link diagram components to FR/NFR IDs
 - Version diagrams with specifications
@@ -571,6 +606,7 @@ See [Sequence Diagram: Order Processing](#sequence-diagram-order-processing)
 ## Why Mermaid?
 
 **Advantages of Mermaid:**
+
 - Native markdown integration
 - Renders in GitHub, GitLab, VS Code, and many platforms
 - Simple, text-based syntax
@@ -580,6 +616,7 @@ See [Sequence Diagram: Order Processing](#sequence-diagram-order-processing)
 - Multiple diagram types in one format
 
 **When to Use:**
+
 - All technical documentation
 - README files and wikis
 - Architecture documentation

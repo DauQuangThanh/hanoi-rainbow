@@ -1,6 +1,5 @@
 # Component Patterns
 
-
 ### Compound Components
 
 ```typescript

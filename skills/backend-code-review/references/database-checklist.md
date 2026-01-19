@@ -3,6 +3,7 @@
 Comprehensive guidelines for reviewing database design, queries, and patterns.
 
 ## Table of Contents
+
 - [SQL Query Optimization](#sql-query-optimization)
 - [Schema Design](#schema-design)
 - [Indexing Strategy](#indexing-strategy)
@@ -17,6 +18,7 @@ Comprehensive guidelines for reviewing database design, queries, and patterns.
 ### N+1 Query Problem
 
 **Bad:**
+
 ```typescript
 // ❌ N+1 queries - 1 query for users + N queries for posts
 const users = await User.findAll();
@@ -27,6 +29,7 @@ for (const user of users) {
 ```
 
 **Good:**
+
 ```typescript
 // ✅ Single query with JOIN
 const users = await User.findAll({
@@ -49,6 +52,7 @@ users.forEach(user => {
 ### Index Usage
 
 **Good:**
+
 ```sql
 -- ✅ Query uses index
 SELECT * FROM users WHERE email = 'user@example.com';
@@ -64,6 +68,7 @@ SELECT id, email, name FROM users WHERE status = 'active';
 ```
 
 **Bad:**
+
 ```sql
 -- ❌ Function on indexed column prevents index usage
 SELECT * FROM users WHERE LOWER(email) = 'user@example.com';
@@ -97,6 +102,7 @@ HAVING COUNT(o.id) > 5;
 ### Pagination
 
 **Good (Offset):**
+
 ```sql
 -- ✅ For small to medium datasets
 SELECT * FROM users
@@ -107,6 +113,7 @@ LIMIT 20 OFFSET 40; -- Page 3
 ```
 
 **Good (Cursor-based):**
+
 ```sql
 -- ✅ For large datasets, better performance
 SELECT * FROM users
@@ -122,6 +129,7 @@ LIMIT 20;
 ### Normalization
 
 **Good:**
+
 ```sql
 -- ✅ Normalized schema
 
@@ -156,6 +164,7 @@ CREATE TABLE orders (
 ```
 
 **Bad:**
+
 ```sql
 -- ❌ Denormalized with redundant data
 CREATE TABLE orders (
@@ -171,6 +180,7 @@ CREATE TABLE orders (
 ### Data Types
 
 **Good:**
+
 ```sql
 -- ✅ Appropriate data types
 CREATE TABLE products (
@@ -187,6 +197,7 @@ CREATE TABLE products (
 ```
 
 **Bad:**
+
 ```sql
 -- ❌ Wrong data types
 CREATE TABLE products (
@@ -249,6 +260,7 @@ REINDEX TABLE users;
 ### ACID Principles
 
 **Good:**
+
 ```typescript
 // ✅ Proper transaction handling
 
@@ -287,6 +299,7 @@ def transfer_money(from_account_id, to_account_id, amount):
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ No transaction - partial updates possible
 async function transferMoney(fromId: string, toId: string, amount: number) {
@@ -320,6 +333,7 @@ COMMIT;
 ### Efficient Loading
 
 **Good:**
+
 ```typescript
 // ✅ Eager loading to prevent N+1
 const users = await User.findAll({
@@ -344,6 +358,7 @@ const users = await User.findAll({
 ### Raw Queries
 
 **Good:**
+
 ```typescript
 // ✅ Parameterized queries (safe from SQL injection)
 const users = await sequelize.query(
@@ -362,6 +377,7 @@ cursor.execute(
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ SQL injection vulnerability!
 const users = await sequelize.query(
@@ -374,6 +390,7 @@ const users = await sequelize.query(
 ### MongoDB
 
 **Good:**
+
 ```typescript
 // ✅ Embedded documents for one-to-few relationships
 const userSchema = new Schema({
@@ -420,6 +437,7 @@ const results = await Order.aggregate([
 ## Connection Pooling
 
 **Good:**
+
 ```typescript
 // ✅ PostgreSQL connection pool
 import { Pool } from 'pg';
@@ -455,6 +473,7 @@ process.on('SIGTERM', async () => {
 ## Migration Management
 
 **Good:**
+
 ```typescript
 // ✅ Versioned migrations
 
@@ -502,6 +521,7 @@ export async function down(queryInterface: QueryInterface) {
 ```
 
 **Key Principles:**
+
 1. Always provide both `up` and `down` migrations
 2. Never modify existing migrations
 3. Test migrations on staging before production

@@ -1,6 +1,7 @@
 # Storage Services
 
 ## Table of Contents
+
 - [Cloud Object Storage (COS)](#cloud-object-storage-cos)
 - [Block Storage for VPC](#block-storage-for-vpc)
 - [File Storage for VPC](#file-storage-for-vpc)
@@ -15,6 +16,7 @@
 S3-compatible object storage for unstructured data with 99.999999999% (11 nines) durability.
 
 **Use Cases:**
+
 - Static website hosting
 - Backup and archival
 - Data lake for analytics
@@ -34,6 +36,7 @@ S3-compatible object storage for unstructured data with 99.999999999% (11 nines)
 ### Create Bucket
 
 **CLI:**
+
 ```bash
 # Install COS plugin
 ibmcloud plugin install cloud-object-storage
@@ -66,6 +69,7 @@ ibmcloud cos bucket-create --bucket my-smart-bucket \
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_resource_instance" "cos_instance" {
   name              = "my-cos"
@@ -98,6 +102,7 @@ resource "ibm_cos_bucket" "bucket" {
 ### Upload and Download Objects
 
 **CLI:**
+
 ```bash
 # Upload file
 ibmcloud cos object-put --bucket my-bucket \
@@ -125,6 +130,7 @@ ibmcloud cos object-delete --bucket my-bucket \
 ```
 
 **Python SDK:**
+
 ```python
 import ibm_boto3
 from ibm_botocore.client import Config
@@ -187,6 +193,7 @@ cos.upload_file(
 ### Bucket Lifecycle Policy
 
 **CLI:**
+
 ```bash
 # Create lifecycle config file
 cat > lifecycle.json <<EOF
@@ -225,6 +232,7 @@ ibmcloud cos bucket-lifecycle-put --bucket my-bucket \
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_cos_bucket" "bucket" {
   bucket_name          = "my-bucket"
@@ -305,6 +313,7 @@ ibmcloud cos bucket-replication-put --bucket my-bucket \
 ### Encryption
 
 **Server-Side Encryption (SSE):**
+
 ```bash
 # Upload with SSE-S3 (IBM managed keys)
 ibmcloud cos object-put --bucket my-bucket \
@@ -321,6 +330,7 @@ ibmcloud cos object-put --bucket my-bucket \
 ```
 
 **Bucket-Level Encryption:**
+
 ```hcl
 resource "ibm_cos_bucket" "bucket" {
   bucket_name          = "my-encrypted-bucket"
@@ -335,6 +345,7 @@ resource "ibm_cos_bucket" "bucket" {
 ### Access Control
 
 **Bucket Policy:**
+
 ```bash
 # Create bucket policy
 cat > policy.json <<EOF
@@ -356,6 +367,7 @@ ibmcloud cos bucket-policy-put --bucket my-bucket \
 ```
 
 **IAM Access:**
+
 ```bash
 # Grant user access to bucket
 ibmcloud iam user-policy-create user@example.com \
@@ -375,6 +387,7 @@ ibmcloud iam user-policy-create user@example.com \
 High-performance block storage volumes for virtual server instances.
 
 **Performance Tiers:**
+
 - **3 IOPS/GB**: General purpose (max 48,000 IOPS)
 - **5 IOPS/GB**: High-performance apps
 - **10 IOPS/GB**: Database workloads (max 96,000 IOPS)
@@ -383,6 +396,7 @@ High-performance block storage volumes for virtual server instances.
 ### Create and Attach Volume
 
 **CLI:**
+
 ```bash
 # Create volume
 ibmcloud is volume-create my-data-volume \
@@ -403,6 +417,7 @@ ibmcloud is volume my-data-volume
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_is_volume" "data_volume" {
   name           = "my-data-volume"
@@ -465,6 +480,7 @@ ibmcloud is volume-create restored-volume \
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_is_snapshot" "snapshot" {
   name          = "my-snapshot"
@@ -507,6 +523,7 @@ xfs_growfs /data
 NFS-based shared file storage for multiple VPC instances.
 
 **Use Cases:**
+
 - Shared application data
 - Content management systems
 - Container persistent volumes
@@ -515,6 +532,7 @@ NFS-based shared file storage for multiple VPC instances.
 ### Create File Share
 
 **CLI:**
+
 ```bash
 # Create file share
 ibmcloud is share-create my-share \
@@ -534,6 +552,7 @@ ibmcloud is share-mount-target my-share my-mount-target
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_is_share" "share" {
   name           = "my-share"
@@ -645,6 +664,7 @@ spec:
 ### Backup Strategies
 
 **1. COS Bucket Replication:**
+
 ```bash
 # Cross-region replication for disaster recovery
 ibmcloud cos bucket-replication-put --bucket prod-bucket \
@@ -662,6 +682,7 @@ ibmcloud cos bucket-replication-put --bucket prod-bucket \
 ```
 
 **2. Block Storage Snapshots:**
+
 ```bash
 # Automated snapshot schedule
 # Create snapshots daily at 2 AM
@@ -673,6 +694,7 @@ ibmcloud is snapshot-consistency-group-create my-cg \
 ```
 
 **3. Database Backups to COS:**
+
 ```bash
 # PostgreSQL backup to COS
 pg_dump -h <DB-HOST> -U admin mydatabase | \
@@ -702,11 +724,13 @@ DR Region (eu-gb)
 ```
 
 **Recovery Time Objective (RTO):**
+
 - Active-Active: 0 (no downtime)
 - Active-Passive: < 1 hour
 - Backup-Restore: < 4 hours
 
 **Recovery Point Objective (RPO):**
+
 - Synchronous replication: 0 (no data loss)
 - Asynchronous replication: < 5 minutes
 - Snapshot-based: < 24 hours

@@ -1,6 +1,5 @@
 # Database Design Checklist
 
-
 ```markdown
 Design Phase:
 - [ ] Requirements gathered and documented

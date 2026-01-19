@@ -3,6 +3,7 @@
 Detailed checklists for assessing requirement quality across different attributes.
 
 ## Table of Contents
+
 - [Individual Requirement Checklist](#individual-requirement-checklist)
 - [Document-Specific Checklists](#document-specific-checklists)
 - [User Story Quality (INVEST)](#user-story-quality-invest)
@@ -12,6 +13,7 @@ Detailed checklists for assessing requirement quality across different attribute
 For each requirement, evaluate against these criteria:
 
 ### Completeness
+
 □ All necessary information included
 □ No missing details or TBD placeholders
 □ Context and rationale provided
@@ -20,6 +22,7 @@ For each requirement, evaluate against these criteria:
 □ Assumptions stated explicitly
 
 ### Clarity
+
 □ Unambiguous language used
 □ No vague terms ("user-friendly", "fast", "easy", "intuitive")
 □ Clear subject and action
@@ -28,6 +31,7 @@ For each requirement, evaluate against these criteria:
 □ No jargon without definition
 
 ### Correctness
+
 □ Technically accurate
 □ Aligned with business needs
 □ Reflects stakeholder intent
@@ -36,6 +40,7 @@ For each requirement, evaluate against these criteria:
 □ Feasible to implement
 
 ### Consistency
+
 □ No conflicts with other requirements
 □ Consistent terminology throughout
 □ Consistent level of detail
@@ -44,6 +49,7 @@ For each requirement, evaluate against these criteria:
 □ Consistent formatting
 
 ### Testability
+
 □ Can be verified/tested
 □ Measurable acceptance criteria defined
 □ Clear pass/fail conditions
@@ -52,6 +58,7 @@ For each requirement, evaluate against these criteria:
 □ Quantifiable where needed
 
 ### Traceability
+
 □ Unique identifier assigned
 □ Source documented (stakeholder, regulation, etc.)
 □ Rationale provided
@@ -60,6 +67,7 @@ For each requirement, evaluate against these criteria:
 □ Linked to test cases
 
 ### Necessity
+
 □ Directly supports business goals
 □ Adds clear value to users/business
 □ Not a duplicate of existing requirement
@@ -67,6 +75,7 @@ For each requirement, evaluate against these criteria:
 □ Cost justified against value
 
 ### Feasibility
+
 □ Technically feasible with available technology
 □ Achievable within constraints (time, budget, resources)
 □ Technology exists or is obtainable
@@ -79,6 +88,7 @@ For each requirement, evaluate against these criteria:
 ### Business Requirements Document (BRD)
 
 #### Business Context
+
 □ Business problem clearly stated
 □ Business objectives defined and measurable
 □ Success criteria quantified
@@ -87,6 +97,7 @@ For each requirement, evaluate against these criteria:
 □ Strategic alignment documented
 
 #### Scope Definition
+
 □ In-scope items clearly listed
 □ Out-of-scope items explicitly stated
 □ Boundaries well-defined
@@ -95,6 +106,7 @@ For each requirement, evaluate against these criteria:
 □ Dependencies on external factors listed
 
 #### Business Requirements
+
 □ Requirements state "what" not "how"
 □ Business rules documented
 □ Process flows included
@@ -105,6 +117,7 @@ For each requirement, evaluate against these criteria:
 ### Software Requirements Specification (SRS)
 
 #### Document Structure
+
 □ IEEE 830 compliant structure (if applicable)
 □ Version control information present
 □ Table of contents complete
@@ -113,6 +126,7 @@ For each requirement, evaluate against these criteria:
 □ Appropriate sections present
 
 #### Functional Requirements
+
 □ All system features specified
 □ System behaviors defined
 □ Input/output specifications complete
@@ -121,6 +135,7 @@ For each requirement, evaluate against these criteria:
 □ Edge cases addressed
 
 #### Non-Functional Requirements
+
 **Performance**
 □ Response time requirements specified
 □ Throughput requirements defined
@@ -152,6 +167,7 @@ For each requirement, evaluate against these criteria:
 □ Update/patch strategy defined
 
 #### Technical Details
+
 □ Architecture constraints stated
 □ Technology stack requirements listed
 □ Integration points defined with APIs/protocols
@@ -159,6 +175,7 @@ For each requirement, evaluate against these criteria:
 □ Interface requirements clear
 
 #### Verification
+
 □ All requirements have verification method
 □ Acceptance criteria defined for each requirement
 □ Test approach specified
@@ -167,6 +184,7 @@ For each requirement, evaluate against these criteria:
 ### User Story Backlog
 
 #### Epic Level
+
 □ Epics align with business goals
 □ Epics appropriately sized (decomposable into 5-10 stories)
 □ Epic dependencies mapped
@@ -174,6 +192,7 @@ For each requirement, evaluate against these criteria:
 □ Value proposition clear for each epic
 
 #### Story Level Format
+
 □ Follows standard format: "As a [role], I want [feature], so that [benefit]"
 □ Role clearly identified (specific user type)
 □ Feature/capability specifically described
@@ -181,6 +200,7 @@ For each requirement, evaluate against these criteria:
 □ Story is self-contained and understandable
 
 #### Story Completeness
+
 □ UI/UX considerations noted where relevant
 □ Technical constraints documented
 □ Dependencies on other stories identified
@@ -193,36 +213,42 @@ For each requirement, evaluate against these criteria:
 Evaluate each user story against INVEST criteria:
 
 ### Independent
+
 □ Story can be developed and tested separately from other stories
 □ No tight coupling with other stories
 □ Can be scheduled flexibly
 □ Dependencies are documented but minimal
 
 ### Negotiable
+
 □ Details can be discussed and refined
 □ Not an explicit contract or detailed specification
 □ Allows for collaboration between team and stakeholder
 □ Room for technical implementation choices
 
 ### Valuable
+
 □ Delivers clear value to end user or business
 □ Value statement is explicit in the "so that" clause
 □ Stakeholder can understand and prioritize the value
 □ Contributes to business goals or user needs
 
 ### Estimable
+
 □ Team has enough information to provide size estimate
 □ Complexity is understood
 □ No major unknowns that prevent estimation
 □ If not estimable, needs spike or research story first
 
 ### Small
+
 □ Can be completed within one sprint/iteration
 □ Fits within team's definition of "small"
 □ Large stories are broken down (epics → stories → tasks)
 □ Typically 1-5 days of effort
 
 ### Testable
+
 □ Clear acceptance criteria provided
 □ Can be verified/validated
 □ Pass/fail conditions are objective
@@ -342,24 +368,28 @@ Then: Order is created with unique order ID
 ### Scoring Scale (0-100%)
 
 **90-100% (Excellent)**
+
 - All criteria met or exceeded
 - No critical or major issues
 - Minor issues only (cosmetic, formatting)
 - Requirements are production-ready
 
 **70-89% (Good)**
+
 - Most criteria met
 - No critical issues
 - Few major issues with clear resolution path
 - Requirements ready with minor revisions
 
 **50-69% (Fair)**
+
 - Some criteria met
 - Few critical issues OR multiple major issues
 - Significant revision needed
 - Requirements need substantial work
 
 **0-49% (Poor)**
+
 - Many criteria not met
 - Multiple critical issues
 - Major rework required
@@ -368,6 +398,7 @@ Then: Order is created with unique order ID
 ### Issue Severity Definitions
 
 **Critical (Must Fix)**
+
 - Blocks project progress
 - Causes major business impact
 - Prevents requirement from being implemented
@@ -375,6 +406,7 @@ Then: Order is created with unique order ID
 - Examples: Missing security requirements, fundamental conflicts, incomplete scope
 
 **Major (Should Fix)**
+
 - Significantly impacts quality or implementation
 - Causes confusion or ambiguity
 - Increases risk of rework
@@ -382,6 +414,7 @@ Then: Order is created with unique order ID
 - Examples: Ambiguous performance criteria, missing acceptance criteria, terminology inconsistencies
 
 **Minor (Nice to Fix)**
+
 - Does not block progress
 - Has workarounds available
 - Cosmetic or formatting issues
@@ -391,6 +424,7 @@ Then: Order is created with unique order ID
 ## Traceability Assessment
 
 ### Backward Traceability
+
 Each requirement should trace to:
 □ Business objective or strategic goal
 □ Stakeholder need (who requested and why)
@@ -400,6 +434,7 @@ Each requirement should trace to:
 □ User research finding or usability study
 
 ### Forward Traceability
+
 Each requirement should trace to:
 □ Design elements (architecture diagrams, UI mockups)
 □ Architecture components (services, modules, APIs)
@@ -409,6 +444,7 @@ Each requirement should trace to:
 □ Documentation and help content (if user-facing)
 
 ### Traceability Matrix Quality
+
 □ Complete coverage - no orphan requirements
 □ Unique, consistent identifiers for all items
 □ Clear, documented relationships between items
@@ -417,7 +453,9 @@ Each requirement should trace to:
 □ Maintained throughout project lifecycle
 
 ### Gap Analysis
+
 Identify and document:
+
 - **Missing Requirements**: Business needs without corresponding requirements
 - **Orphan Requirements**: Requirements without business justification
 - **Untested Requirements**: Requirements without mapped test cases
@@ -429,6 +467,7 @@ Identify and document:
 ### IEEE 830-1998 (SRS Standard)
 
 #### Correct Requirements Characteristics
+
 □ **Unambiguous**: Only one interpretation possible
 □ **Complete**: All needed information present
 □ **Correct**: Accurately represents stakeholder needs
@@ -440,6 +479,7 @@ Identify and document:
 □ **Ranked**: Priority and stability indicated
 
 #### Required SRS Document Structure
+
 □ Introduction (purpose, scope, definitions, references, overview)
 □ Overall description (product perspective, functions, user characteristics, constraints)
 □ Specific requirements (functional, non-functional, interface)

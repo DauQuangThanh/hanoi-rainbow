@@ -6,6 +6,7 @@
 ☐ Incident response procedures
 ☐ Escalation paths documented
 ☐ On-call rotation defined
+
 ```
 
 ### Phase 8: Cost and Performance Review

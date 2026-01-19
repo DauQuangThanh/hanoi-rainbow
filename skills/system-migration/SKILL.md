@@ -10,6 +10,7 @@ description: Guides operating system and hardware platform migrations including 
 Provides comprehensive guidance for system-level migrations including operating system changes, hardware platform transitions, mainframe modernization, virtualization, and data center migrations. Focuses on system infrastructure that underlies applications and platforms.
 
 **Key Points:**
+
 - System migrations often involve multiple skills: OS + database + application coordination
 - Plan for 30-50% more time than initial estimates
 - Parallel run periods reduce risk but increase cost
@@ -22,42 +23,50 @@ Provides comprehensive guidance for system-level migrations including operating 
 Choose your migration path based on the system type:
 
 ### 1. Operating System Migration
+
 **Use for:** Linux distribution changes, Windows to Linux, OS version upgrades
 **Load:** [migration-types.md](references/migration-types.md) for detailed workflows
 
-### 2. Hardware Platform Migration  
+### 2. Hardware Platform Migration
+
 **Use for:** Mainframe to x86, architecture changes, system consolidation
 **Load:** [migration-types.md](references/migration-types.md) for platform-specific guidance
 
 ### 3. Virtualization Migration
+
 **Use for:** Physical to Virtual (P2V), Virtual to Virtual (V2V), cloud migrations
 **Load:** [migration-types.md](references/migration-types.md) for virtualization patterns
 
 ### 4. Data Center Migration
+
 **Use for:** Facility moves, infrastructure consolidation, hybrid cloud
 **Load:** [migration-types.md](references/migration-types.md) for data center procedures
 
 ## Standard Migration Workflow
 
 ### Phase 1: Assessment & Planning
+
 1. Document current system state (OS version, kernel, packages, services, configurations)
 2. Identify application and hardware compatibility requirements
 3. Determine migration strategy (in-place upgrade vs fresh install)
 4. Create detailed migration plan with timeline and resources
 
 ### Phase 2: Preparation
+
 1. Complete full system backups (OS, configurations, data)
 2. Set up target system environment
 3. Test migration procedures in non-production
 4. Prepare rollback plan and validation criteria
 
 ### Phase 3: Execution
+
 1. Perform migration following tested procedure
 2. Migrate configurations and customize for target system
 3. Install and configure applications
 4. Validate system functionality
 
 ### Phase 4: Validation & Cutover
+
 1. Run validation tests (See [validation-and-testing.md](references/validation-and-testing.md))
 2. Conduct parallel run period if applicable
 3. Execute cutover to production
@@ -113,4 +122,3 @@ Load these reference files based on specific migration needs:
   - Need to avoid common migration mistakes
   - Reviewing migration plans for potential issues
   - Troubleshooting failed or problematic migrations
-

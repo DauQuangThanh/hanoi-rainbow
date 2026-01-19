@@ -1,6 +1,5 @@
 # Best Practices
 
-
 ✅ **Multiple Backups**: Take backups before migration, keep source DB until validated
 ✅ **Test in Staging**: Practice migration in non-production first
 ✅ **Monitor Metrics**: Watch lag, throughput, errors during migration

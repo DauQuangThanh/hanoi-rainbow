@@ -1,9 +1,9 @@
 # Design Considerations
 
-
 ### For Different Scale Levels
 
 **Small Scale (< 1K users)**
+
 - Monolithic architecture
 - Single database instance
 - Simple deployment (VM or PaaS)
@@ -11,6 +11,7 @@
 - Manual scaling
 
 **Medium Scale (1K - 100K users)**
+
 - Modular monolithic or early microservices
 - Database read replicas
 - Load balancing
@@ -19,6 +20,7 @@
 - Auto-scaling
 
 **Large Scale (100K - 1M+ users)**
+
 - Full microservices architecture
 - Distributed data stores
 - Multiple caching layers
@@ -30,6 +32,7 @@
 ### For Different Domains
 
 **E-Commerce**
+
 - Product catalog service
 - Shopping cart and order management
 - Payment processing integration
@@ -38,6 +41,7 @@
 - User reviews and ratings
 
 **Financial Services**
+
 - Account management
 - Transaction processing
 - Fraud detection
@@ -46,6 +50,7 @@
 - High security requirements
 
 **SaaS Applications**
+
 - Multi-tenancy architecture
 - Subscription management
 - Usage metering and billing
@@ -53,6 +58,7 @@
 - Analytics and reporting
 
 **IoT/Real-Time Systems**
+
 - Time-series data storage
 - Event streaming
 - Edge computing

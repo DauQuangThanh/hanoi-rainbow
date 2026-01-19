@@ -1,6 +1,5 @@
 # NoSQL Database Design
 
-
 ### MongoDB Document Design
 
 ```javascript

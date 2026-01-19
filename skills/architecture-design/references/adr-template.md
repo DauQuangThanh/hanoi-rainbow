@@ -404,6 +404,7 @@ Standards:
 ## When to Write an ADR
 
 Write an ADR for:
+
 - Architectural style decisions (monolith vs microservices)
 - Technology selections (database, frameworks)
 - Significant pattern adoptions (CQRS, event sourcing)
@@ -414,6 +415,7 @@ Write an ADR for:
 - Integration pattern selections
 
 Don't write an ADR for:
+
 - Minor implementation details
 - Easily reversible decisions
 - Team process decisions (usually)

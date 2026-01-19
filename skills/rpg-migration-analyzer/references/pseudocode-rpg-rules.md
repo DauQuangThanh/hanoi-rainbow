@@ -17,7 +17,7 @@
 ## Data Types
 
 | RPG | Pseudocode | Notes |
-|-----|-----------|-------|
+| --- | --------- | ----- |
 | `nP m` (packed) | `DECIMAL(n,m)` | **Packed - preserve precision!** |
 | `nS m` (zoned) | `DECIMAL(n,m)` | Zoned decimal |
 | `A` (character) | `STRING[n]` | Character |
@@ -29,7 +29,7 @@
 ## Operation Mapping
 
 | RPG | Pseudocode |
-|-----|-----------|
+| --- | --------- |
 | `EVAL result = expr` | `result = expr` |
 | `ADD(E) a b result` | `result = a + b` |
 | `IF condition` | `IF condition THEN` |
@@ -44,7 +44,7 @@
 ## Built-in Functions
 
 | RPG BIF | Pseudocode |
-|---------|-----------|
+| ------- | --------- |
 | `%SUBST(str:pos:len)` | `SUBSTRING(str, pos, len)` |
 | `%TRIM(str)` | `TRIM(str)` |
 | `%LEN(str)` | `LENGTH(str)` |
@@ -55,27 +55,33 @@
 ## Translation Patterns
 
 ### Indicators → Boolean
+
 ```rpg
 D EOF             S               N   INZ(*OFF)
 C                   IF        EOF
 C                   EVAL      EOF = *ON
 ```
+
 →
-```
+
+```pseudocode
 eof: BOOLEAN = FALSE
 IF eof THEN ...
 eof = TRUE
 ```
 
 ### Subroutine → Procedure
+
 ```rpg
 C     CALC_TOTAL    BEGSR
 C                   EVAL      Total = Qty * Price
 C                   ENDSR
 C                   EXSR      CALC_TOTAL
 ```
+
 →
-```
+
+```pseudocode
 PROCEDURE CalcTotal()
 BEGIN
     total = qty * price
@@ -84,6 +90,7 @@ CALL CalcTotal()
 ```
 
 ### File Loop with CHAIN
+
 ```rpg
 C     Key           CHAIN     File
 C                   DOW       %FOUND(File)
@@ -91,8 +98,10 @@ C                   EXSR      ProcessRec
 C     Key           CHAIN     File
 C                   ENDDO
 ```
+
 →
-```
+
+```pseudocode
 record = READ_BY_KEY(file, key)
 WHILE RECORD_FOUND(file) DO
     CALL ProcessRec(record)

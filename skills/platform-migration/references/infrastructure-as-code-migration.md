@@ -1,6 +1,5 @@
 # Infrastructure as Code Migration
 
-
 ### Terraform State Migration
 
 ```bash

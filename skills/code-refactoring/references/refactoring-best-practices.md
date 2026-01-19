@@ -1,6 +1,5 @@
 # Refactoring Best Practices
 
-
 ### 1. Test-Driven Refactoring
 
 Always refactor with a safety net of tests:
@@ -64,6 +63,7 @@ git commit -m "Extract CreateUserUseCase from controller"
 ### 3. Apply SOLID Principles
 
 **Single Responsibility Principle**
+
 ```typescript
 // Before: Multiple responsibilities
 class UserService {
@@ -94,6 +94,7 @@ class UserReportGenerator {
 ```
 
 **Open/Closed Principle**
+
 ```typescript
 // Before: Modification required for new types
 class DiscountCalculator {

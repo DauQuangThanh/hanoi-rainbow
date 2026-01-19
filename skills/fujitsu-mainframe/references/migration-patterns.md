@@ -5,6 +5,7 @@ Detailed migration examples and patterns for converting Fujitsu mainframe applic
 ## Pattern 1: Fujitsu COBOL to Java Spring Boot
 
 ### Fujitsu COBOL Program Example
+
 ```cobol
 IDENTIFICATION DIVISION.
 PROGRAM-ID. EMPMAINT.
@@ -45,6 +46,7 @@ PROCEDURE DIVISION.
 ### Modern Java Spring Boot Implementation
 
 **Entity:**
+
 ```java
 @Entity
 @Table(name = "employees")
@@ -63,6 +65,7 @@ public class Employee {
 ```
 
 **Repository:**
+
 ```java
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
@@ -70,6 +73,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 ```
 
 **Service:**
+
 ```java
 @Service
 public class EmployeeService {
@@ -84,6 +88,7 @@ public class EmployeeService {
 ```
 
 **Controller:**
+
 ```java
 @RestController
 @RequestMapping("/api/employees")
@@ -102,6 +107,7 @@ public class EmployeeController {
 ## Pattern 2: Fujitsu JCL to Shell Script + Kubernetes
 
 ### Fujitsu JCL Example
+
 ```jcl
 //DAILYJOB JOB (ACCT123),'DAILY PROCESS',CLASS=A,MSGCLASS=X
 //STEP010  EXEC PGM=VALIDATE
@@ -115,6 +121,7 @@ public class EmployeeController {
 ```
 
 ### Modern Shell Script
+
 ```bash
 #!/bin/bash
 set -e
@@ -153,6 +160,7 @@ log "Job completed successfully"
 ```
 
 ### Kubernetes CronJob
+
 ```yaml
 apiVersion: batch/v1
 kind: CronJob
@@ -192,6 +200,7 @@ spec:
 ## Pattern 3: SYMFOWARE SQL to PostgreSQL with JPA
 
 ### SYMFOWARE Embedded SQL
+
 ```cobol
 EXEC SQL
     DECLARE EMP_CURSOR CURSOR FOR
@@ -216,6 +225,7 @@ EXEC SQL CLOSE EMP_CURSOR END-EXEC.
 ```
 
 ### Java JPA/Spring Data
+
 ```java
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
@@ -249,6 +259,7 @@ public class EmployeeService {
 ## Pattern 4: Screen Handling - Terminal to Web
 
 ### Fujitsu COBOL Screen Definition
+
 ```cobol
 01  EMPLOYEE-SCREEN.
     05  BLANK SCREEN.
@@ -267,6 +278,7 @@ PROCEDURE DIVISION.
 ```
 
 ### Modern Web UI with React
+
 ```jsx
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -358,6 +370,7 @@ export default EmployeeMaintenance;
 ## Pattern 5: Batch Processing - File to Database
 
 ### Fujitsu COBOL Batch File Processing
+
 ```cobol
 IDENTIFICATION DIVISION.
 PROGRAM-ID. BATCHLOAD.
@@ -410,6 +423,7 @@ PROCESS-RECORD.
 ```
 
 ### Modern Spring Batch
+
 ```java
 @Configuration
 @EnableBatchProcessing
@@ -493,32 +507,38 @@ public class BatchLoadConfiguration {
 ## Migration Strategy Best Practices
 
 ### 1. Start with Data Layer
+
 - Migrate file structures to database tables first
 - Validate data conversion with production samples
 - Create ETL pipelines for ongoing sync during transition
 
 ### 2. Service Layer Next
+
 - Extract business logic into services
 - Maintain same inputs/outputs initially
 - Add unit tests for each service
 
 ### 3. API Layer
+
 - Expose services via REST/GraphQL APIs
 - Document with OpenAPI/Swagger
 - Version APIs for backward compatibility
 
 ### 4. UI Layer Last
+
 - Modern web/mobile UI
 - Progressive enhancement
 - Parallel run with legacy screens
 
 ### 5. Testing Strategy
+
 - Compare outputs: legacy vs new
 - Performance benchmarking
 - Load testing with production volumes
 - User acceptance testing
 
 ### 6. Deployment Strategy
+
 - Blue-green deployment
 - Feature flags for gradual rollout
 - Monitoring and alerting

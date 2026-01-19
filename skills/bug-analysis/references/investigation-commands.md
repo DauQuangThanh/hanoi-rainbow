@@ -5,6 +5,7 @@
 ### Git Commands for Bug Investigation
 
 **Find when a bug was introduced:**
+
 ```bash
 # Binary search to find problematic commit
 git bisect start
@@ -49,6 +50,7 @@ git log -S "function_name" -p path/to/file.js
 ### Searching Logs
 
 **Basic grep patterns:**
+
 ```bash
 # Find errors in logs
 grep -i "error" /var/log/app.log
@@ -79,6 +81,7 @@ grep -n "error" app.log
 ```
 
 **Advanced log analysis:**
+
 ```bash
 # Find errors in last hour
 grep "$(date -d '1 hour ago' '+%Y-%m-%d %H')" app.log | grep "ERROR"
@@ -249,6 +252,7 @@ db.stats()
 ### Linux/macOS
 
 **Process monitoring:**
+
 ```bash
 # Top processes by CPU
 top
@@ -270,6 +274,7 @@ strace -p <PID>  # System calls
 ```
 
 **Memory analysis:**
+
 ```bash
 # Memory usage
 free -h
@@ -288,6 +293,7 @@ pmap <PID>
 ```
 
 **Disk analysis:**
+
 ```bash
 # Disk usage
 df -h
@@ -306,6 +312,7 @@ iotop
 ```
 
 **Network analysis:**
+
 ```bash
 # Network connections
 netstat -tulpn  # Listening ports
@@ -340,6 +347,7 @@ curl -v https://api.example.com
 ### Node.js
 
 **Debugging:**
+
 ```bash
 # Run with debugger
 node --inspect app.js
@@ -358,6 +366,7 @@ node --heapsnapshot-signal=SIGUSR2 app.js
 ```
 
 **Package debugging:**
+
 ```bash
 # List installed packages
 npm ls
@@ -378,6 +387,7 @@ npm ls package-name
 ### Python
 
 **Debugging:**
+
 ```bash
 # Run with debugger
 python -m pdb script.py
@@ -394,6 +404,7 @@ python -m line_profiler script.py.lprof
 ```
 
 **Package debugging:**
+
 ```bash
 # List installed packages
 pip list
@@ -411,6 +422,7 @@ pip check
 ### Java
 
 **Debugging:**
+
 ```bash
 # Heap dump
 jmap -dump:format=b,file=heap.bin <PID>
@@ -431,6 +443,7 @@ jcmd <PID> JFR.start duration=60s filename=recording.jfr
 ### Docker
 
 **Container debugging:**
+
 ```bash
 # Container logs
 docker logs container_name
@@ -459,6 +472,7 @@ docker events --filter container=container_name
 ### Kubernetes
 
 **Pod debugging:**
+
 ```bash
 # Get pod logs
 kubectl logs pod-name
@@ -494,11 +508,13 @@ kubectl get events --sort-by=.metadata.creationTimestamp
 ### Web Performance
 
 **Browser DevTools:**
+
 - Network tab: Request timing, headers, payload
 - Performance tab: Timeline, CPU/memory usage
 - Lighthouse: Performance audit
 
 **Command-line tools:**
+
 ```bash
 # Load testing
 ab -n 1000 -c 10 https://example.com/api
@@ -519,6 +535,7 @@ openssl s_time -connect example.com:443
 ### APM Tools
 
 Common Application Performance Monitoring tools:
+
 - **New Relic**: Transaction tracing, error tracking
 - **Datadog**: Metrics, logs, traces correlation
 - **AppDynamics**: Business transaction monitoring

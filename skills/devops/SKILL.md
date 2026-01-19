@@ -20,6 +20,7 @@ Provides expert guidance covering the entire software delivery lifecycle:
 ## Best Practices
 
 ### CI/CD
+
 - Keep pipelines fast (< 10 minutes for feedback)
 - Fail fast with quick tests first
 - Use pipeline as code (version controlled)
@@ -27,6 +28,7 @@ Provides expert guidance covering the entire software delivery lifecycle:
 - Enable artifact caching and parallelize independent jobs
 
 ### Infrastructure as Code
+
 - Use remote state with locking
 - Create reusable modules and pin versions
 - Always review plan before apply
@@ -34,6 +36,7 @@ Provides expert guidance covering the entire software delivery lifecycle:
 - Document resource dependencies
 
 ### Container Orchestration
+
 - Set resource requests and limits
 - Implement health checks (liveness/readiness probes)
 - Use pod anti-affinity for high availability
@@ -41,6 +44,7 @@ Provides expert guidance covering the entire software delivery lifecycle:
 - Implement proper logging and monitoring
 
 ### Deployment
+
 - Use rolling updates with zero downtime
 - Implement proper health checks and rollback capabilities
 - Use canary/blue-green for critical applications
@@ -48,12 +52,14 @@ Provides expert guidance covering the entire software delivery lifecycle:
 - Monitor post-deployment metrics
 
 ### Security
+
 - Run containers as non-root with read-only root filesystems
 - Scan images for vulnerabilities regularly
 - Implement network policies and secrets management
 - Enable pod security standards and least privilege access
 
 ### Monitoring
+
 - Collect metrics using RED/USE methods
 - Implement structured logging with meaningful alerts
 - Create actionable dashboards and monitor SLIs/SLOs

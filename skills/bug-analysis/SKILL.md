@@ -14,6 +14,7 @@ This skill provides systematic bug analysis to identify root causes, assess impa
 ### Step 1: Initial Triage & Information Gathering
 
 **Collect Essential Information:**
+
 - Bug description and symptoms
 - Reproduction steps (verify they work)
 - Expected vs actual behavior
@@ -23,6 +24,7 @@ This skill provides systematic bug analysis to identify root causes, assess impa
 - User impact and frequency
 
 **Quick Assessment:**
+
 - Severity: Critical/High/Medium/Low
 - Type: Functional/Performance/Security/UI/Data/Integration/Configuration/Regression
 - Priority: Based on severity + business impact
@@ -33,18 +35,23 @@ This skill provides systematic bug analysis to identify root causes, assess impa
 **Severity Classification** (see [severity-guidelines.md](references/severity-guidelines.md) for detailed criteria):
 
 **Critical (P0)** - Response: Immediate (<1 hour)
+
 - System outage, data loss, security breach, no workaround
 
 **High (P1)** - Response: Same day
+
 - Major feature broken, significant user impact (>25%), difficult workaround
 
 **Medium (P2)** - Response: Within 1 week
+
 - Feature partially broken, moderate impact, workaround available
 
 **Low (P3)** - Response: Backlog
+
 - Minor issue, cosmetic problem, minimal impact
 
 **Bug Type Categories:**
+
 - **Functional**: Feature not working as specified
 - **Performance**: Slow response, timeouts, resource issues
 - **Security**: Vulnerabilities, unauthorized access
@@ -82,6 +89,7 @@ This skill provides systematic bug analysis to identify root causes, assess impa
    - Test with different dependency versions
 
 **Common Root Cause Patterns:**
+
 - Logic errors (incorrect conditions, calculations)
 - Null/undefined reference errors
 - Race conditions and timing issues
@@ -92,6 +100,7 @@ This skill provides systematic bug analysis to identify root causes, assess impa
 - Integration failures
 
 **For detailed analysis techniques**, see [analysis-techniques.md](references/analysis-techniques.md) for:
+
 - Five Whys technique
 - Stack trace analysis
 - Differential analysis
@@ -104,29 +113,34 @@ This skill provides systematic bug analysis to identify root causes, assess impa
 **Evaluate Impact Across Dimensions:**
 
 **User Impact:**
+
 - Number/percentage of affected users
 - User workflows disrupted
 - User segments affected
 
 **Business Impact:**
+
 - Revenue loss or risk
 - SLA violations
 - Customer satisfaction impact
 - Reputation risk
 
 **System Impact:**
+
 - Performance degradation
 - Resource consumption
 - Cascading failures
 - Data integrity risks
 
 **Security Impact** (if applicable):
+
 - Confidentiality: Data exposure level
 - Integrity: Unauthorized modifications
 - Availability: Service disruptions
 - Exploit potential
 
 **Scope Definition:**
+
 - Affected versions/releases
 - Affected platforms/browsers
 - Affected features/workflows
@@ -137,12 +151,14 @@ This skill provides systematic bug analysis to identify root causes, assess impa
 **Generate Structured Fix Strategy:**
 
 **1. Immediate Mitigation** (if not already done):
+
 - Workarounds for users
 - Configuration changes to reduce impact
 - Feature flags to disable problematic code
 - Rollback options if recent regression
 
 **2. Permanent Solution:**
+
 - Specific code changes needed
 - Files to modify with line numbers
 - Design changes required
@@ -150,12 +166,14 @@ This skill provides systematic bug analysis to identify root causes, assess impa
 - Configuration updates required
 
 **3. Testing Requirements:**
+
 - Unit tests to add
 - Integration tests needed
 - Regression tests to prevent recurrence
 - Performance/security tests if applicable
 
 **4. Prevention Measures:**
+
 - Code review focus areas
 - Additional validation needed
 - Monitoring/alerting to add
@@ -167,6 +185,7 @@ This skill provides systematic bug analysis to identify root causes, assess impa
 Provide structured analysis using these templates:
 
 **Standard Bug Analysis**: Use template from [output-templates.md](references/output-templates.md) including:
+
 - Bug summary with severity and priority
 - Environment and reproduction steps
 - Root cause analysis with evidence
@@ -174,6 +193,7 @@ Provide structured analysis using these templates:
 - Recommended fix with testing plan
 
 **Specialized Reports** (see [output-templates.md](references/output-templates.md)):
+
 - **Security Vulnerability Report**: CVSS scoring, attack vectors, disclosure plan
 - **Performance Bug Report**: Metrics, profiling results, optimization strategy
 - **Crash Analysis Report**: Stack traces, memory state, crash triggers
@@ -183,6 +203,7 @@ Provide structured analysis using these templates:
 ### Security Vulnerabilities
 
 For security issues:
+
 1. **Assess using CVSS**: Attack vector, complexity, privileges, impact
 2. **Identify exploit potential**: Remote exploitation, authentication required
 3. **Plan containment**: Immediate patches, access restrictions, monitoring
@@ -193,6 +214,7 @@ See [severity-guidelines.md](references/severity-guidelines.md) for security-spe
 ### Performance Issues
 
 For performance bugs:
+
 1. **Establish baseline**: Expected metrics, SLA thresholds
 2. **Identify bottlenecks**: CPU profiling, memory patterns, I/O, database queries
 3. **Quantify degradation**: Response time increase, throughput reduction
@@ -201,6 +223,7 @@ For performance bugs:
 ### Crash Analysis
 
 For application crashes:
+
 1. **Analyze crash dump**: Exception type, stack trace, thread states
 2. **Identify trigger**: User action, system condition, data input, timing
 3. **Assess stability impact**: Frequency, affected scenarios, data loss risk
@@ -211,26 +234,31 @@ For application crashes:
 For detailed command references, see [investigation-commands.md](references/investigation-commands.md):
 
 **Version Control:**
+
 - `git bisect` - Find commit that introduced bug
 - `git blame` - See who last modified code
 - `git log -S "text"` - Find when code changed
 
 **Log Analysis:**
+
 - `grep -A 5 -B 5 "error" app.log` - Find errors with context
 - `tail -f app.log | grep ERROR` - Monitor errors real-time
 - Log parsing with awk and analysis scripts
 
 **Database Investigation:**
+
 - PostgreSQL: Slow query analysis, index usage
 - MySQL: Process list, deadlock detection
 - MongoDB: Operation profiling, collection stats
 
 **System Monitoring:**
+
 - Process monitoring: `top`, `ps`, `htop`
 - Memory analysis: `free`, `pmap`, `valgrind`
 - Network analysis: `netstat`, `tcpdump`, `curl -v`
 
 **Application Debugging:**
+
 - Node.js: `node --inspect`, profiling, heap snapshots
 - Python: `pdb`, `cProfile`, memory profiling
 - Java: `jmap`, `jstack`, flight recorder
@@ -257,6 +285,7 @@ For detailed command references, see [investigation-commands.md](references/inve
 ### Prevention Focus
 
 After fixing bugs:
+
 - **Identify patterns**: Common causes across multiple bugs
 - **Improve testing**: Add coverage for bug scenarios
 - **Enhance monitoring**: Add alerts for similar issues
@@ -304,6 +333,7 @@ grep ERROR /var/log/app.log | wc -l
 ## Integration with Development Workflow
 
 **Bug Lifecycle:**
+
 1. **New** → Report received
 2. **Triage** → Analysis and prioritization (use this skill)
 3. **Confirmed** → Reproduced, root cause identified
@@ -315,6 +345,7 @@ grep ERROR /var/log/app.log | wc -l
 9. **Closed** → Verified resolved
 
 **Documentation Requirements:**
+
 - Link to code: Files and line numbers
 - Link to tests: Verify fix test cases
 - Link to monitoring: Dashboards or alerts

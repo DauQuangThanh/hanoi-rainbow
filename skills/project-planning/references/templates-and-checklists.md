@@ -1,6 +1,5 @@
 # Templates and Checklists
 
-
 ### Project Kickoff Checklist
 
 - [ ] Vision and objectives defined

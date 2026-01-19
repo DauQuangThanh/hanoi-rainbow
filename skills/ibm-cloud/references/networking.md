@@ -1,6 +1,7 @@
 # Networking
 
 ## Table of Contents
+
 - [VPC Networking](#vpc-networking)
 - [Load Balancers](#load-balancers)
 - [Cloud Internet Services](#cloud-internet-services)
@@ -60,6 +61,7 @@ ibmcloud is network-acl-rule-add my-acl allow inbound all \
 ### Application Load Balancer
 
 **Create ALB:**
+
 ```bash
 # Create load balancer
 ibmcloud is load-balancer-create my-alb public \
@@ -89,6 +91,7 @@ ibmcloud is load-balancer-listener-create my-alb \
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_is_lb" "alb" {
   name    = "my-alb"
@@ -187,6 +190,7 @@ ibmcloud cis waf-package-set <CIS-INSTANCE-ID> <DOMAIN-ID> <PACKAGE-ID> \
 Dedicated private connection between on-premises and IBM Cloud.
 
 **Types:**
+
 - **Direct Link Dedicated**: Single-tenant 1-10 Gbps
 - **Direct Link Connect**: Multi-tenant via partners
 
@@ -238,6 +242,7 @@ ibmcloud tg connection-create <TG-ID> \
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_tg_gateway" "tg" {
   name     = "my-tg"
@@ -280,6 +285,7 @@ ibmcloud is vpn-gateway-connection-create my-connection my-vpn-gateway \
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_is_vpn_gateway" "vpn" {
   name   = "my-vpn-gateway"

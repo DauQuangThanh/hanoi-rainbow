@@ -1,16 +1,17 @@
 # CI/CD Pipeline Design
 
-
 ### Pipeline Structure
 
 Design pipelines with these stages:
 
 **1. Source Stage**
+
 - Trigger on code commit/merge
 - Checkout source code
 - Validate branch policies
 
 **2. Build Stage**
+
 - Compile code
 - Run unit tests
 - Generate artifacts
@@ -18,23 +19,27 @@ Design pipelines with these stages:
 - Version artifacts (semantic versioning)
 
 **3. Test Stage**
+
 - Integration tests
 - Security scanning (SAST, dependency scanning)
 - Code quality analysis (SonarQube, linting)
 - Performance tests
 
 **4. Deploy to Staging**
+
 - Deploy to staging environment
 - Run smoke tests
 - Run E2E tests
 - Load testing (if applicable)
 
 **5. Approval Gate**
+
 - Manual approval for production
 - Automated approval criteria
 - Change management integration
 
 **6. Deploy to Production**
+
 - Deployment strategy execution
 - Health checks
 - Rollback capability
@@ -43,6 +48,7 @@ Design pipelines with these stages:
 ### Pipeline Configuration Examples
 
 **GitHub Actions:**
+
 ```yaml
 name: CI/CD Pipeline
 
@@ -118,6 +124,7 @@ jobs:
 ```
 
 **GitLab CI:**
+
 ```yaml
 stages:
   - build

@@ -1,6 +1,5 @@
 # Schedule Risks
 
-
 Risk: Key developer vacation during critical sprint
 Probability: High | Impact: Medium
 Mitigation: Knowledge sharing, pair programming

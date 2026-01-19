@@ -4,6 +4,7 @@
 **Date**: [YYYY-MM-DD]
 
 ## Purpose
+
 Validate readiness for data migration execution.
 
 ## Planning

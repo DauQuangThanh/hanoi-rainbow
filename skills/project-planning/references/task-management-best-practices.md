@@ -1,6 +1,5 @@
 # Task Management Best Practices
 
-
 ### Task Organization
 
 **Task Attributes:**

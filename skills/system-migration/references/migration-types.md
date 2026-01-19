@@ -1,9 +1,8 @@
 # Migration Types
 
+## 1. Operating System Migration
 
-### 1. Operating System Migration
-
-#### Linux Distribution Migration
+### Linux Distribution Migration
 
 **Common Scenarios:**
 

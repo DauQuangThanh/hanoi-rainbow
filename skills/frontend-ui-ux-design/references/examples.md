@@ -1,11 +1,11 @@
 # Examples
 
-
 ### Example 1: E-Commerce Product Page
 
 **User Journey**: Browse → View Product → Add to Cart → Checkout
 
 **Key Components**:
+
 - Product image gallery (with zoom)
 - Product title and price
 - Size/color selector
@@ -17,10 +17,12 @@
 - Breadcrumb navigation
 
 **Responsive Considerations**:
+
 - Mobile: Single column, sticky add-to-cart
 - Desktop: Two-column layout, sidebar details
 
 **Accessibility**:
+
 - Alt text for product images
 - ARIA labels for selectors
 - Keyboard navigation for gallery
@@ -31,6 +33,7 @@
 **User Journey**: Login → View Overview → Drill into Metrics → Export
 
 **Key Components**:
+
 - Sidebar navigation
 - Stats cards (KPIs)
 - Charts (line, bar, pie)
@@ -39,10 +42,12 @@
 - Export functionality
 
 **Responsive Considerations**:
+
 - Mobile: Collapsible sidebar, stacked cards
 - Desktop: Fixed sidebar, grid layout for cards
 
 **Accessibility**:
+
 - Screen reader announcements for dynamic data
 - Keyboard navigation for charts
 - Data tables with proper headers
@@ -53,6 +58,7 @@
 **User Journey**: Open App → Welcome Screens → Sign Up → Tutorial
 
 **Key Screens**:
+
 1. Welcome splash (brand introduction)
 2. Features overview (3-4 screens, swipeable)
 3. Sign up form (minimal fields)
@@ -60,6 +66,7 @@
 5. Quick tutorial (interactive)
 
 **Design Patterns**:
+
 - Swipeable carousel for features
 - Progress indicators (dots)
 - Skip button (top right)

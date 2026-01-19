@@ -7,6 +7,7 @@
 Bicep is a domain-specific language (DSL) for deploying Azure resources declaratively. It's a transparent abstraction over ARM templates with cleaner syntax.
 
 **Benefits:**
+
 - Simpler syntax than ARM templates
 - Type safety and IntelliSense support
 - Automatic dependency management
@@ -16,6 +17,7 @@ Bicep is a domain-specific language (DSL) for deploying Azure resources declarat
 ### Basic Bicep Syntax
 
 **Resource Declaration:**
+
 ```bicep
 // Storage account resource
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
@@ -35,6 +37,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 ```
 
 **Parameters and Variables:**
+
 ```bicep
 @description('The name of the environment')
 @allowed([
@@ -56,6 +59,7 @@ var appServicePlanName = 'plan-${environmentName}-${location}'
 ```
 
 **Outputs:**
+
 ```bicep
 output storageAccountId string = storageAccount.id
 output storageAccountName string = storageAccount.name
@@ -65,6 +69,7 @@ output primaryEndpoints object = storageAccount.properties.primaryEndpoints
 ### Complete Bicep Example
 
 **main.bicep:**
+
 ```bicep
 @description('The environment name')
 param environmentName string = 'dev'
@@ -221,6 +226,7 @@ output fqdn string = publicIp.properties.dnsSettings.fqdn
 ### Bicep Modules
 
 **modules/storage.bicep:**
+
 ```bicep
 @description('Storage account name')
 param storageAccountName string
@@ -261,6 +267,7 @@ output storageAccountName string = storageAccount.name
 ```
 
 **Using modules:**
+
 ```bicep
 // main.bicep
 module storage 'modules/storage.bicep' = {
@@ -306,6 +313,7 @@ az deployment sub create \
 ```
 
 **parameters.json:**
+
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",

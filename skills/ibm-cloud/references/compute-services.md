@@ -1,6 +1,7 @@
 # Compute Services
 
 ## Table of Contents
+
 - [Virtual Private Cloud (VPC)](#virtual-private-cloud-vpc)
 - [Virtual Server Instances](#virtual-server-instances)
 - [IBM Kubernetes Service (IKS)](#ibm-kubernetes-service-iks)
@@ -35,6 +36,7 @@ VPC (10.240.0.0/16)
 ### Create VPC
 
 **CLI:**
+
 ```bash
 # Create VPC
 ibmcloud is vpc-create my-vpc \
@@ -61,6 +63,7 @@ ibmcloud is subnet-update my-subnet-1 \
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_is_vpc" "vpc" {
   name                      = "my-vpc"
@@ -144,22 +147,26 @@ ibmcloud is subnet-update my-subnet-1 --network-acl my-acl
 ### Instance Profiles
 
 **Balanced Profiles (bx):**
+
 - `bx2-2x8`: 2 vCPU, 8GB RAM
 - `bx2-4x16`: 4 vCPU, 16GB RAM
 - `bx2-8x32`: 8 vCPU, 32GB RAM
 - `bx2-16x64`: 16 vCPU, 64GB RAM
 
 **Compute Profiles (cx):**
+
 - `cx2-2x4`: 2 vCPU, 4GB RAM (CPU-optimized)
 - `cx2-4x8`: 4 vCPU, 8GB RAM
 
 **Memory Profiles (mx):**
+
 - `mx2-2x16`: 2 vCPU, 16GB RAM (memory-optimized)
 - `mx2-4x32`: 4 vCPU, 32GB RAM
 
 ### Create Virtual Server
 
 **CLI:**
+
 ```bash
 # List available images
 ibmcloud is images
@@ -188,6 +195,7 @@ ssh root@<FLOATING-IP>
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_is_ssh_key" "ssh_key" {
   name       = "my-ssh-key"
@@ -255,6 +263,7 @@ ibmcloud is instance-create my-vsi my-vpc us-south-1 \
 ```
 
 **cloud-init.yaml:**
+
 ```yaml
 #cloud-config
 package_update: true
@@ -279,12 +288,14 @@ runcmd:
 ### Cluster Types
 
 **Free Cluster:**
+
 - 1 worker node (2 vCPU, 4GB RAM)
 - Single zone
 - 30-day expiration
 - Good for testing
 
 **Standard Cluster:**
+
 - Multiple worker nodes
 - Multi-zone for high availability
 - Scalable
@@ -293,6 +304,7 @@ runcmd:
 ### Create IKS Cluster
 
 **CLI:**
+
 ```bash
 # List available zones
 ibmcloud ks zones --provider vpc-gen2
@@ -322,6 +334,7 @@ kubectl get nodes
 ```
 
 **Multi-Zone Cluster:**
+
 ```bash
 # Create cluster in zone 1
 ibmcloud ks cluster create vpc-gen2 \
@@ -348,6 +361,7 @@ ibmcloud ks zone add vpc-gen2 \
 ```
 
 **Terraform:**
+
 ```hcl
 resource "ibm_container_vpc_cluster" "cluster" {
   name              = "my-cluster"
@@ -475,6 +489,7 @@ kubectl get ingress
 ### Create OpenShift Cluster
 
 **CLI:**
+
 ```bash
 # Create OpenShift cluster
 ibmcloud oc cluster create vpc-gen2 \
@@ -521,6 +536,7 @@ oc get route
 Serverless container platform that auto-scales applications and runs batch jobs.
 
 **Key Features:**
+
 - Auto-scaling from 0 to N instances
 - Pay only for actual usage (CPU, memory, requests)
 - Source-to-image builds
@@ -543,6 +559,7 @@ ibmcloud ce project list
 ### Deploy Application
 
 **From Container Image:**
+
 ```bash
 # Deploy application
 ibmcloud ce application create \
@@ -561,6 +578,7 @@ ibmcloud ce application get --name my-app
 ```
 
 **From Source Code:**
+
 ```bash
 # Build and deploy from Git
 ibmcloud ce application create \
@@ -641,6 +659,7 @@ ibmcloud ce subscription cron create \
 Serverless FaaS platform based on Apache OpenWhisk.
 
 **Supported Runtimes:**
+
 - Node.js (12, 14, 16, 18)
 - Python (3.9, 3.10, 3.11)
 - Go (1.17, 1.19)
@@ -652,6 +671,7 @@ Serverless FaaS platform based on Apache OpenWhisk.
 ### Create Function
 
 **Node.js Example:**
+
 ```javascript
 // hello.js
 function main(params) {
@@ -663,6 +683,7 @@ module.exports.main = main;
 ```
 
 **Deploy:**
+
 ```bash
 # Create function
 ibmcloud fn action create hello hello.js \
@@ -678,6 +699,7 @@ ibmcloud fn action get hello --url
 ```
 
 **Python Example:**
+
 ```python
 # handler.py
 def main(params):
@@ -740,6 +762,7 @@ curl https://<REGION>.functions.cloud.ibm.com/api/v1/web/<NAMESPACE>/default/web
 Dedicated physical servers for high-performance workloads.
 
 **Use Cases:**
+
 - High-performance computing (HPC)
 - Database servers requiring sustained I/O
 - Compliance requirements (no virtualization)
@@ -748,15 +771,19 @@ Dedicated physical servers for high-performance workloads.
 ### Server Profiles
 
 **Compute:**
+
 - `md2-32x192x2-100gb`: 32 cores, 192GB RAM, 2x100GB network
 
 **Balanced:**
+
 - `md3-8x100x100gb`: 8 cores, 100GB RAM
 
 **Memory:**
+
 - `mr3-16x256x100gb`: 16 cores, 256GB RAM
 
 **GPU:**
+
 - `mgp2-48x384x4-100gb`: 48 cores, 384GB RAM, 4x NVIDIA V100
 
 ### Provision Bare Metal

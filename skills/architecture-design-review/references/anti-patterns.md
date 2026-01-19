@@ -7,6 +7,7 @@ A comprehensive guide to identifying and avoiding common architecture anti-patte
 Architecture anti-patterns are common solutions to recurring problems that are ineffective and counterproductive. This guide helps identify these patterns and provides alternatives.
 
 ## Table of Contents
+
 1. [Distributed System Anti-Patterns](#distributed-system-anti-patterns)
 2. [Data Management Anti-Patterns](#data-management-anti-patterns)
 3. [Integration Anti-Patterns](#integration-anti-patterns)
@@ -22,6 +23,7 @@ Architecture anti-patterns are common solutions to recurring problems that are i
 **Description**: Microservices that are tightly coupled and must be deployed together.
 
 **Symptoms**:
+
 - Services share same database
 - Services call each other synchronously for every operation
 - Cannot deploy services independently
@@ -29,6 +31,7 @@ Architecture anti-patterns are common solutions to recurring problems that are i
 - All services must be updated together
 
 **Example**:
+
 ```
 OrderService → calls → InventoryService → calls → PaymentService
       ↓                        ↓                       ↓
@@ -36,6 +39,7 @@ OrderService → calls → InventoryService → calls → PaymentService
 ```
 
 **Why It's Bad**:
+
 - Complexity of microservices without benefits
 - Cannot scale services independently
 - No fault isolation
@@ -43,6 +47,7 @@ OrderService → calls → InventoryService → calls → PaymentService
 - Defeats purpose of microservices
 
 **How to Fix**:
+
 - Database per service pattern
 - Asynchronous communication via events
 - API Gateway for client requests
@@ -58,6 +63,7 @@ OrderService → calls → InventoryService → calls → PaymentService
 **Description**: Too many fine-grained service calls causing performance issues.
 
 **Symptoms**:
+
 - Multiple API calls to complete one operation
 - High network latency
 - N+1 query problem across services
@@ -65,6 +71,7 @@ OrderService → calls → InventoryService → calls → PaymentService
 - High bandwidth usage
 
 **Example**:
+
 ```
 Client → getOrder() → Order Service
        → getCustomer() → Customer Service
@@ -74,6 +81,7 @@ Client → getOrder() → Order Service
 ```
 
 **Why It's Bad**:
+
 - High latency (network round trips)
 - Increased failure points
 - Resource intensive
@@ -81,6 +89,7 @@ Client → getOrder() → Order Service
 - Difficult to troubleshoot
 
 **How to Fix**:
+
 - Aggregate APIs (BFF - Backend for Frontend)
 - GraphQL for flexible querying
 - Data denormalization where appropriate
@@ -96,6 +105,7 @@ Client → getOrder() → Order Service
 **Description**: Critical component with no redundancy causing system-wide failure.
 
 **Common SPOFs**:
+
 - Single database instance
 - Single load balancer
 - Single message broker
@@ -103,11 +113,13 @@ Client → getOrder() → Order Service
 - Single authentication service
 
 **Example**:
+
 ```
 All Services → Single Database → Failure = Total Outage
 ```
 
 **Why It's Bad**:
+
 - Complete system failure risk
 - No fault tolerance
 - Poor availability
@@ -115,6 +127,7 @@ All Services → Single Database → Failure = Total Outage
 - Customer trust erosion
 
 **How to Fix**:
+
 - Database replication (primary-replica)
 - Load balancer redundancy
 - Multi-AZ deployment
@@ -130,6 +143,7 @@ All Services → Single Database → Failure = Total Outage
 **Description**: Failure in one service propagates and causes failures in dependent services.
 
 **Symptoms**:
+
 - One service failure brings down entire system
 - Thread pool exhaustion
 - Connection pool exhaustion
@@ -137,12 +151,14 @@ All Services → Single Database → Failure = Total Outage
 - No circuit breakers
 
 **Example**:
+
 ```
 Service A (healthy) → Service B (slow) → Service C (down)
 Result: All services fail as threads wait
 ```
 
 **Why It's Bad**:
+
 - Magnifies impact of single failure
 - Difficult to recover
 - Affects all dependent services
@@ -150,6 +166,7 @@ Result: All services fail as threads wait
 - Extended downtime
 
 **How to Fix**:
+
 - Circuit breaker pattern (Hystrix, Resilience4j)
 - Timeouts on all external calls
 - Bulkhead pattern for isolation
@@ -157,6 +174,7 @@ Result: All services fail as threads wait
 - Health checks and monitoring
 
 **Patterns**:
+
 - Circuit Breaker
 - Bulkhead
 - Timeout
@@ -171,6 +189,7 @@ Result: All services fail as threads wait
 **Description**: Multiple services sharing the same database tables.
 
 **Symptoms**:
+
 - Services access same tables
 - Schema changes affect multiple services
 - Tight coupling through data
@@ -178,12 +197,14 @@ Result: All services fail as threads wait
 - No service ownership
 
 **Example**:
+
 ```
 OrderService    →     Shared Database    ←    CustomerService
 InvoiceService  →     (Orders, Customers) ←   ShippingService
 ```
 
 **Why It's Bad**:
+
 - Tight coupling defeats microservices
 - Schema changes require coordination
 - Cannot scale database per service needs
@@ -191,6 +212,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 - Transaction spanning services
 
 **How to Fix**:
+
 - Database per service pattern
 - Services own their data
 - API calls for cross-service data
@@ -206,6 +228,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 **Description**: Single massive database with all application data.
 
 **Symptoms**:
+
 - One database for all services
 - Schema grows indefinitely
 - Cannot scale independently
@@ -213,6 +236,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 - Performance degradation over time
 
 **Why It's Bad**:
+
 - Scalability bottleneck
 - Single point of failure
 - Difficult to maintain
@@ -220,6 +244,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 - Technology lock-in
 
 **How to Fix**:
+
 - Separate databases by bounded context
 - Read replicas for read-heavy workloads
 - Sharding for horizontal scaling
@@ -233,6 +258,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 **Description**: Multiple components sharing and modifying the same state.
 
 **Symptoms**:
+
 - Race conditions
 - Data corruption
 - Difficult to debug
@@ -240,6 +266,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 - Cannot scale horizontally
 
 **Why It's Bad**:
+
 - Concurrency issues
 - Not thread-safe
 - Cannot scale horizontally
@@ -247,6 +274,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 - Bugs hard to reproduce
 
 **How to Fix**:
+
 - Immutable data structures
 - Event sourcing
 - Stateless services
@@ -262,6 +290,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 **Description**: One service that does everything.
 
 **Symptoms**:
+
 - Service has 100+ endpoints
 - Handles multiple business domains
 - Large codebase (10K+ lines)
@@ -269,6 +298,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 - Frequent conflicts and deployments
 
 **Why It's Bad**:
+
 - Violates Single Responsibility
 - Difficult to maintain
 - Cannot scale specific functions
@@ -276,6 +306,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 - Team coordination overhead
 
 **How to Fix**:
+
 - Decompose by business capability
 - Extract smaller services
 - Domain-Driven Design
@@ -289,6 +320,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 **Description**: Domain objects with no behavior, just data and getters/setters.
 
 **Symptoms**:
+
 - POJOs with only getters/setters
 - Business logic in service layer
 - Entities are just data containers
@@ -296,6 +328,7 @@ InvoiceService  →     (Orders, Customers) ←   ShippingService
 - Procedural programming in OO language
 
 **Example**:
+
 ```java
 // Anemic
 class Order {
@@ -316,6 +349,7 @@ class OrderService {
 ```
 
 **Why It's Bad**:
+
 - Not object-oriented
 - Business logic scattered
 - Difficult to test
@@ -323,6 +357,7 @@ class OrderService {
 - Procedural mindset
 
 **How to Fix - Rich Domain Model**:
+
 ```java
 class Order {
     private List<OrderItem> items;
@@ -350,6 +385,7 @@ class Order {
 **Description**: Point-to-point integrations creating a tangled mess.
 
 **Symptoms**:
+
 - Direct service-to-service calls everywhere
 - No integration layer
 - Difficult to trace requests
@@ -357,6 +393,7 @@ class Order {
 - Circular dependencies
 
 **Example**:
+
 ```
 ServiceA ←→ ServiceB ←→ ServiceC
     ↕           ↕           ↕
@@ -364,6 +401,7 @@ ServiceD ←→ ServiceE ←→ ServiceF
 ```
 
 **Why It's Bad**:
+
 - High coupling
 - Difficult to change
 - Hard to understand dependencies
@@ -371,6 +409,7 @@ ServiceD ←→ ServiceE ←→ ServiceF
 - Testing difficult
 
 **How to Fix**:
+
 - API Gateway pattern
 - Event-driven architecture
 - Service mesh (Istio, Linkerd)
@@ -386,6 +425,7 @@ ServiceD ←→ ServiceE ←→ ServiceF
 **Description**: System with no recognizable structure.
 
 **Symptoms**:
+
 - No clear architecture
 - High coupling everywhere
 - No separation of concerns
@@ -393,6 +433,7 @@ ServiceD ←→ ServiceE ←→ ServiceF
 - "Just make it work" mentality
 
 **Why It's Bad**:
+
 - Impossible to maintain
 - Difficult to understand
 - Cannot scale or evolve
@@ -400,6 +441,7 @@ ServiceD ←→ ServiceE ←→ ServiceF
 - New features take forever
 
 **How to Fix**:
+
 - Identify bounded contexts
 - Refactor toward layered architecture
 - Apply SOLID principles
@@ -413,6 +455,7 @@ ServiceD ←→ ServiceE ←→ ServiceF
 **Description**: Optimizing before understanding actual performance issues.
 
 **Symptoms**:
+
 - Complex code for theoretical performance
 - Micro-optimizations everywhere
 - Caching everything
@@ -420,6 +463,7 @@ ServiceD ←→ ServiceE ←→ ServiceF
 - "It might be slow" reasoning
 
 **Example**:
+
 ```java
 // Premature optimization
 String result = new StringBuilder()
@@ -433,6 +477,7 @@ String result = "Hello World";
 ```
 
 **Why It's Bad**:
+
 - Increased complexity
 - Harder to maintain
 - May not solve real problems
@@ -440,6 +485,7 @@ String result = "Hello World";
 - "The root of all evil" - Donald Knuth
 
 **How to Fix**:
+
 - Measure first, optimize second
 - Use profiling tools
 - Focus on algorithmic improvements
@@ -453,12 +499,14 @@ String result = "Hello World";
 **Description**: Using same solution/technology for all problems.
 
 **Examples**:
+
 - "Everything is a microservice"
 - "Always use NoSQL"
 - "Use same framework for all projects"
 - "Always use Kubernetes"
 
 **Why It's Bad**:
+
 - Wrong tool for the job
 - Unnecessary complexity
 - Poor performance
@@ -466,6 +514,7 @@ String result = "Hello World";
 - Team frustration
 
 **How to Fix**:
+
 - Understand problem first
 - Evaluate alternatives
 - Choose appropriate tool
@@ -481,6 +530,7 @@ String result = "Hello World";
 **Description**: Deploying software manually through UI or scripts.
 
 **Symptoms**:
+
 - Deployments take hours
 - Different process for each environment
 - "Works on my machine"
@@ -488,6 +538,7 @@ String result = "Hello World";
 - Manual configuration steps
 
 **Why It's Bad**:
+
 - Error-prone
 - Not reproducible
 - Time-consuming
@@ -495,6 +546,7 @@ String result = "Hello World";
 - Cannot deploy frequently
 
 **How to Fix**:
+
 - CI/CD pipeline automation
 - Infrastructure as Code
 - Containerization (Docker)
@@ -508,6 +560,7 @@ String result = "Hello World";
 **Description**: All developers sharing single database instance.
 
 **Symptoms**:
+
 - Cannot test locally
 - Conflicts with other developers
 - Schema changes affect everyone
@@ -515,6 +568,7 @@ String result = "Hello World";
 - Test data pollution
 
 **Why It's Bad**:
+
 - Development slowdown
 - Cannot work offline
 - Difficult to test
@@ -522,6 +576,7 @@ String result = "Hello World";
 - Lack of isolation
 
 **How to Fix**:
+
 - Local database per developer
 - Database migration scripts (Flyway, Liquibase)
 - Docker for local databases
@@ -535,18 +590,21 @@ String result = "Hello World";
 **Description**: Hardcoding configuration values.
 
 **Symptoms**:
+
 - Environment-specific values in code
 - Need to rebuild for config changes
 - Secrets in source control
 - Different code per environment
 
 **Why It's Bad**:
+
 - Security risk (secrets exposed)
 - Cannot change config without rebuild
 - Different builds per environment
 - Violates 12-factor app
 
 **How to Fix**:
+
 - Externalize configuration
 - Environment variables
 - Configuration server (Spring Cloud Config)
@@ -560,6 +618,7 @@ String result = "Hello World";
 Use this checklist during architecture reviews:
 
 **Distributed Systems**:
+
 - [ ] Services can deploy independently?
 - [ ] No shared databases between services?
 - [ ] Asynchronous communication where possible?
@@ -567,24 +626,28 @@ Use this checklist during architecture reviews:
 - [ ] No single points of failure?
 
 **Data Management**:
+
 - [ ] Each service owns its data?
 - [ ] No shared mutable state?
 - [ ] Appropriate database type selected?
 - [ ] Data consistency model defined?
 
 **Integration**:
+
 - [ ] No point-to-point integration spaghetti?
 - [ ] API Gateway or service mesh used?
 - [ ] Services not chatty?
 - [ ] Bounded contexts clear?
 
 **Design**:
+
 - [ ] Clean architecture principles followed?
 - [ ] Not over-engineered?
 - [ ] Appropriate technology choices?
 - [ ] Not premature optimization?
 
 **Deployment**:
+
 - [ ] Automated deployment?
 - [ ] Configuration externalized?
 - [ ] Infrastructure as Code?

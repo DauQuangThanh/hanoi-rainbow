@@ -1,6 +1,5 @@
 # Post-Migration Validation
 
-
 ```markdown
 Technical Validation:
 - [ ] All services running

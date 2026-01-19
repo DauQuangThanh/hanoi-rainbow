@@ -1,7 +1,7 @@
 # Best Practices
 
-
 ### API Design
+
 1. Use consistent naming conventions
 2. Version your APIs from the start
 3. Document with OpenAPI/Swagger
@@ -12,6 +12,7 @@
 8. Use HTTPS for all endpoints
 
 ### Database
+
 1. Design schema with normalization in mind
 2. Add indexes for frequently queried columns
 3. Use transactions for data consistency
@@ -21,6 +22,7 @@
 7. Backup regularly and test restoration
 
 ### Security
+
 1. Never store passwords in plain text
 2. Validate and sanitize all inputs
 3. Use parameterized queries (prevent SQL injection)
@@ -31,6 +33,7 @@
 8. Implement proper CORS policies
 
 ### Performance
+
 1. Cache frequently accessed data
 2. Use database indexes strategically
 3. Implement pagination for large datasets
@@ -41,6 +44,7 @@
 8. Use CDN for static assets
 
 ### Reliability
+
 1. Implement circuit breakers
 2. Add retry logic with exponential backoff
 3. Design for idempotency

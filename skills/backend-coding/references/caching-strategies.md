@@ -1,6 +1,5 @@
 # Caching Strategies
 
-
 ```typescript
 // Redis caching layer
 import Redis from 'ioredis';

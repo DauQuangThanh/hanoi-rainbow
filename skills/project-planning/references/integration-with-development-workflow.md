@@ -1,6 +1,5 @@
 # Integration with Development Workflow
 
-
 ### Continuous Planning
 
 - **Daily**: Update task status, log time, identify blockers
@@ -12,12 +11,14 @@
 ### Tool Integration
 
 **Common Project Management Tools:**
+
 - Jira, Azure DevOps, Linear
 - GitHub Projects, GitLab Issues
 - Trello, Asana, Monday.com
 - Notion, Confluence
 
 **Key Integrations:**
+
 - Link commits to stories: `git commit -m "STORY-28: Add login validation"`
 - Automated status updates from CI/CD
 - Pull requests linked to tasks

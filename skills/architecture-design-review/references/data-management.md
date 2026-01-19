@@ -5,6 +5,7 @@
 ☐ Data consistency strategy defined
 ☐ Caching strategy documented
 ☐ Data migration plan specified
+
 ```
 
 **2. Integration Patterns**

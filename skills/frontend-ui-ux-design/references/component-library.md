@@ -9,6 +9,7 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Trigger actions, submit forms, navigate
 
 **Variants**
+
 - **Primary**: Main call-to-action (solid background, high contrast)
 - **Secondary**: Less prominent actions (outlined or light fill)
 - **Tertiary/Ghost**: Subtle actions (text-only or minimal style)
@@ -16,11 +17,13 @@ Comprehensive guide for designing and implementing common UI components.
 - **Icon Button**: Icon-only for compact spaces
 
 **Sizes**
+
 - Small: 32px height (dense UIs, tables)
 - Medium: 40px height (default)
 - Large: 48px height (hero sections, mobile CTAs)
 
 **States**
+
 - Default
 - Hover (subtle background change)
 - Active/Pressed (darker/pressed effect)
@@ -29,6 +32,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Loading (spinner, disabled interaction)
 
 **Specifications**
+
 ```css
 /* Primary Button */
 .button-primary {
@@ -54,6 +58,7 @@ Comprehensive guide for designing and implementing common UI components.
 ```
 
 **Accessibility**
+
 - Minimum size: 44x44px (touch devices)
 - Clear focus indicator
 - Descriptive text or aria-label
@@ -65,6 +70,7 @@ Comprehensive guide for designing and implementing common UI components.
 ### Input Fields
 
 **Types**
+
 - Text input
 - Email input
 - Password input
@@ -73,6 +79,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Search input
 
 **Anatomy**
+
 - Label (above input)
 - Input field
 - Helper text (below, descriptive)
@@ -80,6 +87,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Optional indicator or required asterisk
 
 **States**
+
 - Default (empty)
 - Filled (with value)
 - Focus (active, outlined)
@@ -88,6 +96,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Success (validation passed)
 
 **Specifications**
+
 ```html
 <div class="form-field">
   <label for="email" class="form-label">
@@ -108,6 +117,7 @@ Comprehensive guide for designing and implementing common UI components.
 ```
 
 **Best Practices**
+
 - Labels always visible (not placeholder-only)
 - Clear placeholder as example
 - Helper text for format or requirements
@@ -116,6 +126,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Appropriate input type for mobile keyboards
 
 **Accessibility**
+
 - Label associated with input (for attribute)
 - Helper text associated (aria-describedby)
 - Error messages announced (aria-live)
@@ -128,6 +139,7 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Select multiple options from a list
 
 **States**
+
 - Unchecked
 - Checked
 - Indeterminate (partial selection, parent checkbox)
@@ -135,6 +147,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Focus
 
 **Specifications**
+
 ```html
 <div class="checkbox-wrapper">
   <input
@@ -149,12 +162,14 @@ Comprehensive guide for designing and implementing common UI components.
 ```
 
 **Best Practices**
+
 - Minimum size: 20x20px (input), 44x44px (clickable area including label)
 - Label clickable (increases target size)
 - Clear visual checked state
 - Use for independent selections
 
 **Accessibility**
+
 - Associated label
 - Keyboard accessible (Space to toggle)
 - Clear focus indicator
@@ -167,18 +182,21 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Select one option from a list
 
 **States**
+
 - Unselected
 - Selected
 - Disabled
 - Focus
 
 **Best Practices**
+
 - Group related options
 - Pre-select default when appropriate
 - Clear visual selected state
 - Use when only one choice allowed
 
 **Accessibility**
+
 - Grouped with fieldset and legend
 - Arrow keys navigate between options
 - Only one focusable in group (selected one)
@@ -190,12 +208,14 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Choose one option from many
 
 **Variants**
+
 - Single select
 - Multi-select
 - Searchable select
 - Grouped options
 
 **States**
+
 - Closed
 - Open/Expanded
 - Selected
@@ -203,6 +223,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Disabled
 
 **Best Practices**
+
 - Default placeholder or selected value
 - Searchable for 7+ options
 - Group related options
@@ -210,6 +231,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Clear selected value option
 
 **Accessibility**
+
 - Keyboard navigation (arrows, type to search)
 - Announce selected value
 - Escape to close
@@ -222,11 +244,13 @@ Comprehensive guide for designing and implementing common UI components.
 ### Navigation Bar
 
 **Types**
+
 - **Top Nav**: Horizontal, global navigation
 - **Sidebar Nav**: Vertical, many items, hierarchical
 - **Bottom Tab Nav**: Mobile, 3-5 primary sections
 
 **Components**
+
 - Logo/Brand
 - Primary navigation links
 - Search bar (optional)
@@ -235,11 +259,13 @@ Comprehensive guide for designing and implementing common UI components.
 - CTA button (optional)
 
 **Responsive Behavior**
+
 - Desktop: Full horizontal menu
 - Tablet: Condensed menu or icons
 - Mobile: Hamburger menu or bottom tabs
 
 **Specifications**
+
 ```html
 <nav class="navbar" role="navigation" aria-label="Main navigation">
   <div class="navbar-brand">
@@ -259,6 +285,7 @@ Comprehensive guide for designing and implementing common UI components.
 ```
 
 **Accessibility**
+
 - Semantic nav element
 - Current page indicator (aria-current)
 - Skip to main content link
@@ -272,6 +299,7 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Show current location in hierarchy
 
 **Best Practices**
+
 - Show hierarchy (Home > Category > Subcategory > Page)
 - Make all levels clickable except current
 - Use chevron or slash separators
@@ -279,6 +307,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Mobile: Show only last 2-3 levels
 
 **Accessibility**
+
 - nav element with aria-label="Breadcrumb"
 - Semantic ordered list
 - aria-current="page" on current item
@@ -290,11 +319,13 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Organize related content into separate views
 
 **Types**
+
 - Horizontal tabs (default)
 - Vertical tabs (sidebar)
 - Pills (rounded background)
 
 **Best Practices**
+
 - 3-7 tabs ideal
 - Clear, concise labels
 - Indicate active tab clearly
@@ -302,6 +333,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Load content on demand or pre-load
 
 **Accessibility**
+
 - ARIA tablist, tab, tabpanel roles
 - Arrow keys navigate tabs
 - Tab key enters content
@@ -315,6 +347,7 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Navigate through multiple pages of content
 
 **Components**
+
 - Previous button
 - Page numbers
 - Current page indicator
@@ -323,6 +356,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Optional: Items per page selector
 
 **Best Practices**
+
 - Show 5-7 page numbers
 - Truncate with ellipsis (1 ... 5 6 7 ... 20)
 - Disable Previous on first page, Next on last
@@ -336,17 +370,20 @@ Comprehensive guide for designing and implementing common UI components.
 ### Alert / Notification
 
 **Types by Severity**
+
 - **Info**: Informational messages (blue)
 - **Success**: Successful operations (green)
 - **Warning**: Caution messages (yellow/orange)
 - **Error**: Errors and failures (red)
 
 **Variants**
+
 - **Inline Alert**: Contextual, stays on page
 - **Toast/Snackbar**: Temporary, auto-dismiss
 - **Banner**: Page-level, persistent
 
 **Components**
+
 - Icon (semantic for type)
 - Title (optional)
 - Message text
@@ -354,6 +391,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Close button
 
 **Specifications**
+
 ```html
 <div class="alert alert-success" role="alert">
   <svg class="alert-icon" aria-hidden="true">...</svg>
@@ -366,6 +404,7 @@ Comprehensive guide for designing and implementing common UI components.
 ```
 
 **Best Practices**
+
 - Clear, actionable messages
 - Appropriate severity level
 - Auto-dismiss for non-critical (3-5 seconds)
@@ -374,6 +413,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Position consistently (top-right common)
 
 **Accessibility**
+
 - role="alert" for important messages
 - aria-live="polite" or "assertive"
 - Focus on alert for critical errors
@@ -384,18 +424,21 @@ Comprehensive guide for designing and implementing common UI components.
 ### Loading States
 
 **Types**
+
 - **Spinner**: Indeterminate progress
 - **Progress Bar**: Determinate progress
 - **Skeleton Screen**: Content placeholder
 - **Overlay Loader**: Block interaction
 
 **When to Use**
+
 - **Spinner**: Quick operations (< 2s)
 - **Progress Bar**: Long operations with known duration
 - **Skeleton**: Initial page load, anticipate content
 - **Overlay**: Prevent interaction during critical operation
 
 **Best Practices**
+
 - Show immediately (< 300ms delay)
 - Provide context ("Loading products...")
 - Use skeleton for perceived performance
@@ -409,12 +452,14 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Focus user on specific task or information
 
 **Types**
+
 - **Modal Dialog**: Blocks background, requires action
 - **Non-Modal Dialog**: Can interact with background
 - **Alert Dialog**: Requires acknowledgment
 - **Confirmation Dialog**: Confirm action
 
 **Components**
+
 - Overlay/backdrop
 - Dialog container
 - Header with title
@@ -423,6 +468,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Close button (top right)
 
 **Best Practices**
+
 - Use sparingly (disruptive)
 - Clear title describing purpose
 - Primary action prominent (right)
@@ -432,6 +478,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Focus trap inside modal
 
 **Accessibility**
+
 - role="dialog" or role="alertdialog"
 - aria-labelledby pointing to title
 - aria-describedby pointing to content
@@ -449,6 +496,7 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Display structured, tabular data
 
 **Components**
+
 - Table header (column names)
 - Table rows
 - Cells
@@ -458,6 +506,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Optional: Pagination
 
 **Features**
+
 - Sortable columns
 - Filterable columns
 - Searchable
@@ -467,12 +516,14 @@ Comprehensive guide for designing and implementing common UI components.
 - Horizontal scroll (responsive)
 
 **Responsive Strategies**
+
 - **Horizontal Scroll**: Simple, less accessible
 - **Stacked Layout**: Cards on mobile
 - **Hide Columns**: Show essential columns only
 - **Accordion Rows**: Expand for details
 
 **Accessibility**
+
 - Semantic table elements (table, thead, tbody, tr, th, td)
 - scope attribute on headers (col or row)
 - Caption or aria-label describing table
@@ -486,18 +537,21 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Contain related information and actions
 
 **Components**
+
 - Header (optional, title/subtitle)
 - Image/Media (optional)
 - Content area
 - Footer (optional, actions/metadata)
 
 **Variants**
+
 - Horizontal card (image left, content right)
 - Vertical card (image top, content bottom)
 - Clickable card (entire card is link)
 - Interactive card (multiple actions)
 
 **Best Practices**
+
 - Consistent card sizes in grid
 - Clear visual hierarchy within card
 - Limit actions to 2-3
@@ -511,6 +565,7 @@ Comprehensive guide for designing and implementing common UI components.
 **Purpose**: Show/hide content sections
 
 **Best Practices**
+
 - Clear section headers
 - Chevron indicator (down when collapsed, up when expanded)
 - Allow multiple open (optional)
@@ -518,6 +573,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Remember state (optional)
 
 **Accessibility**
+
 - button for header (clickable)
 - aria-expanded indicates state
 - aria-controls links to content
@@ -531,6 +587,7 @@ Comprehensive guide for designing and implementing common UI components.
 ### Multi-Step Form
 
 **Components**
+
 - Stepper/Progress indicator
 - Form sections
 - Previous/Next buttons
@@ -538,6 +595,7 @@ Comprehensive guide for designing and implementing common UI components.
 - Review step (before submit)
 
 **Best Practices**
+
 - Show progress clearly
 - Allow back navigation
 - Validate per step
@@ -549,11 +607,13 @@ Comprehensive guide for designing and implementing common UI components.
 ### Search
 
 **Variants**
+
 - Simple search (input + button)
 - Autocomplete search (suggestions)
 - Advanced search (filters, facets)
 
 **Best Practices**
+
 - Prominent placement
 - Appropriate scope (site-wide vs. section)
 - Show recent searches
@@ -566,18 +626,21 @@ Comprehensive guide for designing and implementing common UI components.
 ## Animation & Motion
 
 ### Animation Durations
+
 - **Instant**: 0ms (immediate changes)
 - **Fast**: 100ms (tooltips, highlights)
 - **Normal**: 200-300ms (most transitions)
 - **Slow**: 400-500ms (large elements, page transitions)
 
 ### Easing Functions
+
 - **Ease-in**: Slow start (elements leaving screen)
 - **Ease-out**: Slow end (elements entering screen)
 - **Ease-in-out**: Slow start and end (position changes)
 - **Linear**: Constant speed (loading spinners)
 
 ### Common Animations
+
 - **Fade**: Opacity change
 - **Slide**: Position change
 - **Scale**: Size change
@@ -585,6 +648,7 @@ Comprehensive guide for designing and implementing common UI components.
 - **Shake**: Error indication
 
 ### Best Practices
+
 - Respect prefers-reduced-motion
 - Animate transform and opacity (GPU accelerated)
 - Avoid animating layout properties (width, height)
@@ -596,6 +660,7 @@ Comprehensive guide for designing and implementing common UI components.
 ## Micro-interactions
 
 **Examples**
+
 - Button press (scale down slightly)
 - Like/favorite (heart animation)
 - Add to cart (item flies to cart)
@@ -604,12 +669,14 @@ Comprehensive guide for designing and implementing common UI components.
 - Menu open (slide + fade)
 
 **Purpose**
+
 - Provide feedback
 - Guide user attention
 - Create delight
 - Reinforce brand
 
 **Best Practices**
+
 - Subtle, not distracting
 - Consistent across app
 - Purposeful, not decorative

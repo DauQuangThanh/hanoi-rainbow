@@ -3,6 +3,7 @@
 Comprehensive guidelines for reviewing REST, GraphQL, and gRPC APIs.
 
 ## Table of Contents
+
 - [REST API Design](#rest-api-design)
 - [GraphQL API Design](#graphql-api-design)
 - [gRPC API Design](#grpc-api-design)
@@ -17,6 +18,7 @@ Comprehensive guidelines for reviewing REST, GraphQL, and gRPC APIs.
 ### Resource Naming
 
 **Good:**
+
 ```
 ✅ Collections (plural nouns)
 GET    /api/users
@@ -35,6 +37,7 @@ POST   /api/users/{id}/activate
 ```
 
 **Bad:**
+
 ```
 ❌ Inconsistent naming
 GET    /api/getUsers
@@ -54,6 +57,7 @@ GET    /api/posts
 ### HTTP Methods
 
 **GET - Retrieve Resources:**
+
 ```typescript
 // ✅ Idempotent, no side effects
 app.get('/api/users/:id', async (req, res) => {
@@ -90,6 +94,7 @@ app.get('/api/users', async (req, res) => {
 ```
 
 **POST - Create Resources:**
+
 ```typescript
 // ✅ Returns created resource with 201 status and Location header
 app.post('/api/users', async (req, res) => {
@@ -115,6 +120,7 @@ app.post('/api/users/:id/get', async (req, res) => {
 ```
 
 **PUT - Replace Resource:**
+
 ```typescript
 // ✅ Replaces entire resource
 app.put('/api/users/:id', async (req, res) => {
@@ -134,6 +140,7 @@ app.put('/api/users/:id', async (req, res) => {
 ```
 
 **PATCH - Partial Update:**
+
 ```typescript
 // ✅ Updates only provided fields
 app.patch('/api/users/:id', async (req, res) => {
@@ -147,6 +154,7 @@ app.patch('/api/users/:id', async (req, res) => {
 ```
 
 **DELETE - Remove Resource:**
+
 ```typescript
 // ✅ Returns 204 No Content on success
 app.delete('/api/users/:id', async (req, res) => {
@@ -164,6 +172,7 @@ app.delete('/api/users/:id', async (req, res) => {
 ### Status Codes
 
 **Good:**
+
 ```typescript
 // ✅ Appropriate status codes
 
@@ -217,6 +226,7 @@ res.status(503).json({
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Using wrong status codes
 res.status(200).json({ error: 'User not found' }); // Should be 404
@@ -227,6 +237,7 @@ res.status(200).json({ success: false });           // Use proper error codes
 ### Request/Response Format
 
 **Good:**
+
 ```typescript
 // ✅ Consistent JSON structure
 
@@ -271,6 +282,7 @@ res.status(200).json({ success: false });           // Use proper error codes
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Inconsistent structure
 // Success
@@ -286,6 +298,7 @@ res.status(200).json({ success: false });           // Use proper error codes
 ### Pagination
 
 **Good:**
+
 ```typescript
 // ✅ Offset-based pagination
 app.get('/api/users', async (req, res) => {
@@ -330,6 +343,7 @@ app.get('/api/posts', async (req, res) => {
 ### Filtering, Sorting, Searching
 
 **Good:**
+
 ```typescript
 // ✅ Query parameters for filtering
 app.get('/api/users', async (req, res) => {
@@ -373,6 +387,7 @@ app.get('/api/users', async (req, res) => {
 ### Field Selection
 
 **Good:**
+
 ```typescript
 // ✅ Sparse fieldsets
 app.get('/api/users/:id', async (req, res) => {
@@ -408,6 +423,7 @@ app.get('/api/users/:id', async (req, res) => {
 ### Schema Design
 
 **Good:**
+
 ```graphql
 # ✅ Clear types with descriptions
 
@@ -468,6 +484,7 @@ type PageInfo {
 ### Query Design
 
 **Good:**
+
 ```graphql
 # ✅ Well-designed queries
 
@@ -517,6 +534,7 @@ enum SortDirection {
 ### Mutation Design
 
 **Good:**
+
 ```graphql
 # ✅ Input types for mutations
 
@@ -555,6 +573,7 @@ enum ErrorCode {
 ### Resolver Implementation
 
 **Good:**
+
 ```typescript
 // ✅ Efficient resolvers with DataLoader
 
@@ -636,6 +655,7 @@ const resolvers = {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ N+1 query problem
 const resolvers = {
@@ -651,6 +671,7 @@ const resolvers = {
 ### Query Complexity
 
 **Good:**
+
 ```typescript
 // ✅ Limit query complexity and depth
 
@@ -681,6 +702,7 @@ type Query {
 ### Protocol Buffer Definition
 
 **Good:**
+
 ```protobuf
 // ✅ Well-structured proto file
 
@@ -829,6 +851,7 @@ message Error {
 ### Error Handling
 
 **Good:**
+
 ```go
 // ✅ gRPC error codes
 
@@ -883,6 +906,7 @@ func (s *userService) CreateUser(ctx context.Context, req *userv1.CreateUserRequ
 ### URL Versioning
 
 **Good:**
+
 ```typescript
 // ✅ Version in URL path
 app.use('/api/v1', v1Router);
@@ -902,6 +926,7 @@ v2Router.get('/users', async (req, res) => {
 ### Header Versioning
 
 **Good:**
+
 ```typescript
 // ✅ Version in Accept header
 app.use('/api/users', async (req, res) => {
@@ -921,6 +946,7 @@ app.use('/api/users', async (req, res) => {
 ## Rate Limiting
 
 **Good:**
+
 ```typescript
 // ✅ Rate limiting with express-rate-limit
 import rateLimit from 'express-rate-limit';
@@ -956,6 +982,7 @@ app.post('/api/auth/login', authLimiter, loginHandler);
 ### OpenAPI/Swagger
 
 **Good:**
+
 ```typescript
 // ✅ Comprehensive OpenAPI spec
 import swaggerJsdoc from 'swagger-jsdoc';

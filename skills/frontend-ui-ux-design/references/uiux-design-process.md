@@ -1,6 +1,5 @@
 # UI/UX Design Process
 
-
 Follow this systematic approach when designing user interfaces:
 
 ### Phase 1: Research & Discovery
@@ -49,12 +48,12 @@ Follow this systematic approach when designing user interfaces:
      - Focus on layout and content hierarchy
      - No colors, minimal styling
      - Use placeholder content (lorem ipsum, boxes)
-   
+
    - **Mid-Fidelity Wireframes**: More detailed structures
      - Add actual content and copy
      - Define component types
      - Show interaction patterns
-   
+
    - **High-Fidelity Wireframes**: Near-final layouts
      - Real content and imagery
      - Detailed interactions
@@ -70,36 +69,36 @@ Follow this systematic approach when designing user interfaces:
 ### Phase 3: Visual Design
 
 1. **Design System Foundation**
-   
+
    **Color Palette**
    - Primary colors (brand identity)
    - Secondary colors (accents, CTAs)
    - Neutral colors (text, backgrounds, borders)
    - Semantic colors (success, warning, error, info)
    - Ensure sufficient contrast ratios (WCAG AA: 4.5:1 for text)
-   
+
    **Typography**
    - Font families (primary, secondary, monospace)
    - Type scale (h1-h6, body, captions)
    - Font weights (light, regular, medium, bold)
    - Line heights and letter spacing
    - Responsive typography (fluid type scales)
-   
+
    **Spacing System**
    - Base unit (4px, 8px common)
    - Spacing scale (0.5x, 1x, 1.5x, 2x, 3x, 4x, 6x, 8x)
    - Consistent margins and padding
    - Grid systems (12-column, CSS Grid)
-   
+
    **Elevation & Shadows**
    - Shadow levels (0-5 for material design)
    - Elevation hierarchy
    - Focus states and overlays
 
 2. **Component Design**
-   
+
    Design comprehensive component library:
-   
+
    **Basic Components**
    - Buttons (primary, secondary, tertiary, ghost, icon)
    - Form inputs (text, textarea, select, checkbox, radio)
@@ -107,28 +106,28 @@ Follow this systematic approach when designing user interfaces:
    - Icons and iconography
    - Badges and tags
    - Avatars and profile images
-   
+
    **Navigation Components**
    - Navigation bars (top, side, mobile)
    - Breadcrumbs
    - Tabs and pills
    - Pagination
    - Steppers and progress indicators
-   
+
    **Layout Components**
    - Cards and panels
    - Modals and dialogs
    - Drawers and sidebars
    - Accordions and collapsibles
    - Dividers and separators
-   
+
    **Feedback Components**
    - Alerts and notifications
    - Toast messages
    - Loading states (spinners, skeletons)
    - Progress bars
    - Empty states and error states
-   
+
    **Data Display**
    - Tables and data grids
    - Lists (ordered, unordered, description)
@@ -146,6 +145,7 @@ Follow this systematic approach when designing user interfaces:
 ### Phase 4: Responsive & Adaptive Design
 
 1. **Responsive Breakpoints**
+
    ```
    Mobile:      320px - 767px
    Tablet:      768px - 1023px
@@ -177,19 +177,19 @@ Follow this systematic approach when designing user interfaces:
 ### Phase 5: Accessibility & Inclusivity
 
 1. **WCAG Compliance**
-   
+
    **Level A (Minimum)**
    - Provide text alternatives for images
    - Ensure keyboard accessibility
    - Don't rely solely on color
    - Provide clear labels
-   
+
    **Level AA (Recommended)**
    - Contrast ratio 4.5:1 for normal text, 3:1 for large text
    - Resize text up to 200% without loss of functionality
    - Multiple ways to find content
    - Consistent navigation
-   
+
    **Level AAA (Enhanced)**
    - Contrast ratio 7:1 for normal text, 4.5:1 for large text
    - No images of text
@@ -235,6 +235,7 @@ Follow this systematic approach when designing user interfaces:
    - **CSS Custom Properties**: Theme variables
 
 3. **Component Implementation**
+
    ```jsx
    // Example: Button Component
    <Button

@@ -16,6 +16,7 @@ Follow this structured approach for comprehensive backend code analysis:
 Identify technologies and critical areas before starting:
 
 **Technology Inventory:**
+
 ```
 Backend Language: Node.js/Python/Java/Go/C#
 Framework: Express/FastAPI/Spring Boot/Gin/ASP.NET
@@ -25,6 +26,7 @@ Deployment: AWS/GCP/Azure/Docker/Kubernetes
 ```
 
 **Critical Review Areas (prioritize these):**
+
 - Authentication and authorization logic
 - Payment processing and financial transactions
 - Data access layers (ORM queries, raw SQL)
@@ -33,6 +35,7 @@ Deployment: AWS/GCP/Azure/Docker/Kubernetes
 - File upload and download handlers
 
 **Example Scope Definition:**
+
 ```
 Review: User authentication service
 Files: src/auth/*.ts (15 files, ~2000 lines)
@@ -45,6 +48,7 @@ Focus: Security vulnerabilities, JWT implementation, session management
 Evaluate code organization, design patterns, and maintainability:
 
 **Code Organization Checklist:**
+
 ```
 ☐ Proper layering (controllers → services → repositories → database)
 ☐ Consistent file and folder naming (kebab-case, camelCase, etc.)
@@ -56,6 +60,7 @@ Evaluate code organization, design patterns, and maintainability:
 **SOLID Principles Validation:**
 
 **Single Responsibility:** Each class/module has one reason to change
+
 ```javascript
 // ❌ Bad: UserService does too much
 class UserService {
@@ -77,6 +82,7 @@ class PaymentService {
 ```
 
 **Dependency Injection:** Dependencies injected, not hardcoded
+
 ```python
 # ❌ Bad: Hardcoded dependency
 class UserService:
@@ -90,6 +96,7 @@ class UserService:
 ```
 
 **Error Handling Pattern:**
+
 ```typescript
 // ❌ Bad: Silent failures
 async function getUser(id: string) {
@@ -116,6 +123,7 @@ async function getUser(id: string): Promise<User> {
 ```
 
 **Code Quality Issues to Flag:**
+
 - Functions > 50 lines (should be split)
 - Classes > 300 lines (too many responsibilities)
 - Cyclomatic complexity > 10 (simplify logic)
@@ -132,6 +140,7 @@ Review API endpoints for REST, GraphQL, or gRPC implementations:
 **REST API Review:**
 
 **Endpoint Structure:**
+
 ```
 ✅ Good REST Design:
 GET    /api/v1/users           - List users (paginated)
@@ -148,6 +157,7 @@ GET    /api/v1/user/get/123    - Use path params, not verbs
 ```
 
 **HTTP Status Codes:**
+
 ```
 ✅ Correct Usage:
 200 OK - Successful GET, PUT, PATCH
@@ -168,6 +178,7 @@ GET    /api/v1/user/get/123    - Use path params, not verbs
 ```
 
 **Pagination Implementation:**
+
 ```javascript
 // ✅ Good: Cursor-based pagination for large datasets
 GET /api/v1/orders?cursor=eyJpZCI6MTIzfQ&limit=20
@@ -195,6 +206,7 @@ Response: {
 **GraphQL Review:**
 
 **N+1 Query Detection:**
+
 ```graphql
 # ❌ Bad: Causes N+1 queries
 query {
@@ -217,6 +229,7 @@ const authorLoader = new DataLoader(async (authorIds) => {
 **gRPC Review:**
 
 Check protocol buffer definitions and error handling:
+
 ```protobuf
 // ✅ Good proto definition
 message GetUserRequest {
@@ -239,6 +252,7 @@ service UserService {
 Review database patterns, query optimization, and data integrity:
 
 **SQL Injection Prevention:**
+
 ```python
 # ❌ Critical: SQL injection vulnerability
 def get_user(username):
@@ -252,6 +266,7 @@ def get_user(username):
 ```
 
 **N+1 Query Problem:**
+
 ```javascript
 // ❌ Bad: N+1 queries (1 query + N queries for authors)
 const posts = await Post.findAll();
@@ -266,6 +281,7 @@ const posts = await Post.findAll({
 ```
 
 **Missing Indexes:**
+
 ```sql
 -- ❌ Bad: Queries without indexes
 SELECT * FROM orders WHERE user_id = 123;  -- No index on user_id
@@ -277,6 +293,7 @@ CREATE INDEX idx_products_status_category ON products(status, category);
 ```
 
 **Transaction Handling:**
+
 ```java
 // ❌ Bad: No transaction for multi-step operation
 public void transferFunds(Long fromId, Long toId, BigDecimal amount) {
@@ -302,6 +319,7 @@ public void transferFunds(Long fromId, Long toId, BigDecimal amount) {
 ```
 
 **Connection Pool Configuration:**
+
 ```
 ✅ Recommended Settings:
 - Pool size: 10-20 connections (not 100+)
@@ -320,6 +338,7 @@ Identify authentication, authorization, and data protection issues:
 **Authentication Security:**
 
 **Password Hashing:**
+
 ```javascript
 // ❌ Critical: Plain text or weak hashing
 const hashedPassword = md5(password);  // MD5 is broken
@@ -329,6 +348,7 @@ const hashedPassword = await bcrypt.hash(password, 12);  // Cost factor 12+
 ```
 
 **JWT Implementation:**
+
 ```typescript
 // ❌ Bad: Weak JWT configuration
 const token = jwt.sign({ userId: user.id }, 'secret123');  // Weak secret, no expiry
@@ -347,6 +367,7 @@ const token = jwt.sign(
 ```
 
 **Authorization Validation:**
+
 ```python
 # ❌ Bad: Missing authorization check
 @app.route('/api/users/<user_id>', methods=['DELETE'])
@@ -366,6 +387,7 @@ def delete_user(user_id):
 ```
 
 **Input Validation:**
+
 ```javascript
 // ❌ Bad: No validation
 app.post('/api/users', (req, res) => {
@@ -388,6 +410,7 @@ app.post('/api/users', (req, res) => {
 ```
 
 **Security Checklist:**
+
 ```
 ☐ Passwords hashed with bcrypt/argon2 (cost factor ≥12)
 ☐ JWT tokens expire within 1 hour (15min recommended)

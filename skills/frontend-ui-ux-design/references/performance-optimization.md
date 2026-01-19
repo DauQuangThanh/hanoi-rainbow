@@ -1,6 +1,5 @@
 # Performance Optimization
 
-
 ### Frontend Performance
 
 1. **Asset Optimization**

@@ -1,6 +1,5 @@
 # Examples by Project Type
 
-
 ### Web Application
 
 ```

@@ -12,6 +12,7 @@ Create polished, interactive UI mockups and prototypes using Vue.js 3 with TypeS
 ## Overview
 
 Rapid creation of production-quality mockups with:
+
 - **Vue.js 3 Composition API** with TypeScript
 - **Vite** for fast development
 - **TailwindCSS v4+** with Vite plugin integration
@@ -32,11 +33,13 @@ npm install
 ### 2. Install and Configure TailwindCSS
 
 **Install TailwindCSS with Vite plugin (v4+):**
+
 ```bash
 npm install tailwindcss @tailwindcss/vite
 ```
 
 **Configure vite.config.ts:**
+
 ```typescript
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -51,11 +54,13 @@ export default defineConfig({
 ```
 
 **Import in src/style.css:**
+
 ```css
 @import "tailwindcss";
 ```
 
 **Import in src/main.ts:**
+
 ```typescript
 import { createApp } from 'vue'
 import './style.css'
@@ -76,6 +81,7 @@ npm run dev
 ### 1. Define Structure
 
 Identify mockup requirements:
+
 - Layout type (single page, dashboard, multi-page)
 - Sections needed (header, hero, features, footer, sidebar)
 - Responsive breakpoints (mobile, tablet, desktop)
@@ -139,9 +145,11 @@ const buttonClasses = computed(() => {
 ### 4. Apply Responsive Design
 
 Use TailwindCSS breakpoints:
+
 - `sm:` (640px), `md:` (768px), `lg:` (1024px), `xl:` (1280px), `2xl:` (1536px)
 
 **Responsive Grid Example:**
+
 ```vue
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   <Card v-for="item in items" :key="item.id" />
@@ -151,6 +159,7 @@ Use TailwindCSS breakpoints:
 ### 5. Add Interactivity
 
 **Composable Pattern:**
+
 ```typescript
 // composables/useModal.ts
 import { ref } from 'vue'
@@ -173,6 +182,7 @@ npm run preview    # Preview production build
 ## Common Patterns
 
 ### Landing Page
+
 ```vue
 <template>
   <div class="min-h-screen flex flex-col">
@@ -187,6 +197,7 @@ npm run preview    # Preview production build
 ```
 
 ### Dashboard Layout
+
 ```vue
 <template>
   <div class="flex h-screen bg-gray-100">
@@ -204,14 +215,17 @@ npm run preview    # Preview production build
 ## Design System
 
 ### Colors
+
 - Primary: `blue-600`, Secondary: `gray-600`
 - Success: `green-600`, Warning: `yellow-600`, Error: `red-600`
 - Neutral: `gray-100` to `gray-900`
 
 ### Spacing
+
 Use consistent scale: `p-1` (4px), `p-2` (8px), `p-4` (16px), `p-6` (24px), `p-8` (32px)
 
 ### Typography
+
 - Headings: `text-4xl`, `text-3xl`, `text-2xl`, `text-xl`
 - Body: `text-base` (16px)
 - Weights: `font-normal`, `font-medium`, `font-semibold`, `font-bold`
@@ -219,6 +233,7 @@ Use consistent scale: `p-1` (4px), `p-2` (8px), `p-4` (16px), `p-6` (24px), `p-8
 ## Advanced Guides
 
 For detailed implementations:
+
 - **[Component Library](references/component-library.md)** - Complete reusable components
 - **[TailwindCSS Patterns](references/tailwind-patterns.md)** - Advanced styling
 - **[Vue Composition API](references/composition-api.md)** - State management
@@ -231,6 +246,7 @@ For detailed implementations:
 Helper scripts available in `scripts/` (Bash and PowerShell versions):
 
 **create-component.sh / .ps1** - Generate Vue components with TypeScript boilerplate
+
 ```bash
 # Linux/macOS
 ./scripts/create-component.sh ComponentName ui
@@ -240,6 +256,7 @@ Helper scripts available in `scripts/` (Bash and PowerShell versions):
 ```
 
 **build-deploy.sh / .ps1** - Build and prepare for deployment
+
 ```bash
 # Linux/macOS
 ./scripts/build-deploy.sh
@@ -251,21 +268,25 @@ Helper scripts available in `scripts/` (Bash and PowerShell versions):
 ## Troubleshooting
 
 **TailwindCSS not working:**
+
 - Restart dev server after vite.config.ts changes
 - Verify `@import "tailwindcss";` in CSS file
 - Check Vite plugin is correctly configured
 
 **TypeScript errors:**
+
 - Install Volar extension (not Vetur)
 - Enable "Take Over Mode" in VS Code
 
 **HMR issues:**
+
 ```bash
 rm -rf node_modules/.vite
 npm run dev
 ```
 
 **Large bundle size:**
+
 - Use dynamic imports: `() => import('./Component.vue')`
 - Analyze with: `npm run build -- --mode analyze`
 

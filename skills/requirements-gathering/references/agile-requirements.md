@@ -5,6 +5,7 @@ This guide covers requirements management in Agile environments, including user 
 ## Agile Requirements Principles
 
 ### Agile Manifesto Values Applied to Requirements
+
 1. **Individuals and interactions** over processes and documentation
    - Favor conversations over lengthy specs
    - Collaborate continuously with stakeholders
@@ -26,6 +27,7 @@ This guide covers requirements management in Agile environments, including user 
    - Prioritize based on current business value
 
 ### Agile Requirements Best Practices
+
 - Write requirements just in time
 - Keep requirements at appropriate level of detail
 - Focus on outcomes over outputs
@@ -73,6 +75,7 @@ This guide covers requirements management in Agile environments, including user 
 ### INVEST Criteria
 
 **Independent**
+
 - Stories should not depend on other stories
 - Can be developed in any order
 - Reduces coordination overhead
@@ -88,6 +91,7 @@ Story 2: Add social media login option to registration
 ```
 
 **Negotiable**
+
 - Details are not fixed
 - Allows for team creativity
 - Encourages collaboration
@@ -103,6 +107,7 @@ so that I can complete my registration quickly
 ```
 
 **Valuable**
+
 - Delivers value to user or business
 - Not a technical task
 - Tied to business outcome
@@ -117,6 +122,7 @@ so that I can find customer records faster and handle more support requests
 ```
 
 **Estimable**
+
 - Team can estimate effort
 - Has enough detail
 - Team understands what to build
@@ -131,6 +137,7 @@ sorted by deal value, so that I can focus on the biggest deals
 ```
 
 **Small**
+
 - Can be completed in one sprint
 - Typically 1-13 story points
 - Can be split if too large
@@ -145,6 +152,7 @@ so that I can purchase multiple items in one order
 ```
 
 **Testable**
+
 - Clear acceptance criteria
 - Can verify when done
 - Observable outcomes
@@ -166,6 +174,7 @@ Acceptance Criteria:
 ## User Story Formats
 
 ### 1. Standard Format
+
 ```markdown
 As a [role]
 I want [feature]
@@ -173,6 +182,7 @@ So that [benefit]
 ```
 
 ### 2. Job Story Format
+
 ```markdown
 When [situation]
 I want to [motivation]
@@ -185,6 +195,7 @@ So I can review them later on my desktop and make a purchase decision
 ```
 
 ### 3. Feature Injection Format
+
 ```markdown
 In order to [achieve value]
 As a [role]
@@ -221,6 +232,7 @@ Releases       Product Reviews          Gift Wrapping        Order Tracking
 
 **Step 1: Identify User Activities**
 High-level tasks users need to accomplish
+
 ```markdown
 - Discover products
 - Research products
@@ -232,6 +244,7 @@ High-level tasks users need to accomplish
 
 **Step 2: Break Down into User Tasks**
 Specific actions within each activity
+
 ```markdown
 Discover Products:
 - Browse by category
@@ -248,6 +261,7 @@ Research Products:
 
 **Step 3: Identify MVP (Walking Skeleton)**
 Minimum viable path through the map
+
 ```markdown
 MVP Release:
 - Search products
@@ -259,6 +273,7 @@ MVP Release:
 
 **Step 4: Plan Subsequent Releases**
 Add features in priority order
+
 ```markdown
 Release 2:
 - User accounts
@@ -325,6 +340,7 @@ Release 3:
 **Purpose**: Prepare stories for upcoming sprints
 
 **Activities**:
+
 1. **Review**: Examine upcoming backlog items
 2. **Detail**: Add acceptance criteria and details
 3. **Estimate**: Assign story points
@@ -333,6 +349,7 @@ Release 3:
 6. **Order**: Re-prioritize based on current knowledge
 
 **Refinement Meeting Structure**:
+
 ```markdown
 Duration: 1-2 hours per week
 Attendees: Product Owner, Scrum Master, Development Team
@@ -410,6 +427,7 @@ Documentation:
 **Duration**: 2-4 hours for 2-week sprint
 
 **Part 1: What? (1-2 hours)**
+
 ```markdown
 Purpose: Select stories for sprint
 
@@ -427,6 +445,7 @@ Output:
 ```
 
 **Part 2: How? (1-2 hours)**
+
 ```markdown
 Purpose: Create execution plan
 
@@ -447,6 +466,7 @@ Output:
 ### Sprint Goal
 
 **Good Sprint Goal Characteristics**:
+
 - Focused on business value
 - Inspiring to the team
 - Achievable within sprint
@@ -603,6 +623,7 @@ Performance Requirements:
 ## Agile Ceremonies for Requirements
 
 ### Daily Standup
+
 ```markdown
 Duration: 15 minutes
 Purpose: Sync on progress and impediments
@@ -614,6 +635,7 @@ Questions related to requirements:
 ```
 
 ### Sprint Review (Demo)
+
 ```markdown
 Duration: 1-2 hours
 Purpose: Demonstrate completed work
@@ -633,6 +655,7 @@ Requirements Focus:
 ```
 
 ### Sprint Retrospective
+
 ```markdown
 Duration: 1.5 hours
 Purpose: Improve the process
@@ -728,6 +751,7 @@ Questions:
 ### Lightweight Documentation
 
 **Just Enough Documentation**:
+
 ```markdown
 Required:
 - User stories with acceptance criteria
@@ -746,6 +770,7 @@ Optional (as needed):
 ### Living Documentation
 
 **Code as Documentation**:
+
 ```javascript
 // Self-documenting code
 class UserRegistrationService {
@@ -763,6 +788,7 @@ class UserRegistrationService {
 ```
 
 **Automated Tests as Documentation**:
+
 ```javascript
 describe('User Registration', () => {
   it('should create user with valid email and password', async () => {
@@ -782,6 +808,7 @@ describe('User Registration', () => {
 ## Best Practices
 
 ### 1. Keep Stories Vertical
+
 ```markdown
 # ❌ Bad - Horizontal slices (by layer)
 Story 1: Create database tables for user management
@@ -795,6 +822,7 @@ Story 3: As a user, I want to reset my password
 ```
 
 ### 2. Split Stories Effectively
+
 ```markdown
 Splitting Techniques:
 
@@ -819,6 +847,7 @@ By Operations (CRUD):
 ```
 
 ### 3. Maintain Backlog Health
+
 - Groom regularly (weekly)
 - Keep top 2-3 sprints ready
 - Archive completed items
@@ -827,6 +856,7 @@ By Operations (CRUD):
 - Update estimates as you learn
 
 ### 4. Collaborate Continuously
+
 - PO available daily for questions
 - Team attends refinement
 - Include QA in story creation
@@ -834,6 +864,7 @@ By Operations (CRUD):
 - Adjust based on feedback
 
 ### 5. Balance Detail
+
 - Too little: Team can't build
 - Too much: Wastes time, reduces flexibility
 - Rule: Add detail just in time
@@ -842,6 +873,7 @@ By Operations (CRUD):
 ## Common Anti-Patterns
 
 **Anti-Pattern 1: Writing Technical Tasks as User Stories**
+
 ```markdown
 # ❌ Bad
 As a developer, I want to implement caching
@@ -853,6 +885,7 @@ so that I can find products quickly
 ```
 
 **Anti-Pattern 2: Too Much Detail Up Front**
+
 ```markdown
 # ❌ Bad
 Writing 200-page requirements document
@@ -864,6 +897,7 @@ High-level epics → Stories with acceptance criteria
 ```
 
 **Anti-Pattern 3: No Acceptance Criteria**
+
 ```markdown
 # ❌ Bad
 As a user, I want better search
@@ -877,6 +911,7 @@ Acceptance Criteria:
 ```
 
 **Anti-Pattern 4: Stories That Are Really Epics**
+
 ```markdown
 # ❌ Bad
 As a customer, I want a complete e-commerce platform
@@ -890,6 +925,7 @@ Break into smaller stories:
 ```
 
 **Anti-Pattern 5: Ignoring Non-Functional Requirements**
+
 ```markdown
 # ❌ Bad
 Only focus on features
@@ -905,6 +941,7 @@ Include NFRs in Definition of Done or as separate stories:
 ## Tools for Agile Requirements
 
 **Backlog Management**:
+
 - Jira
 - Azure DevOps
 - Trello
@@ -912,18 +949,21 @@ Include NFRs in Definition of Done or as separate stories:
 - Monday.com
 
 **User Story Mapping**:
+
 - Miro
 - Mural
 - Storiesonboard
 - Cardboard
 
 **Acceptance Testing**:
+
 - Cucumber (BDD)
 - SpecFlow
 - Behave
 - JBehave
 
 **Collaboration**:
+
 - Confluence
 - Notion
 - Google Docs

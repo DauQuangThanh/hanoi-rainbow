@@ -5,15 +5,19 @@ Comprehensive guide for designing and implementing accessible user interfaces.
 ## WCAG Principles: POUR
 
 ### 1. Perceivable
+
 Information and UI components must be presentable to users in ways they can perceive.
 
 ### 2. Operable
+
 UI components and navigation must be operable.
 
 ### 3. Understandable
+
 Information and operation of UI must be understandable.
 
 ### 4. Robust
+
 Content must be robust enough to be interpreted by a wide variety of user agents, including assistive technologies.
 
 ---
@@ -21,12 +25,15 @@ Content must be robust enough to be interpreted by a wide variety of user agents
 ## WCAG Conformance Levels
 
 ### Level A (Minimum)
+
 Basic accessibility features. Legal requirement in many jurisdictions.
 
 ### Level AA (Recommended)
+
 Addresses most common accessibility barriers. Widely adopted as standard.
 
 ### Level AAA (Enhanced)
+
 Highest level of accessibility. Not required for entire sites, but aim for critical content.
 
 **Recommendation**: Target Level AA for all public-facing websites and applications.
@@ -38,11 +45,13 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ### Contrast Ratios (WCAG 2.1)
 
 **Level AA**
+
 - Normal text: 4.5:1
 - Large text (18pt+ or 14pt+ bold): 3:1
 - UI components and graphics: 3:1
 
 **Level AAA**
+
 - Normal text: 7:1
 - Large text: 4.5:1
 
@@ -51,7 +60,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 1. **Don't rely on color alone**
    - Bad: Red = error, green = success (color only)
    - Good: Red + error icon + "Error" text
-   
+
 2. **Test with color blindness simulators**
    - Protanopia (red-blind)
    - Deuteranopia (green-blind)
@@ -61,12 +70,13 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 3. **Use patterns or textures**
    - Charts: Use patterns in addition to colors
    - Status indicators: Icons + color
-   
+
 4. **Provide high contrast mode**
    - Support prefers-contrast media query
    - Windows high contrast mode compatibility
 
 ### Tools
+
 - WebAIM Contrast Checker
 - Chrome DevTools Contrast Checker
 - Stark (Figma plugin)
@@ -94,6 +104,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
    - Minimum 2px outline
    - Sufficient contrast (3:1)
    - Never remove outline without alternative
+
    ```css
    /* Good */
    :focus {
@@ -116,6 +127,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 4. **Skip links**
    - "Skip to main content" at page top
    - Hidden until focused
+
    ```html
    <a href="#main" class="skip-link">Skip to main content</a>
    
@@ -145,6 +157,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ### Keyboard Shortcuts
 
 **Common Patterns**
+
 - Tab: Next focusable element
 - Shift+Tab: Previous focusable element
 - Enter: Activate button/link
@@ -154,6 +167,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 - Home/End: First/last item in list
 
 **Custom Shortcuts**
+
 - Document them clearly
 - Avoid conflicts with browser/screen reader shortcuts
 - Provide alternatives (don't require shortcuts)
@@ -166,6 +180,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ### Semantic HTML
 
 **Use correct elements**
+
 ```html
 <!-- Good -->
 <button>Click me</button>
@@ -184,11 +199,13 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ### ARIA (Accessible Rich Internet Applications)
 
 **When to use ARIA**
+
 - When semantic HTML is insufficient
 - For complex widgets (tree view, tabs, accordion)
 - To enhance existing HTML
 
 **ARIA Rules**
+
 1. Use semantic HTML first
 2. Don't change native semantics
 3. All interactive elements must be keyboard accessible
@@ -198,6 +215,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ### Essential ARIA Attributes
 
 **Roles**
+
 ```html
 <div role="button">...</div>
 <div role="dialog">...</div>
@@ -207,6 +225,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ```
 
 **States & Properties**
+
 ```html
 <!-- Expanded/collapsed -->
 <button aria-expanded="false" aria-controls="menu">Menu</button>
@@ -230,6 +249,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ```
 
 **Live Regions**
+
 ```html
 <!-- Polite: Wait for pause -->
 <div aria-live="polite">Search returned 10 results</div>
@@ -244,6 +264,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ### Alternative Text
 
 **Images**
+
 ```html
 <!-- Informative image -->
 <img src="chart.png" alt="Sales increased 25% in Q4" />
@@ -264,6 +285,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ```
 
 **Icon buttons**
+
 ```html
 <!-- With text -->
 <button>
@@ -280,6 +302,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ### Form Accessibility
 
 **Labels**
+
 ```html
 <!-- Good: Explicit label -->
 <label for="email">Email</label>
@@ -296,6 +319,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ```
 
 **Helper text and errors**
+
 ```html
 <label for="password">Password</label>
 <input
@@ -310,6 +334,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ```
 
 **Required fields**
+
 ```html
 <!-- Visual and programmatic indication -->
 <label for="name">
@@ -319,6 +344,7 @@ Highest level of accessibility. Not required for entire sites, but aim for criti
 ```
 
 **Fieldset and legend** (for grouped inputs)
+
 ```html
 <fieldset>
   <legend>Contact preferences</legend>
@@ -417,11 +443,13 @@ function navigateToPage(page) {
 ### Touch Target Sizes
 
 **Minimum sizes**
+
 - iOS: 44x44 points
 - Android: 48x48 dp
 - WCAG 2.1 Level AAA: 44x44 CSS pixels
 
 **Implementation**
+
 ```css
 /* Button may be visually smaller */
 .button {
@@ -491,12 +519,14 @@ function navigateToPage(page) {
 ### Safe Animations
 
 **Avoid**
+
 - Flashing more than 3 times per second
 - Parallax scrolling (can cause vestibular issues)
 - Excessive motion
 - Auto-playing videos with sound
 
 **Best Practices**
+
 - Provide play/pause controls
 - Respect reduced motion preference
 - Use subtle animations
@@ -509,6 +539,7 @@ function navigateToPage(page) {
 ### Headings
 
 **Hierarchy**
+
 ```html
 <h1>Page Title</h1>
   <h2>Section</h2>
@@ -557,6 +588,7 @@ function navigateToPage(page) {
 ### Automated Testing
 
 **Tools**
+
 - Lighthouse (Chrome DevTools)
 - axe DevTools
 - WAVE Browser Extension
@@ -564,6 +596,7 @@ function navigateToPage(page) {
 - Jest-axe (for React)
 
 **What they catch**
+
 - Missing alt text
 - Insufficient contrast
 - Missing labels
@@ -571,6 +604,7 @@ function navigateToPage(page) {
 - Heading hierarchy
 
 **Limitations**
+
 - Only catch ~30% of issues
 - Can't test keyboard navigation
 - Can't test screen reader experience
@@ -579,6 +613,7 @@ function navigateToPage(page) {
 ### Manual Testing
 
 **Keyboard Navigation**
+
 - [ ] Tab through entire page
 - [ ] All interactive elements reachable
 - [ ] Visible focus indicator
@@ -588,6 +623,7 @@ function navigateToPage(page) {
 - [ ] Escape closes modals
 
 **Screen Reader Testing**
+
 - [ ] Test with NVDA (Windows, free)
 - [ ] Test with JAWS (Windows, paid)
 - [ ] Test with VoiceOver (macOS/iOS, built-in)
@@ -600,6 +636,7 @@ function navigateToPage(page) {
 - [ ] Links descriptive
 
 **Visual Testing**
+
 - [ ] Zoom to 200% (WCAG)
 - [ ] Test with browser zoom
 - [ ] Test with Windows high contrast mode
@@ -609,6 +646,7 @@ function navigateToPage(page) {
 - [ ] Test without CSS
 
 **Mobile Testing**
+
 - [ ] Touch targets at least 44x44
 - [ ] Adequate spacing between targets
 - [ ] Pinch to zoom allowed
@@ -652,21 +690,25 @@ Easy improvements with high impact:
 ## Resources
 
 **Official Guidelines**
-- WCAG 2.1: https://www.w3.org/WAI/WCAG21/quickref/
-- ARIA Authoring Practices: https://www.w3.org/WAI/ARIA/apg/
+
+- WCAG 2.1: <https://www.w3.org/WAI/WCAG21/quickref/>
+- ARIA Authoring Practices: <https://www.w3.org/WAI/ARIA/apg/>
 
 **Testing Tools**
-- axe DevTools: https://www.deque.com/axe/
-- WAVE: https://wave.webaim.org/
+
+- axe DevTools: <https://www.deque.com/axe/>
+- WAVE: <https://wave.webaim.org/>
 - Lighthouse: Built into Chrome DevTools
 
 **Learning Resources**
-- WebAIM: https://webaim.org/
-- A11y Project: https://www.a11yproject.com/
-- Inclusive Components: https://inclusive-components.design/
+
+- WebAIM: <https://webaim.org/>
+- A11y Project: <https://www.a11yproject.com/>
+- Inclusive Components: <https://inclusive-components.design/>
 
 **Screen Readers**
-- NVDA (Windows): https://www.nvaccess.org/
+
+- NVDA (Windows): <https://www.nvaccess.org/>
 - VoiceOver (Mac/iOS): Built-in
 - TalkBack (Android): Built-in
-- JAWS (Windows): https://www.freedomscientific.com/
+- JAWS (Windows): <https://www.freedomscientific.com/>

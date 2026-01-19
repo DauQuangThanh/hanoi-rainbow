@@ -1,6 +1,5 @@
 # Zero-Downtime Migration Strategies
 
-
 ### Logical Replication
 
 ```sql

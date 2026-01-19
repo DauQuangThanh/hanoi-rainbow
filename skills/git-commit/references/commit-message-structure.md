@@ -1,6 +1,5 @@
 # Commit Message Structure
 
-
 ### Basic Format
 
 ```
@@ -12,6 +11,7 @@
 ```
 
 **Components:**
+
 - **type**: Category of change (required)
 - **scope**: Area affected (optional)
 - **subject**: Brief description (required, ≤50 chars)

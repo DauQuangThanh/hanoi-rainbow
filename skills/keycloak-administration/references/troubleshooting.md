@@ -7,6 +7,7 @@
 **Symptoms:** Login fails, error messages, redirects fail
 
 **Diagnosis:**
+
 - Check user status: Enabled, email verified
 - Check required actions: Password expired, update profile
 - Verify client redirect URIs: Must match exactly
@@ -14,6 +15,7 @@
 - Review login events: Events → Login Events
 
 **Solutions:**
+
 - Reset user password (temporary)
 - Clear required actions
 - Fix redirect URI configuration
@@ -25,6 +27,7 @@
 **Symptoms:** Applications reject tokens, signature validation errors
 
 **Diagnosis:**
+
 - Verify token signature with realm public key
 - Check token expiration time
 - Validate issuer URL (must match KeyCloak URL)
@@ -32,6 +35,7 @@
 - Ensure application uses correct realm endpoint
 
 **Solutions:**
+
 - Use correct realm public key for validation
 - Increase token lifespan if too short
 - Fix issuer URL in token validation
@@ -43,6 +47,7 @@
 **Symptoms:** Users not syncing, authentication fails for LDAP users
 
 **Diagnosis:**
+
 - Test LDAP connection: User Federation → Test Connection
 - Check bind credentials: Must have read access
 - Verify LDAP user DN path
@@ -50,6 +55,7 @@
 - Review KeyCloak server logs
 
 **Solutions:**
+
 - Fix LDAP connection settings
 - Update bind DN credentials
 - Correct user DN base path
@@ -61,6 +67,7 @@
 **Symptoms:** Users logged out unexpectedly, session timeouts
 
 **Diagnosis:**
+
 - Check SSO session settings: Idle and Max timeouts
 - Verify client session settings
 - Review remember me configuration
@@ -68,6 +75,7 @@
 - Review events for session termination
 
 **Solutions:**
+
 - Increase SSO session idle/max timeouts
 - Enable remember me for longer sessions
 - Implement token refresh in application
@@ -79,6 +87,7 @@
 **Symptoms:** "Invalid client" or "Unauthorized" errors
 
 **Diagnosis:**
+
 - Verify client ID and secret
 - Check client authentication toggle (ON for confidential)
 - Verify redirect URIs match exactly
@@ -86,6 +95,7 @@
 - Review client credentials in application
 
 **Solutions:**
+
 - Regenerate client secret if compromised
 - Enable client authentication for confidential clients
 - Fix redirect URI configuration (remove wildcards)
@@ -179,6 +189,7 @@ curl -X POST https://keycloak.example.com/realms/{realm}/protocol/openid-connect
 **Symptoms:** Slow login, high response times, timeouts
 
 **Diagnosis:**
+
 - Check database query performance
 - Review connection pool usage
 - Monitor JVM memory and GC
@@ -186,6 +197,7 @@ curl -X POST https://keycloak.example.com/realms/{realm}/protocol/openid-connect
 - Review concurrent session count
 
 **Solutions:**
+
 - Increase database connection pool
 - Optimize database indexes
 - Increase JVM heap size (`-Xmx`, `-Xms`)

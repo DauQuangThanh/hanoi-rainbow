@@ -9,12 +9,14 @@ This guide provides comprehensive techniques for gathering requirements from sta
 **Purpose**: Gather specific, predetermined information
 
 **Best For**:
+
 - Compliance requirements
 - Technical specifications
 - Data requirements
 - Process documentation
 
 **Structure**:
+
 ```markdown
 # Structured Interview Template
 
@@ -86,6 +88,7 @@ This guide provides comprehensive techniques for gathering requirements from sta
 ```
 
 **Example Questions**:
+
 ```markdown
 Process Questions:
 - "Walk me through how you handle a customer order from start to finish"
@@ -113,12 +116,14 @@ Future State Questions:
 **Purpose**: Balance preparation with flexibility
 
 **Best For**:
+
 - Exploratory research
 - User needs discovery
 - Innovation ideation
 - Complex domains
 
 **Structure**:
+
 ```markdown
 # Semi-Structured Interview Approach
 
@@ -156,6 +161,7 @@ Adapt based on responses:
 ```
 
 **Five Whys Technique**:
+
 ```markdown
 # Example: Understanding Root Cause
 
@@ -186,12 +192,14 @@ Real Requirement: API integration between CRM and pricing system
 **Purpose**: Explore unknown territory, build relationships
 
 **Best For**:
+
 - Initial discovery
 - Understanding culture
 - Building stakeholder relationships
 - Innovative solutions
 
 **Approach**:
+
 ```markdown
 # Unstructured Interview Guidelines
 
@@ -222,6 +230,7 @@ Look for:
 **Purpose**: Collaborative requirements definition with multiple stakeholders
 
 **Setup**:
+
 ```markdown
 # Workshop Planning Checklist
 
@@ -246,6 +255,7 @@ Participants Should Include:
 **Facilitation Techniques**:
 
 **1. Round Robin**
+
 ```markdown
 Purpose: Ensure all voices are heard
 
@@ -264,6 +274,7 @@ Good for:
 ```
 
 **2. Silent Brainstorming**
+
 ```markdown
 Purpose: Generate many ideas quickly
 
@@ -282,6 +293,7 @@ Benefits:
 ```
 
 **3. Affinity Diagramming**
+
 ```markdown
 Purpose: Organize large amounts of information
 
@@ -307,6 +319,7 @@ Product Catalog
 ```
 
 **4. Dot Voting**
+
 ```markdown
 Purpose: Prioritize democratically
 
@@ -392,6 +405,7 @@ Output: Validated requirements and concepts
 ```
 
 **How Might We Questions**:
+
 ```markdown
 Problem: Sales reps can't access CRM in the field
 
@@ -410,6 +424,7 @@ Each HMW becomes a potential solution direction
 **Purpose**: Intensive collaborative requirements definition
 
 **Structure**:
+
 ```markdown
 # JAD Session Plan (2-5 days)
 
@@ -458,6 +473,7 @@ Outputs:
 **Purpose**: Understand actual work practices
 
 **Process**:
+
 ```markdown
 # Job Shadowing Plan
 
@@ -506,6 +522,7 @@ What to Document:
 ```
 
 **Example Observations**:
+
 ```markdown
 # Job Shadowing Notes: Sales Representative
 
@@ -552,6 +569,7 @@ Key Observations:
 **Purpose**: Understand users in their natural environment
 
 **Techniques**:
+
 ```markdown
 # Ethnographic Research Approach
 
@@ -588,6 +606,7 @@ Key Observations:
 **Four Principles**:
 
 **1. Context**: Work in user's actual environment
+
 ```markdown
 - Go to their workspace
 - Use their equipment
@@ -596,6 +615,7 @@ Key Observations:
 ```
 
 **2. Partnership**: User as expert, analyst as apprentice
+
 ```markdown
 - Let user lead
 - Ask questions as apprentice
@@ -604,6 +624,7 @@ Key Observations:
 ```
 
 **3. Interpretation**: Develop shared understanding
+
 ```markdown
 - Discuss observations together
 - "It seems like you do X because Y, is that right?"
@@ -612,6 +633,7 @@ Key Observations:
 ```
 
 **4. Focus**: Keep inquiry goal-directed
+
 ```markdown
 - Stay aligned with project goals
 - Explore relevant areas deeply
@@ -620,6 +642,7 @@ Key Observations:
 ```
 
 **Example Session**:
+
 ```markdown
 # Contextual Inquiry Session
 
@@ -654,6 +677,7 @@ Requirement Identified: Unified customer view with order history
 ### Types of Documents to Analyze
 
 **Business Documents**:
+
 ```markdown
 - Business strategy documents
 - Annual reports
@@ -665,6 +689,7 @@ Requirement Identified: Unified customer view with order history
 ```
 
 **Process Documents**:
+
 ```markdown
 - Process maps and workflows
 - Standard Operating Procedures (SOPs)
@@ -675,6 +700,7 @@ Requirement Identified: Unified customer view with order history
 ```
 
 **Technical Documents**:
+
 ```markdown
 - System documentation
 - API specifications
@@ -686,6 +712,7 @@ Requirement Identified: Unified customer view with order history
 ```
 
 **Regulatory Documents**:
+
 ```markdown
 - Industry regulations
 - Compliance requirements
@@ -759,6 +786,7 @@ Constraints:
 ### Prototype Fidelity Levels
 
 **1. Paper Prototypes (Low Fidelity)**
+
 ```markdown
 Purpose: Quick exploration of concepts
 
@@ -790,6 +818,7 @@ Best for:
 ```
 
 **2. Wireframes (Low-Medium Fidelity)**
+
 ```markdown
 Purpose: Define layout and functionality
 
@@ -820,6 +849,7 @@ Best for:
 ```
 
 **3. Mockups (High Fidelity)**
+
 ```markdown
 Purpose: Show final visual design
 
@@ -849,6 +879,7 @@ Best for:
 ```
 
 **4. Interactive Prototypes (High Fidelity)**
+
 ```markdown
 Purpose: Simulate actual product
 

@@ -14,6 +14,7 @@ Platform migrations are infrastructure-focused and should be paired with applica
 ## Core Migration Principles
 
 **Key Practices:**
+
 - Test everything in non-production first
 - Automate using Infrastructure as Code (IaC)
 - Migrate incrementally rather than "big bang"
@@ -22,6 +23,7 @@ Platform migrations are infrastructure-focused and should be paired with applica
 - Document architecture decisions and rationale
 
 **Avoid These Pitfalls:**
+
 - Migrating everything at once without phased approach
 - Skipping non-production validation
 - Ignoring cost estimation for target platform
@@ -34,6 +36,7 @@ Platform migrations are infrastructure-focused and should be paired with applica
 ### Step 1: Assessment and Planning
 
 **Identify Migration Type:**
+
 - Cloud-to-cloud (AWS↔GCP↔Azure)
 - Kubernetes cluster migration (EKS→GKE→AKS)
 - CI/CD platform change (Jenkins→GitLab→GitHub Actions)
@@ -102,36 +105,43 @@ Platform migrations are infrastructure-focused and should be paired with applica
 ## Common Migration Scenarios
 
 ### Cloud-to-Cloud Migration
+
 Migrating between AWS, GCP, Azure, or moving from on-premise to cloud. Requires service mapping, network connectivity, and data transfer strategy.
 
 **Load:** [migration-types.md](references/migration-types.md) - Section 1: Cloud-to-Cloud Migration
 
 ### Kubernetes Platform Migration
+
 Moving clusters between EKS, GKE, AKS, or to self-managed Kubernetes. Involves workload migration, persistent storage, service meshes, and ingress controllers.
 
 **Load:** [migration-types.md](references/migration-types.md) - Section 2: Kubernetes Platform Migration
 
 ### CI/CD Platform Changes
+
 Transitioning between Jenkins, GitLab CI, GitHub Actions, CircleCI, or other platforms. Requires pipeline translation and secrets migration.
 
 **Load:** [migration-types.md](references/migration-types.md) - Section 3: CI/CD Platform Migration
 
 ### Monitoring Stack Migration
+
 Changing observability tools like Prometheus→Datadog, CloudWatch→New Relic. Includes metrics, logs, traces, and alerting.
 
 **Load:** [migration-types.md](references/migration-types.md) - Section 4: Monitoring Stack Migration
 
 ### Container Registry Migration
+
 Moving container images between Docker Hub, ECR, GCR, ACR, Harbor, or private registries.
 
 **Load:** [container-registry-migration.md](references/container-registry-migration.md)
 
 ### Network Infrastructure Migration
+
 Transforming VPC configuration, VPN connections, DNS, load balancers, and CDN infrastructure.
 
 **Load:** [network-infrastructure-migration.md](references/network-infrastructure-migration.md)
 
 ### Database Platform Migration
+
 Migrating databases to different cloud providers or managed services.
 
 **Load:** [database-platform-migration.md](references/database-platform-migration.md)
@@ -147,18 +157,22 @@ Includes cloud provider migration tools (AWS MGN, Azure Migrate, Google Cloud Mi
 ## Reference Documentation
 
 ### Migration Principles
+
 **Load:** [migration-principles.md](references/migration-principles.md)  
 Complete best practices, anti-patterns, and key considerations for any platform migration.
 
 ### Risk Management
+
 **Load:** [risk-management.md](references/risk-management.md)  
 Risk identification, mitigation strategies, contingency planning, and rollback procedures.
 
 ### Post-Migration Validation
+
 **Load:** [post-migration-validation.md](references/post-migration-validation.md)  
 Validation checklists, testing procedures, performance benchmarking, and cutover verification.
 
 ### Cost Optimization
+
 **Load:** [cost-optimization-during-migration.md](references/cost-optimization-during-migration.md)  
 Cost analysis, optimization strategies, and budget management during migration.
 
@@ -173,4 +187,3 @@ When generating migration artifacts, produce:
 - **Validation Checklists**: Acceptance criteria and testing procedures
 - **Risk Register**: Identified risks, impact, probability, mitigation
 - **Cost Analysis**: Comparative cost breakdown with optimization opportunities
-

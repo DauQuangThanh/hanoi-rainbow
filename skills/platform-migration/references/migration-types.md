@@ -1,9 +1,9 @@
 # Migration Types
 
-
 ### 1. Cloud-to-Cloud Migration
 
 **Common Scenarios:**
+
 - AWS → GCP
 - AWS → Azure
 - GCP → AWS

@@ -1,11 +1,11 @@
 # External Dependencies
 
-
 Risk: Design approval delays from stakeholders
 Probability: Medium | Impact: Medium
 Mitigation: Regular check-ins, early feedback loops
 Contingency: Proceed with MVP design
 Owner: Product Manager
+
 ```
 
 **Risk Response Strategies:**

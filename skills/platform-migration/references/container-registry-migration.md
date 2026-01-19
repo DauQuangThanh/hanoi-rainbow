@@ -1,6 +1,5 @@
 # Container Registry Migration
 
-
 ```bash
 # Migrate from Docker Hub to AWS ECR
 

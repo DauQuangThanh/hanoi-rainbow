@@ -1,6 +1,5 @@
 # Advanced Design Patterns
 
-
 ### 1. Many-to-Many Relationships
 
 ```sql

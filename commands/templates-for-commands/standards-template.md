@@ -46,22 +46,27 @@
 
 <!-- ACTION REQUIRED: Choose and document component/file, props/booleans, handlers, hooks/state, and CSS methodology. -->
 ### 3.1 Components & Files
+
 - **Components**: PascalCase nouns (e.g., `UserProfile`, `ProductCard`)
 - **Files**: Match component names exactly (e.g., `UserProfile.tsx`)
 
 ### 3.2 Props & Booleans
+
 - **Props**: camelCase, descriptive
 - **Boolean props**: Prefix with `is`, `has`, `should`, `can` (e.g., `isOpen`, `hasErrors`)
 
 ### 3.3 Event Handlers
+
 - **Internal**: `handle` + EventName (e.g., `handleSubmit`)
 - **Props**: `on` + EventName (e.g., `onSubmit`)
 
 ### 3.4 Hooks & State
+
 - **Custom hooks**: `use` prefix (e.g., `useAuth`)
 - **useState**: `[value, setValue]` with descriptive names (e.g., `isLoading`, `setIsLoading`)
 
 ### 3.5 CSS Naming
+
 - **Choose one**: BEM or utility-first
 - **BEM**: `Block__Element--Modifier`
 - **CSS Modules**: kebab-case in CSS, camelCase in JS imports
@@ -72,14 +77,17 @@
 
 <!-- ACTION REQUIRED: Define variable/constant/function/class/interface/enum naming rules. -->
 ### 4.1 Variables & Constants
+
 - **Variables**: camelCase (JS/TS), snake_case (Python)
 - **Constants**: SCREAMING_SNAKE_CASE
 
 ### 4.2 Functions & Booleans
+
 - **Functions**: Verb-based (e.g., `calculateTotal`)
 - **Boolean functions**: `is_`, `has_`, `should_`, `can_`
 
 ### 4.3 Classes & Types
+
 - **Classes**: PascalCase nouns (e.g., `PaymentProcessor`)
 - **Interfaces (TS)**: Pick `IUser` or `User` convention and stick to it
 - **Enums (TS)**: PascalCase enum; SCREAMING_SNAKE_CASE values
@@ -99,12 +107,14 @@
 
 <!-- ACTION REQUIRED: Define REST param casing, endpoint patterns, statuses, response shape; add GraphQL if applicable. -->
 ### 6.1 REST
+
 - **Endpoints**: plural, lowercase, hyphen-separated (e.g., `/api/users`)
 - **Query params**: choose snake_case or camelCase and be consistent
 - **Status codes**: Use standard HTTP codes (200, 201, 204, 400, 401, 403, 404, 409, 422, 500)
 - **Responses**: Consistent `data` + `meta` for success; `error` object for failures
 
 ### 6.2 GraphQL (if applicable)
+
 - **Types**: PascalCase
 - **Mutations**: verb-based, camelCase (e.g., `createUser`)
 
@@ -182,6 +192,7 @@
 ---
 
 **Notes**
+
 - Prefer explicit names; avoid abbreviations
 - Keep decisions documented (short ADRs)
 - Link to code, schemas, and configs where possible

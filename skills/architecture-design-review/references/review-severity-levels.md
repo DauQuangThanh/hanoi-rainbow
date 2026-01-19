@@ -1,7 +1,7 @@
 # Review Severity Levels
 
-
 **Critical (🔴)**
+
 - Security vulnerabilities
 - Single points of failure without mitigation
 - Data loss risks
@@ -9,6 +9,7 @@
 - Architecture decisions that prevent meeting requirements
 
 **High (🟠)**
+
 - Significant scalability limitations
 - Performance bottlenecks
 - Operational complexity
@@ -16,6 +17,7 @@
 - Missing critical non-functional requirements
 
 **Medium (🟡)**
+
 - Sub-optimal patterns
 - Missing best practices
 - Documentation gaps
@@ -23,6 +25,7 @@
 - Cost inefficiencies
 
 **Low (🟢)**
+
 - Style improvements
 - Future enhancements
 - Nice-to-have features

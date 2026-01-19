@@ -1,6 +1,5 @@
 # Integration Testing Process
 
-
 Follow this systematic approach when designing integration tests:
 
 ### Phase 1: Test Strategy & Planning
@@ -8,19 +7,21 @@ Follow this systematic approach when designing integration tests:
 1. **Define Testing Scope**
 
 **Integration Levels**
+
 - **Component Integration**: Individual modules/classes working together
 - **Service Integration**: APIs and services interacting
 - **System Integration**: Multiple services/systems integrated
 - **End-to-End**: Complete user workflows across entire stack
 
 **Test Objectives**
+
 - Verify interface contracts between components
 - Validate data flow across system boundaries
 - Ensure proper error handling in integrations
 - Test transaction integrity across services
 - Validate performance under realistic load
 
-2. **Identify Integration Points**
+1. **Identify Integration Points**
 
 ```
 System Architecture:
@@ -54,15 +55,17 @@ Integration Points to Test:
 7. Cross-service workflows
 ```
 
-3. **Test Environment Planning**
+1. **Test Environment Planning**
 
 **Environment Types**
+
 - **Development**: Local testing, mocked external dependencies
 - **Integration**: Shared environment with real dependencies
 - **Staging**: Production-like environment for final validation
 - **Production**: Post-deployment smoke tests
 
 **Infrastructure Requirements**
+
 - Test databases (separate from production)
 - Message queues and caches
 - External service mocks/stubs
@@ -74,6 +77,7 @@ Integration Points to Test:
 1. **RESTful API Testing**
 
 **Test Framework Setup (Jest + Supertest)**
+
 ```javascript
 // api.test.js
 const request = require('supertest');
@@ -231,7 +235,7 @@ describe('User API Integration Tests', () => {
 });
 ```
 
-2. **Schema Validation Testing**
+1. **Schema Validation Testing**
 
 ```javascript
 // schema-validation.test.js
@@ -268,7 +272,7 @@ describe('API Response Schema Validation', () => {
 });
 ```
 
-3. **Contract Testing (Pact)**
+1. **Contract Testing (Pact)**
 
 ```javascript
 // user-api.contract.test.js
@@ -359,7 +363,7 @@ class TestDatabase {
 module.exports = TestDatabase;
 ```
 
-2. **Transaction Testing**
+1. **Transaction Testing**
 
 ```javascript
 // transaction.test.js
@@ -399,7 +403,7 @@ describe('Database Transaction Tests', () => {
 });
 ```
 
-3. **Data Integrity Testing**
+1. **Data Integrity Testing**
 
 ```javascript
 // data-integrity.test.js
@@ -497,7 +501,7 @@ describe('Microservices Integration', () => {
 });
 ```
 
-2. **Message Queue Testing**
+1. **Message Queue Testing**
 
 ```javascript
 // message-queue.test.js
@@ -556,7 +560,7 @@ describe('Message Queue Integration', () => {
 });
 ```
 
-3. **Event-Driven Testing**
+1. **Event-Driven Testing**
 
 ```javascript
 // event-driven.test.js
@@ -643,7 +647,7 @@ test.describe('User Registration Flow', () => {
 });
 ```
 
-2. **Multi-Step Workflow Testing**
+1. **Multi-Step Workflow Testing**
 
 ```javascript
 // e2e/checkout-flow.spec.js
@@ -732,7 +736,7 @@ beforeEach(async () => {
 });
 ```
 
-2. **Factory Pattern**
+1. **Factory Pattern**
 
 ```javascript
 // factories/user.factory.js
@@ -765,7 +769,7 @@ const admin = UserFactory.admin({ name: 'Admin User' });
 const users = UserFactory.createMany(10);
 ```
 
-3. **Database Seeding**
+1. **Database Seeding**
 
 ```javascript
 // seeds/test-data.js
@@ -845,7 +849,7 @@ describe('External API Integration', () => {
 });
 ```
 
-2. **Service Mocking**
+1. **Service Mocking**
 
 ```javascript
 // Using jest.mock
@@ -950,7 +954,7 @@ jobs:
           reporter: jest-junit
 ```
 
-2. **Parallel Test Execution**
+1. **Parallel Test Execution**
 
 ```javascript
 // jest.config.js

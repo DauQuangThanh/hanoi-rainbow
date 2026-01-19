@@ -1,7 +1,7 @@
 # Testing Frameworks & Tools
 
-
 ### JavaScript/Node.js
+
 - **Jest**: Full-featured testing framework
 - **Mocha + Chai**: Flexible testing setup
 - **Supertest**: HTTP assertions
@@ -9,6 +9,7 @@
 - **Pact**: Contract testing
 
 ### Python
+
 - **pytest**: Popular testing framework
 - **unittest**: Built-in framework
 - **requests**: HTTP testing
@@ -16,6 +17,7 @@
 - **Factory Boy**: Test data generation
 
 ### Java
+
 - **JUnit 5**: Testing framework
 - **TestContainers**: Docker containers for tests
 - **REST Assured**: API testing

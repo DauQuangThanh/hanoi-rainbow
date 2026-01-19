@@ -54,6 +54,7 @@
 ## Translation Patterns
 
 ### Procedure → Function
+
 ```pli
 CALC_TOTAL: PROCEDURE(qty, price) RETURNS(FIXED DECIMAL(15,2));
     DCL qty FIXED DECIMAL(7,2);
@@ -61,7 +62,9 @@ CALC_TOTAL: PROCEDURE(qty, price) RETURNS(FIXED DECIMAL(15,2));
     RETURN(qty * price);
 END CALC_TOTAL;
 ```
+
 →
+
 ```
 FUNCTION CalcTotal(qty: DECIMAL(7,2), price: DECIMAL(9,2)): DECIMAL(15,2)
 BEGIN
@@ -70,11 +73,14 @@ END FUNCTION
 ```
 
 ### ON Condition → TRY-CATCH
+
 ```pli
 ON ENDFILE(infile) EOF = '1'B;
 READ FILE(infile) INTO(rec);
 ```
+
 →
+
 ```
 TRY
     record = READ_RECORD(inFile)
@@ -84,13 +90,16 @@ END TRY
 ```
 
 ### Structure Declaration
+
 ```pli
 DCL 1 EMPLOYEE,
       2 ID CHAR(10),
       2 NAME CHAR(50),
       2 SALARY FIXED DECIMAL(9,2);
 ```
+
 →
+
 ```
 STRUCTURE Employee
     id: STRING[10]

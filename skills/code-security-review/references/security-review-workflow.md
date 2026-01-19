@@ -1,9 +1,9 @@
 # Security Review Workflow
 
-
 ### Step 1: Initial Security Assessment
 
 **Gather Context:**
+
 - Identify application type (web app, API, mobile, desktop, embedded)
 - Determine data sensitivity level (PII, financial, healthcare, etc.)
 - Note compliance requirements (PCI-DSS, GDPR, HIPAA, SOC 2)
@@ -12,6 +12,7 @@
 - Review security configuration files
 
 **Threat Modeling:**
+
 - Identify assets (data, functions, resources)
 - Determine threat actors (external attackers, insiders, automated bots)
 - Map attack surfaces (user inputs, APIs, file operations, network)
@@ -24,6 +25,7 @@ Review code for OWASP Top 10 vulnerabilities:
 #### 2.1 A01: Broken Access Control
 
 **What to Check:**
+
 - Authorization checks on all sensitive operations
 - Horizontal privilege escalation (accessing other users' data)
 - Vertical privilege escalation (accessing admin functions)
@@ -35,6 +37,7 @@ Review code for OWASP Top 10 vulnerabilities:
 **Vulnerable Examples:**
 
 ❌ **Missing Authorization Check:**
+
 ```python
 @app.route('/user/<user_id>/profile')
 def get_profile(user_id):
@@ -44,6 +47,7 @@ def get_profile(user_id):
 ```
 
 ❌ **Insecure Direct Object Reference (IDOR):**
+
 ```javascript
 // User can modify user_id to access others' orders
 app.get('/api/orders/:order_id', (req, res) => {
@@ -53,6 +57,7 @@ app.get('/api/orders/:order_id', (req, res) => {
 ```
 
 ✅ **Secure Implementation:**
+
 ```python
 @app.route('/user/<user_id>/profile')
 @login_required
@@ -70,6 +75,7 @@ def get_profile(user_id):
 #### 2.2 A02: Cryptographic Failures
 
 **What to Check:**
+
 - Sensitive data transmitted over plain HTTP
 - Weak encryption algorithms (MD5, SHA1, DES, RC4)
 - Hard-coded encryption keys
@@ -81,24 +87,28 @@ def get_profile(user_id):
 **Vulnerable Examples:**
 
 ❌ **Weak Hashing:**
+
 ```java
 // MD5 is cryptographically broken
 String passwordHash = DigestUtils.md5Hex(password);
 ```
 
 ❌ **Hard-Coded Secret:**
+
 ```javascript
 const jwt = require('jsonwebtoken');
 const token = jwt.sign(payload, 'my-secret-key-123');  // Hard-coded
 ```
 
 ❌ **Insecure Random:**
+
 ```python
 import random
 token = random.randint(100000, 999999)  # Predictable
 ```
 
 ✅ **Secure Implementation:**
+
 ```java
 // Use bcrypt with sufficient work factor
 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
@@ -121,6 +131,7 @@ token = secrets.token_urlsafe(32)  # Cryptographically secure
 #### 2.3 A03: Injection
 
 **What to Check:**
+
 - SQL Injection in database queries
 - NoSQL Injection in MongoDB/other NoSQL
 - Command Injection in system calls
@@ -133,6 +144,7 @@ token = secrets.token_urlsafe(32)  # Cryptographically secure
 **Vulnerable Examples:**
 
 ❌ **SQL Injection:**
+
 ```python
 # Never concatenate user input into SQL
 query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
@@ -140,6 +152,7 @@ cursor.execute(query)
 ```
 
 ❌ **Command Injection:**
+
 ```javascript
 const { exec } = require('child_process');
 // User input directly in command
@@ -149,12 +162,14 @@ exec(`ping -c 4 ${req.body.host}`, (err, stdout) => {
 ```
 
 ❌ **NoSQL Injection:**
+
 ```javascript
 // Vulnerable to {$ne: null} injection
 db.users.find({ username: req.body.username, password: req.body.password });
 ```
 
 ✅ **Secure Implementation:**
+
 ```python
 # Use parameterized queries
 query = "SELECT * FROM users WHERE username = ? AND password = ?"
@@ -184,6 +199,7 @@ db.users.findOne({
 #### 2.4 A04: Insecure Design
 
 **What to Check:**
+
 - Missing security requirements in design
 - Insufficient threat modeling
 - No rate limiting on sensitive operations
@@ -195,6 +211,7 @@ db.users.findOne({
 **Example Issues:**
 
 ❌ **No Rate Limiting:**
+
 ```python
 @app.route('/login', methods=['POST'])
 def login():
@@ -205,6 +222,7 @@ def login():
 ```
 
 ✅ **Rate Limiting Implemented:**
+
 ```python
 from flask_limiter import Limiter
 
@@ -221,6 +239,7 @@ def login():
 #### 2.5 A05: Security Misconfiguration
 
 **What to Check:**
+
 - Default credentials still enabled
 - Unnecessary features enabled
 - Error messages revealing sensitive info
@@ -232,6 +251,7 @@ def login():
 **Vulnerable Examples:**
 
 ❌ **Detailed Error Messages:**
+
 ```python
 try:
     # database operation
@@ -241,6 +261,7 @@ except Exception as e:
 ```
 
 ❌ **Missing Security Headers:**
+
 ```javascript
 // No security headers set
 app.get('/', (req, res) => {
@@ -249,6 +270,7 @@ app.get('/', (req, res) => {
 ```
 
 ✅ **Secure Implementation:**
+
 ```python
 try:
     # database operation
@@ -276,6 +298,7 @@ app.use((req, res, next) => {
 #### 2.6 A06: Vulnerable and Outdated Components
 
 **What to Check:**
+
 - Outdated dependencies with known CVEs
 - Unused dependencies increasing attack surface
 - Dependencies from untrusted sources
@@ -283,6 +306,7 @@ app.use((req, res, next) => {
 - Transitive dependency vulnerabilities
 
 **Detection Methods:**
+
 ```bash
 # Python
 pip-audit
@@ -304,6 +328,7 @@ go list -json -m all | nancy sleuth
 ```
 
 **Report Format:**
+
 ```
 Vulnerability: lodash Prototype Pollution
 Severity: High (CVSS 7.4)
@@ -317,6 +342,7 @@ Remediation: Update to version 4.17.21 or higher
 #### 2.7 A07: Identification and Authentication Failures
 
 **What to Check:**
+
 - Weak password requirements
 - No multi-factor authentication
 - Session fixation vulnerabilities
@@ -328,6 +354,7 @@ Remediation: Update to version 4.17.21 or higher
 **Vulnerable Examples:**
 
 ❌ **Weak Session Management:**
+
 ```php
 // Session ID in URL - vulnerable to fixation
 $session_id = $_GET['sessionid'];
@@ -336,6 +363,7 @@ session_start();
 ```
 
 ❌ **No Session Timeout:**
+
 ```javascript
 // Session never expires
 app.use(session({
@@ -347,6 +375,7 @@ app.use(session({
 ```
 
 ✅ **Secure Implementation:**
+
 ```php
 // Regenerate session ID on login
 session_start();
@@ -371,6 +400,7 @@ app.use(session({
 #### 2.8 A08: Software and Data Integrity Failures
 
 **What to Check:**
+
 - No integrity verification for updates
 - Unsigned packages/artifacts
 - Insecure deserialization
@@ -381,6 +411,7 @@ app.use(session({
 **Vulnerable Examples:**
 
 ❌ **Insecure Deserialization:**
+
 ```python
 import pickle
 
@@ -389,6 +420,7 @@ user_data = pickle.loads(request.data)
 ```
 
 ❌ **No Integrity Check:**
+
 ```javascript
 // Downloads script without verification
 const script = await fetch('https://cdn.example.com/lib.js').then(r => r.text());
@@ -396,6 +428,7 @@ eval(script);  // Extremely dangerous
 ```
 
 ✅ **Secure Implementation:**
+
 ```python
 import json
 
@@ -415,6 +448,7 @@ validate_schema(user_data, USER_SCHEMA)
 #### 2.9 A09: Security Logging and Monitoring Failures
 
 **What to Check:**
+
 - No logging of security events
 - Logs don't include sufficient context
 - No alerting on suspicious activity
@@ -425,6 +459,7 @@ validate_schema(user_data, USER_SCHEMA)
 **What to Log:**
 
 **Security Events:**
+
 - Authentication attempts (success/failure)
 - Authorization failures
 - Input validation failures
@@ -434,6 +469,7 @@ validate_schema(user_data, USER_SCHEMA)
 - Security configuration changes
 
 **Example Implementation:**
+
 ```python
 import logging
 
@@ -466,6 +502,7 @@ def promote_user(user_id):
 #### 2.10 A10: Server-Side Request Forgery (SSRF)
 
 **What to Check:**
+
 - User-controlled URLs in backend requests
 - No URL validation/allowlisting
 - Access to internal services possible
@@ -475,6 +512,7 @@ def promote_user(user_id):
 **Vulnerable Examples:**
 
 ❌ **SSRF Vulnerability:**
+
 ```python
 @app.route('/fetch')
 def fetch_url():
@@ -485,6 +523,7 @@ def fetch_url():
 ```
 
 ✅ **Secure Implementation:**
+
 ```python
 from urllib.parse import urlparse
 import ipaddress
@@ -524,6 +563,7 @@ def fetch_url():
 #### 3.1 Cross-Site Scripting (XSS)
 
 **Check for:**
+
 - User input rendered without escaping
 - DOM-based XSS
 - Reflected XSS
@@ -533,6 +573,7 @@ def fetch_url():
 **Examples:**
 
 ❌ **XSS Vulnerable:**
+
 ```javascript
 // React - dangerous HTML injection
 <div dangerouslySetInnerHTML={{__html: userInput}} />
@@ -545,6 +586,7 @@ element.innerHTML = userInput;
 ```
 
 ✅ **XSS Protected:**
+
 ```javascript
 // React - auto-escapes
 <div>{userInput}</div>
@@ -563,6 +605,7 @@ element.innerHTML = DOMPurify.sanitize(userInput);
 #### 3.2 Cross-Site Request Forgery (CSRF)
 
 **Check for:**
+
 - State-changing operations without CSRF token
 - CSRF token validation missing
 - SameSite cookie attribute not set
@@ -571,6 +614,7 @@ element.innerHTML = DOMPurify.sanitize(userInput);
 **Examples:**
 
 ❌ **No CSRF Protection:**
+
 ```python
 @app.route('/account/delete', methods=['POST'])
 @login_required
@@ -581,6 +625,7 @@ def delete_account():
 ```
 
 ✅ **CSRF Protected:**
+
 ```python
 from flask_wtf.csrf import CSRFProtect
 
@@ -597,6 +642,7 @@ def delete_account():
 #### 3.3 API Security
 
 **Check for:**
+
 - Missing authentication on endpoints
 - No rate limiting
 - Excessive data exposure
@@ -607,6 +653,7 @@ def delete_account():
 **Examples:**
 
 ❌ **Mass Assignment:**
+
 ```python
 @app.route('/user/update', methods=['PUT'])
 def update_user():
@@ -617,6 +664,7 @@ def update_user():
 ```
 
 ✅ **Protected:**
+
 ```python
 ALLOWED_FIELDS = {'name', 'email', 'phone'}
 
@@ -632,6 +680,7 @@ def update_user():
 #### 3.4 File Upload Security
 
 **Check for:**
+
 - No file type validation
 - Executable files allowed
 - Path traversal in filenames
@@ -641,6 +690,7 @@ def update_user():
 **Examples:**
 
 ❌ **Insecure Upload:**
+
 ```python
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -650,6 +700,7 @@ def upload():
 ```
 
 ✅ **Secure Upload:**
+
 ```python
 import os
 from werkzeug.utils import secure_filename
@@ -694,6 +745,7 @@ def upload():
 #### 3.5 XML External Entity (XXE)
 
 **Check for:**
+
 - XML parsers with external entity processing enabled
 - SOAP endpoints processing user XML
 - SVG file uploads
@@ -701,6 +753,7 @@ def upload():
 **Examples:**
 
 ❌ **XXE Vulnerable:**
+
 ```python
 from xml.etree.ElementTree import parse
 
@@ -709,6 +762,7 @@ tree = parse(user_xml_file)
 ```
 
 ✅ **XXE Protected:**
+
 ```python
 from defusedxml.ElementTree import parse
 
@@ -719,6 +773,7 @@ tree = parse(user_xml_file)
 ### Step 4: Language-Specific Security
 
 **Java/Spring:**
+
 - Check for SQL injection (use PreparedStatement)
 - Validate @RequestBody with constraints
 - Use Spring Security properly
@@ -726,6 +781,7 @@ tree = parse(user_xml_file)
 - Session fixation protection
 
 **Node.js/Express:**
+
 - helmet middleware for security headers
 - express-rate-limit for rate limiting
 - csrf middleware for CSRF protection
@@ -733,6 +789,7 @@ tree = parse(user_xml_file)
 - Validate environment variables
 
 **Python/Flask/Django:**
+
 - SQLAlchemy parameterized queries
 - Django ORM (safe by default)
 - CSRF middleware enabled
@@ -740,6 +797,7 @@ tree = parse(user_xml_file)
 - Jinja2 auto-escaping
 
 **.NET/C#:**
+
 - Entity Framework parameterized queries
 - AntiForgeryToken for CSRF
 - ValidateInput attribute
@@ -747,6 +805,7 @@ tree = parse(user_xml_file)
 - Data annotations for validation
 
 **PHP:**
+
 - Prepared statements (PDO or MySQLi)
 - htmlspecialchars() for output escaping
 - FILTER_* constants for input validation
@@ -758,6 +817,7 @@ tree = parse(user_xml_file)
 **Check:**
 
 **Web Server:**
+
 - TLS 1.2+ only
 - Strong cipher suites
 - HSTS enabled
@@ -766,6 +826,7 @@ tree = parse(user_xml_file)
 - Default pages removed
 
 **Database:**
+
 - Strong authentication
 - Encrypted connections
 - Principle of least privilege
@@ -773,6 +834,7 @@ tree = parse(user_xml_file)
 - Backup encryption
 
 **Cloud/Infrastructure:**
+
 - IAM roles properly scoped
 - Security groups restrictive
 - Encryption at rest enabled
@@ -784,6 +846,7 @@ tree = parse(user_xml_file)
 #### PCI-DSS (Payment Card Industry)
 
 **Key Requirements:**
+
 - Cardholder data encrypted in transit and at rest
 - Strong access control measures
 - Regular security testing
@@ -791,6 +854,7 @@ tree = parse(user_xml_file)
 - Secure authentication
 
 **Check for:**
+
 - Credit card data in logs
 - PAN (Primary Account Number) storage
 - CVV/CVC storage (prohibited)
@@ -799,6 +863,7 @@ tree = parse(user_xml_file)
 #### GDPR (General Data Protection Regulation)
 
 **Key Requirements:**
+
 - User consent for data processing
 - Right to data deletion
 - Right to data portability
@@ -806,6 +871,7 @@ tree = parse(user_xml_file)
 - Privacy by design
 
 **Check for:**
+
 - PII data inventory
 - Consent management
 - Data retention policies
@@ -815,12 +881,14 @@ tree = parse(user_xml_file)
 #### HIPAA (Health Insurance Portability and Accountability Act)
 
 **Key Requirements:**
+
 - PHI (Protected Health Information) encryption
 - Access controls and audit logs
 - Data integrity controls
 - Breach notification
 
 **Check for:**
+
 - Health data encryption
 - Audit logging of PHI access
 - Authentication mechanisms

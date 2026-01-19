@@ -3,6 +3,7 @@
 Comprehensive guidelines for frontend security best practices.
 
 ## Table of Contents
+
 - [Cross-Site Scripting (XSS)](#cross-site-scripting-xss)
 - [Cross-Site Request Forgery (CSRF)](#cross-site-request-forgery-csrf)
 - [Authentication and Authorization](#authentication-and-authorization)
@@ -26,6 +27,7 @@ Comprehensive guidelines for frontend security best practices.
 #### React (Built-in Protection)
 
 **Problem:**
+
 ```jsx
 // ❌ Dangerous: Direct HTML injection
 function UserComment({ comment }) {
@@ -44,6 +46,7 @@ function Link({ url }) {
 ```
 
 **Solution:**
+
 ```jsx
 // ✅ React automatically escapes by default
 function UserComment({ comment }) {
@@ -97,6 +100,7 @@ function Link({ url }) {
 #### Vue (Built-in Protection)
 
 **Problem:**
+
 ```vue
 <!-- ❌ Dangerous: v-html with user input -->
 <template>
@@ -110,6 +114,7 @@ function Link({ url }) {
 ```
 
 **Solution:**
+
 ```vue
 <!-- ✅ Vue automatically escapes by default -->
 <template>
@@ -139,6 +144,7 @@ const sanitizedComment = computed(() =>
 #### Angular (Built-in Protection)
 
 **Problem:**
+
 ```typescript
 // ❌ Dangerous: Bypassing sanitization
 import { DomSanitizer } from '@angular/platform-browser';
@@ -154,6 +160,7 @@ export class UnsafeComponent {
 ```
 
 **Solution:**
+
 ```typescript
 // ✅ Angular automatically sanitizes
 @Component({
@@ -223,6 +230,7 @@ const safe = sanitizeHTML(userInput); // Returns: '<p>Hello</p>'
 ### CSRF Prevention
 
 **Problem:**
+
 ```typescript
 // ❌ No CSRF protection
 async function deleteAccount() {
@@ -234,6 +242,7 @@ async function deleteAccount() {
 ```
 
 **Solution:**
+
 ```typescript
 // ✅ CSRF token in headers
 async function deleteAccount() {
@@ -297,6 +306,7 @@ function checkCookieSecurity() {
 ### Token Storage
 
 **Problem:**
+
 ```typescript
 // ❌ Storing tokens in localStorage (vulnerable to XSS)
 function login(credentials) {
@@ -311,6 +321,7 @@ function login(credentials) {
 ```
 
 **Solution:**
+
 ```typescript
 // ✅ Option 1: HttpOnly cookies (preferred)
 // Server sets: Set-Cookie: token=xyz; HttpOnly; Secure; SameSite=Strict
@@ -362,6 +373,7 @@ function login(credentials) {
 ### JWT Best Practices
 
 **Problem:**
+
 ```typescript
 // ❌ Storing sensitive data in JWT
 const token = {
@@ -382,6 +394,7 @@ function isAuthenticated() {
 ```
 
 **Solution:**
+
 ```typescript
 // ✅ Only store non-sensitive data with expiration
 // Server-side JWT creation:
@@ -499,6 +512,7 @@ function ProtectedRoute({
 ### CSP Headers
 
 **Problem:**
+
 ```html
 <!-- ❌ No CSP -->
 <html>
@@ -509,6 +523,7 @@ function ProtectedRoute({
 ```
 
 **Solution:**
+
 ```html
 <!-- ✅ Strict CSP -->
 <html>
@@ -575,6 +590,7 @@ function Page() {
 ### HTTPS Only
 
 **Problem:**
+
 ```typescript
 // ❌ Mixed content (HTTPS page loading HTTP resources)
 function loadData() {
@@ -586,6 +602,7 @@ function loadData() {
 ```
 
 **Solution:**
+
 ```typescript
 // ✅ Always use HTTPS
 function loadData() {
@@ -795,6 +812,7 @@ snyk monitor
 ### Sensitive Data Handling
 
 **Problem:**
+
 ```typescript
 // ❌ Logging sensitive data
 console.log('User logged in:', { email, password });
@@ -811,6 +829,7 @@ function UserProfile({ user }) {
 ```
 
 **Solution:**
+
 ```typescript
 // ✅ Never log sensitive data
 console.log('User logged in:', { email }); // Omit password
@@ -849,6 +868,7 @@ interface ClientUser {
 ### 1. Open Redirects
 
 **Problem:**
+
 ```typescript
 // ❌ Unvalidated redirect
 function handleRedirect(url: string) {
@@ -859,6 +879,7 @@ function handleRedirect(url: string) {
 ```
 
 **Solution:**
+
 ```typescript
 // ✅ Validate redirect URLs
 const ALLOWED_REDIRECT_DOMAINS = ['example.com'];
@@ -892,6 +913,7 @@ function handleRedirect(url: string) {
 ### 2. Clickjacking
 
 **Problem:**
+
 ```html
 <!-- ❌ No frame protection -->
 <html>
@@ -902,6 +924,7 @@ function handleRedirect(url: string) {
 ```
 
 **Solution:**
+
 ```html
 <!-- ✅ Prevent framing -->
 <html>
@@ -926,6 +949,7 @@ if (window.top !== window.self) {
 ### 3. Prototype Pollution
 
 **Problem:**
+
 ```typescript
 // ❌ Dangerous object manipulation
 function merge(target: any, source: any) {
@@ -941,6 +965,7 @@ merge({}, JSON.parse('{"__proto__": {"isAdmin": true}}'));
 ```
 
 **Solution:**
+
 ```typescript
 // ✅ Safe object merging
 function safeMerge<T extends object>(target: T, source: Partial<T>): T {

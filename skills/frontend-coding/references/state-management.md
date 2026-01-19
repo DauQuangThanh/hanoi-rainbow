@@ -1,6 +1,5 @@
 # State Management
 
-
 ### Zustand (React)
 
 ```typescript

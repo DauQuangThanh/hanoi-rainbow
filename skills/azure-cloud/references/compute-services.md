@@ -5,27 +5,33 @@
 ### VM Size Selection
 
 **General Purpose (B, D, DC, DS)**
+
 - **B-series**: Burstable, cost-effective for low baseline CPU usage (dev/test, small web servers)
 - **D-series**: Balanced CPU-to-memory ratio (application servers, databases)
 - **DC-series**: Confidential computing with Intel SGX enclaves
 
 **Compute Optimized (F, FS)**
+
 - **F-series**: High CPU-to-memory ratio (batch processing, web servers, analytics)
 - Best for CPU-intensive workloads with less memory requirements
 
 **Memory Optimized (E, ES, M, MS)**
+
 - **E-series**: High memory-to-CPU ratio (in-memory databases, large caches)
 - **M-series**: Largest memory configurations (SAP HANA, massive databases)
 
 **Storage Optimized (L, LS)**
+
 - **L-series**: High disk throughput and IOPS (big data, NoSQL databases)
 
 **GPU (N-series)**
+
 - **NC-series**: NVIDIA Tesla for compute workloads (ML training, simulations)
 - **NV-series**: NVIDIA Tesla for visualization (VDI, rendering)
 - **ND-series**: Deep learning training
 
 **High Performance Compute (H)**
+
 - **H-series**: HPC workloads with InfiniBand networking (molecular dynamics, CFD)
 
 ### VM Best Practices
@@ -52,6 +58,7 @@ az vm create \
 ### Managed Disks
 
 **Disk Types:**
+
 - **Ultra Disk**: Sub-millisecond latency, up to 160,000 IOPS
 - **Premium SSD v2**: Configurable performance, no disk size requirements
 - **Premium SSD**: Consistent low latency, production workloads
@@ -59,6 +66,7 @@ az vm create \
 - **Standard HDD**: Lowest cost, infrequent access
 
 **Disk Performance Tiers:**
+
 ```bash
 # Change disk performance tier without downtime
 az disk update \
@@ -70,6 +78,7 @@ az disk update \
 ### Availability Options
 
 **Availability Zones**
+
 - Physically separate zones within a region
 - 99.99% SLA with zone-redundant deployment
 - Protect from datacenter failures
@@ -84,11 +93,13 @@ az vm create \
 ```
 
 **Availability Sets**
+
 - Logical grouping within a datacenter
 - 99.95% SLA with 2+ VMs in availability set
 - Protection from hardware failures
 
 **Virtual Machine Scale Sets**
+
 - Auto-scaling capabilities
 - Load balancer integration
 - Up to 1,000 VM instances
@@ -98,6 +109,7 @@ az vm create \
 ### Service Plans
 
 **Pricing Tiers:**
+
 - **Free/Shared**: Dev/test, shared infrastructure
 - **Basic**: Dedicated compute, manual scaling
 - **Standard**: Auto-scaling, staging slots, custom domains
@@ -164,18 +176,21 @@ az webapp vnet-integration add \
 ### Hosting Plans
 
 **Consumption Plan**
+
 - Pay-per-execution
 - Automatic scaling
 - 5-minute execution timeout (10 minutes configurable)
 - Best for event-driven, sporadic workloads
 
 **Premium Plan**
+
 - No cold start with pre-warmed instances
 - VNet connectivity
 - Unlimited execution duration
 - Best for long-running, VNet-connected functions
 
 **Dedicated (App Service) Plan**
+
 - Run on existing App Service plan
 - Predictable billing
 - Best for continuous workloads
@@ -202,6 +217,7 @@ module.exports = async function (context, req) {
 ```
 
 **Function.json:**
+
 ```json
 {
   "bindings": [

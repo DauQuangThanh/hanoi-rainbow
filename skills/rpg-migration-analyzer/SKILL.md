@@ -10,23 +10,29 @@ Analyzes legacy RPG programs (RPG III/IV/ILE) for migration to Java, extracting 
 ## Core Capabilities
 
 ### 1. Program Analysis
+
 Extract specification types (H/F/D/C/P-specs), data structures, file definitions, business logic, indicators (*IN), built-in functions (%SUBST, %TRIM, %EOF), and error handling (%ERROR, %STATUS).
 
 ### 2. Data Structure Mapping
+
 Convert D-specs, data types (packed P, zoned S, character A, indicators N), arrays (DIM), nested DS, external data structures (EXTNAME), and qualifiers (LIKEDS, QUALIFIED, INZ) to Java classes/collections.
 
 ### 3. File Operations
+
 Parse physical/logical/display files, access methods (sequential, keyed), I/O operations (READ, WRITE, UPDATE, DELETE, CHAIN, SETLL), and file status (%EOF, %FOUND, %ERROR).
 
 ### 4. Java Migration
+
 Generate POJOs, service methods, JDBC/JPA patterns, Bean Validation, exception handling (try-catch from %ERROR), and collections from arrays.
 
 ### 5. Dependency Analysis
+
 Map CALLB/CALLP calls, service programs (BNDDIR), file dependencies, database tables, and /COPY members.
 
 ## Quick Usage Guide
 
 ### Find Programs
+
 ```bash
 find . -name "*.rpg" -o -name "*.rpgle" -o -name "*.RPGLE"
 ```
@@ -36,7 +42,7 @@ find . -name "*.rpg" -o -name "*.rpgle" -o -name "*.RPGLE"
 Convert RPG data types to Java:
 
 | RPG Type | Java Type | Notes |
-|----------|-----------|-------|
+| -------- | --------- | ----- |
 | `nP m` (packed) | `BigDecimal` | Preserve precision! |
 | `nS m` (zoned) | `BigDecimal` | Decimal with sign |
 | `A` (character) | `String` | Character data |
@@ -48,12 +54,14 @@ Convert RPG data types to Java:
 ### Code Patterns
 
 **Business Logic:**
+
 ```rpg
 C    EVAL  Total = Qty * Price
 C    IF    Total > 1000
 C    EVAL  Total = Total * 0.90
 C    ENDIF
 ```
+
 ```java
 BigDecimal total = qty.multiply(price);
 if (total.compareTo(new BigDecimal("1000")) > 0) {
@@ -62,22 +70,26 @@ if (total.compareTo(new BigDecimal("1000")) > 0) {
 ```
 
 **File Operations:**
+
 ```rpg
 C     custId  CHAIN  CUSTFILE
 C             IF     %FOUND(CUSTFILE)
 C             EXSR   ProcessCustomer
 C             ENDIF
 ```
+
 ```java
 customerRepository.findById(custId).ifPresent(this::processCustomer);
 ```
 
 **Data Structure:**
+
 ```rpg
 D Employee   DS
 D   EmpId             6  0
 D   Salary           63  2P
 ```
+
 ```java
 public class Employee {
     private int empId;

@@ -3,6 +3,7 @@
 Comprehensive checklists for reviewing different aspects of software architecture.
 
 ## Table of Contents
+
 1. [General Architecture Review](#general-architecture-review)
 2. [Microservices Review](#microservices-review)
 3. [Cloud Architecture Review](#cloud-architecture-review)
@@ -16,6 +17,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 ## General Architecture Review
 
 ### Architecture Documentation
+
 - [ ] System context diagram available (C4 Level 1)
 - [ ] Container diagram showing components (C4 Level 2)
 - [ ] Component diagrams for complex containers (C4 Level 3)
@@ -28,6 +30,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] README files comprehensive
 
 ### Requirements Alignment
+
 - [ ] Functional requirements addressed
 - [ ] Non-functional requirements defined
 - [ ] Performance requirements specified (response time, throughput)
@@ -40,6 +43,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Team skills assessed
 
 ### Architecture Style & Patterns
+
 - [ ] Architecture style clearly identified (monolithic, microservices, serverless, etc.)
 - [ ] Architecture pattern appropriate for requirements
 - [ ] Pattern advantages leveraged
@@ -50,6 +54,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Design patterns documented
 
 ### System Decomposition
+
 - [ ] Components organized logically
 - [ ] Component boundaries clear
 - [ ] Component responsibilities defined
@@ -60,6 +65,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Dependency direction appropriate
 
 ### Design Principles
+
 - [ ] SOLID principles followed
 - [ ] Separation of concerns applied
 - [ ] DRY principle maintained
@@ -70,6 +76,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Single point of failure avoided
 
 ### Technology Stack
+
 - [ ] Technology choices justified
 - [ ] Technology maturity assessed
 - [ ] Team expertise considered
@@ -80,6 +87,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Migration path considered
 
 ### Integration & Communication
+
 - [ ] Integration patterns defined
 - [ ] Communication protocols specified
 - [ ] Synchronous vs asynchronous justified
@@ -90,6 +98,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Timeouts configured
 
 ### Data Management
+
 - [ ] Data ownership clear
 - [ ] Data models documented
 - [ ] Database selection justified
@@ -100,6 +109,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Data retention policies set
 
 ### Quality Attributes
+
 - [ ] Scalability addressed
 - [ ] Performance optimized
 - [ ] Security designed in
@@ -110,6 +120,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Observability included
 
 ### Deployment & Operations
+
 - [ ] Deployment strategy defined
 - [ ] CI/CD pipeline configured
 - [ ] Infrastructure as Code used
@@ -124,6 +135,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 ## Microservices Review
 
 ### Service Design
+
 - [ ] Services aligned with business domains (DDD)
 - [ ] Services independently deployable
 - [ ] Services independently scalable
@@ -134,6 +146,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Service versioning strategy defined
 
 ### Service Communication
+
 - [ ] API Gateway implemented
 - [ ] Service discovery mechanism configured
 - [ ] Load balancing setup
@@ -145,6 +158,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Bulkhead pattern for isolation
 
 ### Data Management
+
 - [ ] Database per service enforced
 - [ ] No shared database tables
 - [ ] Data consistency strategy defined (eventual vs strong)
@@ -155,6 +169,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Data synchronization strategy
 
 ### Service Dependencies
+
 - [ ] Service dependencies minimized
 - [ ] Circular dependencies avoided
 - [ ] Dependency graph documented
@@ -164,6 +179,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] API versioning strategy
 
 ### Resilience Patterns
+
 - [ ] Circuit breaker for external calls
 - [ ] Retry with exponential backoff
 - [ ] Fallback mechanisms defined
@@ -173,6 +189,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Chaos engineering considered
 
 ### Observability
+
 - [ ] Distributed tracing (Jaeger, Zipkin)
 - [ ] Centralized logging (ELK, Splunk)
 - [ ] Metrics collection (Prometheus, Grafana)
@@ -182,6 +199,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Alerting rules defined
 
 ### Deployment
+
 - [ ] Container images optimized
 - [ ] Kubernetes/orchestration configured
 - [ ] Service deployment independent
@@ -191,6 +209,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Secrets management (Vault, KMS)
 
 ### Testing Strategy
+
 - [ ] Unit tests for each service
 - [ ] Integration tests defined
 - [ ] Contract testing between services
@@ -203,6 +222,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 ## Cloud Architecture Review
 
 ### Cloud Provider Selection
+
 - [ ] Cloud provider choice justified (AWS, Azure, GCP)
 - [ ] Multi-cloud strategy considered
 - [ ] Vendor lock-in risks assessed
@@ -212,6 +232,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Compliance requirements met
 
 ### Compute Resources
+
 - [ ] Compute type appropriate (VMs, containers, serverless)
 - [ ] Auto-scaling configured
 - [ ] Right-sizing performed
@@ -221,6 +242,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Cost optimization strategies
 
 ### Networking
+
 - [ ] VPC/VNet architecture designed
 - [ ] Subnet segmentation appropriate
 - [ ] Network security groups configured
@@ -231,6 +253,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] CDN for static content
 
 ### Storage
+
 - [ ] Storage type appropriate (block, file, object)
 - [ ] Storage class optimized (hot, cool, archive)
 - [ ] Backup strategy automated
@@ -240,6 +263,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Cost optimization applied
 
 ### Managed Services
+
 - [ ] Managed databases vs self-hosted justified
 - [ ] Managed Kubernetes vs self-managed
 - [ ] Managed message queues used
@@ -248,6 +272,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Build vs buy decisions documented
 
 ### High Availability
+
 - [ ] Multi-AZ deployment
 - [ ] Multi-region considered for critical workloads
 - [ ] Availability zones utilized
@@ -256,6 +281,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Load balancing across zones
 
 ### Disaster Recovery
+
 - [ ] DR strategy defined (backup, pilot light, warm standby, hot site)
 - [ ] RTO (Recovery Time Objective) defined
 - [ ] RPO (Recovery Point Objective) defined
@@ -265,6 +291,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Runbooks for DR scenarios
 
 ### Security
+
 - [ ] IAM roles and policies defined
 - [ ] Least privilege principle applied
 - [ ] MFA enabled for admin access
@@ -275,6 +302,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Compliance standards met (SOC 2, ISO 27001)
 
 ### Cost Optimization
+
 - [ ] Resource tagging for cost allocation
 - [ ] Cost monitoring and alerts
 - [ ] Unused resources identified
@@ -285,6 +313,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Budget tracking
 
 ### Infrastructure as Code
+
 - [ ] IaC tool selected (Terraform, CloudFormation, Pulumi)
 - [ ] All infrastructure codified
 - [ ] Version controlled
@@ -298,6 +327,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 ## Security Architecture Review
 
 ### Authentication
+
 - [ ] Authentication mechanism appropriate (OAuth 2.0, SAML, OpenID Connect)
 - [ ] Multi-factor authentication (MFA) supported
 - [ ] Password policies enforced
@@ -308,6 +338,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Remember me functionality secure
 
 ### Authorization
+
 - [ ] Authorization model defined (RBAC, ABAC, policy-based)
 - [ ] Least privilege principle applied
 - [ ] Role hierarchy designed
@@ -317,6 +348,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Vertical privilege escalation prevented
 
 ### Data Protection
+
 - [ ] Sensitive data identified (PII, PHI, payment info)
 - [ ] Data classification defined
 - [ ] Encryption at rest for sensitive data
@@ -327,6 +359,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Secure data disposal procedures
 
 ### API Security
+
 - [ ] Authentication required for APIs
 - [ ] API keys managed securely
 - [ ] OAuth 2.0 for third-party access
@@ -337,6 +370,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] API security testing (OWASP API Top 10)
 
 ### Network Security
+
 - [ ] Network segmentation (VPC, DMZ)
 - [ ] Firewall rules restrictive
 - [ ] Security groups least privilege
@@ -347,6 +381,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] VPN for remote access
 
 ### Application Security
+
 - [ ] Input validation comprehensive
 - [ ] Output encoding applied
 - [ ] CSRF tokens for state-changing operations
@@ -358,6 +393,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] OWASP Top 10 addressed
 
 ### Secrets Management
+
 - [ ] No secrets in source code
 - [ ] No secrets in environment variables
 - [ ] Secrets in dedicated vault (HashiCorp Vault, AWS Secrets Manager)
@@ -367,6 +403,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Least privilege access to secrets
 
 ### Logging & Monitoring
+
 - [ ] Security events logged
 - [ ] Authentication attempts logged
 - [ ] Authorization failures logged
@@ -377,6 +414,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Alerting for security events
 
 ### Compliance
+
 - [ ] GDPR compliance (if applicable)
 - [ ] HIPAA compliance (if applicable)
 - [ ] PCI DSS compliance (if applicable)
@@ -387,6 +425,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Consent management
 
 ### Vulnerability Management
+
 - [ ] Dependency scanning automated
 - [ ] Container image scanning
 - [ ] SAST (Static Application Security Testing)
@@ -396,6 +435,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Patch management process
 
 ### Incident Response
+
 - [ ] Incident response plan documented
 - [ ] Incident classification defined
 - [ ] Escalation procedures clear
@@ -409,6 +449,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 ## Data Architecture Review
 
 ### Data Modeling
+
 - [ ] Conceptual data model defined
 - [ ] Logical data model documented
 - [ ] Physical data model optimized
@@ -419,6 +460,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Indexes planned strategically
 
 ### Database Selection
+
 - [ ] Relational vs NoSQL justified
 - [ ] Database type appropriate (document, key-value, column, graph)
 - [ ] ACID vs BASE requirements defined
@@ -428,6 +470,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Licensing and cost reviewed
 
 ### Data Consistency
+
 - [ ] Consistency model defined (strong, eventual, causal)
 - [ ] Transaction boundaries clear
 - [ ] Isolation levels appropriate
@@ -437,6 +480,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Idempotency for operations
 
 ### Data Access Patterns
+
 - [ ] Read/write ratio analyzed
 - [ ] Query patterns identified
 - [ ] Access patterns optimized
@@ -446,6 +490,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Cache-aside pattern
 
 ### Schema Management
+
 - [ ] Schema versioning strategy
 - [ ] Schema evolution approach
 - [ ] Backward compatibility ensured
@@ -454,6 +499,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Rollback procedures defined
 
 ### Data Migration
+
 - [ ] Migration strategy defined (big bang, trickle, parallel run)
 - [ ] Data validation procedures
 - [ ] Data cleansing planned
@@ -463,6 +509,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Post-migration verification
 
 ### Data Retention & Archival
+
 - [ ] Data retention policies defined
 - [ ] Archival strategy specified
 - [ ] Hot vs cold storage
@@ -472,6 +519,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Cost optimization
 
 ### Data Quality
+
 - [ ] Data validation at entry points
 - [ ] Data quality rules defined
 - [ ] Data profiling performed
@@ -481,6 +529,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Data governance policies
 
 ### Backup & Recovery
+
 - [ ] Backup frequency appropriate
 - [ ] Backup retention policy
 - [ ] Full vs incremental backups
@@ -491,6 +540,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] RTO and RPO targets met
 
 ### Data Security & Privacy
+
 - [ ] Sensitive data identified
 - [ ] Data classification defined
 - [ ] Encryption at rest
@@ -507,6 +557,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 ## Performance Review
 
 ### Performance Requirements
+
 - [ ] Response time targets defined (p50, p95, p99)
 - [ ] Throughput requirements specified (requests/sec)
 - [ ] Concurrent user load defined
@@ -516,6 +567,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Performance SLAs defined
 
 ### Application Performance
+
 - [ ] Database query optimization
 - [ ] N+1 query problem avoided
 - [ ] Indexes used effectively
@@ -526,6 +578,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Pagination for large datasets
 
 ### Caching Strategy
+
 - [ ] Cache layers identified (browser, CDN, application, database)
 - [ ] Cache-aside pattern used
 - [ ] Write-through vs write-behind defined
@@ -536,6 +589,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Cache hit ratio monitored
 
 ### Database Performance
+
 - [ ] Indexes created on frequently queried columns
 - [ ] Composite indexes for multi-column queries
 - [ ] Index maintenance scheduled
@@ -547,6 +601,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Query timeout configured
 
 ### API Performance
+
 - [ ] Response size optimized
 - [ ] Pagination implemented
 - [ ] Field filtering/sparse fieldsets supported (GraphQL)
@@ -557,6 +612,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Rate limiting to prevent abuse
 
 ### Frontend Performance
+
 - [ ] Code splitting and lazy loading
 - [ ] Image optimization
 - [ ] Minification and bundling
@@ -568,6 +624,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Third-party script impact minimized
 
 ### Network Performance
+
 - [ ] CDN for global distribution
 - [ ] Load balancing configured
 - [ ] Keep-alive connections
@@ -577,6 +634,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Network bandwidth adequate
 
 ### Monitoring & Profiling
+
 - [ ] APM tool integrated (New Relic, DataDog, Dynatrace)
 - [ ] Performance metrics collected (response time, throughput, error rate)
 - [ ] Real User Monitoring (RUM)
@@ -586,6 +644,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Alerting for performance degradation
 
 ### Load Testing
+
 - [ ] Load testing tools selected (JMeter, Gatling, k6)
 - [ ] Realistic load scenarios defined
 - [ ] Ramp-up testing
@@ -599,6 +658,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 ## API Design Review
 
 ### RESTful Design
+
 - [ ] Resource-based URLs
 - [ ] Proper HTTP verbs (GET, POST, PUT, DELETE, PATCH)
 - [ ] HTTP status codes appropriate
@@ -609,6 +669,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Consistent naming conventions
 
 ### API Documentation
+
 - [ ] OpenAPI/Swagger specification
 - [ ] Auto-generated from code
 - [ ] Request/response examples
@@ -619,6 +680,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Interactive documentation (Swagger UI)
 
 ### Request/Response Design
+
 - [ ] Request payload validation
 - [ ] Response format consistent (JSON, XML)
 - [ ] Pagination for collections (limit/offset or cursor)
@@ -629,6 +691,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Date/time in ISO 8601 format
 
 ### Error Handling
+
 - [ ] Standard error response format
 - [ ] Error codes meaningful
 - [ ] Error messages clear
@@ -639,6 +702,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Stack traces not exposed in production
 
 ### Security
+
 - [ ] Authentication required
 - [ ] OAuth 2.0 for third-party access
 - [ ] API keys for simple use cases
@@ -649,6 +713,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] HTTPS enforced
 
 ### Versioning
+
 - [ ] Versioning strategy defined
 - [ ] Version in URL (v1, v2) or header
 - [ ] Backward compatibility maintained
@@ -657,6 +722,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Migration guide for breaking changes
 
 ### Performance
+
 - [ ] Response time acceptable (<200ms for simple queries)
 - [ ] Caching headers appropriate
 - [ ] Compression enabled
@@ -666,6 +732,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Bulk operations supported
 
 ### GraphQL Specific
+
 - [ ] Schema well-designed
 - [ ] Query complexity limits
 - [ ] Depth limits to prevent abuse
@@ -675,6 +742,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 - [ ] Persisted queries for security
 
 ### gRPC Specific
+
 - [ ] Protobuf schemas well-defined
 - [ ] Backward compatibility with schema changes
 - [ ] Streaming for appropriate use cases

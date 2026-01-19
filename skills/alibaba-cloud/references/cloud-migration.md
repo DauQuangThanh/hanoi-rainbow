@@ -5,6 +5,7 @@
 ### Assessment Phase
 
 **Inventory Discovery**
+
 ```
 1. Application Inventory
    - List all applications and services
@@ -26,6 +27,7 @@
 ```
 
 **Migration Approach Selection**
+
 ```
 Rehost (Lift and Shift)
 ├── Pros: Fast, minimal changes, low risk
@@ -61,6 +63,7 @@ Retain
 ### AWS to Alibaba Cloud
 
 **Compute**
+
 ```
 AWS EC2                 → Alibaba Cloud ECS
 AWS Lambda              → Function Compute
@@ -70,6 +73,7 @@ AWS Lightsail           → Simple Application Server
 ```
 
 **Storage**
+
 ```
 AWS S3                  → OSS (Object Storage Service)
 AWS EBS                 → Cloud Disk
@@ -79,6 +83,7 @@ AWS Storage Gateway     → Cloud Storage Gateway
 ```
 
 **Database**
+
 ```
 AWS RDS MySQL           → ApsaraDB RDS for MySQL
 AWS RDS PostgreSQL      → ApsaraDB RDS for PostgreSQL
@@ -90,6 +95,7 @@ AWS DocumentDB          → ApsaraDB for MongoDB
 ```
 
 **Networking**
+
 ```
 AWS VPC                 → VPC (Virtual Private Cloud)
 AWS ELB                 → SLB (Server Load Balancer)
@@ -101,6 +107,7 @@ AWS API Gateway         → API Gateway
 ```
 
 **Container & Kubernetes**
+
 ```
 AWS ECS                 → Container Service
 AWS EKS                 → ACK (Container Service for Kubernetes)
@@ -109,6 +116,7 @@ AWS Fargate             → Serverless Kubernetes (ASK)
 ```
 
 **Security & Identity**
+
 ```
 AWS IAM                 → RAM (Resource Access Management)
 AWS KMS                 → KMS (Key Management Service)
@@ -119,6 +127,7 @@ AWS Secrets Manager     → Secrets Manager
 ```
 
 **Monitoring & Management**
+
 ```
 AWS CloudWatch          → CloudMonitor
 AWS CloudTrail          → ActionTrail
@@ -127,6 +136,7 @@ AWS Systems Manager     → OOS (Operation Orchestration Service)
 ```
 
 **DevOps**
+
 ```
 AWS CodePipeline        → DevOps Pipeline
 AWS CodeBuild           → Container Registry Build
@@ -137,6 +147,7 @@ AWS CloudFormation      → ROS (Resource Orchestration Service)
 ### GCP to Alibaba Cloud
 
 **Compute**
+
 ```
 Compute Engine          → ECS
 Cloud Functions         → Function Compute
@@ -145,6 +156,7 @@ Cloud Run               → Serverless App Engine (SAE)
 ```
 
 **Storage**
+
 ```
 Cloud Storage           → OSS
 Persistent Disk         → Cloud Disk
@@ -152,6 +164,7 @@ Filestore               → NAS
 ```
 
 **Database**
+
 ```
 Cloud SQL MySQL         → ApsaraDB RDS for MySQL
 Cloud SQL PostgreSQL    → ApsaraDB RDS for PostgreSQL
@@ -162,6 +175,7 @@ Memorystore Redis       → ApsaraDB for Redis
 ```
 
 **Networking**
+
 ```
 VPC                     → VPC
 Cloud Load Balancing    → SLB
@@ -172,6 +186,7 @@ Cloud VPN               → VPN Gateway
 ```
 
 **Container & Kubernetes**
+
 ```
 GKE                     → ACK
 Artifact Registry       → Container Registry
@@ -181,6 +196,7 @@ Cloud Run               → Serverless Kubernetes (ASK)
 ### Azure to Alibaba Cloud
 
 **Compute**
+
 ```
 Azure Virtual Machines  → ECS
 Azure Functions         → Function Compute
@@ -189,6 +205,7 @@ Azure Batch             → BatchCompute
 ```
 
 **Storage**
+
 ```
 Azure Blob Storage      → OSS
 Azure Disk Storage      → Cloud Disk
@@ -196,6 +213,7 @@ Azure Files             → NAS
 ```
 
 **Database**
+
 ```
 Azure Database for MySQL     → ApsaraDB RDS for MySQL
 Azure Database for PostgreSQL → ApsaraDB RDS for PostgreSQL
@@ -204,6 +222,7 @@ Azure Cache for Redis        → ApsaraDB for Redis
 ```
 
 **Networking**
+
 ```
 Azure Virtual Network   → VPC
 Azure Load Balancer     → SLB
@@ -214,6 +233,7 @@ Azure VPN Gateway       → VPN Gateway
 ```
 
 **Container & Kubernetes**
+
 ```
 Azure Kubernetes Service → ACK
 Azure Container Registry → Container Registry
@@ -225,6 +245,7 @@ Azure Container Instances → Serverless Kubernetes (ASK)
 ### Compute Migration
 
 **VM Migration**
+
 ```
 1. Using Alibaba Cloud Migration Tool (SMC)
    - Install SMC client on source VM
@@ -249,6 +270,7 @@ Azure Container Instances → Serverless Kubernetes (ASK)
 ```
 
 **Container Migration**
+
 ```
 1. Container Registry Migration
    docker pull source-registry.com/image:tag
@@ -268,6 +290,7 @@ Azure Container Instances → Serverless Kubernetes (ASK)
 **RDS Migration Methods**
 
 **1. DTS (Data Transmission Service) - Recommended**
+
 ```yaml
 Migration Type: Full + Incremental
 Source: AWS RDS MySQL / Self-hosted MySQL
@@ -286,6 +309,7 @@ Steps:
 ```
 
 **2. mysqldump (For smaller databases < 100GB)**
+
 ```bash
 # Export from source
 mysqldump -h source-host -u user -p \
@@ -299,6 +323,7 @@ mysql -h rm-xxxxx.mysql.rds.aliyuncs.com -u user -p mydb < dump.sql
 ```
 
 **3. Physical Backup Restore (For large databases)**
+
 ```bash
 # AWS RDS Snapshot → S3 → OSS → RDS Restore
 1. Create RDS snapshot in AWS
@@ -308,6 +333,7 @@ mysql -h rm-xxxxx.mysql.rds.aliyuncs.com -u user -p mydb < dump.sql
 ```
 
 **PostgreSQL Migration**
+
 ```bash
 # Using pg_dump/pg_restore
 pg_dump -h source-host -U user -F c -d mydb > dump.dump
@@ -321,6 +347,7 @@ pg_restore -h target-host -U user -d mydb dump.dump
 ```
 
 **MongoDB Migration**
+
 ```bash
 # Using mongodump/mongorestore
 mongodump --host source-host --port 27017 \
@@ -340,6 +367,7 @@ mongorestore --host dds-xxxxx.mongodb.rds.aliyuncs.com \
 ```
 
 **Redis Migration**
+
 ```bash
 # Using redis-shake (Alibaba tool)
 ./redis-shake -type sync \
@@ -359,6 +387,7 @@ redis-cli --rdb dump.rdb
 **Object Storage Migration**
 
 **Using OssImport**
+
 ```bash
 # Install OssImport
 wget http://gosspublic.alicdn.com/ossimport/standalone/ossimport-x.x.x.zip
@@ -387,6 +416,7 @@ bash console.sh stat
 ```
 
 **Using rclone**
+
 ```bash
 # Configure rclone
 rclone config
@@ -405,6 +435,7 @@ rclone copy s3:source-bucket oss:target-bucket \
 ```
 
 **Using ossutil**
+
 ```bash
 # Batch upload from local
 ossutil cp -r /local/path oss://bucket/path \
@@ -419,6 +450,7 @@ ossutil sync /local/path oss://bucket/path \
 ```
 
 **File Storage Migration**
+
 ```bash
 # NAS Migration using rsync
 rsync -avz --progress \
@@ -439,6 +471,7 @@ rsync -avz --progress --delete \
 ### Network Migration
 
 **VPN Setup for Hybrid Connectivity**
+
 ```
 1. Setup VPN Gateway in Alibaba Cloud
    - Create VPN Gateway in VPC
@@ -458,6 +491,7 @@ rsync -avz --progress --delete \
 ```
 
 **Express Connect for Dedicated Connection**
+
 ```
 1. Apply for Express Connect
 2. Physical connection setup
@@ -471,6 +505,7 @@ rsync -avz --progress --delete \
 ### Pre-Migration Checklist
 
 **Technical Assessment**
+
 ```
 □ Document current architecture
 □ Identify all dependencies
@@ -482,6 +517,7 @@ rsync -avz --progress --delete \
 ```
 
 **Resource Planning**
+
 ```
 □ Size target infrastructure
 □ Calculate costs
@@ -492,6 +528,7 @@ rsync -avz --progress --delete \
 ```
 
 **Team Preparation**
+
 ```
 □ Train team on Alibaba Cloud
 □ Define roles and responsibilities
@@ -503,6 +540,7 @@ rsync -avz --progress --delete \
 ### During Migration
 
 **Best Practices**
+
 ```
 1. Use incremental migration
    - Minimize downtime
@@ -526,6 +564,7 @@ rsync -avz --progress --delete \
 ```
 
 **Cutover Checklist**
+
 ```
 □ Verify data sync lag < threshold
 □ Stop writes to source
@@ -541,6 +580,7 @@ rsync -avz --progress --delete \
 ### Post-Migration
 
 **Validation**
+
 ```
 □ Verify all applications running
 □ Check data consistency
@@ -551,6 +591,7 @@ rsync -avz --progress --delete \
 ```
 
 **Optimization**
+
 ```
 □ Right-size resources
 □ Implement cost optimizations
@@ -561,6 +602,7 @@ rsync -avz --progress --delete \
 ```
 
 **Decommission**
+
 ```
 □ Keep source running for rollback period (1-4 weeks)
 □ Cancel old subscriptions
@@ -572,6 +614,7 @@ rsync -avz --progress --delete \
 ## Migration Timeline Example
 
 **Phase 1: Assessment (2-4 weeks)**
+
 - Infrastructure discovery
 - Application mapping
 - Dependency analysis
@@ -580,6 +623,7 @@ rsync -avz --progress --delete \
 - Team training
 
 **Phase 2: Planning (2-3 weeks)**
+
 - Detailed migration plan
 - Runbook creation
 - Tool setup
@@ -588,6 +632,7 @@ rsync -avz --progress --delete \
 - Approval process
 
 **Phase 3: Pilot Migration (1-2 weeks)**
+
 - Migrate non-critical workload
 - Test procedures
 - Refine runbooks
@@ -595,6 +640,7 @@ rsync -avz --progress --delete \
 - Document lessons learned
 
 **Phase 4: Production Migration (4-8 weeks)**
+
 - Wave-based migration
 - Continuous monitoring
 - Issue resolution
@@ -602,6 +648,7 @@ rsync -avz --progress --delete \
 - Performance tuning
 
 **Phase 5: Optimization (2-4 weeks)**
+
 - Right-sizing
 - Cost optimization
 - Security hardening
@@ -609,6 +656,7 @@ rsync -avz --progress --delete \
 - Documentation finalization
 
 **Phase 6: Decommission (2-4 weeks)**
+
 - Source environment cleanup
 - Final verification
 - Knowledge transfer

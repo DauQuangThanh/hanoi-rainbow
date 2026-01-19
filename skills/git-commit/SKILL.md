@@ -27,6 +27,7 @@ Generates well-structured git commit messages following conventional commit stan
 ```
 
 **Components:**
+
 - **type**: Category of change (required) - feat, fix, docs, refactor, perf, test, build, ci, chore, style, revert
 - **scope**: Area affected (optional) - auth, api, ui, db, etc.
 - **subject**: Brief description (required, ≤50 chars)
@@ -49,6 +50,7 @@ Generates well-structured git commit messages following conventional commit stan
    - `revert`: Reverting previous commit
 
 2. **Write subject line** (imperative mood, ≤50 chars):
+
    ```
    ✅ feat(auth): add OAuth2 authentication
    ✅ fix(api): resolve race condition in user updates
@@ -68,11 +70,13 @@ Generates well-structured git commit messages following conventional commit stan
 ## Quick Examples
 
 **Simple feature:**
+
 ```
 feat(auth): add password reset endpoint
 ```
 
 **Bug fix with context:**
+
 ```
 fix(api): prevent null pointer in user preferences
 
@@ -83,6 +87,7 @@ Closes #456
 ```
 
 **Breaking change:**
+
 ```
 feat(api)!: change response format to JSON:API spec
 
@@ -110,4 +115,3 @@ For detailed guidance, load these reference files as needed:
 - **[examples-by-project-type.md](references/examples-by-project-type.md)**: Examples for web apps, libraries, mobile, microservices
 - **[advanced-patterns.md](references/advanced-patterns.md)**: Complex scenarios and edge cases
 - **[commit-message-convention.md](references/commit-message-convention.md)**: Enforcement tools and configurations
-

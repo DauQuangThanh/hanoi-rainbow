@@ -12,12 +12,14 @@ Reverse engineer technical specifications from pseudocode, algorithms, or code s
 ### 1. Analyze Pseudocode
 
 Parse structure, control flow, and identify:
+
 - Inputs, outputs, and data transformations
 - Variables, constants, and data structures
 - Algorithms and logic patterns
 - Assumptions and implicit requirements
 
 Ask for clarification on:
+
 - Ambiguous variable names or operations
 - Missing context about data sources/destinations
 - Unclear business rules or constraints
@@ -26,6 +28,7 @@ Ask for clarification on:
 ### 2. Extract Functional Requirements
 
 Document core functionality as requirements:
+
 ```
 FR-001: [Function Name]
 Description: System shall [action] when [condition]
@@ -46,6 +49,7 @@ For detailed requirement patterns: [requirements-patterns.md](references/require
 ### 4. Generate Data Model
 
 Extract from pseudocode:
+
 - Entities and attributes
 - Data structures (arrays, objects, maps)
 - Data types and constraints
@@ -53,6 +57,7 @@ Extract from pseudocode:
 - Validation rules
 
 Document as:
+
 ```
 Entity: [EntityName]
 Attributes:
@@ -67,6 +72,7 @@ Constraints:
 ### 5. Document Workflow and Logic
 
 Analyze control flow:
+
 - Sequential operations
 - Conditional branches and decision points
 - Loops and iterations
@@ -74,6 +80,7 @@ Analyze control flow:
 - Async operations
 
 Generate workflow specification:
+
 ```
 Workflow: [ProcessName]
 
@@ -96,6 +103,7 @@ For complex logic, use decision tables or state diagrams. See [mermaid-diagrams.
 ### 6. Generate API/Interface Specification
 
 Document functions and endpoints:
+
 ```
 Function: functionName
 Purpose: [What it does and why]
@@ -113,6 +121,7 @@ Example:
 ### 7. Identify Integration Points
 
 Document external dependencies:
+
 ```
 Integration: [ServiceName]
 Purpose: [Why needed]
@@ -130,6 +139,7 @@ Error Handling: [How failures are managed]
 ### 9. Create Test Scenarios
 
 Generate from pseudocode logic:
+
 - Happy path scenarios
 - Edge cases and boundary conditions
 - Error conditions and exception paths
@@ -137,6 +147,7 @@ Generate from pseudocode logic:
 - Security scenarios
 
 Format:
+
 ```
 Test Case: TC-001
 Objective: Verify [behavior]
@@ -227,21 +238,25 @@ For additional specification formats: [specification-templates.md](references/sp
 ## Key Principles
 
 **Maintain Traceability:**
+
 - Link requirements to specific pseudocode sections
 - Use unique identifiers for each requirement
 - Reference line numbers or code blocks
 
 **Be Explicit About Inferences:**
+
 - Mark what is stated vs inferred
 - Document assumptions
 - Highlight areas needing clarification
 
 **Focus on Intent:**
+
 - Extract WHAT and WHY, not just HOW
 - Describe business value
 - Separate essential requirements from implementation choices
 
 **Validate Completeness:**
+
 - Ensure all pseudocode paths documented
 - Verify all inputs/outputs specified
 - Check all error conditions addressed
@@ -259,6 +274,7 @@ Recognize and apply standard patterns:
 ## Quality Checklist
 
 Before finalizing:
+
 - ✓ All pseudocode elements covered
 - ✓ Requirements clear, testable, unambiguous
 - ✓ Data models complete with constraints
@@ -273,6 +289,7 @@ Before finalizing:
 **Simple Algorithm:**
 
 Input pseudocode:
+
 ```
 function calculateShippingCost(weight, distance, priority):
     if weight <= 0 or distance <= 0:
@@ -284,6 +301,7 @@ function calculateShippingCost(weight, distance, priority):
 ```
 
 Generated specification excerpt:
+
 ```
 FR-001: Shipping Cost Calculation
 Inputs:
@@ -308,6 +326,7 @@ For detailed workflow examples with branching logic and integration points, see 
 ## Additional Resources
 
 Load as needed:
+
 - [specification-templates.md](references/specification-templates.md) - Industry-standard spec formats
 - [requirements-patterns.md](references/requirements-patterns.md) - Common requirement structures
 - [mermaid-diagrams.md](references/mermaid-diagrams.md) - Mermaid diagram notation and examples

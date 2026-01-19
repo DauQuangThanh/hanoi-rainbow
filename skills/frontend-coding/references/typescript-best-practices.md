@@ -1,6 +1,5 @@
 # TypeScript Best Practices
 
-
 ### Type Safety and Inference
 
 ```typescript

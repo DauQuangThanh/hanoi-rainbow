@@ -4,7 +4,7 @@ Comprehensive testing approach to ensure functional equivalence and quality duri
 
 ## Testing Pyramid for Migration
 
-```
+```text
                     /\
                    /  \
                   / E2E\

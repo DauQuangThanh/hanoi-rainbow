@@ -1,11 +1,11 @@
 # Examples
 
-
 ### Example 1: E-Commerce Platform
 
 **Requirements**: Build a scalable e-commerce platform handling 100K daily active users
 
 **Architecture Design**:
+
 - **Style**: Microservices with event-driven communication
 - **Services**: Product Catalog, User Service, Order Management, Payment Processing, Inventory
 - **Technology**: Node.js/Express, React, PostgreSQL, MongoDB, Redis, Kafka
@@ -17,6 +17,7 @@
 **Requirements**: Process and visualize millions of events per minute
 
 **Architecture Design**:
+
 - **Style**: Event-driven, Lambda architecture
 - **Components**: Event ingestion, stream processing, batch processing, query layer
 - **Technology**: Kafka, Apache Flink, Elasticsearch, React, WebSocket

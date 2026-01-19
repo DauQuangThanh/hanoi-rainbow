@@ -89,15 +89,18 @@
 ### Common Providers
 
 **Google:**
+
 - Client ID and Secret from Google Cloud Console
 - Authorized redirect URI: `https://keycloak.example.com/realms/[realm]/broker/google/endpoint`
 
 **Azure AD (OIDC):**
+
 - Register application in Azure AD
 - Set redirect URI
 - Configure groups/claims
 
 **SAML Identity Provider:**
+
 - Import SAML metadata from provider
 - Configure attribute mappings
 - Set name ID format

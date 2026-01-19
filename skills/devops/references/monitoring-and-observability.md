@@ -1,9 +1,9 @@
 # Monitoring & Observability
 
-
 ### Prometheus Setup
 
 **Prometheus Configuration:**
+
 ```yaml
 # prometheus-config.yaml
 apiVersion: v1
@@ -53,6 +53,7 @@ data:
 ```
 
 **Alert Rules:**
+
 ```yaml
 # alert-rules.yaml
 apiVersion: v1
@@ -103,6 +104,7 @@ data:
 ### Grafana Dashboards
 
 **Application Dashboard JSON (key sections):**
+
 ```json
 {
   "dashboard": {
@@ -140,6 +142,7 @@ data:
 ### ELK Stack for Logging
 
 **Filebeat Configuration:**
+
 ```yaml
 # filebeat-config.yaml
 apiVersion: v1

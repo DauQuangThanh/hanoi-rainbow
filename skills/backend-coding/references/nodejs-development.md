@@ -1,9 +1,9 @@
 # Node.js Development
 
-
 ### Express.js REST API
 
 **Modern Express API with TypeScript**:
+
 ```typescript
 // src/app.ts
 import express, { Request, Response, NextFunction } from 'express';
@@ -90,6 +90,7 @@ startServer();
 ```
 
 **Controllers and Services Pattern**:
+
 ```typescript
 // src/types/user.ts
 export interface User {
@@ -276,6 +277,7 @@ export { router as userRouter };
 ```
 
 **Repository Pattern with TypeORM**:
+
 ```typescript
 // src/entities/User.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';

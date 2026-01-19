@@ -1,6 +1,5 @@
 # Core Capabilities
 
-
 When activated, this skill enables you to:
 
 1. **Test Strategy & Planning**

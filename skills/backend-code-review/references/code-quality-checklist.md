@@ -3,6 +3,7 @@
 Comprehensive criteria for assessing backend code quality across Node.js, Python, Java, Go, and C#.
 
 ## Table of Contents
+
 - [Code Organization](#code-organization)
 - [Design Patterns](#design-patterns)
 - [SOLID Principles](#solid-principles)
@@ -17,6 +18,7 @@ Comprehensive criteria for assessing backend code quality across Node.js, Python
 ### Layered Architecture
 
 **Good:**
+
 ```
 project/
 ├── controllers/     # HTTP handlers, request/response
@@ -29,6 +31,7 @@ project/
 ```
 
 **Node.js/Express Example:**
+
 ```typescript
 // ✅ Proper layering
 
@@ -68,6 +71,7 @@ export class UserRepository {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ All logic in controller
 export async function getUser(req: Request, res: Response) {
@@ -85,6 +89,7 @@ export async function getUser(req: Request, res: Response) {
 **Python/Django Example:**
 
 **Good:**
+
 ```python
 # ✅ Separated concerns
 
@@ -118,6 +123,7 @@ class UserRepository:
 ```
 
 **Bad:**
+
 ```python
 # ❌ Everything in view
 class UserViewSet(viewsets.ModelViewSet):
@@ -151,6 +157,7 @@ class UserViewSet(viewsets.ModelViewSet):
 **Java/Spring Example:**
 
 **Good:**
+
 ```java
 // ✅ Repository pattern
 
@@ -186,6 +193,7 @@ public class UserService {
 ```
 
 **Bad:**
+
 ```java
 // ❌ Direct EntityManager usage everywhere
 @Service
@@ -215,6 +223,7 @@ public class UserService {
 **Good (Multiple Languages):**
 
 **TypeScript/Node.js:**
+
 ```typescript
 // ✅ Constructor injection
 export class OrderService {
@@ -238,6 +247,7 @@ export class OrderService {
 ```
 
 **C#/.NET:**
+
 ```csharp
 // ✅ Dependency injection
 public class OrderService : IOrderService
@@ -269,6 +279,7 @@ public class OrderService : IOrderService
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Direct instantiation, tight coupling
 export class OrderService {
@@ -291,6 +302,7 @@ export class OrderService {
 **Go Example:**
 
 **Good:**
+
 ```go
 // ✅ Strategy pattern for payment processing
 
@@ -342,6 +354,7 @@ err := processor.Process(100.0, details)
 ```
 
 **Bad:**
+
 ```go
 // ❌ Conditional logic everywhere
 func ProcessPayment(method string, amount float64, details PaymentDetails) error {
@@ -367,6 +380,7 @@ func ProcessPayment(method string, amount float64, details PaymentDetails) error
 ### Single Responsibility Principle (SRP)
 
 **Good:**
+
 ```typescript
 // ✅ Each class has one responsibility
 
@@ -390,6 +404,7 @@ class EmailVerificationService {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ God class doing everything
 class UserService {
@@ -410,6 +425,7 @@ class UserService {
 **Python Example:**
 
 **Good:**
+
 ```python
 # ✅ Open for extension, closed for modification
 
@@ -451,6 +467,7 @@ class SlackNotificationSender(NotificationSender):
 ```
 
 **Bad:**
+
 ```python
 # ❌ Must modify class to add new notification types
 class NotificationService:
@@ -472,6 +489,7 @@ class NotificationService:
 **Java Example:**
 
 **Good:**
+
 ```java
 // ✅ Subtypes can replace base type
 
@@ -519,6 +537,7 @@ public class PaymentProcessor {
 ```
 
 **Bad:**
+
 ```java
 // ❌ Violates LSP - throws exception instead of proper behavior
 public class CryptoPayment implements PaymentMethod {
@@ -540,6 +559,7 @@ public class CryptoPayment implements PaymentMethod {
 **C# Example:**
 
 **Good:**
+
 ```csharp
 // ✅ Specific, focused interfaces
 
@@ -570,6 +590,7 @@ public class UserRepository : IReadRepository<User>, IWriteRepository<User>
 ```
 
 **Bad:**
+
 ```csharp
 // ❌ Fat interface forces unnecessary implementation
 public interface IRepository<T>
@@ -610,6 +631,7 @@ public class ReadOnlyUserRepository : IRepository<User>
 ### Dependency Inversion Principle (DIP)
 
 **Good:**
+
 ```typescript
 // ✅ Depend on abstractions, not concretions
 
@@ -659,6 +681,7 @@ class MongoUserRepository implements IUserRepository {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ High-level module depends on low-level details
 class UserRegistrationService {
@@ -696,6 +719,7 @@ class UserRegistrationService {
 **Node.js/TypeScript Example:**
 
 **Good:**
+
 ```typescript
 // ✅ Custom error classes with hierarchy
 
@@ -774,6 +798,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Inconsistent error handling
 class UserService {
@@ -805,6 +830,7 @@ class UserService {
 ### Python Exception Handling
 
 **Good:**
+
 ```python
 # ✅ Custom exception hierarchy
 
@@ -871,6 +897,7 @@ def handle_unexpected_error(error: Exception):
 ### Version Pinning
 
 **Good:**
+
 ```json
 // package.json
 {
@@ -895,6 +922,7 @@ redis==4.5.5
 ```
 
 **Bad:**
+
 ```json
 // ❌ Loose version constraints
 {
@@ -932,6 +960,7 @@ pip list --outdated
 **Node.js/Winston Example:**
 
 **Good:**
+
 ```typescript
 // ✅ Structured logging with context
 
@@ -980,6 +1009,7 @@ class UserService {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Unstructured logging, missing context
 class UserService {
@@ -1015,6 +1045,7 @@ logger.fatal('Database connection lost', { error });             // Critical
 ### TypeScript Best Practices
 
 **Good:**
+
 ```typescript
 // ✅ Strict types, no any
 
@@ -1073,6 +1104,7 @@ function handleResponse<T>(response: ApiResponse<T>): T {
 ```
 
 **Bad:**
+
 ```typescript
 // ❌ Using any, loose types
 interface User {
@@ -1095,6 +1127,7 @@ const user = response.data; // Could be anything!
 ### Node.js Specific
 
 **Issue 1: Callback Hell**
+
 ```typescript
 // ❌ Bad
 getData((err, data) => {
@@ -1122,6 +1155,7 @@ async function workflow() {
 ```
 
 **Issue 2: Unhandled Promise Rejections**
+
 ```typescript
 // ❌ Bad
 app.get('/users', (req, res) => {
@@ -1149,6 +1183,7 @@ process.on('unhandledRejection', (reason, promise) => {
 ### Python Specific
 
 **Issue: Mutable Default Arguments**
+
 ```python
 # ❌ Bad
 def add_item(item, items=[]):  # Dangerous!
@@ -1169,6 +1204,7 @@ def add_item(item, items=None):
 ### Java Specific
 
 **Issue: Resource Management**
+
 ```java
 // ❌ Bad
 public void readFile(String path) throws IOException {
@@ -1192,6 +1228,7 @@ public void readFile(String path) throws IOException {
 ### Go Specific
 
 **Issue: Error Handling**
+
 ```go
 // ❌ Bad - ignoring errors
 func GetUser(id string) *User {
@@ -1212,6 +1249,7 @@ func GetUser(id string) (*User, error) {
 ### C# Specific
 
 **Issue: Async/Await**
+
 ```csharp
 // ❌ Bad - blocking async code
 public User GetUser(int id)

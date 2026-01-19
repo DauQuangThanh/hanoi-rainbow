@@ -77,4 +77,3 @@ CREATE TABLE orders (
 - **Migration**: See [schema-migration-best-practices.md](references/schema-migration-best-practices.md) for zero-downtime migrations, backward compatibility, and rollback strategies
 
 - **Checklist**: See [database-design-checklist.md](references/database-design-checklist.md) for comprehensive validation before implementation
-

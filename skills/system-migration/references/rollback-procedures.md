@@ -1,6 +1,5 @@
 # Rollback Procedures
 
-
 ```markdown
 Rollback Decision Criteria:
 - Critical service failure

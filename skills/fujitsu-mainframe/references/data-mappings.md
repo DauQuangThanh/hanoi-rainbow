@@ -86,6 +86,7 @@ Comprehensive mapping guide for converting Fujitsu mainframe data types to moder
 ### Migration Strategy by File Type
 
 **Sequential Files (SAM):**
+
 ```java
 // Option 1: Keep as file for batch processing
 Files.lines(Paths.get("input.dat"))
@@ -99,6 +100,7 @@ repository.saveAll(records);
 ```
 
 **Indexed Files (ISAM):**
+
 ```java
 // Always migrate to database table
 @Entity
@@ -113,6 +115,7 @@ public class IndexedData {
 ```
 
 **Partitioned Files (PAM):**
+
 ```java
 // Option 1: Keep as files
 Path directory = Paths.get("members");
@@ -131,7 +134,9 @@ public class Member {
 ## COBOL Data Structures to Java Classes
 
 ### Simple Record
+
 **COBOL:**
+
 ```cobol
 01  CUSTOMER-RECORD.
     05  CUST-ID          PIC 9(8).
@@ -141,6 +146,7 @@ public class Member {
 ```
 
 **Java:**
+
 ```java
 @Entity
 @Table(name = "customers")
@@ -161,7 +167,9 @@ public class CustomerRecord {
 ```
 
 ### Nested Structure
+
 **COBOL:**
+
 ```cobol
 01  ORDER-RECORD.
     05  ORDER-ID         PIC 9(10).
@@ -173,6 +181,7 @@ public class CustomerRecord {
 ```
 
 **Java:**
+
 ```java
 @Embeddable
 public class CustomerInfo {
@@ -202,7 +211,9 @@ public class OrderRecord {
 ```
 
 ### Array/Table (OCCURS)
+
 **COBOL:**
+
 ```cobol
 01  MONTHLY-SALES-RECORD.
     05  YEAR             PIC 9(4).
@@ -212,6 +223,7 @@ public class OrderRecord {
 ```
 
 **Java (Separate Entity):**
+
 ```java
 @Entity
 @Table(name = "monthly_sales")
@@ -247,7 +259,9 @@ public class MonthlyData {
 ```
 
 ### REDEFINES (Union Types)
+
 **COBOL:**
+
 ```cobol
 01  TRANSACTION-RECORD.
     05  TRANS-TYPE       PIC X.
@@ -263,6 +277,7 @@ public class MonthlyData {
 ```
 
 **Java (Separate View Classes):**
+
 ```java
 @Entity
 @Table(name = "transactions")
@@ -323,12 +338,14 @@ public class RefundView {
 ### Date Arithmetic
 
 **COBOL:**
+
 ```cobol
 COMPUTE WS-DAYS = FUNCTION INTEGER-OF-DATE(WS-END-DATE)
                 - FUNCTION INTEGER-OF-DATE(WS-START-DATE)
 ```
 
 **Java:**
+
 ```java
 long days = ChronoUnit.DAYS.between(startDate, endDate);
 ```

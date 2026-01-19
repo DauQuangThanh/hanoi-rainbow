@@ -885,42 +885,49 @@ generateReport(process.argv[2] || 'test-results.json');
 ## Best Practices
 
 ### 1. Fast Feedback
+
 - Run unit tests before integration tests
 - Use parallel execution
 - Cache dependencies
 - Use service health checks
 
 ### 2. Reliable Tests
+
 - Retry flaky tests (max 2-3 times)
 - Use proper timeouts
 - Wait for services to be ready
 - Clean up test data
 
 ### 3. Clear Reporting
+
 - Generate JUnit XML for CI systems
 - Create HTML reports for humans
 - Include coverage reports
 - Log failures with context
 
 ### 4. Resource Management
+
 - Use Docker services for dependencies
 - Clean up containers after tests
 - Use test databases (not production)
 - Manage secrets properly
 
 ### 5. Performance
+
 - Run tests in parallel
 - Use test sharding for large suites
 - Cache node_modules
 - Optimize database seeds
 
 ### 6. Security
+
 - Never commit credentials
 - Use CI secrets management
 - Run security scans
 - Audit dependencies
 
 ### 7. Maintainability
+
 - Keep pipeline configuration DRY
 - Use templates/orbs when available
 - Document custom scripts

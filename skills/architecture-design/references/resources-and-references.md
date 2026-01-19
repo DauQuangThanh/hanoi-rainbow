@@ -1,6 +1,5 @@
 # Resources and References
 
-
 For additional guidance:
 
 - **Books**: "Designing Data-Intensive Applications", "Software Architecture Patterns", "Building Microservices"

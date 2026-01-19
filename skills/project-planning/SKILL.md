@@ -10,6 +10,7 @@ description: Guides comprehensive software project planning including task break
 This skill provides comprehensive guidance for planning and managing software projects using industry best practices. It covers breaking down requirements into manageable tasks, estimating effort, organizing sprints, managing backlogs, and tracking progress effectively.
 
 **Key Principles:**
+
 - Adapt practices to team size and project complexity
 - Start simple, add complexity as needed
 - Focus on delivering value, not following process
@@ -21,6 +22,7 @@ This skill provides comprehensive guidance for planning and managing software pr
 Follow this workflow when planning software projects:
 
 ### 1. Define Project Scope
+
 - **Vision Statement**: Clear project purpose and objectives
 - **Success Criteria**: Measurable outcomes that define success
 - **Stakeholders**: Identify all stakeholders and their roles
@@ -28,22 +30,26 @@ Follow this workflow when planning software projects:
 - **Deliverables**: Core features, documentation, training materials
 
 ### 2. Break Down Requirements
+
 - Transform requirements into epics (large bodies of work)
 - Break epics into user stories: "As a [role], I want [feature] so that [benefit]"
 - Create technical tasks from user stories
 - Define acceptance criteria for each story
 
 ### 3. Estimate Effort
+
 - Use story points (Fibonacci: 1, 2, 3, 5, 8, 13) for relative sizing
 - Conduct planning poker for team consensus
 - Apply three-point estimation for critical/uncertain tasks
 
 ### 4. Organize and Prioritize
+
 - Group work into sprints (1-4 weeks)
 - Prioritize using MoSCoW (Must/Should/Could/Won't) or Value vs. Effort
 - Manage backlog with clear prioritization tiers: Now, Next, Later, Backlog
 
 ### 5. Track and Adjust
+
 - Monitor sprint progress and velocity
 - Identify and manage risks (technical, schedule, resource, external)
 - Conduct regular retrospectives and adapt practices
@@ -79,6 +85,7 @@ Follow this workflow when planning software projects:
 ## Bundled Resources
 
 ### References (references/)
+
 Load these on-demand for detailed guidance:
 
 - **core-planning-workflow.md**: Complete project setup process, requirements breakdown techniques, estimation methods, sprint planning procedures, and velocity tracking (load when planning new projects or setting up processes)
@@ -100,4 +107,3 @@ Load these on-demand for detailed guidance:
 - **anti-patterns-to-avoid.md**: Common planning mistakes, warning signs of project issues, and best practices (load when troubleshooting project problems or conducting retrospectives)
 
 - **integration-with-development-workflow.md**: Integrating planning with development processes and CI/CD considerations (load when connecting planning to technical workflows)
-

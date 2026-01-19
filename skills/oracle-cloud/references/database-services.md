@@ -7,6 +7,7 @@
 **Use Cases**: OLTP workloads, web applications, SaaS applications
 
 **Provisioning**:
+
 ```hcl
 resource "oci_database_autonomous_database" "atp" {
   compartment_id           = var.compartment_id
@@ -54,6 +55,7 @@ resource "oci_database_autonomous_database" "adw" {
 ### Autonomous Database Connection
 
 **Wallet Download**:
+
 ```bash
 # Download wallet
 oci db autonomous-database generate-wallet \
@@ -63,6 +65,7 @@ oci db autonomous-database generate-wallet \
 ```
 
 **Connection String**:
+
 ```python
 import cx_Oracle
 
@@ -80,11 +83,13 @@ connection = cx_Oracle.connect(
 ### Auto Scaling Configuration
 
 **CPU Auto Scaling**:
+
 - Automatically scales up to 3x the base OCPU count
 - Scales based on CPU utilization
 - No additional configuration needed when `is_auto_scaling_enabled = true`
 
 **Storage Auto Scaling**:
+
 ```hcl
 resource "oci_database_autonomous_database" "atp_auto_scale" {
   # ... other configuration ...
@@ -148,6 +153,7 @@ resource "oci_mysql_mysql_db_system" "ha_mysql" {
 ### MySQL Backup and Recovery
 
 **Manual Backup**:
+
 ```bash
 # Create manual backup
 oci mysql backup create \
@@ -272,6 +278,7 @@ resource "oci_nosql_index" "email_index" {
 ### NoSQL Operations
 
 **Python SDK Example**:
+
 ```python
 from oci import nosql
 from oci.config import from_file
@@ -319,12 +326,14 @@ query_response = nosql_client.query(query_request)
 ### Autonomous Database Backups
 
 **Automatic Backups**:
+
 - Retained for 60 days by default
 - Daily incremental backups
 - Weekly full backups
 - Point-in-time recovery available
 
 **Manual Backups**:
+
 ```bash
 # Create manual backup
 oci db autonomous-database create-backup \
@@ -361,6 +370,7 @@ resource "oci_mysql_mysql_db_system" "mysql_with_backup" {
 ### MySQL Migration Using Data Pump
 
 **Export from Source**:
+
 ```bash
 mysqldump -h source-host \
   -u admin -p \
@@ -371,6 +381,7 @@ mysqldump -h source-host \
 ```
 
 **Import to OCI MySQL**:
+
 ```bash
 mysql -h mysql-oci-host \
   -u admin -p \
@@ -380,6 +391,7 @@ mysql -h mysql-oci-host \
 ### PostgreSQL Migration
 
 **Using pg_dump/pg_restore**:
+
 ```bash
 # Export
 pg_dump -h source-host \
@@ -436,6 +448,7 @@ connection = pool.get_connection()
 ### Autonomous Database Performance
 
 **Enable Auto Scaling**:
+
 ```hcl
 resource "oci_database_autonomous_database" "optimized_atp" {
   # ... base configuration ...
@@ -446,6 +459,7 @@ resource "oci_database_autonomous_database" "optimized_atp" {
 ```
 
 **Query Performance**:
+
 - Use bind variables to enable plan caching
 - Create appropriate indexes
 - Monitor Performance Hub for slow queries
@@ -454,6 +468,7 @@ resource "oci_database_autonomous_database" "optimized_atp" {
 ### MySQL Performance Tuning
 
 **Key Parameters**:
+
 ```sql
 -- Connection settings
 SET GLOBAL max_connections = 500;
@@ -473,6 +488,7 @@ SET GLOBAL long_query_time = 2;
 ### NoSQL Performance
 
 **Optimize Table Limits**:
+
 ```hcl
 resource "oci_nosql_table" "high_performance" {
   # ... base configuration ...
@@ -490,6 +506,7 @@ resource "oci_nosql_table" "high_performance" {
 ### Database Metrics
 
 **Key Metrics to Monitor**:
+
 - CPU Utilization (target < 80%)
 - Storage Used (alert at 80%)
 - Connection Count (monitor for connection pool exhaustion)
@@ -497,6 +514,7 @@ resource "oci_nosql_table" "high_performance" {
 - Replication Lag (for HA configurations)
 
 **OCI Monitoring Query**:
+
 ```bash
 # Get CPU utilization for Autonomous Database
 oci monitoring metric-data summarize-metrics-data \

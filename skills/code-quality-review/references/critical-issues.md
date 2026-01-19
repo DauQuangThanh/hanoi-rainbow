@@ -1,6 +1,5 @@
 # Critical Issues
 
-
 ### Issue 1: Excessive Cyclomatic Complexity
 
 **Severity:** Critical
@@ -11,6 +10,7 @@
 The `authenticate()` method has a cyclomatic complexity of 28, significantly exceeding the recommended threshold of 15. This makes the code difficult to test, maintain, and understand.
 
 **Current Code:**
+
 ```java
 public AuthResult authenticate(Credentials creds) {
     if (creds == null) {
@@ -28,6 +28,7 @@ public AuthResult authenticate(Credentials creds) {
 ```
 
 **Impact:**
+
 - Maintainability: High negative impact - difficult to modify
 - Testability: Requires 28+ test cases for full coverage
 - Bug Risk: High probability of edge case bugs
@@ -36,6 +37,7 @@ public AuthResult authenticate(Credentials creds) {
 Extract authentication logic into strategy pattern with separate validators for each auth type.
 
 **Improved Code:**
+
 ```java
 public AuthResult authenticate(Credentials creds) {
     AuthenticationStrategy strategy = strategyFactory.getStrategy(creds);
@@ -61,6 +63,7 @@ public AuthResult authenticate(Credentials creds) {
 Database operations lack try-catch blocks, potentially causing application crashes on connection failures.
 
 **Current Code:**
+
 ```java
 public User findById(String id) {
     Connection conn = dataSource.getConnection();
@@ -73,6 +76,7 @@ public User findById(String id) {
 ```
 
 **Recommendation:**
+
 ```java
 public User findById(String id) {
     try (Connection conn = dataSource.getConnection();

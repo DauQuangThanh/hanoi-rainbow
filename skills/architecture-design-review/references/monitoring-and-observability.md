@@ -6,6 +6,7 @@
 ☐ Alerting rules defined
 ☐ Dashboards for key metrics
 ☐ On-call procedures documented
+
 ```
 
 **4. Maintainability Assessment**

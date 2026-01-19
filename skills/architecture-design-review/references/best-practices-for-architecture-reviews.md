@@ -1,6 +1,5 @@
 # Best Practices for Architecture Reviews
 
-
 1. **Be Objective**
    - Focus on design, not people
    - Use data and evidence

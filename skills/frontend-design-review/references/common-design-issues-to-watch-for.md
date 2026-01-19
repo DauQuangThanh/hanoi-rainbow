@@ -1,7 +1,7 @@
 # Common Design Issues to Watch For
 
-
 ### Visual Design
+
 - Inconsistent typography scales
 - Insufficient color contrast
 - Spacing not following system
@@ -12,6 +12,7 @@
 - Overuse of colors or styles
 
 ### User Experience
+
 - Unclear navigation structure
 - Missing feedback for actions
 - Confusing user flows
@@ -22,6 +23,7 @@
 - Poor error messages
 
 ### Design System
+
 - Duplicating existing components
 - Not using design tokens
 - Inventing one-off styles
@@ -30,6 +32,7 @@
 - Inconsistent naming conventions
 
 ### Accessibility
+
 - Insufficient color contrast
 - Missing alt text on images
 - No keyboard navigation support
@@ -40,6 +43,7 @@
 - Inaccessible custom controls
 
 ### Responsive Design
+
 - Fixed widths breaking layouts
 - Horizontal scrolling on mobile
 - Tiny text requiring zoom
@@ -49,6 +53,7 @@
 - Poor mobile navigation
 
 ### Component Architecture
+
 - Overly complex components
 - Too many variants
 - Missing common states

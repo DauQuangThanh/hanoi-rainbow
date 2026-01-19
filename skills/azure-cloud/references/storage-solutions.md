@@ -5,10 +5,12 @@
 ### Storage Account Types
 
 **Performance Tiers:**
+
 - **Standard**: General-purpose, cost-effective, backed by HDDs
 - **Premium**: High-performance, backed by SSDs, low latency
 
 **Account Kinds:**
+
 - **StorageV2 (General-purpose v2)**: Recommended for most scenarios
 - **BlobStorage**: Legacy, blob-only accounts
 - **BlockBlobStorage**: Premium block blobs and append blobs
@@ -17,16 +19,19 @@
 ### Access Tiers
 
 **Hot Tier**
+
 - Optimized for frequent access
 - Higher storage costs, lower access costs
 - Use for active data
 
 **Cool Tier**
+
 - Optimized for infrequent access (stored 30+ days)
 - Lower storage costs, higher access costs
 - Use for short-term backup and archives
 
 **Archive Tier**
+
 - Lowest storage costs, highest access costs
 - Hours of latency for retrieval
 - Use for long-term archival (stored 180+ days)
@@ -152,17 +157,20 @@ az storage container legal-hold set \
 ### File Share Tiers
 
 **Premium (FileStorage account)**
+
 - SSD-backed, low latency
 - Provisioned model (pay for provisioned size)
 - Up to 100,000 IOPS per share
 - Use for high-performance workloads
 
 **Transaction Optimized (Standard)**
+
 - HDD-backed
 - Pay for used storage + transactions
 - Use for general-purpose workloads
 
 **Hot/Cool (Standard)**
+
 - Cost-optimized tiers
 - Lower storage costs than transaction optimized
 - Use based on access patterns
@@ -188,6 +196,7 @@ az storage share create \
 ### Mounting File Shares
 
 **Windows:**
+
 ```powershell
 $connectTestResult = Test-NetConnection -ComputerName mystorageaccount.file.core.windows.net -Port 445
 if ($connectTestResult.TcpTestSucceeded) {
@@ -197,6 +206,7 @@ if ($connectTestResult.TcpTestSucceeded) {
 ```
 
 **Linux:**
+
 ```bash
 # Install cifs-utils
 sudo apt-get update

@@ -1,6 +1,7 @@
 # AI/ML Services
 
 ## Table of Contents
+
 - [Watson Assistant](#watson-assistant)
 - [Watson Studio](#watson-studio)
 - [Watson Machine Learning](#watson-machine-learning)
@@ -31,6 +32,7 @@ ibmcloud resource service-key-create my-wa-creds \
 ### Build Chatbot
 
 **Node.js SDK:**
+
 ```javascript
 const AssistantV2 = require('ibm-watson/assistant/v2');
 const { IamAuthenticator } = require('ibm-watson/auth');
@@ -80,6 +82,7 @@ ibmcloud resource service-instance-create my-watson-studio \
 ### Jupyter Notebooks
 
 Access via Watson Studio web UI:
+
 - Python, R, Scala notebooks
 - GPU acceleration
 - Collaborative editing
@@ -96,6 +99,7 @@ Deploy and manage machine learning models at scale.
 ### Train and Deploy Model
 
 **Python SDK:**
+
 ```python
 from ibm_watson_machine_learning import APIClient
 
@@ -159,6 +163,7 @@ print(predictions)
 ### Natural Language Understanding
 
 **Python:**
+
 ```python
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_watson.natural_language_understanding_v1 import Features, EntitiesOptions, KeywordsOptions, SentimentOptions
@@ -185,6 +190,7 @@ print(json.dumps(response, indent=2))
 ### Language Translator
 
 **Python:**
+
 ```python
 from ibm_watson import LanguageTranslatorV3
 
@@ -211,6 +217,7 @@ print(translation['translations'][0]['translation'])
 ### Speech to Text
 
 **Python:**
+
 ```python
 from ibm_watson import SpeechToTextV1
 
@@ -233,6 +240,7 @@ print(response['results'][0]['alternatives'][0]['transcript'])
 ### Text to Speech
 
 **Python:**
+
 ```python
 from ibm_watson import TextToSpeechV1
 
@@ -258,6 +266,7 @@ with open('output.mp3', 'wb') as audio_file:
 ### Visual Recognition
 
 **Python:**
+
 ```python
 from ibm_watson import VisualRecognitionV4
 

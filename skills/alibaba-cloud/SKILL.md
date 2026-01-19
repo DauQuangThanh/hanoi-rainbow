@@ -21,12 +21,14 @@ Provides expert guidance across Alibaba Cloud ecosystem:
 ## Best Practices
 
 ### Architecture
+
 - Deploy across multiple zones for high availability
 - Use SLB for load balancing with health checks
 - Implement Auto Scaling for dynamic capacity
 - Configure CloudMonitor with actionable alerts
 
 ### Security
+
 - Enable RAM with least privilege access control
 - Use Security Groups and Network ACLs for filtering
 - Enable encryption at rest and in transit
@@ -34,6 +36,7 @@ Provides expert guidance across Alibaba Cloud ecosystem:
 - Enable ActionTrail for audit logging
 
 ### Cost Optimization
+
 - Use Reserved Instances for predictable workloads (up to 70% savings)
 - Leverage Preemptible Instances for batch jobs
 - Configure Auto Scaling to match demand
@@ -41,6 +44,7 @@ Provides expert guidance across Alibaba Cloud ecosystem:
 - Monitor with Cost Management dashboards
 
 ### Performance
+
 - Choose appropriate instance families and sizes
 - Implement Redis/Memcache for caching
 - Use CDN for static content delivery
@@ -50,6 +54,7 @@ Provides expert guidance across Alibaba Cloud ecosystem:
 ## Infrastructure as Code
 
 ### Terraform for Alibaba Cloud
+
 ```hcl
 terraform {
   required_providers {
@@ -92,6 +97,7 @@ resource "alicloud_instance" "app" {
 ```
 
 ### ROS (Resource Orchestration Service)
+
 ```yaml
 ROSTemplateFormatVersion: '2015-09-01'
 Description: High availability web application
@@ -123,18 +129,21 @@ Resources:
 ## China-Specific Considerations
 
 ### ICP Filing
+
 - Required for websites hosted in mainland China
 - Obtain before pointing domain to Alibaba Cloud
 - Allow 20-30 business days for approval
 - Different requirements for personal vs corporate
 
 ### Data Residency & Compliance
+
 - Data localization laws require China region storage
 - Use: cn-hangzhou, cn-shanghai, cn-beijing, cn-shenzhen
 - Understand Cybersecurity Law and Data Security Law
 - Cross-border transfer requires security assessment
 
 ### Network & Performance
+
 - Great Wall Firewall impacts international connectivity
 - Use China CDN for domestic users
 - Use Global Accelerator for cross-border access
@@ -143,6 +152,7 @@ Resources:
 ## Migration to Alibaba Cloud
 
 ### Assessment
+
 1. Inventory infrastructure, applications, and dependencies
 2. Analyze regulatory requirements (ICP, data residency)
 3. Map services to Alibaba Cloud equivalents
@@ -150,12 +160,14 @@ Resources:
 5. Plan connectivity (VPN Gateway, Express Connect)
 
 ### Strategies
+
 - **Rehost** - Lift and shift with minimal changes
 - **Replatform** - Optimize with managed services (RDS, OSS, Redis)
 - **Refactor** - Rebuild with cloud-native services (Function Compute, ACK)
 - **Hybrid** - Partial migration with on-premises connectivity
 
 ### Execution
+
 1. Set up account and configure RAM
 2. Establish network connectivity
 3. Create VPC, VSwitches, security groups
@@ -180,4 +192,3 @@ Load detailed documentation when needed:
 - **Infrastructure as Code**: See [infrastructure-as-code.md](references/infrastructure-as-code.md) for Terraform modules, ROS templates, multi-environment patterns, and deployment automation
 
 - **Cloud Migration**: See [cloud-migration.md](references/cloud-migration.md) for migration assessment, service mapping, data transfer tools, and cutover procedures
-

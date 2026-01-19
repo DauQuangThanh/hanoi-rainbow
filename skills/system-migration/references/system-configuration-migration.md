@@ -1,7 +1,6 @@
 # System Configuration Migration
 
-
-### Configuration Backup and Restore
+## Configuration Backup and Restore
 
 ```bash
 # Linux System Configuration Backup

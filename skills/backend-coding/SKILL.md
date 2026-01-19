@@ -16,6 +16,7 @@ Follow this systematic approach for backend implementation:
 Define clear, RESTful API contracts before implementation.
 
 **REST API Design Pattern:**
+
 ```
 Resource-based URLs (use plural nouns):
 ✅ GET    /api/v1/users              - List users (paginated)
@@ -31,6 +32,7 @@ Resource-based URLs (use plural nouns):
 ```
 
 **Basic Example (Express.js):**
+
 ```typescript
 router.get('/users',
   query('page').optional().isInt({ min: 1 }).toInt(),
@@ -68,6 +70,7 @@ router.get('/users',
 Use repository pattern for clean separation and testability.
 
 **Repository Pattern (TypeORM):**
+
 ```typescript
 export class UserRepository {
   private repository: Repository<User>;
@@ -108,6 +111,7 @@ export class UserRepository {
 Secure JWT-based authentication with refresh tokens.
 
 **JWT Authentication Pattern:**
+
 ```typescript
 export class AuthService {
   private readonly JWT_SECRET = process.env.JWT_SECRET!;
@@ -164,6 +168,7 @@ export const authenticate = async (req, res, next) => {
 Use Redis for performance optimization with cache-aside pattern.
 
 **Caching Pattern:**
+
 ```typescript
 export class CacheService {
   private redis: Redis;
@@ -217,6 +222,7 @@ export class UserService {
 Global error handling with custom error classes.
 
 **Error Handling Pattern:**
+
 ```typescript
 // Custom error classes
 export class AppError extends Error {
@@ -273,6 +279,7 @@ export const asyncHandler = (fn: Function) => {
 Write comprehensive unit and integration tests.
 
 **Testing Pattern:**
+
 ```typescript
 describe('User API', () => {
   beforeAll(async () => {
@@ -341,6 +348,7 @@ Load detailed patterns for specific technologies:
 Before deployment, verify:
 
 **Security:**
+
 ```
 ☐ Input validation on all endpoints (express-validator, Pydantic)
 ☐ SQL injection prevention (parameterized queries only)
@@ -353,6 +361,7 @@ Before deployment, verify:
 ```
 
 **Performance:**
+
 ```
 ☐ Database indexes on query columns
 ☐ Connection pooling configured (10-20 connections)
@@ -362,6 +371,7 @@ Before deployment, verify:
 ```
 
 **Code Quality:**
+
 ```
 ☐ Repository pattern for data access
 ☐ Dependency injection for testability

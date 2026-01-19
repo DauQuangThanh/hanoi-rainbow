@@ -29,6 +29,7 @@ git config --get remote.origin.url
 **ONLY PROCEED TO NEXT STEPS IF THE REMOTE IS AN AZURE DEVOPS URL**
 
 Azure DevOps remotes can be in these formats:
+
 - `https://dev.azure.com/{organization}/{project}/_git/{repository}`
 - `https://{organization}.visualstudio.com/{project}/_git/{repository}`
 - `https://{organization}.visualstudio.com/DefaultCollection/{project}/_git/{repository}`

@@ -9,11 +9,13 @@ This guide provides detailed information about testing frameworks across differe
 **Overview**: Complete testing framework with built-in mocking, coverage, and assertions.
 
 **Installation**
+
 ```bash
 npm install --save-dev jest @types/jest
 ```
 
 **Configuration**
+
 ```javascript
 // jest.config.js
 module.exports = {
@@ -31,6 +33,7 @@ module.exports = {
 ```
 
 **Jest Setup File**
+
 ```javascript
 // jest.setup.js
 beforeAll(() => {
@@ -61,6 +64,7 @@ expect.extend({
 ```
 
 **Example Tests**
+
 ```javascript
 // user.service.test.js
 const UserService = require('../services/user.service');
@@ -130,6 +134,7 @@ describe('UserService', () => {
 ```
 
 **Async Testing**
+
 ```javascript
 // Promises
 test('async test with promise', () => {
@@ -155,6 +160,7 @@ test('async test with rejects', async () => {
 ```
 
 **Snapshot Testing**
+
 ```javascript
 test('component snapshot', () => {
   const component = renderComponent({ title: 'Test' });
@@ -167,11 +173,13 @@ test('component snapshot', () => {
 ### Mocha + Chai
 
 **Installation**
+
 ```bash
 npm install --save-dev mocha chai chai-http sinon
 ```
 
 **Configuration**
+
 ```javascript
 // .mocharc.js
 module.exports = {
@@ -184,6 +192,7 @@ module.exports = {
 ```
 
 **Example Tests**
+
 ```javascript
 // user.test.js
 const { expect } = require('chai');
@@ -229,6 +238,7 @@ describe('UserService', () => {
 ```
 
 **HTTP Testing with Chai-HTTP**
+
 ```javascript
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -263,11 +273,13 @@ describe('User API', () => {
 ### Supertest (HTTP Testing)
 
 **Installation**
+
 ```bash
 npm install --save-dev supertest
 ```
 
 **Example Tests**
+
 ```javascript
 const request = require('supertest');
 const app = require('../app');
@@ -326,12 +338,14 @@ describe('User API Integration', () => {
 ### Playwright (E2E Testing)
 
 **Installation**
+
 ```bash
 npm install --save-dev @playwright/test
 npx playwright install
 ```
 
 **Configuration**
+
 ```javascript
 // playwright.config.js
 const { defineConfig, devices } = require('@playwright/test');
@@ -383,6 +397,7 @@ module.exports = defineConfig({
 ```
 
 **Example Tests**
+
 ```javascript
 // e2e/login.spec.js
 const { test, expect } = require('@playwright/test');
@@ -449,11 +464,13 @@ test('API: create user', async ({ request }) => {
 ### pytest
 
 **Installation**
+
 ```bash
 pip install pytest pytest-asyncio pytest-cov pytest-mock
 ```
 
 **Configuration**
+
 ```ini
 # pytest.ini
 [pytest]
@@ -473,6 +490,7 @@ markers =
 ```
 
 **Example Tests**
+
 ```python
 # tests/test_user_service.py
 import pytest
@@ -527,6 +545,7 @@ async def test_async_create_user(user_service, sample_user):
 ```
 
 **API Testing with pytest**
+
 ```python
 # tests/test_api.py
 import pytest
@@ -578,6 +597,7 @@ class TestUserAPI:
 ```
 
 **Database Testing**
+
 ```python
 # tests/conftest.py
 import pytest
@@ -617,6 +637,7 @@ def test_create_user(db_session):
 ### JUnit 5 + Spring Boot Test
 
 **Dependencies (Maven)**
+
 ```xml
 <dependencies>
     <dependency>
@@ -638,6 +659,7 @@ def test_create_user(db_session):
 ```
 
 **Example Tests**
+
 ```java
 // UserServiceIntegrationTest.java
 package com.example.service;
@@ -723,6 +745,7 @@ class UserServiceIntegrationTest {
 ```
 
 **API Testing with REST Assured**
+
 ```java
 // UserApiIntegrationTest.java
 package com.example.api;
@@ -839,6 +862,7 @@ class UserApiIntegrationTest {
 ```
 
 **TestContainers for Database Testing**
+
 ```java
 // AbstractIntegrationTest.java
 package com.example;
@@ -893,6 +917,7 @@ class UserServiceIntegrationTest extends AbstractIntegrationTest {
 ## Best Practices
 
 ### Framework Selection
+
 1. **Choose based on language ecosystem**
 2. **Consider team familiarity**
 3. **Evaluate plugin ecosystem**
@@ -900,6 +925,7 @@ class UserServiceIntegrationTest extends AbstractIntegrationTest {
 5. **Review documentation quality**
 
 ### Test Organization
+
 1. **Group related tests**
 2. **Use descriptive names**
 3. **Follow AAA pattern**
@@ -907,6 +933,7 @@ class UserServiceIntegrationTest extends AbstractIntegrationTest {
 5. **Use fixtures/factories**
 
 ### Performance
+
 1. **Run fast tests first**
 2. **Use parallel execution**
 3. **Mock external dependencies**
@@ -914,6 +941,7 @@ class UserServiceIntegrationTest extends AbstractIntegrationTest {
 5. **Optimize setup/teardown**
 
 ### Maintenance
+
 1. **Keep tests simple**
 2. **Avoid duplication**
 3. **Refactor with code**

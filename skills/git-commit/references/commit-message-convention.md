@@ -1,6 +1,5 @@
 # Commit Message Convention
 
-
 All commits must follow conventional commit format:
 
 **Required Types:** feat, fix, docs, refactor, test, chore
@@ -8,6 +7,7 @@ All commits must follow conventional commit format:
 **Subject Length:** Maximum 50 characters
 **Body:** Required for breaking changes and complex fixes
 **Footer:** Must reference issue number when applicable
+
 ```
 
 ### Enforce with Tools
@@ -29,6 +29,7 @@ All commits must follow conventional commit format:
 ```
 
 **Git hooks (husky):**
+
 ```json
 {
   "husky": {

@@ -22,6 +22,7 @@ Conducts systematic code quality analysis across multiple dimensions: maintainab
 ### Step 1: Scope Assessment
 
 Determine review scope based on change size:
+
 - **Small (<100 lines)**: Quick correctness check, 15-30 minutes
 - **Medium (100-500 lines)**: Full quality analysis, 1-2 hours  
 - **Large (>500 lines)**: Architectural review, break into smaller reviews if possible, 2-4 hours
@@ -31,12 +32,14 @@ For scope-specific guidance, see [review-scope-guidelines.md](references/review-
 ### Step 2: Initial Assessment
 
 **Gather Context:**
+
 - Identify programming language and framework
 - Understand project type (web app, API, library, CLI, etc.)
 - Note existing coding standards or style guides
 - Check for linter configuration files (.eslintrc, .pylintrc, checkstyle.xml, etc.)
 
 **Read the Code:**
+
 - Start with entry points (main files, index files)
 - Review module/package organization
 - Check dependency management
@@ -45,6 +48,7 @@ For scope-specific guidance, see [review-scope-guidelines.md](references/review-
 ### Step 3: Quality Analysis
 
 Analyze code across key dimensions:
+
 - **Code Smells**: Long methods, large classes, duplicate code, dead code, etc.
 - **Complexity**: Cyclomatic complexity (target <15), cognitive complexity, nesting depth
 - **Maintainability**: Clear naming, proper abstraction, separation of concerns
@@ -58,6 +62,7 @@ For quality metrics and thresholds, see [quality-metrics-reference.md](reference
 ### Step 4: Document Findings
 
 Structure the review report with:
+
 - Executive summary with scores and top priorities
 - Detailed findings with severity, location, description, and recommendations
 - Metrics summary with current vs. target values
@@ -70,6 +75,7 @@ For complete report structure and output guidelines, see [review-report-format.m
 ## Quality Assurance
 
 Use the checklist to ensure comprehensive reviews:
+
 - Code organization and structure
 - Naming conventions and clarity
 - Complexity thresholds
@@ -83,6 +89,7 @@ For complete checklist, see [best-practices-checklist.md](references/best-practi
 ## Common Pitfalls
 
 Avoid these common review mistakes:
+
 - Focusing only on style issues instead of substantive problems
 - Being overly critical without actionable suggestions
 - Ignoring context and business constraints
