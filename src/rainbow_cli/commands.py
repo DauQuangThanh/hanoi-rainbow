@@ -223,11 +223,18 @@ def init(
             console.print(error_panel)
             raise typer.Exit(1)
 
-        # Detect existing agent folders
+        # Detect existing agent folders (backup root folder, not subfolders)
+        # Track root folders to avoid duplicates (e.g., .github has both agents/ and prompts/)
+        detected_roots = set()
         for agent_key, agent_config in AGENT_CONFIG.items():
-            agent_folder = project_path / agent_config["agent_folder"]
-            if agent_folder.exists():
-                existing_agents.append((agent_key, agent_config["name"], agent_config["agent_folder"]))
+            # Extract root folder (e.g., ".claude" from ".claude/commands/")
+            root_folder = Path(agent_config["agent_folder"]).parts[0]
+            root_folder_path = project_path / root_folder
+            
+            # Only add if root folder exists and hasn't been added yet
+            if root_folder_path.exists() and root_folder not in detected_roots:
+                detected_roots.add(root_folder)
+                existing_agents.append((agent_key, agent_config["name"], root_folder))
 
         is_upgrade_mode = True
 
@@ -437,7 +444,7 @@ def init(
                     shutil.copytree(jules_skills, backup_jules_skills)
                     backup_paths["skills"] = backup_jules_skills
 
-                # Backup existing agent folders
+                # Backup existing agent folders (whole root folders, not subfolders)
                 for agent_key, agent_name, agent_folder in existing_agents:
                     source_folder = project_path / agent_folder
                     if source_folder.exists():
