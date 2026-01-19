@@ -1,6 +1,6 @@
 [project]
 name = "rainbow-cli"
-version = "0.1.13"
+version = "0.1.14"
 description = "Rainbow CLI, part of Hanoi Rainbow Project. A framework to develop your project with Spec-Driven Development (SDD)."
 requires-python = ">=3.11"
 dependencies = [
