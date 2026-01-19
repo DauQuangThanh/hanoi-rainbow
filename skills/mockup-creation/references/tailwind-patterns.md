@@ -18,7 +18,7 @@ Advanced TailwindCSS patterns and best practices for mockup creation.
 
 ## Responsive Design
 
-### Mobile-First Approach
+## Mobile-First Approach
 
 Always start with mobile styles, then enhance for larger screens:
 
@@ -46,7 +46,7 @@ Always start with mobile styles, then enhance for larger screens:
 ### Breakpoint Reference
 
 | Breakpoint | Class | Min Width |
-|------------|-------|-----------|
+| ---------- | ----- | --------- |
 | Small | `sm:` | 640px |
 | Medium | `md:` | 768px |
 | Large | `lg:` | 1024px |

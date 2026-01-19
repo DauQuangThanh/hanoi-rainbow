@@ -2,7 +2,7 @@
 
 ## Severity Classification
 
-### Critical (P0)
+## Critical (P0)
 
 **Criteria:**
 
@@ -125,7 +125,7 @@
 ## Priority vs Severity Matrix
 
 | Severity | High Business Impact | Medium Business Impact | Low Business Impact |
-|----------|---------------------|----------------------|-------------------|
+| ---------- | --------------------- |----------------------|-------------------|
 | Critical | P0 - Immediate | P0 - Immediate | P1 - Same day |
 | High | P1 - Same day | P1 - Same day | P2 - This week |
 | Medium | P2 - This week | P2 - This week | P3 - Backlog |

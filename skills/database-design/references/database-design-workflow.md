@@ -1,6 +1,6 @@
 # Database Design Workflow
 
-### 1. Requirements Analysis
+## 1. Requirements Analysis
 
 **Gather Requirements:**
 

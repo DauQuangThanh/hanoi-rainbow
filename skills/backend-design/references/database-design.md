@@ -4,7 +4,7 @@ Comprehensive guide for designing relational and NoSQL databases.
 
 ## Relational Database Design
 
-### 1. Normal Forms
+## 1. Normal Forms
 
 **First Normal Form (1NF)**
 

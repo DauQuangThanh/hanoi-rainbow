@@ -1,6 +1,6 @@
 # Core Planning Workflow
 
-### 1. Initial Project Setup
+## 1. Initial Project Setup
 
 **Define Project Scope:**
 

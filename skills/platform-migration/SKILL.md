@@ -33,7 +33,7 @@ Platform migrations are infrastructure-focused and should be paired with applica
 
 ## Migration Workflow
 
-### Step 1: Assessment and Planning
+## Step 1: Assessment and Planning
 
 **Identify Migration Type:**
 

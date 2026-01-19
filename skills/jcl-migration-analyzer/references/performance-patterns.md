@@ -8,7 +8,7 @@ COBOL programs often process large volumes of data efficiently using mainframe-o
 
 ## Common Performance Patterns
 
-### 1. Batch Processing with Streams
+## 1. Batch Processing with Streams
 
 **COBOL Pattern**: Sequential file processing
 **Java Solution**: Use Java Streams for efficient batch processing

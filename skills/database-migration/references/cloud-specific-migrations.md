@@ -1,6 +1,6 @@
 # Cloud-Specific Migrations
 
-### AWS RDS Migration
+## AWS RDS Migration
 
 ```bash
 # On-Premise PostgreSQL → AWS RDS PostgreSQL

@@ -30,7 +30,7 @@ Rainbow supports multiple AI agents by generating agent-specific command files a
 ### Current Supported Agents
 
 | Agent | Directory | Format | CLI Tool | Description |
-|-------|-----------|---------|----------|-------------|
+| ------- | ----------- |---------|----------|-------------|
 | **Claude Code** | `.claude/commands/` | Markdown | `claude` | Anthropic's Claude Code CLI |
 | **Gemini CLI** | `.gemini/commands/` | TOML | `gemini` | Google's Gemini CLI |
 | **GitHub Copilot** | `.github/agents/` + `.github/prompts/` | Markdown | N/A (IDE-based) | GitHub Copilot in VS Code |

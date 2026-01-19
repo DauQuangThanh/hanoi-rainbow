@@ -29,7 +29,7 @@ Story is complete when:
 - [ ] Deployed to staging environment
 - [ ] Accepted by Product Owner
 
-### 6. Prioritization Frameworks
+## 6. Prioritization Frameworks
 
 **MoSCoW Method:**
 
@@ -125,7 +125,7 @@ Assignments:
 - Developer 3: Frontend UI components
 ```
 
-### 8. Risk Management
+## 8. Risk Management
 
 **Risk Identification:**
 

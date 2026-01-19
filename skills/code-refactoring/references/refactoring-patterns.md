@@ -4,7 +4,7 @@ This reference provides a comprehensive catalog of refactoring patterns with det
 
 ## Composing Methods
 
-### Extract Method
+## Extract Method
 
 **Problem**: Code fragment that can be grouped together
 **Solution**: Turn the fragment into a method with a descriptive name

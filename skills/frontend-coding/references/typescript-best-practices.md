@@ -1,6 +1,6 @@
 # TypeScript Best Practices
 
-### Type Safety and Inference
+## Type Safety and Inference
 
 ```typescript
 // Utility Types

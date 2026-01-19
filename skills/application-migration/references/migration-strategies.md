@@ -1,6 +1,6 @@
 # Migration Strategies
 
-### 1. Rehost (Lift and Shift)
+## 1. Rehost (Lift and Shift)
 
 **When to Use:**
 
@@ -159,7 +159,6 @@ Mon 8am: Users on new system
 ```
 
 **Effort**: Medium | **Risk**: Very High | **Value**: Medium | **Use Sparingly**
----
 
 ## Migration Patterns by Application Type
 
@@ -419,7 +418,7 @@ Phase 5: Decommission Source (Month 10)
 ## Strategy Decision Matrix
 
 | Application Type | Size | Complexity | Timeline | Budget | Recommended Strategy |
-|-----------------|------|------------|----------|--------|---------------------|
+| ----------------- | ------ |------------|----------|--------|---------------------|
 | Mainframe | Large | Very High | 18-24 mo | High | Strangler Fig |
 | Monolith | Large | High | 12-18 mo | High | Strangler Fig |
 | Monolith | Medium | Medium | 6-12 mo | Medium | Phased + Replatform |

@@ -2,7 +2,7 @@
 
 ## Bicep
 
-### Bicep Overview
+## Bicep Overview
 
 Bicep is a domain-specific language (DSL) for deploying Azure resources declaratively. It's a transparent abstraction over ARM templates with cleaner syntax.
 

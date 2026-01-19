@@ -1,6 +1,6 @@
 # Network Infrastructure Migration
 
-### VPC/Network Migration
+## VPC/Network Migration
 
 ```markdown
 Scenario: Migrate from AWS VPC to GCP VPC

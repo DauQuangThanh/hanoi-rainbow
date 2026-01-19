@@ -1,6 +1,6 @@
 # Severity Levels
 
-### 🔴 Critical
+## 🔴 Critical
 
 - **Definition**: Issues that pose security risks, data loss, or broken core functionality
 - **Examples**:

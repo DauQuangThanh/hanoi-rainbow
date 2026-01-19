@@ -1,6 +1,6 @@
 # Design Tools & Resources
 
-### Design Tools
+## Design Tools
 
 **UI Design**
 

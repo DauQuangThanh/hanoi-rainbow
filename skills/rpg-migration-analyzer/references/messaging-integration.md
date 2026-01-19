@@ -8,7 +8,7 @@ Mainframe systems use IBM MQ, CICS queues, and transient data for asynchronous c
 
 ## Common Mainframe Patterns
 
-### 1. IBM MQ Messages
+## 1. IBM MQ Messages
 
 **COBOL Example**:
 

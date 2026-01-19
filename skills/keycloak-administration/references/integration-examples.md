@@ -2,7 +2,7 @@
 
 ## Spring Boot Integration
 
-### Maven Dependency
+## Maven Dependency
 
 ```xml
 <dependency>

@@ -21,7 +21,7 @@ Rapid creation of production-quality mockups with:
 
 ## Quick Start
 
-### 1. Initialize Project
+## 1. Initialize Project
 
 ```bash
 # Create Vite + Vue + TypeScript project

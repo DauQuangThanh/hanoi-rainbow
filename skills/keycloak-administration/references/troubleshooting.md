@@ -2,7 +2,7 @@
 
 ## Common Issues
 
-### 1. Users Cannot Login
+## 1. Users Cannot Login
 
 **Symptoms:** Login fails, error messages, redirects fail
 

@@ -17,7 +17,7 @@ This document provides comprehensive guidance on database design patterns, norma
 
 ## Data Modeling Fundamentals
 
-### Entity-Relationship Modeling
+## Entity-Relationship Modeling
 
 **Entities**: Objects or concepts (User, Order, Product)
 **Attributes**: Properties of entities (name, email, price)
@@ -87,7 +87,7 @@ UNIQUE(student_id, course_id)
 **Auto-Increment INT vs. UUID:**
 
 | Aspect | Auto-Increment INT | UUID |
-|--------|-------------------|------|
+| -------- | ------------------- |------|
 | Size | 4-8 bytes | 16 bytes |
 | Readability | Easy (1, 2, 3) | Hard (123e4567-e89b...) |
 | Distribution | Sequential | Random |
@@ -120,7 +120,7 @@ CREATE TABLE orders (
 **Cascade Options:**
 
 | Option | Behavior |
-|--------|----------|
+| -------- | ---------- |
 | CASCADE | Delete/update related rows |
 | SET NULL | Set foreign key to NULL |
 | SET DEFAULT | Set foreign key to default value |

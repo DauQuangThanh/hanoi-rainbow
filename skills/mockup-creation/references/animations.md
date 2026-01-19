@@ -16,7 +16,7 @@ Advanced animation patterns for Vue.js 3 mockups using TailwindCSS and native CS
 
 ## CSS Transitions
 
-### Basic Transition Properties
+## Basic Transition Properties
 
 ```vue
 <template>

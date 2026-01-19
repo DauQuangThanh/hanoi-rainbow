@@ -1,6 +1,6 @@
 # Templates and Checklists
 
-### Project Kickoff Checklist
+## Project Kickoff Checklist
 
 - [ ] Vision and objectives defined
 - [ ] Stakeholders identified

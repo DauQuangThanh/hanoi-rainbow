@@ -204,7 +204,7 @@ hanoi-rainbow/
 ## �🔄 Quick Reference
 
 | What You Want | Command |
-|---------------|----------|
+| --------------- | ---------- |
 | **Run CLI directly** | `python -m src.rainbow_cli --help` |
 | **Editable install** | `uv pip install -e .` then `rainbow ...` |
 | **Local uvx (repo root)** | `uvx --from . rainbow ...` |
@@ -228,7 +228,7 @@ rm -rf .venv dist build *.egg-info
 ## 🛠️ Common Issues
 
 | Problem | Solution |
-|---------|----------|
+| --------- | ---------- |
 | **`ModuleNotFoundError: typer`** | Run `uv pip install -e .` to install dependencies |
 | **Scripts not executable (Linux)** | Re-run init or manually run `chmod +x scripts/*.sh` |
 | **Git step skipped** | You passed `--no-git` or Git isn't installed |

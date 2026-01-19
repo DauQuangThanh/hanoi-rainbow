@@ -2,7 +2,7 @@
 
 When presenting UI/UX designs, structure your response as follows:
 
-### 1. Design Brief
+## 1. Design Brief
 
 - Project overview and goals
 - Target audience and personas

@@ -1,6 +1,6 @@
 # Commit Workflow
 
-### 1. Review Changes
+## 1. Review Changes
 
 Before committing, understand what changed:
 

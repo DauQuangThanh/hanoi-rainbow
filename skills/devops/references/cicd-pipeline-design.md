@@ -1,6 +1,6 @@
 # CI/CD Pipeline Design
 
-### Pipeline Structure
+## Pipeline Structure
 
 Design pipelines with these stages:
 

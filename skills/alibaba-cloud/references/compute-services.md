@@ -2,7 +2,7 @@
 
 ## ECS (Elastic Compute Service)
 
-### Instance Families
+## Instance Families
 
 **General Purpose (g series)**
 

@@ -9,7 +9,7 @@
 
 ```
 
-### Phase 8: Cost and Performance Review
+## Phase 8: Cost and Performance Review
 
 **1. Cost Analysis**
 

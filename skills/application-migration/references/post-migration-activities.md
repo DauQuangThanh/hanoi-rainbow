@@ -1,6 +1,6 @@
 # Post-Migration Activities
 
-### 1. Validation and Stabilization
+## 1. Validation and Stabilization
 
 **Immediate (First 24 Hours):**
 

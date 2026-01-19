@@ -17,7 +17,7 @@ Comprehensive guide for deploying Vue.js 3 + Vite + TailwindCSS mockups to vario
 
 ## Build Configuration
 
-### vite.config.ts
+## vite.config.ts
 
 ```typescript
 import { defineConfig } from 'vite'

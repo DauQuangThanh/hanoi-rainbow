@@ -16,7 +16,7 @@ This document provides guidance on assessing code security compliance with commo
 
 ## PCI-DSS
 
-### Requirement 3: Protect Stored Cardholder Data
+## Requirement 3: Protect Stored Cardholder Data
 
 **3.4: Render PAN unreadable anywhere it is stored**
 
@@ -187,7 +187,7 @@ def update_payment(payment_id, amount, user_id, ip_address):
 ## PCI-DSS Compliance Status
 
 | Requirement | Status | Findings | Remediation |
-|-------------|--------|----------|-------------|
+| ------------- | -------- |----------|-------------|
 | 3.4: Encrypt PAN | ⚠️ Partial | Weak encryption (MD5) | Implement AES-256 |
 | 6.5: Secure coding | ❌ Non-Compliant | SQL injection found | Use parameterized queries |
 | 8.1: User identification | ✅ Compliant | Proper implementation | - |
@@ -306,7 +306,7 @@ def delete_user_data(user_id):
 ## GDPR Compliance Status
 
 | Requirement | Status | Findings |
-|-------------|--------|----------|
+| ------------- | -------- |----------|
 | Lawful basis for processing | ✅ | Consent mechanism implemented |
 | Data minimization | ⚠️ | Excessive logging of IP addresses |
 | Encryption | ✅ | TLS 1.3, AES-256 at rest |
@@ -462,7 +462,7 @@ def update_patient_record(patient_id, updates, user_id):
 ## HIPAA Security Rule Compliance
 
 | Requirement | Standard | Status | Findings |
-|-------------|----------|--------|----------|
+| ------------- | ---------- |--------|----------|
 | Access Control | § 164.312(a) | ⚠️ | No automatic logoff |
 | Audit Controls | § 164.312(b) | ✅ | Comprehensive logging |
 | Integrity | § 164.312(c) | ⚠️ | No data integrity checksums |
@@ -553,7 +553,7 @@ app.use((req, res, next) => {
 ## SOC 2 Type II Compliance
 
 | Control | Status | Evidence | Gaps |
-|---------|--------|----------|------|
+| --------- | -------- |----------|------|
 | CC6.1: Access Controls | ✅ | MFA implemented, RBAC in place | None |
 | CC6.2: Access Provisioning | ⚠️ | Manual process | Automate deprovisioning |
 | CC6.6: Encryption | ✅ | TLS 1.3, AES-256 | None |
@@ -621,7 +621,7 @@ Include in security report:
 Use this to track compliance across multiple standards:
 
 | Security Control | PCI-DSS | GDPR | HIPAA | SOC 2 |
-|------------------|---------|------|-------|-------|
+| ------------------ | --------- |------|-------|-------|
 | Encryption at rest | 3.4 | Art 32 | §312(a) | CC6.6 |
 | Encryption in transit | 4.1 | Art 32 | §312(e) | CC6.6 |
 | Access control | 7.1 | Art 25 | §312(a) | CC6.1 |

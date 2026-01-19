@@ -21,7 +21,7 @@ Provides expert guidance for AWS infrastructure and services:
 
 ## Key Principles
 
-### General Best Practices
+## General Best Practices
 
 - **Follow least privilege** - Use IAM roles with minimal required permissions
 - **Enable monitoring** - Configure CloudWatch for all services with appropriate alarms

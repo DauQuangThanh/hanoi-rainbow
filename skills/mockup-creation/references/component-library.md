@@ -20,21 +20,15 @@ Complete collection of production-ready Vue 3 + TypeScript + TailwindCSS compone
 - [Layout Components](#layout-components)
   - [Container](#container)
   - [Grid](#grid)
-  - [Sidebar](#sidebar)
-  - [Header](#header)
-  - [Footer](#footer)
 - [Section Components](#section-components)
   - [Hero](#hero)
   - [Features](#features)
-  - [Testimonials](#testimonials)
-  - [Pricing](#pricing)
-  - [CTA](#cta)
 
 ---
 
 ## UI Components
 
-### Button
+## Button
 
 Flexible button component with multiple variants and sizes.
 

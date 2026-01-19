@@ -7,7 +7,7 @@
 ## Specification Mapping
 
 | RPG Spec | Pseudocode Section |
-|----------|-------------------|
+| ---------- | ------------------- |
 | H-spec (Header) | Program Overview + Constants |
 | F-spec (File) | Data Structures (file controls) |
 | D-spec (Data) | Data Structures |
@@ -54,7 +54,7 @@
 
 ## Translation Patterns
 
-### Indicators → Boolean
+## Indicators → Boolean
 
 ```rpg
 D EOF             S               N   INZ(*OFF)

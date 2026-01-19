@@ -58,7 +58,7 @@ Use this template to structure comprehensive backend design review reports.
 
 ## 3. Key Findings Summary
 
-### Critical Issues (🔴)
+## Critical Issues (🔴)
 
 1. [Issue title] - [Brief description]
 2. [Issue title] - [Brief description]
@@ -190,7 +190,7 @@ sequenceDiagram
 ## 8. Action Items
 
 | ID | Issue | Severity | Recommendation | Owner | Deadline | Status |
-|----|-------|----------|----------------|-------|----------|--------|
+| ---- | ------- |----------|----------------|-------|----------|--------|
 | 1 | [Issue title] | 🔴 Critical | [Brief action] | [Name] | [Date] | Not Started |
 | 2 | [Issue title] | 🟠 High | [Brief action] | [Name] | [Date] | In Progress |
 | 3 | [Issue title] | 🟡 Medium | [Brief action] | [Name] | [Date] | Not Started |

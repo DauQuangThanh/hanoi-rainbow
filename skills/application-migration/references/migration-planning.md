@@ -1,6 +1,6 @@
 # Migration Planning
 
-### 1. Create Migration Roadmap
+## 1. Create Migration Roadmap
 
 **Phased Approach:**
 

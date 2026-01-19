@@ -12,7 +12,7 @@ Detailed checklists for assessing requirement quality across different attribute
 
 For each requirement, evaluate against these criteria:
 
-### Completeness
+## Completeness
 
 □ All necessary information included
 □ No missing details or TBD placeholders

@@ -9,7 +9,7 @@ Reverse engineer technical specifications from pseudocode, algorithms, or code s
 
 ## Core Workflow
 
-### 1. Analyze Pseudocode
+## 1. Analyze Pseudocode
 
 Parse structure, control flow, and identify:
 

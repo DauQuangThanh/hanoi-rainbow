@@ -2,7 +2,7 @@
 
 ## Clustering
 
-### Configure Cluster
+## Configure Cluster
 
 1. Use shared database (PostgreSQL, MySQL)
 2. Enable distributed cache (Infinispan)

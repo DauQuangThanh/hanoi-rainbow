@@ -1,6 +1,6 @@
 # Common Refactoring Scenarios
 
-### Legacy Code Refactoring
+## Legacy Code Refactoring
 
 When working with legacy code without tests:
 

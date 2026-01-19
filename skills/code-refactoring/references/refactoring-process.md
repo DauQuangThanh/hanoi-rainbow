@@ -2,7 +2,7 @@
 
 Follow this systematic approach when refactoring code:
 
-### Phase 1: Assessment & Planning
+## Phase 1: Assessment & Planning
 
 1. **Identify Refactoring Needs**
    - Code review findings

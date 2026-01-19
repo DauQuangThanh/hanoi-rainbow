@@ -1,6 +1,6 @@
 # Examples
 
-### Example 1: E-Commerce Backend
+## Example 1: E-Commerce Backend
 
 **Architecture**: Microservices with event-driven communication
 

@@ -277,7 +277,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 User can rainbow execution mode via arguments:
 
 | Mode | Command | Scenarios | Duration | Use Case |
-|------|---------|-----------|----------|----------|
+| ------ | --------- |-----------|----------|----------|
 | **Smoke** | `perform-e2e-test smoke` | P0 only | ~10-15 min | Quick validation, every commit |
 | **Regression** | `perform-e2e-test regression` | P0 + P1 | ~1 hour | Daily/nightly builds |
 | **Full** | `perform-e2e-test full` | All (P0-P3) | ~3-4 hours | Weekly, pre-release |

@@ -14,10 +14,10 @@ Complete reference for analyzing PL/I programs and migrating to Java.
 
 ## Data Type Mapping
 
-### Type Conversion Table
+## Type Conversion Table
 
 | PL/I Type | Java Type | Notes |
-|-----------|-----------|-------|
+| ----------- | ----------- |-------|
 | `FIXED DECIMAL(n,m)` | `BigDecimal` | **Always use BigDecimal - NEVER float/double for financial data** |
 | `FIXED BINARY(15)` | `short` | 16-bit signed integer |
 | `FIXED BINARY(31)` | `int` | 32-bit signed integer |
@@ -212,7 +212,7 @@ for (int i = 1; i <= 10; i += 2) {
 ### String Operations
 
 | PL/I Function | Java Equivalent | Notes |
-|---------------|-----------------|-------|
+| --------------- | ----------------- |-------|
 | `SUBSTR(str, 10, 20)` | `str.substring(9, 29)` | **0-based indexing!** |
 | `INDEX(str, 'search')` | `str.indexOf("search")` | Returns -1 if not found (vs 0 in PL/I) |
 | `LENGTH(str)` | `str.length()` | Same semantics |
@@ -382,7 +382,7 @@ for (int i = 0; i < 10; i++) {  // 0 to 9, not 1 to 10
 ### 4. Boolean Operations
 
 | PL/I | Java | Notes |
-|------|------|-------|
+| ------ | ------ |-------|
 | `¬` or `^` | `!` | Logical NOT |
 | `&` | `&&` | Logical AND |
 | `|` | `||` | Logical OR |

@@ -2,7 +2,7 @@
 
 ## COBOL Program Structure
 
-### Complete Program Template
+## Complete Program Template
 
 ```cobol
        IDENTIFICATION DIVISION.

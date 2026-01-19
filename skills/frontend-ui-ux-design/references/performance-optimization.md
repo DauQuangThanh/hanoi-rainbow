@@ -1,6 +1,6 @@
 # Performance Optimization
 
-### Frontend Performance
+## Frontend Performance
 
 1. **Asset Optimization**
    - Compress images (WebP, AVIF formats)

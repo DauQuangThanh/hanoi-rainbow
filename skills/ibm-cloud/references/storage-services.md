@@ -11,7 +11,7 @@
 
 ## Cloud Object Storage (COS)
 
-### Overview
+## Overview
 
 S3-compatible object storage for unstructured data with 99.999999999% (11 nines) durability.
 
@@ -26,7 +26,7 @@ S3-compatible object storage for unstructured data with 99.999999999% (11 nines)
 ### Storage Classes
 
 | Class | Use Case | Retrieval | Cost |
-|-------|----------|-----------|------|
+| ------- | ---------- |-----------|------|
 | **Standard** | Hot data, frequent access | Instant | $$$ |
 | **Vault** | Cool data, monthly access | Instant | $$ |
 | **Cold Vault** | Cold data, yearly access | Instant | $ |

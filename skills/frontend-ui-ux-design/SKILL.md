@@ -11,7 +11,7 @@ This skill enables creation of production-ready frontend UI/UX designs from rese
 
 ## Design Workflow
 
-### 1. Understand Requirements
+## 1. Understand Requirements
 
 **Gather Context:**
 

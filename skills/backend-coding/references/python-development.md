@@ -1,6 +1,6 @@
 # Python Development
 
-### FastAPI Application
+## FastAPI Application
 
 ```python
 # main.py

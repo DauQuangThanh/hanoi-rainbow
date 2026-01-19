@@ -9,7 +9,7 @@ Systematically review frontend code to identify issues, ensure quality, and prov
 
 ## Review Workflow
 
-### 1. Initial Assessment
+## 1. Initial Assessment
 
 Gather context about the project and identify review scope:
 

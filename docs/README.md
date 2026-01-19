@@ -30,7 +30,7 @@ Open `http://localhost:8080` to see the documentation.
 ## 📁 File Structure
 
 | File | Purpose |
-|------|----------|
+| ------ | ---------- |
 | `docfx.json` | DocFX configuration |
 | `index.md` | Documentation homepage |
 | `toc.yml` | Table of contents |

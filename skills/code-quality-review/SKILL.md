@@ -19,7 +19,7 @@ Conducts systematic code quality analysis across multiple dimensions: maintainab
 
 ## Review Workflow
 
-### Step 1: Scope Assessment
+## Step 1: Scope Assessment
 
 Determine review scope based on change size:
 

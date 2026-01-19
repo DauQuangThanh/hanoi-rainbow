@@ -11,7 +11,7 @@ Systematic IBM Cloud platform guidance for enterprise cloud infrastructure, cove
 
 Choose your path based on the task:
 
-### 1. Service Category Selection
+## 1. Service Category Selection
 
 **Compute & Containers** → Load [compute-services.md](references/compute-services.md)
 

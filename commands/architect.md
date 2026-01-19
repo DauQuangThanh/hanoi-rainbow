@@ -210,7 +210,7 @@ When researching architectural patterns or technologies:
 ## Template Sections Mapping
 
 | Phase | Template Section | Content Source |
-|-------|------------------|----------------|
+| ------- | ------------------ |----------------|
 | 0 | Introduction | User input + ground-rules |
 | 0 | Architectural Drivers | Feature specs + ground-rules |
 | 1 | System Context View | All feature specs |

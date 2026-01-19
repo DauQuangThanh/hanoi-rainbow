@@ -1,6 +1,6 @@
 # Design Considerations
 
-### For Different Scale Levels
+## For Different Scale Levels
 
 **Small Scale (< 1K users)**
 

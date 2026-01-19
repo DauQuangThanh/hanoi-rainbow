@@ -2,7 +2,7 @@
 
 # 🌈 Hanoi Rainbow
 
-### *Drive Quality Together with AI-Powered Framework*
+## *Drive Quality Together with AI-Powered Framework*
 
 **Stop guessing. Start specifying.**  
 Turn your ideas into production-ready applications through clear specifications, not trial-and-error coding.
@@ -19,10 +19,10 @@ Turn your ideas into production-ready applications through clear specifications,
 ## Table of Contents
 
 - [🤔 What is Spec-Driven Development?](#-what-is-spec-driven-development)
-- [⚡ Get Started](#-get-started)
+- [⚡ Get Started](#quick-start)
 - [🤖 Supported AI Agents](#-supported-ai-agents)
 - [🔧 Rainbow CLI Reference](#-rainbow-cli-reference)
-- [📚 Core Philosophy](#-core-philosophy)
+- [📚 Core Philosophy](#spec-driven-development-sdd)
 - [🌟 Development Phases](#-development-phases)
 - [🔧 Prerequisites](#-prerequisites)
 - [📖 Learn More](#-learn-more)
@@ -165,7 +165,7 @@ Run your application and fix any issues. Your AI assistant will help debug.
 ## 🤖 Supported AI Agents
 
 | Agent                                                     | Support | Notes                                             |
-|-----------------------------------------------------------|---------|---------------------------------------------------|
+| ----------------------------------------------------------- | --------- |---------------------------------------------------|
 | [Amazon Q Developer CLI](https://aws.amazon.com/developer/learning/q-developer-cli/) | ⚠️ | Amazon Q Developer CLI [does not support](https://github.com/aws/amazon-q-developer-cli/issues/3064) custom arguments for slash commands. |
 | [Amp](https://ampcode.com/)                               | ✅ | |
 | [Auggie CLI](https://docs.augmentcode.com/cli/overview)   | ✅ |                                                   |
@@ -193,7 +193,7 @@ The `rainbow` command supports the following options:
 ### Commands
 
 | Command     | Description                                                    |
-|-------------|----------------------------------------------------------------|
+| ------------- | ---------------------------------------------------------------- |
 | `init`      | Initialize a new Rainbow project from the latest template      |
 | `check`     | Check for installed tools (`git`, `claude`, `gemini`, `code`/`code-insiders`, `cursor-agent`, `windsurf`, `qwen`, `opencode`, `codex`, `kilocode`, `auggie`, `roo`, `codebuddy`, `amp`, `shai`, `q`, `bob`, `jules`, `qoder`, `antigravity`) |
 | `version`   | Display CLI version, template version, and system information  |
@@ -201,7 +201,7 @@ The `rainbow` command supports the following options:
 ### `rainbow init` Arguments & Options
 
 | Argument/Option        | Type     | Description                                                                  |
-|------------------------|----------|------------------------------------------------------------------------------|
+| ------------------------ | ---------- |------------------------------------------------------------------------------|
 | `<project-name>`       | Argument | Name for your new project directory (optional if using `--here`, or use `.` for current directory) |
 | `--ai`                 | Option   | AI assistant(s) to use. Can be a single agent or comma-separated list (e.g., `claude,gemini,copilot`). Valid options: `claude`, `gemini`, `copilot`, `cursor-agent`, `qwen`, `opencode`, `codex`, `windsurf`, `kilocode`, `auggie`, `roo`, `codebuddy`, `amp`, `shai`, `q`, `bob`, `jules`, `qoder`, `antigravity`. If not specified, an interactive multi-select menu will appear |
 | `--script`             | Option   | Script variant to use: `sh` (bash/zsh) or `ps` (PowerShell)                 |
@@ -284,7 +284,7 @@ After running `rainbow init`, your AI coding agent will have access to these sla
 Essential commands for the Spec-Driven Development workflow:
 
 | Command                  | Description                                                           | Auto Commit Prefix |
-|--------------------------|-----------------------------------------------------------------------|--------------------|
+| -------------------------- | ----------------------------------------------------------------------- |--------------------|
 | `/rainbow.regulate`      | Create or update project governing principles and development guidelines | `docs:` |
 | `/rainbow.specify`       | Define what you want to build (requirements and user stories)        | `docs:` |
 | `/rainbow.design`        | Create technical implementation plans with your chosen tech stack     | `docs:` |
@@ -296,7 +296,7 @@ Essential commands for the Spec-Driven Development workflow:
 Commands for comprehensive product-wide documentation (run once per product, not per feature):
 
 | Command                      | Description                                                           | Auto Commit Prefix |
-|------------------------------|-----------------------------------------------------------------------|--------------------|
+| ------------------------------ | ----------------------------------------------------------------------- |--------------------|
 | `/rainbow.architect`         | Create comprehensive system architecture documentation for the entire product | `docs:` |
 | `/rainbow.standardize`       | Create comprehensive coding standards and conventions documentation | `docs:` |
 | `/rainbow.design-e2e-test`   | Design comprehensive end-to-end test specifications for the entire product | `test:` |
@@ -307,7 +307,7 @@ Commands for comprehensive product-wide documentation (run once per product, not
 Additional commands for enhanced quality, validation, and project management:
 
 | Command                  | Description                                                           | Auto Commit Prefix |
-|--------------------------|-----------------------------------------------------------------------|--------------------|
+| -------------------------- | ----------------------------------------------------------------------- |--------------------|
 | `/rainbow.clarify`       | Clarify underspecified areas (recommended before `/rainbow.design`; formerly `/quizme`) | `docs:` |
 | `/rainbow.analyze`       | Cross-artifact consistency & coverage analysis (run after `/rainbow.taskify`, before `/rainbow.implement`) | `docs:` |
 | `/rainbow.checklist`     | Generate custom quality checklists that validate requirements completeness, clarity, and consistency | `docs:` |
@@ -319,7 +319,7 @@ Additional commands for enhanced quality, validation, and project management:
 Commands for systematic legacy system migration and modernization:
 
 | Command                  | Description                                                           | Auto Commit Prefix |
-|--------------------------|-----------------------------------------------------------------------|--------------------|
+| -------------------------- | ----------------------------------------------------------------------- |--------------------|
 | `/rainbow.assess-legacy` | Analyze existing legacy systems (COBOL, RPG, JCL) to understand current state before modernization | `docs:` |
 | `/rainbow.map-business-logic` | Extract and document business rules from legacy code for reimplementation | `docs:` |
 | `/rainbow.design-data-migration` | Create comprehensive data migration strategy from legacy databases (DB2, IMS, VSAM) to modern data stores | `docs:` |
@@ -331,7 +331,7 @@ Commands for systematic legacy system migration and modernization:
 ### Environment Variables
 
 | Variable         | Description                                                                                    |
-|------------------|------------------------------------------------------------------------------------------------|
+| ------------------ | ------------------------------------------------------------------------------------------------ |
 | `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-photo-albums`) to work on a specific feature when not using Git branches.<br/>**Must be set in the context of the agent you're working with prior to using `/rainbow.design` or follow-up commands. |
 
 ## 🎯 Why Spec-Driven Development?
@@ -339,7 +339,7 @@ Commands for systematic legacy system migration and modernization:
 Spec-Driven Development is built on these core principles:
 
 | Principle | What It Means |
-|-----------|---------------|
+| ----------- | --------------- |
 | **Intent First** | Define the "*what*" and "*why*" before the "*how*" |
 | **Rich Specifications** | Create detailed specs with organizational principles and guardrails |
 | **Step-by-Step Refinement** | Improve through multiple steps, not one-shot generation |
@@ -350,7 +350,7 @@ Spec-Driven Development is built on these core principles:
 ## 🌟 When to Use Spec-Driven Development
 
 | Scenario | What You Can Do |
-|----------|-----------------|
+| ---------- | ----------------- |
 | **🆕 New Projects** | <ul><li>Start with high-level requirements</li><li>Generate complete specifications</li><li>Plan implementation steps</li><li>Build production-ready apps</li></ul> |
 | **🔬 Exploration** | <ul><li>Try different solutions in parallel</li><li>Test multiple tech stacks</li><li>Experiment with UX patterns</li></ul> |
 | **🔧 Existing Projects** | <ul><li>Add new features systematically</li><li>Modernize legacy code</li><li>Adapt processes to your needs</li></ul> |

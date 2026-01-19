@@ -13,7 +13,7 @@
 
 ## VPC Networking
 
-### Subnets and Routing
+## Subnets and Routing
 
 ```bash
 # Create subnet

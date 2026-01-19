@@ -1,6 +1,6 @@
 # Commit Types
 
-### Primary Types
+## Primary Types
 
 **feat**: New feature for users
 

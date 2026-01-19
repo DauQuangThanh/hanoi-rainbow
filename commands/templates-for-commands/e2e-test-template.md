@@ -10,7 +10,7 @@
 ## Document Control
 
 | Version | Date | Author | Changes |
-|---------|------|--------|---------|
+| --------- | ------ |--------|---------|
 | 1.0 | [DATE] | [NAME] | Initial E2E test plan |
 | | | | |
 
@@ -128,7 +128,7 @@ E2E tests are the **smallest layer** of the test pyramid but provide the **highe
 ### 2.3 Test Levels
 
 | Level | Focus | Examples | Execution Frequency |
-|-------|-------|----------|---------------------|
+| ------- | ------- |----------|---------------------|
 | **Smoke Tests** | Critical happy paths | Login, view dashboard, logout | Every commit |
 | **Regression Tests** | Core features | All critical user journeys | Daily/nightly |
 | **Full Suite** | Comprehensive coverage | All scenarios including edge cases | Weekly/pre-release |
@@ -240,7 +240,7 @@ graph LR
 ### 4.1 User Personas
 
 | Persona | Role | Primary Goals |
-|---------|------|---------------|
+| --------- | ------ |---------------|
 | **End User** | [e.g., Customer] | [e.g., Browse products, make purchases] |
 | **Admin User** | [e.g., Administrator] | [e.g., Manage users, view analytics] |
 | **[Persona 3]** | [Role] | [Goals] |
@@ -307,7 +307,7 @@ graph LR
 ### 4.3 Journey Priority Matrix
 
 | Priority | Definition | Examples | Test Frequency |
-|----------|------------|----------|----------------|
+| ---------- | ------------ |----------|----------------|
 | **P0 - Critical** | Core business functionality, revenue-impacting | Login, Payment, Checkout | Every build |
 | **P1 - High** | Important features, data integrity | Profile update, Search, Filtering | Daily |
 | **P2 - Medium** | Secondary features, enhancements | Settings, Preferences, Help | Weekly |
@@ -443,7 +443,7 @@ WHERE email = 'test@example.com';
 -->
 
 | Scenario ID | Scenario Name | Tags | Journey |
-|-------------|---------------|------|---------|
+| ------------- | --------------- |------|---------|
 | 5.4.1 | [Name] | [tags] | [Journey ref] |
 | 5.4.2 | [Name] | [tags] | [Journey ref] |
 
@@ -525,7 +525,7 @@ sequenceDiagram
 ### 6.2 Test Data Types
 
 | Data Type | Source | Storage | Lifecycle |
-|-----------|--------|---------|-----------|
+| ----------- | -------- |---------|-----------|
 | **User Accounts** | Factory/Seeding | Database | Created before test, deleted after |
 | **Product Data** | Fixed fixtures | JSON files | Loaded once, reused |
 | **Transaction Data** | Generated per test | Database | Created during test, deleted after |
@@ -594,7 +594,7 @@ afterEach(async () => {
 **Test Payment Cards**:
 
 | Card Type | Number | CVV | Expiry | Result |
-|-----------|--------|-----|--------|--------|
+| ----------- | -------- |-----|--------|--------|
 | Visa | 4242 4242 4242 4242 | Any 3 digits | Future date | Success |
 | Mastercard | 5555 5555 5555 4444 | Any 3 digits | Future date | Success |
 | Declined | 4000 0000 0000 0002 | Any 3 digits | Future date | Card declined |
@@ -610,7 +610,7 @@ afterEach(async () => {
 -->
 
 | Environment | Purpose | URL | Data | External Services |
-|-------------|---------|-----|------|-------------------|
+| ------------- | --------- |-----|------|-------------------|
 | **Local** | Development testing | localhost:3000 | Seed data | Mocked |
 | **CI** | Automated test runs | ephemeral | Generated per run | Mocked |
 | **Staging** | Pre-production testing | staging.example.com | Anonymized prod-like | Mix of real/mocked |
@@ -714,7 +714,7 @@ npm run start:test
 ### 8.2 Tool Stack
 
 | Category | Tool | Purpose | Version |
-|----------|------|---------|---------|
+| ---------- | ------ |---------|---------|
 | **UI Testing** | [Playwright] | Browser automation | [Latest] |
 | **API Testing** | [Supertest] | HTTP assertion | [Latest] |
 | **Mobile Testing** | [Appium/Detox] | Mobile automation | [Latest] |
@@ -895,7 +895,7 @@ test.describe('Authentication', { tag: '@smoke' }, () => {
 ### 10.1 Test Suites
 
 | Suite | Purpose | Scenarios | Duration | Frequency |
-|-------|---------|-----------|----------|-----------|
+| ------- | --------- |-----------|----------|-----------|
 | **Smoke** | Critical paths only | P0 scenarios | ~10 min | Every commit |
 | **Regression** | Core functionality | P0 + P1 scenarios | ~1 hour | Daily (nightly) |
 | **Full** | Comprehensive | All scenarios | ~3-4 hours | Weekly |
@@ -984,7 +984,7 @@ npx playwright test --shard=2/4
 ### 10.5 Execution Triggers
 
 | Trigger | Suite | Condition |
-|---------|-------|-----------|
+| --------- | ------- |-----------|
 | **Git Push** | Smoke | Every push to main/develop |
 | **Pull Request** | Smoke + affected scenarios | PR opened/updated |
 | **Scheduled** | Regression | Daily at 2 AM |
@@ -1051,7 +1051,7 @@ npx playwright test --shard=2/4
 ### 11.4 Key Metrics
 
 | Metric | Definition | Target |
-|--------|------------|--------|
+| -------- | ------------ |--------|
 | **Pass Rate** | (Passed / Total) × 100 | ≥ 95% |
 | **Execution Time** | Time to run full suite | ≤ 4 hours |
 | **Flaky Rate** | Intermittent failures | ≤ 2% |
@@ -1092,7 +1092,7 @@ test('Flaky test example', async ({ page }) => {
 ### 12.2 Test Maintenance Schedule
 
 | Task | Frequency | Owner |
-|------|-----------|-------|
+| ------ | ----------- |-------|
 | Review flaky tests | Weekly | QA Lead |
 | Update test data | Monthly | QA Team |
 | Review test coverage | Monthly | QA + Dev |
@@ -1139,7 +1139,7 @@ test('Flaky test example', async ({ page }) => {
 ### 13.1 Glossary
 
 | Term | Definition |
-|------|------------|
+| ------ | ------------ |
 | **E2E Test** | End-to-end test validating entire system workflow |
 | **Smoke Test** | Quick test of critical functionality |
 | **Regression Test** | Test ensuring existing functionality still works |
@@ -1168,7 +1168,7 @@ test('Flaky test example', async ({ page }) => {
 **Scenario Coverage by Feature**:
 
 | Feature | Total Scenarios | P0 | P1 | P2 | P3 | Coverage % |
-|---------|----------------|----|----|----|----|------------|
+| --------- | ---------------- |----|----|----|----|------------|
 | Authentication | 12 | 4 | 5 | 2 | 1 | 95% |
 | User Management | 8 | 2 | 4 | 2 | 0 | 90% |
 | [Feature 3] | [#] | [#] | [#] | [#] | [#] | [%] |
@@ -1192,7 +1192,7 @@ test('Flaky test example', async ({ page }) => {
 ### 13.5 Contact Information
 
 | Role | Name | Email | Slack |
-|------|------|-------|-------|
+| ------ | ------ |-------|-------|
 | **QA Lead** | [Name] | [email] | @[handle] |
 | **Test Architect** | [Name] | [email] | @[handle] |
 | **DevOps Contact** | [Name] | [email] | @[handle] |

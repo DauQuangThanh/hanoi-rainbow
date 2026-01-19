@@ -1,6 +1,6 @@
 # Performance Optimization
 
-### Query Optimization
+## Query Optimization
 
 ```sql
 -- Use EXPLAIN to analyze queries

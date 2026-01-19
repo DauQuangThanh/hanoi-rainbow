@@ -2,7 +2,7 @@
 
 ## Azure Blob Storage
 
-### Storage Account Types
+## Storage Account Types
 
 **Performance Tiers:**
 
@@ -248,7 +248,7 @@ New-AzStorageSyncServerEndpoint -ResourceGroupName myResourceGroup -StorageSyncS
 ### Disk Types Comparison
 
 | Feature | Ultra Disk | Premium SSD v2 | Premium SSD | Standard SSD | Standard HDD |
-|---------|-----------|----------------|-------------|--------------|--------------|
+| --------- | ----------- |----------------|-------------|--------------|--------------|
 | Max IOPS | 160,000 | 80,000 | 20,000 | 6,000 | 2,000 |
 | Max Throughput | 4,000 MB/s | 1,200 MB/s | 900 MB/s | 750 MB/s | 500 MB/s |
 | Latency | Sub-ms | Sub-ms | Single-digit ms | Single-digit ms | Tens of ms |

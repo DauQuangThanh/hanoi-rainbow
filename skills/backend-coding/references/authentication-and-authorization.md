@@ -1,6 +1,6 @@
 # Authentication & Authorization
 
-### JWT Authentication
+## JWT Authentication
 
 ```typescript
 // Node.js JWT implementation

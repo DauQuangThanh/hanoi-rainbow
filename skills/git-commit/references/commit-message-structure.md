@@ -1,6 +1,6 @@
 # Commit Message Structure
 
-### Basic Format
+## Basic Format
 
 ```
 <type>(<scope>): <subject>

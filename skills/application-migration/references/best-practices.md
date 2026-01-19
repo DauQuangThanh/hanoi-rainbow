@@ -1,6 +1,6 @@
 # Best Practices
 
-### Do's
+## Do's
 
 ✅ **Start Small**: Pilot with non-critical functionality first
 ✅ **Automate**: Infrastructure, deployment, testing, data migration

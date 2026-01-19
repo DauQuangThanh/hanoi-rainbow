@@ -1,6 +1,6 @@
 # Common Commands
 
-### Kubernetes
+## Kubernetes
 
 ```bash
 # Get resources

@@ -8,7 +8,7 @@ COBOL programs running under CICS or IMS use implicit transaction management. In
 
 ## CICS Transaction Concepts
 
-### CICS Transaction Model
+## CICS Transaction Model
 
 **Key Characteristics**:
 

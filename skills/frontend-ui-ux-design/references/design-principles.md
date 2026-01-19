@@ -1,6 +1,6 @@
 # Design Principles
 
-### 1. Visual Hierarchy
+## 1. Visual Hierarchy
 
 - **Size**: Larger elements draw more attention
 - **Color**: Bright colors stand out, use sparingly

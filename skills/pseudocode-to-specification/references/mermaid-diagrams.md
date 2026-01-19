@@ -20,7 +20,7 @@ This document provides guidance on creating Mermaid diagrams from pseudocode ana
 
 ## Diagram Types and Use Cases
 
-### 1. Sequence Diagram
+## 1. Sequence Diagram
 
 **Use for:** Interaction flows, API calls, message passing
 
@@ -482,7 +482,7 @@ graph LR
 ### Choosing the Right Diagram
 
 | Need to Show | Use This Diagram |
-|--------------|------------------|
+| -------------- | ------------------ |
 | Message flow between systems | Sequence Diagram (sequenceDiagram) |
 | Business process flow | Flowchart (flowchart TD/LR) |
 | Entity lifecycle | State Diagram (stateDiagram-v2) |

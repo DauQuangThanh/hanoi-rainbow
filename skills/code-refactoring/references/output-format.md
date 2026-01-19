@@ -2,7 +2,7 @@
 
 When performing refactoring, structure your response as:
 
-### 1. Analysis
+## 1. Analysis
 
 - Identified code smells
 - Complexity metrics

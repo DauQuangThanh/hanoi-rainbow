@@ -4,7 +4,7 @@ Detailed migration examples and patterns for converting Fujitsu mainframe applic
 
 ## Pattern 1: Fujitsu COBOL to Java Spring Boot
 
-### Fujitsu COBOL Program Example
+## Fujitsu COBOL Program Example
 
 ```cobol
 IDENTIFICATION DIVISION.

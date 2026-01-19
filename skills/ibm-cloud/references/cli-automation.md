@@ -12,7 +12,7 @@
 
 ## IBM Cloud CLI
 
-### Installation
+## Installation
 
 ```bash
 # macOS

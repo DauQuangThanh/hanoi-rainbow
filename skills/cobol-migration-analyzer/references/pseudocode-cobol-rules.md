@@ -7,7 +7,7 @@
 ## Division Mapping
 
 | COBOL | Pseudocode Section |
-|-------|-------------------|
+| ------- | ------------------- |
 | IDENTIFICATION DIVISION | Program Overview |
 | ENVIRONMENT DIVISION | Data Structures (file controls) |
 | DATA DIVISION | Data Structures |
@@ -16,7 +16,7 @@
 ## Data Types
 
 | COBOL | Pseudocode | Notes |
-|-------|-----------|-------|
+| ------- | ----------- |-------|
 | `PIC 9(n)` | `INTEGER` | |
 | `PIC 9(n)V9(m)` | `DECIMAL(n+m,m)` | Financial precision |
 | `PIC S9(n)V9(m) COMP-3` | `DECIMAL(n+m,m)` | **Packed decimal - preserve exactly!** |
@@ -27,7 +27,7 @@
 ## Statement Mapping
 
 | COBOL | Pseudocode |
-|-------|-----------|
+| ------- | ----------- |
 | `MOVE src TO dest` | `dest = src` |
 | `ADD x TO y` | `y = y + x` |
 | `COMPUTE result = expr` | `result = expr` |
@@ -40,7 +40,7 @@
 ## File Operations
 
 | COBOL | Pseudocode |
-|-------|-----------|
+| ------- | ----------- |
 | `OPEN INPUT file` | `file = OPEN(path) FOR READING` |
 | `OPEN OUTPUT file` | `file = OPEN(path) FOR WRITING` |
 | `READ file AT END` | `TRY: record = READ_RECORD(file) CATCH EndOfFile:` |
@@ -49,7 +49,7 @@
 
 ## Translation Patterns
 
-### 88-Level → ENUM
+## 88-Level → ENUM
 
 ```cobol
 01 RECORD-TYPE PIC X.

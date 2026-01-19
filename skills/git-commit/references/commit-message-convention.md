@@ -10,7 +10,7 @@ All commits must follow conventional commit format:
 
 ```
 
-### Enforce with Tools
+## Enforce with Tools
 
 **commitlint:**
 ```json

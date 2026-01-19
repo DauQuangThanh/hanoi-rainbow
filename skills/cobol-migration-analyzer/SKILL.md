@@ -9,7 +9,7 @@ Analyze legacy COBOL programs and JCL scripts for migration to Java. Extract bus
 
 ## Core Capabilities
 
-### 1. COBOL Program Analysis
+## 1. COBOL Program Analysis
 
 Extract COBOL divisions (IDENTIFICATION, ENVIRONMENT, DATA, PROCEDURE), Working-Storage variables, file definitions (FD), business logic paragraphs, PERFORM statements, CALL hierarchies, embedded SQL, and error handling patterns.
 
@@ -60,7 +60,7 @@ Document program overview, dependencies, data structures, business logic pattern
 ### COBOL to Java Type Mapping
 
 | COBOL Picture | Java Type | Notes |
-|---------------|-----------|-------|
+| --------------- | ----------- |-------|
 | `PIC 9(n)` | `int`, `long`, `BigInteger` | Unsigned numeric |
 | `PIC S9(n)V9(m)` | `BigDecimal` | Signed decimal |
 | `PIC X(n)` | `String` | Alphanumeric |

@@ -4,7 +4,7 @@ Complete framework for planning and executing Fujitsu mainframe migrations to mo
 
 ## 1. Assessment Phase
 
-### 1.1 Inventory Collection
+## 1.1 Inventory Collection
 
 Create comprehensive inventory of all mainframe assets:
 
@@ -545,7 +545,7 @@ Monday 8:00 AM - Business opens with new system
 ### 7.1 Key Risks
 
 | Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
+| ------ | -------- |-------------|------------|
 | Data loss during migration | High | Low | Backups, validation, rehearsals |
 | Performance degradation | High | Medium | Load testing, tuning, monitoring |
 | Extended downtime | High | Medium | Rehearsals, rollback plan |

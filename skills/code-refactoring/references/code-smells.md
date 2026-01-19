@@ -6,7 +6,7 @@ This reference provides comprehensive guidance on identifying and addressing cod
 
 Code that has grown so large and unwieldy that it's difficult to work with.
 
-### Long Method
+## Long Method
 
 **Symptoms**: Method contains too many lines of code (generally >20-30 lines)
 

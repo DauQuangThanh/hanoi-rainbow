@@ -2,7 +2,7 @@
 
 ## Migration Strategies
 
-### Assessment Phase
+## Assessment Phase
 
 **Inventory Discovery**
 

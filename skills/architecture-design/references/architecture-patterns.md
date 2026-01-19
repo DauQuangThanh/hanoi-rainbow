@@ -4,7 +4,7 @@ Detailed descriptions of common architecture patterns with use cases, benefits, 
 
 ## Visual Overview
 
-### Layered Architecture
+## Layered Architecture
 
 ```
 ┌─────────────────────────────────┐
@@ -436,7 +436,7 @@ Frontend application is composed of independent, loosely coupled micro-apps.
 ## Pattern Selection Matrix
 
 | Pattern | Complexity | Scalability | Team Size | Cost |
-|---------|-----------|-------------|-----------|------|
+| --------- | ----------- |-------------|-----------|------|
 | Monolithic | Low | Limited | Small | Low |
 | Microservices | High | Excellent | Large | High |
 | Event-Driven | High | Excellent | Medium-Large | Medium-High |

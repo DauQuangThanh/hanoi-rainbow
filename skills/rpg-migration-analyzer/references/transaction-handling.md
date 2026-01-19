@@ -8,7 +8,7 @@ RPG programs running on AS/400 (IBM i) use commitment control for transaction ma
 
 ## AS/400 Commitment Control Concepts
 
-### Commitment Control Model
+## Commitment Control Model
 
 **Key Characteristics**:
 

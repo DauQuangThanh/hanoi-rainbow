@@ -1,6 +1,6 @@
 # Infrastructure as Code Migration
 
-### Terraform State Migration
+## Terraform State Migration
 
 ```bash
 # Migrate state between backends

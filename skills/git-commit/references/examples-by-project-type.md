@@ -1,6 +1,6 @@
 # Examples by Project Type
 
-### Web Application
+## Web Application
 
 ```
 feat(dashboard): add real-time analytics widget

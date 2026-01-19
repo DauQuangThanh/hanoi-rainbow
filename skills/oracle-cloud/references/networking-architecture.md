@@ -2,7 +2,7 @@
 
 ## Virtual Cloud Network (VCN) Design
 
-### VCN CIDR Planning
+## VCN CIDR Planning
 
 **Best Practices**:
 

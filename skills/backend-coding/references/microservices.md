@@ -4,7 +4,7 @@ This reference covers microservices patterns, service communication, API gateway
 
 ## Service Communication Patterns
 
-### Synchronous Communication (HTTP/REST)
+## Synchronous Communication (HTTP/REST)
 
 ```typescript
 // Service A calling Service B

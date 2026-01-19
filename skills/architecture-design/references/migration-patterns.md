@@ -2,7 +2,7 @@
 
 When migrating from legacy systems:
 
-### Strangler Fig Pattern
+## Strangler Fig Pattern
 
 - Gradually replace legacy functionality
 - Run old and new systems in parallel

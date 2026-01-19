@@ -5,7 +5,7 @@ Comprehensive mapping guide for converting Fujitsu mainframe data types to moder
 ## Fujitsu COBOL to Java Type Mapping
 
 | Fujitsu COBOL | Java Type | Notes | Example |
-|---------------|-----------|-------|---------|
+| --------------- | ----------- |-------|---------|
 | `PIC 9(n)` where n ≤ 9 | `int` | Unsigned numeric | `PIC 9(6)` → `int` |
 | `PIC 9(n)` where n ≤ 18 | `long` | Unsigned numeric | `PIC 9(12)` → `long` |
 | `PIC 9(n)` where n > 18 | `BigInteger` | Large unsigned | `PIC 9(25)` → `BigInteger` |
@@ -25,7 +25,7 @@ Comprehensive mapping guide for converting Fujitsu mainframe data types to moder
 | `OCCURS n` | `List<T>`, `T[]` | Arrays/tables | Prefer `List<T>` |
 | `OCCURS DEPENDING ON` | `List<T>` | Variable arrays | Use dynamic list |
 
-### Critical Notes
+## Critical Notes
 
 1. **Never use `float` or `double` for monetary values** - always use `BigDecimal`
 2. **COMP-3 must be BigDecimal** - financial calculations require precision
@@ -35,7 +35,7 @@ Comprehensive mapping guide for converting Fujitsu mainframe data types to moder
 ## SYMFOWARE to PostgreSQL Type Mapping
 
 | SYMFOWARE Type | PostgreSQL Type | Notes | Size Limits |
-|----------------|-----------------|-------|-------------|
+| ---------------- | ----------------- |-------|-------------|
 | `CHAR(n)` | `CHAR(n)` | Fixed length, space-padded | 1-10485760 |
 | `VARCHAR(n)` | `VARCHAR(n)` | Variable length | 1-10485760 |
 | `NCHAR(n)` | `CHAR(n)` | National char | 1-5242880 |
@@ -74,7 +74,7 @@ Comprehensive mapping guide for converting Fujitsu mainframe data types to moder
 ### Fujitsu File Organizations
 
 | Fujitsu File Type | Description | Modern Equivalent | Implementation |
-|-------------------|-------------|-------------------|----------------|
+| ------------------- | ------------- |-------------------|----------------|
 | SAM (Sequential Access) | Sequential file processing | Sequential processing | `BufferedReader`/`BufferedWriter` |
 | PAM (Partitioned Access) | Directory with members | File system directory | `Files.list()`, `Files.walk()` |
 | ISAM (Indexed Sequential) | Indexed file access | Database table with index | JPA Entity with `@Index` |
@@ -328,7 +328,7 @@ public class RefundView {
 ### COBOL Date Formats to Java
 
 | COBOL Format | Example | Java Type | Conversion |
-|--------------|---------|-----------|------------|
+| -------------- | --------- |-----------|------------|
 | `PIC 9(8)` (YYYYMMDD) | 20260115 | `LocalDate` | `LocalDate.parse("20260115", DateTimeFormatter.ofPattern("yyyyMMdd"))` |
 | `PIC 9(6)` (YYMMDD) | 260115 | `LocalDate` | Handle century properly |
 | `PIC X(10)` (YYYY-MM-DD) | 2026-01-15 | `LocalDate` | `LocalDate.parse("2026-01-15")` |

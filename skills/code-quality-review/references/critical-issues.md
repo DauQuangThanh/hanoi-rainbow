@@ -1,6 +1,6 @@
 # Critical Issues
 
-### Issue 1: Excessive Cyclomatic Complexity
+## Issue 1: Excessive Cyclomatic Complexity
 
 **Severity:** Critical
 **Category:** Complexity

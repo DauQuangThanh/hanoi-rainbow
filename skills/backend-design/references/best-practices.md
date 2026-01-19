@@ -1,6 +1,6 @@
 # Best Practices
 
-### API Design
+## API Design
 
 1. Use consistent naming conventions
 2. Version your APIs from the start

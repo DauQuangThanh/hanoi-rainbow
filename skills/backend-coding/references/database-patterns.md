@@ -1,6 +1,6 @@
 # Database Patterns
 
-### Transaction Management
+## Transaction Management
 
 ```typescript
 // TypeORM transactions

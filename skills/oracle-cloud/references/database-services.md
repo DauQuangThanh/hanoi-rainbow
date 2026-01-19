@@ -2,7 +2,7 @@
 
 ## Autonomous Database
 
-### Autonomous Transaction Processing (ATP)
+## Autonomous Transaction Processing (ATP)
 
 **Use Cases**: OLTP workloads, web applications, SaaS applications
 

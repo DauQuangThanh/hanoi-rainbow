@@ -5,7 +5,7 @@
 ```markdown
 ## Bug Report
 
-### Summary
+## Summary
 **Bug ID**: [BUG-XXXX]
 **Title**: [Concise, descriptive title]
 **Reporter**: [Name/Email]

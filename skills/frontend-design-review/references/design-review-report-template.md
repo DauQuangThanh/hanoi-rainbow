@@ -29,7 +29,7 @@ Use this comprehensive template for frontend design review reports.
 
 ## Review Scope
 
-### Included in Review
+## Included in Review
 - [List of screens/flows reviewed]
 - [Design components evaluated]
 - [Specific aspects covered: accessibility, responsive design, etc.]
@@ -54,28 +54,28 @@ Use this comprehensive template for frontend design review reports.
 [Issues that must be fixed before launch]
 
 | ID | Issue | Screen/Component | Severity | Impact |
-|----|-------|------------------|----------|---------|
+| ---- | ------- |------------------|----------|---------|
 | C-01 | [Issue description] | [Location] | Critical | [Impact description] |
 
 ### High Priority Issues
 [Issues that significantly impact usability or accessibility]
 
 | ID | Issue | Screen/Component | Severity | Impact |
-|----|-------|------------------|----------|---------|
+| ---- | ------- |------------------|----------|---------|
 | H-01 | [Issue description] | [Location] | High | [Impact description] |
 
 ### Medium Priority Issues
 [Issues that affect experience but aren't blocking]
 
 | ID | Issue | Screen/Component | Severity | Impact |
-|----|-------|------------------|----------|---------|
+| ---- | ------- |------------------|----------|---------|
 | M-01 | [Issue description] | [Location] | Medium | [Impact description] |
 
 ### Low Priority Issues
 [Minor improvements and polish items]
 
 | ID | Issue | Screen/Component | Severity | Impact |
-|----|-------|------------------|----------|---------|
+| ---- | ------- |------------------|----------|---------|
 | L-01 | [Issue description] | [Location] | Low | [Impact description] |
 
 ---
@@ -245,7 +245,7 @@ Use this comprehensive template for frontend design review reports.
 ## Action Items
 
 | Priority | Action | Owner | Due Date | Status |
-|----------|--------|-------|----------|--------|
+| ---------- | -------- |-------|----------|--------|
 | Critical | [Action item] | [Name] | [Date] | Not Started |
 | High | [Action item] | [Name] | [Date] | Not Started |
 | Medium | [Action item] | [Name] | [Date] | Not Started |

@@ -4,7 +4,7 @@ This document describes common patterns to recognize in pseudocode and how to ex
 
 ## Pattern Recognition Guide
 
-### 1. CRUD Operations Pattern
+## 1. CRUD Operations Pattern
 
 **Pseudocode Indicators:**
 

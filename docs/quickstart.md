@@ -13,7 +13,7 @@ Follow this order for best results:
 > **💡 Automatic Version Control:** All Rainbow commands automatically generate appropriate git commit messages and commit changes upon completion using semantic commit prefixes (`docs:`, `feat:`, `test:`, `chore:`).
 
 | Step | Command | Purpose |
-|------|---------|----------|
+| ------ | --------- |----------|
 | 1️⃣ | `/rainbow.regulate` | Set ground rules |
 | 2️⃣ | `/rainbow.specify` | Define requirements |
 | 3️⃣ | `/rainbow.architect` | Design system architecture (optional, once per product) |
@@ -190,7 +190,7 @@ Now specify **how** to build it (tech stack and architecture):
 ## 🎯 Key Principles
 
 | Principle | What It Means |
-|-----------|---------------|
+| ----------- | --------------- |
 | **Be Explicit** | Clearly describe what and why you're building |
 | **Skip Tech Early** | Don't worry about tech stack during specification |
 | **Iterate** | Refine specs before implementation |

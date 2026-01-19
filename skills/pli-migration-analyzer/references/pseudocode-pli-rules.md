@@ -7,7 +7,7 @@
 ## Structure Mapping
 
 | PL/I Element | Pseudocode Section |
-|--------------|-------------------|
+| -------------- | ------------------- |
 | `PROCEDURE OPTIONS(MAIN)` | Program Overview + Main Algorithm |
 | `DECLARE` / `DCL` | Data Structures |
 | `DCL file FILE` | Data Structures (file controls) |
@@ -17,7 +17,7 @@
 ## Data Types
 
 | PL/I | Pseudocode | Notes |
-|------|-----------|-------|
+| ------ | ----------- |-------|
 | `FIXED DECIMAL(n,m)` | `DECIMAL(n,m)` | **Preserve precision!** |
 | `FIXED BINARY(n)` | `INTEGER` | Binary integer |
 | `FLOAT DECIMAL(n)` | ⚠️ Use `DECIMAL` | Financial: never float! |
@@ -30,7 +30,7 @@
 ## Statement Mapping
 
 | PL/I | Pseudocode |
-|------|-----------|
+| ------ | ----------- |
 | `a = b;` | `a = b` |
 | `IF condition THEN ... ELSE` | `IF condition THEN ... ELSE` |
 | `DO WHILE(condition);` | `WHILE condition DO` |
@@ -43,7 +43,7 @@
 ## Built-in Functions
 
 | PL/I BIF | Pseudocode |
-|----------|-----------|
+| ---------- | ----------- |
 | `SUBSTR(str,pos,len)` | `SUBSTRING(str, pos, len)` |
 | `INDEX(str,search)` | `FIND(str, search)` |
 | `LENGTH(str)` | `LENGTH(str)` |
@@ -53,7 +53,7 @@
 
 ## Translation Patterns
 
-### Procedure → Function
+## Procedure → Function
 
 ```pli
 CALC_TOTAL: PROCEDURE(qty, price) RETURNS(FIXED DECIMAL(15,2));

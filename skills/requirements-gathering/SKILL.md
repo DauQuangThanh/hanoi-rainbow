@@ -11,7 +11,7 @@ This skill guides you through systematic requirements gathering and documentatio
 
 ## Requirements Gathering Workflow
 
-### 1. Planning & Stakeholder Analysis
+## 1. Planning & Stakeholder Analysis
 
 **Identify Stakeholders:**
 

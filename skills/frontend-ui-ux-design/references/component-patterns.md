@@ -1,6 +1,6 @@
 # Component Patterns
 
-### Forms Best Practices
+## Forms Best Practices
 
 1. **Input Design**
    - Clear labels above inputs

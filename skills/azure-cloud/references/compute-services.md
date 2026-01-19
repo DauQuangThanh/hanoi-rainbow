@@ -2,7 +2,7 @@
 
 ## Azure Virtual Machines
 
-### VM Size Selection
+## VM Size Selection
 
 **General Purpose (B, D, DC, DS)**
 

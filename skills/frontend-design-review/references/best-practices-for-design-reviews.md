@@ -1,6 +1,6 @@
 # Best Practices for Design Reviews
 
-### 1. **Be Objective and Evidence-Based**
+## 1. **Be Objective and Evidence-Based**
 
 - Base feedback on established principles (WCAG, usability heuristics, design system rules)
 - Provide specific examples and screenshots

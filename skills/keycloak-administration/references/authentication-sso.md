@@ -2,7 +2,7 @@
 
 ## Authentication Flows
 
-### Browser Flow (default login)
+## Browser Flow (default login)
 
 1. Cookie check
 2. Kerberos (if configured)

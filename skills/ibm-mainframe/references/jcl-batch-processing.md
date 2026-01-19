@@ -2,7 +2,7 @@
 
 ## JCL Fundamentals
 
-### Job Statement
+## Job Statement
 
 ```jcl
 //JOBNAME  JOB (account),'programmer-name',

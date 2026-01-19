@@ -1,6 +1,6 @@
 # Examples
 
-### Example 1: E-Commerce Platform
+## Example 1: E-Commerce Platform
 
 **Requirements**: Build a scalable e-commerce platform handling 100K daily active users
 

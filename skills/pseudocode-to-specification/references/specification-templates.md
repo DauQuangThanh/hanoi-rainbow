@@ -16,7 +16,7 @@ Status: [Draft/Review/Approved]
 
 ## 1. Introduction
 
-### 1.1 Purpose
+## 1.1 Purpose
 [What this SRS describes and who should read it]
 
 ### 1.2 Scope
@@ -361,7 +361,7 @@ const response = await fetch('https://api.example.com/v1/resource/123', {
 ### Attributes
 
 | Attribute | Type | Nullable | Default | Constraints | Description |
-|-----------|------|----------|---------|-------------|-------------|
+| ----------- | ------ |----------|---------|-------------|-------------|
 | id | UUID | No | auto | Primary Key | Unique identifier |
 | name | String(255) | No | - | Unique | Entity name |
 | status | Enum | No | 'active' | ['active','inactive'] | Current status |
@@ -443,7 +443,7 @@ const response = await fetch('https://api.example.com/v1/resource/123', {
 ### Test Steps
 
 | Step | Action | Expected Result |
-|------|--------|----------------|
+| ------ | -------- |----------------|
 | 1 | [Action to perform] | [What should happen] |
 | 2 | [Next action] | [Expected outcome] |
 | 3 | [Verification step] | [Expected state] |

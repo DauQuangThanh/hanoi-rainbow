@@ -2,7 +2,7 @@
 
 ## Client Types
 
-### 1. OpenID Connect (OIDC) Clients
+## 1. OpenID Connect (OIDC) Clients
 
 - Standard flow: Authorization code flow (web applications)
 - Implicit flow: Legacy, not recommended

@@ -20,7 +20,7 @@ Provides expert guidance across Alibaba Cloud ecosystem:
 
 ## Best Practices
 
-### Architecture
+## Architecture
 
 - Deploy across multiple zones for high availability
 - Use SLB for load balancing with health checks

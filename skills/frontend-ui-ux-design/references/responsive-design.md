@@ -4,7 +4,7 @@ Comprehensive guide to responsive web design patterns and techniques.
 
 ## Responsive Breakpoints
 
-### Standard Breakpoints
+## Standard Breakpoints
 
 ```css
 /* Mobile First Approach */

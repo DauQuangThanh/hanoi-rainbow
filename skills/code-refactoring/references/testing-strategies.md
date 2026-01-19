@@ -6,7 +6,7 @@ This reference provides comprehensive strategies for safely refactoring code thr
 
 Before refactoring, establish a comprehensive safety net of tests. The goal is to verify behavior doesn't change during refactoring.
 
-### Testing Pyramid for Refactoring
+## Testing Pyramid for Refactoring
 
 ```
          /\

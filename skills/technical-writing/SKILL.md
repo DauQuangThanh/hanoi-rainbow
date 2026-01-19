@@ -9,7 +9,7 @@ Creates professional technical documentation with clear structure, appropriate d
 
 ## Workflow
 
-### 1. Identify Documentation Type
+## 1. Identify Documentation Type
 
 Determine which type of documentation is needed:
 

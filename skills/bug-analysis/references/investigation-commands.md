@@ -2,7 +2,7 @@
 
 ## Version Control Investigation
 
-### Git Commands for Bug Investigation
+## Git Commands for Bug Investigation
 
 **Find when a bug was introduced:**
 

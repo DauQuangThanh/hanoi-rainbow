@@ -12,9 +12,9 @@ Comprehensive criteria for assessing frontend code quality.
 
 ## Component Structure
 
-### React Components
+## React Components
 
-#### Single Responsibility Principle
+### Single Responsibility Principle
 
 **Good:**
 

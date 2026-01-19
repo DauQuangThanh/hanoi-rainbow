@@ -1,6 +1,6 @@
 # Team Conventions
 
-### Establish Project Standards
+## Establish Project Standards
 
 Document in `CONTRIBUTING.md`:
 

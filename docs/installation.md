@@ -9,7 +9,7 @@
 Before installing, make sure you have:
 
 | Requirement | Description |
-|-------------|-------------|
+| ------------- | ------------- |
 | **Operating System** | Linux, macOS, or Windows (PowerShell supported) |
 | **AI Assistant** | [Claude Code](https://www.anthropic.com/claude-code), [GitHub Copilot](https://code.visualstudio.com/), [Gemini CLI](https://github.com/google-gemini/gemini-cli), or [CodeBuddy CLI](https://www.codebuddy.ai/cli) |
 | **Package Manager** | [uv](https://docs.astral.sh/uv/) |
@@ -101,7 +101,7 @@ Your AI agent should show these core commands:
 **Core Workflow:**
 
 | Command | Purpose |
-|---------|----------|
+| --------- | ---------- |
 | `/rainbow.regulate` | Set project principles |
 | `/rainbow.specify` | Create specifications |
 | `/rainbow.design` | Generate implementation plans |

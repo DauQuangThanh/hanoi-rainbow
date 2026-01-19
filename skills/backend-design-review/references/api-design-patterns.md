@@ -17,7 +17,7 @@ This document provides comprehensive guidance on API design patterns, best pract
 
 ## RESTful API Design
 
-### REST Principles
+## REST Principles
 
 **RE**presentational **S**tate **T**ransfer (REST) is an architectural style with six constraints:
 
@@ -60,7 +60,7 @@ GET /api/users/123/orders/456       (get specific order for user 123)
 ### HTTP Methods
 
 | Method | Idempotent | Safe | Usage | Success Status |
-|--------|-----------|------|-------|----------------|
+| -------- | ----------- |------|-------|----------------|
 | GET | ✅ | ✅ | Retrieve resource(s) | 200 OK |
 | POST | ❌ | ❌ | Create new resource | 201 Created |
 | PUT | ✅ | ❌ | Replace entire resource | 200 OK, 204 No Content |

@@ -1,6 +1,6 @@
 # Execution Playbook
 
-### 1. Pre-Migration Checklist
+## 1. Pre-Migration Checklist
 
 ```markdown
 Infrastructure:

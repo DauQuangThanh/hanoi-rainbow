@@ -19,7 +19,7 @@ Provides expert guidance covering the entire software delivery lifecycle:
 
 ## Best Practices
 
-### CI/CD
+## CI/CD
 
 - Keep pipelines fast (< 10 minutes for feedback)
 - Fail fast with quick tests first

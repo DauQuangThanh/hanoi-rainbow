@@ -1,6 +1,6 @@
 # Monitoring & Observability
 
-### Prometheus Setup
+## Prometheus Setup
 
 **Prometheus Configuration:**
 

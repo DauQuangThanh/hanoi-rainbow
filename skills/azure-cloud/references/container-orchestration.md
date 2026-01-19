@@ -2,7 +2,7 @@
 
 ## AKS Cluster Architecture
 
-### Cluster Components
+## Cluster Components
 
 **Control Plane (Microsoft-managed)**
 

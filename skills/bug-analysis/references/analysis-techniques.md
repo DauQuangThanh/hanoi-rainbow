@@ -2,7 +2,7 @@
 
 ## Root Cause Analysis Methods
 
-### 1. Five Whys Technique
+## 1. Five Whys Technique
 
 Ask "Why?" repeatedly to drill down to root cause:
 
@@ -67,7 +67,7 @@ Compare working vs non-working scenarios:
 **Matrix Approach:**
 
 | Scenario | Works? | Version | Environment | Data |
-|----------|--------|---------|-------------|------|
+| ---------- | -------- |---------|-------------|------|
 | Production | No | v2.1.0 | Prod | Real data |
 | Staging | Yes | v2.1.0 | Staging | Test data |
 | Local | Yes | v2.1.0 | Dev | Mock data |

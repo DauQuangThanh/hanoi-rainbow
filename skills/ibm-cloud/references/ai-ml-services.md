@@ -13,7 +13,7 @@
 
 ## Watson Assistant
 
-### Overview
+## Overview
 
 Build conversational interfaces with AI-powered chatbots.
 

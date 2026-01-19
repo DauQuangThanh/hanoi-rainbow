@@ -9,7 +9,7 @@ Analyzes legacy RPG programs (RPG III/IV/ILE) for migration to Java, extracting 
 
 ## Core Capabilities
 
-### 1. Program Analysis
+## 1. Program Analysis
 
 Extract specification types (H/F/D/C/P-specs), data structures, file definitions, business logic, indicators (*IN), built-in functions (%SUBST, %TRIM, %EOF), and error handling (%ERROR, %STATUS).
 

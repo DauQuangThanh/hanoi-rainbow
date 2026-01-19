@@ -15,7 +15,7 @@ Owner: Product Manager
 3. **Transfer**: Outsource or insure
 4. **Accept**: Acknowledge and monitor
 
-### 9. Milestone and Timeline Planning
+## 9. Milestone and Timeline Planning
 
 **Project Roadmap:**
 
@@ -66,7 +66,7 @@ Testing (ongoing)      [══════════════════�
 Documentation                    [══════════]
 ```
 
-### 10. Progress Tracking
+## 10. Progress Tracking
 
 **Burndown Chart:**
 

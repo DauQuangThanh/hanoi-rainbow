@@ -2,7 +2,7 @@
 
 ## EC2 (Elastic Compute Cloud)
 
-### Instance Types and Families
+## Instance Types and Families
 
 **General Purpose** (T, M series)
 

@@ -11,7 +11,7 @@ This skill guides systematic code refactoring to improve code quality, maintaina
 
 ## Refactoring Workflow
 
-### Step 1: Analyze Code and Identify Issues
+## Step 1: Analyze Code and Identify Issues
 
 Examine the codebase to identify code smells and quality issues:
 

@@ -14,7 +14,7 @@
 
 ## Virtual Private Cloud (VPC)
 
-### Overview
+## Overview
 
 VPC provides isolated, software-defined network infrastructure in IBM Cloud with complete control over IP addressing, routing, security, and connectivity.
 

@@ -4,7 +4,7 @@ This guide covers common patterns, anti-patterns, and best practices for integra
 
 ## Test Design Patterns
 
-### 1. Arrange-Act-Assert (AAA) Pattern
+## 1. Arrange-Act-Assert (AAA) Pattern
 
 **Structure**
 

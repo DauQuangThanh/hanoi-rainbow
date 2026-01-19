@@ -28,7 +28,7 @@ What is the change that we're proposing and/or doing?
 ## Consequences
 What becomes easier or more difficult to do because of this change?
 
-### Positive
+## Positive
 - Benefit 1
 - Benefit 2
 

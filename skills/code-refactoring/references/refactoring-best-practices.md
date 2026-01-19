@@ -1,6 +1,6 @@
 # Refactoring Best Practices
 
-### 1. Test-Driven Refactoring
+## 1. Test-Driven Refactoring
 
 Always refactor with a safety net of tests:
 

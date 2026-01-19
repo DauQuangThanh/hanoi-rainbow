@@ -1,6 +1,6 @@
 # Best Practices
 
-### Requirements Quality Checklist
+## Requirements Quality Checklist
 
 - [ ] **Clear**: Unambiguous and easy to understand
 - [ ] **Complete**: All necessary information included

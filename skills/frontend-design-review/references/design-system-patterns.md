@@ -19,7 +19,7 @@ This document provides comprehensive guidance on evaluating and validating desig
 
 Design tokens are the visual design atoms of a design system—specifically, they are named entities that store visual design attributes. They ensure consistency across products and platforms.
 
-### Color Tokens
+## Color Tokens
 
 **Token Structure:**
 

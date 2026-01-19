@@ -2,7 +2,7 @@
 
 ## OSS (Object Storage Service)
 
-### Bucket Configuration
+## Bucket Configuration
 
 **Storage Classes**
 

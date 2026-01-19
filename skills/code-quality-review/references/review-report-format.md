@@ -28,7 +28,7 @@
 
 ## Report Structure
 
-### Executive Summary
+## Executive Summary
 
 ```
 Code Quality Score: [X/100]
@@ -86,7 +86,7 @@ For each issue, provide:
 
 ```markdown
 | Metric | Current | Target | Status |
-|--------|---------|--------|--------|
+| -------- | --------- |--------|--------|
 | Cyclomatic Complexity (avg) | X | <10 | ⚠️ |
 | Lines per Method (avg) | X | <50 | ✅ |
 | Code Duplication | X% | <5% | ⚠️ |

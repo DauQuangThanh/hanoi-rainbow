@@ -8,7 +8,7 @@ Quality attributes (also called non-functional requirements) are critical proper
 
 ## Key Quality Attributes
 
-### 1. Scalability
+## 1. Scalability
 
 **Definition**: Ability to handle increased load without performance degradation.
 
@@ -656,7 +656,7 @@ Architecture is about making trade-offs between quality attributes:
 ## Assessment Matrix
 
 | Quality Attribute | Current State | Target State | Gap | Priority | Effort |
-|-------------------|---------------|--------------|-----|----------|--------|
+| ------------------- | --------------- |--------------|-----|----------|--------|
 | Scalability | 1K users | 100K users | High | Critical | High |
 | Performance | 500ms p95 | 200ms p95 | Medium | High | Medium |
 | Security | Basic auth | OAuth + MFA | High | Critical | Medium |

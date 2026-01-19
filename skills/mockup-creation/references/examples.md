@@ -7,8 +7,6 @@ Production-ready mockup examples using Vue.js 3, TypeScript, Vite, and TailwindC
 - [E-commerce Product Page](#e-commerce-product-page)
 - [SaaS Dashboard](#saas-dashboard)
 - [Portfolio Landing Page](#portfolio-landing-page)
-- [Admin Panel](#admin-panel)
-- [Blog Homepage](#blog-homepage)
 
 ---
 
@@ -16,7 +14,7 @@ Production-ready mockup examples using Vue.js 3, TypeScript, Vite, and TailwindC
 
 Complete product page with gallery, reviews, and cart functionality.
 
-### ProductPage.vue
+## ProductPage.vue
 
 ```vue
 <script setup lang="ts">

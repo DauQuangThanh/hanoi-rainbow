@@ -1,6 +1,6 @@
 # React Development
 
-### Functional Components and Hooks
+## Functional Components and Hooks
 
 **Modern React Component**:
 

@@ -1,9 +1,9 @@
 # Cost Analysis
 
-### Estimated Monthly Costs
+## Estimated Monthly Costs
 
 | Component | Cost | Notes |
-|-----------|------|-------|
+| ----------- | ------ |-------|
 | Compute | $X | [Details] |
 | Database | $X | [Details] |
 | Storage | $X | [Details] |

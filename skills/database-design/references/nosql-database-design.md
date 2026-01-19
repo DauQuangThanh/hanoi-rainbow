@@ -1,6 +1,6 @@
 # NoSQL Database Design
 
-### MongoDB Document Design
+## MongoDB Document Design
 
 ```javascript
 // Embedded Documents (one-to-few)

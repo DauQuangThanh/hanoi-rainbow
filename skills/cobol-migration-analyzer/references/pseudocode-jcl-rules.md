@@ -7,7 +7,7 @@
 ## Element Mapping
 
 | JCL Element | Pseudocode Equivalent |
-|-------------|----------------------|
+| ------------- | ---------------------- |
 | `//JOB` | Job Definition |
 | `//EXEC PGM=` | Execute Program |
 | `//EXEC PROC=` | Call Procedure |
@@ -19,7 +19,7 @@
 ## Return Code Mapping
 
 | RC | Meaning | Pseudocode |
-|----|---------|-----------|
+| ---- | --------- |-----------|
 | 0 | Success | Success |
 | 4 | Warning | Warning (continue) |
 | 8 | Error | Error (may stop) |
@@ -29,7 +29,7 @@
 ## DISP Parameter Translation
 
 | DISP | Status | Normal End | Abnormal End | Pseudocode |
-|------|--------|------------|--------------|-----------|
+| ------ | -------- |------------|--------------|-----------|
 | `SHR` | Shared | Keep | Keep | READ_SHARED(dataset) |
 | `OLD` | Exclusive | Keep | Keep | READ_EXCLUSIVE(dataset) |
 | `NEW` | Create | CATLG | DELETE | CREATE(dataset) |
@@ -37,7 +37,7 @@
 
 ## Translation Patterns
 
-### Job Step Sequence
+## Job Step Sequence
 
 ```jcl
 //STEP010  EXEC PGM=PROG1

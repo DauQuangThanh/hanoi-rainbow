@@ -22,7 +22,7 @@ Provides comprehensive guidance for system-level migrations including operating 
 
 Choose your migration path based on the system type:
 
-### 1. Operating System Migration
+## 1. Operating System Migration
 
 **Use for:** Linux distribution changes, Windows to Linux, OS version upgrades
 **Load:** [migration-types.md](references/migration-types.md) for detailed workflows

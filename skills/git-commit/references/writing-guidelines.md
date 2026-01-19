@@ -1,6 +1,6 @@
 # Writing Guidelines
 
-### Subject Line Rules
+## Subject Line Rules
 
 **DO:**
 

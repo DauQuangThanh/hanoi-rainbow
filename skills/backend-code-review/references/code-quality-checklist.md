@@ -15,7 +15,7 @@ Comprehensive criteria for assessing backend code quality across Node.js, Python
 
 ## Code Organization
 
-### Layered Architecture
+## Layered Architecture
 
 **Good:**
 

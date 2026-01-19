@@ -11,7 +11,7 @@ This skill provides expert guidance for conducting thorough frontend design revi
 
 ## Core Capabilities
 
-### 1. UI/UX Design Quality Review
+## 1. UI/UX Design Quality Review
 
 - Visual design assessment (typography, color, spacing, layout, visual hierarchy)
 - User experience evaluation (flows, interactions, navigation, usability)

@@ -29,7 +29,7 @@ Templates and examples for frontend code review reports.
 
 **Rating:** ⭐⭐⭐⭐☆ (4/5)
 
-### Summary
+## Summary
 [2-3 sentence high-level summary of code quality and main findings]
 
 ### Key Findings
@@ -51,7 +51,7 @@ Templates and examples for frontend code review reports.
 ## Scores by Category
 
 | Category | Score | Notes |
-|----------|-------|-------|
+| ---------- | ------- |-------|
 | Code Quality | 8/10 | [Brief note] |
 | Performance | 7/10 | [Brief note] |
 | Accessibility | 6/10 | [Brief note] |
@@ -124,7 +124,7 @@ interface UserProfileProps {
 }
 ```
 
-#### ⚠️ Issues Found
+### ⚠️ Issues Found
 
 **Issue 1: God Component**
 
@@ -317,7 +317,7 @@ const handleClick = useCallback(() => {
 ### Summary by Category
 
 | Category | Issues | Severity |
-|----------|--------|----------|
+| ---------- | -------- |----------|
 | Keyboard Navigation | 8 | High |
 | Color Contrast | 12 | Medium |
 | Form Labels | 5 | High |
@@ -1078,7 +1078,7 @@ const comment = '<img src=x onerror="alert(document.cookie)">';
 **Vulnerable Dependencies Found:** 7
 
 | Package | Version | Severity | Fix Available |
-|---------|---------|----------|---------------|
+| --------- | --------- |----------|---------------|
 | lodash | 4.17.20 | High | 4.17.21 |
 | validator | 13.5.2 | High | 13.9.0 |
 | axios | 0.21.1 | Medium | 1.6.0 |
@@ -1119,7 +1119,7 @@ const comment = '<img src=x onerror="alert(document.cookie)">';
 ## Core Web Vitals
 
 | Metric | Current | Target | Status |
-|--------|---------|--------|--------|
+| -------- | --------- |--------|--------|
 | LCP | 3.2s | < 2.5s | ❌ Fail |
 | FID | 85ms | < 100ms | ✅ Pass |
 | CLS | 0.08 | < 0.1 | ✅ Pass |
@@ -1194,7 +1194,7 @@ Total potential savings: 122 KB (23% reduction)
 **Current Compliance:** 67% (AA Level)
 
 | Success Criterion | Level | Status |
-|-------------------|-------|--------|
+| ------------------- | ------- |--------|
 | 1.1.1 Non-text Content | A | ⚠️ Partial |
 | 1.3.1 Info and Relationships | A | ✅ Pass |
 | 1.4.3 Contrast (Minimum) | AA | ❌ Fail |
@@ -1210,7 +1210,7 @@ Total potential savings: 122 KB (23% reduction)
 **Severity:** High
 
 | Element | Location | Current | Required | Fix |
-|---------|----------|---------|----------|-----|
+| --------- | ---------- |---------|----------|-----|
 | Secondary text | theme.css:23 | 3.2:1 | 4.5:1 | #999 → #666 |
 | Button text | Button.tsx:45 | 2.8:1 | 4.5:1 | Adjust colors |
 

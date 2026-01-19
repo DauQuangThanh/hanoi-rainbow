@@ -13,7 +13,7 @@ Practical examples showing common issues and their improvements.
 
 ## Ambiguous Requirements Examples
 
-### Example 1: Performance Requirements
+## Example 1: Performance Requirements
 
 **❌ Poor (Ambiguous)**:
 

@@ -4,7 +4,7 @@ This reference covers REST API design, GraphQL implementation, gRPC services, AP
 
 ## RESTful API Design
 
-### Resource Naming Conventions
+## Resource Naming Conventions
 
 ```
 Good Examples:

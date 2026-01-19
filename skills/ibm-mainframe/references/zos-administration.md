@@ -2,7 +2,7 @@
 
 ## System Operations
 
-### IPL (Initial Program Load)
+## IPL (Initial Program Load)
 
 **Cold start:**
 

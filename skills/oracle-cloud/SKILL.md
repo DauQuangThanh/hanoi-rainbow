@@ -20,7 +20,7 @@ Provides expert guidance for Oracle Cloud Infrastructure across all major servic
 
 ## Best Practices
 
-### Compute
+## Compute
 
 - Use flexible shapes for cost optimization
 - Enable boot volume backups and configure lifecycle policies

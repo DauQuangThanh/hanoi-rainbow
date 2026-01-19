@@ -15,7 +15,7 @@
 
 ## Db2 on Cloud
 
-### Overview
+## Overview
 
 Enterprise-grade relational database with high availability, automatic scaling, and AI-powered optimization.
 

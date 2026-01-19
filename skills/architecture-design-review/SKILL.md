@@ -11,7 +11,7 @@ Conduct systematic architecture design reviews to validate system design, assess
 
 Follow this structured approach for comprehensive architecture reviews:
 
-### 1. Gather Architecture Documentation
+## 1. Gather Architecture Documentation
 
 Collect required materials:
 

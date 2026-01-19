@@ -1,6 +1,6 @@
 # Deployment Strategies
 
-### Blue-Green Deployment
+## Blue-Green Deployment
 
 **Kubernetes Implementation:**
 

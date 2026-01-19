@@ -16,7 +16,7 @@ Comprehensive guidelines for frontend security best practices.
 
 ## Cross-Site Scripting (XSS)
 
-### Types of XSS
+## Types of XSS
 
 1. **Stored XSS:** Malicious script stored in database
 2. **Reflected XSS:** Malicious script in URL parameters

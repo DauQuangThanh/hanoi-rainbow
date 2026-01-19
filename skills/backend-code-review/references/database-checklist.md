@@ -15,7 +15,7 @@ Comprehensive guidelines for reviewing database design, queries, and patterns.
 
 ## SQL Query Optimization
 
-### N+1 Query Problem
+## N+1 Query Problem
 
 **Bad:**
 

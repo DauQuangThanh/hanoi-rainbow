@@ -1,6 +1,6 @@
 # Security Review Workflow
 
-### Step 1: Initial Security Assessment
+## Step 1: Initial Security Assessment
 
 **Gather Context:**
 

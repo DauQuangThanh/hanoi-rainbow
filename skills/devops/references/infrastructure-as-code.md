@@ -1,6 +1,6 @@
 # Infrastructure as Code
 
-### Terraform
+## Terraform
 
 **Project Structure:**
 

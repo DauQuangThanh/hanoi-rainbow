@@ -1,6 +1,6 @@
 # Migration Types
 
-### 1. Cloud-to-Cloud Migration
+## 1. Cloud-to-Cloud Migration
 
 **Common Scenarios:**
 

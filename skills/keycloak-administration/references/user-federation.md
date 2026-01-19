@@ -4,7 +4,7 @@
 
 **Purpose:** Sync users from existing directory services
 
-### Configure LDAP
+## Configure LDAP
 
 1. User Federation → Add Provider → LDAP
 2. Edit mode: READ_ONLY, WRITABLE, or UNSYNCED

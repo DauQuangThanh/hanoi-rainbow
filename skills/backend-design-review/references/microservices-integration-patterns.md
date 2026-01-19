@@ -17,7 +17,7 @@ This document provides comprehensive guidance on microservices architecture patt
 
 ## Service Decomposition
 
-### Bounded Context (Domain-Driven Design)
+## Bounded Context (Domain-Driven Design)
 
 **Definition:** A boundary within which a particular domain model applies
 
@@ -126,7 +126,7 @@ Payment Service
 ### Service Granularity Trade-offs
 
 | Aspect | Coarse-Grained (Few Services) | Fine-Grained (Many Services) |
-|--------|-------------------------------|------------------------------|
+| -------- | ------------------------------- |------------------------------|
 | Complexity | Lower | Higher |
 | Team Autonomy | Lower | Higher |
 | Deployment | Simpler | More complex |
@@ -291,7 +291,7 @@ Order Service → [Event Stream] → Topic (partitioned) → Consumer Group 1
 ### Synchronous vs. Asynchronous
 
 | Aspect | Synchronous | Asynchronous |
-|--------|-------------|--------------|
+| -------- | ------------- |--------------|
 | Response | Immediate | Eventual |
 | Coupling | Tight (temporal) | Loose |
 | Failure Handling | Caller must handle | Retry mechanism |
@@ -818,7 +818,7 @@ except requests.Timeout:
 **Timeout Guidelines:**
 
 | Service Type | Timeout |
-|--------------|---------|
+| -------------- | --------- |
 | Fast API (simple query) | 1-3 seconds |
 | Normal API (with DB query) | 3-10 seconds |
 | Slow API (aggregation) | 10-30 seconds |
@@ -1296,7 +1296,7 @@ orders-value (Avro schema):
 **Compatibility Modes:**
 
 | Mode | Consumers | Producers |
-|------|-----------|-----------|
+| ------ | ----------- |-----------|
 | BACKWARD | Old consumer can read new events | New producer |
 | FORWARD | New consumer can read old events | Old producer |
 | FULL | Both directions compatible | Both |
@@ -1378,7 +1378,7 @@ orders_stream.join(
 **Delivery Guarantees:**
 
 | Guarantee | Meaning |
-|-----------|---------|
+| ----------- | --------- |
 | At-most-once | Message may be lost, never duplicated |
 | At-least-once | Message never lost, may be duplicated |
 | Exactly-once | Message delivered exactly once |

@@ -26,7 +26,7 @@ Choose your task and load the appropriate reference:
 
 ## Installation & Setup
 
-### Deployment Options
+## Deployment Options
 
 **1. Standalone Mode (Development/Testing)**
 

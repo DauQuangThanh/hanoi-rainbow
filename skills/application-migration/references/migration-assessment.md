@@ -1,6 +1,6 @@
 # Migration Assessment
 
-### 1. Current State Analysis
+## 1. Current State Analysis
 
 **Inventory Existing Systems:**
 
@@ -76,7 +76,7 @@ Data Strategy: Polyglot persistence
 
 ```markdown
 | Capability | Current | Target | Gap | Priority |
-|------------|---------|--------|-----|----------|
+| ------------ | --------- |--------|-----|----------|
 | API Layer | None | REST/GraphQL | Need to build | High |
 | Authentication | Custom | OAuth 2.0/SAML | Need integration | High |
 | Monitoring | Basic logs | APM, distributed tracing | Tooling needed | Medium |

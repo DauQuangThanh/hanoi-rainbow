@@ -14,7 +14,7 @@ Guidelines for reviewing backend performance, optimization, and scalability.
 
 ## Caching Strategies
 
-### Redis Caching
+## Redis Caching
 
 **Good:**
 

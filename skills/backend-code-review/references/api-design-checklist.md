@@ -15,7 +15,7 @@ Comprehensive guidelines for reviewing REST, GraphQL, and gRPC APIs.
 
 ## REST API Design
 
-### Resource Naming
+## Resource Naming
 
 **Good:**
 

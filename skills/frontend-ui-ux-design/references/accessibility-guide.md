@@ -4,7 +4,7 @@ Comprehensive guide for designing and implementing accessible user interfaces.
 
 ## WCAG Principles: POUR
 
-### 1. Perceivable
+## 1. Perceivable
 
 Information and UI components must be presentable to users in ways they can perceive.
 

@@ -1,6 +1,6 @@
 # Common Scenarios
 
-### Feature Addition
+## Feature Addition
 
 ```
 feat(checkout): add coupon code validation

@@ -4,7 +4,7 @@ Comprehensive guide for designing and implementing common UI components.
 
 ## Basic Components
 
-### Button
+## Button
 
 **Purpose**: Trigger actions, submit forms, navigate
 

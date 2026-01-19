@@ -20,7 +20,7 @@ Provides expert guidance for Google Cloud Platform across all major services:
 
 ## Key Principles
 
-### General Best Practices
+## General Best Practices
 
 - **Follow least privilege** - Use IAM roles with minimal required permissions
 - **Enable monitoring** - Configure Cloud Monitoring and Logging for all services

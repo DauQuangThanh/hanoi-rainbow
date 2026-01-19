@@ -2,7 +2,7 @@
 
 Follow this systematic approach when designing software architectures:
 
-### Phase 1: Discovery & Requirements
+## Phase 1: Discovery & Requirements
 
 1. **Gather Requirements**
    - Functional requirements (features, use cases)

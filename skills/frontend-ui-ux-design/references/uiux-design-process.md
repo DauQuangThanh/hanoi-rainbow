@@ -2,7 +2,7 @@
 
 Follow this systematic approach when designing user interfaces:
 
-### Phase 1: Research & Discovery
+## Phase 1: Research & Discovery
 
 1. **User Research**
    - **User Interviews**: Understand user needs, goals, and pain points

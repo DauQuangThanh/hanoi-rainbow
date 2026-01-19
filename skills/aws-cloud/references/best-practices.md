@@ -2,7 +2,7 @@
 
 ## EC2 (Elastic Compute Cloud)
 
-### Instance Selection
+## Instance Selection
 
 - Select appropriate instance types based on workload characteristics:
   - **General Purpose** (T, M): Balanced compute, memory, networking

@@ -2,7 +2,7 @@
 
 ## Terraform for Alibaba Cloud
 
-### Provider Configuration
+## Provider Configuration
 
 **Basic Setup**
 

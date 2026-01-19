@@ -1,6 +1,6 @@
 # Commit Message Templates
 
-### Template Setup
+## Template Setup
 
 Create `.gitmessage` template:
 

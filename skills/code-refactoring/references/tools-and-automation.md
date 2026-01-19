@@ -1,6 +1,6 @@
 # Tools and Automation
 
-### Static Analysis Tools
+## Static Analysis Tools
 
 - **JavaScript/TypeScript**: ESLint, TSLint, SonarQube
 - **Python**: Pylint, Flake8, Black

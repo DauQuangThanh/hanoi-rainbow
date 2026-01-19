@@ -1,6 +1,6 @@
 # Advanced Patterns
 
-### Co-authored Commits
+## Co-authored Commits
 
 For pair programming:
 

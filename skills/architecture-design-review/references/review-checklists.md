@@ -16,7 +16,7 @@ Comprehensive checklists for reviewing different aspects of software architectur
 
 ## General Architecture Review
 
-### Architecture Documentation
+## Architecture Documentation
 
 - [ ] System context diagram available (C4 Level 1)
 - [ ] Container diagram showing components (C4 Level 2)

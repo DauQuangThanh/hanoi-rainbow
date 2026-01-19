@@ -1,6 +1,6 @@
 # 🌈 Hanoi Rainbow
 
-### *Build Better Software with AI-Powered Specifications*
+## *Build Better Software with AI-Powered Specifications*
 
 **Stop guessing. Start specifying.**  
 Turn your ideas into production-ready applications through clear specifications, not trial-and-error coding.
@@ -21,7 +21,7 @@ For decades, we treated specifications as throwaway notes—just a formality bef
 **New to Hanoi Rainbow?** Follow these guides:
 
 | Guide | Description |
-|-------|-------------|
+| ------- | ------------- |
 | 📦 [Installation Guide](installation.md) | Set up Rainbow CLI and prerequisites |
 | ⚡ [Quick Start Guide](quickstart.md) | Build your first project in minutes |
 | 🗺️ **[Workflows Guide](workflows.md)** | **Choose the right workflow for your project** |
@@ -33,7 +33,7 @@ For decades, we treated specifications as throwaway notes—just a formality bef
 **Choose your workflow based on project type:**
 
 | Workflow | Best For | Timeline |
-|----------|----------|----------|
+| ---------- | ---------- |----------|
 | 🌱 [Greenfield](greenfield-workflow.md) | New applications from scratch | 2-4 weeks (MVP) |
 | 🏗️ [Brownfield](brownfield-workflow.md) | Adding features to existing apps | 1-2 weeks/feature |
 | 🔄 [Legacy Migration](legacy-migration-workflow.md) | Migrating data/batch from mainframe | 4-12 weeks |
@@ -48,7 +48,7 @@ After installation, you'll have access to these slash commands in your AI assist
 ### Core Workflow Commands
 
 | Command | Purpose |
-|---------|----------|
+| --------- | ---------- |
 | `/rainbow.regulate` | Set project principles and ground rules |
 | `/rainbow.specify` | Define requirements and user stories |
 | `/rainbow.design` | Create technical implementation plans |
@@ -60,7 +60,7 @@ After installation, you'll have access to these slash commands in your AI assist
 Run these once per product, not per feature:
 
 | Command | Purpose |
-|---------|----------|
+| --------- | ---------- |
 | `/rainbow.architect` | Design system architecture with C4 diagrams |
 | `/rainbow.standardize` | Create coding standards and conventions |
 | `/rainbow.design-e2e-test` | Design end-to-end test specifications |
@@ -69,7 +69,7 @@ Run these once per product, not per feature:
 ### Quality & Enhancement Commands
 
 | Command | Purpose |
-|---------|----------|
+| --------- | ---------- |
 | `/rainbow.clarify` | Clarify unclear requirements |
 | `/rainbow.analyze` | Check consistency across specifications |
 | `/rainbow.checklist` | Generate quality validation checklists |
@@ -80,7 +80,7 @@ Run these once per product, not per feature:
 Spec-Driven Development is built on these principles:
 
 | Principle | What It Means |
-|-----------|---------------|
+| ----------- | --------------- |
 | **Intent First** | Define the "*what*" and "*why*" before the "*how*" |
 | **Rich Specifications** | Create detailed specs with organizational principles |
 | **Step-by-Step** | Improve through multiple steps, not one-shot generation |
@@ -89,7 +89,7 @@ Spec-Driven Development is built on these principles:
 ## 🌟 When to Use This
 
 | Scenario | What You Can Do |
-|----------|------------------|
+| ---------- | ------------------ |
 | **🆕 New Projects** | <ul><li>Start with high-level requirements</li><li>Generate complete specifications</li><li>Plan implementation steps</li><li>Build production-ready apps</li></ul> |
 | **🔬 Exploration** | <ul><li>Try different solutions in parallel</li><li>Test multiple tech stacks</li><li>Experiment with UX patterns</li></ul> |
 | **🔧 Existing Projects** | <ul><li>Add new features systematically</li><li>Modernize legacy code</li><li>Adapt processes to your needs</li></ul> |

@@ -1,6 +1,6 @@
 # Integration with Development Workflow
 
-### Continuous Planning
+## Continuous Planning
 
 - **Daily**: Update task status, log time, identify blockers
 - **Weekly**: Review progress, adjust priorities, update estimates

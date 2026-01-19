@@ -1,6 +1,6 @@
 # Review Workflow
 
-### Step 1: Initial Assessment
+## Step 1: Initial Assessment
 
 **Gather Context:**
 

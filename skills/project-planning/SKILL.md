@@ -21,7 +21,7 @@ This skill provides comprehensive guidance for planning and managing software pr
 
 Follow this workflow when planning software projects:
 
-### 1. Define Project Scope
+## 1. Define Project Scope
 
 - **Vision Statement**: Clear project purpose and objectives
 - **Success Criteria**: Measurable outcomes that define success

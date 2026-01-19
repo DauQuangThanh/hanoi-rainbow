@@ -4,7 +4,7 @@ Comprehensive guide for designing robust, scalable, and maintainable APIs.
 
 ## REST API Design Principles
 
-### 1. Resource Naming
+## 1. Resource Naming
 
 **Use Nouns, Not Verbs**
 

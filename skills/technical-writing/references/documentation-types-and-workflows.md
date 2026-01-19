@@ -14,7 +14,7 @@ Comprehensive patterns for creating different types of technical documentation. 
 
 ## API Documentation
 
-### Purpose
+## Purpose
 
 Enable developers to integrate and use your API effectively by providing complete reference documentation.
 
@@ -84,7 +84,7 @@ Brief description of what this endpoint does.
 **Parameters:**
 
 | Name | Type | In | Required | Description |
-|------|------|-----|----------|-------------|
+| ------ | ------ |-----|----------|-------------|
 | id | string | path | Yes | Resource identifier |
 | limit | integer | query | No | Results per page (default: 20, max: 100) |
 
@@ -189,7 +189,7 @@ Complete reference of all error codes.
 ## Error Codes
 
 | Code | Status | Meaning | Solution |
-|------|--------|---------|----------|
+| ------ | -------- |---------|----------|
 | 400 | Bad Request | Invalid parameters | Check request format |
 | 401 | Unauthorized | Missing/invalid auth | Verify API key |
 | 404 | Not Found | Resource doesn't exist | Check resource ID |
@@ -759,7 +759,7 @@ Complete list of technologies with rationale.
 ## Technology Stack
 
 | Component | Technology | Version | Rationale |
-|-----------|-----------|---------|-----------|
+| ----------- | ----------- |---------|-----------|
 | Service Layer | Go | 1.20 | Performance, concurrency |
 | Database | PostgreSQL | 15 | ACID, reliability |
 | Cache | Redis | 7.x | Speed, pub/sub |
@@ -785,7 +785,7 @@ Performance, scalability, reliability targets.
 ### Performance
 
 | Metric | Target | Measurement |
-|--------|--------|-------------|
+| -------- | -------- |-------------|
 | Response Time (p95) | < 500ms | APM tool |
 | Throughput | 10K req/sec | Load balancer |
 | Database Query | < 100ms | Query logs |
@@ -793,7 +793,7 @@ Performance, scalability, reliability targets.
 ### Scalability
 
 | Metric | Target | Strategy |
-|--------|--------|----------|
+| -------- | -------- |----------|
 | Concurrent Users | 100K | Horizontal scaling |
 | Data Growth | 10TB/year | Partitioning |
 | Geographic | Multi-region | Active-active |
@@ -801,7 +801,7 @@ Performance, scalability, reliability targets.
 ### Availability
 
 | Component | SLA | Strategy |
-|-----------|-----|----------|
+| ----------- | ----- |----------|
 | Overall | 99.99% | Redundancy |
 | Database | 99.99% | Replication |
 | API | 99.95% | Multi-AZ |
@@ -879,7 +879,7 @@ Detailed API contracts.
 **Parameters:**
 
 | Name | Type | In | Required | Validation | Description |
-|------|------|-----|----------|------------|-------------|
+| ------ | ------ |-----|----------|------------|-------------|
 | id | string | path | Yes | UUID v4 | Resource ID |
 | limit | integer | query | No | 1-100 | Items per page |
 

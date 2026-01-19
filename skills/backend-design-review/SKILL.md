@@ -9,7 +9,7 @@ description: Conducts comprehensive backend design reviews covering API design q
 
 Follow this systematic review process:
 
-### 1. Pre-Review Preparation
+## 1. Pre-Review Preparation
 
 - Gather design documentation (architecture diagrams, API specs, database schemas, ADRs)
 - Understand requirements (functional, non-functional, compliance)

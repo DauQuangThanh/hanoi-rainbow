@@ -1,6 +1,6 @@
 # Testing Best Practices
 
-### Test Organization
+## Test Organization
 
 1. **Arrange-Act-Assert (AAA) Pattern**
 

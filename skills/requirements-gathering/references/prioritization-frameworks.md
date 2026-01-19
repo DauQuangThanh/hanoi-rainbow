@@ -1,6 +1,6 @@
 # Prioritization Frameworks
 
-### MoSCoW Method
+## MoSCoW Method
 
 ```markdown
 # MoSCoW Prioritization

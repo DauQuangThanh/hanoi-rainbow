@@ -11,7 +11,7 @@ This skill provides systematic bug analysis to identify root causes, assess impa
 
 ## Core Analysis Workflow
 
-### Step 1: Initial Triage & Information Gathering
+## Step 1: Initial Triage & Information Gathering
 
 **Collect Essential Information:**
 

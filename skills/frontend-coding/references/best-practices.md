@@ -1,6 +1,6 @@
 # Best Practices
 
-### Code Organization
+## Code Organization
 
 ```
 src/

@@ -9,7 +9,7 @@ Analyzes legacy JCL scripts for migration to modern batch processing and workflo
 
 ## Core Capabilities
 
-### 1. Job Analysis
+## 1. Job Analysis
 
 Extract job structure (JOB card), step sequences, program invocations (EXEC PGM/PROC), conditional logic (COND, IF/THEN/ELSE), return codes, data sets (DD statements), resource requirements, and symbolic parameters.
 
@@ -167,7 +167,7 @@ with DAG('job', schedule_interval='@daily') as dag:
 ### Return Code Reference
 
 | RC | Meaning | Action |
-|----|---------|--------|
+| ---- | --------- |--------|
 | 0 | Success | Continue |
 | 4 | Warning | Continue (informational) |
 | 8 | Error | May continue based on COND |

@@ -11,7 +11,7 @@ Plan and execute application migration projects—from legacy system modernizati
 
 Follow this systematic approach for successful migrations:
 
-### 1. Assess Current State
+## 1. Assess Current State
 
 Analyze the application portfolio and environment:
 

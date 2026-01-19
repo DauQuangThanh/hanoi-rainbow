@@ -1,6 +1,6 @@
 # Common Patterns to Validate
 
-### Monolithic Architecture
+## Monolithic Architecture
 
 ☐ Justified for project size and complexity
 ☐ Modularization strategy defined

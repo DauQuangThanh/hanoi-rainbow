@@ -237,7 +237,7 @@ When researching E2E testing approaches:
 ## Template Sections Mapping
 
 | Phase | Template Section | Content Source |
-|-------|------------------|----------------|
+| ------- | ------------------ |----------------|
 | 0 | Introduction | Architecture + ground-rules |
 | 0 | Test Strategy | Architecture analysis |
 | 0 | Scope | Feature specs + architecture |

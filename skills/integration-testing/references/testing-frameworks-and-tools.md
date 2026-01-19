@@ -1,6 +1,6 @@
 # Testing Frameworks & Tools
 
-### JavaScript/Node.js
+## JavaScript/Node.js
 
 - **Jest**: Full-featured testing framework
 - **Mocha + Chai**: Flexible testing setup

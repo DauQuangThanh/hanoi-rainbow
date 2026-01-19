@@ -4,7 +4,7 @@ This document provides a complete example of a security review report. Use this 
 
 ---
 
-# Security Review Report
+## Security Review Report
 
 **Application:** E-Commerce Web Application
 **Review Date:** January 14, 2026
@@ -58,11 +58,11 @@ The application contains multiple critical security vulnerabilities that pose si
 
 ## Detailed Findings
 
-### Critical Vulnerabilities
+## Critical Vulnerabilities
 
 ---
 
-#### CRITICAL-1: SQL Injection in User Search
+### CRITICAL-1: SQL Injection in User Search
 
 **Severity:** Critical
 **CWE ID:** CWE-89 (SQL Injection)
@@ -625,7 +625,7 @@ app.use('/api/', userRateLimiter);
 ### PCI-DSS Status: ❌ NON-COMPLIANT
 
 | Requirement | Status | Findings | Priority |
-|-------------|--------|----------|----------|
+| ------------- | -------- |----------|----------|
 | 3.4: Encrypt cardholder data | ❌ Failed | Plain text storage | P0 |
 | 6.5.1: Injection flaws | ❌ Failed | SQL injection present | P0 |
 | 6.5.10: Authentication | ❌ Failed | JWT bypass possible | P0 |
@@ -640,7 +640,7 @@ app.use('/api/', userRateLimiter);
 ### GDPR Status: ⚠️ PARTIALLY COMPLIANT
 
 | Requirement | Status | Findings |
-|-------------|--------|----------|
+| ------------- | -------- |----------|
 | Right to access (Art 15) | ✅ Compliant | Export function implemented |
 | Right to erasure (Art 17) | ❌ Non-Compliant | No deletion mechanism |
 | Data minimization (Art 5) | ⚠️ Partial | Excessive logging |
@@ -670,7 +670,7 @@ Info:      ████ 4 (14%)
 ### OWASP Top 10 Coverage
 
 | Category | Vulnerabilities | Severity |
-|----------|----------------|----------|
+| ---------- | ---------------- |----------|
 | A01: Broken Access Control | 2 | High |
 | A02: Cryptographic Failures | 3 | Critical/High |
 | A03: Injection | 2 | Critical/High |

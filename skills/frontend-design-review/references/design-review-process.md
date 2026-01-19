@@ -1,6 +1,6 @@
 # Design Review Process
 
-### Phase 1: Pre-Review Preparation
+## Phase 1: Pre-Review Preparation
 
 **Activities:**
 

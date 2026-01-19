@@ -15,7 +15,7 @@ Azure Monitor collects, analyzes, and acts on telemetry data from Azure and on-p
 
 ## Log Analytics Workspace
 
-### Creating Workspace
+## Creating Workspace
 
 ```bash
 # Create Log Analytics workspace

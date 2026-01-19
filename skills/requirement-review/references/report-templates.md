@@ -23,7 +23,7 @@ Templates for generating comprehensive requirements review reports.
 
 ## Executive Summary
 
-### Overall Assessment
+## Overall Assessment
 - **Overall Quality Rating**: [Excellent / Good / Fair / Poor]
 - **Recommendation**: [Approve / Approve with Conditions / Major Revision Needed / Reject]
 
@@ -140,7 +140,7 @@ Requirements using unclear language:
 
 #### Terminology Inconsistencies
 | Inconsistent Terms Used | Occurrences | Recommended Standard Term |
-|-------------------------|-------------|---------------------------|
+| ------------------------- | ------------- |---------------------------|
 | User / Customer / Client / End-user | 45 / 23 / 12 / 8 | "User" (most common) |
 | Login / Sign-in / Log-in / Sign in | 15 / 8 / 7 / 4 | "Login" (matches system) |
 | Order / Purchase / Transaction | 34 / 12 / 8 | "Order" (business term) |
@@ -255,7 +255,7 @@ Business objectives mentioned in charter but not in requirements:
 #### High-Risk Requirements
 
 | Req ID | Requirement Summary | Risk Category | Risk Level | Impact | Mitigation Needed |
-|--------|-------------------|---------------|------------|--------|-------------------|
+| -------- | ------------------- |---------------|------------|--------|-------------------|
 | REQ-045 | Real-time sync across 100K concurrent users | Technical complexity, Performance | High | Project timeline, Budget | POC/spike required, architecture review |
 | REQ-067 | AI-based product recommendations | Unproven technology, Resource | Medium | Feature delivery | Evaluate ML platforms, skill assessment |
 | REQ-089 | Sub-second global search | Performance, Infrastructure | High | User satisfaction | Load testing, CDN strategy |
@@ -278,7 +278,7 @@ Business objectives mentioned in charter but not in requirements:
 ### Quality Scores by Attribute
 
 | Quality Attribute | Score | Target | Status | Gap |
-|-------------------|-------|--------|--------|-----|
+| ------------------- | ------- |--------|--------|-----|
 | Completeness | 75% | 95% | ⚠️ Below | -20% |
 | Clarity | 82% | 90% | ⚠️ Below | -8% |
 | Consistency | 70% | 95% | ❌ Poor | -25% |
@@ -290,7 +290,7 @@ Business objectives mentioned in charter but not in requirements:
 ### Issue Distribution
 
 | Severity | Count | Percentage | Examples |
-|----------|-------|------------|----------|
+| ---------- | ------- |------------|----------|
 | Critical | 5 | 4% | Missing security requirements, fundamental scope conflicts |
 | Major | 18 | 15% | Ambiguous performance criteria, missing acceptance criteria, terminology inconsistencies |
 | Minor | 32 | 27% | Formatting inconsistencies, minor typos, diagram improvements |
@@ -299,7 +299,7 @@ Business objectives mentioned in charter but not in requirements:
 ### Requirements Coverage
 
 | Category | Count | Percentage | Status |
-|----------|-------|------------|--------|
+| ---------- | ------- |------------|--------|
 | Requirements Reviewed | 120 | 100% | |
 | Requirements with Issues | 55 | 46% | ⚠️ High |
 | Requirements without Issues | 65 | 54% | ✅ Good |
@@ -405,7 +405,7 @@ Business objectives mentioned in charter but not in requirements:
 ## Action Items
 
 | ID | Action | Owner | Priority | Effort | Due Date | Status | Dependencies |
-|----|--------|-------|----------|--------|----------|--------|--------------|
+| ---- | -------- |-------|----------|--------|----------|--------|--------------|
 | A-001 | Add security requirements section | [Security Architect, BA] | Critical | 2-3 days | [Date] | Open | None |
 | A-002 | Resolve conflict: REQ-012 vs REQ-089 | [PO, BA] | Critical | 0.5 day | [Date] | Open | A-001 |
 | A-003 | Add acceptance criteria to US-045 through US-078 | [BA, Dev Team] | Critical | 1-2 weeks | [Date] | Open | None |
@@ -515,7 +515,7 @@ For tracking individual requirement issues:
 
 ```markdown
 | Issue ID | Severity | Req ID | Issue Type | Description | Recommendation | Owner | Status | Due Date |
-|----------|----------|--------|------------|-------------|----------------|-------|--------|----------|
+| ---------- | ---------- |--------|------------|-------------|----------------|-------|--------|----------|
 | ISS-001 | Critical | REQ-045 | Ambiguity | "Fast" undefined | Specify: "< 2s for 95%" | [BA] | Open | [Date] |
 | ISS-002 | Major | REQ-067 | Untestable | "Intuitive UI" subjective | Define usability metrics | [UX] | Open | [Date] |
 | ISS-003 | Critical | REQ-012, REQ-089 | Conflict | Phone number mandatory/optional | Align with stakeholders | [PO] | Open | [Date] |

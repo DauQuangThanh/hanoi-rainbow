@@ -17,7 +17,7 @@ Comprehensive testing approach to ensure functional equivalence and quality duri
 
 ## 1. Unit Testing
 
-### Testing Converted Business Logic
+## Testing Converted Business Logic
 
 **Goal**: Verify each Java method matches RPG procedure/subroutine behavior
 

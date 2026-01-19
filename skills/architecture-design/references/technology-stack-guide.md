@@ -4,7 +4,7 @@ Comprehensive guide for selecting appropriate technologies for different archite
 
 ## Backend Technologies
 
-### Java Ecosystem
+## Java Ecosystem
 
 **Spring Boot**
 

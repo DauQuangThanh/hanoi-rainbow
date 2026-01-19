@@ -9,7 +9,7 @@ Analyze and migrate Fujitsu mainframe systems (FACOM, BS2000/OSD, OSIV, NetCOBOL
 
 ## Core Capabilities
 
-### 1. Fujitsu COBOL Analysis
+## 1. Fujitsu COBOL Analysis
 
 Extract NetCOBOL/PowerCOBOL programs, Fujitsu-specific verbs, proprietary file organizations (SAM/PAM/ISAM), SYMFOWARE embedded SQL, screen handling (ACCEPT/DISPLAY with CRT STATUS).
 
@@ -78,7 +78,7 @@ Document architecture, Fujitsu-specific features, Java/cloud design, data migrat
 ### File Systems
 
 | Type | Description | Java Equivalent |
-|------|-------------|-----------------|
+| ------ | ------------- |-----------------|
 | SAM | Sequential | `BufferedReader`/`Writer` |
 | PAM | Partitioned | File directory |
 | ISAM | Indexed | Database with index |
@@ -134,7 +134,7 @@ public class Employee {
 **Load `references/data-mappings.md` for comprehensive tables.** Critical mappings:
 
 | Fujitsu COBOL | Java | Notes |
-|---------------|------|-------|
+| --------------- | ------ |-------|
 | `PIC 9(n)` | `int`, `long`, `BigInteger` | Size dependent |
 | `PIC S9(n)V9(m)` | `BigDecimal` | **ALWAYS** for decimals |
 | `PIC X(n)` | `String` | Alphanumeric |
@@ -142,7 +142,7 @@ public class Employee {
 | `OCCURS n` | `List<T>` | Prefer List over array |
 
 | SYMFOWARE | PostgreSQL |
-|-----------|------------|
+| ----------- | ------------ |
 | `CHAR(n)` | `CHAR(n)` |
 | `VARCHAR(n)` | `VARCHAR(n)` |
 | `DECIMAL(p,s)` | `NUMERIC(p,s)` |

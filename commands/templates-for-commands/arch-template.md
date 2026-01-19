@@ -95,7 +95,7 @@ graph TB
 
 <!-- ACTION REQUIRED: 1–6 critical decisions, short. -->
 | ID | Title | Status | Date |
-|----|-------|--------|------|
+| ---- | ------- |--------|------|
 | ADR-001 | [e.g., Microservices] | Accepted | [DATE] |
 | ADR-002 | [e.g., API Gateway] | Accepted | [DATE] |
 | ADR-003 | [e.g., Event-Driven] | Proposed | [DATE] |
@@ -137,7 +137,7 @@ graph TB
 ## 7. Risks & Technical Debt
 
 | ID | Risk/Debt | Impact | Mitigation/Plan |
-|----|-----------|--------|-----------------|
+| ---- | ----------- |--------|-----------------|
 | R-001 | [e.g., DB bottleneck] | High | Replicas + caching |
 | R-002 | [e.g., 3rd-party outages] | High | Circuit breakers + fallbacks |
 | TD-001 | [e.g., legacy auth] | Medium | Migrate to OAuth2 |

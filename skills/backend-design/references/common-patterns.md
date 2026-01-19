@@ -1,6 +1,6 @@
 # Common Patterns
 
-### Repository Pattern
+## Repository Pattern
 
 ```javascript
 class UserRepository {

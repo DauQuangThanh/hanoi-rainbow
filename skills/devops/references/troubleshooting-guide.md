@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-### Pod Issues
+## Pod Issues
 
 **Pod not starting:**
 

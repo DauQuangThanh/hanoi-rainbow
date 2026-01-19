@@ -1,6 +1,6 @@
 # Best Practices
 
-### Atomic Commits
+## Atomic Commits
 
 **DO:** One logical change per commit
 

@@ -1,6 +1,6 @@
 # Common Design Issues to Watch For
 
-### Visual Design
+## Visual Design
 
 - Inconsistent typography scales
 - Insufficient color contrast

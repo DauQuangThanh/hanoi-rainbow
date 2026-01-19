@@ -19,7 +19,7 @@
 
 ## Pseudocode Syntax
 
-### Structure Definition
+## Structure Definition
 
 ```
 STRUCTURE StructureName:

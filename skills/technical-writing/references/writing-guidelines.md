@@ -17,7 +17,7 @@ Comprehensive guidelines for clear, consistent, and effective technical writing.
 
 ## Clarity and Conciseness
 
-### Use Active Voice
+## Use Active Voice
 
 Active voice makes documentation clearer and more direct.
 
@@ -437,7 +437,7 @@ Tables are ideal for parameters, options, and comparisons.
 
 ```markdown
 | Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
+| ----------- | ------ |----------|-------------|
 | name | string | Yes | User's full name |
 | email | string | Yes | Valid email address |
 | age | integer | No | User's age (18+) |

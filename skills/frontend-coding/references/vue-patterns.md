@@ -4,7 +4,7 @@ This reference provides advanced Vue.js patterns, Composition API techniques, an
 
 ## Composition API Patterns
 
-### Composables Organization
+## Composables Organization
 
 ```typescript
 // composables/useUser.ts

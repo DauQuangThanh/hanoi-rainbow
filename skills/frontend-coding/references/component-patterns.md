@@ -1,6 +1,6 @@
 # Component Patterns
 
-### Compound Components
+## Compound Components
 
 ```typescript
 import React, { createContext, useContext, useState } from 'react';

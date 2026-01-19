@@ -16,7 +16,7 @@ Comprehensive guidelines for WCAG 2.1 AA/AAA compliance and inclusive design.
 
 ## Semantic HTML
 
-### Proper Document Structure
+## Proper Document Structure
 
 **Problem:**
 

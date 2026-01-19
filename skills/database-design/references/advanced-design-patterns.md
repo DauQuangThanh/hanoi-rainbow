@@ -1,6 +1,6 @@
 # Advanced Design Patterns
 
-### 1. Many-to-Many Relationships
+## 1. Many-to-Many Relationships
 
 ```sql
 -- Junction/Bridge table pattern

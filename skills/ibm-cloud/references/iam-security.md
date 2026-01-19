@@ -14,7 +14,7 @@
 
 ## Identity and Access Management (IAM)
 
-### Overview
+## Overview
 
 IAM provides centralized access control for IBM Cloud resources through policies, roles, and access groups.
 

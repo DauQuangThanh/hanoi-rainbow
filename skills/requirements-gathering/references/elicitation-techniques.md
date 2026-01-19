@@ -4,7 +4,7 @@ This guide provides comprehensive techniques for gathering requirements from sta
 
 ## Interview Techniques
 
-### Structured Interviews
+## Structured Interviews
 
 **Purpose**: Gather specific, predetermined information
 
@@ -1057,7 +1057,7 @@ Best for:
 
 ```markdown
 | Technique | Best For | Time Required | Stakeholder Involvement | Detail Level |
-|-----------|----------|---------------|------------------------|--------------|
+| ----------- | ---------- |---------------|------------------------|--------------|
 | Structured Interview | Specific info, compliance | 1-2 hours | Low (1-2 people) | High |
 | Semi-Structured Interview | Exploration, complex topics | 1-2 hours | Low (1-2 people) | Medium-High |
 | Requirements Workshop | Consensus, prioritization | 2-4 hours | High (6-12 people) | Medium |

@@ -1,6 +1,6 @@
 # Common Mistakes to Avoid
 
-### Vague Messages
+## Vague Messages
 
 ```
 ❌ fix: fixed issue

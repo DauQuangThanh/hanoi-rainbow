@@ -9,7 +9,7 @@ Analyzes legacy PL/I programs and generates Java migration strategies. Extracts 
 
 ## Workflow
 
-### 1. Discover PL/I Programs
+## 1. Discover PL/I Programs
 
 Find PL/I source files in the workspace:
 

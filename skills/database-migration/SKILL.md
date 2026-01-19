@@ -29,7 +29,7 @@ Provides comprehensive guidance for migrating databases between engines, version
 
 ## Core Migration Workflow
 
-### Step 1: Assessment and Planning
+## Step 1: Assessment and Planning
 
 **Analyze Source Database:**
 

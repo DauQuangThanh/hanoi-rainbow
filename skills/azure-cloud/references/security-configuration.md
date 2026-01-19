@@ -2,7 +2,7 @@
 
 ## Azure Active Directory (Entra ID)
 
-### User and Group Management
+## User and Group Management
 
 ```bash
 # Create user

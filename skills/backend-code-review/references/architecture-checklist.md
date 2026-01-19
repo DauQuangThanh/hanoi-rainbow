@@ -14,7 +14,7 @@ Guidelines for reviewing backend architecture, design patterns, and system desig
 
 ## Layered Architecture
 
-### Three-Tier Architecture
+## Three-Tier Architecture
 
 **Good:**
 

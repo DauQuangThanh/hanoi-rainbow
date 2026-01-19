@@ -2,7 +2,7 @@
 
 ## Roles
 
-### Realm Roles
+## Realm Roles
 
 - Global roles across all clients in realm
 - Example: `admin`, `user`, `manager`

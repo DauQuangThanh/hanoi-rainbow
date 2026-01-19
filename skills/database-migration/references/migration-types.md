@@ -1,6 +1,6 @@
 # Migration Types
 
-### 1. Homogeneous Database Migration
+## 1. Homogeneous Database Migration
 
 **Definition:** Same database engine, different version or platform
 

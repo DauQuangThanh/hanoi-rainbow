@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary
 
-### Program Overview
+## Program Overview
 
 - **Purpose**: {{PROGRAM_PURPOSE}}
 - **Type**: {{PROGRAM_TYPE}} (Batch/Online/Utility)
@@ -37,13 +37,13 @@
 #### Key Data Structures
 
 | Structure | Type | Lines | Description |
-|-----------|------|-------|-------------|
+| ----------- | ------ |-------|-------------|
 {{DATA_STRUCTURES_TABLE}}
 
 #### Copybooks Used
 
 | Copybook | Purpose | Lines |
-|----------|---------|-------|
+| ---------- | --------- |-------|
 {{COPYBOOKS_TABLE}}
 
 ### Business Logic Summary
@@ -61,19 +61,19 @@
 ### Program Calls
 
 | Called Program | Purpose | Frequency |
-|----------------|---------|-----------|
+| ---------------- | --------- |-----------|
 {{PROGRAM_CALLS_TABLE}}
 
 ### File Operations
 
 | File Name | Access Mode | Operations |
-|-----------|-------------|------------|
+| ----------- | ------------- |------------|
 {{FILE_OPERATIONS_TABLE}}
 
 ### Database Operations
 
 | Table | Operations | Estimated Rows |
-|-------|------------|----------------|
+| ------- | ------------ |----------------|
 {{DATABASE_OPERATIONS_TABLE}}
 
 ### Dependency Graph
@@ -97,7 +97,7 @@
 #### Class Design
 
 | Java Class | Purpose | COBOL Equivalent |
-|------------|---------|------------------|
+| ------------ | --------- |------------------|
 {{CLASS_DESIGN_TABLE}}
 
 #### Method Signatures
@@ -230,7 +230,7 @@
 ### Schedule
 
 | Phase | Start Date | End Date | Duration |
-|-------|------------|----------|----------|
+| ------- | ------------ |----------|----------|
 | Preparation | {{P1_START}} | {{P1_END}} | {{P1_DURATION}} |
 | Implementation | {{P2_START}} | {{P2_END}} | {{P2_DURATION}} |
 | Testing | {{P3_START}} | {{P3_END}} | {{P3_DURATION}} |

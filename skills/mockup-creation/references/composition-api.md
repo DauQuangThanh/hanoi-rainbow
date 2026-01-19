@@ -19,7 +19,7 @@ Advanced patterns for Vue 3 Composition API with TypeScript in mockup developmen
 
 ## Composables
 
-### Basic Composable Pattern
+## Basic Composable Pattern
 
 ```typescript
 // composables/useCounter.ts

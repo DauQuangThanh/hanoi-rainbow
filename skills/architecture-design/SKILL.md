@@ -53,7 +53,7 @@ When activated, this skill provides:
 
 Follow this systematic process:
 
-### Step 1: Discovery & Requirements
+## Step 1: Discovery & Requirements
 
 1. **Gather Requirements**
    - Functional requirements (features, use cases)

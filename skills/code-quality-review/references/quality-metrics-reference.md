@@ -1,6 +1,6 @@
 # Quality Metrics Reference
 
-### Cyclomatic Complexity Thresholds
+## Cyclomatic Complexity Thresholds
 
 - 1-10: Simple, low risk
 - 11-20: Moderate complexity, moderate risk

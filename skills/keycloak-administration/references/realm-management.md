@@ -15,7 +15,7 @@
 
 ## Essential Realm Settings
 
-### 1. General Settings
+## 1. General Settings
 
 - Display name: User-friendly name
 - HTML display name: Branded name with styling

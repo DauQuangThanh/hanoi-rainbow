@@ -2,7 +2,7 @@
 
 ## Provider Configuration
 
-### Basic Provider Setup
+## Basic Provider Setup
 
 ```hcl
 terraform {

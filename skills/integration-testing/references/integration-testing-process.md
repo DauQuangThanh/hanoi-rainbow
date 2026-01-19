@@ -2,7 +2,7 @@
 
 Follow this systematic approach when designing integration tests:
 
-### Phase 1: Test Strategy & Planning
+## Phase 1: Test Strategy & Planning
 
 1. **Define Testing Scope**
 

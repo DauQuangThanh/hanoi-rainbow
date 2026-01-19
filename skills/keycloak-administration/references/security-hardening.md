@@ -2,7 +2,7 @@
 
 ## Authentication Security
 
-### Password Policies
+## Password Policies
 
 1. Realm Settings → Authentication → Password Policy
 2. Add policies:

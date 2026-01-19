@@ -1,6 +1,6 @@
 # Severity Levels
 
-### 🔴 Critical
+## 🔴 Critical
 
 - **Definition**: Issues that severely impact usability, accessibility, or brand
 - **Examples**:

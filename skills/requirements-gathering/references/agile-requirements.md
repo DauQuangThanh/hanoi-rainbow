@@ -4,7 +4,7 @@ This guide covers requirements management in Agile environments, including user 
 
 ## Agile Requirements Principles
 
-### Agile Manifesto Values Applied to Requirements
+## Agile Manifesto Values Applied to Requirements
 
 1. **Individuals and interactions** over processes and documentation
    - Favor conversations over lengthy specs

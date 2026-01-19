@@ -20,7 +20,7 @@ Choose your task and load the appropriate reference:
 
 ## Core Mainframe Concepts
 
-### z/OS Operating System
+## z/OS Operating System
 
 - **MVS (Multiple Virtual Storage)**: Core OS components
 - **JES2/JES3**: Job Entry Subsystems for batch processing

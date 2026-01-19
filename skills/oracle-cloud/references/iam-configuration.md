@@ -2,7 +2,7 @@
 
 ## Compartment Design
 
-### Compartment Hierarchy Best Practices
+## Compartment Hierarchy Best Practices
 
 ```
 Root Compartment (Tenancy)

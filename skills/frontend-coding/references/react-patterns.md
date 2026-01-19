@@ -4,7 +4,7 @@ This reference provides advanced React patterns, hooks patterns, and architectur
 
 ## Custom Hooks Patterns
 
-### Data Fetching Hook
+## Data Fetching Hook
 
 ```typescript
 import { useState, useEffect, useCallback } from 'react';

@@ -11,7 +11,7 @@ Performs comprehensive security code reviews to identify vulnerabilities, assess
 
 ## Security Review Workflow
 
-### 1. Initial Assessment
+## 1. Initial Assessment
 
 Gather context about the application:
 

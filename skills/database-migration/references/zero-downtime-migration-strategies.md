@@ -1,6 +1,6 @@
 # Zero-Downtime Migration Strategies
 
-### Logical Replication
+## Logical Replication
 
 ```sql
 -- PostgreSQL Logical Replication Setup

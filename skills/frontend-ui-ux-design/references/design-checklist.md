@@ -1,6 +1,6 @@
 # Design Checklist
 
-### Before Development
+## Before Development
 
 - [ ] User research completed and documented
 - [ ] Personas created

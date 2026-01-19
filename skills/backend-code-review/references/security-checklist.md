@@ -15,7 +15,7 @@ Comprehensive security guidelines for backend code review.
 
 ## Authentication
 
-### JWT Implementation
+## JWT Implementation
 
 **Good:**
 

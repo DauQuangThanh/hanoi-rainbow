@@ -11,7 +11,7 @@ Build production-ready backend services with proper architecture, security, perf
 
 Follow this systematic approach for backend implementation:
 
-### 1. Design API Endpoints
+## 1. Design API Endpoints
 
 Define clear, RESTful API contracts before implementation.
 

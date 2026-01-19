@@ -1,6 +1,6 @@
 # State Management
 
-### Zustand (React)
+## Zustand (React)
 
 ```typescript
 import create from 'zustand';

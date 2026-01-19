@@ -1,6 +1,6 @@
 # Design Systems
 
-### Design System Structure
+## Design System Structure
 
 ```
 Design System

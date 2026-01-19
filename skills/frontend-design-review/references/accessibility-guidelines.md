@@ -19,7 +19,7 @@ This document provides comprehensive guidance on evaluating web accessibility du
 
 The Web Content Accessibility Guidelines (WCAG) 2.1 are organized around four principles, often abbreviated as **POUR**:
 
-### 1. **Perceivable**
+## 1. **Perceivable**
 
 Information and user interface components must be presentable to users in ways they can perceive.
 
@@ -93,7 +93,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 **Common Patterns:**
 
 | Image Type | Alt Text Approach |
-|------------|-------------------|
+| ------------ | ------------------- |
 | Informative | Describe the information conveyed |
 | Functional | Describe the action/function |
 | Decorative | Use `alt=""` |
@@ -208,7 +208,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 **Color Contrast Quick Reference:**
 
 | Foreground | Background | Ratio | AA Pass | AAA Pass |
-|------------|------------|-------|---------|----------|
+| ------------ | ------------ |-------|---------|----------|
 | #767676 | #FFFFFF | 4.54:1 | ✅ Normal | ❌ Normal |
 | #595959 | #FFFFFF | 7.00:1 | ✅ Normal | ✅ Normal |
 | #FFFFFF | #0066CC | 4.55:1 | ✅ Normal | ❌ Normal |
@@ -324,7 +324,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 **Common Keyboard Patterns:**
 
 | Component | Keyboard Behavior |
-|-----------|-------------------|
+| ----------- | ------------------- |
 | Button | Enter or Space to activate |
 | Link | Enter to follow |
 | Checkbox | Space to toggle |
@@ -802,7 +802,7 @@ Content must be robust enough to be interpreted reliably by a wide variety of us
 **ARIA Roles for Custom Controls:**
 
 | Component | ARIA Role | States/Properties |
-|-----------|-----------|-------------------|
+| ----------- | ----------- |-------------------|
 | Tab panels | `role="tablist"`, `role="tab"`, `role="tabpanel"` | `aria-selected`, `aria-controls` |
 | Accordion | `role="button"` or `<button>` | `aria-expanded`, `aria-controls` |
 | Modal | `role="dialog"` | `aria-labelledby`, `aria-describedby`, `aria-modal` |

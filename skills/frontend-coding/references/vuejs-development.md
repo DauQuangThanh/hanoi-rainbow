@@ -1,6 +1,6 @@
 # Vue.js Development
 
-### Composition API
+## Composition API
 
 **Modern Vue 3 Component**:
 

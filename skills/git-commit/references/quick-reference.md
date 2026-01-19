@@ -1,6 +1,6 @@
 # Quick Reference
 
-### Type Decision Tree
+## Type Decision Tree
 
 ```
 Does it add new user-facing functionality? → feat

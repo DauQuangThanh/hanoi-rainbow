@@ -21,7 +21,7 @@ Provides expert guidance for Microsoft Azure infrastructure and services:
 
 ## Best Practices
 
-### Azure Virtual Machines
+## Azure Virtual Machines
 
 - Select appropriate VM sizes based on workload (D-series, F-series, E-series)
 - Use managed disks for simplified management and availability

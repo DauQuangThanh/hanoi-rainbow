@@ -1,6 +1,6 @@
 # Migration Phases
 
-### Phase 1: Assessment and Planning
+## Phase 1: Assessment and Planning
 
 ```markdown
 1. Database Inventory

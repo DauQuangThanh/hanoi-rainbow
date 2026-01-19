@@ -4,7 +4,7 @@ This guide covers integrating integration tests into CI/CD pipelines across diff
 
 ## GitHub Actions
 
-### Complete Integration Test Workflow
+## Complete Integration Test Workflow
 
 ```yaml
 # .github/workflows/integration-tests.yml

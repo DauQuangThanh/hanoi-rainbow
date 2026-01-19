@@ -2,7 +2,7 @@
 
 ## 1. Operating System Migration
 
-### Linux Distribution Migration
+## Linux Distribution Migration
 
 **Common Scenarios:**
 
@@ -174,7 +174,7 @@ systemctl start apache2
 # openssh-server → openssh-server (same)
 ```
 
-#### Windows to Linux Migration
+### Windows to Linux Migration
 
 ```markdown
 Use Cases:

@@ -8,7 +8,7 @@
 
 ```
 
-### Phase 4: Quality Attributes Assessment
+## Phase 4: Quality Attributes Assessment
 
 **1. Scalability Review**
 

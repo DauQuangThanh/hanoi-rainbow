@@ -9,7 +9,7 @@ Systematically review requirements to validate quality and identify issues befor
 
 ## Review Workflow
 
-### 1. Preparation
+## 1. Preparation
 
 Gather all relevant documentation:
 

@@ -1,6 +1,6 @@
 # Examples
 
-### Example 1: E-Commerce Product Page
+## Example 1: E-Commerce Product Page
 
 **User Journey**: Browse → View Product → Add to Cart → Checkout
 

@@ -2,7 +2,7 @@
 
 ## VM Instance Configuration
 
-### Instance Shapes
+## Instance Shapes
 
 **Flexible Shapes** (VM.Standard.E4.Flex, VM.Optimized3.Flex):
 

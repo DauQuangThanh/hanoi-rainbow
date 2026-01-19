@@ -11,7 +11,7 @@ Conduct systematic backend code reviews to identify security vulnerabilities, pe
 
 Follow this structured approach for comprehensive backend code analysis:
 
-### 1. Assess Technology Stack and Scope
+## 1. Assess Technology Stack and Scope
 
 Identify technologies and critical areas before starting:
 

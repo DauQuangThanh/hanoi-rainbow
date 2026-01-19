@@ -19,7 +19,7 @@ This document provides comprehensive guidance on evaluating responsive design st
 
 ## Responsive Design Principles
 
-### Core Principles
+## Core Principles
 
 1. **Fluid Grids**: Layouts use relative units (%, rem, em) instead of fixed pixels
 2. **Flexible Images**: Images scale within containing elements
@@ -522,7 +522,7 @@ body {
 **Responsive Type Scale:**
 
 | Element | Mobile (320-767px) | Tablet (768-1023px) | Desktop (1024px+) |
-|---------|---------------------|----------------------|-------------------|
+| --------- | --------------------- |----------------------|-------------------|
 | Body    | 16px (1rem)        | 18px (1.125rem)     | 18px (1.125rem)   |
 | Small   | 14px (0.875rem)    | 16px (1rem)         | 16px (1rem)       |
 | H1      | 28px (1.75rem)     | 36px (2.25rem)      | 48px (3rem)       |

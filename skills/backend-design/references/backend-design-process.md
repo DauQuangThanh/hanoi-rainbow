@@ -2,7 +2,7 @@
 
 Follow this systematic approach when designing backend systems:
 
-### Phase 1: Requirements Analysis
+## Phase 1: Requirements Analysis
 
 1. **Functional Requirements**
    - Define API endpoints and operations

@@ -1,6 +1,6 @@
 # Configuration Management
 
-### Ansible Playbook Example
+## Ansible Playbook Example
 
 ```yaml
 # playbook.yml

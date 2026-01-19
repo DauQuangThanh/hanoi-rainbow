@@ -18,7 +18,7 @@ Architecture anti-patterns are common solutions to recurring problems that are i
 
 ## Distributed System Anti-Patterns
 
-### 1. Distributed Monolith
+## 1. Distributed Monolith
 
 **Description**: Microservices that are tightly coupled and must be deployed together.
 

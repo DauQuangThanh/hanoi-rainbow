@@ -2,7 +2,7 @@
 
 Follow this systematic approach when conducting architecture reviews:
 
-### Phase 1: Pre-Review Preparation
+## Phase 1: Pre-Review Preparation
 
 **1. Gather Architecture Documentation**
 

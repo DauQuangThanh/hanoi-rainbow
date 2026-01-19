@@ -2,7 +2,7 @@
 
 ## Assessment Framework
 
-### Discovery Phase
+## Discovery Phase
 
 **1. Application Inventory**
 

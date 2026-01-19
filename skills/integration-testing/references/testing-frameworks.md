@@ -4,7 +4,7 @@ This guide provides detailed information about testing frameworks across differe
 
 ## JavaScript/TypeScript Testing Frameworks
 
-### Jest
+## Jest
 
 **Overview**: Complete testing framework with built-in mocking, coverage, and assertions.
 
@@ -901,7 +901,7 @@ class UserServiceIntegrationTest extends AbstractIntegrationTest {
 ## Comparison Matrix
 
 | Feature | Jest | Pytest | JUnit 5 |
-|---------|------|--------|---------|
+| --------- | ------ |--------|---------|
 | Language | JavaScript/TypeScript | Python | Java |
 | Built-in Assertions | ✅ | ✅ | ✅ |
 | Mocking | ✅ Built-in | ⚠️ Requires pytest-mock | ⚠️ Requires Mockito |

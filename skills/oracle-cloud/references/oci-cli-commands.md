@@ -2,7 +2,7 @@
 
 ## Installation and Configuration
 
-### Install OCI CLI
+## Install OCI CLI
 
 **macOS/Linux**:
 

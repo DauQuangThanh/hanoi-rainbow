@@ -35,7 +35,7 @@ ip route > routing-table.txt
 # Restore on target system (carefully review each file)
 ```
 
-### Automation Scripts
+## Automation Scripts
 
 ```bash
 # Create migration script
