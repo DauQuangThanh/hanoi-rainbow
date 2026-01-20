@@ -31,22 +31,25 @@ Rainbow supports multiple AI agents by generating agent-specific command files a
 
 | Agent | Directory | Format | CLI Tool | Description |
 | ------- | ----------- |---------|----------|-------------|
-| **Claude Code** | `.claude/commands/` | Markdown | `claude` | Anthropic's Claude Code CLI |
-| **Gemini CLI** | `.gemini/commands/` | TOML | `gemini` | Google's Gemini CLI |
-| **GitHub Copilot** | `.github/agents/` + `.github/prompts/` | Markdown | N/A (IDE-based) | GitHub Copilot in VS Code |
-| **Cursor** | `.cursor/commands/` | Markdown | `cursor-agent` | Cursor CLI |
-| **Qwen Code** | `.qwen/commands/` | TOML | `qwen` | Alibaba's Qwen Code CLI |
-| **opencode** | `.opencode/command/` | Markdown | `opencode` | opencode CLI |
-| **Codex CLI** | `.codex/commands/` | Markdown | `codex` | Codex CLI |
-| **Windsurf** | `.windsurf/workflows/` | Markdown | N/A (IDE-based) | Windsurf IDE workflows |
-| **Kilo Code** | `.kilocode/rules/` | Markdown | N/A (IDE-based) | Kilo Code IDE |
-| **Auggie CLI** | `.augment/rules/` | Markdown | `auggie` | Auggie CLI |
-| **Roo Code** | `.roo/rules/` | Markdown | N/A (IDE-based) | Roo Code IDE |
-| **CodeBuddy CLI** | `.codebuddy/commands/` | Markdown | `codebuddy` | CodeBuddy CLI |
 | **Amazon Q Developer CLI** | `.amazonq/prompts/` | Markdown | `q` | Amazon Q Developer CLI |
 | **Amp** | `.agents/commands/` | Markdown | `amp` | Amp CLI |
-| **SHAI** | `.shai/commands/` | Markdown | `shai` | SHAI CLI |
+| **Auggie CLI** | `.augment/rules/` | Markdown | `auggie` | Auggie CLI |
+| **Claude Code** | `.claude/commands/` | Markdown | `claude` | Anthropic's Claude Code CLI |
+| **CodeBuddy CLI** | `.codebuddy/commands/` | Markdown | `codebuddy` | CodeBuddy CLI |
+| **Codex CLI** | `.codex/commands/` | Markdown | `codex` | Codex CLI |
+| **Cursor** | `.cursor/commands/` | Markdown | N/A (IDE-based) | Cursor IDE |
+| **Gemini CLI** | `.gemini/commands/` | TOML | `gemini` | Google's Gemini CLI |
+| **GitHub Copilot** | `.github/agents/` + `.github/prompts/` | Markdown | N/A (IDE-based) | GitHub Copilot in VS Code |
+| **Google Antigravity** | `.agent/rules/` | Markdown | N/A (IDE-based) | Google Antigravity IDE |
 | **IBM Bob** | `.bob/commands/` | Markdown | N/A (IDE-based) | IBM Bob IDE |
+| **Jules** | `.agent/` | Markdown | N/A (IDE-based) | Jules IDE |
+| **Kilo Code** | `.kilocode/rules/` | Markdown | N/A (IDE-based) | Kilo Code IDE |
+| **opencode** | `.opencode/command/` | Markdown | `opencode` | opencode CLI |
+| **Qoder CLI** | `.qoder/commands/` | Markdown | `qoder` | Qoder CLI |
+| **Qwen Code** | `.qwen/commands/` | TOML | `qwen` | Alibaba's Qwen Code CLI |
+| **Roo Code** | `.roo/rules/` | Markdown | N/A (IDE-based) | Roo Code IDE |
+| **SHAI** | `.shai/commands/` | Markdown | `shai` | SHAI CLI |
+| **Windsurf** | `.windsurf/workflows/` | Markdown | N/A (IDE-based) | Windsurf IDE workflows |
 
 **Note on GitHub Copilot:** GitHub Copilot uses two separate folders:
 
@@ -312,29 +315,36 @@ echo "✅ Done"
 
 Require a command-line tool to be installed:
 
-- **Claude Code**: `claude` CLI
-- **Gemini CLI**: `gemini` CLI  
-- **Cursor**: `cursor-agent` CLI
-- **Qwen Code**: `qwen` CLI
-- **opencode**: `opencode` CLI
 - **Amazon Q Developer CLI**: `q` CLI
-- **CodeBuddy CLI**: `codebuddy` CLI
 - **Amp**: `amp` CLI
+- **Auggie CLI**: `auggie` CLI
+- **Claude Code**: `claude` CLI
+- **CodeBuddy CLI**: `codebuddy` CLI
+- **Codex CLI**: `codex` CLI
+- **Gemini CLI**: `gemini` CLI  
+- **opencode**: `opencode` CLI
+- **Qoder CLI**: `qoder` CLI
+- **Qwen Code**: `qwen` CLI
 - **SHAI**: `shai` CLI
 
 ### IDE-Based Agents
 
 Work within integrated development environments:
 
+- **Cursor**: Built into Cursor IDE
 - **GitHub Copilot**: Built into VS Code/compatible editors
-- **Windsurf**: Built into Windsurf IDE
+- **Google Antigravity**: Built into Google Antigravity IDE
 - **IBM Bob**: Built into IBM Bob IDE
+- **Jules**: Built into Jules IDE
+- **Kilo Code**: Built into Kilo Code IDE
+- **Roo Code**: Built into Roo Code IDE
+- **Windsurf**: Built into Windsurf IDE
 
 ## Command File Formats
 
 ### Markdown Format
 
-Used by: Claude, Cursor, opencode, Windsurf, Amazon Q Developer, Amp, SHAI, IBM Bob
+Used by: Amazon Q Developer, Amp, Auggie, Claude, CodeBuddy, Codex, Cursor, Google Antigravity, IBM Bob, Jules, Kilo Code, opencode, Qoder, Roo Code, SHAI, Windsurf
 
 **Standard format:**
 
@@ -372,10 +382,16 @@ Command content with {SCRIPT} and {{args}} placeholders.
 ## Directory Conventions
 
 - **CLI agents**: Usually `.<agent-name>/commands/`
+  - Examples: `.claude/commands/`, `.gemini/commands/`, `.qwen/commands/`, `.codebuddy/commands/`, `.qoder/commands/`
 - **IDE agents**: Follow IDE-specific patterns:
-  - Copilot: `.github/agents/`
+  - Copilot: `.github/agents/` + `.github/prompts/`
   - Cursor: `.cursor/commands/`
   - Windsurf: `.windsurf/workflows/`
+  - Kilo Code: `.kilocode/rules/`
+  - Roo Code: `.roo/rules/`
+  - IBM Bob: `.bob/commands/`
+  - Jules: `.agent/`
+  - Google Antigravity: `.agent/rules/`
 
 ## Argument Patterns
 
