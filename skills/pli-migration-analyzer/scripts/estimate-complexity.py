@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Estimate migration complexity for COBOL programs.
+Estimate migration complexity for PL/I programs.
 
 Calculates a complexity score based on various factors:
 - Lines of code
-- Number of paragraphs
+- Number of procedures
 - Control flow complexity
 - External dependencies
 - File operations
@@ -19,24 +19,24 @@ from typing import Dict, Any
 
 
 class ComplexityEstimator:
-    """Estimate migration complexity for COBOL programs."""
+    """Estimate migration complexity for PL/I programs."""
     
     # Complexity weights
     WEIGHTS = {
         'loc_per_point': 100,      # Lines per complexity point
-        'paragraph_weight': 2,      # Each paragraph adds complexity
+        'procedure_weight': 2,      # Each procedure adds complexity
         'call_weight': 5,           # Each external call
         'file_weight': 3,           # Each file operation
         'sql_weight': 4,            # Each SQL statement
         'goto_weight': 10,          # GO TO statements
-        'alter_weight': 15,         # ALTER statements (very complex)
-        'perform_varying_weight': 3, # Complex loops
+        'on_condition_weight': 3,   # ON condition handlers
+        'do_loop_weight': 2,        # DO loops
     }
     
-    def __init__(self, cobol_file: Path):
-        self.cobol_file = cobol_file
-        self.content = cobol_file.read_text(encoding='utf-8', errors='ignore')
-        self.lines = [line for line in self.content.split('\n') if line.strip() and not line.strip().startswith('*')]
+    def __init__(self, pli_file: Path):
+        self.pli_file = pli_file
+        self.content = pli_file.read_text(encoding='utf-8', errors='ignore')
+        self.lines = [line for line in self.content.split('\n') if line.strip() and not line.strip().startswith('/*')]
         
     def estimate(self) -> Dict[str, Any]:
         """Calculate complexity estimate."""
@@ -44,7 +44,7 @@ class ComplexityEstimator:
         score = self._calculate_score(metrics)
         
         return {
-            'program': self.cobol_file.name,
+            'program': self.pli_file.name,
             'metrics': metrics,
             'complexity_score': score,
             'complexity_level': self._get_complexity_level(score),
@@ -56,24 +56,24 @@ class ComplexityEstimator:
         """Collect various code metrics."""
         return {
             'total_lines': len(self.lines),
-            'paragraphs': self._count_paragraphs(),
+            'procedures': self._count_procedures(),
             'calls': self._count_pattern(r'CALL\s+'),
-            'files': self._count_pattern(r'SELECT\s+'),
+            'files': self._count_pattern(r'FILE\s*\('),
             'sql_statements': self._count_pattern(r'EXEC\s+SQL'),
             'goto_statements': self._count_pattern(r'GO\s+TO\s+'),
-            'alter_statements': self._count_pattern(r'ALTER\s+'),
-            'perform_varying': self._count_pattern(r'PERFORM\s+.*VARYING'),
-            'copybooks': self._count_pattern(r'COPY\s+'),
+            'includes': self._count_pattern(r'%INCLUDE\s+'),
+            'on_conditions': self._count_pattern(r'ON\s+(ENDFILE|ERROR|CONVERSION)'),
+            'do_loops': self._count_pattern(r'DO\s+(WHILE|UNTIL)'),
             'if_statements': self._count_pattern(r'IF\s+'),
-            'evaluate_statements': self._count_pattern(r'EVALUATE\s+'),
+            'select_statements': self._count_pattern(r'SELECT\s*;'),
         }
     
-    def _count_paragraphs(self) -> int:
-        """Count paragraph definitions."""
+    def _count_procedures(self) -> int:
+        """Count procedure definitions."""
         count = 0
         for line in self.lines:
-            # Paragraph name followed by period at start of line
-            if re.match(r'^[A-Z0-9\-]+\.\s*$', line.strip()):
+            # PROCEDURE statement
+            if re.search(r'\bPROCEDURE\b', line, re.IGNORECASE):
                 count += 1
         return count
     
@@ -93,13 +93,13 @@ class ComplexityEstimator:
         score += metrics['total_lines'] / self.WEIGHTS['loc_per_point']
         
         # Add weighted factors
-        score += metrics['paragraphs'] * self.WEIGHTS['paragraph_weight']
+        score += metrics['procedures'] * self.WEIGHTS['procedure_weight']
         score += metrics['calls'] * self.WEIGHTS['call_weight']
         score += metrics['files'] * self.WEIGHTS['file_weight']
         score += metrics['sql_statements'] * self.WEIGHTS['sql_weight']
         score += metrics['goto_statements'] * self.WEIGHTS['goto_weight']
-        score += metrics['alter_statements'] * self.WEIGHTS['alter_weight']
-        score += metrics['perform_varying'] * self.WEIGHTS['perform_varying_weight']
+        score += metrics['on_conditions'] * self.WEIGHTS['on_condition_weight']
+        score += metrics['do_loops'] * self.WEIGHTS['do_loop_weight']
         
         return int(score)
     
@@ -134,11 +134,11 @@ class ComplexityEstimator:
                 'severity': 'high'
             })
         
-        if metrics['alter_statements'] > 0:
+        if metrics['on_conditions'] > 10:
             risks.append({
-                'type': 'control_flow',
-                'description': f"Contains {metrics['alter_statements']} ALTER statements - complex refactoring needed",
-                'severity': 'critical'
+                'type': 'exception_handling',
+                'description': f"Contains {metrics['on_conditions']} ON condition handlers - complex exception mapping needed",
+                'severity': 'medium'
             })
         
         if metrics['sql_statements'] > 10:
@@ -173,18 +173,18 @@ class ComplexityEstimator:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Estimate COBOL program migration complexity')
-    parser.add_argument('cobol_file', type=Path, help='Path to COBOL source file')
+    parser = argparse.ArgumentParser(description='Estimate PL/I program migration complexity')
+    parser.add_argument('pli_file', type=Path, help='Path to PL/I source file')
     parser.add_argument('--detailed', action='store_true', help='Show detailed metrics')
     parser.add_argument('--json', action='store_true', help='Output as JSON')
     
     args = parser.parse_args()
     
-    if not args.cobol_file.exists():
-        print(f"Error: File not found: {args.cobol_file}")
+    if not args.pli_file.exists():
+        print(f"Error: File not found: {args.pli_file}")
         return 1
     
-    estimator = ComplexityEstimator(args.cobol_file)
+    estimator = ComplexityEstimator(args.pli_file)
     result = estimator.estimate()
     
     if args.json:

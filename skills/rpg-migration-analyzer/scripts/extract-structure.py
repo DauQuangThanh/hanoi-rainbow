@@ -59,93 +59,147 @@ class RPGStructureExtractor:
                     return match.group(2)
         return self.source_file.stem
     
-    def extract_divisions(self) -> Dict[str, int]:
-        """Find line numbers where divisions start."""
-        divisions = {}
+    def extract_specifications(self) -> Dict[str, int]:
+        """Find line numbers where specifications start."""
+        specs = {'H': [], 'F': [], 'D': [], 'C': [], 'P': [], 'O': []}
         for i, line in enumerate(self.lines):
-            for div_name in ['IDENTIFICATION', 'ENVIRONMENT', 'DATA', 'PROCEDURE']:
-                if re.search(rf'{div_name}\s+DIVISION', line, re.IGNORECASE):
-                    divisions[div_name] = i + 1
-        return divisions
+            if len(line) > 0:
+                spec_type = line[0].upper()
+                if spec_type in specs:
+                    specs[spec_type].append(i + 1)
+        return {k: v for k, v in specs.items() if v}
     
-    def extract_working_storage(self) -> List[Dict[str, Any]]:
-        """Extract Working-Storage variables."""
-        variables = []
-        in_working_storage = False
+    def extract_data_structures(self) -> List[Dict[str, Any]]:
+        """Extract D-spec data structures and standalone fields."""
+        data_defs = []
         
-        for line in self.lines:
-            if re.search(r'WORKING-STORAGE\s+SECTION', line, re.IGNORECASE):
-                in_working_storage = True
-                continue
-            if re.search(r'(PROCEDURE\s+DIVISION|LINKAGE\s+SECTION)', line, re.IGNORECASE):
-                in_working_storage = False
-                
-            if in_working_storage:
-                match = re.match(r'\s*(\d{2})\s+(\S+)\s+(.+)', line)
-                if match:
-                    level, name, rest = match.groups()
-                    pic_match = re.search(r'PIC\s+(\S+)', rest, re.IGNORECASE)
-                    variables.append({
-                        'level': int(level),
+        for i, line in enumerate(self.lines):
+            if len(line) > 0 and line[0].upper() == 'D':
+                # Parse D-spec format (fixed or free)
+                name_match = re.match(r'^D\s+(\S+)', line, re.IGNORECASE)
+                if name_match:
+                    name = name_match.group(1)
+                    
+                    # Check for data structure
+                    is_ds = 'DS' in line.upper()
+                    
+                    # Extract data type
+                    type_match = re.search(r'\s+(CHAR|VARCHAR|INT|UNS|PACKED|ZONED|DATE|TIME|TIMESTAMP|LIKE|LIKEDS)\s*\(([^)]+)\)', line, re.IGNORECASE)
+                    data_type = type_match.group(1) if type_match else None
+                    length = type_match.group(2) if type_match else None
+                    
+                    data_defs.append({
                         'name': name,
-                        'picture': pic_match.group(1) if pic_match else None,
-                        'line': self.lines.index(line) + 1
+                        'type': 'data_structure' if is_ds else 'field',
+                        'data_type': data_type,
+                        'length': length,
+                        'line': i + 1
                     })
         
-        return variables
+        return data_defs
     
     def extract_file_definitions(self) -> List[Dict[str, str]]:
-        """Extract file definitions from SELECT statements."""
+        """Extract file definitions from F-specs."""
         files = []
-        for line in self.lines:
-            match = re.search(r'SELECT\s+(\S+)\s+ASSIGN', line, re.IGNORECASE)
-            if match:
-                files.append({
-                    'name': match.group(1),
-                    'line': self.lines.index(line) + 1
-                })
+        for i, line in enumerate(self.lines):
+            if len(line) > 0 and line[0].upper() == 'F':
+                # Parse F-spec format
+                file_match = re.match(r'^F(\S+)', line, re.IGNORECASE)
+                if file_match:
+                    file_name = file_match.group(1)
+                    
+                    # Determine file type (I=Input, O=Output, U=Update, etc.)
+                    file_type = 'UNKNOWN'
+                    if 'DISK' in line.upper():
+                        if ' O ' in line.upper() or ' OUTPUT ' in line.upper():
+                            file_type = 'OUTPUT'
+                        elif ' U ' in line.upper() or ' UPDATE ' in line.upper():
+                            file_type = 'UPDATE'
+                        else:
+                            file_type = 'INPUT'
+                    
+                    files.append({
+                        'name': file_name,
+                        'type': file_type,
+                        'line': i + 1
+                    })
         return files
     
-    def extract_paragraphs(self) -> List[Dict[str, Any]]:
-        """Extract paragraph and section names."""
-        paragraphs = []
+    def extract_subroutines(self) -> List[Dict[str, Any]]:
+        """Extract subroutines (BEGSR/ENDSR blocks)."""
+        subroutines = []
+        current_sr = None
+        
         for i, line in enumerate(self.lines):
-            # Match paragraph names (word followed by period at start of line)
-            match = re.match(r'^([A-Z0-9\-]+)\.\s*$', line.strip())
-            if match and i > 0:
-                para_name = match.group(1)
-                # Skip division names
-                if para_name not in ['IDENTIFICATION', 'ENVIRONMENT', 'DATA', 'PROCEDURE']:
-                    paragraphs.append({
-                        'name': para_name,
-                        'line': i + 1,
-                        'type': 'section' if 'SECTION' in para_name else 'paragraph'
-                    })
-        return paragraphs
+            # Look for BEGSR
+            begsr_match = re.search(r'BEGSR\s+(\S+)', line, re.IGNORECASE)
+            if begsr_match:
+                current_sr = {
+                    'name': begsr_match.group(1),
+                    'start_line': i + 1,
+                    'end_line': None
+                }
+            
+            # Look for ENDSR
+            if 'ENDSR' in line.upper() and current_sr:
+                current_sr['end_line'] = i + 1
+                subroutines.append(current_sr)
+                current_sr = None
+        
+        return subroutines
+    
+    def extract_procedures(self) -> List[Dict[str, Any]]:
+        """Extract procedures (P-spec definitions)."""
+        procedures = []
+        current_proc = None
+        
+        for i, line in enumerate(self.lines):
+            if len(line) > 0 and line[0].upper() == 'P':
+                # Look for procedure begin/end
+                proc_match = re.match(r'^P\s+(\S+)\s+(B|E)', line, re.IGNORECASE)
+                if proc_match:
+                    proc_name = proc_match.group(1)
+                    proc_flag = proc_match.group(2).upper()
+                    
+                    if proc_flag == 'B':  # Begin
+                        current_proc = {
+                            'name': proc_name,
+                            'start_line': i + 1,
+                            'end_line': None
+                        }
+                    elif proc_flag == 'E' and current_proc:  # End
+                        current_proc['end_line'] = i + 1
+                        procedures.append(current_proc)
+                        current_proc = None
+        
+        return procedures
     
     def extract_calls(self) -> List[Dict[str, Any]]:
-        """Extract CALL statements to other programs."""
+        """Extract CALLB/CALLP statements to other programs."""
         calls = []
         for i, line in enumerate(self.lines):
-            match = re.search(r'CALL\s+[\'"](\S+)[\'"]', line, re.IGNORECASE)
+            # Match CALLB or CALLP
+            match = re.search(r'\s+(CALLB|CALLP)\s+[\'"]?(\S+)[\'"]?', line, re.IGNORECASE)
             if match:
                 calls.append({
-                    'program': match.group(1),
+                    'type': match.group(1).upper(),
+                    'program': match.group(2).strip('\'"'),
                     'line': i + 1
                 })
         return calls
     
-    def extract_copybooks(self) -> List[Dict[str, Any]]:
-        """Extract COPY statements."""
-        copybooks = []
+    def extract_copy_members(self) -> List[Dict[str, Any]]:
+        """Extract /COPY and /INCLUDE statements."""
+        copy_members = []
         for i, line in enumerate(self.lines):
-            match = re.search(r'COPY\s+(\S+)', line, re.IGNORECASE)
+            match = re.search(r'^\s*/(COPY|INCLUDE)\s+(\S+)', line, re.IGNORECASE)
             if match:
-                copybooks.append({
-                    'name': match.group(1).rstrip('.'),
+                copy_members.append({
+                    'type': match.group(1).upper(),
+                    'name': match.group(2),
                     'line': i + 1
                 })
-        return copybooks
+        return copy_members
     
     def extract_sql_operations(self) -> List[Dict[str, Any]]:
         """Extract embedded SQL operations."""
@@ -155,7 +209,7 @@ class RPGStructureExtractor:
         sql_start = 0
         
         for i, line in enumerate(self.lines):
-            if 'EXEC SQL' in line.upper():
+            if 'EXEC SQL' in line.upper() or '/EXEC SQL' in line.upper():
                 in_sql = True
                 sql_start = i + 1
                 sql_text = []
@@ -163,12 +217,13 @@ class RPGStructureExtractor:
             if in_sql:
                 sql_text.append(line.strip())
                 
-            if 'END-EXEC' in line.upper() and in_sql:
-                in_sql = False
-                sql_ops.append({
-                    'statement': ' '.join(sql_text),
-                    'line': sql_start
-                })
+            if 'END-EXEC' in line.upper() or '/END-EXEC' in line.upper():
+                if in_sql:
+                    in_sql = False
+                    sql_ops.append({
+                        'statement': ' '.join(sql_text),
+                        'line': sql_start
+                    })
         
         return sql_ops
     
@@ -176,10 +231,12 @@ class RPGStructureExtractor:
         """Calculate basic statistics."""
         return {
             'total_lines': len(self.lines),
-            'working_storage_vars': len(self.extract_working_storage()),
-            'paragraphs': len(self.extract_paragraphs()),
+            'data_definitions': len(self.extract_data_structures()),
+            'file_definitions': len(self.extract_file_definitions()),
+            'subroutines': len(self.extract_subroutines()),
+            'procedures': len(self.extract_procedures()),
             'calls': len(self.extract_calls()),
-            'copybooks': len(self.extract_copybooks()),
+            'copy_members': len(self.extract_copy_members()),
             'sql_operations': len(self.extract_sql_operations())
         }
 
@@ -195,7 +252,7 @@ def main():
         print(f"Error: File not found: {args.source_file}")
         return 1
     
-    extractor = LegacyStructureExtractor(args.source_file)
+    extractor = RPGStructureExtractor(args.source_file)
     structure = extractor.extract()
     
     output_json = json.dumps(structure, indent=2)

@@ -198,18 +198,18 @@ class RPGComplexityEstimator:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Estimate COBOL program migration complexity')
-    parser.add_argument('cobol_file', type=Path, help='Path to COBOL source file')
+    parser = argparse.ArgumentParser(description='Estimate RPG program migration complexity')
+    parser.add_argument('rpg_file', type=Path, help='Path to RPG source file')
     parser.add_argument('--detailed', action='store_true', help='Show detailed metrics')
     parser.add_argument('--json', action='store_true', help='Output as JSON')
     
     args = parser.parse_args()
     
-    if not args.cobol_file.exists():
-        print(f"Error: File not found: {args.cobol_file}")
+    if not args.rpg_file.exists():
+        print(f"Error: File not found: {args.rpg_file}")
         return 1
     
-    estimator = ComplexityEstimator(args.cobol_file)
+    estimator = ComplexityEstimator(args.rpg_file)
     result = estimator.estimate()
     
     if args.json:

@@ -13,7 +13,7 @@ from typing import List, Dict, Optional, Tuple
 
 
 class FieldDefinition:
-    """Represents a COBOL field definition."""
+    """Represents a PL/I field definition."""
     
     def __init__(self, level: int, name: str, picture: Optional[str], occurs: Optional[int] = None):
         self.level = level
@@ -27,7 +27,7 @@ class FieldDefinition:
         return self.picture is None
     
     def to_java_type(self) -> str:
-        """Convert COBOL picture to Java type."""
+        """Convert PL/I picture to Java type."""
         if self.picture is None:
             # Group item - will be a nested class
             return self.to_java_class_name()
@@ -54,42 +54,63 @@ class FieldDefinition:
         return 'String'
     
     def to_java_field_name(self) -> str:
-        """Convert COBOL name to Java field name (camelCase)."""
+        """Convert PL/I name to Java field name (camelCase)."""
         parts = self.name.lower().replace('_', '-').split('-')
         return parts[0] + ''.join(p.capitalize() for p in parts[1:])
     
     def to_java_class_name(self) -> str:
-        """Convert COBOL name to Java class name (PascalCase)."""
+        """Convert PL/I name to Java class name (PascalCase)."""
         parts = self.name.lower().replace('_', '-').split('-')
         return ''.join(p.capitalize() for p in parts)
 
 
-class CopybookParser:
-    """Parse COBOL copybook and extract field definitions."""
+class PLIStructureParser:
+    """Parse PL/I data structures and extract field definitions."""
     
-    def __init__(self, copybook_file: Path):
-        self.copybook_file = copybook_file
-        self.content = copybook_file.read_text(encoding='utf-8', errors='ignore')
+    def __init__(self, pli_file: Path):
+        self.pli_file = pli_file
+        self.content = pli_file.read_text(encoding='utf-8', errors='ignore')
         self.lines = self.content.split('\n')
         
     def parse(self) -> FieldDefinition:
-        """Parse copybook and return root field definition."""
+        """Parse PL/I DECLARE statements and return root field definition."""
         fields = []
         
         for line in self.lines:
-            # Match COBOL field definition: level number, name, and optional picture
-            match = re.match(r'\s*(\d{2})\s+(\S+)(?:\s+PIC\s+(\S+))?(?:\s+OCCURS\s+(\d+))?', line, re.IGNORECASE)
-            if match:
-                level = int(match.group(1))
-                name = match.group(2).rstrip('.')
-                picture = match.group(3)
-                occurs = int(match.group(4)) if match.group(4) else None
+            # Match PL/I DECLARE statements with level numbers (for structures)
+            # Pattern: DCL 01 name ...
+            level_match = re.match(r'\s*(?:DCL|DECLARE)\s+(\d{2})\s+(\w+)(?:\s+(FIXED\s+(?:DECIMAL|BINARY)|CHARACTER|CHAR|BIT))?(?:\s*\(([^)]+)\))?', line, re.IGNORECASE)
+            if level_match:
+                level = int(level_match.group(1))
+                name = level_match.group(2)
+                data_type = level_match.group(3) if level_match.group(3) else None
+                attributes = level_match.group(4) if level_match.group(4) else None
                 
-                field = FieldDefinition(level, name, picture, occurs)
+                # Convert PL/I type to picture-like format for compatibility
+                picture = self._pli_type_to_picture(data_type, attributes) if data_type else None
+                
+                field = FieldDefinition(level, name, picture, None)
                 fields.append(field)
         
         # Build hierarchy
         return self._build_hierarchy(fields)
+    
+    def _pli_type_to_picture(self, data_type: str, attributes: str) -> str:
+        """Convert PL/I data type to picture format."""
+        if not data_type:
+            return None
+        
+        data_type_upper = data_type.upper()
+        if 'FIXED DECIMAL' in data_type_upper or 'FIXED DEC' in data_type_upper:
+            # FIXED DECIMAL(p,q) -> 9(p)V9(q) equivalent
+            return f"9({attributes})" if attributes else "9(15)"
+        elif 'FIXED BINARY' in data_type_upper or 'FIXED BIN' in data_type_upper:
+            return "9(9)"  # Integer equivalent
+        elif 'CHARACTER' in data_type_upper or 'CHAR' in data_type_upper:
+            return f"X({attributes})" if attributes else "X(1)"
+        elif 'BIT' in data_type_upper:
+            return "9(1)"  # Boolean equivalent
+        return None
     
     def _build_hierarchy(self, fields: List[FieldDefinition]) -> FieldDefinition:
         """Build hierarchical structure from flat field list."""
@@ -113,7 +134,7 @@ class CopybookParser:
 
 
 class JavaClassGenerator:
-    """Generate Java class from COBOL copybook structure."""
+    """Generate Java class from PL/I data structure."""
     
     def __init__(self, root_field: FieldDefinition, package_name: str = 'com.example.model'):
         self.root = root_field
@@ -136,7 +157,7 @@ class JavaClassGenerator:
         
         # Generate class
         lines.append('/**')
-        lines.append(f' * Generated from COBOL copybook: {self.root.name}')
+        lines.append(f' * Generated from PL/I data structure: {self.root.name}')
         lines.append(' * Auto-generated - do not modify directly')
         lines.append(' */')
         lines.extend(self._generate_class(self.root, 0))
@@ -219,19 +240,19 @@ class JavaClassGenerator:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Generate Java classes from legacy data structures')
-    parser.add_argument('copybook', type=Path, help='Path to data structure definition file')
+    parser = argparse.ArgumentParser(description='Generate Java classes from PL/I data structures')
+    parser.add_argument('pli_file', type=Path, help='Path to PL/I source file with DECLARE statements')
     parser.add_argument('--package', '-p', default='com.example.model', help='Java package name')
     parser.add_argument('--output-dir', '-o', type=Path, help='Output directory for Java files')
     
     args = parser.parse_args()
     
-    if not args.copybook.exists():
-        print(f"Error: Data structure file not found: {args.copybook}")
+    if not args.pli_file.exists():
+        print(f"Error: PL/I file not found: {args.pli_file}")
         return 1
     
-    # Parse copybook
-    parser_obj = CopybookParser(args.copybook)
+    # Parse PL/I structure
+    parser_obj = PLIStructureParser(args.pli_file)
     root_field = parser_obj.parse()
     
     # Generate Java class

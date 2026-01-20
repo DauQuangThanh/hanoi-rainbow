@@ -1,15 +1,39 @@
 ---
 name: jcl-migration-analyzer
 description: Analyzes legacy JCL (Job Control Language) scripts to assist with migration to modern workflow orchestration and batch processing systems. Extracts job flows, step sequences, data dependencies, conditional logic, and program invocations. Generates migration reports and creates implementation strategies for Spring Batch, Apache Airflow, or shell scripts. Use when working with mainframe job migration, JCL analysis, batch workflow modernization, or when users mention JCL conversion, analyzing .jcl/.JCL files, working with job steps, procedures, or planning workflow orchestration from JCL jobs.
+metadata:
+  version: "1.0"
+  category: legacy-migration
 ---
 
 # JCL Migration Analyzer
 
 Analyzes legacy JCL scripts for migration to modern batch processing and workflow orchestration systems like Spring Batch, Apache Airflow, Kubernetes Jobs, or shell scripts.
 
+## Overview
+
+This skill provides comprehensive analysis and migration planning for JCL (Job Control Language) batch processing systems. It extracts job structures, converts JCL constructs to modern workflow patterns, maps data dependencies, and generates implementation-ready migration strategies.
+
+**Key Migration Focus**: JCL to modern orchestration with proper handling of COND logic inversion, data dependencies (DD statements), GDG generations, procedures (PROCs), and batch workflow patterns.
+
+## When to Use This Skill
+
+Use this skill when:
+- Analyzing JCL job files (.jcl, .JCL) for modernization
+- Planning migration from mainframe batch processing to modern workflow systems
+- Converting JCL job steps to Spring Batch, Apache Airflow, or shell scripts
+- Understanding JCL COND logic and conditional execution patterns
+- Mapping JCL data sets (DD statements) to modern file operations
+- Extracting JCL procedures (PROCs) and symbolic parameters
+- Generating workflow definitions for orchestration platforms
+- Estimating complexity and effort for JCL migration projects
+- Creating migration documentation and strategy reports
+- Modernizing mainframe batch jobs to cloud-native workflows
+- User mentions: JCL analysis, mainframe job migration, batch workflow conversion, COND logic, job steps, procedures, workflow orchestration
+
 ## Core Capabilities
 
-## 1. Job Analysis
+### 1. Job Analysis
 
 Extract job structure (JOB card), step sequences, program invocations (EXEC PGM/PROC), conditional logic (COND, IF/THEN/ELSE), return codes, data sets (DD statements), resource requirements, and symbolic parameters.
 
@@ -29,14 +53,83 @@ Generate Spring Batch jobs, Apache Airflow DAGs, Kubernetes Jobs, shell scripts,
 
 **CRITICAL**: COND logic is INVERTED! Map COND parameters, IF/THEN/ELSE, return codes, step bypassing, and restart logic to modern constructs.
 
-## Quick Usage Guide
+## Workflow
 
-### Find Jobs
+### Step 1: Discover JCL Assets
+
+Find JCL jobs and procedures in the workspace:
 
 ```bash
 find . -name "*.jcl" -o -name "*.JCL"
 find . -name "*.proc" -o -name "*.PROC"
 ```
+
+Use `scripts/analyze-dependencies.sh` or `scripts/analyze-dependencies.ps1` to generate dependency graph in JSON format.
+
+### Step 2: Extract Structure
+
+Use `scripts/extract-structure.py` to parse JCL files and extract:
+- Job cards and parameters
+- Step sequences and execution order
+- Program/procedure invocations
+- DD statements with DISP parameters
+- COND and IF/THEN/ELSE logic
+- Symbolic parameters
+
+Output format: JSON with job structure, steps, and dependencies.
+
+### Step 3: Analyze Conditional Logic
+
+**CRITICAL**: Identify and document COND logic (which is INVERTED):
+- `COND=(0,NE)` → Run if previous RC ≠ 0 (run on ERROR)
+- `COND=(0,EQ)` → Skip if previous RC = 0 (skip on SUCCESS)
+- IF/THEN/ELSE uses normal logic (not inverted)
+
+Create truth tables for complex conditional logic to avoid errors in migration.
+
+### Step 4: Map Data Dependencies
+
+Track data flow between steps:
+- Input datasets (DISP=SHR or OLD)
+- Output datasets (DISP=NEW, CATLG)
+- Temporary datasets (&&TEMP)
+- GDG generations (GDG(0), GDG(+1))
+- Dataset concatenations
+
+### Step 5: Estimate Complexity
+
+Use `scripts/estimate-complexity.py` to calculate migration complexity based on:
+- Number of job steps
+- Conditional logic complexity (COND/IF/THEN/ELSE)
+- Number of procedures (PROCs)
+- Data dependency complexity
+- Number of programs invoked
+- GDG usage patterns
+
+### Step 6: Choose Target Platform
+
+Select migration target based on requirements:
+- **Spring Batch**: Java-based batch processing with comprehensive features
+- **Apache Airflow**: Python-based workflow orchestration with rich UI
+- **Shell Scripts**: Simple, lightweight for basic sequential processing
+- **Kubernetes Jobs**: Container-based batch processing
+- **AWS Step Functions**: Serverless workflow orchestration
+- **Azure Logic Apps**: Cloud-based workflow integration
+
+### Step 7: Generate Migration Strategy
+
+Create comprehensive migration report with:
+1. **Job Overview**: Purpose, schedule, dependencies
+2. **Step Sequence**: Detailed breakdown of each step
+3. **Data Flow Diagram**: Input/output dependencies
+4. **Conditional Logic Map**: COND translations (with inversion notes)
+5. **Target Implementation**: Workflow definition in chosen platform
+6. **Migration Estimate**: Effort, complexity score, risk assessment
+7. **Action Items**: Prioritized tasks with acceptance criteria
+
+Use template: `assets/migration-report-template.md`
+
+## Quick Reference
 
 ### Critical: COND Logic is INVERTED
 
@@ -195,34 +288,27 @@ with DAG('job', schedule_interval='@daily') as dag:
 
 Provide: Job overview, step sequence, data flow, conditional logic, migration target, workflow definition, migration estimate, action items.
 
-## Bundled Resources
+## Advanced Topics
 
-### Scripts (scripts/)
+For detailed conversion rules and patterns, see:
 
-Available automation tools for JCL analysis:
+- **[pseudocode-jcl-rules.md](references/pseudocode-jcl-rules.md)** - Comprehensive JCL to pseudocode conversion rules including element mapping, return codes, DISP parameters, translation patterns, and COND logic handling
+- **[pseudocode-common-rules.md](references/pseudocode-common-rules.md)** - Common pseudocode syntax and conventions applicable to all languages
+- **[testing-strategy.md](references/testing-strategy.md)** - Comprehensive testing approach including unit tests, integration tests, parallel validation, and data-driven testing for migrated workflows
+- **[transaction-handling.md](references/transaction-handling.md)** - Transaction management, rollback strategies, and ACID compliance for batch jobs
+- **[messaging-integration.md](references/messaging-integration.md)** - Message queue integration patterns (MQ, JMS, Kafka) for event-driven workflows
+- **[performance-patterns.md](references/performance-patterns.md)** - Batch processing optimization, memory management, parallel processing, and performance tuning
 
-- **analyze-dependencies.sh/.ps1**: Generate dependency graphs in JSON format
-- **extract-structure.py**: Extract structural information from JCL files  
-- **generate-java-classes.py**: Generate Java POJOs from data structures
-- **estimate-complexity.py**: Estimate migration complexity and effort
+## Tools and Scripts
 
-Use these scripts when detailed structural analysis is needed or for batch processing multiple JCL files.
+All scripts support cross-platform execution (Windows PowerShell, bash):
 
-### References (references/)
+- `analyze-dependencies.sh/ps1` - Generate dependency graph in JSON format showing job-to-job, job-to-dataset, and procedure dependencies
+- `extract-structure.py` - Parse JCL files and extract structure (job cards, steps, DD statements, COND logic) to JSON
+- `generate-java-classes.py` - Generate Java POJOs from data structures for Spring Batch item readers/writers
+- `estimate-complexity.py` - Calculate migration complexity score based on steps, conditional logic, procedures, and data dependencies
 
-Load these on-demand for detailed guidance:
-
-- **pseudocode-common-rules.md**: General pseudocode syntax and conventions
-- **pseudocode-jcl-rules.md**: JCL-specific translation rules and patterns (load when generating pseudocode)
-- **testing-strategy.md**: Comprehensive testing approach for migrated workflows (load when planning testing)
-- **transaction-handling.md**: Transaction patterns and ACID compliance (load when dealing with transactional jobs)
-- **messaging-integration.md**: Message queue integration patterns (load when jobs involve messaging)
-- **performance-patterns.md**: Performance optimization strategies (load when optimizing workflows)
-
-### Templates (assets/)
-
-- **migration-report-template.md**: Standard format for migration analysis reports
-- **java-class-template.java**: Template for generating Java classes from data structures
+Scripts use standard libraries only and output JSON for easy integration with CI/CD pipelines and migration tracking tools.
 
 ## Integration
 

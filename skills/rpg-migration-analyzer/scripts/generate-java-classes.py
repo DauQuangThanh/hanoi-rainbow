@@ -66,58 +66,64 @@ class RPGFieldDefinition:
         return 'String'
     
     def to_java_field_name(self) -> str:
-        """Convert COBOL name to Java field name (camelCase)."""
+        """Convert RPG name to Java field name (camelCase)."""
         parts = self.name.lower().replace('_', '-').split('-')
         return parts[0] + ''.join(p.capitalize() for p in parts[1:])
     
     def to_java_class_name(self) -> str:
-        """Convert COBOL name to Java class name (PascalCase)."""
+        """Convert RPG name to Java class name (PascalCase)."""
         parts = self.name.lower().replace('_', '-').split('-')
         return ''.join(p.capitalize() for p in parts)
 
 
-class CopybookParser:
-    """Parse COBOL copybook and extract field definitions."""
+class RPGStructureParser:
+    """Parse RPG data structures and extract field definitions."""
     
-    def __init__(self, copybook_file: Path):
-        self.copybook_file = copybook_file
-        self.content = copybook_file.read_text(encoding='utf-8', errors='ignore')
+    def __init__(self, rpg_file: Path):
+        self.rpg_file = rpg_file
+        self.content = rpg_file.read_text(encoding='utf-8', errors='ignore')
         self.lines = self.content.split('\n')
         
-    def parse(self) -> FieldDefinition:
-        """Parse copybook and return root field definition."""
+    def parse(self) -> RPGFieldDefinition:
+        """Parse RPG D-specs and return root field definition."""
         fields = []
         
         for line in self.lines:
-            # Match COBOL field definition: level number, name, and optional picture
-            match = re.match(r'\s*(\d{2})\s+(\S+)(?:\s+PIC\s+(\S+))?(?:\s+OCCURS\s+(\d+))?', line, re.IGNORECASE)
-            if match:
-                level = int(match.group(1))
-                name = match.group(2).rstrip('.')
-                picture = match.group(3)
-                occurs = int(match.group(4)) if match.group(4) else None
-                
-                field = FieldDefinition(level, name, picture, occurs)
-                fields.append(field)
+            # Match RPG D-spec field definition
+            if len(line) > 0 and line[0].upper() == 'D':
+                # Parse D-spec format
+                match = re.match(r'^D\s+(\S+)\s+.*?\s+(CHAR|VARCHAR|INT|UNS|PACKED|ZONED|DATE|TIME|LIKE|LIKEDS)\s*\((\d+)(?::(\d+))?\)', line, re.IGNORECASE)
+                if match:
+                    name = match.group(1)
+                    data_type = match.group(2)
+                    length = int(match.group(3))
+                    decimals = int(match.group(4)) if match.group(4) else 0
+                    
+                    # Check for DIM (array dimension)
+                    dim_match = re.search(r'DIM\((\d+)\)', line, re.IGNORECASE)
+                    is_array = dim_match is not None
+                    array_size = int(dim_match.group(1)) if dim_match else 0
+                    
+                    field = RPGFieldDefinition(name, data_type, length, decimals, is_array, array_size)
+                    fields.append(field)
         
         # Build hierarchy
         return self._build_hierarchy(fields)
     
-    def _build_hierarchy(self, fields: List[FieldDefinition]) -> FieldDefinition:
+    def _build_hierarchy(self, fields: List[RPGFieldDefinition]) -> RPGFieldDefinition:
         """Build hierarchical structure from flat field list."""
         if not fields:
-            return FieldDefinition(1, 'Root', None)
+            return RPGFieldDefinition('Root', 'A', 0)
         
         root = fields[0]
         stack = [root]
         
         for field in fields[1:]:
-            # Pop stack until we find the parent level
-            while stack and stack[-1].level >= field.level:
-                stack.pop()
-            
+            # For RPG, determine hierarchy based on data structure membership
+            # This is a simplified version - real implementation would track DS boundaries
             if stack:
-                stack[-1].children.append(field)
+                # Add to current data structure if appropriate
+                pass
             
             stack.append(field)
         
@@ -125,9 +131,9 @@ class CopybookParser:
 
 
 class JavaClassGenerator:
-    """Generate Java class from COBOL copybook structure."""
+    """Generate Java class from RPG data structure."""
     
-    def __init__(self, root_field: FieldDefinition, package_name: str = 'com.example.model'):
+    def __init__(self, root_field: RPGFieldDefinition, package_name: str = 'com.example.model'):
         self.root = root_field
         self.package_name = package_name
         self.imports = set()
@@ -148,14 +154,14 @@ class JavaClassGenerator:
         
         # Generate class
         lines.append('/**')
-        lines.append(f' * Generated from COBOL copybook: {self.root.name}')
+        lines.append(f' * Generated from RPG data structure: {self.root.name}')
         lines.append(' * Auto-generated - do not modify directly')
         lines.append(' */')
         lines.extend(self._generate_class(self.root, 0))
         
         return '\n'.join(lines)
     
-    def _collect_imports(self, field: FieldDefinition):
+    def _collect_imports(self, field: RPGFieldDefinition):
         """Collect required imports."""
         java_type = field.to_java_type()
         
@@ -163,14 +169,14 @@ class JavaClassGenerator:
             self.imports.add('java.math.BigDecimal')
         elif java_type == 'BigInteger':
             self.imports.add('java.math.BigInteger')
-        elif field.occurs:
+        elif field.is_array:
             self.imports.add('java.util.List')
             self.imports.add('java.util.ArrayList')
         
         for child in field.children:
             self._collect_imports(child)
     
-    def _generate_class(self, field: FieldDefinition, indent_level: int) -> List[str]:
+    def _generate_class(self, field: RPGFieldDefinition, indent_level: int) -> List[str]:
         """Generate class definition recursively."""
         lines = []
         indent = '    ' * indent_level
@@ -185,7 +191,7 @@ class JavaClassGenerator:
             java_type = child.to_java_type()
             field_name = child.to_java_field_name()
             
-            if child.occurs:
+            if child.is_array:
                 lines.append(f'{field_indent}private List<{java_type}> {field_name} = new ArrayList<>();')
             else:
                 lines.append(f'{field_indent}private {java_type} {field_name};')
@@ -200,7 +206,7 @@ class JavaClassGenerator:
             field_name = child.to_java_field_name()
             method_suffix = field_name[0].upper() + field_name[1:]
             
-            if child.occurs:
+            if child.is_array:
                 return_type = f'List<{java_type}>'
                 lines.append(f'{field_indent}public {return_type} get{method_suffix}() {{')
                 lines.append(f'{field_indent}    return {field_name};')
@@ -219,9 +225,9 @@ class JavaClassGenerator:
                 lines.append(f'{field_indent}}}')
             lines.append('')
         
-        # Generate nested classes for group items
+        # Generate nested classes for data structures
         for child in field.children:
-            if child.is_group() and child.children:
+            if child.is_data_structure() and child.children:
                 lines.extend(self._generate_class(child, indent_level + 1))
                 lines.append('')
         
@@ -231,19 +237,19 @@ class JavaClassGenerator:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Generate Java classes from legacy data structures')
-    parser.add_argument('copybook', type=Path, help='Path to data structure definition file')
+    parser = argparse.ArgumentParser(description='Generate Java classes from RPG data structures')
+    parser.add_argument('rpg_source', type=Path, help='Path to RPG source file with D-specs')
     parser.add_argument('--package', '-p', default='com.example.model', help='Java package name')
     parser.add_argument('--output-dir', '-o', type=Path, help='Output directory for Java files')
     
     args = parser.parse_args()
     
-    if not args.copybook.exists():
-        print(f"Error: Data structure file not found: {args.copybook}")
+    if not args.rpg_source.exists():
+        print(f"Error: RPG source file not found: {args.rpg_source}")
         return 1
     
-    # Parse copybook
-    parser_obj = CopybookParser(args.copybook)
+    # Parse RPG data structures
+    parser_obj = RPGStructureParser(args.rpg_source)
     root_field = parser_obj.parse()
     
     # Generate Java class

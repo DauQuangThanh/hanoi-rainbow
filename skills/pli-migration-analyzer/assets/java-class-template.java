@@ -57,7 +57,7 @@ public class {{CLASS_NAME}} {
      * @return true if valid, false otherwise
      */
     public boolean isValid() {
-        // TODO: Implement validation logic from COBOL
+        // TODO: Implement validation logic from PL/I
         return true;
     }
     

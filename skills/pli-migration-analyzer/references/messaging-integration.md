@@ -10,30 +10,30 @@ Mainframe systems use IBM MQ, CICS queues, and transient data for asynchronous c
 
 ## 1. IBM MQ Messages
 
-**COBOL Example**:
+**PL/I Example**:
 
-```cobol
+```pli
+/* Write to temporary storage queue */
 EXEC CICS WRITEQ TS
     QUEUE('ORDERQ')
-    FROM(ORDER-MESSAGE)
-    LENGTH(ORDER-LENGTH)
-END-EXEC.
+    FROM(order_message)
+    LENGTH(order_length);
 
+/* Read from temporary storage queue */
 EXEC CICS READQ TS
     QUEUE('ORDERQ')
-    INTO(ORDER-MESSAGE)
-    LENGTH(ORDER-LENGTH)
-END-EXEC.
+    INTO(order_message)
+    LENGTH(order_length);
 ```
 
 ### 2. CICS Transient Data
 
-```cobol
+```pli
+/* Write to transient data queue */
 EXEC CICS WRITEQ TD
     QUEUE('LOGG')
-    FROM(LOG-MESSAGE)
-    LENGTH(LOG-LENGTH)
-END-EXEC.
+    FROM(log_message)
+    LENGTH(log_length);
 ```
 
 ## Java Messaging Patterns
@@ -239,15 +239,15 @@ public class KafkaOrderConsumer {
 
 ### Pattern 1: Request-Reply
 
-**COBOL/MQ**:
+**PL/I/MQ**:
 
-```cobol
-* Send request
-MOVE 'TEMP-REPLY-Q' TO MQMD-REPLYTOQ
-CALL 'MQPUT' USING ...
+```pli
+/* Send request with reply queue */
+MQMD.REPLYTOQ = 'TEMP_REPLY_Q';
+CALL MQPUT(hconn, hobj, mqmd, mqpmo, buffer_length, buffer, compcode, reason);
 
-* Wait for reply
-CALL 'MQGET' USING MQMD MQGMO REPLYQ-NAME ...
+/* Wait for reply */
+CALL MQGET(hconn, hobj, mqmd, mqgmo, buffer_length, buffer, data_length, compcode, reason);
 ```
 
 **Java/JMS**:
@@ -331,16 +331,16 @@ public class RetryConfig {
 
 ## Message Format Conversion
 
-### COBOL Fixed-Length to JSON
+### PL/I Fixed-Length to JSON
 
-**COBOL Message**:
+**PL/I Message**:
 
-```cobol
-01  ORDER-MESSAGE.
-    05  ORDER-ID        PIC X(10).
-    05  CUSTOMER-ID     PIC X(10).
-    05  AMOUNT          PIC 9(7)V99 COMP-3.
-    05  ORDER-DATE      PIC 9(8).
+```pli
+DCL 1 ORDER_MESSAGE,
+      2 ORDER_ID CHAR(10),
+      2 CUSTOMER_ID CHAR(10),
+      2 AMOUNT FIXED DECIMAL(9,2),
+      2 ORDER_DATE CHAR(8);
 ```
 
 **Java DTO**:
@@ -353,13 +353,13 @@ public class OrderMessage {
     private BigDecimal amount;
     private LocalDate orderDate;
     
-    // Converter from COBOL format
-    public static OrderMessage fromCobolBytes(byte[] bytes) {
+    // Converter from PL/I format
+    public static OrderMessage fromPliBytes(byte[] bytes) {
         // Parse fixed-length format
         String orderId = new String(bytes, 0, 10).trim();
         String customerId = new String(bytes, 10, 10).trim();
-        BigDecimal amount = CobolConverter.fromPackedDecimal(bytes, 20, 5);
-        LocalDate orderDate = CobolConverter.fromCobolDate(bytes, 25, 8);
+        BigDecimal amount = PliConverter.fromPackedDecimal(bytes, 20, 5);
+        LocalDate orderDate = PliConverter.fromPliDate(bytes, 25, 8);
         
         return new OrderMessage(orderId, customerId, amount, orderDate);
     }

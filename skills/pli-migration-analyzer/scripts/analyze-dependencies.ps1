@@ -20,24 +20,16 @@ Write-Host "Output will be written to: $OutputFile"
 $initialJson = @{
     programs = @()
     dependencies = @()
-    copybooks = @()
+    include_files = @()
     files = @()
 } | ConvertTo-Json -Depth 3
 
 Set-Content -Path $OutputFile -Value $initialJson -Encoding UTF8
 
-# Function to extract program name from COBOL file
+# Function to extract program name from PL/I file
 function Get-ProgramName {
     param([string]$FilePath)
-    
-    $content = Get-Content $FilePath -ErrorAction SilentlyContinue
-    if ($content) {
-        foreach ($line in $content) {
-            if ($line -match 'PROGRAM-ID[\.\s]+([A-Za-z0-9-]+)') {
-                return $matches[1]
-            }
-        }
-    }
+    # PL/I programs use filename as program name
     return (Get-Item $FilePath).BaseName
 }
 
@@ -49,7 +41,7 @@ function Get-CallStatements {
     $content = Get-Content $FilePath -ErrorAction SilentlyContinue
     if ($content) {
         foreach ($line in $content) {
-            if ($line -match 'CALL.*[''"]([A-Z0-9-]+)[''"]') {
+            if ($line -match 'CALL\s+([A-Za-z0-9_]+)') {
                 $calls += $matches[1]
             }
         }
@@ -57,7 +49,7 @@ function Get-CallStatements {
     return $calls
 }
 
-# Function to extract COPY statements
+# Function to extract %INCLUDE statements
 function Get-CopyStatements {
     param([string]$FilePath)
     
@@ -65,15 +57,15 @@ function Get-CopyStatements {
     $content = Get-Content $FilePath -ErrorAction SilentlyContinue
     if ($content) {
         foreach ($line in $content) {
-            if ($line -match 'COPY\s+([A-Z0-9-]+)') {
-                $copies += $matches[1] -replace '\.$', ''
+            if ($line -match '%INCLUDE\s+([A-Za-z0-9_/.]+)') {
+                $copies += $matches[1] -replace "[';\"]",''
             }
         }
     }
     return $copies
 }
 
-# Function to extract SELECT/ASSIGN file names
+# Function to extract file names from OPEN/CLOSE statements
 function Get-FileReferences {
     param([string]$FilePath)
     
@@ -81,7 +73,7 @@ function Get-FileReferences {
     $content = Get-Content $FilePath -ErrorAction SilentlyContinue
     if ($content) {
         foreach ($line in $content) {
-            if ($line -match 'SELECT\s+([A-Z0-9-]+)') {
+            if ($line -match 'FILE\(([A-Za-z0-9_]+)\)') {
                 $fileRefs += $matches[1]
             }
         }
@@ -89,37 +81,37 @@ function Get-FileReferences {
     return $fileRefs
 }
 
-# Find all COBOL files
-Write-Host "Scanning for COBOL files..."
-$cobolFiles = Get-ChildItem -Path $SourceDir -Recurse -Include "*.cbl","*.CBL","*.cob","*.COB" -File -ErrorAction SilentlyContinue
+# Find all PL/I files
+Write-Host "Scanning for PL/I files..."
+$pliFiles = Get-ChildItem -Path $SourceDir -Recurse -Include "*.pli","*.PLI","*.pl1" -File -ErrorAction SilentlyContinue
 
-if (-not $cobolFiles -or $cobolFiles.Count -eq 0) {
-    Write-Host "No COBOL files found in $SourceDir"
+if (-not $pliFiles -or $pliFiles.Count -eq 0) {
+    Write-Host "No PL/I files found in $SourceDir"
     exit 1
 }
 
-Write-Host "Found $($cobolFiles.Count) COBOL files"
+Write-Host "Found $($pliFiles.Count) PL/I files"
 
 # Collections for data
 $programs = @()
 $dependencies = @()
-$copybooks = @()
+$includeFiles = @()
 $files = @()
 
-# Process each COBOL file
-foreach ($cobolFile in $cobolFiles) {
-    Write-Host "Processing: $($cobolFile.FullName)"
+# Process each PL/I file
+foreach ($pliFile in $pliFiles) {
+    Write-Host "Processing: $($pliFile.FullName)"
     
-    $programName = Get-ProgramName -FilePath $cobolFile.FullName
+    $programName = Get-ProgramName -FilePath $pliFile.FullName
     
     # Add program to list
     $programs += @{
         name = $programName
-        file = $cobolFile.FullName
+        file = $pliFile.FullName
     }
     
     # Extract calls
-    $calls = Get-CallStatements -FilePath $cobolFile.FullName
+    $calls = Get-CallStatements -FilePath $pliFile.FullName
     foreach ($calledProgram in $calls) {
         if ($calledProgram) {
             $dependencies += @{
@@ -130,24 +122,24 @@ foreach ($cobolFile in $cobolFiles) {
         }
     }
     
-    # Extract copybooks
-    $copies = Get-CopyStatements -FilePath $cobolFile.FullName
-    foreach ($copybook in $copies) {
-        if ($copybook) {
-            $copybooks += @{
-                name = $copybook
+    # Extract %INCLUDE files
+    $copies = Get-CopyStatements -FilePath $pliFile.FullName
+    foreach ($includeFile in $copies) {
+        if ($includeFile) {
+            $includeFiles += @{
+                name = $includeFile
                 used_by = $programName
             }
             $dependencies += @{
                 from = $programName
-                to = $copybook
-                type = "copy"
+                to = $includeFile
+                type = "include"
             }
         }
     }
     
     # Extract file references
-    $fileRefs = Get-FileReferences -FilePath $cobolFile.FullName
+    $fileRefs = Get-FileReferences -FilePath $pliFile.FullName
     foreach ($fileRef in $fileRefs) {
         if ($fileRef) {
             $files += @{
@@ -164,18 +156,18 @@ foreach ($cobolFile in $cobolFiles) {
 }
 
 # Build final JSON with summary
-$uniqueCopybooks = $copybooks | Select-Object -Property name -Unique
+$uniqueIncludes = $includeFiles | Select-Object -Property name -Unique
 $uniqueFiles = $files | Select-Object -Property name -Unique
 
 $result = @{
     programs = $programs
     dependencies = $dependencies
-    copybooks = $uniqueCopybooks
+    include_files = $uniqueIncludes
     files = $uniqueFiles
     summary = @{
         total_programs = $programs.Count
         total_dependencies = $dependencies.Count
-        total_copybooks = $uniqueCopybooks.Count
+        total_includes = $uniqueIncludes.Count
         total_files = $uniqueFiles.Count
     }
 }
@@ -189,5 +181,5 @@ Write-Host ""
 Write-Host "Summary:"
 Write-Host "  Programs: $($programs.Count)"
 Write-Host "  Dependencies: $($dependencies.Count)"
-Write-Host "  Copybooks: $($uniqueCopybooks.Count)"
+Write-Host "  Include files: $($uniqueIncludes.Count)"
 Write-Host "  Files: $($uniqueFiles.Count)"

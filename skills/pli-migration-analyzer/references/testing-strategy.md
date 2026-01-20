@@ -1,6 +1,6 @@
-# Testing Strategy for COBOL to Java Migration
+# Testing Strategy for PL/I to Java Migration
 
-Comprehensive testing approach to ensure functional equivalence and quality during migration.
+Comprehensive testing approach to ensure functional equivalence and quality during migration from PL/I programs to Java.
 
 ## Testing Pyramid for Migration
 
@@ -19,7 +19,7 @@ Comprehensive testing approach to ensure functional equivalence and quality duri
 
 ## Testing Converted Business Logic
 
-**Goal**: Verify each Java method matches COBOL paragraph behavior
+**Goal**: Verify each Java method matches PL/I procedure behavior
 
 ```java
 @Test
@@ -63,21 +63,21 @@ void testCalculateBonus_juniorEmployee() {
 
 ```java
 @Test
-void testCobolToJavaDataConversion() {
-    // COBOL PIC S9(7)V99 COMP-3
-    String cobolPackedDecimal = "0000012345C"; // 123.45
+void testPliToJavaDataConversion() {
+    // PL/I FIXED DECIMAL(7,2)
+    String pliPackedDecimal = "0000012345C"; // 123.45
     
-    BigDecimal result = converter.fromPackedDecimal(cobolPackedDecimal);
+    BigDecimal result = converter.fromPackedDecimal(pliPackedDecimal);
     
     assertEquals(new BigDecimal("123.45"), result);
 }
 
 @Test
 void testDateConversion() {
-    // COBOL date format: YYYYMMDD
-    String cobolDate = "20260113";
+    // PL/I date format: YYYYMMDD
+    String pliDate = "20260113";
     
-    LocalDate result = converter.fromCobolDate(cobolDate);
+    LocalDate result = converter.fromPliDate(pliDate);
     
     assertEquals(LocalDate.of(2026, 1, 13), result);
 }
@@ -225,7 +225,7 @@ public class ResultComparator {
             result.addDifference("amount", expected.getAmount(), actual.getAmount());
         }
         
-        // Compare strings (trim for COBOL spaces)
+        // Compare strings (trim for PL/I fixed-length CHARACTER spaces)
         if (!actual.getName().trim().equals(expected.getName().trim())) {
             result.addDifference("name", expected.getName(), actual.getName());
         }
@@ -301,8 +301,8 @@ public class PerformanceBenchmark {
         javaService.process(testData);
     }
     
-    // Compare with baseline from COBOL system
-    // Target: >= 90% of COBOL throughput
+    // Compare with baseline from PL/I system
+    // Target: >= 90% of PL/I throughput
 }
 ```
 

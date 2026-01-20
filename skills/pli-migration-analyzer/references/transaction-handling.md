@@ -4,7 +4,7 @@ This document explains how to handle transactions when migrating from CICS/mainf
 
 ## Overview
 
-COBOL programs running under CICS or IMS use implicit transaction management. In Java, transactions must be explicitly managed using appropriate frameworks and patterns.
+PL/I programs running under CICS or IMS use implicit transaction management. In Java, transactions must be explicitly managed using appropriate frameworks and patterns.
 
 ## CICS Transaction Concepts
 
@@ -20,11 +20,12 @@ COBOL programs running under CICS or IMS use implicit transaction management. In
 
 ### Common CICS Commands
 
-```cobol
-EXEC CICS SYNCPOINT END-EXEC.
-EXEC CICS SYNCPOINT ROLLBACK END-EXEC.
-EXEC CICS LINK PROGRAM(name) END-EXEC.
-EXEC CICS RETURN END-EXEC.
+```pli
+/* PL/I CICS commands */
+EXEC CICS SYNCPOINT;
+EXEC CICS SYNCPOINT ROLLBACK;
+EXEC CICS LINK PROGRAM(name);
+EXEC CICS RETURN;
 ```
 
 ## Java Transaction Patterns
@@ -137,19 +138,21 @@ public void readWithConsistency() {
 
 ### Pattern 1: Batch SYNCPOINT
 
-**COBOL/CICS**:
+**PL/I/CICS**:
 
-```cobol
-PERFORM VARYING WS-COUNTER FROM 1 BY 1
-    UNTIL WS-COUNTER > 1000
+```pli
+/* Process records with periodic commits */
+DCL counter FIXED BINARY(31) INIT(0);
+
+DO WHILE (counter <= 1000);
+    CALL PROCESS_RECORD();
+    counter = counter + 1;
     
-    PERFORM PROCESS-RECORD
-    
-    IF WS-COUNTER = 100
-        EXEC CICS SYNCPOINT END-EXEC
-        MOVE 0 TO WS-COUNTER
-    END-IF
-END-PERFORM.
+    IF counter = 100 THEN DO;
+        EXEC CICS SYNCPOINT;
+        counter = 0;
+    END;
+END;
 ```
 
 **Java**:
@@ -278,12 +281,12 @@ public class DistributedService {
 
 ### CICS ABEND → Java Exception
 
-**COBOL/CICS**:
+**PL/I/CICS**:
 
-```cobol
-IF ERROR-CONDITION
-    EXEC CICS ABEND ABCODE('APPL') END-EXEC
-END-IF.
+```pli
+IF error_condition THEN DO;
+    EXEC CICS ABEND ABCODE('APPL');
+END;
 ```
 
 **Java**:

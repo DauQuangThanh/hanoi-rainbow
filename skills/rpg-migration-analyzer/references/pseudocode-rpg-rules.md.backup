@@ -1,0 +1,2992 @@
+# RPG Translation Rules
+
+**Prerequisites**: Read [PSEUDOCODE-COMMON-RULES.md](PSEUDOCODE-COMMON-RULES.md) for syntax, naming, and structure.
+
+---
+
+## Specification Mapping
+
+| RPG Spec | Pseudocode Section |
+| ---------- | ------------------- |
+| H-spec (Header) | Program Overview + Constants |
+| F-spec (File) | Data Structures (file controls) |
+| D-spec (Data) | Data Structures |
+| I-spec (Input) | Data Structures (legacy input) |
+| C-spec (Calculation) | Main Algorithm + Core Processing |
+| O-spec (Output) | Core Processing (legacy output) |
+| P-spec (Procedure) | Core Processing Logic |
+
+## F-Spec File Declarations
+
+### Database Files
+
+```rpg
+F CustMast   IF   E           K DISK    USROPN
+F OrderFile  UF A E           K DISK
+F TransFile  O    E             DISK
+```
+
+→
+
+```pseudocode
+// Input File - Keyed access, user open
+CONSTANTS:
+    CUSTMAST_FILE = "CustMast"
+    FILE_TYPE_INPUT = "INPUT"
+    FILE_KEYED = TRUE
+END CONSTANTS
+
+// Update File - Keyed access, auto open
+// OrderFile: INPUT/UPDATE mode, keyed access
+
+// Output File - Sequential
+// TransFile: OUTPUT mode, sequential
+```
+
+### Display Files (Workstation)
+
+```rpg
+F ScreenDsp  CF   E             WORKSTN SFILE(Detail:RRN)
+F             INDDS(Indicators)
+```
+
+→
+
+```pseudocode
+// Display file with subfile
+STRUCTURE ScreenDisplay:
+    subfileRecords: ARRAY OF DetailRecord
+    subfileRRN: INTEGER
+    indicators: IndicatorDS
+END STRUCTURE
+```
+
+### Printer Files
+
+```rpg
+F ReportPrt  O    E             PRINTER OFLIND(*INOF)
+```
+
+→
+
+```pseudocode
+// Printer output file
+reportPrinter: OUTPUT_FILE
+overflowIndicator: BOOLEAN  // Set when page overflow
+```
+
+### File Keywords Translation
+
+| F-Spec Keyword | Meaning | Pseudocode |
+| -------------- | ------- | ---------- |
+| `USROPN` | User controlled open | Manual OPEN_FILE() required |
+| `INFDS(ds)` | File info data structure | Capture file status in structure |
+| `SFILE(fmt:rrn)` | Subfile definition | Array with relative record number |
+| `INDDS(ds)` | Indicator data structure | Map indicators to boolean structure |
+| `OFLIND(*INxx)` | Overflow indicator | Boolean for page overflow |
+| `COMMIT` | Under commitment control | Transaction-controlled file |
+| `IGNORE(fmt)` | Ignore record format | Skip specified format |
+| `INCLUDE(fmt)` | Include record format | Process specified format |
+| `PREFIX(str)` | Prefix field names | Add prefix to all field names |
+| `RENAME(old:new)` | Rename record format | Use new name for format |
+
+## Data Types
+
+| RPG | Pseudocode | Notes |
+| --- | --------- | ----- |
+| `nP m` (packed) | `DECIMAL(n,m)` | **Packed - preserve precision!** |
+| `nS m` (zoned) | `DECIMAL(n,m)` | Zoned decimal |
+| `A` (character) | `STRING[n]` | Character |
+| `D` (date) | `DATE` | Date |
+| `T` (time) | `TIME` | Time |
+| `Z` (timestamp) | `DATETIME` | Timestamp |
+| `N` (indicator) | `BOOLEAN` | True/False |
+| `I` (integer) | `INTEGER` | Binary integer |
+| `U` (unsigned) | `UNSIGNED_INTEGER` | Unsigned integer |
+| `F` (float) | `FLOAT` | Floating point (avoid for money!) |
+| `*` (pointer) | `POINTER` | Memory address |
+| `DIM(n)` | `ARRAY[n] OF TYPE` | Arrays |
+| `LIKEDS(ds)` | `STRUCTURE_INSTANCE` | Data structure reference |
+
+### RPG Special Values
+
+| RPG Value | Pseudocode | Notes |
+| --------- | --------- | ----- |
+| `*BLANK` / `*BLANKS` | `""` or `EMPTY_STRING` | Empty string |
+| `*ZERO` / `*ZEROS` | `0` | Numeric zero |
+| `*HIVAL` | `MAX_VALUE` | Highest value for type |
+| `*LOVAL` | `MIN_VALUE` | Lowest value for type |
+| `*ALL'x'` | `REPEAT('x', length)` | Repeated character |
+| `*ON` | `TRUE` | Boolean true |
+| `*OFF` | `FALSE` | Boolean false |
+| `*NULL` | `NULL` | Null pointer |
+
+## Operation Mapping
+
+### Basic Operations
+
+| RPG | Pseudocode |
+| --- | --------- |
+| `EVAL result = expr` | `result = expr` |
+| `ADD(E) a b result` | `result = a + b` |
+| `SUB(E) a b result` | `result = a - b` |
+| `MULT(E) a b result` | `result = a * b` |
+| `DIV(E) a b result` | `result = a / b` |
+| `MVR remainder` | `remainder = MODULO(a, b)` |
+| `Z-ADD value result` | `result = value` (zero and add) |
+| `Z-SUB value result` | `result = -value` (zero and subtract) |
+
+### Data Movement
+
+| RPG | Pseudocode |
+| --- | --------- |
+| `MOVE src dest` | `dest = RIGHT_ALIGN(src, LENGTH(dest))` |
+| `MOVEL src dest` | `dest = LEFT_ALIGN(src, LENGTH(dest))` |
+| `CLEAR field` | `field = DEFAULT_VALUE` |
+| `MOVEA arr1 arr2` | `COPY_ARRAY(arr1, arr2)` |
+
+### String Operations
+
+| RPG | Pseudocode |
+| --- | --------- |
+| `CAT str1:str2 result` | `result = CONCATENATE(str1, str2)` |
+| `SCAN pattern str` | `position = FIND(str, pattern)` |
+| `CHECK charset str` | `position = FIND_INVALID_CHAR(str, charset)` |
+| `CHECKR charset str` | `position = FIND_INVALID_CHAR_REVERSE(str, charset)` |
+| `XLATE from:to str` | `str = TRANSLATE(str, from, to)` |
+| `SUBST str:pos:len dest` | `dest = SUBSTRING(str, pos, len)` |
+
+### Control Flow
+
+| RPG | Pseudocode |
+| --- | --------- |
+| `IF condition` | `IF condition THEN` |
+| `ELSE` | `ELSE` |
+| `ELSEIF condition` | `ELSE IF condition THEN` |
+| `ENDIF` | `END IF` |
+| `DOW condition` | `WHILE condition DO` |
+| `DOU condition` | `DO ... WHILE NOT condition` |
+| `FOR index = start TO end` | `FOR index FROM start TO end DO` |
+| `ITER` | `CONTINUE` |
+| `LEAVE` | `BREAK` |
+| `SELECT` | `SWITCH` |
+| `WHEN condition` | `CASE condition:` |
+| `OTHER` | `DEFAULT:` |
+| `ENDSL` | `END SWITCH` |
+
+### Comparison
+
+| RPG | Pseudocode |
+| --- | --------- |
+| `COMP a b` | `COMPARE(a, b)` |
+| `IFEQ / IF a = b` | `IF a = b THEN` |
+| `IFNE / IF a <> b` | `IF a != b THEN` |
+| `IFGT / IF a > b` | `IF a > b THEN` |
+| `IFLT / IF a < b` | `IF a < b THEN` |
+| `IFGE / IF a >= b` | `IF a >= b THEN` |
+| `IFLE / IF a <= b` | `IF a <= b THEN` |
+
+### Procedure Calls
+
+| RPG | Pseudocode |
+| --- | --------- |
+| `EXSR subroutine` | `CALL SubroutineName()` |
+| `CALLP procedure(parms)` | `CALL Procedure(parms)` |
+| `CALLB procedure(parms)` | `result = CALL_BOUND(procedure, parms)` |
+| `CALL pgm` with PLIST | `CALL_PROGRAM(pgm, paramList)` |
+| `RETURN value` | `RETURN value` |
+
+### File Operations - Basic
+
+| RPG | Pseudocode |
+| --- | --------- |
+| `READ file` | `record = READ_RECORD(file)` |
+| `READP file` | `record = READ_PREVIOUS(file)` |
+| `READE key file` | `record = READ_EQUAL_KEY(file, key)` |
+| `READPE key file` | `record = READ_PREVIOUS_EQUAL(file, key)` |
+| `CHAIN key file` | `record = READ_BY_KEY(file, key)` |
+| `WRITE file` | `WRITE_RECORD(file, record)` |
+| `UPDATE file` | `UPDATE_RECORD(file, record)` |
+| `DELETE file` | `DELETE_RECORD(file)` |
+| `UNLOCK file` | `UNLOCK_RECORD(file)` |
+
+### File Operations - Positioning
+
+| RPG | Pseudocode |
+| --- | --------- |
+| `SETLL key file` | `POSITION_LOWER_LIMIT(file, key)` |
+| `SETGT key file` | `POSITION_GREATER_THAN(file, key)` |
+| `OPEN file` | `OPEN_FILE(file)` |
+| `CLOSE file` | `CLOSE_FILE(file)` |
+| `FEOD file` | `FORCE_END_OF_DATA(file)` |
+
+### Output Operations
+
+| RPG | Pseudocode |
+| --- | --------- |
+| `EXCEPT format` | `WRITE_OUTPUT_FORMAT(format)` |
+| `WRITE format` | `WRITE_RECORD(format)` |
+
+### Data Validation
+
+| RPG | Pseudocode |
+| --- | --------- |
+| `TEST(DE) date` | `IS_VALID_DATE(date)` |
+| `TEST(T) time` | `IS_VALID_TIME(time)` |
+| `TEST(Z) timestamp` | `IS_VALID_TIMESTAMP(timestamp)` |
+| `TEST(N) field` | `IS_NUMERIC(field)` |
+
+## Built-in Functions
+
+### String Functions
+
+| RPG BIF | Pseudocode |
+| ------- | --------- |
+| `%SUBST(str:pos:len)` | `SUBSTRING(str, pos, len)` |
+| `%TRIM(str)` | `TRIM(str)` |
+| `%TRIML(str)` | `TRIM_LEFT(str)` |
+| `%TRIMR(str)` | `TRIM_RIGHT(str)` |
+| `%LEN(str)` | `LENGTH(str)` |
+| `%SIZE(var)` | `SIZE_OF(var)` |
+| `%SCAN(pattern:str:start)` | `FIND(str, pattern, start)` |
+| `%CHECK(charset:str:start)` | `FIND_INVALID_CHAR(str, charset, start)` |
+| `%CHECKR(charset:str:start)` | `FIND_INVALID_CHAR_REVERSE(str, charset, start)` |
+| `%REPLACE(repl:str:pos:len)` | `REPLACE(str, repl, pos, len)` |
+| `%XLATE(from:to:str)` | `TRANSLATE(str, from, to)` |
+
+### Conversion Functions
+
+| RPG BIF | Pseudocode |
+| ------- | --------- |
+| `%CHAR(value)` | `TO_STRING(value)` |
+| `%INT(value)` | `TO_INTEGER(value)` |
+| `%UNS(value)` | `TO_UNSIGNED(value)` |
+| `%DEC(value:digits:decimals)` | `TO_DECIMAL(value, digits, decimals)` |
+| `%DECH(value:digits:decimals)` | `TO_DECIMAL_HALF_ADJUST(value, digits, decimals)` |
+| `%FLOAT(value)` | `TO_FLOAT(value)` |
+| `%EDITC(num:code)` | `FORMAT_NUMERIC(num, code)` |
+| `%EDITW(num:pattern)` | `FORMAT_WITH_PATTERN(num, pattern)` |
+| `%EDITFLT(num)` | `FORMAT_FLOAT(num)` |
+
+### Date/Time Functions
+
+| RPG BIF | Pseudocode |
+| ------- | --------- |
+| `%DATE()` | `CURRENT_DATE()` |
+| `%TIME()` | `CURRENT_TIME()` |
+| `%TIMESTAMP()` | `CURRENT_TIMESTAMP()` |
+| `%DATE(value:format)` | `PARSE_DATE(value, format)` |
+| `%TIME(value:format)` | `PARSE_TIME(value, format)` |
+| `%TIMESTAMP(value:format)` | `PARSE_TIMESTAMP(value, format)` |
+| `%DIFF(dt1:dt2:unit)` | `DATE_DIFFERENCE(dt1, dt2, unit)` |
+| `%YEARS(num)` | `DURATION_YEARS(num)` |
+| `%MONTHS(num)` | `DURATION_MONTHS(num)` |
+| `%DAYS(num)` | `DURATION_DAYS(num)` |
+| `%HOURS(num)` | `DURATION_HOURS(num)` |
+| `%MINUTES(num)` | `DURATION_MINUTES(num)` |
+| `%SECONDS(num)` | `DURATION_SECONDS(num)` |
+| `%MSECONDS(num)` | `DURATION_MILLISECONDS(num)` |
+
+### File Status Functions
+
+| RPG BIF | Pseudocode |
+| ------- | --------- |
+| `%EOF(file)` | `END_OF_FILE(file)` |
+| `%EQUAL(file)` | `EQUAL_CONDITION(file)` |
+| `%FOUND(file)` | `RECORD_FOUND(file)` |
+| `%OPEN(file)` | `IS_FILE_OPEN(file)` |
+| `%ERROR` | `ERROR_OCCURRED()` |
+| `%STATUS` | `GET_STATUS_CODE()` |
+
+### Array/Data Structure Functions
+
+| RPG BIF | Pseudocode |
+| ------- | --------- |
+| `%ELEM(array)` | `ELEMENT_COUNT(array)` |
+| `%OCCUR(ds)` | `GET_OCCURRENCE(ds)` |
+| `%ADDR(var)` | `ADDRESS_OF(var)` |
+| `%PADDR(proc)` | `PROCEDURE_ADDRESS(proc)` |
+| `%LOOKUP(val:arr)` | `ARRAY_SEARCH(arr, val)` |
+| `%TLOOKUP(val:arr:seq)` | `TABLE_LOOKUP(arr, val, seq)` |
+
+### Arithmetic/Utility Functions
+
+| RPG BIF | Pseudocode |
+| ------- | --------- |
+| `%ABS(value)` | `ABSOLUTE_VALUE(value)` |
+| `%DIV(a:b)` | `INTEGER_DIVIDE(a, b)` |
+| `%REM(a:b)` | `REMAINDER(a, b)` |
+| `%SQRT(value)` | `SQUARE_ROOT(value)` |
+| `%INTH(value)` | `INTEGER_HALF_ADJUST(value)` |
+| `%DECH(value:d:p)` | `DECIMAL_HALF_ADJUST(value, d, p)` |
+
+### Conditional Functions
+
+| RPG BIF | Pseudocode |
+| ------- | --------- |
+| `%NULLIND(field)` | `GET_NULL_INDICATOR(field)` |
+| `%PARMS` | `PARAMETER_COUNT()` |
+| `%PARMNUM(parm)` | `PARAMETER_NUMBER(parm)` |
+
+## Data Structure Patterns
+
+### Simple Data Structure
+
+```rpg
+D Customer        DS
+D   CustNo                       10P 0
+D   Name                         30A
+D   Balance                      15P 2
+```
+
+→
+
+```pseudocode
+STRUCTURE Customer:
+    custNo: DECIMAL(10,0)
+    name: STRING[30]
+    balance: DECIMAL(15,2)
+END STRUCTURE
+```
+
+### Qualified Data Structure
+
+```rpg
+D Customer        DS                  QUALIFIED
+D   CustNo                       10P 0
+D   Name                         30A
+```
+
+→
+
+```pseudocode
+STRUCTURE Customer:    // Qualified - access as Customer.custNo
+    custNo: DECIMAL(10,0)
+    name: STRING[30]
+END STRUCTURE
+```
+
+### Data Structure with LIKEDS
+
+```rpg
+D Address         DS                  QUALIFIED
+D   Street                       50A
+D   City                         30A
+D
+D Customer        DS                  QUALIFIED
+D   Name                         30A
+D   HomeAddr                          LIKEDS(Address)
+D   BillAddr                          LIKEDS(Address)
+```
+
+→
+
+```pseudocode
+STRUCTURE Address:
+    street: STRING[50]
+    city: STRING[30]
+END STRUCTURE
+
+STRUCTURE Customer:
+    name: STRING[30]
+    homeAddr: Address
+    billAddr: Address
+END STRUCTURE
+```
+
+### Overlay
+
+```rpg
+D FullDate        DS
+D   Year                          4S 0
+D   Month                         2S 0  OVERLAY(FullDate:5)
+D   Day                           2S 0  OVERLAY(FullDate:7)
+```
+
+→
+
+```pseudocode
+STRUCTURE FullDate:
+    year: DECIMAL(4,0)           // Positions 1-4
+    month: DECIMAL(2,0)          // Positions 5-6 (overlay)
+    day: DECIMAL(2,0)            // Positions 7-8 (overlay)
+    // Note: month and day share memory space with year
+END STRUCTURE
+```
+
+### Multiple Occurrence Data Structure
+
+```rpg
+D LineItem        DS                  OCCURS(99)
+D   ItemNo                        7P 0
+D   Qty                           5P 0
+D   Price                        11P 2
+
+C                   EVAL      *IN01 = %OCCUR(LineItem)
+C                   OCCUR     5         LineItem
+```
+
+→
+
+```pseudocode
+STRUCTURE LineItem:
+    itemNo: DECIMAL(7,0)
+    qty: DECIMAL(5,0)
+    price: DECIMAL(11,2)
+END STRUCTURE
+
+lineItems: ARRAY[99] OF LineItem
+currentOccurrence: INTEGER
+
+currentOccurrence = 5
+currentLine = lineItems[currentOccurrence]
+```
+
+## I-Spec (Input Specification) Patterns
+
+### Fixed Format Input
+
+```rpg
+I            AA  01
+I                                        1  10  CustNo
+I                                       11  40  CustName
+I                                       41  48 0Balance
+```
+
+→
+
+```pseudocode
+STRUCTURE InputRecord_AA:
+    custNo: STRING[10]        // Positions 1-10
+    custName: STRING[30]      // Positions 11-40
+    balance: DECIMAL(8,0)     // Positions 41-48
+END STRUCTURE
+
+PROCEDURE ParseInputRecord(line: STRING) RETURNS InputRecord_AA
+BEGIN
+    record: InputRecord_AA
+    record.custNo = SUBSTRING(line, 1, 10)
+    record.custName = SUBSTRING(line, 11, 30)
+    record.balance = TO_DECIMAL(SUBSTRING(line, 41, 8), 8, 0)
+    RETURN record
+END PROCEDURE
+```
+
+### Record Identification
+
+```rpg
+I            AA  01
+I            BB  02
+```
+
+→
+
+```pseudocode
+// Record type AA = indicator 01
+// Record type BB = indicator 02
+IF recordType = "AA" THEN
+    indicator01 = TRUE
+ELSE IF recordType = "BB" THEN
+    indicator02 = TRUE
+END IF
+```
+
+## O-Spec (Output Specification) Patterns
+
+### Report Output
+
+```rpg
+O ReportPrt  E            Heading
+O                                        10 'CUSTOMER REPORT'
+O                          CustNo        50
+O                          CustName      80
+```
+
+→
+
+```pseudocode
+PROCEDURE WriteHeading()
+BEGIN
+    WRITE_LINE(reportPrinter, "CUSTOMER REPORT", POSITION=10)
+END PROCEDURE
+
+PROCEDURE WriteDetail(record: CustomerRecord)
+BEGIN
+    line = FORMAT_FIELD(record.custNo, 50) + 
+           FORMAT_FIELD(record.custName, 80)
+    WRITE_LINE(reportPrinter, line)
+END PROCEDURE
+```
+
+### Conditional Output
+
+```rpg
+O                    N01                  'NO DATA'
+O                     01                  'DATA FOUND'
+```
+
+→
+
+```pseudocode
+IF NOT indicator01 THEN
+    WRITE_LINE(reportPrinter, "NO DATA")
+ELSE
+    WRITE_LINE(reportPrinter, "DATA FOUND")
+END IF
+```
+
+## Translation Patterns
+
+### Indicators → Boolean
+
+```rpg
+D EOF             S               N   INZ(*OFF)
+C                   IF        EOF
+C                   EVAL      EOF = *ON
+```
+
+→
+
+```pseudocode
+eof: BOOLEAN = FALSE
+IF eof THEN ...
+eof = TRUE
+```
+
+### Subroutine → Procedure
+
+```rpg
+C     CALC_TOTAL    BEGSR
+C                   EVAL      Total = Qty * Price
+C                   ENDSR
+C                   EXSR      CALC_TOTAL
+```
+
+→
+
+```pseudocode
+PROCEDURE CalcTotal()
+BEGIN
+    total = qty * price
+END PROCEDURE
+CALL CalcTotal()
+```
+
+### File Loop with CHAIN
+
+```rpg
+C     Key           CHAIN     File
+C                   DOW       %FOUND(File)
+C                   EXSR      ProcessRec
+C     Key           CHAIN     File
+C                   ENDDO
+```
+
+→
+
+```pseudocode
+record = READ_BY_KEY(file, key)
+WHILE RECORD_FOUND(file) DO
+    CALL ProcessRec(record)
+    record = READ_BY_KEY(file, key)
+END WHILE
+```
+
+### Sequential Read Loop
+
+```rpg
+C                   READ      CustMast
+C                   DOW       NOT %EOF(CustMast)
+C                   EXSR      ProcessCustomer
+C                   READ      CustMast
+C                   ENDDO
+```
+
+→
+
+```pseudocode
+record = READ_RECORD(custMast)
+WHILE NOT END_OF_FILE(custMast) DO
+    CALL ProcessCustomer(record)
+    record = READ_RECORD(custMast)
+END WHILE
+```
+
+### SETLL/READE Pattern (Key Processing)
+
+```rpg
+C     Key           SETLL     File
+C     Key           READE     File
+C                   DOW       NOT %EOF(File)
+C                   EXSR      Process
+C     Key           READE     File
+C                   ENDDO
+```
+
+→
+
+```pseudocode
+POSITION_LOWER_LIMIT(file, key)
+record = READ_EQUAL_KEY(file, key)
+WHILE NOT END_OF_FILE(file) DO
+    CALL Process(record)
+    record = READ_EQUAL_KEY(file, key)
+END WHILE
+```
+
+### Update Record Pattern
+
+```rpg
+C     CustNo        CHAIN     CustMast
+C                   IF        %FOUND(CustMast)
+C                   EVAL      Balance = Balance + Amount
+C                   UPDATE    CustRec
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+record = READ_BY_KEY(custMast, custNo)
+IF RECORD_FOUND(custMast) THEN
+    record.balance = record.balance + amount
+    UPDATE_RECORD(custMast, record)
+END IF
+```
+
+### Write New Record Pattern
+
+```rpg
+C                   CLEAR     CustRec
+C                   EVAL      CustNo = NewCustNo
+C                   EVAL      Name = NewName
+C                   WRITE     CustRec
+```
+
+→
+
+```pseudocode
+record = NEW CustomerRecord
+record.custNo = newCustNo
+record.name = newName
+WRITE_RECORD(custMast, record)
+```
+
+### Modern Error Handling (MONITOR)
+
+```rpg
+C                   MONITOR
+C     Key           CHAIN     File
+C                   EVAL      Result = Amt1 / Amt2
+C                   ON-ERROR  1211:1299
+C                   EVAL      ErrMsg = 'File error occurred'
+C                   ON-ERROR  *ALL
+C                   EVAL      ErrMsg = 'Unknown error'
+C                   ENDMON
+```
+
+→
+
+```pseudocode
+TRY:
+    record = READ_BY_KEY(file, key)
+    result = amt1 / amt2
+CATCH FileException:
+    errMsg = "File error occurred"
+CATCH Exception:
+    errMsg = "Unknown error"
+END TRY
+```
+
+### Legacy Error Handling (%ERROR)
+
+```rpg
+C     Key           CHAIN(E)  File
+C                   IF        %ERROR
+C                   EVAL      ErrMsg = 'CHAIN failed'
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+TRY:
+    record = READ_BY_KEY(file, key)
+CATCH Exception:
+    errMsg = "CHAIN failed"
+END TRY
+```
+
+### Procedure with Parameters
+
+```rpg
+D CalcTax         PR            15P 2
+D   Amount                      15P 2 CONST
+D   TaxRate                      5P 3 CONST
+
+P CalcTax         B
+D CalcTax         PI            15P 2
+D   Amount                      15P 2 CONST
+D   TaxRate                      5P 3 CONST
+
+C                   RETURN    Amount * TaxRate
+P CalcTax         E
+```
+
+→
+
+```pseudocode
+FUNCTION CalcTax(amount: DECIMAL(15,2), taxRate: DECIMAL(5,3)) RETURNS DECIMAL(15,2)
+BEGIN
+    RETURN amount * taxRate
+END FUNCTION
+```
+
+### String Manipulation
+
+```rpg
+C                   EVAL      FullName = %TRIM(FirstName) + ' ' +
+C                                        %TRIM(LastName)
+C                   EVAL      Pos = %SCAN('&':Message)
+C                   IF        Pos > 0
+C                   EVAL      Message = %REPLACE(Value:Message:Pos:1)
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+fullName = TRIM(firstName) + " " + TRIM(lastName)
+pos = FIND(message, "&")
+IF pos > 0 THEN
+    message = REPLACE(message, value, pos, 1)
+END IF
+```
+
+### Date Arithmetic
+
+```rpg
+C                   EVAL      Today = %DATE()
+C                   EVAL      DueDate = Today + %DAYS(30)
+C                   EVAL      DaysLate = %DIFF(Today:InvDate:*DAYS)
+C                   IF        DaysLate > 30
+C                   EVAL      Status = 'OVERDUE'
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+today = CURRENT_DATE()
+dueDate = today + DURATION_DAYS(30)
+daysLate = DATE_DIFFERENCE(today, invDate, DAYS)
+IF daysLate > 30 THEN
+    status = "OVERDUE"
+END IF
+```
+
+### Numeric Formatting
+
+```rpg
+C                   EVAL      Display = %EDITC(Amount:'J')
+C                   EVAL      Formatted = %EDITW(SSN:'0  -  -    ')
+```
+
+→
+
+```pseudocode
+display = FORMAT_NUMERIC(amount, COMMA_WITH_DECIMALS)
+formatted = FORMAT_WITH_PATTERN(ssn, "0  -  -    ")
+```
+
+### SELECT/WHEN Pattern
+
+```rpg
+C                   SELECT
+C                   WHEN      Status = 'A'
+C                   EVAL      Desc = 'Active'
+C                   WHEN      Status = 'I'
+C                   EVAL      Desc = 'Inactive'
+C                   OTHER
+C                   EVAL      Desc = 'Unknown'
+C                   ENDSL
+```
+
+→
+
+```pseudocode
+SWITCH status:
+    CASE "A":
+        desc = "Active"
+        BREAK
+    CASE "I":
+        desc = "Inactive"
+        BREAK
+    DEFAULT:
+        desc = "Unknown"
+END SWITCH
+```
+
+### Subfile Operations (Interactive Programs)
+
+```rpg
+// Clear and load subfile
+C                   EVAL      *IN31 = *OFF
+C                   WRITE     SflCtl
+C                   EVAL      *IN31 = *ON
+
+C                   EVAL      RRN = 0
+C                   READ      DataFile
+C                   DOW       NOT %EOF(DataFile)
+C                   EVAL      RRN = RRN + 1
+C                   EVAL      SflCustNo = CustNo
+C                   EVAL      SflName = Name
+13. **Subfile operations**: Preserve subfile load/display/read patterns
+14. **READC operation**: Convert to "read changed records" pattern
+15. **RPG cycle**: Convert to explicit loops with clear control flow
+16. **CTDATA arrays**: Extract to initialization code or configuration
+17. **F-spec prefixes**: Apply field name prefixes consistently
+18. **USROPN files**: Ensure explicit OPEN/CLOSE operations
+19. **Overflow indicators**: Convert to page management logic
+20. **System APIs**: Document external dependencies clearly
+
+## Common Pitfalls to Avoid
+
+1. **Losing precision**: Always check packed decimal field sizes (nP m)
+2. **Ignoring indicators**: Named booleans must have meaningful names
+3. **MOVE/MOVEL**: Remember these are position-based, not simple assignments
+4. **Array indexing**: RPG uses 1-based indexing, adjust for target language
+5. **%FOUND vs %EOF**: Use correct check after different file operations
+6. **Date formats**: RPG date formats vary (*ISO, *USA, *EUR, *JIS, *MDY, etc.)
+7. **String position**: RPG %SUBST uses 1-based positions
+8. **Half-adjust**: Don't forget (H) extender implies ROUND with HALF_UP
+9. **File scope**: RPG files are global; modern code may need different scope
+10. **Indicator arrays**: *IN(01) array syntax vs individual *IN01
+11. **EVAL optional**: Free format may omit EVAL but it's an assignment
+12. **Procedure naming**: BEGSR names are local; P-spec procs may be exported
+13. **Data structure arrays**: Multiple occurrence DS != modern arrays
+14. **LR indicator**: Setting *INLR=*ON closes files and frees resources
+15. **Factor 1 and 2**: Some ops use Factor 1 as control (LOKUP, SCAN old style)
+C                   WRITE     SflRec
+C                   READ      DataFile
+C                   ENDDO
+
+C                   EVAL      *IN32 = *ON
+C                   EXFMT     SflCtl
+```
+
+→
+
+```pseudocode
+// Clear subfile
+subfileClear = TRUE
+WRITE_SCREEN_FORMAT(screen, "SflCtl")
+subfileClear = FALSE
+subfileDisplay = TRUE
+
+// Load subfile records
+rrn = 0
+record = READ_RECORD(dataFile)
+WHILE NOT END_OF_FILE(dataFile) DO
+    rrn = rrn + 1
+    subfileRecord.custNo = record.custNo
+    subfileRecord.name = record.name
+    subfileRecord.rrn = rrn
+    WRITE_SUBFILE_RECORD(screen, "SflRec", subfileRecord)
+    record = READ_RECORD(dataFile)
+END WHILE
+
+// Display subfile and wait for input
+subfileDisplayControl = TRUE
+DISPLAY_AND_READ(screen, "SflCtl")
+```
+
+### Subfile Processing User Selections
+
+```rpg
+C                   EVAL      RRN = 0
+C                   READC     SflRec
+C                   DOW       NOT %EOF(ScreenDsp)
+C                   IF        SflSelect = 'X'
+C                   EXSR      ProcessSelection
+C                   ENDIF
+C                   READC     SflRec
+C                   ENDDO
+```
+
+→
+
+```pseudocode
+rrn = 0
+changedRecord = READ_CHANGED_SUBFILE_RECORD(screen, "SflRec")
+WHILE RECORD_FOUND(screen) DO
+    IF changedRecord.select = "X" THEN
+        CALL ProcessSelection(changedRecord)
+    END IF
+    changedRecord = READ_CHANGED_SUBFILE_RECORD(screen, "SflRec")
+END WHILE
+```
+
+### RPG Cycle Handling (Legacy)
+
+```rpg
+// Primary file drives RPG cycle
+F DataFile   IP   E             DISK
+
+C                   READ      DataFile
+C                   DOW       NOT %EOF(DataFile)
+C     *LOVAL        SETLL     DetailFile
+C     Key           READE     DetailFile
+C                   DOW       NOT %EOF(DetailFile)
+C                   EXSR      ProcessDetail
+C     Key           READE     DetailFile
+C                   ENDDO
+C                   READ      DataFile
+C                   ENDDO
+```
+
+→
+
+```pseudocode
+// Convert RPG cycle to explicit loop
+PROCEDURE MainProcess()
+BEGIN
+    dataRecord = READ_RECORD(dataFile)
+    WHILE NOT END_OF_FILE(dataFile) DO
+        // Level break logic would go here if present
+        CALL ProcessMasterRecord(dataRecord)
+        
+        // Process matching detail records
+        POSITION_LOWER_LIMIT(detailFile, MIN_VALUE)
+        detailRecord = READ_EQUAL_KEY(detailFile, dataRecord.key)
+        WHILE NOT END_OF_FILE(detailFile) DO
+            CALL ProcessDetail(detailRecord)
+            detailRecord = READ_EQUAL_KEY(detailFile, dataRecord.key)
+        END WHILE
+        
+        dataRecord = READ_RECORD(dataFile)
+    END WHILE
+END PROCEDURE
+```
+
+### Array Initialization and Processing
+
+```rpg
+D Months          S              3    DIM(12) CTDATA PERRCD(4)
+D MonthIdx        S              3  0
+
+C                   FOR       MonthIdx = 1 TO 12
+C                   EVAL      Display = Months(MonthIdx)
+C                   ENDFOR
+
+**CTDATA Months
+JanFebMarApr
+MayJunJulAug
+SepOctNovDec
+```
+
+→
+
+```pseudocode
+// Compile-time data array
+months: ARRAY[12] OF STRING[3] = [
+    "Jan", "Feb", "Mar", "Apr",
+    "May", "Jun", "Jul", "Aug",
+    "Sep", "Oct", "Nov", "Dec"
+]
+
+FOR monthIdx FROM 1 TO 12 DO
+    display = months[monthIdx]
+END FOR
+```
+
+### Dynamic Array Sorting
+
+```rpg
+C                   SORTA     %SUBARR(Array:1:Count)
+```
+
+→
+
+```pseudocode
+SORT_ARRAY(array, 1, count, ASCENDING)
+```
+
+### Program Initialization and Termination
+
+```rpg
+C     *INZSR        BEGSR
+C                   EVAL      StartTime = %TIME()
+C                   EXSR      LoadConfig
+C                   ENDSR
+
+C     *INLR         IFEQ      *ON
+C                   EVAL      EndTime = %TIME()
+C                   EXSR      Cleanup
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+PROCEDURE Initialize()
+BEGIN
+    startTime = CURRENT_TIME()
+    CALL LoadConfig()
+END PROCEDURE
+
+PROCEDURE Terminate()
+BEGIN
+    endTime = CURRENT_TIME()
+    CALL Cleanup()
+    lastRecord = TRUE  // *INLR equivalent
+END PROCEDURE
+
+// Main program flow
+BEGIN PROGRAM
+    CALL Initialize()
+    CALL MainProcessing()
+    CALL Terminate()
+END PROGRAM
+```
+
+### Message Handling
+
+```rpg
+D Msg             S             52
+D MsgKey          S              4
+
+C                   CALL      'QMHSNDPM'
+C                   PARM                    MsgId
+C                   PARM                    MsgFile
+C                   PARM                    MsgData
+C                   PARM                    MsgLen
+C                   PARM      '*INFO'       MsgType
+C                   PARM      '*'          CallStk
+C                   PARM      0             StkCntr
+C                   PARM                    MsgKey
+```
+
+→
+
+```pseudocode
+PROCEDURE SendProgramMessage(
+    msgId: STRING,
+    msgFile: STRING,
+    msgData: STRING,
+    msgType: STRING
+) RETURNS STRING
+BEGIN
+    msgKey: STRING[4]
+    // Call system API to send program message
+    CALL_SYSTEM_API("QMHSNDPM", [
+        msgId, msgFile, msgData, LENGTH(msgData),
+        msgType, "*", 0, msgKey
+    ])
+    RETURN msgKey
+END PROCEDURE
+```
+
+### Data Queue Operations
+
+```rpg
+D DtaQ            S             10    INZ('MYDTAQ')
+D DtaQLib         S             10    INZ('MYLIB')
+D DtaQData        S            100
+D DtaQLen         S              5  0
+
+C                   CALL      'QSNDDTAQ'
+C                   PARM                    DtaQ
+C                   PARM                    DtaQLib
+C                   PARM      100           DtaQLen
+C                   PARM                    DtaQData
+```
+
+→
+
+```pseudocode
+STRUCTURE DataQueue:
+    name: STRING[10]
+    library: STRING[10]
+END STRUCTURE
+
+PROCEDURE SendToDataQueue(
+    queue: DataQueue,
+    data: STRING,
+    length: INTEGER
+)
+BEGIN
+    CALL_SYSTEM_API("QSNDDTAQ", [
+        queue.name, queue.library, length, data
+    ])
+END PROCEDURE
+
+PROCEDURE ReceiveFromDataQueue(
+    queue: DataQueue,
+    waitTime: INTEGER
+) RETURNS STRING
+BEGIN
+    data: STRING[100]
+    dataLength: INTEGER
+    CALL_SYSTEM_API("QRCVDTAQ", [
+        queue.name, queue.library, dataLength, data, waitTime
+    ])
+    RETURN SUBSTRING(data, 1, dataLength)
+END PROCEDURE
+```
+
+## Critical Rules
+
+1. **Indicators**: Convert *IN01-*IN99 to named booleans with descriptive names
+2. **Packed decimal (P)**: MUST preserve precision using DECIMAL(n,m)
+3. **%ERROR**: Convert to TRY-CATCH blocks
+4. **%FOUND**: Check after CHAIN/SETLL/READE operations
+5. **Half-adjust (H)**: Use `ROUND(expr, decimals)` with HALF_UP rounding
+6. **MONITOR/ON-ERROR**: Convert to modern TRY-CATCH-FINALLY blocks
+7. **Multiple occurrence DS**: Convert to arrays with explicit indexing
+8. **OVERLAY**: Document shared memory with clear comments
+9. **Data areas**: Convert to persistent storage or configuration
+10. **Commitment control**: Preserve transaction boundaries
+11. **Pointers**: Use safe abstractions where possible
+12. **Special values**: Convert to language-appropriate equivalents
+
+## Advanced Features
+
+### File Information Data Structure (INFDS)
+
+```rpg
+F CustMast   IF   E           K DISK    INFDS(FileInfo)
+D FileInfo          DS
+D   FileName          *FILE
+D   FileStatus        *STATUS
+D   OpCode            *OPCODE
+D   Routine           *ROUTINE
+D   NumRecs           *RECORD
+```
+
+→
+
+```pseudocode
+STRUCTURE FileInformationDS:
+    fileName: STRING[10]
+    fileStatus: INTEGER
+    opCode: STRING[6]
+    routine: STRING[8]
+    numRecs: INTEGER
+END STRUCTURE
+
+fileInfo: FileInformationDS
+// Access: fileInfo.fileStatus after file operations
+```
+
+### Program Status Data Structure (PSDS)
+
+```rpg
+D PSDS           SDS
+D   PgmName         *PROC
+D   PgmStatus       *STATUS
+D   PrevStatus           16     20S 0
+D   LineNum              21     28
+D   Routine              29     36
+D   UserName             254    263
+```
+
+→
+
+```pseudocode
+STRUCTURE ProgramStatusDS:
+    pgmName: STRING[10]
+    pgmStatus: INTEGER
+    prevStatus: DECIMAL(5,0)
+    lineNum: STRING[8]
+    routine: STRING[8]
+    userName: STRING[10]
+END STRUCTURE
+
+psds: ProgramStatusDS
+// Access: psds.pgmStatus for error handling
+```
+
+### Data Area Operations
+
+```rpg
+D Counter         S              5P 0 DTAARA(MYCOUNTER)
+
+C     *DTAARA       DEFINE    Counter
+C                   IN        Counter
+C                   EVAL      Counter = Counter + 1
+C                   OUT       Counter
+```
+
+→
+
+```pseudocode
+counter: DECIMAL(5,0)
+
+// Read from persistent storage
+counter = READ_DATA_AREA("MYCOUNTER")
+counter = counter + 1
+// Write back to persistent storage
+WRITE_DATA_AREA("MYCOUNTER", counter)
+```
+
+### Commitment Control
+
+```rpg
+C                   COMMIT
+C                   IF        %ERROR
+C                   EVAL      ErrMsg = 'Commit failed'
+C                   ENDIF
+
+C                   ROLBK
+```
+
+→
+
+```pseudocode
+TRY:
+    COMMIT_TRANSACTION()
+CATCH Exception:
+    errMsg = "Commit failed"
+    ROLLBACK_TRANSACTION()
+END TRY
+```
+
+### API Call Pattern
+
+```rpg
+D QCmdExc         PR                  EXTPGM('QCMDEXC')
+D   Command                   3000A   CONST OPTIONS(*VARSIZE)
+D   Length                      15P 5 CONST
+
+D Cmd             S           3000A
+D CmdLen          S             15P 5
+
+C                   EVAL      Cmd = 'DLTF FILE(MYLIB/MYFILE)'
+C                   EVAL      CmdLen = %LEN(%TRIM(Cmd))
+C                   CALLB     QCmdExc(Cmd:CmdLen)
+```
+
+→
+
+```pseudocode
+// Define API interface
+FUNCTION QCmdExc(command: STRING, length: DECIMAL(15,5))
+BEGIN
+    // External system API call
+END FUNCTION
+
+cmd: STRING[3000]
+cmdLen: DECIMAL(15,5)
+
+cmd = "DLTF FILE(MYLIB/MYFILE)"
+cmdLen = LENGTH(TRIM(cmd))
+CALL QCmdExc(cmd, cmdLen)
+```
+
+### Service Programs and Binding
+
+```rpg
+H NOMAIN  // Service program indicator
+
+/COPY QRPGLESRC,PROTOTYPES
+
+D GetCustomer     PR                  EXTPROC('GetCustomer')
+D                                     LIKEDS(Customer)
+D   CustNo                      10P 0 CONST
+
+P GetCustomer     B                   EXPORT
+D GetCustomer     PI                  LIKEDS(Customer)
+D   CustNo                      10P 0 CONST
+  // Implementation
+P GetCustomer     E
+```
+
+→
+
+```pseudocode
+// Service program module (no main entry point)
+// IMPORT: PROTOTYPES module
+
+FUNCTION GetCustomer(custNo: DECIMAL(10,0)) RETURNS Customer EXPORTED
+BEGIN
+    customer: Customer
+    // Implementation to retrieve customer
+    RETURN customer
+END FUNCTION
+
+// Notes:
+// - NOMAIN indicates service program (library of procedures)
+// - EXPORT makes procedure available to external programs
+// - /COPY includes common definitions
+// - Binding directory references needed for linking
+```
+
+### Binding Directory (H-Spec)
+
+```rpg
+H BNDDIR('MYLIB/MYBNDDIR')
+H ACTGRP(*NEW)
+```
+
+→
+
+```pseudocode
+// Program Configuration
+CONSTANTS:
+    BINDING_DIRECTORY = "MYLIB/MYBNDDIR"  // External references
+    ACTIVATION_GROUP = "NEW"               // Isolated execution
+END CONSTANTS
+
+// Notes:
+// - BNDDIR specifies external service programs to link
+// - ACTGRP controls resource isolation and cleanup
+// - *NEW = new activation group (recommended for modern programs)
+// - *CALLER = use caller's activation group
+```
+
+### Parameter Passing Options
+
+```rpg
+D ProcessRecord   PR
+D   Record                            LIKEDS(Customer) CONST
+D   Options                           OPTIONS(*NOPASS:*OMIT)
+D   ErrCode                           LIKEDS(ApiError) OPTIONS(*NOPASS)
+
+P ProcessRecord   B
+D ProcessRecord   PI
+D   Record                            LIKEDS(Customer) CONST
+D   Options                           OPTIONS(*NOPASS:*OMIT)
+D   ErrCode                           LIKEDS(ApiError) OPTIONS(*NOPASS)
+
+C                   IF        %PARMS >= 2 AND %ADDR(Options) <> *NULL
+C                   // Use optional parameter
+C                   ENDIF
+P ProcessRecord   E
+```
+
+→
+
+```pseudocode
+FUNCTION ProcessRecord(
+    record: Customer,                    // CONST - pass by value
+    options: OPTIONAL NULLABLE STRING,    // *NOPASS:*OMIT
+    errCode: OPTIONAL ApiError           // *NOPASS
+)
+BEGIN
+    // Check if optional parameters provided
+    IF PARAMETER_COUNT() >= 2 AND options IS NOT NULL THEN
+        // Use optional parameter
+    END IF
+END FUNCTION
+
+// Parameter Options:
+// - CONST: Pass by value (read-only)
+// - VALUE: Pass by value (copy)
+// - *NOPASS: Parameter is optional
+// - *OMIT: Parameter can be passed as *OMIT (null)
+// - *STRING: Null-terminated string
+// - *VARSIZE: Variable-length parameter
+// - OPTIONS(*TRIM): Trim trailing blanks
+```
+
+### Data Structure Parameter Passing
+
+```rpg
+D ProcessDS       PR
+D   InDS                              LIKEDS(InputDS) CONST
+D   OutDS                             LIKEDS(OutputDS)
+
+C                   EVAL      OutDS = InDS  // Structure assignment
+C                   CALLP     ProcessDS(MyInput:MyOutput)
+```
+
+→
+
+```pseudocode
+FUNCTION ProcessDS(inDS: InputDS, outDS: OUTPUT OutputDS)
+BEGIN
+    outDS = inDS  // Copy all fields from input to output
+END FUNCTION
+
+// Call with structures
+CALL ProcessDS(myInput, myOutput)
+
+// Note: Structure assignment copies all fields
+```
+
+### Return Value vs. Output Parameters
+
+```rpg
+// Return value style (modern)
+D CalcTotal       PR            15P 2
+D   Quantity                     7P 0 CONST
+D   Price                       11P 2 CONST
+
+C                   EVAL      Total = CalcTotal(Qty:Price)
+
+// Output parameter style (legacy)
+D CalcTotal2      PR
+D   Total                       15P 2
+D   Quantity                     7P 0 CONST
+D   Price                       11P 2 CONST
+
+C                   CALLP     CalcTotal2(Total:Qty:Price)
+```
+
+→
+
+```pseudocode
+// Modern style - return value
+FUNCTION CalcTotal(quantity: DECIMAL(7,0), price: DECIMAL(11,2)) RETURNS DECIMAL(15,2)
+BEGIN
+    RETURN quantity * price
+END FUNCTION
+
+total = CalcTotal(qty, price)
+
+// Legacy style - output parameter
+PROCEDURE CalcTotal2(total: OUTPUT DECIMAL(15,2), quantity: DECIMAL(7,0), price: DECIMAL(11,2))
+BEGIN
+    total = quantity * price
+END PROCEDURE
+
+CALL CalcTotal2(total, qty, price)
+```
+
+### Performance Optimization Patterns
+
+```rpg
+// Pre-allocate structures in loops (avoid in tight loops)
+C                   DOW       NOT %EOF(File)
+C                   CLEAR     TempDS  // Expensive if repeated
+C                   READ      File
+C                   ENDDO
+
+// Better approach - reuse
+C                   CLEAR     TempDS
+C                   DOW       NOT %EOF(File)
+C                   // Reuse TempDS, clear only needed fields
+C                   READ      File
+C                   ENDDO
+```
+
+→
+
+```pseudocode
+// AVOID: Clearing structure in every iteration
+WHILE NOT END_OF_FILE(file) DO
+    tempDS = NEW TempStructure()  // Expensive
+    record = READ_RECORD(file)
+END WHILE
+
+// BETTER: Reuse structure, clear only when needed
+tempDS = NEW TempStructure()
+WHILE NOT END_OF_FILE(file) DO
+    // Reuse tempDS, update only changed fields
+    record = READ_RECORD(file)
+END WHILE
+
+// Performance notes:
+// - Minimize object allocation in loops
+// - Reuse data structures when possible
+// - Use *NOPASS parameters to avoid unnecessary copying
+// - Avoid string concatenation in tight loops
+```
+
+### Activation Group Management
+
+```rpg
+H ACTGRP(*NEW)     // New activation group
+H ACTGRP(*CALLER)  // Caller's activation group
+H ACTGRP('MYGRP')  // Named activation group
+
+C                   EVAL      *INLR = *ON  // End program, reclaim resources
+```
+
+→
+
+```pseudocode
+// Program Configuration
+CONSTANTS:
+    ACTIVATION_GROUP_NEW = TRUE
+    // or ACTIVATION_GROUP_NAME = "MYGRP"
+END CONSTANTS
+
+PROCEDURE Terminate()
+BEGIN
+    lastRecord = TRUE  // *INLR = *ON
+    // Automatic cleanup:
+    // - Close all files
+    // - Deallocate memory
+    // - Free resources
+    // - Reclaim activation group if *NEW
+END PROCEDURE
+
+// Activation Group Notes:
+// - *NEW: Isolated, automatic cleanup, recommended for batch
+// - *CALLER: Share resources with caller, use for service programs
+// - Named: Shared resources across multiple programs
+// - *INLR=*ON: Triggers full cleanup and resource reclamation
+```
+
+## Embedded SQL Operations
+
+### Basic SQL Select
+
+```rpg
+C/EXEC SQL
+C+  SELECT CUSTNO, NAME, BALANCE
+C+    INTO :CustNo, :Name, :Balance
+C+    FROM CUSTOMER
+C+   WHERE CUSTNO = :SearchCustNo
+C/END-EXEC
+
+C                   IF        SQLCOD = 0
+C                   // Record found
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+TRY:
+    EXECUTE SQL
+        SELECT CUSTNO, NAME, BALANCE
+        INTO :custNo, :name, :balance
+        FROM CUSTOMER
+        WHERE CUSTNO = :searchCustNo
+    END SQL
+    
+    IF SQL_CODE = 0 THEN
+        // Record found
+    END IF
+CATCH SQLException:
+    // Handle SQL error
+END TRY
+```
+
+### SQL Cursor Processing
+
+```rpg
+C/EXEC SQL
+C+  DECLARE C1 CURSOR FOR
+C+    SELECT CUSTNO, NAME, BALANCE
+C+      FROM CUSTOMER
+C+     WHERE STATE = :StateCode
+C+     ORDER BY NAME
+C/END-EXEC
+
+C/EXEC SQL OPEN C1 END-EXEC
+
+C                   DOU       SQLCOD <> 0
+C/EXEC SQL
+C+  FETCH C1 INTO :CustNo, :Name, :Balance
+C/END-EXEC
+C                   IF        SQLCOD = 0
+C                   EXSR      ProcessCustomer
+C                   ENDIF
+C                   ENDDO
+
+C/EXEC SQL CLOSE C1 END-EXEC
+```
+
+→
+
+```pseudocode
+// Declare cursor
+CURSOR c1 FOR
+    SELECT CUSTNO, NAME, BALANCE
+    FROM CUSTOMER
+    WHERE STATE = :stateCode
+    ORDER BY NAME
+END CURSOR
+
+OPEN_CURSOR(c1)
+
+DO
+    FETCH c1 INTO custNo, name, balance
+    IF SQL_CODE = 0 THEN
+        CALL ProcessCustomer(custNo, name, balance)
+    END IF
+WHILE SQL_CODE = 0
+
+CLOSE_CURSOR(c1)
+```
+
+### SQL Insert/Update/Delete
+
+```rpg
+C/EXEC SQL
+C+  INSERT INTO CUSTOMER
+C+    (CUSTNO, NAME, BALANCE)
+C+  VALUES (:CustNo, :Name, :Balance)
+C/END-EXEC
+
+C/EXEC SQL
+C+  UPDATE CUSTOMER
+C+     SET BALANCE = BALANCE + :Amount
+C+   WHERE CUSTNO = :CustNo
+C/END-EXEC
+
+C/EXEC SQL
+C+  DELETE FROM CUSTOMER
+C+   WHERE CUSTNO = :CustNo
+C/END-EXEC
+
+C                   EVAL      RowsAffected = SQLERRD(3)
+```
+
+→
+
+```pseudocode
+// Insert
+EXECUTE SQL
+    INSERT INTO CUSTOMER (CUSTNO, NAME, BALANCE)
+    VALUES (:custNo, :name, :balance)
+END SQL
+
+// Update
+EXECUTE SQL
+    UPDATE CUSTOMER
+    SET BALANCE = BALANCE + :amount
+    WHERE CUSTNO = :custNo
+END SQL
+
+// Delete
+EXECUTE SQL
+    DELETE FROM CUSTOMER
+    WHERE CUSTNO = :custNo
+END SQL
+
+rowsAffected = SQL_ROWS_AFFECTED()
+```
+
+### Dynamic SQL
+
+```rpg
+D SqlStmt         S            512A
+D CustNo          S              9P 0
+
+C                   EVAL      SqlStmt = 'SELECT CUSTNO ' +
+C                                       'FROM CUSTOMER ' +
+C                                       'WHERE STATE = ?'
+
+C/EXEC SQL
+C+  PREPARE S1 FROM :SqlStmt
+C/END-EXEC
+
+C/EXEC SQL
+C+  EXECUTE S1 USING :StateCode INTO :CustNo
+C/END-EXEC
+```
+
+→
+
+```pseudocode
+sqlStmt: STRING[512]
+custNo: DECIMAL(9,0)
+
+sqlStmt = "SELECT CUSTNO " +
+          "FROM CUSTOMER " +
+          "WHERE STATE = ?"
+
+PREPARE_SQL_STATEMENT("S1", sqlStmt)
+EXECUTE_PREPARED("S1", [stateCode], custNo)
+```
+
+### SQL Error Handling
+
+```rpg
+D SQLSTT          S              5A
+D SQLCOD          S             10I 0
+
+C/EXEC SQL
+C+  WHENEVER SQLERROR CONTINUE
+C/END-EXEC
+
+C/EXEC SQL
+C+  SELECT NAME INTO :Name
+C+    FROM CUSTOMER
+C+   WHERE CUSTNO = :CustNo
+C/END-EXEC
+
+C                   SELECT
+C                   WHEN      SQLCOD = 0
+C                   EVAL      Msg = 'Success'
+C                   WHEN      SQLCOD = 100
+C                   EVAL      Msg = 'Not found'
+C                   OTHER
+C                   EVAL      Msg = 'SQL Error: ' + SQLSTT
+C                   ENDSL
+```
+
+→
+
+```pseudocode
+sqlState: STRING[5]
+sqlCode: INTEGER
+
+TRY:
+    EXECUTE SQL
+        SELECT NAME INTO :name
+        FROM CUSTOMER
+        WHERE CUSTNO = :custNo
+    END SQL
+    
+    SWITCH sqlCode:
+        CASE 0:
+            msg = "Success"
+            BREAK
+        CASE 100:
+            msg = "Not found"
+            BREAK
+        DEFAULT:
+            msg = "SQL Error: " + sqlState
+    END SWITCH
+CATCH SQLException:
+    msg = "SQL Error: " + GET_SQL_STATE()
+END TRY
+
+// SQL Status Codes:
+// 0 = Success
+// 100 = No data found
+// negative = Error occurred
+// SQLSTT/SQLSTATE = 5-character error code
+```
+
+### Stored Procedure Calls
+
+```rpg
+C/EXEC SQL
+C+  CALL MYPROC(:InParm1, :InParm2, :OutParm)
+C/END-EXEC
+```
+
+→
+
+```pseudocode
+EXECUTE SQL
+    CALL MYPROC(:inParm1, :inParm2, :outParm)
+END SQL
+```
+
+### SQL Transaction Control
+
+```rpg
+C/EXEC SQL
+C+  SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+C/END-EXEC
+
+C/EXEC SQL COMMIT END-EXEC
+
+C/EXEC SQL ROLLBACK END-EXEC
+```
+
+→
+
+```pseudocode
+// Set isolation level
+EXECUTE SQL
+    SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+END SQL
+
+// Commit transaction
+COMMIT_TRANSACTION()
+
+// Rollback transaction
+ROLLBACK_TRANSACTION()
+```
+
+## IFS (Integrated File System) Operations
+
+### IFS File Operations
+
+```rpg
+D FD              S             10I 0
+D Buffer          S           1024A
+D BytesRead       S             10I 0
+
+C                   EVAL      FD = open('/home/myfile.txt':
+C                                        O_RDONLY)
+C                   IF        FD >= 0
+C                   EVAL      BytesRead = read(FD:Buffer:%SIZE(Buffer))
+C                   CALLP     close(FD)
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+fileDescriptor: INTEGER
+buffer: STRING[1024]
+bytesRead: INTEGER
+
+fileDescriptor = IFS_OPEN("/home/myfile.txt", READ_ONLY)
+IF fileDescriptor >= 0 THEN
+    bytesRead = IFS_READ(fileDescriptor, buffer, SIZE_OF(buffer))
+    IFS_CLOSE(fileDescriptor)
+END IF
+
+// IFS File Modes:
+// O_RDONLY - Read only
+// O_WRONLY - Write only
+// O_RDWR - Read and write
+// O_CREAT - Create if doesn't exist
+// O_TRUNC - Truncate to zero length
+// O_APPEND - Append to end
+```
+
+### IFS Directory Operations
+
+```rpg
+D Dir             S               *
+D Entry           DS                  LIKEDS(Dirent)
+
+C                   EVAL      Dir = opendir('/home/mydir')
+C                   IF        Dir <> *NULL
+C                   DOW       readdir(Dir:Entry) <> *NULL
+C                   // Process Entry.d_name
+C                   ENDDO
+C                   CALLP     closedir(Dir)
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+STRUCTURE DirectoryEntry:
+    name: STRING[256]
+    type: STRING[10]
+END STRUCTURE
+
+directory: POINTER
+entry: DirectoryEntry
+
+directory = IFS_OPEN_DIR("/home/mydir")
+IF directory IS NOT NULL THEN
+    WHILE IFS_READ_DIR(directory, entry) IS NOT NULL DO
+        // Process entry.name
+    END WHILE
+    IFS_CLOSE_DIR(directory)
+END IF
+```
+
+### IFS File Information
+
+```rpg
+D StatDS          DS                  QUALIFIED
+D   FileSize                    10I 0
+D   ModTime                     10I 0
+D   FileType                     5I 0
+
+C                   IF        stat('/home/myfile.txt':StatDS) = 0
+C                   // File exists, check StatDS fields
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+STRUCTURE FileStats:
+    fileSize: INTEGER
+    modTime: INTEGER
+    fileType: INTEGER
+    permissions: INTEGER
+END STRUCTURE
+
+stats: FileStats
+
+IF IFS_STAT("/home/myfile.txt", stats) = 0 THEN
+    // File exists, access stats.fileSize, etc.
+END IF
+```
+
+## XML and JSON Operations
+
+### XML Parsing (xml-into)
+
+```rpg
+D Customer        DS                  QUALIFIED
+D   Name                        30A
+D   City                        20A
+D   Balance                     15P 2
+
+D XmlDoc          S           1000A
+
+C                   EVAL      XmlDoc = '<customer>' +
+C                                      '<name>John Smith</name>' +
+C                                      '<city>Chicago</city>' +
+C                                      '<balance>1500.00</balance>' +
+C                                      '</customer>'
+
+C                   XML-INTO  Customer %XML(XmlDoc)
+```
+
+→
+
+```pseudocode
+STRUCTURE Customer:
+    name: STRING[30]
+    city: STRING[20]
+    balance: DECIMAL(15,2)
+END STRUCTURE
+
+xmlDoc: STRING[1000]
+customer: Customer
+
+xmlDoc = "<customer>" +
+         "<name>John Smith</name>" +
+         "<city>Chicago</city>" +
+         "<balance>1500.00</balance>" +
+         "</customer>"
+
+customer = PARSE_XML(xmlDoc, Customer)
+```
+
+### JSON Parsing (DATA-INTO)
+
+```rpg
+D Order           DS                  QUALIFIED
+D   OrderNo                      9P 0
+D   CustName                    30A
+D   Total                       15P 2
+
+D JsonDoc         S           1000A
+
+C                   EVAL      JsonDoc = '{"orderNo":12345,' +
+C                                       '"custName":"John Smith",' +
+C                                       '"total":1500.00}'
+
+C                   DATA-INTO Order %DATA(JsonDoc:'doc=string')
+```
+
+→
+
+```pseudocode
+STRUCTURE Order:
+    orderNo: DECIMAL(9,0)
+    custName: STRING[30]
+    total: DECIMAL(15,2)
+END STRUCTURE
+
+jsonDoc: STRING[1000]
+order: Order
+
+jsonDoc = '{"orderNo":12345,' +
+          '"custName":"John Smith",' +
+          '"total":1500.00}'
+
+order = PARSE_JSON(jsonDoc, Order)
+```
+
+### XML Generation (xml-sax)
+
+```rpg
+C                   CALLP     StartElement('customer')
+C                   CALLP     AddElement('name':'John Smith')
+C                   CALLP     AddElement('city':'Chicago')
+C                   CALLP     AddElement('balance':'1500.00')
+C                   CALLP     EndElement('customer')
+```
+
+→
+
+```pseudocode
+XML_START_ELEMENT("customer")
+XML_ADD_ELEMENT("name", "John Smith")
+XML_ADD_ELEMENT("city", "Chicago")
+XML_ADD_ELEMENT("balance", "1500.00")
+XML_END_ELEMENT("customer")
+```
+
+### JSON Generation (YAJL)
+
+```rpg
+D JsonGen         S               *
+
+C                   EVAL      JsonGen = yajl_genOpen(*OFF)
+C                   CALLP     yajl_beginObj(JsonGen)
+C                   CALLP     yajl_addNum(JsonGen:'orderNo':'12345')
+C                   CALLP     yajl_addChar(JsonGen:'custName':'John Smith')
+C                   CALLP     yajl_addNum(JsonGen:'total':'1500.00')
+C                   CALLP     yajl_endObj(JsonGen)
+C                   EVAL      JsonDoc = yajl_getString(JsonGen)
+C                   CALLP     yajl_genClose(JsonGen)
+```
+
+→
+
+```pseudocode
+jsonGenerator: POINTER
+
+jsonGenerator = JSON_OPEN_GENERATOR()
+JSON_BEGIN_OBJECT(jsonGenerator)
+JSON_ADD_NUMBER(jsonGenerator, "orderNo", 12345)
+JSON_ADD_STRING(jsonGenerator, "custName", "John Smith")
+JSON_ADD_NUMBER(jsonGenerator, "total", 1500.00)
+JSON_END_OBJECT(jsonGenerator)
+jsonDoc = JSON_GET_STRING(jsonGenerator)
+JSON_CLOSE_GENERATOR(jsonGenerator)
+```
+
+## HTTP/Web Services
+
+### HTTP GET Request
+
+```rpg
+D HttpResp        S          65535A
+D Rc              S             10I 0
+
+C                   EVAL      Rc = http_get(
+C                                  'http://api.example.com/data':
+C                                  HttpResp)
+C                   IF        Rc = 200
+C                   // Process HttpResp
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+httpResponse: STRING[65535]
+responseCode: INTEGER
+
+responseCode = HTTP_GET("http://api.example.com/data", httpResponse)
+IF responseCode = 200 THEN
+    // Process httpResponse
+END IF
+```
+
+### HTTP POST Request
+
+```rpg
+D PostData        S           1000A
+D HttpResp        S          65535A
+D Rc              S             10I 0
+
+C                   EVAL      PostData = '{"key":"value"}'
+C                   EVAL      Rc = http_post_stmf(
+C                                  'http://api.example.com/update':
+C                                  '/tmp/request.json':
+C                                  '/tmp/response.json':
+C                                  HTTP_TIMEOUT)
+```
+
+→
+
+```pseudocode
+postData: STRING[1000]
+httpResponse: STRING[65535]
+responseCode: INTEGER
+
+postData = '{"key":"value"}'
+responseCode = HTTP_POST(
+    "http://api.example.com/update",
+    postData,
+    httpResponse,
+    TIMEOUT_SECONDS
+)
+```
+
+### Web Service Call (SOAP)
+
+```rpg
+D SoapRequest     S           5000A
+D SoapResponse    S          65535A
+
+C                   EVAL      SoapRequest = 
+C                             '<?xml version="1.0"?>' +
+C                             '<soap:Envelope>' +
+C                             '<soap:Body>' +
+C                             '<GetCustomer>' +
+C                             '<CustNo>12345</CustNo>' +
+C                             '</GetCustomer>' +
+C                             '</soap:Body>' +
+C                             '</soap:Envelope>'
+
+C                   EVAL      Rc = http_post_xml(
+C                                  'http://api.example.com/soap':
+C                                  SoapRequest:
+C                                  SoapResponse)
+```
+
+→
+
+```pseudocode
+soapRequest: STRING[5000]
+soapResponse: STRING[65535]
+
+soapRequest = 
+    '<?xml version="1.0"?>' +
+    '<soap:Envelope>' +
+    '<soap:Body>' +
+    '<GetCustomer>' +
+    '<CustNo>12345</CustNo>' +
+    '</GetCustomer>' +
+    '</soap:Body>' +
+    '</soap:Envelope>'
+
+responseCode = HTTP_POST_XML(
+    "http://api.example.com/soap",
+    soapRequest,
+    soapResponse
+)
+```
+
+## Advanced File Locking Patterns
+
+### Record Locking
+
+```rpg
+C     Key           CHAIN(N)  File          // Read without lock
+C                   IF        %FOUND(File)
+C     Key           CHAIN     File          // Lock record
+C                   IF        %FOUND(File)
+C                   EVAL      Balance = Balance + Amount
+C                   UPDATE    FileRec
+C                   ENDIF
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+// Read without lock for validation
+record = READ_BY_KEY_NO_LOCK(file, key)
+IF RECORD_FOUND(file) THEN
+    // Lock and read again for update
+    record = READ_BY_KEY_WITH_LOCK(file, key)
+    IF RECORD_FOUND(file) THEN
+        record.balance = record.balance + amount
+        UPDATE_RECORD(file, record)
+        // Lock automatically released after update
+    END IF
+END IF
+```
+
+### File Override and Open Options
+
+```rpg
+C                   CALL      'QCMDEXC'
+C                   PARM                    Cmd
+C                   PARM                    CmdLen
+C                   // Cmd = 'OVRDBF FILE(MYFILE) SHARE(*YES)'
+
+C                   OPEN      MyFile
+```
+
+→
+
+```pseudocode
+// Override database file attributes
+EXECUTE_COMMAND("OVRDBF FILE(MYFILE) SHARE(*YES)")
+
+// Open file with overrides applied
+OPEN_FILE(myFile)
+
+// File sharing options:
+// *YES - Allow sharing
+// *NO - Exclusive access
+// *SHRREAD - Share for read only
+// *SHRUPD - Share for read and update
+```
+
+## User Space Operations
+
+### Creating and Using User Spaces
+
+```rpg
+D UserSpace       DS                  QUALIFIED
+D   Name                        10A   INZ('MYUSRSPC')
+D   Lib                         10A   INZ('MYLIB')
+
+D UsrSpcPtr       S               *
+D DataPtr         S               *   BASED(UsrSpcPtr)
+D DataString      S          32767A   BASED(DataPtr)
+
+C                   CALL      'QUSCRTUS'
+C                   PARM                    UserSpace
+C                   // ... other parameters
+
+C                   CALL      'QUSPTRUS'
+C                   PARM                    UserSpace
+C                   PARM                    UsrSpcPtr
+
+C                   EVAL      DataString = 'My Data'
+```
+
+→
+
+```pseudocode
+STRUCTURE UserSpaceID:
+    name: STRING[10] = "MYUSRSPC"
+    library: STRING[10] = "MYLIB"
+END STRUCTURE
+
+userSpace: UserSpaceID
+userSpacePointer: POINTER
+dataString: STRING[32767]
+
+// Create user space
+CREATE_USER_SPACE(userSpace, SIZE=65536, AUTHORITY="*ALL")
+
+// Get pointer to user space
+userSpacePointer = GET_USER_SPACE_POINTER(userSpace)
+
+// Access data through pointer
+dataString = READ_FROM_POINTER(userSpacePointer, LENGTH=32767)
+WRITE_TO_POINTER(userSpacePointer, "My Data")
+
+// Notes:
+// - User spaces provide shared memory between programs
+// - Useful for large data structures or inter-program communication
+// - Must manage memory layout manually
+```
+
+## Multiple Threading (Limited Support)
+
+### Job Submission (Parallel Processing)
+
+```rpg
+D JobName         S             10A
+D JobNumber       S              6A
+
+C                   CALL      'QCMDEXC'
+C                   PARM      'SBMJOB CMD(CALL PGM(PROCESS))' Cmd
+C                   PARM      %LEN(%TRIM(Cmd))                CmdLen
+```
+
+→
+
+```pseudocode
+jobName: STRING[10]
+jobNumber: STRING[6]
+
+// Submit job to run in parallel
+SUBMIT_JOB(
+    COMMAND="CALL PGM(PROCESS)",
+    JOB_NAME=jobName,
+    JOB_NUMBER=jobNumber
+)
+
+// Notes:
+// - RPG traditionally single-threaded
+// - Use SBMJOB for parallel batch processing
+// - Java migration: Consider Thread pools or ExecutorService
+// - Monitor job completion via QSYSOPR message queue or data areas
+```
+
+### Data Queue for Inter-Job Communication
+
+```rpg
+D DtaQMsg         S            100A
+
+// Send message to data queue
+C                   CALL      'QSNDDTAQ'
+C                   PARM      'MSGQUEUE' DQName
+C                   PARM      'MYLIB'    DQLib
+C                   PARM      100        MsgLen
+C                   PARM                 DtaQMsg
+
+// Receive from data queue (wait 5 seconds)
+C                   CALL      'QRCVDTAQ'
+C                   PARM      'MSGQUEUE' DQName
+C                   PARM      'MYLIB'    DQLib
+C                   PARM      100        MsgLen
+C                   PARM                 DtaQMsg
+C                   PARM      5          WaitTime
+```
+
+→
+
+```pseudocode
+dataQueueMessage: STRING[100]
+
+// Send message (producer)
+SEND_TO_DATA_QUEUE(
+    QUEUE="MSGQUEUE",
+    LIBRARY="MYLIB",
+    MESSAGE=dataQueueMessage
+)
+
+// Receive message (consumer, wait 5 seconds)
+dataQueueMessage = RECEIVE_FROM_DATA_QUEUE(
+    QUEUE="MSGQUEUE",
+    LIBRARY="MYLIB",
+    WAIT_SECONDS=5
+)
+
+// Migration note: Consider message queues (RabbitMQ, Kafka) or Redis
+```
+
+## External Program Calls
+
+### Dynamic Program Call
+
+```rpg
+D PgmName         S             10A
+D PgmLib          S             10A
+D ParmList        DS
+D   Parm1                       10A
+D   Parm2                       15P 2
+
+C                   EVAL      PgmName = 'CUSTPGM'
+C                   EVAL      PgmLib = 'MYLIB'
+C                   CALL(E)   PgmName(PgmLib)
+C                   PARM                    Parm1
+C                   PARM                    Parm2
+C                   IF        %ERROR
+C                   // Handle error
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+programName: STRING[10]
+programLibrary: STRING[10]
+parm1: STRING[10]
+parm2: DECIMAL(15,2)
+
+programName = "CUSTPGM"
+programLibrary = "MYLIB"
+
+TRY:
+    CALL_EXTERNAL_PROGRAM(
+        PROGRAM=programName,
+        LIBRARY=programLibrary,
+        PARAMETERS=[parm1, parm2]
+    )
+CATCH ProgramException:
+    // Handle program not found or other errors
+END TRY
+```
+
+### Call Java Program from RPG
+
+```rpg
+D JavaClass       S            256A
+D JavaMethod      S            256A
+D JavaParm        S            100A
+
+C                   EVAL      JavaClass = 'com.example.MyClass'
+C                   EVAL      JavaMethod = 'processData'
+C                   EVAL      JavaParm = 'Input Data'
+
+C                   CALL      'QJVACMDSRV'
+C                   // Parameters for Java invocation
+```
+
+→
+
+```pseudocode
+javaClass: STRING[256]
+javaMethod: STRING[256]
+javaParm: STRING[100]
+
+javaClass = "com.example.MyClass"
+javaMethod = "processData"
+javaParm = "Input Data"
+
+// Call Java method
+CALL_JAVA_METHOD(
+    CLASS=javaClass,
+    METHOD=javaMethod,
+    PARAMETERS=[javaParm]
+)
+
+// Migration note: Direct method call in target language
+```
+
+## Object-Oriented Features (Limited)
+
+### Object Reference (Pointers to Procedures)
+
+```rpg
+D ProcPtr         S               *   PROCPTR
+D ProcessFunc     PR
+D                                     EXTPROC(ProcPtr)
+D   Data                       100A
+
+C                   EVAL      ProcPtr = %PADDR('PROCESSDATA')
+C                   CALLB     ProcessFunc(MyData)
+```
+
+→
+
+```pseudocode
+processProcedure: POINTER TO FUNCTION
+
+processProcedure = GET_PROCEDURE_ADDRESS("ProcessData")
+CALL_FUNCTION_POINTER(processProcedure, [myData])
+
+// Migration note: Use function references, lambdas, or strategy pattern
+```
+
+### Factory Pattern with Procedure Pointers
+
+```rpg
+D ProcessorPtr    S               *   PROCPTR
+D Processor       PR
+D                                     EXTPROC(ProcessorPtr)
+D   Record                            LIKEDS(DataRec)
+
+C                   SELECT
+C                   WHEN      Type = 'A'
+C                   EVAL      ProcessorPtr = %PADDR('PROCESS_A')
+C                   WHEN      Type = 'B'
+C                   EVAL      ProcessorPtr = %PADDR('PROCESS_B')
+C                   ENDSL
+
+C                   CALLB     Processor(Record)
+```
+
+→
+
+```pseudocode
+processorFunction: POINTER TO FUNCTION
+
+SWITCH type:
+    CASE "A":
+        processorFunction = GET_PROCEDURE_ADDRESS("ProcessA")
+        BREAK
+    CASE "B":
+        processorFunction = GET_PROCEDURE_ADDRESS("ProcessB")
+        BREAK
+END SWITCH
+
+CALL_FUNCTION_POINTER(processorFunction, [record])
+
+// Migration note: Use Strategy or Factory pattern with interfaces
+```
+
+## Advanced Translation Patterns
+
+### Refactoring Global Indicators
+
+```rpg
+// Legacy: Global indicators throughout program
+C                   EVAL      *IN01 = *ON
+C                   IF        *IN01
+C                   EXSR      Process
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+// Better: Named boolean at appropriate scope
+isRecordFound: BOOLEAN = TRUE
+
+IF isRecordFound THEN
+    CALL Process()
+END IF
+
+// Best practices:
+// - Use descriptive names
+// - Limit scope (local vs global)
+// - Consider state objects for complex indicator sets
+```
+
+### Refactoring %PARMS Checks
+
+```rpg
+D MyProc          PR
+D   Required                    10A
+D   Optional1                   10A   OPTIONS(*NOPASS)
+D   Optional2                   10A   OPTIONS(*NOPASS)
+
+P MyProc          B
+C                   SELECT
+C                   WHEN      %PARMS = 1
+C                   // Use only Required
+C                   WHEN      %PARMS = 2
+C                   // Use Required and Optional1
+C                   WHEN      %PARMS = 3
+C                   // Use all parameters
+C                   ENDSL
+P MyProc          E
+```
+
+→
+
+```pseudocode
+FUNCTION MyProc(
+    required: STRING[10],
+    optional1: OPTIONAL STRING[10] = NULL,
+    optional2: OPTIONAL STRING[10] = NULL
+)
+BEGIN
+    // Use null checks instead of parameter count
+    IF optional1 IS NOT NULL THEN
+        // Process optional1
+    END IF
+    
+    IF optional2 IS NOT NULL THEN
+        // Process optional2
+    END IF
+END FUNCTION
+
+// Modern approach: Use optional parameters with defaults
+// or method overloading in target language
+```
+
+### Converting Fixed-Format to Free-Format Logic
+
+```rpg
+// Legacy fixed-format
+C     CustNo        CHAIN     CustMast
+C                   IF        %FOUND
+C                   EVAL      Name = CustName
+C                   ENDIF
+```
+
+→
+
+```pseudocode
+record = READ_BY_KEY(custMast, custNo)
+IF RECORD_FOUND(custMast) THEN
+    name = record.custName
+END IF
+
+// Note: Free-format RPG and pseudocode are already similar
+// Focus on extracting business logic from I/O operations
+```
+
+## Translation Workflow
+
+1. **Analyze Program Structure**
+   - Identify H-spec compiler directives (ACTGRP, BNDDIR, NOMAIN)
+   - Map F-spec files to data structures/interfaces
+   - Catalog all D-spec definitions
+
+2. **Extract Data Definitions**
+   - Convert standalone fields (preserve packed decimal precision!)
+   - Transform data structures (handle QUALIFIED, LIKEDS, OVERLAY)
+   - Document multiple occurrence DS as arrays
+   - Identify special data structures (PSDS, INFDS, DTAARA)
+
+3. **Convert Control Flow**
+   - Map BEGSR/ENDSR → Named procedures
+   - Convert P-spec procedures → Functions with prototypes
+   - Translate parameter lists (PLIST/PARM)
+
+4. **Translate Operations**
+   - C-spec calculations → Pseudocode expressions
+   - File I/O operations → Standard file functions
+   - Embedded SQL → Database query patterns
+   - Error handling → TRY-CATCH blocks
+   - Indicator logic → Boolean variables
+
+5. **Handle Special Cases**
+   - API calls → Function interfaces
+   - Data area operations → Persistent storage
+   - Commitment control → Transaction management
+   - Output specs → Report formatting logic
+
+6. **Generate Documentation**
+   - Create Mermaid flowchart
+   - Document business rules
+   - Add example traces
+   - Note integration points
+
+7. **Verification**
+   - Verify decimal precision preserved
+   - Confirm error handling coverage
+   - Validate date/time conversions
+   - Check array bounds handling
+   - Test IFS and web service integrations
+   - Validate transaction boundaries
+
+## Migration Best Practices
+
+### 1. Decimal Precision Strategy
+
+```pseudocode
+// CRITICAL: RPG packed decimals must map to exact precision types
+// RPG: 15P 2 → Target: DECIMAL(15,2) or BigDecimal
+// NEVER use: float, double for financial data
+
+CONSTANTS:
+    ROUNDING_MODE = HALF_UP  // RPG default rounding
+END CONSTANTS
+
+FUNCTION CalculateTax(amount: DECIMAL(15,2), rate: DECIMAL(5,3)) RETURNS DECIMAL(15,2)
+BEGIN
+    result: DECIMAL(18,5)
+    result = amount * rate
+    RETURN ROUND(result, 2, ROUNDING_MODE)
+END FUNCTION
+```
+
+### 2. Indicator Refactoring Strategy
+
+```pseudocode
+// Phase 1: Direct translation (indicators → booleans)
+indicator01: BOOLEAN  // EOF
+indicator02: BOOLEAN  // Record found
+indicator03: BOOLEAN  // Error occurred
+
+// Phase 2: Semantic naming
+endOfFile: BOOLEAN
+recordFound: BOOLEAN
+errorOccurred: BOOLEAN
+
+// Phase 3: Encapsulation (for complex programs)
+STRUCTURE ProgramState:
+    endOfFile: BOOLEAN
+    recordFound: BOOLEAN
+    errorOccurred: BOOLEAN
+    // ... other state
+END STRUCTURE
+
+// Phase 4: Eliminate where possible
+// Replace indicator checks with direct return values or exceptions
+```
+
+### 3. File I/O Abstraction
+
+```pseudocode
+// Abstraction layer for file operations
+INTERFACE FileOperations:
+    FUNCTION ReadRecord(key: STRING) RETURNS Record
+    FUNCTION UpdateRecord(record: Record) RETURNS BOOLEAN
+    FUNCTION DeleteRecord(key: STRING) RETURNS BOOLEAN
+END INTERFACE
+
+// Implementation can be:
+// - Database (most common for RPG files)
+// - REST API
+// - Message queue
+// - Legacy file system
+
+CLASS DatabaseFileOperations IMPLEMENTS FileOperations:
+    FUNCTION ReadRecord(key: STRING) RETURNS Record
+    BEGIN
+        EXECUTE SQL
+            SELECT * INTO :record FROM TABLE WHERE KEY = :key
+        END SQL
+        RETURN record
+    END FUNCTION
+END CLASS
+```
+
+### 4. Error Handling Modernization
+
+```pseudocode
+// RPG pattern: Indicators and status codes
+// Modern pattern: Exceptions with context
+
+STRUCTURE FileOperationException EXTENDS Exception:
+    fileName: STRING
+    operation: STRING
+    statusCode: INTEGER
+    recordKey: STRING
+END STRUCTURE
+
+FUNCTION ReadCustomer(custNo: DECIMAL(10,0)) RETURNS Customer
+BEGIN
+    TRY:
+        record = READ_BY_KEY(custMast, custNo)
+        IF NOT RECORD_FOUND(custMast) THEN
+            THROW NEW RecordNotFoundException(
+                MESSAGE="Customer not found",
+                KEY=custNo
+            )
+        END IF
+        RETURN record
+    CATCH DatabaseException AS e:
+        THROW NEW FileOperationException(
+            MESSAGE="Failed to read customer",
+            FILE="CUSTMAST",
+            OPERATION="READ",
+            KEY=custNo,
+            CAUSE=e
+        )
+    END TRY
+END FUNCTION
+```
+
+### 5. Transaction Pattern
+
+```pseudocode
+// Preserve RPG commitment control in modern transactions
+
+FUNCTION ProcessOrder(order: Order) RETURNS BOOLEAN
+BEGIN
+    TRY:
+        BEGIN_TRANSACTION()
+        
+        // Update inventory
+        inventory = READ_BY_KEY_WITH_LOCK(invFile, order.itemNo)
+        inventory.quantity = inventory.quantity - order.quantity
+        UPDATE_RECORD(invFile, inventory)
+        
+        // Create order record
+        WRITE_RECORD(orderFile, order)
+        
+        // Update customer balance
+        customer = READ_BY_KEY_WITH_LOCK(custFile, order.custNo)
+        customer.balance = customer.balance + order.total
+        UPDATE_RECORD(custFile, customer)
+        
+        COMMIT_TRANSACTION()
+        RETURN TRUE
+        
+    CATCH Exception AS e:
+        ROLLBACK_TRANSACTION()
+        LOG_ERROR("Order processing failed", e)
+        RETURN FALSE
+    END TRY
+END FUNCTION
+```
+
+### 6. Testing Strategy
+
+```pseudocode
+// Unit test template for migrated RPG logic
+
+TEST_SUITE CustomerProcessing:
+    
+    SETUP:
+        // Initialize test database
+        testDb = CREATE_TEST_DATABASE()
+        // Load test data
+        LOAD_TEST_DATA("test-customers.sql")
+    END SETUP
+    
+    TEST CalculateDiscount_StandardCustomer:
+        // Given
+        customer = NEW Customer(type="STANDARD", balance=1000.00)
+        orderAmount: DECIMAL(15,2) = 500.00
+        
+        // When
+        discount = CalculateDiscount(customer, orderAmount)
+        
+        // Then
+        ASSERT_EQUALS(discount, 25.00)  // 5% discount
+        ASSERT_PRECISION(discount, 2)    // Verify decimal places
+    END TEST
+    
+    TEST ProcessOrder_InsufficientInventory:
+        // Given
+        order = NEW Order(itemNo="ITEM001", quantity=100)
+        inventory = NEW Inventory(itemNo="ITEM001", quantity=50)
+        
+        // When/Then
+        ASSERT_THROWS(InsufficientInventoryException, 
+                     ProcessOrder(order))
+    END TEST
+    
+    TEARDOWN:
+        testDb.CLOSE()
+    END TEARDOWN
+    
+END TEST_SUITE
+```
+
+### 7. Performance Considerations
+
+```pseudocode
+// Maintain RPG batch processing efficiency
+
+// Pattern 1: Bulk read and process
+FUNCTION ProcessDailyTransactions() 
+BEGIN
+    BATCH_SIZE = 1000
+    transactions: ARRAY OF Transaction
+    
+    // Use cursor or streaming for large datasets
+    CURSOR txCursor FOR
+        SELECT * FROM TRANSACTIONS 
+        WHERE PROCESS_DATE = CURRENT_DATE
+        ORDER BY TRANSACTION_TIME
+    END CURSOR
+    
+    OPEN_CURSOR(txCursor)
+    transactions = FETCH_BATCH(txCursor, BATCH_SIZE)
+    
+    WHILE SIZE(transactions) > 0 DO
+        // Process batch
+        FOR EACH tx IN transactions DO
+            CALL ProcessTransaction(tx)
+        END FOR
+        
+        // Commit batch
+        COMMIT_TRANSACTION()
+        
+        // Fetch next batch
+        transactions = FETCH_BATCH(txCursor, BATCH_SIZE)
+    END WHILE
+    
+    CLOSE_CURSOR(txCursor)
+END FUNCTION
+
+// Pattern 2: Parallel processing (where appropriate)
+FUNCTION ProcessBatchParallel(records: ARRAY OF Record)
+BEGIN
+    // Split into chunks
+    chunks = SPLIT_INTO_CHUNKS(records, THREAD_COUNT)
+    
+    // Process in parallel
+    PARALLEL_FOR_EACH chunk IN chunks DO
+        FOR EACH record IN chunk DO
+            CALL ProcessRecord(record)
+        END FOR
+    END PARALLEL_FOR_EACH
+END FUNCTION
+```
+
+## Common Migration Challenges
+
+### Challenge 1: MOVE/MOVEL Operations
+
+```pseudocode
+// RPG MOVE is right-aligned, MOVEL is left-aligned
+// Must preserve padding behavior
+
+FUNCTION RPG_MOVE(source: STRING, targetLength: INTEGER) RETURNS STRING
+BEGIN
+    // Right-align and pad with spaces on left
+    IF LENGTH(source) >= targetLength THEN
+        RETURN SUBSTRING(source, LENGTH(source) - targetLength + 1, targetLength)
+    ELSE
+        padding = REPEAT(" ", targetLength - LENGTH(source))
+        RETURN padding + source
+    END IF
+END FUNCTION
+
+FUNCTION RPG_MOVEL(source: STRING, targetLength: INTEGER) RETURNS STRING
+BEGIN
+    // Left-align and pad with spaces on right
+    IF LENGTH(source) >= targetLength THEN
+        RETURN SUBSTRING(source, 1, targetLength)
+    ELSE
+        padding = REPEAT(" ", targetLength - LENGTH(source))
+        RETURN source + padding
+    END IF
+END FUNCTION
+```
+
+### Challenge 2: Overlay and Shared Memory
+
+```pseudocode
+// RPG OVERLAY shares memory space
+// Must preserve data relationships
+
+STRUCTURE DateStructure:
+    fullDate: STRING[8]      // YYYYMMDD
+    year: COMPUTED_FIELD     // Positions 1-4
+    month: COMPUTED_FIELD    // Positions 5-6
+    day: COMPUTED_FIELD      // Positions 7-8
+END STRUCTURE
+
+// Implementation with computed properties
+CLASS DateStructure:
+    PRIVATE fullDate: STRING[8]
+    
+    PROPERTY Year:
+        GET: RETURN SUBSTRING(fullDate, 1, 4)
+        SET: fullDate = value + SUBSTRING(fullDate, 5, 4)
+    END PROPERTY
+    
+    PROPERTY Month:
+        GET: RETURN SUBSTRING(fullDate, 5, 2)
+        SET: fullDate = SUBSTRING(fullDate, 1, 4) + value + 
+                       SUBSTRING(fullDate, 7, 2)
+    END PROPERTY
+    
+    PROPERTY Day:
+        GET: RETURN SUBSTRING(fullDate, 7, 2)
+        SET: fullDate = SUBSTRING(fullDate, 1, 6) + value
+    END PROPERTY
+END CLASS
+```
+
+### Challenge 3: Multiple Occurrence Data Structures
+
+```pseudocode
+// RPG: Multiple occurrence DS with %OCCUR
+// Modern: Array with explicit indexing
+
+// RPG concept:
+// LineItem DS OCCURS(99)
+// %OCCUR(LineItem) = 5  // Set to 5th occurrence
+
+// Modern equivalent:
+lineItems: ARRAY[99] OF LineItem
+currentLineIndex: INTEGER = 5
+currentLine = lineItems[currentLineIndex]
+
+// Better: Use collections with iteration
+lineItems: LIST OF LineItem
+FOR EACH item IN lineItems DO
+    CALL ProcessLineItem(item)
+END FOR
+```
+
+### Challenge 4: *ALL and Special Value Comparisons
+
+```pseudocode
+// RPG special values need careful translation
+
+// *BLANK/*BLANKS
+IF field = EMPTY_STRING OR TRIM(field) = "" THEN ...
+
+// *ZERO/*ZEROS
+IF field = 0 THEN ...
+
+// *HIVAL (highest value for type)
+IF field >= MAX_VALUE_FOR_TYPE THEN ...
+
+// *LOVAL (lowest value for type)
+IF field <= MIN_VALUE_FOR_TYPE THEN ...
+
+// *ALL'X' (all positions contain 'X')
+IF field = REPEAT('X', LENGTH(field)) THEN ...
+```
+
+## Documentation Template
+
+When documenting migrated RPG programs, include:
+
+```markdown
+# [PROGRAM-NAME] - Description
+
+## Original RPG Information
+- **Original Source**: [Path/Library/Program]
+- **RPG Version**: [RPG III/RPG IV/ILE RPG]
+- **Compile Date**: [Date]
+- **Dependencies**: [Called programs, files, procedures]
+
+## Migration Information
+- **Migration Date**: [Date]
+- **Target Platform**: [Java/Python/C#/etc.]
+- **Migrated By**: [Name/Team]
+- **Verification Status**: [Unit Tested/Integration Tested/Production Ready]
+
+## Program Overview
+- **Purpose**: [What the program does]
+- **Trigger**: [Batch job/Online/API/Event]
+- **Frequency**: [Daily/Real-time/On-demand]
+- **Input**: [Files, parameters, databases]
+- **Output**: [Files, reports, databases, messages]
+
+## Data Structures
+[All structures with field definitions and RPG equivalents]
+
+## Core Business Logic
+[Key procedures/functions with pseudocode]
+
+## Translation Notes
+[Special cases, assumptions, deviations from original]
+
+## Testing Notes
+[Test cases, edge cases, known issues]
+
+## Performance Benchmarks
+[RPG vs. migrated performance comparison if available]
+```
+
+**Reference**: IBM RPG IV Reference, ILE RPG Programmer's Guide

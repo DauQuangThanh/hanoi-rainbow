@@ -322,7 +322,6 @@ Always include language identifier in code blocks.
 ```javascript
 const result = await fetchData();
 console.log(result);
-```
 ````
 
 **❌ Without Language:**
@@ -331,7 +330,6 @@ console.log(result);
 ```
 const result = await fetchData();
 console.log(result);
-```
 ````
 
 ### Use Inline Code for Keywords

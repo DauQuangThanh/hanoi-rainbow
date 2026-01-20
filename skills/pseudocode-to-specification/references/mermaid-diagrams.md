@@ -70,7 +70,6 @@ sequenceDiagram
     System->>ExternalAPI: Request
     ExternalAPI-->>System: Response
     System-->>Actor: Final Response
-```
 ````
 
 **Key Elements:**
@@ -139,7 +138,6 @@ flowchart TD
     Cond1 -->|No| Action2
     Action1 --> End
     Action2 --> End
-```
 ````
 
 **Key Elements:**
@@ -533,7 +531,6 @@ sequenceDiagram
     API->>Database: query()
     Database-->>API: results
     API-->>Client: response
-```
 ````
 
 **Flowcharts:**
@@ -550,7 +547,6 @@ flowchart TD
     Process --> Decision
     Decision -->|Yes| End
     Decision -->|No| Process
-```
 ````
 
 **State Diagrams:**
@@ -561,7 +557,6 @@ stateDiagram-v2
     [*] --> State1
     State1 --> State2: transition
     State2 --> [*]
-```
 ````
 
 **Class Diagrams:**
@@ -575,7 +570,6 @@ classDiagram
     }
     
     ClassA "1" --> "*" ClassB
-```
 ````
 
 ## Integration with Specifications

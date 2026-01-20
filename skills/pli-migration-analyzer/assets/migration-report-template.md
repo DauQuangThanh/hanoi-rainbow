@@ -27,12 +27,12 @@
 
 ### Program Structure
 
-#### Divisions
+#### Main Components
 
-- IDENTIFICATION DIVISION: Line {{ID_DIV_LINE}}
-- ENVIRONMENT DIVISION: Line {{ENV_DIV_LINE}}
-- DATA DIVISION: Line {{DATA_DIV_LINE}}
-- PROCEDURE DIVISION: Line {{PROC_DIV_LINE}}
+- Entry Point: PROCEDURE OPTIONS(MAIN) at Line {{MAIN_PROC_LINE}}
+- Total Procedures: {{PROCEDURE_COUNT}}
+- Total Declarations: {{DECLARATION_COUNT}}
+- File Definitions: {{FILE_DEF_COUNT}}
 
 #### Key Data Structures
 
@@ -40,11 +40,11 @@
 | ----------- | ------ |-------|-------------|
 {{DATA_STRUCTURES_TABLE}}
 
-#### Copybooks Used
+#### Include Files Used
 
-| Copybook | Purpose | Lines |
-| ---------- | --------- |-------|
-{{COPYBOOKS_TABLE}}
+| Include File | Purpose | Lines |
+| -------------- | --------- |-------|
+{{INCLUDE_FILES_TABLE}}
 
 ### Business Logic Summary
 
@@ -96,7 +96,7 @@
 
 #### Class Design
 
-| Java Class | Purpose | COBOL Equivalent |
+| Java Class | Purpose | PL/I Equivalent |
 | ------------ | --------- |------------------|
 {{CLASS_DESIGN_TABLE}}
 
@@ -121,7 +121,7 @@
 ### Metrics
 
 - **Cyclomatic Complexity**: {{CYCLOMATIC_COMPLEXITY}}
-- **Number of Paragraphs**: {{PARAGRAPH_COUNT}}
+- **Number of Procedures**: {{PROCEDURE_COUNT}}
 - **External Dependencies**: {{DEPENDENCY_COUNT}}
 - **File Operations**: {{FILE_OP_COUNT}}
 - **Database Operations**: {{DB_OP_COUNT}}
@@ -239,7 +239,7 @@
 ### Resource Requirements
 
 - **Java Developers**: {{JAVA_DEV_COUNT}}
-- **COBOL Analysts**: {{COBOL_ANALYST_COUNT}}
+- **PL/I Analysts**: {{PLI_ANALYST_COUNT}}
 - **QA Engineers**: {{QA_COUNT}}
 - **DevOps**: {{DEVOPS_COUNT}}
 
@@ -257,11 +257,11 @@
 
 - [ ] All business logic correctly migrated
 - [ ] 100% test coverage for critical paths
-- [ ] Parallel run matches COBOL output (99.9%+)
+- [ ] Parallel run matches PL/I output (99.9%+)
 
 ### Non-Functional
 
-- [ ] Performance meets or exceeds COBOL
+- [ ] Performance meets or exceeds PL/I
 - [ ] Response time < {{RESPONSE_TIME_TARGET}}ms
 - [ ] Throughput >= {{THROUGHPUT_TARGET}} TPS
 
@@ -275,9 +275,9 @@
 
 ## 12. Appendices
 
-### A. COBOL Source Reference
+### A. PL/I Source Reference
 
-{{COBOL_SOURCE_EXCERPTS}}
+{{PLI_SOURCE_EXCERPTS}}
 
 ### B. Generated Java Code Samples
 
@@ -289,11 +289,11 @@
 
 ### D. References
 
-- COBOL Program: `{{COBOL_FILE_PATH}}`
+- PL/I Program: `{{PLI_FILE_PATH}}`
 - Design Document: `{{DESIGN_DOC_PATH}}`
 - Test Data: `{{TEST_DATA_PATH}}`
 
 ---
 
 **Report Generated**: {{REPORT_DATE}}  
-**Tool**: COBOL Migration Analyzer Agent Skill v1.0.0
+**Tool**: PL/I Migration Analyzer Agent Skill v1.0.0

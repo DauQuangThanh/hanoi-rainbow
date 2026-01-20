@@ -91,7 +91,6 @@ result = ROUND(calculation, 2)  // Use HALF_UP rounding
 
 ## Mermaid Flowchart Template
 
-````
 ```mermaid
 flowchart TD
     Start([Start])
@@ -104,7 +103,6 @@ flowchart TD
     Decision -->|Yes| End
     Decision -->|No| Process
 ```
-````
 
 ## Document Structure Template
 

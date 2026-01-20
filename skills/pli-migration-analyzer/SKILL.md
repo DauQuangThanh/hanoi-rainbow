@@ -1,6 +1,9 @@
 ---
 name: pli-migration-analyzer
 description: Analyzes legacy PL/I (Programming Language One) programs to assist with migration to modern Java applications. Extracts business logic, data structures, procedure definitions, and file operations from PL/I code. Generates migration reports and creates Java implementation strategies. Use when working with mainframe migration, PL/I analysis, legacy system modernization, or when users mention PL/I to Java conversion, analyzing .pli/.PLI/.pl1 files, working with PL/I procedures, or planning Java service implementations from PL/I programs.
+metadata:
+  version: "1.0"
+  category: legacy-migration
 ---
 
 # PL/I Migration Analyzer
@@ -9,7 +12,7 @@ Analyzes legacy PL/I programs and generates Java migration strategies. Extracts 
 
 ## Workflow
 
-## 1. Discover PL/I Programs
+### 1. Discover PL/I Programs
 
 Find PL/I source files in the workspace:
 

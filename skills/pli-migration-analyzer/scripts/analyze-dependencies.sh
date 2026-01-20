@@ -19,79 +19,80 @@ cat > "$OUTPUT_FILE" << 'EOF'
 {
   "programs": [],
   "dependencies": [],
-  "copybooks": [],
+  "include_files": [],
   "files": []
 }
 EOF
 
-# Function to extract program name from COBOL file
+# Function to extract program name from PL/I file
 extract_program_name() {
     local file="$1"
-    grep -i "PROGRAM-ID" "$file" | head -1 | sed -E 's/.*PROGRAM-ID[. ]+([A-Za-z0-9-]+).*/\1/' || basename "$file" .cbl
+    # PL/I programs use filename as program name
+    basename "$file" | sed -E 's/\.(pli|PLI|pl1)$//'
 }
 
 # Function to extract CALL statements
 extract_calls() {
     local file="$1"
-    grep -i "CALL" "$file" | grep -oE "'[A-Z0-9-]+'" | tr -d "'" || true
+    grep -iE "CALL +[A-Za-z0-9_]+" "$file" | grep -oE "CALL +[A-Za-z0-9_]+" | awk '{print $2}' || true
 }
 
-# Function to extract COPY statements
+# Function to extract %INCLUDE statements
 extract_copies() {
     local file="$1"
-    grep -i "COPY" "$file" | grep -oE 'COPY +[A-Z0-9-]+' | awk '{print $2}' | tr -d '.' || true
+    grep -iE "%INCLUDE" "$file" | grep -oE "%INCLUDE +[A-Za-z0-9_/.]+" | awk '{print $2}' | tr -d "';" || true
 }
 
-# Function to extract SELECT/ASSIGN file names
+# Function to extract file names from OPEN/CLOSE statements
 extract_files() {
     local file="$1"
-    grep -i "SELECT" "$file" | grep -oE 'SELECT +[A-Z0-9-]+' | awk '{print $2}' || true
+    grep -iE "(OPEN|CLOSE) +FILE\([A-Za-z0-9_]+\)" "$file" | grep -oE "FILE\([A-Za-z0-9_]+\)" | tr -d 'FILE()' || true
 }
 
-# Find all COBOL files
-echo "Scanning for COBOL files..."
-COBOL_FILES=$(find "$SOURCE_DIR" -type f \( -name "*.cbl" -o -name "*.CBL" -o -name "*.cob" -o -name "*.COB" \) 2>/dev/null || true)
+# Find all PL/I files
+echo "Scanning for PL/I files..."
+PLI_FILES=$(find "$SOURCE_DIR" -type f \( -name "*.pli" -o -name "*.PLI" -o -name "*.pl1" \) 2>/dev/null || true)
 
-if [ -z "$COBOL_FILES" ]; then
-    echo "No COBOL files found in $SOURCE_DIR"
+if [ -z "$PLI_FILES" ]; then
+    echo "No PL/I files found in $SOURCE_DIR"
     exit 1
 fi
 
 # Create temporary files for collecting data
 PROGRAMS_TEMP=$(mktemp)
 DEPS_TEMP=$(mktemp)
-COPYBOOKS_TEMP=$(mktemp)
+INCLUDES_TEMP=$(mktemp)
 FILES_TEMP=$(mktemp)
 
 # Cleanup on exit
-trap "rm -f $PROGRAMS_TEMP $DEPS_TEMP $COPYBOOKS_TEMP $FILES_TEMP" EXIT
+trap "rm -f $PROGRAMS_TEMP $DEPS_TEMP $INCLUDES_TEMP $FILES_TEMP" EXIT
 
-# Process each COBOL file
-echo "$COBOL_FILES" | while read -r cobol_file; do
-    [ -z "$cobol_file" ] && continue
+# Process each PL/I file
+echo "$PLI_FILES" | while read -r pli_file; do
+    [ -z "$pli_file" ] && continue
     
-    echo "Processing: $cobol_file"
+    echo "Processing: $pli_file"
     
-    program_name=$(extract_program_name "$cobol_file")
+    program_name=$(extract_program_name "$pli_file")
     
     # Add program to list
-    echo "{\"name\": \"$program_name\", \"file\": \"$cobol_file\"}" >> "$PROGRAMS_TEMP"
+    echo "{\"name\": \"$program_name\", \"file\": \"$pli_file\"}" >> "$PROGRAMS_TEMP"
     
     # Extract calls
-    extract_calls "$cobol_file" | while read -r called_program; do
+    extract_calls "$pli_file" | while read -r called_program; do
         [ -z "$called_program" ] && continue
         echo "{\"from\": \"$program_name\", \"to\": \"$called_program\", \"type\": \"call\"}" >> "$DEPS_TEMP"
     done
     
-    # Extract copybooks
-    extract_copies "$cobol_file" | while read -r copybook; do
-        [ -z "$copybook" ] && continue
-        echo "{\"name\": \"$copybook\", \"used_by\": \"$program_name\"}" >> "$COPYBOOKS_TEMP"
-        echo "{\"from\": \"$program_name\", \"to\": \"$copybook\", \"type\": \"copy\"}" >> "$DEPS_TEMP"
+    # Extract %INCLUDE files
+    extract_copies "$pli_file" | while read -r include_file; do
+        [ -z "$include_file" ] && continue
+        echo "{\"name\": \"$include_file\", \"used_by\": \"$program_name\"}" >> "$INCLUDES_TEMP"
+        echo "{\"from\": \"$program_name\", \"to\": \"$include_file\", \"type\": \"include\"}" >> "$DEPS_TEMP"
     done
     
     # Extract file references
-    extract_files "$cobol_file" | while read -r file_ref; do
+    extract_files "$pli_file" | while read -r file_ref; do
         [ -z "$file_ref" ] && continue
         echo "{\"name\": \"$file_ref\", \"used_by\": \"$program_name\"}" >> "$FILES_TEMP"
         echo "{\"from\": \"$program_name\", \"to\": \"$file_ref\", \"type\": \"file\"}" >> "$DEPS_TEMP"
@@ -104,23 +105,23 @@ if command -v jq &> /dev/null; then
     
     PROGRAMS_JSON=$(cat "$PROGRAMS_TEMP" | jq -s '.' 2>/dev/null || echo "[]")
     DEPS_JSON=$(cat "$DEPS_TEMP" | jq -s '.' 2>/dev/null || echo "[]")
-    COPYBOOKS_JSON=$(cat "$COPYBOOKS_TEMP" | jq -s 'unique' 2>/dev/null || echo "[]")
+    INCLUDES_JSON=$(cat "$INCLUDES_TEMP" | jq -s 'unique' 2>/dev/null || echo "[]")
     FILES_JSON=$(cat "$FILES_TEMP" | jq -s 'unique' 2>/dev/null || echo "[]")
     
     jq -n \
         --argjson programs "$PROGRAMS_JSON" \
         --argjson deps "$DEPS_JSON" \
-        --argjson copybooks "$COPYBOOKS_JSON" \
+        --argjson includes "$INCLUDES_JSON" \
         --argjson files "$FILES_JSON" \
         '{
             programs: $programs,
             dependencies: $deps,
-            copybooks: $copybooks,
+            include_files: $includes,
             files: $files,
             summary: {
                 total_programs: ($programs | length),
                 total_dependencies: ($deps | length),
-                total_copybooks: ($copybooks | length),
+                total_includes: ($includes | length),
                 total_files: ($files | length)
             }
         }' > "$OUTPUT_FILE"
@@ -134,8 +135,8 @@ else
     echo "  \"dependencies\": [" >> "$OUTPUT_FILE"
     cat "$DEPS_TEMP" | sed '$ ! s/$/,/' >> "$OUTPUT_FILE"
     echo "  ]," >> "$OUTPUT_FILE"
-    echo "  \"copybooks\": [" >> "$OUTPUT_FILE"
-    cat "$COPYBOOKS_TEMP" | sed '$ ! s/$/,/' >> "$OUTPUT_FILE"
+    echo "  \"include_files\": [" >> "$OUTPUT_FILE"
+    cat "$INCLUDES_TEMP" | sed '$ ! s/$/,/' >> "$OUTPUT_FILE"
     echo "  ]," >> "$OUTPUT_FILE"
     echo "  \"files\": [" >> "$OUTPUT_FILE"
     cat "$FILES_TEMP" | sed '$ ! s/$/,/' >> "$OUTPUT_FILE"
@@ -149,5 +150,5 @@ echo ""
 echo "Summary:"
 echo "  Programs: $(grep -c "\"name\"" "$PROGRAMS_TEMP" || echo 0)"
 echo "  Dependencies: $(wc -l < "$DEPS_TEMP" | xargs)"
-echo "  Copybooks: $(sort -u "$COPYBOOKS_TEMP" | wc -l | xargs)"
+echo "  Include files: $(sort -u "$INCLUDES_TEMP" | wc -l | xargs)"
 echo "  Files: $(sort -u "$FILES_TEMP" | wc -l | xargs)"

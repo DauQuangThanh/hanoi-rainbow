@@ -20,28 +20,20 @@ Write-Host "Output will be written to: $OutputFile"
 $initialJson = @{
     programs = @()
     dependencies = @()
-    copybooks = @()
+    copy_members = @()
     files = @()
 } | ConvertTo-Json -Depth 3
 
 Set-Content -Path $OutputFile -Value $initialJson -Encoding UTF8
 
-# Function to extract program name from COBOL file
+# Function to extract program name from RPG file
 function Get-ProgramName {
     param([string]$FilePath)
-    
-    $content = Get-Content $FilePath -ErrorAction SilentlyContinue
-    if ($content) {
-        foreach ($line in $content) {
-            if ($line -match 'PROGRAM-ID[\.\s]+([A-Za-z0-9-]+)') {
-                return $matches[1]
-            }
-        }
-    }
+    # Use filename as program name for RPG
     return (Get-Item $FilePath).BaseName
 }
 
-# Function to extract CALL statements
+# Function to extract CALLB/CALLP statements
 function Get-CallStatements {
     param([string]$FilePath)
     
@@ -49,15 +41,15 @@ function Get-CallStatements {
     $content = Get-Content $FilePath -ErrorAction SilentlyContinue
     if ($content) {
         foreach ($line in $content) {
-            if ($line -match 'CALL.*[''"]([A-Z0-9-]+)[''"]') {
-                $calls += $matches[1]
+            if ($line -match '\s+(CALLB|CALLP)\s+''?([A-Za-z0-9_-]+)''?') {
+                $calls += $matches[2]
             }
         }
     }
     return $calls
 }
 
-# Function to extract COPY statements
+# Function to extract /COPY and /INCLUDE statements
 function Get-CopyStatements {
     param([string]$FilePath)
     
@@ -65,15 +57,15 @@ function Get-CopyStatements {
     $content = Get-Content $FilePath -ErrorAction SilentlyContinue
     if ($content) {
         foreach ($line in $content) {
-            if ($line -match 'COPY\s+([A-Z0-9-]+)') {
-                $copies += $matches[1] -replace '\.$', ''
+            if ($line -match '^\s*/(COPY|INCLUDE)\s+([A-Za-z0-9/_-]+)') {
+                $copies += $matches[2]
             }
         }
     }
     return $copies
 }
 
-# Function to extract SELECT/ASSIGN file names
+# Function to extract F-spec file names
 function Get-FileReferences {
     param([string]$FilePath)
     
@@ -81,7 +73,7 @@ function Get-FileReferences {
     $content = Get-Content $FilePath -ErrorAction SilentlyContinue
     if ($content) {
         foreach ($line in $content) {
-            if ($line -match 'SELECT\s+([A-Z0-9-]+)') {
+            if ($line -match '^\s*F([A-Z0-9]+)') {
                 $fileRefs += $matches[1]
             }
         }
@@ -89,37 +81,37 @@ function Get-FileReferences {
     return $fileRefs
 }
 
-# Find all COBOL files
-Write-Host "Scanning for COBOL files..."
-$cobolFiles = Get-ChildItem -Path $SourceDir -Recurse -Include "*.cbl","*.CBL","*.cob","*.COB" -File -ErrorAction SilentlyContinue
+# Find all RPG files
+Write-Host "Scanning for RPG source files..."
+$rpgFiles = Get-ChildItem -Path $SourceDir -Recurse -Include "*.rpg","*.RPG","*.rpgle","*.RPGLE","*.sqlrpgle","*.SQLRPGLE" -File -ErrorAction SilentlyContinue
 
-if (-not $cobolFiles -or $cobolFiles.Count -eq 0) {
-    Write-Host "No COBOL files found in $SourceDir"
+if (-not $rpgFiles -or $rpgFiles.Count -eq 0) {
+    Write-Host "No RPG files found in $SourceDir"
     exit 1
 }
 
-Write-Host "Found $($cobolFiles.Count) COBOL files"
+Write-Host "Found $($rpgFiles.Count) RPG files"
 
 # Collections for data
 $programs = @()
 $dependencies = @()
-$copybooks = @()
+$copyMembers = @()
 $files = @()
 
-# Process each COBOL file
-foreach ($cobolFile in $cobolFiles) {
-    Write-Host "Processing: $($cobolFile.FullName)"
+# Process each RPG file
+foreach ($rpgFile in $rpgFiles) {
+    Write-Host "Processing: $($rpgFile.FullName)"
     
-    $programName = Get-ProgramName -FilePath $cobolFile.FullName
+    $programName = Get-ProgramName -FilePath $rpgFile.FullName
     
     # Add program to list
     $programs += @{
         name = $programName
-        file = $cobolFile.FullName
+        file = $rpgFile.FullName
     }
     
-    # Extract calls
-    $calls = Get-CallStatements -FilePath $cobolFile.FullName
+    # Extract calls (CALLB/CALLP)
+    $calls = Get-CallStatements -FilePath $rpgFile.FullName
     foreach ($calledProgram in $calls) {
         if ($calledProgram) {
             $dependencies += @{
@@ -130,24 +122,24 @@ foreach ($cobolFile in $cobolFiles) {
         }
     }
     
-    # Extract copybooks
-    $copies = Get-CopyStatements -FilePath $cobolFile.FullName
-    foreach ($copybook in $copies) {
-        if ($copybook) {
-            $copybooks += @{
-                name = $copybook
+    # Extract /COPY and /INCLUDE members
+    $copies = Get-CopyStatements -FilePath $rpgFile.FullName
+    foreach ($copyMember in $copies) {
+        if ($copyMember) {
+            $copyMembers += @{
+                name = $copyMember
                 used_by = $programName
             }
             $dependencies += @{
                 from = $programName
-                to = $copybook
+                to = $copyMember
                 type = "copy"
             }
         }
     }
     
-    # Extract file references
-    $fileRefs = Get-FileReferences -FilePath $cobolFile.FullName
+    # Extract F-spec file references
+    $fileRefs = Get-FileReferences -FilePath $rpgFile.FullName
     foreach ($fileRef in $fileRefs) {
         if ($fileRef) {
             $files += @{
@@ -164,18 +156,18 @@ foreach ($cobolFile in $cobolFiles) {
 }
 
 # Build final JSON with summary
-$uniqueCopybooks = $copybooks | Select-Object -Property name -Unique
+$uniqueCopyMembers = $copyMembers | Select-Object -Property name -Unique
 $uniqueFiles = $files | Select-Object -Property name -Unique
 
 $result = @{
     programs = $programs
     dependencies = $dependencies
-    copybooks = $uniqueCopybooks
+    copy_members = $uniqueCopyMembers
     files = $uniqueFiles
     summary = @{
         total_programs = $programs.Count
         total_dependencies = $dependencies.Count
-        total_copybooks = $uniqueCopybooks.Count
+        total_copy_members = $uniqueCopyMembers.Count
         total_files = $uniqueFiles.Count
     }
 }
@@ -189,5 +181,5 @@ Write-Host ""
 Write-Host "Summary:"
 Write-Host "  Programs: $($programs.Count)"
 Write-Host "  Dependencies: $($dependencies.Count)"
-Write-Host "  Copybooks: $($uniqueCopybooks.Count)"
+Write-Host "  /COPY Members: $($uniqueCopyMembers.Count)"
 Write-Host "  Files: $($uniqueFiles.Count)"
