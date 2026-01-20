@@ -161,11 +161,19 @@ rainbow check
 uv tool install rainbow-cli --force --from git+https://github.com/dauquangthanh/hanoi-rainbow.git
 ```
 
+```bash
+uv tool install rainbow-cli --force --native-tls --from git+https://github.com/dauquangthanh/hanoi-rainbow.git
+```
+
 <details>
 <summary><strong>Alternative: Run without installing</strong></summary>
 
 ```bash
 uvx --from git+https://github.com/dauquangthanh/hanoi-rainbow.git rainbow init <PROJECT_NAME>
+```
+
+```bash
+uvx --native-tls --from git+https://github.com/dauquangthanh/hanoi-rainbow.git rainbow init <PROJECT_NAME>
 ```
 
 **Why install?**
