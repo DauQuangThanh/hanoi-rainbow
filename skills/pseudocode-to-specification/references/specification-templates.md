@@ -4,8 +4,6 @@ This document provides industry-standard templates for various specification doc
 
 ## Software Requirements Specification (SRS) Template
 
-Based on IEEE 830-1998 Standard
-
 ```markdown
 # Software Requirements Specification
 # [System Name]
@@ -42,12 +40,6 @@ Status: [Draft/Review/Approved]
 ### 2.3 User Characteristics
 [User education, experience, technical expertise]
 
-### 2.4 Constraints
-[Regulatory, hardware limitations, interfaces, etc.]
-
-### 2.5 Assumptions and Dependencies
-[Factors that affect requirements]
-
 ## 3. Specific Requirements
 
 ### 3.1 Functional Requirements
@@ -72,30 +64,7 @@ Status: [Draft/Review/Approved]
 #### 3.2.4 Communications Interfaces
 [Network protocols, data formats]
 
-### 3.3 Performance Requirements
-[Response time, throughput, capacity]
-
-### 3.4 Design Constraints
-[Standards compliance, hardware limitations]
-
-### 3.5 Software System Attributes
-
-#### 3.5.1 Reliability
-[MTBF, MTTR, error handling]
-
-#### 3.5.2 Availability
-[Uptime requirements]
-
-#### 3.5.3 Security
-[Authentication, authorization, encryption]
-
-#### 3.5.4 Maintainability
-[Modularity, testability]
-
-#### 3.5.5 Portability
-[Platform independence]
-
-### 3.6 Other Requirements
+### 3.3 Other Requirements
 [Database, operations, site adaptation]
 
 ## 4. Appendices
@@ -172,32 +141,23 @@ Acceptance Criteria:
 - Error 1: [Condition and message]
 - Error 2: [Condition and message]
 
-## 6. Non-Functional Requirements
-- Performance: [Metrics]
-- Security: [Requirements]
-- Usability: [Standards]
-- Reliability: [Targets]
-
-## 7. User Interface Specifications
+## 6. User Interface Specifications
 [Wireframes, mockups, navigation flows]
 
-## 8. Data Model
+## 7. Data Model
 [Mermaid entity diagrams, data dictionary]
 
-## 9. API Specifications
+## 8. API Specifications
 [Endpoints, request/response formats]
 
-## 10. Integration Points
+## 9. Integration Points
 [External systems, dependencies]
 
-## 11. Test Strategy
-[Test approach, coverage, acceptance criteria]
-
-## 12. Open Issues and Risks
+## 10. Open Issues and Risks
 - [Issue 1] - [Impact] - [Mitigation]
 - [Issue 2] - [Impact] - [Mitigation]
 
-## 13. Appendices
+## 11. Appendices
 [Additional Mermaid diagrams, references]
 ```
 
@@ -407,72 +367,6 @@ const response = await fetch('https://api.example.com/v1/resource/123', {
 
 ```
 
-## Test Case Specification Template
-
-```markdown
-# Test Specification
-
-## Test Case: TC-[ID]
-
-### Metadata
-- **Test ID:** TC-[ID]
-- **Feature:** [Feature name]
-- **Priority:** [High/Medium/Low]
-- **Type:** [Functional/Integration/Performance/Security]
-- **Author:** [Name]
-- **Date:** [YYYY-MM-DD]
-
-### Objective
-[What this test verifies]
-
-### Preconditions
-- [Required state or setup]
-- [Test data needed]
-- [Environment configuration]
-
-### Test Data
-```json
-{
-  "input": {
-    "field1": "value1",
-    "field2": 123
-  }
-}
-```
-
-### Test Steps
-
-| Step | Action | Expected Result |
-| ------ | -------- |----------------|
-| 1 | [Action to perform] | [What should happen] |
-| 2 | [Next action] | [Expected outcome] |
-| 3 | [Verification step] | [Expected state] |
-
-### Expected Results
-
-- Output: [Expected output data/response]
-- State Changes: [Database or system state changes]
-- Side Effects: [Logs, events, notifications]
-
-### Actual Results
-
-[To be filled during test execution]
-
-### Pass/Fail Criteria
-
-- Pass if: [Conditions for success]
-- Fail if: [Conditions for failure]
-
-### Postconditions
-
-[System state after test, cleanup needed]
-
-### Notes
-
-[Additional context, edge cases, known issues]
-
-```
-
 ## Architecture Decision Record (ADR) Template
 
 ```markdown
@@ -541,25 +435,29 @@ Analysis of the algorithm/pattern chosen]
 
 ## Usage Guidelines
 
+**Focus on Functional Requirements:**
+
+These templates emphasize functional requirements - what the system does, how it processes data, and how users interact with it. Non-functional requirements (performance, security, reliability) are intentionally excluded to maintain focus on business logic and behavior derived from pseudocode analysis.
+
 **Choose Template Based on Context:**
 
-- **SRS** - Complete system specification, formal documentation
-- **Functional Spec** - Feature-level detail, agile-friendly
-- **API Spec** - Service interfaces, integration documentation
-- **Data Model** - Database design, entity relationships
-- **Test Spec** - Quality assurance, acceptance testing
-- **ADR** - Design decisions, architectural choices
+- **SRS** - Complete system specification, formal documentation of functional behavior
+- **Functional Spec** - Feature-level detail, user stories, business rules
+- **API Spec** - Service interfaces, request/response specifications
+- **Data Model** - Entity definitions, relationships, business rules
+- **ADR** - Design decisions, algorithm choices from pseudocode
 
 **Adapt Templates:**
 
 - Remove sections not relevant to pseudocode analysis
-- Add sections for domain-specific requirements
+- Add sections for domain-specific functional requirements
+- Focus on "what" the system does, not "how well" it performs
 - Adjust detail level based on audience
 - Maintain consistency within project
 
 **Traceability:**
 
 - Link specifications back to pseudocode sections
-- Use consistent identifiers (FR-001, TC-001, ADR-001)
+- Use consistent identifiers (FR-001, ADR-001, etc.)
 - Reference line numbers or code blocks
 - Maintain requirements traceability matrix
