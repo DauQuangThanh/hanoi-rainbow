@@ -1,10 +1,12 @@
 ---
 description: Execute the architecture design workflow to create comprehensive system architecture documentation for the entire product.
 handoffs: 
-  - label: Create Feature Plan
+  - label: Create Feature Design
     agent: rainbow.design
-    prompt: Create implementation plan for a specific feature
-    send: true
+    prompt: Create a detailed design for a specific feature
+  - label: Create Development Standards
+    agent: rainbow.standardize
+    prompt: Create coding standards and conventions documentation for the entire product
   - label: Review Ground-rules
     agent: rainbow.regulate
     prompt: Review project ground rules and constraints

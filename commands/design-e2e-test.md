@@ -1,13 +1,12 @@
 ---
 description: Execute the E2E test design workflow to create comprehensive end-to-end test specifications for the entire product.
 handoffs: 
-  - label: Create Standards
-    agent: rainbow.standardize
-    prompt: Create coding standards and conventions for the product
-    send: true
-  - label: Review Architecture
-    agent: rainbow.architect
-    prompt: Review product architecture design
+  - label: Implement Project
+    agent: rainbow.implement
+    prompt: Start the implementation in phases
+  - label: Execute E2E Tests
+    agent: rainbow.perform-e2e-test
+    prompt: Execute the E2E test suite and verify results
 scripts:
   sh: scripts/bash/setup-design-e2e-test.sh --json
   ps: scripts/powershell/setup-design-e2e-test.ps1 -Json

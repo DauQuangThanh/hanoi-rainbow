@@ -1,9 +1,9 @@
 ---
 description: Execute the standardization workflow to create comprehensive coding standards and conventions documentation for the entire product.
 handoffs: 
-  - label: Create Feature Plan
+  - label: Create Feature Design
     agent: rainbow.design
-    prompt: Create implementation plan for a specific feature following the established standards
+    prompt: Create a detailed design for ... following the established standards
     send: true
   - label: Review Architecture
     agent: rainbow.architect

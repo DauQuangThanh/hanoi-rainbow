@@ -1,9 +1,12 @@
 ---
 description: Identify underspecified areas in the current feature spec by asking up to 5 highly targeted clarification questions and encoding answers back into the spec.
 handoffs: 
-  - label: Build Technical Plan
+  - label: Update Architectural Design
+    agent: rainbow.architect
+    prompt: Update the architectural design for the spec. I am building with...
+  - label: Update Detailed Design
     agent: rainbow.design
-    prompt: Create a plan for the spec. I am building with...
+    prompt: Update the detailed design for the spec. I am building with...
 scripts:
    sh: scripts/bash/check-prerequisites.sh --json --paths-only
    ps: scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly

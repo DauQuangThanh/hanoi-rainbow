@@ -3,11 +3,13 @@ description: Execute the implementation planning workflow using the plan templat
 handoffs: 
   - label: Create Tasks
     agent: rainbow.taskify
-    prompt: Break the plan into tasks
-    send: true
+    prompt: Break the design into tasks which will be implemented by AI agents
   - label: Create Checklist
     agent: rainbow.checklist
     prompt: Create a checklist for the following domain...
+  - label: Design E2E Test
+    agent: rainbow.design-e2e-test
+    prompt: Create an E2E test scripts for the following domain...
 scripts:
   sh: scripts/bash/setup-design.sh --json
   ps: scripts/powershell/setup-design.ps1 -Json

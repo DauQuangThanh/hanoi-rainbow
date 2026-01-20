@@ -1,13 +1,16 @@
 ---
 description: Create or update the feature specification from a natural language feature description.
 handoffs: 
-  - label: Build Technical Plan
-    agent: rainbow.design
-    prompt: Create a plan for the spec. I am building with...
   - label: Clarify Spec Requirements
     agent: rainbow.clarify
     prompt: Clarify specification requirements
     send: true
+  - label: Build Architectural Design
+    agent: rainbow.architect
+    prompt: Create an architectural design for the entire product. I am building ...
+  - label: Build Detailed Design
+    agent: rainbow.design
+    prompt: Create a detailed design for the spec. I am building ...
 scripts:
   sh: scripts/bash/create-new-feature.sh --json "{ARGS}"
   ps: scripts/powershell/create-new-feature.ps1 -Json "{ARGS}"

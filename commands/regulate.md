@@ -3,7 +3,7 @@ description: Create or update the project ground-rules from interactive or provi
 handoffs: 
   - label: Build Specification
     agent: rainbow.specify
-    prompt: Implement the feature specification based on the updated ground-rules. I want to build...
+    prompt: Create the feature specification based on the updated ground-rules. I want to build...
 ---
 
 ## User Input

@@ -1,12 +1,5 @@
 ---
 description: Execute end-to-end tests based on the E2E test plan and generate detailed test result reports.
-handoffs: 
-  - label: Review Test Plan
-    agent: rainbow.design-e2e-test
-    prompt: Review or update the E2E test plan
-  - label: Review Architecture
-    agent: rainbow.architect
-    prompt: Review product architecture design
 scripts:
   sh: scripts/bash/setup-perform-e2e-test.sh --json
   ps: scripts/powershell/setup-perform-e2e-test.ps1 -Json
