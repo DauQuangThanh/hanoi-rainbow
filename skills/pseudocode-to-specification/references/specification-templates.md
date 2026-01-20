@@ -1,6 +1,6 @@
 # Specification Templates
 
-This document provides industry-standard templates for various specification documents generated from pseudocode analysis.
+This document provides templates for functional specification documents generated from pseudocode analysis. These templates focus exclusively on **what** the system does (functional requirements) and exclude design, implementation, and testing details.
 
 ## Software Requirements Specification (SRS) Template
 
@@ -38,7 +38,7 @@ Status: [Draft/Review/Approved]
 [Summary of major functions]
 
 ### 2.3 User Characteristics
-[User education, experience, technical expertise]
+[User roles, business knowledge, domain expertise]
 
 ## 3. Specific Requirements
 
@@ -52,28 +52,25 @@ Status: [Draft/Review/Approved]
 
 ### 3.2 External Interface Requirements
 
-#### 3.2.1 User Interfaces
-[GUI, CLI, API interfaces]
+#### 3.2.1 User Interactions
+[Types of user interactions, modes of access]
 
-#### 3.2.2 Hardware Interfaces
-[Physical connections]
+#### 3.2.2 System Interfaces
+[Logical connections to other systems, data exchanged]
 
-#### 3.2.3 Software Interfaces
-[Connections to other systems]
+#### 3.2.3 Data Formats
+[Input/output data structures and constraints]
 
-#### 3.2.4 Communications Interfaces
-[Network protocols, data formats]
-
-### 3.3 Other Requirements
-[Database, operations, site adaptation]
+### 3.3 Business Rules and Constraints
+[Complete business logic, validation rules, calculations]
 
 ## 4. Appendices
 
 ### Appendix A: Data Dictionary
-[Data element definitions]
+[Business data element definitions and constraints]
 
-### Appendix B: Models
-[Mermaid diagrams and models]
+### Appendix B: Business Rules Matrix
+[Complete listing of conditions, actions, and business logic]
 ```
 
 ## Functional Specification Template
@@ -141,323 +138,200 @@ Acceptance Criteria:
 - Error 1: [Condition and message]
 - Error 2: [Condition and message]
 
-## 6. User Interface Specifications
-[Wireframes, mockups, navigation flows]
+## 6. Business Rules and Constraints
+[Complete business logic, validation rules, calculation formulas]
 
-## 7. Data Model
-[Mermaid entity diagrams, data dictionary]
+## 7. Data Requirements
+[Business entities, relationships, attributes, constraints]
 
-## 8. API Specifications
-[Endpoints, request/response formats]
+## 8. Dependencies and Assumptions
+[External system dependencies at functional level, assumptions made]
 
-## 9. Integration Points
-[External systems, dependencies]
-
-## 10. Open Issues and Risks
+## 9. Open Issues and Risks
 - [Issue 1] - [Impact] - [Mitigation]
 - [Issue 2] - [Impact] - [Mitigation]
 
-## 11. Appendices
-[Additional Mermaid diagrams, references]
+## 10. Appendices
+[Additional business rules, glossary, references]
 ```
 
-## API Specification Template
-
-Based on OpenAPI/Swagger standards
+## Functional Service Requirements Template
 
 ```markdown
-# API Specification
-# [API Name]
+# Functional Service Requirements
+# [Service Name]
 
 ## Overview
+**Purpose:** [What business problem this service solves]
 **Version:** [X.Y.Z]
-**Base URL:** `https://api.example.com/v1`
-**Protocol:** HTTPS only
-**Authentication:** [Method]
+**Scope:** [Business boundaries and responsibilities]
 
-## Authentication
-```http
-Authorization: Bearer {token}
-```
+## Service Functions
 
-## Endpoints
+### [Function Name]
 
-### [Endpoint Name]
+**Business Purpose:** [Why this function exists, business value]
 
-**Purpose:** [What this endpoint does]
+**Functional Description:** [What this function does in business terms]
 
-#### Request
+**Inputs:**
+- Input 1: [Business data required]
+  - Required: [Yes/No]
+  - Constraints: [Business rules and validation]
+  - Format: [Logical format description]
 
-```http
-[METHOD] /resource/{id}
-Host: api.example.com
-Content-Type: application/json
-Authorization: Bearer {token}
-```
+**Processing Logic:**
+1. [Business rule or logic step]
+2. [Calculation or transformation]
+3. [Decision point and branching logic]
 
-**Path Parameters:**
+**Outputs:**
+- Output 1: [Business data produced]
+  - Conditions: [When this output is generated]
+  - Format: [Logical format description]
 
-- `id` (string, required) - [Description]
+**Business Rules:**
+- Rule 1: [Condition] → [Action]
+- Rule 2: [Validation or constraint]
+- Rule 3: [Calculation formula]
 
-**Query Parameters:**
+**Error Conditions:**
+- Error 1: [Business condition that causes error]
+  - Message: [User-facing description]
+  - Recovery: [What user should do]
 
-- `filter` (string, optional) - [Description]
-- `limit` (integer, optional) - [Description, default, range]
+**Preconditions:**
+[What must be true before function can execute]
 
-**Request Body:**
+**Postconditions:**
+[What will be true after successful execution]
 
-```json
-{
-  "field1": "string",
-  "field2": 123,
-  "field3": {
-    "nested": "value"
-  }
-}
-```
+## Service Dependencies
 
-**Field Definitions:**
+### [External Service/System]
+**Purpose:** [Why this dependency exists]
+**Data Exchanged:** [Business data sent/received]
+**Frequency:** [When/how often interaction occurs]
+**Failure Handling:** [Business impact and mitigation]
 
-- `field1` (string, required, max 255) - [Description]
-- `field2` (integer, required, 1-1000) - [Description]
-- `field3` (object, optional) - [Description]
+## Data Definitions
 
-#### Responses
+### [Data Structure Name]
+**Purpose:** [Business meaning and use]
 
-**200 OK - Success**
+**Fields:**
+- field_name: [Business meaning, constraints, validation rules]
 
-```json
-{
-  "status": "success",
-  "data": {
-    "id": "12345",
-    "field": "value"
-  }
-}
-```
-
-**400 Bad Request - Validation Error**
-
-```json
-{
-  "status": "error",
-  "code": "VALIDATION_ERROR",
-  "message": "Invalid input",
-  "errors": [
-    {
-      "field": "field1",
-      "message": "Required field missing"
-    }
-  ]
-}
-```
-
-**401 Unauthorized**
-
-```json
-{
-  "status": "error",
-  "code": "UNAUTHORIZED",
-  "message": "Invalid or expired token"
-}
-```
-
-**500 Internal Server Error**
-
-```json
-{
-  "status": "error",
-  "code": "INTERNAL_ERROR",
-  "message": "An unexpected error occurred"
-}
-```
-
-#### Example Usage
-
-**cURL:**
-
-```bash
-curl -X [METHOD] \
-  https://api.example.com/v1/resource/123 \
-  -H "Authorization: Bearer {token}" \
-  -H "Content-Type: application/json" \
-  -d '{"field1": "value"}'
-```
-
-**JavaScript:**
-
-```javascript
-const response = await fetch('https://api.example.com/v1/resource/123', {
-  method: '[METHOD]',
-  headers: {
-    'Authorization': 'Bearer ' + token,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({field1: 'value'})
-});
-```
-
-#### Rate Limiting
-
-- Limit: [X requests per minute]
-- Header: `X-RateLimit-Remaining`
-
-#### Notes
-
-[Additional context, edge cases, deprecation notices]
+**Business Rules:**
+- [Rule governing this data structure]
 
 ```
 
-## Data Model Specification Template
+## Business Entity Requirements Template
 
 ```markdown
-# Data Model Specification
+# Business Entity Requirements
 
 ## Entity: [EntityName]
 
-### Description
-[Purpose and role of this entity in the system]
+### Business Description
+[What this entity represents in business terms, its purpose and role]
 
-### Attributes
+### Business Attributes
 
-| Attribute | Type | Nullable | Default | Constraints | Description |
-| ----------- | ------ |----------|---------|-------------|-------------|
-| id | UUID | No | auto | Primary Key | Unique identifier |
-| name | String(255) | No | - | Unique | Entity name |
-| status | Enum | No | 'active' | ['active','inactive'] | Current status |
-| created_at | Timestamp | No | NOW() | - | Creation timestamp |
-| updated_at | Timestamp | No | NOW() | - | Last update timestamp |
+| Attribute | Business Meaning | Required | Constraints | Valid Values |
+|-----------|------------------|----------|-------------|-------------|
+| identifier | Unique business identifier | Yes | Must be unique | [Format/pattern] |
+| name | Business name/label | Yes | Max 255 characters | [Any restrictions] |
+| status | Current state in lifecycle | Yes | Single value | active, inactive, pending |
+| category | Business classification | No | From approved list | [Category values] |
 
-### Relationships
+### Business Relationships
 
-**One-to-Many with [OtherEntity]:**
-- Foreign Key: [other_entity_id]
-- Cascade: [Delete/Update behavior]
-- Description: [Relationship meaning]
+**Relationship to [OtherEntity]:**
+- Type: [One-to-one / One-to-many / Many-to-many]
+- Business Meaning: [Why this relationship exists]
+- Cardinality: [Minimum and maximum occurrences]
+- Business Rules: [Rules governing the relationship]
 
-**Many-to-Many with [ThirdEntity]:**
-- Join Table: [entity_third_entity]
-- Description: [Relationship meaning]
+### Business Rules and Constraints
 
-### Indexes
-- Primary: `id` (clustered)
-- Unique: `name`
-- Index: `status, created_at` (for filtering and sorting)
+#### Creation Rules
+- Rule 1: [What must be true to create this entity]
+- Rule 2: [Default values and initialization]
 
-### Constraints
-- `name` must be unique within tenant
-- `status` transition rules: 'active' → 'inactive' allowed, reverse requires approval
-- Soft delete: Set `deleted_at` timestamp instead of physical deletion
+#### Modification Rules
+- Rule 1: [What can/cannot be changed]
+- Rule 2: [Conditions for updates]
+- Rule 3: [State transition rules]
 
-### Business Rules
-- New entities default to 'active' status
-- Cannot delete entity if related [OtherEntity] exists
-- Audit log entry created on every modification
+#### Deletion Rules
+- Rule 1: [When entity can be removed]
+- Rule 2: [Dependencies that prevent deletion]
+- Rule 3: [Cascade behavior in business terms]
 
-### Example Record
-```json
-{
-  "id": "550e8400-e29b-41d4-a716-446655440000",
-  "name": "Example Entity",
-  "status": "active",
-  "created_at": "2024-01-15T10:30:00Z",
-  "updated_at": "2024-01-15T10:30:00Z"
-}
-```
+#### Validation Rules
+- Rule 1: [Format or pattern validation]
+- Rule 2: [Business logic validation]
+- Rule 3: [Cross-field validation]
 
-```
+### Lifecycle States
 
-## Architecture Decision Record (ADR) Template
+**State: [StateName]**
+- Business Meaning: [What this state means]
+- Entry Conditions: [How entity enters this state]
+- Exit Conditions: [How entity leaves this state]
+- Allowed Transitions: [StateName] → [NextState]
 
-```markdown
-# ADR-[Number]: [Decision Title]
+### Business Invariants
+[Conditions that must always be true for this entity]
 
-## Status
-[Proposed | Accepted | Deprecated | Superseded by ADR-XXX]
+### Example Business Scenarios
 
-## Date
-[YYYY-MM-DD]
+**Scenario 1: [Scenario Name]**
+- Context: [Business situation]
+- Entity State: [Attribute values]
+- Business Rules Applied: [Which rules are relevant]
 
-## Context
-[What is the issue we're facing? What factors are at play?
-Include technical, organizational, and business context.
-From pseudocode analysis: what problem does this algorithm solve?]
-
-## Decision
-[What is the change we're proposing/making?
-What approach does the pseudocode implement?]
-
-## Rationale
-[Why this approach? What makes it appropriate?
-Analysis of the algorithm/pattern chosen]
-
-## Consequences
-
-### Positive
-- [Benefit 1]
-- [Benefit 2]
-
-### Negative
-- [Trade-off 1]
-- [Trade-off 2]
-
-### Neutral
-- [Impact 1]
-- [Impact 2]
-
-## Alternatives Considered
-
-### Alternative 1: [Name]
-**Description:** [Brief explanation]
-**Pros:** [Benefits]
-**Cons:** [Drawbacks]
-**Why rejected:** [Reason]
-
-### Alternative 2: [Name]
-**Description:** [Brief explanation]
-**Pros:** [Benefits]
-**Cons:** [Drawbacks]
-**Why rejected:** [Reason]
-
-## Implementation Notes
-[Technical details, dependencies, migration strategy]
-
-## Related Decisions
-- Relates to: [ADR-XXX]
-- Supersedes: [ADR-XXX]
-- Related to: [Issue/Requirement ID]
-
-## References
-- [Document 1]
-- [Research paper]
-- [Code location]
 ```
 
 ## Usage Guidelines
 
-**Focus on Functional Requirements:**
+**Strict Functional Focus:**
 
-These templates emphasize functional requirements - what the system does, how it processes data, and how users interact with it. Non-functional requirements (performance, security, reliability) are intentionally excluded to maintain focus on business logic and behavior derived from pseudocode analysis.
+These templates focus exclusively on **functional requirements** - what the system does, the business logic it implements, and the rules it enforces. They intentionally exclude:
+
+- **Design details** - UI layouts, visual design, architecture patterns
+- **Implementation details** - Technologies, frameworks, database schemas, API protocols
+- **Testing details** - Test cases, test strategies, quality metrics
+- **Non-functional requirements** - Performance, scalability, security implementations
 
 **Choose Template Based on Context:**
 
-- **SRS** - Complete system specification, formal documentation of functional behavior
-- **Functional Spec** - Feature-level detail, user stories, business rules
-- **API Spec** - Service interfaces, request/response specifications
-- **Data Model** - Entity definitions, relationships, business rules
-- **ADR** - Design decisions, algorithm choices from pseudocode
+- **SRS** - Complete system functional specification, formal documentation of business behavior
+- **Functional Spec** - Feature-level functional detail, user stories, business rules
+- **Functional Service Requirements** - Service-level business logic and data flows
+- **Business Entity Requirements** - Business data definitions, rules, and constraints
 
 **Adapt Templates:**
 
-- Remove sections not relevant to pseudocode analysis
-- Add sections for domain-specific functional requirements
-- Focus on "what" the system does, not "how well" it performs
-- Adjust detail level based on audience
-- Maintain consistency within project
+- Remove sections not relevant to business logic from pseudocode
+- Add sections for domain-specific business rules and constraints
+- Focus on "what" the system does, not "how" it's built or "how well" it performs
+- Describe behavior, not implementation
+- Specify business rules, not technical solutions
+
+**What to Include:**
+- Business logic and rules
+- Data validation constraints
+- User interactions and workflows
+- Business calculations and formulas
+- State transitions and conditions
+- Error conditions and business exceptions
 
 **Traceability:**
 
 - Link specifications back to pseudocode sections
-- Use consistent identifiers (FR-001, ADR-001, etc.)
-- Reference line numbers or code blocks
+- Use consistent identifiers (FR-001, BR-001, etc.)
+- Reference line numbers or code blocks from pseudocode
 - Maintain requirements traceability matrix

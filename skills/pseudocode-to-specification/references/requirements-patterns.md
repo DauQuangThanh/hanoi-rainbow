@@ -1,6 +1,6 @@
 # Requirements Patterns
 
-This document describes common patterns to recognize in pseudocode and how to extract corresponding requirements.
+This document describes common **business and functional patterns** to recognize in pseudocode and how to extract corresponding functional requirements. These patterns focus on WHAT the system does from a business perspective, excluding implementation, design, and performance details.
 
 ## Pattern Recognition Guide
 
@@ -17,41 +17,40 @@ delete/remove
 
 **Extract:**
 
-- **Data Model:** Entity being manipulated
-- **Operations:** Create, Read, Update, Delete specifications
-- **Validation Rules:** Input constraints
-- **Access Control:** Who can perform which operations
-- **Audit:** Logging and tracking requirements
+- **Business Entity:** What business concept is being managed
+- **Business Operations:** Create, Read, Update, Delete from business perspective
+- **Business Validation Rules:** Business constraints on input data
+- **Business Access Rules:** Who can perform which business operations
+- **Business Audit:** What business events need tracking
 
 **Requirements Template:**
 
 ```
-FR-[ID]: [Entity] Management
+FR-[ID]: [Entity] Business Management
 
 Create Operation:
-- Input: [Entity fields with types and constraints]
-- Validation: [Required fields, format rules, business rules]
-- Output: [Created entity with generated ID]
-- Side Effects: [Audit log, notifications]
+- Business Input: [Entity fields with business meaning and constraints]
+- Business Validation: [Required fields, business format rules, business logic]
+- Business Output: [Created entity with business identifier]
+- Business Side Effects: [Business notifications, audit events]
 
 Read Operation:
-- Input: [ID or filter criteria]
-- Output: [Entity data or list]
-- Filtering: [Available filter fields]
-- Sorting: [Available sort options]
-- Pagination: [Page size, offset/cursor]
+- Business Input: [Business identifier or search criteria]
+- Business Output: [Entity business data or list]
+- Business Filtering: [Available business filter criteria]
+- Business Sorting: [Available business sort options]
 
 Update Operation:
-- Input: [Entity ID + fields to update]
-- Validation: [Field constraints, business rules]
-- Concurrency: [Optimistic locking, versioning]
-- Output: [Updated entity]
+- Business Input: [Entity identifier + fields to update]
+- Business Validation: [Field constraints, business rules]
+- Business Output: [Updated entity]
+- Business Rules: [What can/cannot be changed, when]
 
 Delete Operation:
-- Input: [Entity ID]
-- Validation: [Check dependencies]
-- Type: [Hard delete or soft delete]
-- Side Effects: [Cascade rules, cleanup]
+- Business Input: [Entity identifier]
+- Business Validation: [Check business dependencies]
+- Business Type: [Permanent removal or business archival]
+- Business Side Effects: [Impact on related business entities]
 ```
 
 ### 2. Validation Pattern
@@ -75,21 +74,21 @@ throw error "validation failed"
 **Requirements Template:**
 
 ```
-VR-[ID]: [Field/Entity] Validation
+BR-[ID]: [Field/Entity] Business Validation
 
-Field Validations:
-- [field1]: Required, String, Length: 1-255, Pattern: [regex]
-- [field2]: Optional, Integer, Range: 1-100
-- [field3]: Required, Enum: [value1, value2, value3]
+Business Field Rules:
+- [field1]: Required for business, Must match business format [pattern]
+- [field2]: Optional, Business range: 1-100
+- [field3]: Required, Business values: [value1, value2, value3]
 
-Business Rules:
-- Rule 1: If [condition], then [field] must [constraint]
-- Rule 2: [field1] + [field2] must be [constraint]
+Business Logic Rules:
+- Rule 1: If [business condition], then [field] must [business constraint]
+- Rule 2: [field1] combined with [field2] must satisfy [business rule]
 
-Error Responses:
-- Empty required field: "Field '[name]' is required"
-- Invalid format: "Field '[name]' must match format [format]"
-- Out of range: "Field '[name]' must be between [min] and [max]"
+Business Error Messages:
+- Missing required field: "[Business-friendly message]"
+- Invalid format: "[Business-friendly explanation]"
+- Out of range: "[Business constraint explanation]"
 ```
 
 ### 3. State Machine Pattern
@@ -108,37 +107,32 @@ else if state == "processing"
 
 **Extract:**
 
-- **States:** All possible states
-- **Transitions:** Valid state changes
-- **Triggers:** Events or conditions causing transitions
-- **Guards:** Conditions that must be met for transition
-- **Actions:** Side effects during transition
+- **Business States:** All possible business states
+- **Business Transitions:** Valid business state changes
+- **Business Triggers:** Business events causing transitions
+- **Business Guards:** Business conditions for transitions
+- **Business Actions:** Business side effects during transition
 
 **Requirements Template:**
 
 ```
-SM-[ID]: [Entity] State Machine
+FR-[ID]: [Entity] Business Lifecycle
 
-States:
-- [state1]: [Description, entry/exit actions]
-- [state2]: [Description, entry/exit actions]
+Business States:
+- [state1]: [Business meaning, business entry/exit actions]
+- [state2]: [Business meaning, business entry/exit actions]
 
-Transitions:
+Business Transitions:
 From [state1] to [state2]:
-- Trigger: [Event or action]
-- Guard: [Condition that must be true]
-- Actions: [Side effects, notifications, updates]
+- Business Trigger: [Business event or user action]
+- Business Guard: [Business condition that must be true]
+- Business Actions: [Business notifications, updates to related entities]
 
-State Diagram:
-[initial] → [state1] → [state2] → [terminal]
-           ↓
-         [error_state]
+Initial Business State: [state1]
+Final Business States: [state2], [error_state]
 
-Initial State: [state1]
-Terminal States: [state2], [error_state]
-
-Invariants:
-- [Property that must hold in all states]
+Business Invariants:
+- [Business property that must hold in all states]
 ```
 
 ### 4. Workflow/Pipeline Pattern
@@ -154,47 +148,42 @@ output = finalize(result2)
 
 **Extract:**
 
-- **Stages:** Sequential processing steps
-- **Data Flow:** Input/output at each stage
-- **Transformations:** How data changes
-- **Dependencies:** Stage dependencies
-- **Error Handling:** Failure recovery at each stage
+- **Business Stages:** Sequential business processing steps
+- **Business Data Flow:** Business input/output at each stage
+- **Business Transformations:** How business data changes
+- **Business Dependencies:** Business stage dependencies
+- **Business Error Handling:** Business failure recovery
 
 **Requirements Template:**
 
 ```
-WF-[ID]: [Process Name] Workflow
+FR-[ID]: [Process Name] Business Workflow
 
-Overview: [Purpose and scope]
+Business Purpose: [Business goal and value]
 
-Stages:
+Business Stages:
 
-Stage 1: [Name]
-- Input: [Data format and source]
-- Processing: [What happens]
-- Output: [Result format]
-- Duration: [Expected time]
-- Error Handling: [Recovery strategy]
+Stage 1: [Business Stage Name]
+- Business Input: [Business data required]
+- Business Processing: [Business logic applied]
+- Business Output: [Business result]
+- Business Rules: [Applicable business constraints]
+- Business Error Handling: [Business recovery strategy]
 
-Stage 2: [Name]
-- Input: [Output from Stage 1]
-- Processing: [Transformation logic]
-- Output: [Result format]
-- Dependencies: [External systems]
+Stage 2: [Business Stage Name]
+- Business Input: [Output from Stage 1]
+- Business Processing: [Business transformation logic]
+- Business Output: [Business result]
+- Business Dependencies: [Other business processes]
 
-Stage N: [Name]
-- Input: [Previous stage output]
-- Processing: [Final actions]
-- Output: [Final result]
+Stage N: [Business Stage Name]
+- Business Input: [Previous stage output]
+- Business Processing: [Final business actions]
+- Business Output: [Final business result]
 
-Error Handling:
-- Stage failure: [Retry, rollback, or forward to error queue]
-- Timeout: [Action after max duration]
-- Data validation failure: [Reject or partial process]
-
-Monitoring:
-- Track: [Metrics to monitor at each stage]
-- Alert: [Conditions for alerts]
+Business Error Handling:
+- Stage failure: [Business impact and mitigation]
+- Business validation failure: [Business decision: reject or proceed]
 ```
 
 ### 5. Calculation/Algorithm Pattern
@@ -210,48 +199,42 @@ return result
 
 **Extract:**
 
-- **Inputs:** Parameters and preconditions
-- **Algorithm:** Steps and logic
-- **Outputs:** Results and format
-- **Complexity:** Time and space requirements
-- **Edge Cases:** Boundary conditions
+- **Business Inputs:** Business parameters and preconditions
+- **Business Algorithm:** Business calculation steps and logic
+- **Business Outputs:** Business results and format
+- **Business Edge Cases:** Business boundary conditions
 
 **Requirements Template:**
 
 ```
-ALG-[ID]: [Algorithm Name]
+FR-[ID]: [Calculation Name]
 
-Purpose: [What it calculates and why]
+Business Purpose: [What business value this calculates and why]
 
-Inputs:
-- [param1]: [Type] - [Constraints, valid range]
-- [param2]: [Type] - [Description]
+Business Inputs:
+- [param1]: [Business meaning, constraints, valid business range]
+- [param2]: [Business meaning, description]
 
-Algorithm:
-1. [Step description with formula if applicable]
-2. For each [item] in [collection]:
-   - [Calculation or operation]
-3. [Final step]
+Business Calculation Logic:
+1. [Business step description with business formula if applicable]
+2. For each [business item] in [business collection]:
+   - [Business calculation or operation]
+3. [Final business step]
 
-Formula: [Mathematical expression if applicable]
+Business Formula: [Business calculation expression]
 
-Outputs:
-- [Result]: [Type, format, precision]
+Business Outputs:
+- [Result]: [Business meaning, format, precision]
 
-Edge Cases:
-- Empty input: [Behavior]
-- Zero/negative values: [Behavior]
-- Maximum values: [Behavior]
-- Division by zero: [Error handling]
+Business Edge Cases:
+- Empty input: [Business behavior]
+- Zero/negative values: [Business behavior]
+- Maximum values: [Business behavior]
+- Division by zero: [Business error handling]
 
-Performance:
-- Time Complexity: O([expression])
-- Space Complexity: O([expression])
-- Maximum input size: [Limit]
-
-Examples:
-- Input: [Sample] → Output: [Expected result]
-- Input: [Edge case] → Output: [Expected result]
+Business Examples:
+- Business Scenario 1: [Context] → [Expected result]
+- Business Scenario 2: [Edge case context] → [Expected result]
 ```
 
 ### 6. Authentication/Authorization Pattern
@@ -267,46 +250,43 @@ if not hasPermission(user, resource):
 
 **Extract:**
 
-- **Authentication:** How identity is verified
-- **Authorization:** Permission checking
-- **Roles:** User roles and capabilities
-- **Resources:** Protected resources
-- **Security Rules:** Access control policies
+- **Business Authentication:** How business identity is verified
+- **Business Authorization:** Business permission checking
+- **Business Roles:** User roles and business capabilities
+- **Business Resources:** Protected business resources
+- **Business Security Rules:** Business access control policies
 
 **Requirements Template:**
 
 ```
-SEC-[ID]: [Resource] Access Control
+FR-[ID]: [Resource] Business Access Control
 
-Authentication:
-- Method: [JWT, OAuth, API Key, Session]
-- Required: [Yes/No for this resource]
-- Token Location: [Header, Cookie, Query]
-- Token Format: [Structure]
+Business Authentication:
+- Required: [Yes/No for this business resource]
+- Business Identity: [How user identity is established]
 
-Authorization:
+Business Authorization:
 
-Roles:
-- [role1]: [Description and capabilities]
-- [role2]: [Description and capabilities]
+Business Roles:
+- [role1]: [Business description and capabilities]
+- [role2]: [Business description and capabilities]
 
-Permissions:
-- [resource].[action]: Required roles: [role1, role2]
-- [resource].[action]: Required roles: [role3]
+Business Permissions:
+- [resource].[action]: Required business roles: [role1, role2]
+- [resource].[action]: Required business roles: [role3]
 
-Access Rules:
-- Rule 1: [role] can [action] if [condition]
+Business Access Rules:
+- Rule 1: [role] can [action] if [business condition]
 - Rule 2: Owner can always [action] on own [resource]
 - Rule 3: Public [resources] allow [action] without authentication
 
-Error Responses:
-- 401 Unauthorized: Missing or invalid authentication
-- 403 Forbidden: Insufficient permissions
-- 404 Not Found: Hide existence of protected resources
+Business Error Conditions:
+- Missing authentication: [Business impact and user message]
+- Insufficient permissions: [Business impact and user message]
 
-Audit:
-- Log: [What to log for access attempts]
-- Alert: [Conditions for security alerts]
+Business Audit:
+- Log: [What business events to track]
+- Alert: [Business conditions for alerts]
 ```
 
 ### 7. Event-Driven Pattern
@@ -321,190 +301,49 @@ on event:
 
 **Extract:**
 
-- **Events:** Event types and payloads
-- **Handlers:** Processing logic for each event
-- **Publishers:** What generates events
-- **Subscribers:** Who listens to events
-- **Event Flow:** Cascading events
+- **Business Events:** Business event types and data
+- **Business Handlers:** Business processing logic for each event
+- **Business Publishers:** What business actions generate events
+- **Business Subscribers:** Which business functions react to events
+- **Business Event Flow:** Cascading business events
 
 **Requirements Template:**
 
 ```
-EV-[ID]: [Event Name]
+FR-[ID]: [Business Event Name]
 
-Event Definition:
-- Name: [event.name.format]
-- Trigger: [What causes this event]
-- Payload:
-  ```json
-  {
-    "eventId": "uuid",
-    "timestamp": "ISO8601",
-    "data": {
-      "field1": "type",
-      "field2": "type"
-    }
-  }
-  ```
+Business Event Definition:
+- Name: [Business event name]
+- Business Trigger: [What business action causes this event]
+- Business Data:
+  - eventId: Unique event identifier
+  - timestamp: When business event occurred
+  - businessData: [Business-relevant data fields]
 
-Publishers:
+Business Publishers:
+- [System/Process]: Publishes when [business condition occurs]
 
-- [System/Component]: Publishes when [condition]
+Business Subscribers:
+- [BusinessHandler1]: [What business action it performs]
+- [BusinessHandler2]: [What business action it performs]
 
-Subscribers:
+Business Processing Rules:
+- Must process event: [Yes/No - business requirement]
+- Processing order matters: [Yes/No - business requirement]
 
-- [Handler1]: [What it does with the event]
-- [Handler2]: [What it does with the event]
+Cascading Business Events:
+- On business success: Trigger [next business event]
+- On business failure: Trigger [error business event]
 
-Processing:
-
-- Delivery: [At-least-once, exactly-once, at-most-once]
-- Ordering: [Guaranteed order or not]
-- Retry: [Retry strategy for failures]
-- Dead Letter: [What happens to failed events]
-
-Cascading Events:
-
-- On success: Trigger [next.event]
-- On failure: Trigger [error.event]
-
-Idempotency:
-
-- Handler must be idempotent: [Yes/No]
-- Deduplication: [Strategy using eventId or other key]
-
+Business Idempotency:
+- Can process same event multiple times: [Yes/No]
+- Business deduplication strategy: [How to handle duplicates]
 ```
 
-### 8. Caching Pattern
+### 8. Batch Processing Pattern
 
 **Pseudocode Indicators:**
 ```
-
-if cache.has(key):
-  return cache.get(key)
-result = fetchFromDatabase(key)
-cache.set(key, result)
-return result
-
-```
-
-**Extract:**
-- **Cache Strategy:** What to cache
-- **Cache Key:** How items are keyed
-- **TTL:** How long cached
-- **Invalidation:** When to clear cache
-- **Fallback:** What happens on cache miss
-
-**Requirements Template:**
-```
-
-CACHE-[ID]: [Data Type] Caching
-
-Strategy: [Read-through, write-through, write-behind, cache-aside]
-
-Cache Configuration:
-
-- Storage: [In-memory, Redis, Memcached]
-- Key Format: [Pattern for cache keys]
-- TTL: [Time to live in seconds]
-- Max Size: [Memory or entry limit]
-- Eviction Policy: [LRU, LFU, FIFO]
-
-Caching Rules:
-
-- Cache: [What data to cache]
-- Don't Cache: [What to exclude]
-- Cache if: [Conditional caching rules]
-
-Invalidation:
-
-- On Update: [Clear affected cache entries]
-- On Delete: [Remove from cache]
-- On Schedule: [Periodic refresh]
-
-Fallback:
-
-- Cache miss: [Fetch from source]
-- Cache error: [Bypass cache, use source]
-- Stale data: [Serve stale or refresh]
-
-Monitoring:
-
-- Hit rate: [Target percentage]
-- Miss rate: [Alert threshold]
-- Memory usage: [Alert threshold]
-
-```
-
-### 9. Retry/Resilience Pattern
-
-**Pseudocode Indicators:**
-```
-
-attempts = 0
-while attempts < maxRetries:
-  try:
-    result = operation()
-    return result
-  catch error:
-    attempts++
-    wait exponentialBackoff(attempts)
-
-```
-
-**Extract:**
-- **Retry Logic:** When and how to retry
-- **Backoff Strategy:** Delay between retries
-- **Max Attempts:** Retry limits
-- **Circuit Breaker:** When to stop retrying
-- **Fallback:** Alternative action on failure
-
-**Requirements Template:**
-```
-
-RES-[ID]: [Operation] Resilience
-
-Retry Configuration:
-
-- Max Attempts: [Number]
-- Backoff Strategy: [Fixed, Exponential, Jittered]
-- Initial Delay: [Milliseconds]
-- Max Delay: [Milliseconds]
-- Multiplier: [For exponential backoff]
-
-Retry Conditions:
-
-- Retry on: [Transient errors, timeouts, 5xx responses]
-- Don't retry on: [4xx errors, business logic errors]
-
-Circuit Breaker:
-
-- Failure Threshold: [Number of failures to open circuit]
-- Timeout: [How long circuit stays open]
-- Half-Open: [Test requests before fully closing]
-
-Timeout:
-
-- Operation Timeout: [Max time for single attempt]
-- Total Timeout: [Max time including all retries]
-
-Fallback:
-
-- On exhausted retries: [Return default, cached value, or error]
-- On circuit open: [Fast fail or return fallback]
-
-Monitoring:
-
-- Track: [Success rate, retry rate, circuit state]
-- Alert: [When circuit opens, high retry rate]
-
-```
-
-### 10. Batch Processing Pattern
-
-**Pseudocode Indicators:**
-```
-
 batch = []
 for each item in items:
   batch.add(item)
@@ -513,68 +352,58 @@ for each item in items:
     batch.clear()
 if batch.size > 0:
   processBatch(batch)
-
 ```
 
 **Extract:**
-- **Batch Size:** Items per batch
-- **Batch Processing:** How batches are handled
-- **Triggers:** What causes batch processing
-- **Partial Failures:** Handling of partial batch failures
+- **Business Batch Size:** Items per business batch
+- **Business Batch Processing:** How batches are handled in business terms
+- **Business Triggers:** What causes batch processing
+- **Business Partial Failures:** Handling of partial batch failures
 
 **Requirements Template:**
 ```
+FR-[ID]: [Operation] Business Batch Processing
 
-BATCH-[ID]: [Operation] Batch Processing
+Business Batch Configuration:
+- Batch Size: [Number of business items]
+- Business Trigger: [Size threshold OR time threshold]
 
-Batch Configuration:
+Business Batching Strategy:
+- Collect: [How business items are accumulated]
+- Process: [How batch is processed from business perspective]
 
-- Batch Size: [Number of items]
-- Max Wait Time: [Process incomplete batch after duration]
-- Max Batch Size: [Upper limit]
+Business Error Handling:
+- Partial Success: [Business decision: continue, reject all, or mark failed items]
+- Business Impact: [Effect on related business processes]
 
-Batching Strategy:
-
-- Collect: [How items are accumulated]
-- Trigger: [Size threshold OR time threshold]
-- Processing: [How batch is processed]
-
-Error Handling:
-
-- Partial Success: [Continue, rollback all, or mark failed items]
-- Retry: [Retry entire batch or just failed items]
-- Dead Letter: [Failed items moved to error queue]
-
-Ordering:
-
-- Maintain Order: [Yes/No within batch]
-- Process Order: [Sequential or parallel]
-
-Monitoring:
-
-- Batch size: [Average and max]
-- Processing time: [Per batch]
-- Success rate: [Percentage of items processed]
-
+Business Rules:
+- Maintain Order: [Yes/No - business requirement]
+- Process Order: [Sequential or can be parallel from business view]
 ```
 
 ## Usage Guide
 
 **When analyzing pseudocode:**
 
-1. **Identify Pattern:** Match code structure to patterns above
-2. **Extract Elements:** Pull out pattern-specific components
-3. **Generate Requirements:** Use appropriate template
-4. **Add Context:** Include business rules and constraints
-5. **Validate Completeness:** Ensure all code paths covered
+1. **Identify Business Pattern:** Match code structure to business patterns above
+2. **Extract Business Elements:** Pull out business-specific components
+3. **Generate Functional Requirements:** Use appropriate template focused on business logic
+4. **Add Business Context:** Include business rules and constraints
+5. **Validate Completeness:** Ensure all business logic paths covered
+
+**Focus on Business Functionality:**
+- Describe WHAT from business perspective, not HOW from technical perspective
+- Extract business rules, not implementation strategies
+- Document business behavior, not performance characteristics
+- Specify business constraints, not technical optimizations
 
 **For Multiple Patterns:**
-- Code often contains multiple patterns
-- Extract requirements for each pattern
-- Link related requirements
-- Create hierarchy (workflow contains validation contains CRUD)
+- Code often contains multiple business patterns
+- Extract functional requirements for each pattern
+- Link related business requirements
+- Create hierarchy (business process contains business rules contains business validation)
 
 **Pattern Combinations:**
 - Workflow + CRUD + Validation (common for business processes)
-- Event + Retry + State Machine (common for async systems)
-- Authentication + Authorization + CRUD (common for APIs)
+- Event + State Machine (common for business event systems)
+- Authentication + Authorization + CRUD (common for business APIs)

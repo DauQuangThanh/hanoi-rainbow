@@ -1,87 +1,80 @@
-# Mermaid Diagrams for Specification
+# Business Flow Diagrams for Functional Specification
 
-This document provides guidance on creating Mermaid diagrams from pseudocode analysis to visualize system structure and behavior.
+This document provides guidance on creating diagrams from pseudocode analysis to visualize **business processes, workflows, and functional behavior**. Focus is on illustrating WHAT the system does from a business perspective, not HOW it's technically implemented.
 
 ## When to Use Diagrams
 
-**Use diagrams to clarify:**
+**Use diagrams to clarify business logic:**
 
-- Complex workflows with multiple paths
-- Entity relationships and data models
-- System interactions and integrations
-- State transitions and lifecycle
-- Component architecture and dependencies
+- Complex business workflows with multiple decision paths
+- Business entity relationships and data requirements
+- Business interactions between systems/actors
+- Business state transitions and lifecycle
+- Business process flows
 
 **Don't overuse:**
 
-- Simple linear processes (plain text is clearer)
-- When pseudocode is self-explanatory
-- For audiences unfamiliar with diagrams
+- Simple linear business processes (plain text is clearer)
+- When pseudocode already clearly expresses business logic
+- For technical implementation details (architecture, deployment, etc.)
+- When documenting technical rather than functional aspects
 
 ## Diagram Types and Use Cases
 
 ## 1. Sequence Diagram
 
-**Use for:** Interaction flows, API calls, message passing
+**Use for:** Business interaction flows, actor communications, business message passing
 
 **When to extract from pseudocode:**
 
 ```
-functionA calls functionB
-functionB queries database
-database returns results
-functionB calls externalAPI
-externalAPI responds
-functionB returns to functionA
+businessActor performs action
+system validates with businessRule
+system queries businessData
+system notifies externalParty
 ```
 
 **Mermaid Notation:**
 
 ```mermaid
 sequenceDiagram
-    participant Client
-    participant Service
-    participant Database
-    participant ExternalAPI
+    participant Customer
+    participant OrderSystem
+    participant InventorySystem
+    participant PaymentSystem
     
-    Client->>Service: request()
-    Service->>Database: query()
-    Database-->>Service: results
-    Service->>ExternalAPI: callAPI()
-    ExternalAPI-->>Service: response
-    Service-->>Client: response
+    Customer->>OrderSystem: Place Order
+    OrderSystem->>InventorySystem: Check Availability
+    InventorySystem-->>OrderSystem: Availability Status
+    OrderSystem->>PaymentSystem: Process Payment
+    PaymentSystem-->>OrderSystem: Payment Result
+    OrderSystem-->>Customer: Order Confirmation
 ```
 
 **Markdown Format:**
 
 ````markdown
-## Sequence Diagram: [Process Name]
+## Sequence Diagram: [Business Process Name]
 
 ```mermaid
 sequenceDiagram
-    participant Actor
+    participant BusinessActor
     participant System
-    participant Database
-    participant ExternalAPI
+    participant ExternalSystem
     
-    Actor->>System: Action
-    System->>Database: Query
-    Database-->>System: Results
-    System->>ExternalAPI: Request
-    ExternalAPI-->>System: Response
-    System-->>Actor: Final Response
+    BusinessActor->>System: Business Action
+    System->>ExternalSystem: Business Request
+    ExternalSystem-->>System: Business Response
+    System-->>BusinessActor: Business Result
+```
 ````
 
 **Key Elements:**
 
-- Participants: Systems, actors, components (declared with `participant`)
-- Messages: Synchronous (`->>`) or asynchronous (`-->>`)
-- Return messages: Dashed arrows (`-->>`)
-- Activations: Shown automatically or with `activate`/`deactivate`
-
-### 2. Activity Diagram (Flowchart)
-
-**Use for:** Business processes, algorithm flow, decision logic
+- Participants: Business actors, systems, external parties
+- Messages: Business actions and requests
+- Return messages: Business responses and results
+- Focus on business meaning, not technical protocols
 
 **When to extract from pseudocode:**
 
@@ -226,21 +219,21 @@ stateDiagram-v2
 - Transitions: `State1 --> State2: event [guard]`
 - Notes: `note right of State` for annotations
 
-### 4. Class Diagram (Data Model)
+### 4. Class Diagram (Business Data Model)
 
-**Use for:** Entity relationships, data structures, object hierarchies
+**Use for:** Business entity relationships, business data structures, business object hierarchies
 
 **When to extract from pseudocode:**
 
 ```
-class Order:
-  id, customer, items, total
+entity Order:
+  id, customer, items, total, status
   
-class OrderItem:
+entity OrderItem:
   product, quantity, price
 
-class Customer:
-  id, name, email
+entity Customer:
+  id, name, email, status
 ```
 
 **Mermaid Class Diagram:**
@@ -248,73 +241,68 @@ class Customer:
 ```mermaid
 classDiagram
     class Customer {
-        -UUID id
-        -String name
-        -String email
-        +getOrders() List~Order~
+        -identifier
+        -name
+        -email
+        -status
     }
     
     class Order {
-        -UUID id
-        -Decimal total
-        -Enum status
-        +calculate() Decimal
+        -orderNumber
+        -totalAmount
+        -orderStatus
     }
     
     class OrderItem {
-        -String product
-        -Integer quantity
-        -Decimal price
-        +subtotal() Decimal
+        -productName
+        -quantity
+        -unitPrice
     }
     
-    Customer "1" --> "*" Order : has
+    Customer "1" --> "*" Order : places
     Order "1" --> "*" OrderItem : contains
 ```
 
 **Markdown Format:**
 
 ````markdown
-## Class Diagram: [Domain Name]
+## Business Entity Diagram: [Domain Name]
 
 ```mermaid
 classDiagram
     class Customer {
-        -UUID id
-        -String name
-        -String email
-        +getOrders() List~Order~
+        -identifier
+        -name
+        -email
+        -status
     }
     
     class Order {
-        -UUID id
-        -UUID customer_id
-        -Decimal total
-        -Enum status
-        +calculate() Decimal
+        -orderNumber
+        -totalAmount
+        -orderStatus
     }
     
-    Customer "1" --> "*" Order : has
+    Customer "1" --> "*" Order : places
 ```
 
-### Entities
+### Business Entities
 
 **Customer**
-- Attributes:
-  - id: UUID (primary key)
-  - name: String (max 255, required)
-  - email: String (unique, required)
-- Methods:
-  - getOrders(): List<Order>
+- Business Attributes:
+  - identifier: Unique customer identifier
+  - name: Customer full name (required)
+  - email: Contact email (must be unique)
+  - status: Account status (active, inactive, suspended)
 
 **Order**
-- Attributes:
-  - id: UUID (primary key)
-  - customer_id: UUID (foreign key → Customer)
-  - total: Decimal(10,2)
-  - status: Enum[pending, paid, shipped]
-- Methods:
-  - calculate(): Decimal
+- Business Attributes:
+  - orderNumber: Unique order identifier
+  - totalAmount: Total order value in currency
+  - orderStatus: Current order state (pending, confirmed, shipped, delivered)
+- Business Relationships:
+  - Placed by exactly one Customer
+  - Contains one or more OrderItems
 ````
 
 **Relationship Types in Mermaid:**
@@ -326,83 +314,9 @@ classDiagram
 - Dependency: `..>` Uses
 - Cardinality: `"1" --> "*"` (one-to-many)
 
-### 5. Component Diagram
+### 5. Use Case Diagram (Business Capabilities)
 
-**Use for:** System architecture, module dependencies, service interactions
-
-**When to extract from pseudocode:**
-
-```
-APIGateway uses AuthService
-APIGateway uses OrderService
-OrderService uses PaymentService
-OrderService uses InventoryService
-```
-
-**Mermaid Component Diagram (using C4):**
-
-```mermaid
-C4Component
-    title Component Diagram for API System
-    
-    Container_Boundary(api, "API Gateway") {
-        Component(router, "Route Handler", "Routes requests")
-        Component(auth, "Authentication", "Validates tokens")
-    }
-    
-    Component(authSvc, "Auth Service", "gRPC", "User authentication")
-    Component(orderSvc, "Order Service", "REST", "Order management")
-    Component(paymentSvc, "Payment Service", "REST", "Payment processing")
-    Component(inventorySvc, "Inventory Service", "REST", "Stock management")
-    
-    Rel(router, authSvc, "Validates", "gRPC")
-    Rel(router, orderSvc, "Forwards", "HTTP")
-    Rel(router, paymentSvc, "Forwards", "HTTP")
-    Rel(orderSvc, inventorySvc, "Checks stock", "HTTP")
-```
-
-**Markdown Format:**
-
-```markdown
-## Component Diagram: [System Name]
-
-### Components
-
-**API Gateway**
-- Responsibilities:
-  - Request routing
-  - Authentication/Authorization
-  - Rate limiting
-- Interfaces:
-  - Exposes: REST API (HTTP)
-  - Consumes: Auth Service, Order Service, Payment Service
-
-**Auth Service**
-- Responsibilities:
-  - User authentication
-  - Token generation/validation
-- Interfaces:
-  - Exposes: Authentication API (gRPC)
-  - Consumes: User Database
-
-**Order Service**
-- Responsibilities:
-  - Order management
-  - Order processing workflow
-- Interfaces:
-  - Exposes: Order API (REST)
-  - Consumes: Inventory Service, Payment Service, Database
-
-### Dependencies
-- API Gateway → Auth Service (authentication)
-- API Gateway → Order Service (order operations)
-- Order Service → Payment Service (payment processing)
-- Order Service → Inventory Service (stock checking)
-```
-
-### 6. Use Case Diagram
-
-**Use for:** System functionality, user interactions, feature scope
+**Use for:** Business functionality, user interactions, business feature scope
 
 **When to extract from pseudocode:**
 
@@ -413,14 +327,14 @@ if user.isAdmin():
   can: manageProducts, viewAllOrders, generateReports
 ```
 
-**Mermaid Journey or Flowchart (Use Case Alternative):**
+**Mermaid Flowchart (Use Case Alternative):**
 
 ```mermaid
 graph LR
     Customer([Customer])
     Admin([Admin])
     
-    subgraph "Order System"
+    subgraph "Order Management System"
         PlaceOrder[Place Order]
         ViewOrders[View Orders]
         CancelOrder[Cancel Order]
@@ -436,43 +350,43 @@ graph LR
     Admin --> GenerateReports
 ```
 
-**Note:** Mermaid doesn't have a dedicated use case diagram type. Use flowcharts, user journey diagrams, or document use cases in structured markdown as shown below.
+**Note:** Mermaid doesn't have a dedicated use case diagram type. Use flowcharts or document use cases in structured markdown.
 
 **Markdown Format:**
 
 ```markdown
 ## Use Case Diagram: [System Name]
 
-### Actors
+### Business Actors
 - **Customer**: End user who purchases products
 - **Admin**: System administrator
 
-### Use Cases
+### Business Use Cases
 
 **Place Order** (Customer)
-- Description: Customer creates new order
-- Precondition: Customer logged in, items in cart
-- Postcondition: Order created, inventory reserved
+- Business Purpose: Customer creates new order
+- Business Precondition: Customer authenticated, items selected
+- Business Postcondition: Order created, inventory reserved
 
 **View Orders** (Customer, Admin)
-- Description: View order history and status
-- Precondition: Authenticated user
-- Postcondition: Order list displayed
+- Business Purpose: View order history and status
+- Business Precondition: Authenticated user
+- Business Postcondition: Order list displayed
 
 **Cancel Order** (Customer)
-- Description: Customer cancels pending order
-- Precondition: Order exists and is cancellable
-- Postcondition: Order cancelled, inventory released
+- Business Purpose: Customer cancels pending order
+- Business Precondition: Order exists and is cancellable
+- Business Postcondition: Order cancelled, inventory released
 
 **Manage Products** (Admin only)
-- Description: Add, edit, or remove products
-- Precondition: Admin authentication
-- Postcondition: Product catalog updated
+- Business Purpose: Add, edit, or remove products
+- Business Precondition: Admin authentication
+- Business Postcondition: Product catalog updated
 
 **Generate Reports** (Admin only)
-- Description: Create sales and inventory reports
-- Precondition: Admin authentication
-- Postcondition: Report generated
+- Business Purpose: Create business and operational reports
+- Business Precondition: Admin authentication
+- Business Postcondition: Report generated
 ```
 
 ## Diagram Creation Guidelines
@@ -481,138 +395,85 @@ graph LR
 
 | Need to Show | Use This Diagram |
 | -------------- | ------------------ |
-| Message flow between systems | Sequence Diagram (sequenceDiagram) |
+| Business interactions between actors | Sequence Diagram (sequenceDiagram) |
 | Business process flow | Flowchart (flowchart TD/LR) |
-| Entity lifecycle | State Diagram (stateDiagram-v2) |
-| Data structure and relationships | Class Diagram (classDiagram) |
-| System architecture | C4 Component or Flowchart |
-| User capabilities | Flowchart or User Journey |
+| Business entity lifecycle | State Diagram (stateDiagram-v2) |
+| Business data relationships | Class Diagram (classDiagram) |
+| Business user capabilities | Flowchart or User Journey |
 
 ### Best Practices
 
 **Keep it Simple:**
 
-- One diagram per concept
+- One diagram per business concept
 - Maximum 7-10 elements per diagram
-- Break complex diagrams into multiple views
+- Break complex business flows into multiple views
 
 **Be Consistent:**
 
 - Use standard Mermaid syntax
-- Consistent naming conventions
-- Same level of abstraction throughout
+- Consistent business terminology
+- Same level of business abstraction throughout
 
-**Add Context:**
+**Add Business Context:**
 
-- Title clearly describes what is shown
-- Use notes for additional context
-- Brief description of diagram purpose
+- Title clearly describes the business process shown
+- Use notes for business rules and constraints
+- Brief description of diagram's business purpose
 
-**Focus on Clarity:**
+**Focus on Business Clarity:**
 
-- Prioritize readability over completeness
+- Prioritize business readability over technical completeness
 - Use proper direction (TD, LR, etc.)
-- Label transitions and relationships clearly
+- Label transitions and relationships with business meaning
 
-### Mermaid Diagram Syntax
+## Integration with Functional Specifications
 
-All diagrams should use Mermaid format:
-
-**Sequence Diagrams:**
-
-````markdown
-```mermaid
-sequenceDiagram
-    participant Client
-    participant API
-    participant Database
-    
-    Client->>API: request()
-    API->>Database: query()
-    Database-->>API: results
-    API-->>Client: response
-````
-
-**Flowcharts:**
-
-````markdown
-```mermaid
-flowchart TD
-    Start([Start])
-    Process[Process]
-    Decision{Decision?}
-    End([End])
-    
-    Start --> Process
-    Process --> Decision
-    Decision -->|Yes| End
-    Decision -->|No| Process
-````
-
-**State Diagrams:**
-
-````markdown
-```mermaid
-stateDiagram-v2
-    [*] --> State1
-    State1 --> State2: transition
-    State2 --> [*]
-````
-
-**Class Diagrams:**
-
-````markdown
-```mermaid
-classDiagram
-    class ClassName {
-        -privateField
-        +publicMethod()
-    }
-    
-    ClassA "1" --> "*" ClassB
-````
-
-## Integration with Specifications
-
-**Link Diagrams to Requirements:**
+**Link Diagrams to Functional Requirements:**
 
 ````markdown
 ## FR-010: Order Processing
 
-See [Sequence Diagram: Order Processing](#sequence-diagram-order-processing)
+See [Business Flow Diagram: Order Processing](#sequence-diagram-order-processing)
 
-[Detailed requirement text...]
+[Detailed functional requirement text...]
 ````
 
 **Embed in Specification Sections:**
 
-- Overview: User Journey or Component Diagram (C4/Flowchart)
-- Workflow: Flowchart or Sequence Diagram
-- Data Model: Class Diagram
-- State Management: State Diagram
+- Business Overview: Use Case Diagram or Business Journey
+- Business Workflow: Flowchart or Sequence Diagram
+- Business Data Requirements: Class Diagram
+- Business State Management: State Diagram
 
 **Traceability:**
 
-- Reference diagram elements in requirements
-- Link diagram components to FR/NFR IDs
-- Version diagrams with specifications
+- Reference diagram elements in functional requirements
+- Link diagram components to FR and BR IDs
+- Version diagrams with functional specifications
 
-## Why Mermaid?
+## Why Use Business Flow Diagrams?
 
-**Advantages of Mermaid:**
+**Benefits for Functional Specifications:**
 
-- Native markdown integration
-- Renders in GitHub, GitLab, VS Code, and many platforms
-- Simple, text-based syntax
-- Easy to version control and diff
-- Wide tool support
-- Active development and community
-- Multiple diagram types in one format
+- Clarify complex business logic visually
+- Show business decision points clearly
+- Illustrate business entity relationships
+- Document business state transitions
+- Communicate business processes to stakeholders
 
 **When to Use:**
 
-- All technical documentation
-- README files and wikis
-- Architecture documentation
-- API specifications
-- Design documents
+- Functional specifications
+- Business requirements documents
+- README files documenting business capabilities
+- Business process documentation
+- Stakeholder communication materials
+
+**When NOT to Use:**
+
+- Technical architecture documentation
+- Implementation guides
+- Deployment diagrams
+- Technical design documents
+- Performance analysis

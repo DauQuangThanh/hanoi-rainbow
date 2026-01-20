@@ -1,11 +1,11 @@
 ---
 name: pseudocode-to-specification
-description: Reverse engineers and generates comprehensive technical specifications from pseudocode, algorithms, or code snippets. Produces detailed requirements documents, functional specifications, API documentation, data models, and workflow diagrams. Use when analyzing pseudocode, extracting requirements from algorithms, documenting undocumented code, reverse engineering specifications, creating specifications from implementation details, or when users mention "pseudocode to spec", "reverse engineer specification", "generate spec from code", "document algorithm", "extract requirements from pseudocode", "code to specification", or "specification from implementation".
+description: Analyzes pseudocode, algorithms, or code snippets to extract and document functional requirements and business specifications. Produces functional specifications, business logic documentation, data requirements, and workflow specifications focused exclusively on WHAT the system does, not HOW it's implemented. Use when analyzing pseudocode for business logic, extracting functional requirements from algorithms, documenting business behavior from code, reverse engineering functional specifications, or when users mention "pseudocode to spec", "extract requirements", "business logic documentation", "functional specification from code", or "requirements from pseudocode".
 ---
 
 # Pseudocode to Specification
 
-Reverse engineer technical specifications from pseudocode, algorithms, or code snippets.
+Extract functional requirements and business specifications from pseudocode, algorithms, or code snippets.
 
 ## Core Workflow
 
@@ -27,262 +27,288 @@ Ask for clarification on:
 
 ### 2. Extract Functional Requirements
 
-Document core functionality as requirements:
+Document core business functionality as requirements:
 
 ```
 FR-001: [Function Name]
+Business Purpose: [Why this function exists]
 Description: System shall [action] when [condition]
-Inputs: [data, parameters, context]
-Processing: [steps and business rules]
-Outputs: [results, side effects]
-Preconditions: [required state]
-Postconditions: [resulting state]
+Inputs: [business data, parameters, context]
+Processing Logic: [business rules and decision steps]
+Outputs: [business results, side effects]
+Business Rules: [constraints, validations, calculations]
+Preconditions: [required business state]
+Postconditions: [resulting business state]
 ```
-
-### 3. Extract Non-Functional Requirements
-
-**Performance:** Time/space complexity, throughput, latency, scalability
-**Quality:** Error handling, validation, security, reliability, maintainability
 
 For detailed requirement patterns: [requirements-patterns.md](references/requirements-patterns.md)
 
-### 4. Generate Data Model
+### 3. Extract Business Data Requirements
 
-Extract from pseudocode:
+Identify business entities and their requirements:
 
-- Entities and attributes
-- Data structures (arrays, objects, maps)
-- Data types and constraints
-- Relationships between entities
-- Validation rules
+- Business entities and their meaning
+- Business attributes and their purpose
+- Business constraints and validation rules
+- Business relationships between entities
+- Data lifecycle and state transitions
 
 Document as:
 
 ```
-Entity: [EntityName]
+Business Entity: [EntityName]
+Business Meaning: [What this represents]
 Attributes:
-  - name: [type] - [description, constraints]
-  - field: [type] - [validation rules]
+  - name: [Business meaning, constraints]
+  - field: [Business purpose, validation rules]
 Relationships:
-  - [RelationType] with [OtherEntity]
-Constraints:
-  - [Business rules, uniqueness, referential integrity]
+  - [Business relationship] with [OtherEntity]
+  - Cardinality: [min..max]
+Business Rules:
+  - [Business constraint or invariant]
+Lifecycle States:
+  - [State] → [State] when [condition]
 ```
 
-### 5. Document Workflow and Logic
+### 4. Document Business Workflow and Logic
 
-Analyze control flow:
+Analyze business process flow:
 
-- Sequential operations
-- Conditional branches and decision points
-- Loops and iterations
-- Exception handling paths
-- Async operations
+- Sequential business operations
+- Business decision points and conditions
+- Iterative business processes
+- Business exception paths
+- Business event triggers
 
-Generate workflow specification:
+Generate business workflow specification:
 
 ```
-Workflow: [ProcessName]
+Business Process: [ProcessName]
+Purpose: [Business goal]
 
-Step 1: [Action]
-  - Condition: [when/if]
-  - Action: [what happens]
+Step 1: [Business Action]
+  - Business Condition: [when/if from business perspective]
+  - Action: [what happens in business terms]
+  - Business Rules Applied: [relevant rules]
   - Next: [step or branch]
 
-Step 2: [Action]
-  [branches]
-    - If [condition]: Go to Step 3
+Step 2: [Business Decision]
+  Branches:
+    - If [business condition]: Go to Step 3
     - Else: Go to Step 5
+  - Decision Criteria: [business factors]
 
-Error Handling:
-  - [ErrorType]: [Recovery action]
+Business Error Conditions:
+  - [ErrorCondition]: [Business impact and recovery]
 ```
 
-For complex logic, use decision tables or state diagrams. See [mermaid-diagrams.md](references/mermaid-diagrams.md) for notation.
+For complex business logic, use decision tables. See [mermaid-diagrams.md](references/mermaid-diagrams.md) for business flow notation.
 
-### 6. Generate API/Interface Specification
+### 5. Generate Service Function Specifications
 
-Document functions and endpoints:
-
-```
-Function: functionName
-Purpose: [What it does and why]
-Parameters:
-  - param1: [type] - [description, constraints]
-  - param2: [type] - [description, optional/required]
-Returns: [type] - [description]
-Throws: [exceptions and conditions]
-Complexity: O([time]) time, O([space]) space
-Example:
-  Input: [sample input]
-  Output: [expected output]
-```
-
-### 7. Identify Integration Points
-
-Document external dependencies:
+Document service functions in business terms:
 
 ```
-Integration: [ServiceName]
-Purpose: [Why needed]
-Protocol: [REST, GraphQL, gRPC, etc.]
-Authentication: [Method]
-Data Format: [JSON, XML, etc.]
-Error Handling: [How failures are managed]
+Function: [functionName]
+Business Purpose: [What business problem this solves]
+Business Context: [When/why this is needed]
+Inputs:
+  - param1: [Business meaning, constraints]
+  - param2: [Business meaning, required/optional]
+Processing Logic:
+  1. [Business rule or validation]
+  2. [Business calculation or transformation]
+  3. [Business decision point]
+Outputs: [Business result description]
+Business Rules:
+  - [Rule 1: condition → action]
+  - [Rule 2: validation or constraint]
+Error Conditions:
+  - [Business error]: [Condition and meaning]
+Example Business Scenarios:
+  Scenario: [situation]
+  Input: [business context]
+  Output: [expected business result]
 ```
 
-### 8. Document Assumptions and Constraints
+### 6. Identify Integration Points
 
-**Technical:** Platform, resources, concurrency, data volume
-**Business:** Regulatory, SLA, budget, timeline
+Document functional dependencies on external systems:
 
-### 9. Create Test Scenarios
+```
+Integration: [SystemName]
+Business Purpose: [Why this dependency exists]
+Data Exchanged: [Business data sent/received]
+Business Rules:
+  - [When interaction occurs]
+  - [What triggers communication]
+Failure Impact:
+  - Business consequence: [Impact on business process]
+  - Mitigation: [Business workaround or fallback]
+```
 
-Generate from pseudocode logic:
+### 7. Document Assumptions and Constraints
 
-- Happy path scenarios
-- Edge cases and boundary conditions
-- Error conditions and exception paths
-- Performance and load scenarios
-- Security scenarios
+**Business Assumptions:**
+- Expected data volumes and patterns
+- User behavior expectations
+- Business process frequency
+- External system availability
+
+**Business Constraints:**
+- Regulatory requirements
+- Business policy limitations
+- Data retention requirements
+- Compliance requirements
+
+### 8. Identify Business Acceptance Criteria
+
+Define how to verify functional correctness:
+
+- Normal business scenarios
+- Business edge cases and boundary conditions
+- Business error conditions
+- Business rules validation
 
 Format:
 
 ```
-Test Case: TC-001
-Objective: Verify [behavior]
-Preconditions: [setup]
-Input: [test data]
-Expected Output: [results]
-Steps:
-  1. [action]
-  2. [verification]
+Acceptance Criterion: AC-001
+For: [FR-XXX]
+Given: [business context]
+When: [business action]
+Then: [expected business outcome]
+
+Business Scenarios:
+  Scenario 1: Normal case
+    - Context: [typical business situation]
+    - Action: [user/system action]
+    - Expected: [business result]
+  
+  Scenario 2: Edge case
+    - Context: [boundary condition]
+    - Action: [user/system action]
+    - Expected: [business result]
 ```
 
 ## Output Formats
 
-Generate specification based on context and needs. Standard formats include:
+Generate functional specification based on context. Standard format:
 
-**Complete Specification Document:**
+**Functional Specification Document:**
 
 ```markdown
-# [System/Component] Specification
+# [System/Component] Functional Specification
 
 ## 1. Overview
-[Purpose, scope, and objectives]
+[Business purpose, scope, and objectives]
 
 ## 2. Functional Requirements
-[FR-001, FR-002, etc.]
+[FR-001, FR-002, etc. - business functionality]
 
-## 3. Non-Functional Requirements
-[Performance, security, reliability, etc.]
+## 3. Business Data Requirements
+[Business entities, attributes, relationships, constraints]
 
-## 4. Data Model
-[Entities, relationships, constraints]
+## 4. Business Workflow and Logic
+[Business process flows, decision logic, business rules]
 
-## 5. API Specification
-[Functions, endpoints, interfaces]
+## 5. Service Function Specifications
+[Business functions, inputs/outputs, processing logic]
 
-## 6. Workflow and Logic
-[Process flows, decision tables]
+## 6. Integration Points
+[External system dependencies at functional level]
 
-## 7. Integration Points
-[External dependencies and interfaces]
+## 7. Business Rules and Constraints
+[Complete business logic, validation rules, calculations]
 
-## 8. Assumptions and Constraints
-[Technical and business constraints]
+## 8. Business Acceptance Criteria
+[How to verify functional correctness]
 
-## 9. Test Scenarios
-[Test cases and acceptance criteria]
+## 9. Assumptions and Dependencies
+[Business assumptions and constraints]
 
 ## 10. Appendices
-[Diagrams, references, glossary]
+[Business flow diagrams, glossary, references]
 ```
 
-**User Stories (Agile):**
+**User Stories (Agile Format):**
 
 ```
-Epic: [High-level feature]
+Epic: [High-level business capability]
 
-Story 1: As a [role], I want [capability] so that [benefit]
+Story 1: As a [role], I want [capability] so that [business benefit]
+
 Acceptance Criteria:
-  - Given [context], when [action], then [outcome]
-  - Given [context], when [action], then [outcome]
+  - Given [business context], when [user action], then [business outcome]
+  - Given [business context], when [user action], then [business outcome]
 
-Story 2: [Next story]
-```
+Business Rules:
+  - [Rule 1: condition → action]
+  - [Rule 2: constraint or validation]
 
-**Architecture Decision Records (ADR):**
-
-```markdown
-# ADR-001: [Decision Title]
-
-## Status
-[Proposed/Accepted/Deprecated]
-
-## Context
-[From pseudocode analysis: problem and constraints]
-
-## Decision
-[What approach the pseudocode implements]
-
-## Consequences
-[Benefits and trade-offs of this approach]
-
-## Alternatives Considered
-[Other approaches and why not chosen]
+Story 2: [Next story following same pattern]
 ```
 
 For additional specification formats: [specification-templates.md](references/specification-templates.md)
 
 ## Key Principles
 
-**Maintain Traceability:**
+**Focus Strictly on Functional Requirements:**
 
-- Link requirements to specific pseudocode sections
-- Use unique identifiers for each requirement
-- Reference line numbers or code blocks
+- Extract WHAT the system does, not HOW it's built
+- Describe business behavior, not technical implementation
+- Specify business rules, not design patterns
+- Document business logic, not architecture
+- Exclude performance, security, scalability (non-functional)
 
-**Be Explicit About Inferences:**
+**Maintain Business Traceability:**
 
-- Mark what is stated vs inferred
-- Document assumptions
-- Highlight areas needing clarification
+- Link requirements to business logic in pseudocode
+- Use identifiers: FR (functional), BR (business rule), AC (acceptance criteria)
+- Reference pseudocode sections showing business logic
 
-**Focus on Intent:**
+**Clarify Business Intent:**
 
-- Extract WHAT and WHY, not just HOW
-- Describe business value
-- Separate essential requirements from implementation choices
+- Extract WHY (business purpose) and WHAT (business capability)
+- Describe business value and outcomes
+- Separate business requirements from technical choices
+- Mark inferred business rules vs stated logic
 
-**Validate Completeness:**
+**Validate Functional Completeness:**
 
-- Ensure all pseudocode paths documented
-- Verify all inputs/outputs specified
-- Check all error conditions addressed
+- Ensure all business logic paths documented
+- Verify all business inputs/outputs specified
+- Check all business error conditions covered
+- Confirm all business rules extracted
 
-## Common Patterns
+## Common Business Patterns
 
-Recognize and apply standard patterns:
+Recognize and document business patterns:
 
-**CRUD Operations:** Create/read/update/delete → Standard CRUD spec with data model
-**State Machines:** State transitions → State diagram with transition table
-**Pipeline Processing:** Sequential transformations → Pipeline spec with stages
-**Request-Response:** Input → process → output → API spec with contracts
-**Event-Driven:** Listen → react → Event spec with handlers and triggers
+**CRUD Operations:** Create/read/update/delete → Business entity management spec with business rules
+**State Machines:** State transitions → Business lifecycle spec with state meanings and transition conditions
+**Business Process:** Sequential steps → Business workflow spec with decision points
+**Data Transformation:** Input → process → output → Business function spec with transformation rules
+**Event-Driven:** Trigger → react → Business event spec with business triggers and actions
 
-## Quality Checklist
+## Functional Specification Quality Checklist
 
-Before finalizing:
+Before finalizing, verify:
 
-- ✓ All pseudocode elements covered
-- ✓ Requirements clear, testable, unambiguous
-- ✓ Data models complete with constraints
-- ✓ Workflows cover all branches and errors
-- ✓ Assumptions and constraints documented
-- ✓ Integration points identified
-- ✓ Test scenarios cover major use cases
-- ✓ Specification follows standard format
+- ✓ All business logic from pseudocode extracted
+- ✓ Requirements describe WHAT (functionality), not HOW (design/implementation)
+- ✓ Business rules complete and clear
+- ✓ Business entities and relationships defined
+- ✓ Business workflows cover all decision paths
+- ✓ Business error conditions documented
+- ✓ Business assumptions stated
+- ✓ Integration dependencies at functional level (data exchanged, not technical protocols)
+- ✓ Acceptance criteria defined (functional verification, not test cases)
+- ✓ No design decisions (architecture, patterns, technology choices)
+- ✓ No implementation details (algorithms, data structures, code)
+- ✓ No testing strategies (test plans, test cases, coverage)
+- ✓ No deployment considerations (infrastructure, environments, scaling)
+- ✓ Focus maintained exclusively on business functionality and requirements
 
 ## Examples
 
@@ -300,23 +326,49 @@ function calculateShippingCost(weight, distance, priority):
     return round(baseCost, 2)
 ```
 
-Generated specification excerpt:
+Generated functional specification excerpt:
 
 ```
 FR-001: Shipping Cost Calculation
-Inputs:
-  - weight: decimal (kg, must be > 0)
-  - distance: decimal (km, must be > 0)
-  - priority: enum ["express", "standard"]
-Processing:
-  1. Validate inputs (weight > 0, distance > 0)
-  2. Calculate: (weight × $0.50) + (distance × $0.10)
-  3. Apply multiplier: express=1.5×, standard=1.0×
-  4. Round to 2 decimal places
-Output: decimal (USD)
-Exceptions:
-  - InvalidInputError: weight ≤ 0 or distance ≤ 0
-  - UnknownPriorityError: invalid priority value
+
+Business Purpose:
+  Calculate shipping cost based on package characteristics and service level
+
+Business Inputs:
+  - weight: Package weight in kg (must be positive)
+  - distance: Shipping distance in km (must be positive)
+  - priority: Service level (express or standard)
+
+Business Logic:
+  1. Validate business constraints:
+     - Weight must represent a real package (> 0)
+     - Distance must be a valid route (> 0)
+  2. Calculate base cost using business formula:
+     - Weight component: weight × $0.50 per kg
+     - Distance component: distance × $0.10 per km
+  3. Apply service level multiplier:
+     - Express service: 1.5× base cost
+     - Standard service: 1.0× base cost (no change)
+  4. Round to currency precision (2 decimal places)
+
+Business Rules:
+  - BR-001: Weight and distance must be positive values
+  - BR-002: Express service costs 50% more than standard
+  - BR-003: Cost calculated in USD currency
+
+Business Output:
+  - Shipping cost in USD
+
+Business Error Conditions:
+  - Invalid package weight: Cannot calculate for non-physical package
+  - Invalid distance: Cannot calculate for invalid route
+  - Unknown service level: Must specify express or standard service
+
+Acceptance Criteria:
+  - Given valid weight and distance, when calculating standard shipping,
+    then cost equals (weight × 0.5 + distance × 0.1) rounded to 2 decimals
+  - Given valid inputs with express priority, when calculating,
+    then cost is 1.5× the standard calculation
 ```
 
 **Complex Workflow:**
