@@ -322,6 +322,7 @@ These templates focus exclusively on **functional requirements** - what the syst
 - Specify business rules, not technical solutions
 
 **What to Include:**
+
 - Business logic and rules
 - Data validation constraints
 - User interactions and workflows

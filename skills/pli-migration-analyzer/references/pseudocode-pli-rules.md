@@ -276,36 +276,45 @@ END FUNCTION
 4. **ON conditions**: Map to TRY-CATCH blocks
 5. **GO TO**: Refactor to structured control flow
 6. **Bit strings**: Convert '1'B/'0'B to TRUE/FALSE8. **Substring positions**: PL/I uses 1-based indexing (document conversion to 0-based if needed)
-9. **File buffers**: LOCATE allocates buffer - map to appropriate memory management
-10. **Concatenation**: `||` operator maps to `+` or CONCAT()
+7. **File buffers**: LOCATE allocates buffer - map to appropriate memory management
+8. **Concatenation**: `||` operator maps to `+` or CONCAT()
 
 ## Common PL/I Idioms
 
 ### Initialization Pattern
+
 ```pli
 DCL counter FIXED BIN(31) INIT(0);
 ```
+
 →
+
 ```
 counter: INTEGER = 0
 ```
 
 ### Null String Check
+
 ```pli
 IF name = '' THEN ...
 ```
+
 →
+
 ```
 IF name = '' OR name = NULL THEN ...
 ```
 
 ### Numeric Validation
+
 ```pli
 ON CONVERSION SNAP;
 value = input_string;
 REVERT CONVERSION;
 ```
+
 →
+
 ```
 TRY
     value = CONVERT_TO_NUMBER(inputString)
@@ -315,40 +324,53 @@ END TRY
 ```
 
 ### Counter Increment
+
 ```pli
 count = count + 1;
 ```
+
 →
+
 ```
 count = count + 1  // or INCREMENT(count)
 ```
 
 ### Boolean Toggle
+
 ```pli
 flag = ¬flag;  /* or */ flag = ^flag;
 ```
+
 →
+
 ```
 flag = NOT flag
 ```
 
 ### Range Check
+
 ```pli
 IF value >= MIN_VALUE & value <= MAX_VALUE THEN ...
 ```
+
 →
+
 ```
 IF value >= MIN_VALUE AND value <= MAX_VALUE THEN ...
 ```
 
 ### Packed Decimal Precision
+
 ```pli
 DCL price FIXED DECIMAL(9,2);  /* 999999999.99 */
 ```
+
 →
+
 ```
 price: DECIMAL(9,2)  // CRITICAL: Preserve exact precision!
 ```
+
 ## Translation Workflow
 
 ### Step-by-Step Process

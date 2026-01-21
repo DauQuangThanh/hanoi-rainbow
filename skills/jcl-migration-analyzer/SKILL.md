@@ -19,6 +19,7 @@ This skill provides comprehensive analysis and migration planning for JCL (Job C
 ## When to Use This Skill
 
 Use this skill when:
+
 - Analyzing JCL job files (.jcl, .JCL) for modernization
 - Planning migration from mainframe batch processing to modern workflow systems
 - Converting JCL job steps to Spring Batch, Apache Airflow, or shell scripts
@@ -69,6 +70,7 @@ Use `scripts/analyze-dependencies.sh` or `scripts/analyze-dependencies.ps1` to g
 ### Step 2: Extract Structure
 
 Use `scripts/extract-structure.py` to parse JCL files and extract:
+
 - Job cards and parameters
 - Step sequences and execution order
 - Program/procedure invocations
@@ -81,6 +83,7 @@ Output format: JSON with job structure, steps, and dependencies.
 ### Step 3: Analyze Conditional Logic
 
 **CRITICAL**: Identify and document COND logic (which is INVERTED):
+
 - `COND=(0,NE)` → Run if previous RC ≠ 0 (run on ERROR)
 - `COND=(0,EQ)` → Skip if previous RC = 0 (skip on SUCCESS)
 - IF/THEN/ELSE uses normal logic (not inverted)
@@ -90,6 +93,7 @@ Create truth tables for complex conditional logic to avoid errors in migration.
 ### Step 4: Map Data Dependencies
 
 Track data flow between steps:
+
 - Input datasets (DISP=SHR or OLD)
 - Output datasets (DISP=NEW, CATLG)
 - Temporary datasets (&&TEMP)
@@ -99,6 +103,7 @@ Track data flow between steps:
 ### Step 5: Estimate Complexity
 
 Use `scripts/estimate-complexity.py` to calculate migration complexity based on:
+
 - Number of job steps
 - Conditional logic complexity (COND/IF/THEN/ELSE)
 - Number of procedures (PROCs)
@@ -109,6 +114,7 @@ Use `scripts/estimate-complexity.py` to calculate migration complexity based on:
 ### Step 6: Choose Target Platform
 
 Select migration target based on requirements:
+
 - **Spring Batch**: Java-based batch processing with comprehensive features
 - **Apache Airflow**: Python-based workflow orchestration with rich UI
 - **Shell Scripts**: Simple, lightweight for basic sequential processing
@@ -119,6 +125,7 @@ Select migration target based on requirements:
 ### Step 7: Generate Migration Strategy
 
 Create comprehensive migration report with:
+
 1. **Job Overview**: Purpose, schedule, dependencies
 2. **Step Sequence**: Detailed breakdown of each step
 3. **Data Flow Diagram**: Input/output dependencies

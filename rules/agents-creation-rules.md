@@ -14,6 +14,7 @@ last_updated: 2026-01-21
 ## LLM PROCESSING INSTRUCTIONS
 
 **PARSING STRATEGY**:
+
 1. Read entire document into context
 2. Index sections by markdown headers (##, ###, ####)
 3. Extract all code blocks with language tags
@@ -24,6 +25,7 @@ last_updated: 2026-01-21
 8. Apply patterns from "ANTI-PATTERN vs. GOOD PATTERN" sections
 
 **DOCUMENT STRUCTURE**:
+
 - Universal Principles: APPLY TO ALL commands
 - File Format Standards: SELECT based on agent type
 - Agent-Specific Guidelines: APPLY only for matched agent
@@ -35,7 +37,7 @@ last_updated: 2026-01-21
 ---
 
 > **DOCUMENT PURPOSE**: This document provides comprehensive guidelines for creating custom AI agents, commands, and workflows. It is designed to be read by both humans and LLMs to ensure consistent, high-quality agent creation across multiple AI-powered development tools.
-
+>
 > **TARGET AUDIENCE**: AI agents, developers, and teams building custom agents for spec-driven development and AI-assisted coding workflows.
 
 ---
@@ -62,6 +64,7 @@ validation: REQUIRED
 **RULE**: Always be explicit about intent and expected outcomes.
 
 **REQUIREMENTS**:
+
 ```yaml
 requirements:
   - id: R001
@@ -82,6 +85,7 @@ requirements:
 ```
 
 **ANTI-PATTERN vs. GOOD PATTERN**:
+
 ```markdown
 ❌ ANTI-PATTERN: "Help with code"
    - Too vague
@@ -95,24 +99,28 @@ requirements:
 ```
 
 ### 2. Modularity and Reusability
+
 - One clear responsibility per agent/command
 - Avoid monolithic agents
 - Design for chaining/composition
 - Extract reusable components
 
 ### 3. Context Awareness
+
 - Reference project docs/conventions
 - Use relative paths
 - Integrate version control info
 - Track development phase
 
 ### 4. Guardrails and Constraints
+
 - Define should/should-not behaviors
 - Specify tech constraints
 - Include quality gates
 - Set error handling expectations
 
 ### 5. Cross-Platform Compatibility
+
 - Support Windows/macOS/Linux
 - Provide .sh + .ps1 OR Python/Node.js
 - Test on all platforms
@@ -150,6 +158,7 @@ def select_file_format(agent_name: str) -> str:
 ### Markdown Format (.md)
 
 **USED BY** (17 agents):
+
 - Claude Code
 - Cursor
 - GitHub Copilot
@@ -205,6 +214,7 @@ argument_patterns:
 ```
 
 **TEMPLATE**:
+
 ```markdown
 ---
 description: "Clear, concise description of what this command does"
@@ -242,6 +252,7 @@ mode: project-name.command-name
 ```
 
 **Key Differences:**
+
 - The `mode` field enables slash command functionality
 - Format: `{project-identifier}.{command-name}`
 - Example: `vinh.specify`, `vinh.implement`
@@ -273,6 +284,7 @@ Reference {SCRIPT} for script paths.
 ```
 
 **Key Points:**
+
 - Use triple quotes (`"""`) for multi-line prompts
 - Arguments use double curly braces: `{{args}}`
 - Maintain proper TOML syntax for special characters
@@ -285,12 +297,14 @@ Reference {SCRIPT} for script paths.
 ### Claude Code (.claude/commands/)
 
 **Best Practices:**
+
 - Use conversational but precise language
 - Break complex tasks into clear steps
 - Leverage Claude's strong reasoning capabilities
 - Include rationale for decisions when appropriate
 
 **COMPLETE EXAMPLE**:
+
 ```markdown
 ---
 description: "Design a technical implementation plan with architecture decisions"
@@ -326,6 +340,7 @@ Arguments: $ARGUMENTS
 ```
 
 **KEY ELEMENTS**:
+
 - Clear phases with explicit numbering
 - Output specification section
 - Input section showing argument usage
@@ -333,10 +348,12 @@ Arguments: $ARGUMENTS
 ### GitHub Copilot (.github/agents/ + .github/prompts/)
 
 **Structure:**
+
 - `.github/agents/` - Custom agents (`.agent.md`)
 - `.github/prompts/` - Slash commands (`.prompt.md`)
 
 **Pattern:**
+
 ```markdown
 ---
 description: "Command description"
@@ -353,6 +370,7 @@ Arguments: $ARGUMENTS
 ### Cursor (.cursor/commands/ or .cursor/rules/)
 
 **Pattern:**
+
 ```markdown
 ---
 description: "Rule description"
@@ -365,6 +383,7 @@ glob: "**/*.ext"  # Optional
 ### Windsurf (.windsurf/workflows/ or .windsurf/rules/)
 
 **Pattern:**
+
 ```markdown
 ---
 description: "Workflow description"
@@ -382,6 +401,7 @@ description: "Workflow description"
 ### Gemini CLI & Qwen Code (.gemini/commands/, .qwen/commands/)
 
 **TOML Pattern:**
+
 ```toml
 description = "Command description"
 
@@ -445,6 +465,7 @@ description_validation:
 - Use **dot notation** for command modes: `project.command-name`
 
 **Examples:**
+
 ```
 ✅ specify.md          - Create specifications
 ✅ implement.md        - Execute implementation
@@ -463,6 +484,7 @@ description_validation:
 - Keep under **80 characters** when possible
 
 **Examples:**
+
 ```markdown
 ✅ "Create a detailed specification from user requirements"
 ✅ "Analyze codebase for security vulnerabilities and generate report"
@@ -485,16 +507,20 @@ description_validation:
 | **Agent name** | `__AGENT__` | When agent name needed in output | Replaced with agent name |
 
 **Best Practices:**
+
 - Always document what arguments are expected
 - Provide examples of valid arguments
 - Handle missing or invalid arguments gracefully
 - Use descriptive variable names in examples
 
 **Example:**
+
 ```markdown
 ## Usage
 ```
+
 /speckit.specify [feature description]
+
 ```
 
 ## Arguments
@@ -502,8 +528,10 @@ description_validation:
   
 ## Examples
 ```
+
 /speckit.specify Create a user authentication system with email/password login
 /speckit.specify Build a photo album organizer with drag-and-drop functionality
+
 ```
 ```
 
@@ -528,6 +556,7 @@ description_validation:
 ```
 
 **Key Principles:**
+
 - Each phase should have **clear entry/exit criteria**
 - Phases should be **sequential** with explicit dependencies
 - Include **validation checkpoints** between phases
@@ -566,17 +595,21 @@ Design RESTful API endpoints following these examples:
 
 ## Example 1: User Resource
 ```
+
 GET    /api/v1/users           - List all users
 GET    /api/v1/users/:id       - Get specific user
 POST   /api/v1/users           - Create new user
 PUT    /api/v1/users/:id       - Update user
 DELETE /api/v1/users/:id       - Delete user
+
 ```
 
 ## Example 2: Nested Resource
 ```
+
 GET    /api/v1/users/:id/posts       - List user's posts
 POST   /api/v1/users/:id/posts       - Create post for user
+
 ```
 
 Now design endpoints for: $ARGUMENTS
@@ -667,6 +700,7 @@ Create a JSON file `schema.json` with this structure:
 ```
 
 Include comments explaining design decisions.
+
 ```
 
 ---
@@ -721,6 +755,7 @@ validation_matrix:
 > **REQUIREMENT**: All scripts MUST work on Windows, macOS, and Linux.
 
 **DECISION TREE: CHOOSING SCRIPT APPROACH**
+
 ```
 Does script have complex logic or many dependencies?
 ├─ YES → Use Python or Node.js (RECOMMENDED)
@@ -780,6 +815,7 @@ Write-Host "Processing..."
 ### 2. Cross-Platform Best Practices
 
 **Path Handling:**
+
 ```bash
 # Bash: Use forward slashes, convert if needed
 PROJECT_DIR="$(pwd)"
@@ -793,6 +829,7 @@ $outputFile = Join-Path $projectDir "output/report.md"
 ```
 
 **Environment Variables:**
+
 ```bash
 # Bash
 export MY_VAR="value"
@@ -806,6 +843,7 @@ Write-Host $env:MY_VAR
 ```
 
 **File Operations:**
+
 ```bash
 # Bash
 mkdir -p "output/logs"
@@ -821,6 +859,7 @@ Remove-Item -Recurse -Force "temp/"
 ```
 
 **Command Execution:**
+
 ```bash
 # Bash
 if some-command; then
@@ -845,6 +884,7 @@ try {
 ### 3. Platform Detection
 
 **In Agent Commands:**
+
 ```markdown
 ## Platform-Specific Instructions
 
@@ -854,9 +894,11 @@ sh scripts/setup.sh
 ```
 
 **For Windows (PowerShell):**
+
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/setup.ps1
 ```
+
 ```
 
 **In Scripts (Auto-detect):**
@@ -886,6 +928,7 @@ if ($IsWindows) {
 ### 4. Using Cross-Platform Languages
 
 **Python (Recommended for complex logic):**
+
 ```python
 #!/usr/bin/env python3
 # script-name.py - Works on all platforms
@@ -911,6 +954,7 @@ if __name__ == "__main__":
 ```
 
 **Node.js (Alternative for JavaScript environments):**
+
 ```javascript
 #!/usr/bin/env node
 // script-name.js - Works on all platforms
@@ -962,14 +1006,17 @@ chmod +x scripts/process.sh
 ```
 
 **Windows:**
+
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/process.ps1
 ```
 
 **Cross-Platform (Python):**
+
 ```bash
 python3 scripts/process.py
 ```
+
 ```
 
 ---
@@ -999,6 +1046,7 @@ python3 scripts/process.py
 **MANDATORY CHECKS BEFORE COMMITTING**:
 
 #### Content Quality
+
 - [ ] **Description**: Clear, actionable, under 80 characters
   - PASS: "Create feature specification from user requirements"
   - FAIL: "Helps with stuff"
@@ -1020,12 +1068,14 @@ python3 scripts/process.py
   - FAIL: "Takes arguments"
 
 #### Technical Quality
+
 - [ ] **Edge Cases**: Common failure scenarios documented
 - [ ] **File Paths**: Use correct conventions for target platform
 - [ ] **Syntax**: Valid Markdown/TOML (run linter)
 - [ ] **Compatibility**: Tested with target agent(s)
 
 #### Cross-Platform (if scripts included)
+
 - [ ] **Platform Coverage**: Works on Windows, macOS, Linux
 - [ ] **Documentation**: Platform-specific requirements listed
 
@@ -1120,12 +1170,16 @@ Please use `/speckit.implement` instead.
 
 Old usage:
 ```
+
 /old-implement "feature description"
+
 ```
 
 New usage:
 ```
+
 /speckit.implement
+
 ```
 
 The new command automatically detects the feature context.
@@ -1143,6 +1197,7 @@ The new command automatically detects the feature context.
 - Refine existing commands based on real usage
 
 **Feedback Template:**
+
 ```markdown
 # Command Feedback
 
@@ -1208,6 +1263,7 @@ The new command automatically detects the feature context.
 ### Agent Directory Structure
 
 **HOW TO READ THIS TABLE**:
+
 1. Find your target agent in the "Agent" column
 2. Note the "Directory" where files should be placed
 3. Use the correct "File Type" extension

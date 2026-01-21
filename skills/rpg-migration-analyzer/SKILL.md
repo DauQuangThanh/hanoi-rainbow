@@ -19,6 +19,7 @@ This skill provides comprehensive analysis and migration planning for RPG (Repor
 ## When to Use This Skill
 
 Use this skill when:
+
 - Analyzing RPG source files (.rpg, .rpgle, .RPGLE) for modernization
 - Planning migration from AS/400 or IBM i systems to Java
 - Converting RPG data structures (D-specs) to Java classes
@@ -35,17 +36,19 @@ Use this skill when:
 ### 1. Program Analysis
 
 Extract and analyze RPG program components:
+
 - **Specification types**: H-spec (header/control), F-spec (file definitions), D-spec (data definitions), C-spec (calculation/logic), P-spec (procedures)
 - **Data structures**: D-specs with nested structures, arrays (DIM), external references (EXTNAME), qualifiers (LIKEDS, QUALIFIED)
 - **File definitions**: Physical files, logical files, display files (WORKSTN), printer files
 - **Business logic**: Calculation specifications, control structures (IF/ELSE/DO/FOR), expressions (EVAL)
-- **Indicators**: Legacy indicators (*IN01-*IN99), built-in indicators (*INLR, *INOF)
+- **Indicators**: Legacy indicators (*IN01-*IN99), built-in indicators (*INLR,*INOF)
 - **Built-in functions**: String functions (%SUBST, %TRIM, %SCAN), date functions (%DATE, %DAYS), math functions (%DEC, %INT), file status (%EOF, %FOUND, %ERROR)
 - **Error handling**: %ERROR, %STATUS, ON-ERROR blocks
 
 ### 2. Data Structure Mapping
 
 Convert RPG data definitions to Java equivalents:
+
 - **D-spec conversion**: Data structure definitions to Java classes (POJOs)
 - **Data type mapping**:
   - Packed decimal (P) → `BigDecimal` (preserve precision)
@@ -64,6 +67,7 @@ Convert RPG data definitions to Java equivalents:
 ### 3. File Operations
 
 Parse and convert RPG file I/O to modern database access:
+
 - **File types**: Physical files (DISK), logical files (keyed access), display files (WORKSTN), printer files (PRINTER)
 - **Access methods**: Sequential (full read), keyed (direct access by key), arrival sequence
 - **I/O operations**:
@@ -79,6 +83,7 @@ Parse and convert RPG file I/O to modern database access:
 ### 4. Java Migration Strategy
 
 Generate modern Java implementation patterns:
+
 - **POJOs**: Plain Old Java Objects from D-spec data structures
 - **JPA Entities**: @Entity annotations for database tables (from EXTNAME files)
 - **Repository pattern**: Spring Data JPA repositories for file operations
@@ -92,6 +97,7 @@ Generate modern Java implementation patterns:
 ### 5. Dependency Analysis
 
 Map program relationships and external dependencies:
+
 - **Program calls**: CALLB (bound procedure calls), CALLP (prototyped procedure calls)
 - **Service programs**: BNDDIR (binding directories), *SRVPGM objects
 - **File dependencies**: All physical/logical files accessed by the program
@@ -136,6 +142,7 @@ Convert RPG to Java types - **CRITICAL**: Always use `BigDecimal` for packed/zon
 ### Step 4: Convert Code Patterns
 
 Transform RPG operations to Java - key conversions:
+
 - **Calculations**: EVAL expressions → BigDecimal arithmetic methods
 - **File I/O**: CHAIN → `findById()` with Optional, READ → query methods
 - **Arrays**: Adjust 1-based (RPG) to 0-based (Java) indexing
@@ -147,6 +154,7 @@ See [pseudocode-rpg-rules.md](references/pseudocode-rpg-rules.md) for comprehens
 ### Step 5: Generate Java Implementation
 
 Create:
+
 1. POJOs from D-spec data structures (`scripts/generate-java-classes.py`)
 2. JPA entities for database tables
 3. Repository interfaces (Spring Data JPA)
@@ -185,6 +193,7 @@ Verify: BigDecimal usage, index adjustments, transaction boundaries, error handl
 ### Example: Data Structure to Java Class
 
 **RPG D-spec:**
+
 ```rpg
 D Employee   DS
 D   EmpId             6  0
@@ -193,6 +202,7 @@ D   Salary           63  2P
 ```
 
 **Java POJO:**
+
 ```java
 public class Employee {
     private int empId;
@@ -205,23 +215,26 @@ public class Employee {
 ### Example: File Operation Conversion
 
 **RPG CHAIN:**
+
 ```rpg
 C     custId  CHAIN  CUSTFILE
 C             IF     %FOUND(CUSTFILE)
 ```
 
 **Java with JPA:**
+
 ```java
 customerRepository.findById(custId).ifPresent(customer -> {
     // process customer
 });
 ```
 
+```java
 // Service usage
 public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
-    
+
     public Optional<Customer> findCustomer(Integer custId) {
         return customerRepository.findById(custId);
     }
@@ -231,18 +244,23 @@ public class CustomerService {
 ## Edge Cases
 
 ### Case 1: Packed Decimal Precision
+
 **Problem**: Using double/float causes precision errors. **Solution**: Always use `BigDecimal` from String literals: `new BigDecimal("123.45")`
 
 ### Case 2: Array Index Shift
+
 **Problem**: RPG 1-based, Java 0-based. **Solution**: Adjust all array/string index references. Test thoroughly.
 
 ### Case 3: External Data Structures
+
 **Problem**: EXTNAME without DDL source. **Solution**: Use DSPFFD command, query DB2 SYSTABLES/SYSCOLUMNS, or create entities from runtime data.
 
 ### Case 4: Legacy Indicators
+
 **Problem**: *IN01-*IN99 for control flow. **Solution**: Replace with descriptive booleans: `boolean invalidAmount = false;`
 
 ### Case 5: Date Century Handling
+
 **Problem**: 2-digit years (Y2K). **Solution**: Use 4-digit LocalDate, apply century window logic, document assumptions.
 
 ## Guidelines
@@ -261,12 +279,15 @@ public class CustomerService {
 ## Error Handling
 
 ### Type 1: File I/O Errors
+
 **Detection**: %ERROR or %STATUS checks. **Handling**: Use try-catch with custom exceptions (`CustomerNotFoundException`, `DataAccessException`)
 
 ### Type 2: Arithmetic Overflow
+
 **Detection**: Insufficient field size. **Handling**: BigDecimal with appropriate scale/precision, catch `ArithmeticException`
 
 ### Type 3: Missing Dependencies
+
 **Detection**: Missing /COPY members. **Handling**: Track all includes, create shared interfaces, use Maven/Gradle dependencies
 
 ## Additional Resources
@@ -308,44 +329,52 @@ Python and shell scripts for automated analysis in `scripts/`:
 - **[java-class-template.java](assets/java-class-template.java)** - Template for generated Java classes
 
 **analyze-dependencies.sh / .ps1**
+
 - Scans RPG source files for CALLB, CALLP, /COPY references
 - Generates dependency graph in JSON format
 - Identifies circular dependencies
 
 Usage:
+
 ```bash
 ./scripts/analyze-dependencies.sh /path/to/rpg/source
 ```
 
 **extract-structure.py**
+
 - Extracts program structure (H/F/D/C/P specs)
 - Lists all variables, data structures, files
 - Identifies subroutines and procedures
 - Outputs JSON structure file
 
 Usage:
+
 ```bash
 python scripts/extract-structure.py PROGRAM.rpgle --output structure.json
 ```
 
 **generate-java-classes.py**  
+
 - Generates Java POJO classes from RPG data structures
 - Creates proper field types (BigDecimal for packed decimals)
 - Adds getters, setters, constructors
 - Generates Bean Validation annotations
 
 Usage:
+
 ```bash
 python scripts/generate-java-classes.py structure.json --output-dir ./src/main/java
 ```
 
 **estimate-complexity.py**
+
 - Calculates migration complexity score
 - Analyzes LOC, dependencies, file operations
 - Provides effort estimate (hours/days)
 - Generates priority ranking
 
 Usage:
+
 ```bash
 python scripts/estimate-complexity.py structure.json --report complexity-report.md
 ```
@@ -362,6 +391,7 @@ Use the migration report template for consistent documentation:
 This skill integrates with various development and analysis tools:
 
 ### IBM i / AS/400 Tools
+
 - **Source Entry Utility (SEU)**: Extract source code from AS/400
 - **Programming Development Manager (PDM)**: Access member lists and source files
 - **WRKMBRPDM**: Work with source members
@@ -369,23 +399,27 @@ This skill integrates with various development and analysis tools:
 - **DSPPGMREF**: Display program references and dependencies
 
 ### Database Tools
+
 - **DB2 for i**: Query system catalogs (SYSTABLES, SYSCOLUMNS) for metadata
 - **IBM Data Studio**: Visual database design and SQL development
 - **DBeaver**: Universal database tool with DB2 support
 
 ### Modern Development Environment
+
 - **IntelliJ IDEA**: Java development with Spring Boot support
 - **Eclipse**: Java IDE with JPA tooling
 - **VS Code**: Lightweight editor with Java extensions
 - **Git**: Version control for both legacy source and new Java code
 
 ### Migration Support Tools
+
 - **Spring Initializr**: Bootstrap Spring Boot projects
 - **JPA Buddy**: IntelliJ plugin for JPA entity generation
 - **Liquibase/Flyway**: Database migration version control
 - **Maven/Gradle**: Build automation and dependency management
 
 ### Testing and Validation
+
 - **JUnit 5**: Unit testing framework
 - **Spring Boot Test**: Integration testing support
 - **Mockito**: Mocking framework for unit tests

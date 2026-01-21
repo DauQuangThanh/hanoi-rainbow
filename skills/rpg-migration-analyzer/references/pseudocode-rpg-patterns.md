@@ -587,11 +587,11 @@ END PROCEDURE
 3. **MOVE/MOVEL**: Remember these are position-based, not simple assignments
 4. **Array indexing**: RPG uses 1-based indexing, adjust for target language
 5. **%FOUND vs %EOF**: Use correct check after different file operations
-6. **Date formats**: RPG date formats vary (*ISO, *USA, *EUR, *JIS, *MDY, etc.)
+6. **Date formats**: RPG date formats vary (*ISO,*USA, *EUR,*JIS, *MDY, etc.)
 7. **String position**: RPG %SUBST uses 1-based positions
 8. **Half-adjust**: Don't forget (H) extender implies ROUND with HALF_UP
 9. **File scope**: RPG files are global; modern code may need different scope
-10. **Indicator arrays**: *IN(01) array syntax vs individual *IN01
+10. **Indicator arrays**: *IN(01) array syntax vs individual*IN01
 11. **EVAL optional**: Free format may omit EVAL but it's an assignment
 12. **Procedure naming**: BEGSR names are local; P-spec procs may be exported
 13. **Data structure arrays**: Multiple occurrence DS != modern arrays

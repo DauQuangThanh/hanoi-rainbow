@@ -343,6 +343,7 @@ Business Idempotency:
 ### 8. Batch Processing Pattern
 
 **Pseudocode Indicators:**
+
 ```
 batch = []
 for each item in items:
@@ -355,12 +356,14 @@ if batch.size > 0:
 ```
 
 **Extract:**
+
 - **Business Batch Size:** Items per business batch
 - **Business Batch Processing:** How batches are handled in business terms
 - **Business Triggers:** What causes batch processing
 - **Business Partial Failures:** Handling of partial batch failures
 
 **Requirements Template:**
+
 ```
 FR-[ID]: [Operation] Business Batch Processing
 
@@ -392,18 +395,21 @@ Business Rules:
 5. **Validate Completeness:** Ensure all business logic paths covered
 
 **Focus on Business Functionality:**
+
 - Describe WHAT from business perspective, not HOW from technical perspective
 - Extract business rules, not implementation strategies
 - Document business behavior, not performance characteristics
 - Specify business constraints, not technical optimizations
 
 **For Multiple Patterns:**
+
 - Code often contains multiple business patterns
 - Extract functional requirements for each pattern
 - Link related business requirements
 - Create hierarchy (business process contains business rules contains business validation)
 
 **Pattern Combinations:**
+
 - Workflow + CRUD + Validation (common for business processes)
 - Event + State Machine (common for business event systems)
 - Authentication + Authorization + CRUD (common for business APIs)

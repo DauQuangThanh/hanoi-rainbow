@@ -150,12 +150,14 @@ Failure Impact:
 ### 7. Document Assumptions and Constraints
 
 **Business Assumptions:**
+
 - Expected data volumes and patterns
 - User behavior expectations
 - Business process frequency
 - External system availability
 
 **Business Constraints:**
+
 - Regulatory requirements
 - Business policy limitations
 - Data retention requirements

@@ -17,14 +17,16 @@ This is the main index for RPG to pseudocode translation rules. The rules have b
 ## File Guide
 
 ### 📘 [pseudocode-rpg-core-rules.md](pseudocode-rpg-core-rules.md)
+
 **Size**: ~400 lines  
 **Use for**: Basic RPG syntax, data types, and operations
 
 **Contains**:
+
 - Specification mapping (H-spec, F-spec, D-spec, C-spec, P-spec)
 - F-spec file declarations (Database, Display, Printer)
 - Core data types (Packed, Zoned, Character, Date/Time, Indicators)
-- RPG special values (*BLANK, *ZERO, *HIVAL, *LOVAL, etc.)
+- RPG special values (*BLANK,*ZERO, *HIVAL,*LOVAL, etc.)
 - Basic operations (arithmetic, data movement, string ops)
 - Control flow (IF, DOW, DOU, FOR, SELECT/WHEN)
 - File operations (READ, WRITE, CHAIN, UPDATE, SETLL)
@@ -35,10 +37,12 @@ This is the main index for RPG to pseudocode translation rules. The rules have b
 ---
 
 ### 🔧 [pseudocode-rpg-functions.md](pseudocode-rpg-functions.md)
+
 **Size**: ~130 lines  
 **Use for**: RPG built-in functions (BIFs)
 
 **Contains**:
+
 - String functions (%SUBST, %TRIM, %SCAN, %REPLACE, %XLATE)
 - Conversion functions (%CHAR, %INT, %DEC, %EDITC, %EDITW)
 - Date/Time functions (%DATE, %TIME, %TIMESTAMP, %DIFF, durations)
@@ -52,10 +56,12 @@ This is the main index for RPG to pseudocode translation rules. The rules have b
 ---
 
 ### 📦 [pseudocode-rpg-data-structures.md](pseudocode-rpg-data-structures.md)
+
 **Size**: ~200 lines  
 **Use for**: Complex data structure patterns
 
 **Contains**:
+
 - Simple data structures
 - Qualified data structures
 - LIKEDS (structure references)
@@ -69,10 +75,12 @@ This is the main index for RPG to pseudocode translation rules. The rules have b
 ---
 
 ### 🎯 [pseudocode-rpg-patterns.md](pseudocode-rpg-patterns.md)
+
 **Size**: ~700 lines  
 **Use for**: Common RPG idioms and translation patterns
 
 **Contains**:
+
 - Indicator → Boolean conversion
 - Subroutine → Procedure patterns
 - File loop patterns (CHAIN, READ, SETLL/READE)
@@ -96,16 +104,18 @@ This is the main index for RPG to pseudocode translation rules. The rules have b
 ---
 
 ### 🚀 [pseudocode-rpg-advanced.md](pseudocode-rpg-advanced.md)
+
 **Size**: ~1,300 lines  
 **Use for**: Modern ILE RPG features and integrations
 
 **Contains**:
+
 - File/Program status data structures (INFDS, PSDS)
 - Data area operations
 - Commitment control
 - API call patterns
 - Service programs and binding (NOMAIN, EXPORT)
-- Parameter passing options (CONST, *NOPASS, *OMIT, *VARSIZE)
+- Parameter passing options (CONST, *NOPASS,*OMIT, *VARSIZE)
 - Return values vs output parameters
 - Performance optimization patterns
 - Activation group management
@@ -124,10 +134,12 @@ This is the main index for RPG to pseudocode translation rules. The rules have b
 ---
 
 ### 📋 [pseudocode-rpg-migration-guide.md](pseudocode-rpg-migration-guide.md)
+
 **Size**: ~530 lines  
 **Use for**: Migration planning and best practices
 
 **Contains**:
+
 - Advanced refactoring patterns
 - Translation workflow (7-step process)
 - **Migration Best Practices**:
@@ -183,18 +195,21 @@ For a complete RPG program migration:
 ## Quick Reference
 
 ### Critical Data Type Rules
+
 - **Packed Decimal (nP m)** → `DECIMAL(n,m)` - **NEVER USE FLOAT FOR MONEY!**
 - **Indicators (*INxx)** → Named `BOOLEAN` variables
 - **Arrays** → 1-based indexing in RPG, adjust for target language
-- **Dates** → Handle format differences (*ISO, *USA, *EUR, *MDY, etc.)
+- **Dates** → Handle format differences (*ISO,*USA, *EUR,*MDY, etc.)
 
 ### Most Common Patterns
+
 - File loop: `READ` in `DOW NOT %EOF` loop
 - Key processing: `SETLL` + `READE` in loop
 - Update: `CHAIN` + check `%FOUND` + `UPDATE`
 - Error handling: `MONITOR`/`ON-ERROR` → TRY/CATCH
 
 ### Files Referenced
+
 - [pseudocode-common-rules.md](pseudocode-common-rules.md) - Base pseudocode syntax
 - [testing-strategy.md](testing-strategy.md) - Unit testing approaches
 - [transaction-handling.md](transaction-handling.md) - Transaction patterns
@@ -220,12 +235,14 @@ For a complete RPG program migration:
 ## Version History
 
 ### v2.0 - Split Architecture (2026-01-20)
+
 - **Breaking Change**: Split single 2,993-line file into 6 focused files
 - **Benefit**: Improved Agent Skills compliance (<500 line recommendation)
 - **Benefit**: Easier context loading for AI agents
 - **Benefit**: Progressive disclosure of complexity
 
 ### v1.0 - Monolithic (Original)
+
 - Single comprehensive file
 - 2,993 lines total
 - Complete but difficult to navigate

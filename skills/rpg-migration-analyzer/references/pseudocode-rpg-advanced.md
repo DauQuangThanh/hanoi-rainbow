@@ -1317,7 +1317,6 @@ CALL_FUNCTION_POINTER(processorFunction, [record])
 // Migration note: Use Strategy or Factory pattern with interfaces
 ```
 
-
 ---
 
 **Next**: See [pseudocode-rpg-migration-guide.md](pseudocode-rpg-migration-guide.md) for migration best practices.

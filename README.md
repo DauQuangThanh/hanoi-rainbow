@@ -53,10 +53,10 @@ flowchart LR
     Start --> Brownfield[🏗️ Brownfield<br/>Existing Project]
     
     Greenfield --> GF1[📋 Regulate<br/>Set Principles]
-    GF1 --> GF2[📝 Architect<br/>System Design]
-    GF2 --> GF3[📏 Standardize<br/>Coding Rules]
-    GF3 --> GF4[🎯 Specify<br/>Define Features]
-    GF4 --> GF5[🔍 Clarify<br/>Refine Requirements]
+    GF1 --> GF2[🎯 Specify<br/>Define Features]
+    GF2 --> GF3[🔍 Clarify<br/>Refine Requirements]
+    GF3 --> GF4[📝 Architect<br/>System Design]
+    GF4 --> GF5[📏 Standardize<br/>Coding Rules]
     GF5 --> GF6[🛠️ Design<br/>Technical Plan]
     GF6 --> GF7[📋 Taskify<br/>Break Down Tasks]
     GF7 --> GF8[⚡ Implement<br/>Build Features]
@@ -78,52 +78,6 @@ flowchart LR
 ```
 
 **Greenfield** projects start with establishing principles, architecture, and standards before building features. **Brownfield** projects begin with `/rainbow.assess-context` to understand existing architecture and patterns, then follow a streamlined workflow to add new features while maintaining consistency.
-
-## 🚀 Quick Start
-
-**What you get:** 22 slash commands · 41 reusable skills · 19 AI agent integrations
-
-### Understanding Greenfield vs. Brownfield
-
-```mermaid
-flowchart LR
-    subgraph Greenfield["🌱 GREENFIELD: Starting Fresh"]
-        direction TB
-        GF_Start[Empty Canvas] --> GF_Setup[Setup Phase]
-        GF_Setup --> GF_Regulate[📋 Regulate<br/>Project Principles]
-        GF_Regulate --> GF_Arch[📝 Architect<br/>System Design]
-        GF_Arch --> GF_Std[📏 Standardize<br/>Coding Standards]
-        GF_Std --> GF_Dev[Development Phase]
-        GF_Dev --> GF_Spec[🎯 Specify<br/>Feature]
-        GF_Spec --> GF_Design[🛠️ Design<br/>Technical Plan]
-        GF_Design --> GF_Task[📋 Taskify]
-        GF_Task --> GF_Impl[⚡ Implement]
-        
-        style GF_Setup fill:#E8F5E9,stroke:#4CAF50,stroke-width:2px
-        style GF_Dev fill:#C8E6C9,stroke:#66BB6A,stroke-width:2px
-    end
-    
-    subgraph Brownfield["🏗️ BROWNFIELD: Enhancing Existing"]
-        direction TB
-        BF_Start[Existing Codebase] --> BF_Assess[📚 Assess Context<br/>Analyze Architecture<br/>Extract Patterns<br/>Document Conventions]
-        BF_Assess --> BF_Regulate[📋 Regulate<br/>Update Principles<br/><i>align with findings</i>]
-        BF_Regulate --> BF_Spec[🎯 Specify<br/>New Feature<br/><i>fits existing design</i>]
-        BF_Spec --> BF_Design[🛠️ Design<br/>Integration Plan<br/><i>maintain consistency</i>]
-        BF_Design --> BF_Task[📋 Taskify]
-        BF_Task --> BF_Impl[⚡ Implement<br/><i>follow conventions</i>]
-        
-        style BF_Assess fill:#E3F2FD,stroke:#2196F3,stroke-width:2px
-        style BF_Regulate fill:#E3F2FD,stroke:#2196F3,stroke-width:2px
-    end
-    
-    GF_Impl -.->|Clean Slate<br/>Full Control| Result1[New Application]
-    BF_Impl -.->|Maintains Cohesion<br/>Extends Capabilities| Result2[Enhanced Application]
-    
-    style Greenfield fill:#F1F8E9
-    style Brownfield fill:#E1F5FE
-    style Result1 fill:#FFD700
-    style Result2 fill:#FFD700
-```
 
 **Key Differences:**
 
@@ -366,12 +320,11 @@ rainbow version
 
 ### Available Slash Commands
 
-After running `rainbow init`, your AI coding agent will have access to **22 slash commands** organized into four categories:
+After running `rainbow init`, your AI coding agent will have access to **15 slash commands** organized into three categories:
 
 - **6 Core Workflow Commands** - Essential development cycle (regulate/assess-context → specify → design → taskify → implement)
 - **4 Product-Level Commands** - Run once per product (architecture, standards, E2E tests)
 - **5 Quality & Enhancement Commands** - Validation, analysis, and project management
-- **7 Legacy Modernization Commands** - Mainframe/midrange migration and modernization
 
 After running `rainbow init`, your AI coding agent will have access to these slash commands for structured development:
 
@@ -442,10 +395,10 @@ Hanoi Rainbow supports three main development scenarios with different workflows
 flowchart TB
     subgraph Greenfield["🌱 GREENFIELD: New Applications (2-4 weeks)"]
         direction TB
-        GF1[📋 Regulate: Set Principles] --> GF2[📝 Architect: System Design]
-        GF2 --> GF3[📏 Standardize: Coding Standards]
-        GF3 --> GF4[🎯 Specify: Feature Requirements]
-        GF4 --> GF5[🔍 Clarify: Refine Spec]
+        GF1[📋 Regulate: Set Principles] --> GF2[🎯 Specify: Feature Requirements]
+        GF2 --> GF3[🔍 Clarify: Refine Spec]
+        GF3 --> GF4[📝 Architect: System Design]
+        GF4 --> GF5[📏 Standardize: Coding Standards]
         GF5 --> GF6[🛠️ Design: Technical Plan]
         GF6 --> GF7[📋 Taskify: Break Down]
         GF7 --> GF8[⚡ Implement: Build It]
@@ -511,7 +464,7 @@ flowchart TD
     Start -->|Brand new application| GF[🌱 Greenfield Workflow]
     Start -->|Adding to existing app| BF[🏗️ Brownfield Workflow]
     
-    GF --> GFDesc["<b>Timeline:</b> 2-4 weeks<br/><b>Steps:</b> Regulate → Architect →<br/>Standardize → Specify →<br/>Design → Implement"]
+    GF --> GFDesc["<b>Timeline:</b> 2-4 weeks<br/><b>Steps:</b> Regulate → Specify →<br/>Architect → Standardize →<br/>Design → Taskify → Implement"]
     BF --> BFDesc["<b>Timeline:</b> 1-2 weeks/feature<br/><b>Steps:</b> Assess Context →<br/>Regulate → Specify → Design → Implement"]
     
     style GF fill:#90EE90
@@ -926,13 +879,17 @@ After running `rainbow init`, your project will have the following structure:
 │   └── templates/         # Reusable templates for specs, plans, and tasks
 │
 ├── .<agent-folder>/       # Agent-specific commands (e.g., .claude/commands/, .github/agents/ or .github/prompts/)
-│   └── rainbow.*.md       # 22 Rainbow slash commands for your AI agent
+│   └── rainbow.*.md       # 15 Rainbow slash commands for your AI agent
 │
 ├── .<agent-folder>/skills/  # Agent-specific skills (reusable capabilities)
 │   ├── backend-coding/
 │   ├── frontend-design/
 │   ├── database-design/
-│   └── ... (41 skills total)
+│   ├── cobol-migration-analyzer/
+│   ├── jcl-migration-analyzer/
+│   ├── pli-migration-analyzer/
+│   ├── rpg-migration-analyzer/
+│   └── ... (41 skills total for various development and legacy modernization tasks)
 │
 └── specs/                 # Your feature specifications (created as you work)
     └── <feature-name>/

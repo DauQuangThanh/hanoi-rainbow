@@ -15,6 +15,7 @@ last_updated: 2026-01-21
 ## LLM PROCESSING INSTRUCTIONS
 
 **PARSING STRATEGY**:
+
 1. Load entire specification into context
 2. Parse SKILL.md frontmatter as strict YAML
 3. Validate all required fields (name, description)
@@ -25,6 +26,7 @@ last_updated: 2026-01-21
 8. Check cross-platform script compatibility
 
 **VALIDATION SEQUENCE**:
+
 ```python
 def validate_skill(skill_path: Path) -> ValidationResult:
     results = []
@@ -51,13 +53,14 @@ def validate_skill(skill_path: Path) -> ValidationResult:
 ---
 
 > **DOCUMENT PURPOSE**: This document provides comprehensive guidelines for creating agent skills following the Agent Skills specification. It is designed to be read by both humans and LLMs.
-
+>
 > **WHAT ARE AGENT SKILLS**: Folders of instructions, scripts, and resources that agents can discover and use to perform specialized tasks more accurately and efficiently.
-
-> **KEY DIFFERENCE FROM AGENT COMMANDS**: 
+>
+> **KEY DIFFERENCE FROM AGENT COMMANDS**:
+>
 > - **Agent Commands**: Platform-specific slash commands (e.g., `/speckit.specify`)
 > - **Agent Skills**: Portable, self-contained capability packages that work across multiple agent platforms
-
+>
 > **TARGET AUDIENCE**: AI agents, developers, and teams creating reusable skills for AI-assisted development.
 
 ## Core Principles
@@ -136,12 +139,14 @@ TIER 3: RESOURCES (Load on Demand)
 ```
 
 **WHY THIS MATTERS FOR LLMs**:
+
 - **Context Window**: Limited token budget for all inputs
 - **Performance**: Loading all skills fully = context overflow
 - **Efficiency**: Metadata scanning is fast, full loading is expensive
 - **Accuracy**: Focused context improves task execution
 
 **CONCRETE EXAMPLE**:
+
 ```
 Agent has 200 skills available:
 - Without progressive disclosure: 200 × 5000 = 1,000,000 tokens loaded (OVERFLOW)
@@ -152,6 +157,7 @@ Agent has 200 skills available:
 **RULE**: Keep `SKILL.md` under 500 lines (~5000 tokens). Move details to `references/`.
 
 ### 2. Self-Contained Design
+
 - Explicit dependencies
 - Portable across implementations
 - Version-controlled and auditable
@@ -159,6 +165,7 @@ Agent has 200 skills available:
 - Simple deployment
 
 ### 3. Clear Communication
+
 - Explicit over implicit
 - Actionable error messages
 - Document edge cases
@@ -168,12 +175,14 @@ Agent has 200 skills available:
 ## Directory Structure
 
 ### Required Structure
+
 ```
 skill-name/
 └── SKILL.md          # Required: Core skill definition
 ```
 
 ### Full Structure with Optional Directories
+
 ```
 skill-name/
 ├── SKILL.md              # Required: Core skill definition
@@ -231,6 +240,7 @@ allowed-tools: Bash(git:*) Read  # Optional, experimental
 ```bash
 scripts/script.py [args]
 ```
+
 ```
 
 ### Frontmatter Fields
@@ -254,6 +264,7 @@ name: code-review
 ```
 
 **Invalid Examples:**
+
 ```yaml
 name: PDF-Processing      # uppercase not allowed
 name: -pdf                # cannot start with hyphen
@@ -261,7 +272,8 @@ name: pdf--processing     # consecutive hyphens not allowed
 name: pdf_processing      # underscores not allowed
 ```
 
-##### `description`
+### `description`
+
 - **Required**: Yes
 - **Format**: 1-1024 characters
 - **Purpose**: Helps agents decide when to activate the skill
@@ -271,11 +283,13 @@ name: pdf_processing      # underscores not allowed
   - Specific keywords for task identification
 
 **Good Example:**
+
 ```yaml
 description: Extracts text and tables from PDF files, fills PDF forms, and merges multiple PDFs. Use when working with PDF documents or when the user mentions PDFs, forms, or document extraction.
 ```
 
 **Poor Example:**
+
 ```yaml
 description: Helps with PDFs.  # Too vague, missing use cases and keywords
 ```
@@ -283,23 +297,27 @@ description: Helps with PDFs.  # Too vague, missing use cases and keywords
 #### Optional Fields
 
 ##### `license`
+
 - **Required**: No
 - **Format**: Short license name or reference
 - **Purpose**: Specify licensing terms
 
 **Example:**
+
 ```yaml
 license: Apache-2.0
 license: Proprietary. LICENSE.txt has complete terms
 ```
 
 ##### `compatibility`
+
 - **Required**: No
 - **Format**: 1-500 characters
 - **Purpose**: Indicate specific environment requirements
 - **Include only if**: Skill has specific requirements
 
 **Examples:**
+
 ```yaml
 compatibility: Designed for Claude Code (or similar products)
 compatibility: Requires git, docker, jq, and access to the internet
@@ -308,11 +326,13 @@ compatibility: Requires git, docker, jq, and access to the internet
 **Note**: Most skills do not need this field.
 
 ##### `metadata`
+
 - **Required**: No
 - **Format**: Key-value map (string → string)
 - **Purpose**: Store additional properties not in the spec
 
 **Example:**
+
 ```yaml
 metadata:
   author: example-org
@@ -324,12 +344,14 @@ metadata:
 **Best Practice**: Use reasonably unique key names to avoid conflicts.
 
 ##### `allowed-tools`
+
 - **Required**: No
 - **Format**: Space-delimited list of pre-approved tools
 - **Status**: **Experimental** (support varies by implementation)
 - **Purpose**: Pre-approve specific tools the skill may use without additional confirmation
 
 **Example:**
+
 ```yaml
 allowed-tools: Bash(git:*) Bash(jq:*) Read
 ```
@@ -371,12 +393,14 @@ The Markdown body after frontmatter contains skill instructions. There are no st
 Contains executable code that agents can run.
 
 **Cross-Platform Requirements:**
+
 - **Provide both Bash (.sh) and PowerShell (.ps1) versions** for shell scripts
 - **Or use cross-platform languages** (Python, Node.js, Ruby) to avoid duplication
 - **Test on Windows, macOS, and Linux** before deploying
 - **Document platform-specific dependencies** clearly
 
 **Guidelines:**
+
 - Be self-contained or clearly document dependencies
 - Include helpful error messages
 - Handle edge cases gracefully
@@ -386,12 +410,14 @@ Contains executable code that agents can run.
 - Use meaningful filenames with appropriate extensions (.sh, .ps1, .py, .js)
 
 **Naming Conventions:**
+
 - Bash scripts: `script-name.sh`
 - PowerShell scripts: `script-name.ps1`
 - Python scripts: `script-name.py` (preferred for cross-platform)
 - Node.js scripts: `script-name.js`
 
 **Example: Cross-Platform Python Script (Recommended):**
+
 ```python
 #!/usr/bin/env python3
 """
@@ -417,6 +443,7 @@ from pathlib import Path
 ```
 
 **Example: Bash Script (macOS/Linux):**
+
 ```bash
 #!/usr/bin/env bash
 # extract.sh - Extract text from PDFs (Unix-like systems)
@@ -432,6 +459,7 @@ fi
 ```
 
 **Example: PowerShell Script (Windows):**
+
 ```powershell
 # extract.ps1 - Extract text from PDFs (Windows)
 
@@ -490,11 +518,13 @@ anti_pattern:
 ```
 
 **Good structure:**
+
 ```
 SKILL.md → references/REFERENCE.md ✓
 ```
 
 **Poor structure:**
+
 ```
 SKILL.md → references/index.md → references/details/section1.md → references/details/subsection.md ✗
 ```
@@ -516,6 +546,7 @@ SKILL.md → references/index.md → references/details/section1.md → referenc
    - "Use this approach for PDFs larger than 10MB to avoid memory errors"
 
 4. **Include Concrete Examples**: Show expected inputs and outputs
+
    ```markdown
    **Input:** invoice_2024.pdf
    **Output:** 
@@ -564,6 +595,7 @@ LLMs process instructions differently than humans. Optimize for machine comprehe
    - Include error codes and meanings
 
 4. **Concrete examples**: Show, don't just tell
+
    ```markdown
    **Input:** `invoice_2024-01-15.pdf`
    **Expected output:**
@@ -574,9 +606,11 @@ LLMs process instructions differently than humans. Optimize for machine comprehe
      "total": 1234.56
    }
    ```
+
    ```
 
 5. **Decision trees**: Make conditional logic explicit
+
    ```markdown
    If file extension is `.txt`:
      - Use UTF-8 encoding
@@ -690,6 +724,7 @@ quality_score:
 ### Description Formula
 
 **REQUIRED COMPONENTS**:
+
 ```
 [What it does] + [When to use it] + [Key terms for matching]
 ```
@@ -712,6 +747,7 @@ quality_score:
    - Common variations
 
 **TEMPLATE**:
+
 ```yaml
 description: "[ACTION 1], [ACTION 2], and [ACTION 3]. Use when [SCENARIO 1], [SCENARIO 2], or when user mentions [KEYWORD 1], [KEYWORD 2], or [KEYWORD 3]."
 ```
@@ -818,6 +854,7 @@ skills-ref validate ./skills/
 ```
 
 **Validation Checks:**
+
 - SKILL.md frontmatter is valid YAML
 - Required fields present (name, description)
 - Field constraints met (length, format, character restrictions)
@@ -829,6 +866,7 @@ skills-ref validate ./skills/
 **Why validation matters**: Skills that fail validation may not load correctly in agent implementations, causing runtime errors or being ignored entirely. Always validate before deploying or sharing skills.
 
 **Best practice**: Integrate validation into your development workflow:
+
 - Run validation before committing changes
 - Add validation to CI/CD pipelines
 - Validate after any structural changes to the skill
@@ -964,6 +1002,7 @@ python3 scripts/process.py --input data.csv
 ```
 
 **Requirements:**
+
 - Python 3.8 or higher
 - pandas library: `pip install pandas`
 
@@ -972,15 +1011,18 @@ python3 scripts/process.py --input data.csv
 Alternatively, use the shell-specific scripts:
 
 **macOS/Linux (Bash):**
+
 ```bash
 chmod +x scripts/process.sh
 ./scripts/process.sh --input data.csv
 ```
 
 **Windows (PowerShell):**
+
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/process.ps1 -Input data.csv
 ```
+
 ```
 
 ### Testing Cross-Platform Scripts
@@ -1082,6 +1124,7 @@ automated_testing:
 **MANDATORY TEST MATRIX**:
 
 #### Platform Testing
+
 - [ ] **Windows 10/11 + PowerShell 5.1+**
   - PASS: Script executes without errors
   - PASS: Output matches expected format
@@ -1098,6 +1141,7 @@ automated_testing:
   - FAIL: Missing packages or permission issues
 
 #### Robustness Testing
+
 - [ ] **Path Handling**
   - TEST: `/path/to/file`, `C:\path\to\file`, `./relative/path`
   - PASS: All path formats handled correctly
@@ -1121,6 +1165,7 @@ automated_testing:
   - FAIL: Platform-specific output variations
 
 **Testing with Docker (Linux environment):**
+
 ```bash
 # Test Python script in isolated Linux environment
 docker run -v $(pwd):/workspace -w /workspace python:3.11 \
@@ -1128,6 +1173,7 @@ docker run -v $(pwd):/workspace -w /workspace python:3.11 \
 ```
 
 **Testing on Windows (using WSL):**
+
 ```bash
 # Test Bash script on Windows via WSL
 wsl bash scripts/process.sh --input test-data.csv
@@ -1136,9 +1182,11 @@ wsl bash scripts/process.sh --input test-data.csv
 ### Common Cross-Platform Pitfalls
 
 **1. Line Endings**
+
 - Windows: CRLF (`\r\n`)
 - Unix: LF (`\n`)
 - **Solution**: Configure `.gitattributes`:
+
   ```
   *.sh text eol=lf
   *.ps1 text eol=crlf
@@ -1146,21 +1194,25 @@ wsl bash scripts/process.sh --input test-data.csv
   ```
 
 **2. Path Separators**
+
 - Windows: Backslash (`\`)
 - Unix: Forward slash (`/`)
 - **Solution**: Use `pathlib` in Python or `Join-Path` in PowerShell
 
 **3. Case Sensitivity**
+
 - Windows: Case-insensitive file systems
 - Unix: Case-sensitive file systems
 - **Solution**: Always use consistent casing for file names
 
 **4. Executable Permissions**
+
 - Unix requires: `chmod +x script.sh`
 - Windows: No explicit permission needed
 - **Solution**: Document this requirement for Unix users
 
 **5. Command Availability**
+
 - Some commands differ between platforms (e.g., `ls` vs `dir`)
 - **Solution**: Check for command existence before using, or use cross-platform alternatives
 
@@ -1247,7 +1299,9 @@ For each endpoint, create:
 ```
 
 ### 3. Include Examples
+
 Provide curl commands for testing
+
 ```
 
 ### Pattern 3: Workflow Skill
@@ -1328,12 +1382,14 @@ description: Guides through complete deployment process including testing, build
 ## Checklist for Creating a Skill
 
 ### Before You Start
+
 - [ ] Identify the task or domain the skill addresses
 - [ ] Verify no existing skill covers this capability
 - [ ] Determine required tools and dependencies
 - [ ] Plan the directory structure
 
 ### Creating SKILL.md
+
 - [ ] Choose a valid, descriptive name (lowercase, hyphens only)
 - [ ] Write comprehensive description (what, when, keywords)
 - [ ] Add appropriate license
@@ -1346,6 +1402,7 @@ description: Guides through complete deployment process including testing, build
 - [ ] Keep under 500 lines (move details to references/)
 
 ### Optional Content
+
 - [ ] Create scripts with clear documentation
 - [ ] Add reference documentation for complex topics
 - [ ] Include templates and assets as needed
@@ -1353,6 +1410,7 @@ description: Guides through complete deployment process including testing, build
 - [ ] Test all scripts and verify they work
 
 ### Quality Checks
+
 - [ ] Validate with skills-ref tool
 - [ ] Test skill with target agent(s)
 - [ ] Review for clarity and completeness
@@ -1367,6 +1425,7 @@ description: Guides through complete deployment process including testing, build
 - [ ] **Document platform-specific requirements**
 
 ### Finalization
+
 - [ ] Add to version control
 - [ ] Document in team/organization knowledge base
 - [ ] Share with relevant team members
@@ -1383,72 +1442,91 @@ description: Guides through complete deployment process including testing, build
 **WHY THIS FAILS**: Agent cannot determine when to activate skill.
 
 **ANTI-PATTERN**:
+
 ```yaml
 ❌ description: "Helps with data"
 ```
+
 **PROBLEMS**:
+
 - Too generic (what kind of data?)
 - No use cases (when to activate?)
 - Missing keywords (how to match?)
 
 **CORRECT PATTERN**:
+
 ```yaml
 ✅ description: "Transforms CSV files into JSON format with validation and error reporting. Use for data format conversions or when user mentions CSV, JSON, or data transformation."
 ```
+
 **STRENGTHS**:
+
 - Specific capabilities (CSV → JSON)
 - Clear use case (format conversions)
 - Keywords for matching (CSV, JSON, transformation)
 
 ### 2. Missing Use Cases
+
 ❌ Only describing what it does
 ✅ Describing what it does AND when to use it
 
 ### 3. Overly Long SKILL.md
+
 ❌ 1000+ lines in main file
 ✅ <500 lines in SKILL.md, detailed content in references/
 
 ### 4. Implicit Assumptions
+
 ❌ "Process the file normally"
 ✅ "Extract text from PDF, handling both text-based and scanned documents. For scanned PDFs, apply OCR using Tesseract."
 
 ### 5. Poor File Organization
+
 ❌ Flat structure with all files in root
 ✅ Organized with scripts/, references/, assets/
 
 ### 6. Undocumented Dependencies
+
 ❌ Script fails with "module not found"
 ✅ Clear prerequisites section listing all dependencies
 
 ### 7. Invalid Naming
+
 ❌ `My_Skill`, `my skill`, `MySkill`
 ✅ `my-skill`
 
 ### 8. No Examples
+
 ❌ Instructions without demonstrations
 ✅ Multiple examples showing different use cases
 
 ### 9. Ignoring Edge Cases
+
 ❌ Only happy path documented
 ✅ Edge cases and error handling included
 
 ### 10. Missing Validation
+
 ❌ Shipping without testing
 ✅ Validated with skills-ref and tested with agents
 
 ### 11. Platform-Specific Scripts Only
+
 ❌ Only providing Bash scripts without PowerShell alternative
 ✅ Using Python/Node.js for cross-platform compatibility, or providing both .sh and .ps1 versions
 
 ### 12. Hard-Coded Path Separators
+
 ❌ Using `\` or `/` directly in paths
 ✅ Using `pathlib.Path` (Python) or `Join-Path` (PowerShell) for cross-platform paths
 
 ### 13. Platform-Specific Commands
+
 ❌ Using `ls`, `grep`, `sed` without Windows alternatives
 ✅ Using cross-platform tools or providing platform-specific script versions
 
 ### 14. Untested on All Platforms
+
 ❌ Only testing on developer's primary OS
 ✅ Testing on Windows, macOS, and Linux before release
 
@@ -1459,6 +1537,7 @@ description: Guides through complete deployment process including testing, build
 Agent Skills are supported by a growing ecosystem of AI development tools and platforms:
 
 **Production-Ready Support:**
+
 - **Claude Code** (Anthropic): Native support via plugin system
 - **Claude.ai** (Anthropic): Built-in skills available for paid plans
 - **Claude API** (Anthropic): Upload custom skills via API
@@ -1471,27 +1550,30 @@ Agent Skills are supported by a growing ecosystem of AI development tools and pl
 - **Goose** (Block): Skills integration
 
 **Partner Skills:**
+
 - **Notion**: [Notion Skills for Claude](https://www.notion.so/notiondevs/Notion-Skills-for-Claude-28da4445d27180c7af1df7d8615723d0)
 
 ### Open Development
 
 The Agent Skills format is:
+
 - **Open standard**: Originally developed by Anthropic, released as open specification
 - **Community-driven**: Open to contributions from the broader ecosystem
 - **Actively maintained**: Regular updates and improvements
 - **Widely adopted**: Growing support across major AI platforms
 
-**Contribute**: https://github.com/agentskills/agentskills
+**Contribute**: <https://github.com/agentskills/agentskills>
 
 ## Resources
 
 ### Official Resources
-- **Specification**: https://agentskills.io/specification
-- **Agent Skills Home**: https://agentskills.io/
-- **What are skills?**: https://agentskills.io/what-are-skills
-- **Integrate skills**: https://agentskills.io/integrate-skills
-- **Anthropic's Skills Repository**: https://github.com/anthropics/skills
-- **Reference Library (skills-ref)**: https://github.com/agentskills/agentskills/tree/main/skills-ref
+
+- **Specification**: <https://agentskills.io/specification>
+- **Agent Skills Home**: <https://agentskills.io/>
+- **What are skills?**: <https://agentskills.io/what-are-skills>
+- **Integrate skills**: <https://agentskills.io/integrate-skills>
+- **Anthropic's Skills Repository**: <https://github.com/anthropics/skills>
+- **Reference Library (skills-ref)**: <https://github.com/agentskills/agentskills/tree/main/skills-ref>
 - **Anthropic Support Articles**:
   - [What are skills?](https://support.claude.com/en/articles/12512176-what-are-skills)
   - [Using skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude)
@@ -1499,7 +1581,8 @@ The Agent Skills format is:
 - **Engineering Blog**: [Equipping agents for the real world with Agent Skills](https://anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
 
 ### Example Skills
-- **Anthropic's Skills Repository**: https://github.com/anthropics/skills
+
+- **Anthropic's Skills Repository**: <https://github.com/anthropics/skills>
   - **Creative & Design**: Art, music, mockup creation
   - **Development & Technical**: Testing web apps, MCP server generation, code analysis
   - **Enterprise & Communication**: Branding, communications workflows
@@ -1508,13 +1591,15 @@ The Agent Skills format is:
 **Note**: Many skills in the repository are open source (Apache 2.0). The document creation & editing skills are source-available (not open source) but provided as reference for complex production skills.
 
 ### Tools and Templates
+
 - **skills-ref**: Reference library for validation and prompt XML generation
-- **Skill Template**: Available at https://github.com/anthropics/skills/tree/main/template
+- **Skill Template**: Available at <https://github.com/anthropics/skills/tree/main/template>
 - **Claude Code Plugin**: Install from marketplace with `/plugin marketplace add anthropics/skills`
 
 ## Using Skills in Different Platforms
 
 ### Claude Code
+
 ```bash
 # Add the marketplace
 /plugin marketplace add anthropics/skills
@@ -1528,14 +1613,17 @@ The Agent Skills format is:
 ```
 
 ### Claude.ai
+
 - All example skills are available to paid plans
 - Upload custom skills via the UI (see [Using skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude))
 
 ### Claude API
+
 - Upload custom skills via API
 - See [Skills API Quickstart](https://docs.claude.com/en/api/skills-guide#creating-a-skill)
 
 ### Other Compatible Agents
+
 Refer to each platform's documentation for specific integration instructions.
 
 ## Version History
@@ -1544,4 +1632,4 @@ Refer to each platform's documentation for specific integration instructions.
 
 ---
 
-*This document is based on the Agent Skills specification (https://agentskills.io) and Anthropic's implementation reference (https://github.com/anthropics/skills). It is intended to be read by both human developers and LLMs to ensure consistent, high-quality skill creation.*
+*This document is based on the Agent Skills specification (<https://agentskills.io>) and Anthropic's implementation reference (<https://github.com/anthropics/skills>). It is intended to be read by both human developers and LLMs to ensure consistent, high-quality skill creation.*

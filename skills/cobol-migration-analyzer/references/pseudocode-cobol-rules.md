@@ -228,11 +228,13 @@ EVALUATE TRUE
    WHEN OTHER
       PERFORM ERROR-ROUTINE
 END-EVALUATE
+
 ```
 
 →
 
 ```
+
 SWITCH statusCode:
     CASE '00':
         CALL SuccessRoutine()
@@ -243,6 +245,7 @@ SWITCH statusCode:
     DEFAULT:
         CALL ErrorRoutine()
 END SWITCH
+
 ```
 
 ### SEARCH → Linear Search
@@ -327,6 +330,7 @@ BEGIN
 END PROCEDURE
 CALL InitSequence()
 ```
+
 | ------- | ----------- |
 | `OPEN INPUT file` | `file = OPEN(path) FOR READING` |
 | `OPEN OUTPUT file` | `file = OPEN(path) FOR WRITING` |
