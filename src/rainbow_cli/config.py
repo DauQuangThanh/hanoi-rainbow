@@ -12,6 +12,13 @@ AGENT_CONFIG = {
         "install_url": None,  # IDE-based, no CLI check needed
         "requires_cli": False,
     },
+    "opencode": {
+        "name": "Open Code",
+        "agent_folder": ".opencode/command/",
+        "skills_folder": ".opencode/skill/",
+        "install_url": "https://opencode.ai",
+        "requires_cli": True,
+    },
     "claude": {
         "name": "Claude Code",
         "agent_folder": ".claude/commands/",
@@ -33,18 +40,18 @@ AGENT_CONFIG = {
         "install_url": None,  # IDE-based
         "requires_cli": False,
     },
+    "antigravity": {
+        "name": "Google Antigravity",
+        "agent_folder": ".agent/rules/",
+        "skills_folder": ".agent/skills/",
+        "install_url": None,  # IDE-based
+        "requires_cli": False,
+    },
     "qwen": {
         "name": "Qwen Code",
         "agent_folder": ".qwen/commands/",
         "skills_folder": ".qwen/skills/",
         "install_url": "https://github.com/QwenLM/qwen-code",
-        "requires_cli": True,
-    },
-    "opencode": {
-        "name": "opencode",
-        "agent_folder": ".opencode/command/",
-        "skills_folder": ".opencode/skill/",
-        "install_url": "https://opencode.ai",
         "requires_cli": True,
     },
     "codex": {
@@ -130,13 +137,6 @@ AGENT_CONFIG = {
         "skills_folder": ".qoder/skills/",
         "install_url": "https://qoder.ai",
         "requires_cli": True,
-    },
-    "antigravity": {
-        "name": "Google Antigravity",
-        "agent_folder": ".agent/rules/",
-        "skills_folder": ".agent/skills/",
-        "install_url": None,  # IDE-based
-        "requires_cli": False,
     },
 }
 

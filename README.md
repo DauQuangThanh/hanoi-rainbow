@@ -130,7 +130,7 @@ flowchart LR
 | Aspect | 🌱 Greenfield | 🏗️ Brownfield |
 |--------|--------------|---------------|
 | **Starting Point** | Empty project | Existing codebase |
-| **Setup Phase** | `/rainbow.regulate` → `/rainbow.architect` → `/rainbow.standardize` | `/rainbow.assess-context` (once per project) |
+| **Setup Phase** | `/rainbow.regulate` | `/rainbow.assess-context` (once per project) |
 | **Focus** | Establish foundations first | Integrate with existing patterns |
 | **Timeline** | 2-4 weeks (MVP) | 1-2 weeks per feature |
 | **Flexibility** | Complete freedom in design | Must maintain consistency |
