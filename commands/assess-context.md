@@ -411,7 +411,6 @@ The context assessment is complete when:
 - Run this ONCE per project when first adding Rainbow to existing brownfield codebase
 - Run this BEFORE creating project principles in brownfield projects
 - The assessment guides how new features should integrate with existing code
-- For legacy mainframe/midrange systems, use `/rainbow.assess-legacy` instead
 - Assessment is stored at `docs/context-assessment.md` (project-level)
 - **Recommended workflow**: `/rainbow.assess-context` → `/rainbow.regulate` → `/rainbow.specify`
 - Follow up with `/rainbow.regulate` to create project principles based on assessment

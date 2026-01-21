@@ -108,7 +108,7 @@ Clarify any unclear requirements:
 
 ---
 
-### Step 7: Create Implementation Plan
+### Step 7: Create Technical Design
 
 Now specify **how** to build it (tech stack and architecture):
 

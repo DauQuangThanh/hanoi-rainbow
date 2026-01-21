@@ -24,7 +24,6 @@ For decades, we treated specifications as throwaway notes—just a formality bef
 | ------- | ------------- |
 | 📦 [Installation Guide](installation.md) | Set up Rainbow CLI and prerequisites |
 | ⚡ [Quick Start Guide](quickstart.md) | Build your first project in minutes |
-| 🗺️ **[Workflows Guide](workflows.md)** | **Choose the right workflow for your project** |
 | 🔄 [Upgrade Guide](upgrade.md) | Update to the latest version |
 | 💻 [Local Development](local-development.md) | Contribute and develop locally |
 
@@ -36,8 +35,6 @@ For decades, we treated specifications as throwaway notes—just a formality bef
 | ---------- | ---------- |----------|
 | 🌱 [Greenfield](greenfield-workflow.md) | New applications from scratch | 2-4 weeks (MVP) |
 | 🏗️ [Brownfield](brownfield-workflow.md) | Adding features to existing apps | 1-2 weeks/feature |
-| 🔄 [Legacy Migration](legacy-migration-workflow.md) | Migrating data/batch from mainframe | 4-12 weeks |
-| 🏭 [Legacy Modernization](legacy-modernization-workflow.md) | Complete mainframe transformation | 6-18 months |
 
 ---
 

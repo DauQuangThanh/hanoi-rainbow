@@ -227,7 +227,7 @@ Create coding standards for your team:
 /rainbow.standardize Define naming conventions, file organization, and best practices
 ```
 
-#### 5️⃣ **Create Implementation Plan**
+#### 5️⃣ **Create Technical Design**
 
 Now specify **how** to build it (tech stack and architecture):
 
@@ -413,20 +413,6 @@ Additional commands for enhanced quality, validation, and project management:
 | `/rainbow.tasks-to-issues` | Convert existing tasks into actionable GitHub issues with dependency tracking | `chore:` |
 | `/rainbow.tasks-to-ado`  | Convert existing tasks into actionable Azure DevOps work items with dependency tracking | `chore:` |
 
-#### Mainframe/Midrange Modernization Commands
-
-Commands for systematic legacy system migration and modernization:
-
-| Command                  | Description                                                           | Auto Commit Prefix |
-| -------------------------- | ----------------------------------------------------------------------- |--------------------|
-| `/rainbow.assess-legacy` | Analyze existing legacy systems (COBOL, RPG, JCL) to understand current state before modernization | `docs:` |
-| `/rainbow.map-business-logic` | Extract and document business rules from legacy code for reimplementation | `docs:` |
-| `/rainbow.design-data-migration` | Create comprehensive data migration strategy from legacy databases (DB2, IMS, VSAM) to modern data stores | `docs:` |
-| `/rainbow.convert-batch` | Design modern equivalents for mainframe batch processing (JCL → Kubernetes/serverless/streaming) | `docs:` |
-| `/rainbow.design-screen-migration` | Convert green-screen/5250 interfaces to modern web/mobile UI | `docs:` |
-| `/rainbow.plan-strangler` | Create detailed strangler pattern implementation plan for phased migration | `docs:` |
-| `/rainbow.validate-modernization` | Verify that modernized system matches legacy behavior and meets quality standards | `test:` |
-
 ### Environment Variables
 
 | Variable         | Description                                                                                    |
@@ -477,30 +463,16 @@ flowchart TB
         BF7 --> BF8[✅ Test & Deploy]
     end
     
-    subgraph Legacy["🏢 LEGACY MODERNIZATION: Mainframe Migration (6-18 months)"]
-        direction TB
-        LM1[🔍 Assess Legacy: Analyze System] --> LM2[📊 Map Business Logic]
-        LM2 --> LM3[🗄️ Design Data Migration]
-        LM3 --> LM4[⚙️ Convert Batch Jobs]
-        LM4 --> LM5[🖥️ Design Screen Migration]
-        LM5 --> LM6[🔄 Plan Strangler Pattern]
-        LM6 --> LM7[⚡ Implement Modernization]
-        LM7 --> LM8[✅ Validate Modernization]
-    end
-    
     style Greenfield fill:#E8F5E9
     style Brownfield fill:#E3F2FD
-    style Legacy fill:#FFF3E0
     style GF8 fill:#FFD700
     style BF7 fill:#FFD700
-    style LM7 fill:#FFD700
 ```
 
 | Scenario | What You Can Do |
 | ---------- | ----------------- |
 | **🆕 New Projects (Greenfield)** | <ul><li>Start with high-level requirements</li><li>Establish project principles and architecture</li><li>Generate complete specifications</li><li>Plan implementation steps</li><li>Build production-ready apps with clear standards</li></ul> |
 | **🔧 Existing Projects (Brownfield)** | <ul><li>Add new features systematically to existing codebases</li><li>Maintain consistency with existing patterns</li><li>Adapt the SDD process to your current architecture</li><li>Integrate new functionality smoothly</li></ul> |
-| **🏢 Mainframe Modernization (Legacy)** | <ul><li>Assess legacy systems (COBOL, RPG, JCL)</li><li>Extract business logic from code</li><li>Plan data migration strategies (DB2, IMS, VSAM)</li><li>Modernize batch processing (JCL → Cloud-native)</li><li>Convert green-screen UIs to modern web/mobile</li><li>Implement strangler pattern migrations</li><li>Validate modernized systems against legacy</li></ul> |
 | **🔬 Exploration** | <ul><li>Try different solutions in parallel</li><li>Test multiple tech stacks</li><li>Experiment with UX patterns</li><li>Rapid prototyping and validation</li></ul> |
 
 ---
@@ -538,24 +510,14 @@ flowchart TD
     
     Start -->|Brand new application| GF[🌱 Greenfield Workflow]
     Start -->|Adding to existing app| BF[🏗️ Brownfield Workflow]
-    Start -->|Migrating legacy system| Legacy{Legacy Type?}
-    
-    Legacy -->|Mainframe/Midrange<br/>COBOL, RPG, JCL| LM[🏢 Legacy Modernization<br/>Workflow]
-    Legacy -->|Partial migration<br/>data/batch only| LMig[🔄 Legacy Migration<br/>Workflow]
     
     GF --> GFDesc["<b>Timeline:</b> 2-4 weeks<br/><b>Steps:</b> Regulate → Architect →<br/>Standardize → Specify →<br/>Design → Implement"]
     BF --> BFDesc["<b>Timeline:</b> 1-2 weeks/feature<br/><b>Steps:</b> Assess Context →<br/>Regulate → Specify → Design → Implement"]
-    LM --> LMDesc["<b>Timeline:</b> 6-18 months<br/><b>Steps:</b> Assess → Map Logic →<br/>Data/Batch/Screen Migration →<br/>Strangler Pattern → Validate"]
-    LMig --> LMigDesc["<b>Timeline:</b> 4-12 weeks<br/><b>Steps:</b> Assess → Data Migration →<br/>Batch Conversion → Validate"]
     
     style GF fill:#90EE90
     style BF fill:#87CEEB
-    style LM fill:#FFB366
-    style LMig fill:#FFE6CC
     style GFDesc fill:#E8F5E9
     style BFDesc fill:#E3F2FD
-    style LMDesc fill:#FFF3E0
-    style LMigDesc fill:#FFF8E1
 ```
 
 **Quick Links:**
