@@ -104,7 +104,7 @@ def copy_local_template(
     """
 
     # Paths to copy
-    commands_dir = source_path / "commands"
+    commands_dir = source_path / "agent-commands"
     skills_dir = source_path / "skills"
     memory_dir = source_path / "memory"
     scripts_dir = source_path / "scripts"
@@ -170,7 +170,7 @@ def copy_local_template(
         dest_templates = rainbow_dir / "templates"
         dest_templates.mkdir(exist_ok=True)
 
-        # Copy from commands/templates-for-commands to .rainbow/templates/templates-for-commands
+        # Copy from agent-commands/templates-for-commands to .rainbow/templates/templates-for-commands
         cmd_templates = commands_dir / "templates-for-commands"
         if cmd_templates.exists():
             dest_cmd_templates = dest_templates / "templates-for-commands"
