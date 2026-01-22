@@ -19,6 +19,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+rules/
 .github/copilot-instructions.md
 
 # Virtual environments
