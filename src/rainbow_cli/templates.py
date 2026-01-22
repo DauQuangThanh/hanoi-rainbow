@@ -86,6 +86,83 @@ def merge_json_files(existing_path: Path, new_content: dict, verbose: bool = Fal
     return merged
 
 
+def install_agent_commands(
+    project_path: Path,
+    commands_source_dir: Path,
+    ai_assistant: str,
+    verbose: bool = True,
+    tracker: "StepTracker | None" = None
+) -> None:
+    """Install and transform agent command files for a specific AI assistant.
+    
+    This function:
+    1. Reads command template files from commands_source_dir
+    2. Replaces placeholders ($ARGUMENTS, __AGENT__)
+    3. Writes transformed files to agent-specific directory with proper extension
+    4. For GitHub Copilot, also creates files in prompts directory
+    
+    Args:
+        project_path: Target project root directory
+        commands_source_dir: Source directory containing command .md files
+        ai_assistant: AI assistant identifier (e.g., 'copilot', 'claude')
+        verbose: Whether to print progress messages
+        tracker: Optional step tracker for progress reporting
+    """
+    agent_config = AGENT_CONFIG.get(ai_assistant)
+    if not agent_config:
+        raise ValueError(f"Unknown AI assistant: {ai_assistant}")
+
+    agent_folder = agent_config["agent_folder"]
+    agent_ext = EXTENSION_MAP.get(ai_assistant, ".md")
+    args_format = ARGS_FORMAT_MAP.get(ai_assistant, "$ARGUMENTS")
+
+    # Create agent-specific command directory
+    agent_path = project_path / agent_folder
+    agent_path.mkdir(parents=True, exist_ok=True)
+
+    # Copy command files to agent directory
+    if commands_source_dir.exists():
+        for cmd_file in commands_source_dir.glob("*.md"):
+            # Read the command file
+            content = cmd_file.read_text(encoding='utf-8')
+
+            # Replace placeholders
+            content = content.replace("$ARGUMENTS", args_format)
+            content = content.replace("__AGENT__", ai_assistant)
+
+            # Write to agent directory with appropriate extension
+            output_file = agent_path / f"rainbow.{cmd_file.stem}{agent_ext}"
+            # Only write if file doesn't exist or content is different (handles shared folders)
+            if not output_file.exists() or output_file.read_text(encoding='utf-8') != content:
+                output_file.write_text(content, encoding='utf-8')
+
+        if verbose and not tracker:
+            console.print(f"[green]✓[/green] Created {ai_assistant} commands in {agent_folder}")
+
+    # For GitHub Copilot, also copy to prompts folder
+    prompts_folder = agent_config.get("prompts_folder")
+    if prompts_folder and commands_source_dir.exists():
+        prompts_path = project_path / prompts_folder
+        prompts_path.mkdir(parents=True, exist_ok=True)
+        
+        for cmd_file in commands_source_dir.glob("*.md"):
+            # Read the command file
+            content = cmd_file.read_text(encoding='utf-8')
+
+            # Replace placeholders
+            content = content.replace("$ARGUMENTS", args_format)
+            content = content.replace("__AGENT__", ai_assistant)
+
+            # Write to prompts directory with .prompt.md extension
+            output_file = prompts_path / f"rainbow.{cmd_file.stem}.prompt.md"
+            # Only write if file doesn't exist or content is different (handles shared folders)
+            if not output_file.exists() or output_file.read_text(encoding='utf-8') != content:
+                output_file.write_text(content, encoding='utf-8')
+        
+        if verbose and not tracker:
+            console.print(f"[green]✓[/green] Created {ai_assistant} prompts in {prompts_folder}")
+
+
 def copy_local_template(
     project_path: Path,
     source_path: Path,
@@ -181,51 +258,8 @@ def copy_local_template(
         if verbose and not tracker:
             console.print(f"[green]✓[/green] Copied templates")
 
-    # Create agent-specific command directory
-    agent_path = project_path / agent_folder
-    agent_path.mkdir(parents=True, exist_ok=True)
-
-    # Copy command files to agent directory
-    if commands_dir.exists():
-        for cmd_file in commands_dir.glob("*.md"):
-            # Read the command file
-            content = cmd_file.read_text()
-
-            # Replace placeholders
-            content = content.replace("$ARGUMENTS", args_format)
-            content = content.replace("__AGENT__", ai_assistant)
-
-            # Write to agent directory with appropriate extension
-            output_file = agent_path / f"rainbow.{cmd_file.stem}{agent_ext}"
-            # Only write if file doesn't exist or content is different (handles shared folders)
-            if not output_file.exists() or output_file.read_text() != content:
-                output_file.write_text(content)
-
-    if verbose and not tracker:
-        console.print(f"[green]✓[/green] Created {ai_assistant} commands in {agent_folder}")
-
-    # For GitHub Copilot, also copy to prompts folder
-    prompts_folder = agent_config.get("prompts_folder")
-    if prompts_folder and commands_dir.exists():
-        prompts_path = project_path / prompts_folder
-        prompts_path.mkdir(parents=True, exist_ok=True)
-        
-        for cmd_file in commands_dir.glob("*.md"):
-            # Read the command file
-            content = cmd_file.read_text()
-
-            # Replace placeholders
-            content = content.replace("$ARGUMENTS", args_format)
-            content = content.replace("__AGENT__", ai_assistant)
-
-            # Write to prompts directory with .prompt.md extension
-            output_file = prompts_path / f"rainbow.{cmd_file.stem}.prompt.md"
-            # Only write if file doesn't exist or content is different (handles shared folders)
-            if not output_file.exists() or output_file.read_text() != content:
-                output_file.write_text(content)
-        
-        if verbose and not tracker:
-            console.print(f"[green]✓[/green] Created {ai_assistant} prompts in {prompts_folder}")
+    # Install agent command files (transforms .md to agent-specific format)
+    install_agent_commands(project_path, commands_dir, ai_assistant, verbose, tracker)
 
     # Copy skills to agent-specific skills folder
     if skills_dir.exists():
@@ -400,6 +434,12 @@ def download_and_extract_template(
                             if dest_path.exists() and verbose and not tracker:
                                 console.print(f"[yellow]Overwriting file:[/yellow] {item.name}")
                             shutil.copy2(item, dest_path)
+                    
+                    # Install agent command files after merging
+                    commands_source = source_dir / "agent-commands"
+                    if commands_source.exists():
+                        install_agent_commands(project_path, commands_source, ai_assistant, verbose, tracker)
+                    
                     if verbose and not tracker:
                         console.print(f"[cyan]Template files merged into current directory[/cyan]")
             else:
@@ -436,6 +476,11 @@ def download_and_extract_template(
                             shutil.copytree(item, dest_path, dirs_exist_ok=True)
                         else:
                             shutil.copy2(item, dest_path)
+
+                    # Install agent command files after extraction
+                    commands_source = source_dir / "agent-commands"
+                    if commands_source.exists():
+                        install_agent_commands(project_path, commands_source, ai_assistant, verbose, tracker)
 
                     if verbose and not tracker:
                         console.print(f"[cyan]Template files copied to {project_path}[/cyan]")
