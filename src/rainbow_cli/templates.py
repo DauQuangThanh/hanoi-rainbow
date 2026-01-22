@@ -182,6 +182,9 @@ def copy_local_template(
             console.print(f"[green]✓[/green] Copied templates")
 
     # Create agent-specific command directory
+    # Note: Multiple agents can share the same agent_folder (e.g., Auggie CLI, SHAI).
+    # Using exist_ok=True allows peaceful coexistence - each agent's commands are
+    # prefixed with "rainbow." and use agent-specific extensions, preventing conflicts.
     agent_path = project_path / agent_folder
     agent_path.mkdir(parents=True, exist_ok=True)
 
@@ -208,12 +211,12 @@ def copy_local_template(
         skills_path.mkdir(parents=True, exist_ok=True)
 
         # Copy all skills subdirectories
+        # Use dirs_exist_ok=True to merge instead of replace when multiple agents
+        # share the same skills_folder (e.g., Auggie CLI uses .augment/rules/ for both)
         for skill_item in skills_dir.iterdir():
             if skill_item.is_dir():
                 dest_skill = skills_path / skill_item.name
-                if dest_skill.exists():
-                    shutil.rmtree(dest_skill)
-                shutil.copytree(skill_item, dest_skill)
+                shutil.copytree(skill_item, dest_skill, dirs_exist_ok=True)
 
         if verbose and not tracker:
             console.print(f"[green]✓[/green] Created {ai_assistant} skills in {skills_folder}")

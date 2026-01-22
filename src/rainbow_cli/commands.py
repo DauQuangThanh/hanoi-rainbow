@@ -223,15 +223,21 @@ def init(
             console.print(error_panel)
             raise typer.Exit(1)
 
-        # Detect existing agent folders (backup root folder, not subfolders)
+        # Detect existing agent folders (backup root/parent folder, not subfolders)
+        # Examples: backup .github/ (parent), not .github/agents/ (subfolder)
+        #           backup .claude/ (parent), not .claude/commands/ (subfolder)
         # Track root folders to avoid duplicates (e.g., .github has both agents/ and prompts/)
         detected_roots = set()
         for agent_key, agent_config in AGENT_CONFIG.items():
-            # Extract root folder (e.g., ".claude" from ".claude/commands/")
-            root_folder = Path(agent_config["agent_folder"]).parts[0]
+            # Extract root/parent folder from the full path
+            # E.g., ".claude" from ".claude/commands/"
+            # E.g., ".github" from ".github/agents/"
+            agent_folder_path = agent_config["agent_folder"]
+            root_folder = Path(agent_folder_path).parts[0]
             root_folder_path = project_path / root_folder
             
             # Only add if root folder exists and hasn't been added yet
+            # This ensures we backup parent directories (.claude/, .github/), not subfolders
             if root_folder_path.exists() and root_folder not in detected_roots:
                 detected_roots.add(root_folder)
                 existing_agents.append((agent_key, agent_config["name"], root_folder))
@@ -444,13 +450,17 @@ def init(
                     shutil.copytree(jules_skills, backup_jules_skills)
                     backup_paths["skills"] = backup_jules_skills
 
-                # Backup existing agent folders (whole root folders, not subfolders)
+                # Backup existing agent folders (parent/root folders, not subfolders)
+                # This backs up entire parent directories like .github/, .claude/, .cursor/
+                # NOT just subfolders like .github/agents/ or .claude/commands/
                 for agent_key, agent_name, agent_folder in existing_agents:
                     source_folder = project_path / agent_folder
                     if source_folder.exists():
+                        # agent_folder is already the root (e.g., ".github", ".claude")
                         # Remove trailing slash/backslash for backup name (cross-platform)
                         folder_name = agent_folder.rstrip('/\\')
                         backup_folder = project_path / f"{folder_name}.backup.{timestamp}"
+                        # Copy entire parent directory tree
                         shutil.copytree(source_folder, backup_folder)
                         backup_paths[agent_folder] = backup_folder
 
