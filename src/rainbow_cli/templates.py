@@ -104,7 +104,7 @@ def copy_local_template(
     """
 
     # Paths to copy
-    commands_dir = source_path / "agent-commands"
+    commands_dir = source_path / "commands"
     skills_dir = source_path / "skills"
     memory_dir = source_path / "memory"
     scripts_dir = source_path / "scripts"

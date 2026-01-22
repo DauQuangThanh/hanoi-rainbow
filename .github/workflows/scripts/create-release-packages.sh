@@ -147,10 +147,10 @@ build_variant() {
   
   # Copy template files to .rainbow/templates with subdirectories
   mkdir -p "$SPEC_DIR/templates"
-  [[ -d agent-commands/templates-for-commands ]] && {
+  [[ -d commands/templates-for-commands ]] && {
     mkdir -p "$SPEC_DIR/templates/templates-for-commands"
-    find agent-commands/templates-for-commands -type f -not -name "vscode-settings.json" -exec cp {} "$SPEC_DIR/templates/templates-for-commands/" \;
-    echo "Copied agent-commands/templates-for-commands -> .rainbow/templates/templates-for-commands"
+    find commands/templates-for-commands -type f -not -name "vscode-settings.json" -exec cp {} "$SPEC_DIR/templates/templates-for-commands/" \;
+    echo "Copied commands/templates-for-commands -> .rainbow/templates/templates-for-commands"
   }
   
   # NOTE: We substitute {ARGS} internally. Outward tokens differ intentionally:
@@ -206,7 +206,7 @@ build_variant() {
       generate_skills copilot "$base_dir/.github/skills"
       # Create VS Code workspace settings
       mkdir -p "$base_dir/.vscode"
-      [[ -f agent-commands/templates-for-commands/vscode-settings.json ]] && cp agent-commands/templates-for-commands/vscode-settings.json "$base_dir/.vscode/settings.json"
+      [[ -f commands/templates-for-commands/vscode-settings.json ]] && cp commands/templates-for-commands/vscode-settings.json "$base_dir/.vscode/settings.json"
       ;;
     cursor-agent)
       mkdir -p "$base_dir/.cursor/commands"
