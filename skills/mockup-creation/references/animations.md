@@ -1,6 +1,8 @@
 # Animations & Transitions Guide
 
-Advanced animation patterns for Vue.js 3 mockups using TailwindCSS and native CSS.
+Advanced animation patterns for NuxtJS 4 mockups using TailwindCSS v4 and native CSS.
+
+> **Note**: All Vue APIs (ref, computed, etc.) are auto-imported by Nuxt - no manual imports needed.
 
 ## Table of Contents
 
@@ -62,7 +64,7 @@ Advanced animation patterns for Vue.js 3 mockups using TailwindCSS and native CS
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
+// No imports needed - ref auto-imported by Nuxt
 
 const show = ref(true)
 </script>
@@ -145,7 +147,7 @@ const show = ref(true)
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
+// No imports needed - ref auto-imported by Nuxt
 
 interface Item {
   id: number
@@ -301,7 +303,7 @@ export default {
 
 ```vue
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+// No imports needed - ref, onMounted auto-imported by Nuxt
 
 const loading = ref(true)
 
@@ -378,7 +380,7 @@ const sizeClasses = {
 
 ```vue
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+// No imports needed - ref, computed auto-imported by Nuxt
 
 interface Props {
   value: number
@@ -519,10 +521,9 @@ export default router
 ```
 
 ```vue
-<!-- App.vue -->
+<!-- App.vue or Layout -->
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import { computed } from 'vue'
+// No imports needed - useRoute, computed auto-imported by Nuxt
 
 const route = useRoute()
 const transitionName = computed(() => {
@@ -574,7 +575,7 @@ const transitionName = computed(() => {
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
+// No imports needed - ref auto-imported by Nuxt
 
 const show = ref(false)
 </script>

@@ -1,6 +1,8 @@
-# Vue 3 Composition API Patterns
+# NuxtJS 4 Composables Patterns
 
-Advanced patterns for Vue 3 Composition API with TypeScript in mockup development.
+Advanced patterns for NuxtJS 4 composables with TypeScript in mockup development.
+
+> **Note**: All Vue APIs and composables are auto-imported by Nuxt - no manual imports needed.
 
 ## Table of Contents
 
@@ -21,10 +23,10 @@ Advanced patterns for Vue 3 Composition API with TypeScript in mockup developmen
 
 ## Basic Composable Pattern
 
-```typescript
-// composables/useCounter.ts
-import { ref, computed } from 'vue'
+**File: composables/useCounter.ts**
 
+```typescript
+// No imports needed - ref, computed auto-imported by Nuxt
 export function useCounter(initialValue = 0) {
   const count = ref(initialValue)
   
@@ -56,8 +58,7 @@ export function useCounter(initialValue = 0) {
 
 ```vue
 <script setup lang="ts">
-import { useCounter } from '@/composables/useCounter'
-
+// Auto-imported by Nuxt - no import statement needed
 const { count, increment, decrement, doubleCount } = useCounter(10)
 </script>
 
@@ -73,10 +74,10 @@ const { count, increment, decrement, doubleCount } = useCounter(10)
 
 ### useToggle
 
-```typescript
-// composables/useToggle.ts
-import { ref } from 'vue'
+**File: composables/useToggle.ts**
 
+```typescript
+// No imports needed - ref auto-imported by Nuxt
 export function useToggle(initialState = false) {
   const state = ref(initialState)
   
@@ -105,7 +106,7 @@ export function useToggle(initialState = false) {
 
 ```typescript
 // composables/useLocalStorage.ts
-import { ref, watch } from 'vue'
+// No imports needed - ref, watch auto-imported by Nuxt
 
 export function useLocalStorage<T>(key: string, defaultValue: T) {
   const storedValue = localStorage.getItem(key)
@@ -143,7 +144,7 @@ const user = useLocalStorage<User>('user', {
 
 ```typescript
 // composables/useDebounce.ts
-import { ref, watch } from 'vue'
+// No imports needed - ref, watch auto-imported by Nuxt
 
 export function useDebounce<T>(value: Ref<T>, delay = 300) {
   const debouncedValue = ref<T>(value.value)
@@ -165,7 +166,7 @@ export function useDebounce<T>(value: Ref<T>, delay = 300) {
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
+// No imports needed - ref auto-imported by Nuxt
 import { useDebounce } from '@/composables/useDebounce'
 
 const searchQuery = ref('')
@@ -186,7 +187,7 @@ watch(debouncedQuery, (query) => {
 
 ```typescript
 // composables/useClickOutside.ts
-import { onMounted, onUnmounted } from 'vue'
+// No imports needed - onMounted, onUnmounted auto-imported by Nuxt
 import type { Ref } from 'vue'
 
 export function useClickOutside(
@@ -213,7 +214,7 @@ export function useClickOutside(
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
+// No imports needed - ref auto-imported by Nuxt
 import { useClickOutside } from '@/composables/useClickOutside'
 
 const dropdownRef = ref<HTMLElement | null>(null)
@@ -242,7 +243,7 @@ useClickOutside(dropdownRef, () => {
 
 ```typescript
 // stores/useStore.ts
-import { reactive, readonly } from 'vue'
+// No imports needed - reactive, readonly auto-imported by Nuxt
 
 interface State {
   user: User | null
@@ -345,7 +346,7 @@ export const useUserStore = defineStore('user', {
 ```typescript
 // main.ts
 import { createPinia } from 'pinia'
-import { createApp } from 'vue'
+// No imports needed - createApp auto-imported by Nuxt
 import App from './App.vue'
 
 const pinia = createPinia()
@@ -429,7 +430,7 @@ onUnmounted(() => {
 
 ```vue
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+// No imports needed - ref, onMounted auto-imported by Nuxt
 
 interface Product {
   id: string
@@ -476,7 +477,7 @@ onMounted(async () => {
 
 ```vue
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+// No imports needed - ref, reactive auto-imported by Nuxt
 
 // ref - for primitives and single values
 const count = ref(0)
@@ -509,7 +510,7 @@ state.user.email = 'new@example.com'
 
 ```vue
 <script setup lang="ts">
-import { reactive, toRefs } from 'vue'
+// No imports needed - reactive, toRefs auto-imported by Nuxt
 
 const state = reactive({
   count: 0,
@@ -529,7 +530,7 @@ console.log(name.value)
 
 ```vue
 <script setup lang="ts">
-import { shallowRef, shallowReactive } from 'vue'
+// No imports needed - shallowRef, shallowReactive auto-imported by Nuxt
 
 // Only top level is reactive
 const state = shallowReactive({
@@ -558,7 +559,7 @@ state.nested = { value: 2 } // Triggers reactivity
 
 ```vue
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+// No imports needed - ref, computed auto-imported by Nuxt
 
 const firstName = ref('John')
 const lastName = ref('Doe')
@@ -577,7 +578,7 @@ const fullName = computed(() => {
 
 ```vue
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+// No imports needed - ref, computed auto-imported by Nuxt
 
 const firstName = ref('John')
 const lastName = ref('Doe')
@@ -601,7 +602,7 @@ const fullName = computed({
 
 ```vue
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+// No imports needed - ref, computed auto-imported by Nuxt
 
 interface Product {
   id: string
@@ -651,7 +652,7 @@ const filteredProducts = computed(() => {
 
 ```vue
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+// No imports needed - ref, watch auto-imported by Nuxt
 
 const count = ref(0)
 
@@ -665,7 +666,7 @@ watch(count, (newValue, oldValue) => {
 
 ```vue
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+// No imports needed - ref, watch auto-imported by Nuxt
 
 const firstName = ref('John')
 const lastName = ref('Doe')
@@ -680,7 +681,7 @@ watch([firstName, lastName], ([newFirst, newLast], [oldFirst, oldLast]) => {
 
 ```vue
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+// No imports needed - reactive, watch auto-imported by Nuxt
 
 const state = reactive({
   user: {
@@ -705,7 +706,7 @@ watch(
 
 ```vue
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+// No imports needed - ref, watch auto-imported by Nuxt
 
 const count = ref(0)
 
@@ -723,7 +724,7 @@ watch(
 
 ```vue
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+// No imports needed - ref, watchEffect auto-imported by Nuxt
 
 const count = ref(0)
 const doubled = ref(0)
@@ -744,7 +745,7 @@ watchEffect(() => {
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
+// No imports needed - ref auto-imported by Nuxt
 
 const handleClick = (event: MouseEvent) => {
   console.log('Clicked at:', event.clientX, event.clientY)
@@ -803,7 +804,7 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 ```vue
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+// No imports needed - ref, onMounted auto-imported by Nuxt
 
 const inputRef = ref<HTMLInputElement | null>(null)
 
@@ -821,7 +822,7 @@ onMounted(() => {
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
+// No imports needed - ref auto-imported by Nuxt
 import ChildComponent from './ChildComponent.vue'
 
 const childRef = ref<InstanceType<typeof ChildComponent> | null>(null)
@@ -845,7 +846,7 @@ const callChildMethod = () => {
 
 ```vue
 <script setup lang="ts">
-import { provide, ref } from 'vue'
+// No imports needed - provide, ref auto-imported by Nuxt
 
 const theme = ref('light')
 
@@ -857,7 +858,7 @@ provide('theme', theme)
 
 ```vue
 <script setup lang="ts">
-import { inject } from 'vue'
+// No imports needed - inject auto-imported by Nuxt
 import type { Ref } from 'vue'
 
 const theme = inject<Ref<string>>('theme')
@@ -879,7 +880,7 @@ export const ThemeKey: InjectionKey<Ref<string>> = Symbol('theme')
 
 ```vue
 <script setup lang="ts">
-import { provide, ref } from 'vue'
+// No imports needed - provide, ref auto-imported by Nuxt
 import { ThemeKey } from './keys'
 
 const theme = ref('light')
@@ -889,7 +890,7 @@ provide(ThemeKey, theme)
 
 ```vue
 <script setup lang="ts">
-import { inject } from 'vue'
+// No imports needed - inject auto-imported by Nuxt
 import { ThemeKey } from './keys'
 
 const theme = inject(ThemeKey)
@@ -905,7 +906,7 @@ const theme = inject(ThemeKey)
 
 ```typescript
 // composables/useFetch.ts
-import { ref } from 'vue'
+// No imports needed - ref auto-imported by Nuxt
 
 export function useFetch<T>(url: string) {
   const data = ref<T | null>(null)
@@ -940,7 +941,7 @@ export function useFetch<T>(url: string) {
 
 ```vue
 <script setup lang="ts">
-import { onMounted } from 'vue'
+// No imports needed - onMounted auto-imported by Nuxt
 import { useFetch } from '@/composables/useFetch'
 
 interface User {
@@ -970,7 +971,7 @@ onMounted(() => {
 
 ```vue
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+// No imports needed - ref, computed auto-imported by Nuxt
 
 interface FormData {
   email: string
@@ -1098,7 +1099,7 @@ const handleSubmit = () => {
 
 ```typescript
 // composables/useForm.ts
-import { ref, computed } from 'vue'
+// No imports needed - ref, computed auto-imported by Nuxt
 
 type ValidationRule<T> = (value: T) => string | undefined
 

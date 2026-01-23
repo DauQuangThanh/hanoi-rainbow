@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Create Component Script
-# Generates a new Vue component with TypeScript and TailwindCSS boilerplate
+# Create Component Script for NuxtJS 4
+# Generates a new Nuxt component with TypeScript and TailwindCSS v4 boilerplate
+# Components are auto-imported by Nuxt
 
 set -e
 
@@ -31,13 +32,13 @@ fi
 # Determine directory based on type
 case $TYPE in
     ui)
-        DIR="src/components/ui"
+        DIR="components/ui"
         ;;
     layout)
-        DIR="src/components/layout"
+        DIR="components/layout"
         ;;
     section)
-        DIR="src/components/sections"
+        DIR="components/sections"
         ;;
     *)
         echo -e "${RED}Error: Invalid type. Must be: ui, layout, or section${NC}"
@@ -63,7 +64,7 @@ fi
 # Create component file
 cat > "$FILE_PATH" << 'EOF'
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+// No imports needed - auto-imported by Nuxt
 
 interface Props {
   // Add your props here
@@ -106,11 +107,20 @@ echo "  2. Define your props interface"
 echo "  3. Add component logic"
 echo "  4. Build your template with TailwindCSS"
 echo ""
-echo -e "${YELLOW}Usage example:${NC}"
-echo "  <script setup lang=\"ts\">"
-echo "  import ${COMPONENT_NAME} from '@/components/${TYPE}/${COMPONENT_NAME}.vue'"
-echo "  </script>"
-echo ""
-echo "  <template>"
-echo "    <${COMPONENT_NAME} />"
-echo "  </template>"
+echo -e "${YELLOW}Usage (auto-imported):${NC}"
+if [ "$TYPE" = "ui" ]; then
+    echo "  <template>"
+    echo "    <!-- Auto-imported as Ui${COMPONENT_NAME} -->"
+    echo "    <Ui${COMPONENT_NAME} />"
+    echo "  </template>"
+elif [ "$TYPE" = "layout" ]; then
+    echo "  <template>"
+    echo "    <!-- Auto-imported as Layout${COMPONENT_NAME} -->"
+    echo "    <Layout${COMPONENT_NAME} />"
+    echo "  </template>"
+else
+    echo "  <template>"
+    echo "    <!-- Auto-imported as Sections${COMPONENT_NAME} -->"
+    echo "    <Sections${COMPONENT_NAME} />"
+    echo "  </template>"
+fi

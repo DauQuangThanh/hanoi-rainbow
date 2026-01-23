@@ -26,7 +26,7 @@ Always start with mobile styles, then enhance for larger screens:
 <template>
   <!-- Mobile: single column, Desktop: three columns -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <Card />
+    <UiCard />
   </div>
   
   <!-- Mobile: stacked, Desktop: side-by-side -->
@@ -129,7 +129,7 @@ export default {
 
 ```vue
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+// No imports needed - ref, onMounted auto-imported by Nuxt
 
 const isDark = ref(false)
 

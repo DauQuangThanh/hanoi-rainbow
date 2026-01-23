@@ -1,5 +1,6 @@
-# Create Component Script (PowerShell)
-# Generates a new Vue component with TypeScript and TailwindCSS boilerplate
+# Create Component Script (PowerShell) for NuxtJS 4
+# Generates a new Nuxt component with TypeScript and TailwindCSS v4 boilerplate
+# Components are auto-imported by Nuxt
 # Platform: Windows (PowerShell 5.1+), optional: Linux/macOS (PowerShell Core 7+)
 
 [CmdletBinding()]
@@ -33,9 +34,9 @@ try {
 
     # Determine directory based on type
     $dir = switch ($Type) {
-        'ui'      { 'src\components\ui' }
-        'layout'  { 'src\components\layout' }
-        'section' { 'src\components\sections' }
+        'ui'      { 'components\ui' }
+        'layout'  { 'components\layout' }
+        'section' { 'components\sections' }
     }
 
     # Create directory if it doesn't exist
@@ -60,7 +61,7 @@ try {
     # Create component file
     $componentContent = @"
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+// No imports needed - auto-imported by Nuxt
 
 interface Props {
   // Add your props here
@@ -102,13 +103,18 @@ const emit = defineEmits<{
     Write-Host "  3. Add component logic"
     Write-Host "  4. Build your template with TailwindCSS"
     Write-Host ""
-    Write-ColorOutput "Usage example:" "Yellow"
-    Write-Host "  <script setup lang=`"ts`">"
-    Write-Host "  import $ComponentName from '@/components/$Type/$ComponentName.vue'"
-    Write-Host "  </script>"
-    Write-Host ""
+    Write-ColorOutput "Usage (auto-imported):" "Yellow"
     Write-Host "  <template>"
-    Write-Host "    <$ComponentName />"
+    if ($Type -eq 'ui') {
+        Write-Host "    <!-- Auto-imported as Ui$ComponentName -->"
+        Write-Host "    <Ui$ComponentName />"
+    } elseif ($Type -eq 'layout') {
+        Write-Host "    <!-- Auto-imported as Layout$ComponentName -->"
+        Write-Host "    <Layout$ComponentName />"
+    } else {
+        Write-Host "    <!-- Auto-imported as Sections$ComponentName -->"
+        Write-Host "    <Sections$ComponentName />"
+    }
     Write-Host "  </template>"
 }
 catch {

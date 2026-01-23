@@ -1,6 +1,8 @@
 # Complete Mockup Examples
 
-Production-ready mockup examples using Vue.js 3, TypeScript, Vite, and TailwindCSS.
+Production-ready mockup examples using NuxtJS 4, TypeScript, and TailwindCSS v4.
+
+> **Note**: All composables and Vue APIs are auto-imported by Nuxt - no manual imports needed.
 
 ## Table of Contents
 
@@ -18,8 +20,7 @@ Complete product page with gallery, reviews, and cart functionality.
 
 ```vue
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useCart } from '@/composables/useCart'
+// No imports needed - ref, computed, useCart auto-imported by Nuxt
 
 interface Product {
   id: string
@@ -266,7 +267,7 @@ Full-featured dashboard with metrics, charts, and data tables.
 
 ```vue
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+// No imports needed - ref, computed auto-imported by Nuxt
 
 interface Metric {
   label: string
@@ -460,7 +461,7 @@ Modern portfolio landing page with hero, projects, and contact sections.
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
+// No imports needed - ref auto-imported by Nuxt
 
 interface Project {
   id: string

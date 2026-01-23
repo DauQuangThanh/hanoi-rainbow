@@ -1,6 +1,8 @@
 # Component Library Reference
 
-Complete collection of production-ready Vue 3 + TypeScript + TailwindCSS components for mockup creation.
+Complete collection of production-ready NuxtJS 4 + TypeScript + TailwindCSS v4 components for mockup creation.
+
+> **Note**: All Vue APIs (ref, computed, watch, etc.) are auto-imported by Nuxt - no manual imports needed.
 
 ## Table of Contents
 
@@ -32,9 +34,11 @@ Complete collection of production-ready Vue 3 + TypeScript + TailwindCSS compone
 
 Flexible button component with multiple variants and sizes.
 
+**File: components/ui/Button.vue**
+
 ```vue
 <script setup lang="ts">
-import { computed } from 'vue'
+// No imports needed - auto-imported by Nuxt
 
 interface Props {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
@@ -99,17 +103,20 @@ const buttonClasses = computed(() => {
 **Usage:**
 
 ```vue
-<Button variant="primary" size="md" @click="handleClick">
-  Click Me
-</Button>
+<template>
+  <!-- Auto-imported as UiButton from components/ui/Button.vue -->
+  <UiButton variant="primary" size="md" @click="handleClick">
+    Click Me
+  </UiButton>
 
-<Button variant="outline" size="lg" loading>
-  Loading...
-</Button>
+  <UiButton variant="outline" size="lg" :loading="true">
+    Loading...
+  </UiButton>
 
-<Button variant="danger" icon="🗑️" @click="deleteItem">
-  Delete
-</Button>
+  <UiButton variant="danger" icon="🗑️" @click="deleteItem">
+    Delete
+  </UiButton>
+</template>
 ```
 
 ---
@@ -118,8 +125,12 @@ const buttonClasses = computed(() => {
 
 Flexible card component for content containers.
 
+**File: components/ui/Card.vue**
+
 ```vue
 <script setup lang="ts">
+// No imports needed - auto-imported by Nuxt
+
 interface Props {
   hoverable?: boolean
   clickable?: boolean
@@ -173,10 +184,13 @@ const cardClasses = computed(() => {
 **Usage:**
 
 ```vue
-<Card hoverable clickable @click="handleCardClick">
-  <h3 class="text-xl font-bold">Card Title</h3>
-  <p class="text-gray-600 mt-2">Card content goes here</p>
-</Card>
+<template>
+  <!-- Auto-imported as UiCard from components/ui/Card.vue -->
+  <UiCard hoverable clickable @click="handleCardClick">
+    <h3 class="text-xl font-bold">Card Title</h3>
+    <p class="text-gray-600 mt-2">Card content goes here</p>
+  </UiCard>
+</template>
 ```
 
 ---
@@ -185,9 +199,11 @@ const cardClasses = computed(() => {
 
 Full-featured modal dialog with backdrop.
 
+**File: components/ui/Modal.vue**
+
 ```vue
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+// No imports needed - onMounted, onUnmounted auto-imported by Nuxt
 
 interface Props {
   modelValue: boolean
@@ -308,24 +324,24 @@ const sizeClasses = {
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
+// No imports needed - ref auto-imported by Nuxt
 
 const showModal = ref(false)
 </script>
 
 <template>
-  <Button @click="showModal = true">Open Modal</Button>
+  <UiButton @click="showModal = true">Open Modal</UiButton>
   
-  <Modal v-model="showModal" title="Confirmation" size="md">
+  <UiModal v-model="showModal" title="Confirmation" size="md">
     <p>Are you sure you want to proceed?</p>
     
     <template #footer>
       <div class="flex justify-end gap-2">
-        <Button variant="ghost" @click="showModal = false">Cancel</Button>
-        <Button variant="primary" @click="handleConfirm">Confirm</Button>
+        <UiButton variant="ghost" @click="showModal = false">Cancel</UiButton>
+        <UiButton variant="primary" @click="handleConfirm">Confirm</UiButton>
       </div>
     </template>
-  </Modal>
+  </UiModal>
 </template>
 ```
 
@@ -337,7 +353,7 @@ Text input with validation support.
 
 ```vue
 <script setup lang="ts">
-import { computed } from 'vue'
+// No imports needed - computed auto-imported by Nuxt
 
 interface Props {
   modelValue: string
@@ -427,7 +443,7 @@ Dropdown select component.
 
 ```vue
 <script setup lang="ts">
-import { computed } from 'vue'
+// No imports needed - computed auto-imported by Nuxt
 
 interface Option {
   value: string | number
@@ -512,7 +528,7 @@ Tab navigation component.
 
 ```vue
 <script setup lang="ts">
-import { ref, provide } from 'vue'
+// No imports needed - ref, provide auto-imported by Nuxt
 
 interface Props {
   modelValue?: string | number
@@ -554,7 +570,7 @@ provide('setActiveTab', setActiveTab)
 
 ```vue
 <script setup lang="ts">
-import { inject, computed } from 'vue'
+// No imports needed - inject, computed auto-imported by Nuxt
 
 interface Props {
   value: string | number
@@ -595,7 +611,7 @@ const tabClasses = computed(() => {
 
 ```vue
 <script setup lang="ts">
-import { inject, computed } from 'vue'
+// No imports needed - inject, computed auto-imported by Nuxt
 
 interface Props {
   value: string | number
@@ -784,15 +800,17 @@ const props = withDefaults(defineProps<Props>(), {
 **Usage:**
 
 ```vue
-<Hero
-  title="Welcome to Our Platform"
-  subtitle="Build amazing things with Vue.js"
-  image="/hero-bg.jpg"
-  :overlay="true"
->
-  <Button variant="primary" size="lg">Get Started</Button>
-  <Button variant="outline" size="lg" class="ml-4">Learn More</Button>
-</Hero>
+<template>
+  <SectionsHero
+    title="Welcome to Our Platform"
+    subtitle="Build amazing things with Vue.js"
+    image="/hero-bg.jpg"
+    :overlay="true"
+  >
+    <UiButton variant="primary" size="lg">Get Started</UiButton>
+    <UiButton variant="outline" size="lg" class="ml-4">Learn More</UiButton>
+  </SectionsHero>
+</template>
 ```
 
 ---

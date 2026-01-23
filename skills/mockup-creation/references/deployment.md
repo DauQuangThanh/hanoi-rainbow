@@ -1,10 +1,14 @@
 # Deployment Guide
 
-Comprehensive guide for deploying Vue.js 3 + Vite + TailwindCSS mockups to various hosting platforms.
+Comprehensive guide for deploying NuxtJS 4 (Vue) and Next.js (React) mockups with TailwindCSS v4 to various hosting platforms.
+
+> **Note**: Both frameworks support SSR (Server-Side Rendering) and SSG (Static Site Generation). Choose based on your needs.
 
 ## Table of Contents
 
 - [Build Configuration](#build-configuration)
+  - [NuxtJS Configuration](#nuxtjs-configuration)
+  - [Next.js Configuration](#nextjs-configuration)
 - [Netlify Deployment](#netlify-deployment)
 - [Vercel Deployment](#vercel-deployment)
 - [GitHub Pages](#github-pages)
@@ -17,90 +21,202 @@ Comprehensive guide for deploying Vue.js 3 + Vite + TailwindCSS mockups to vario
 
 ## Build Configuration
 
-## vite.config.ts
+### NuxtJS Configuration
+
+#### nuxt.config.ts for Production
 
 ```typescript
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+// https://nuxt.com/docs/4.x/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
 
-export default defineConfig({
-  plugins: [vue()],
+export default defineNuxtConfig({
+  // Rendering mode
+  ssr: true, // Set to false for SPA mode
   
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, './src')
+  // Nitro (server) configuration
+  nitro: {
+    compressPublicAssets: true,
+    prerender: {
+      crawlLinks: true,
+      routes: ['/'] // Add your routes for SSG
     }
   },
   
-  build: {
-    // Output directory
-    outDir: 'dist',
-    
-    // Generate source maps for production debugging
-    sourcemap: false,
-    
-    // Chunk size warnings
-    chunkSizeWarningLimit: 1000,
-    
-    // Minification
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.log in production
-        drop_debugger: true
-      }
-    },
-    
-    // Rollup options
-    rollupOptions: {
-      output: {
-        // Manual chunk splitting
-        manualChunks: {
-          'vue-vendor': ['vue', 'vue-router'],
-          'utils': [
-            './src/composables/index.ts',
-            './src/utils/index.ts'
-          ]
+  // Runtime config (for environment variables)
+  runtimeConfig: {
+    // Private keys (server-side only)
+    apiSecret: '',
+    // Public keys (exposed to client)
+    public: {
+      apiBase: process.env.API_BASE_URL || ''
+    }
+  },
+  
+  // App configuration
+  app: {
+    head: {
+      title: 'My Mockup',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'My mockup description' }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ]
+    }
+  },
+  
+  // TypeScript
+  typescript: {
+    strict: true,
+    typeCheck: true
+  },
+  
+  // Vite optimization with TailwindCSS v4
+  vite: {
+    plugins: [
+      tailwindcss()
+    ],
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // Split vendor chunks for better caching
+          }
         }
       }
     }
   },
   
-  // Preview server configuration
-  preview: {
-    port: 4173,
-    strictPort: true
-  }
+  // CSS files
+  css: ['~/assets/css/main.css']
 })
 ```
 
-### Build Commands
+#### Build Commands (NuxtJS)
 
 ```json
 {
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "type-check": "vue-tsc --noEmit",
-    "build:analyze": "vite build --mode analyze"
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxi typecheck",
+    "analyze": "nuxi analyze"
   }
 }
 ```
+
+**Build Types:**
+
+- `npm run build` - SSR build (.output/ directory)
+- `npm run generate` - Static site (SSG) build (.output/public/ directory)
+- `npm run preview` - Preview production build locally
+
+### Next.js Configuration
+
+#### next.config.js for Production
+
+```javascript
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Rendering mode
+  // output: 'export', // Uncomment for static export (SSG)
+  
+  // Performance optimizations
+  poweredByHeader: false,
+  compress: true,
+  
+  // Image optimization
+  images: {
+    // For static export, use unoptimized
+    // unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'example.com',
+      },
+    ],
+  },
+  
+  // TypeScript and linting
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+  
+  // Environment variables (public vars must start with NEXT_PUBLIC_)
+  env: {
+    CUSTOM_KEY: process.env.CUSTOM_KEY,
+  },
+  
+  // Headers for security
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
+    ]
+  },
+}
+
+export default nextConfig
+```
+
+#### Build Commands (Next.js)
+
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  }
+}
+```
+
+**Build Types:**
+
+- `npm run build` - Production build (SSR, default)
+- `npm run build` with `output: 'export'` in config - Static export (SSG)
+- `npm run start` - Start production server (SSR only)
 
 ---
 
 ## Netlify Deployment
 
-### Method 1: Git Integration (Recommended)
+### NuxtJS on Netlify
+
+##### SSG (Static Site) Deployment
 
 1. **Create `netlify.toml`:**
 
 ```toml
 [build]
-  command = "npm run build"
-  publish = "dist"
+  command = "npm run generate"
+  publish = ".output/public"
 
 [[redirects]]
   from = "/*"
@@ -108,7 +224,7 @@ export default defineConfig({
   status = 200
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
 
 [[headers]]
   for = "/*"
@@ -119,17 +235,99 @@ export default defineConfig({
     Referrer-Policy = "strict-origin-when-cross-origin"
 
 [[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.css"
+  for = "/_nuxt/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 ```
 
-1. **Connect to Netlify:**
+#### SSR Deployment (using Nitro)
+
+**Install Netlify adapter:**
+
+```bash
+npm install -D @netlify/functions
+```
+
+**Update nuxt.config.ts:**
+
+```typescript
+export default defineNuxtConfig({
+  nitro: {
+    preset: 'netlify'
+  }
+})
+```
+
+**Build and deploy:**
+
+```bash
+npm run build
+# Output is in .output/
+```
+
+### Next.js on Netlify
+
+#### SSR Deployment (Default)
+
+1. **Create `netlify.toml`:**
+
+```toml
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+```
+
+**Install Next.js plugin:**
+
+```bash
+npm install -D @netlify/plugin-nextjs
+```
+
+#### SSG (Static Export) Deployment
+
+**Update next.config.js:**
+
+```javascript
+const nextConfig = {
+  output: 'export',
+  images: {
+    unoptimized: true, // Required for static export
+  },
+}
+```
+
+**Update `netlify.toml`:**
+
+```toml
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build.environment]
+  NODE_VERSION = "20"
+```
+
+### Deployment Methods (Both Frameworks)
+
+#### Method 1: Git-based Deployment
    - Go to <https://app.netlify.com>
    - Click "New site from Git"
    - Select your repository
@@ -166,43 +364,22 @@ netlify domains:add yourdomain.com
 
 ## Vercel Deployment
 
-### Method 1: Git Integration (Recommended)
+> **Both NuxtJS and Next.js have first-class Vercel support - zero configuration needed!**
 
-1. **Create `vercel.json`:**
+### NuxtJS on Vercel
 
-```json
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    }
-  ]
-}
-```
+#### Method 1: Git Integration (Recommended)
 
-1. **Deploy:**
+1. **No vercel.json needed** - Vercel auto-detects NuxtJS
+
+2. **Deploy:**
    - Go to <https://vercel.com>
    - Click "New Project"
    - Import your Git repository
-   - Settings are auto-detected
+   - Vercel automatically detects Nuxt and configures everything
    - Click "Deploy"
 
-### Method 2: Vercel CLI
+#### Method 2: Vercel CLI
 
 ```bash
 # Install Vercel CLI
@@ -215,13 +392,90 @@ vercel login
 vercel --prod
 ```
 
+#### SSR vs SSG on Vercel (NuxtJS)
+
+**SSR (default):** Runs Nuxt server on Vercel Edge Functions
+
+**SSG:** Update nuxt.config.ts:
+
+```typescript
+export default defineNuxtConfig({
+  nitro: {
+    preset: 'vercel-static'
+  }
+})
+```
+
+Then run `npm run generate` for static deployment.
+
+### Next.js on Vercel (Recommended Platform)
+
+> **Vercel is the creator and recommended platform for Next.js**
+
+#### Method 1: Git Integration (Easiest)
+
+1. **Zero configuration needed** - Vercel auto-detects Next.js
+
+2. **Deploy:**
+   - Go to <https://vercel.com>
+   - Click "New Project"
+   - Import your Git repository
+   - Vercel automatically configures everything
+   - Click "Deploy"
+
+#### Method 2: Vercel CLI
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Login
+vercel login
+
+# Deploy
+vercel --prod
+```
+
+#### Automatic Features
+
+- **SSR by default**: Server-Side Rendering with Edge Functions
+- **ISR**: Incremental Static Regeneration automatically enabled
+- **Image Optimization**: Built-in with Next.js Image component
+- **Analytics**: Optional Vercel Analytics integration
+- **Edge Middleware**: Runs on Vercel Edge Network
+
+#### Environment Variables
+
+Set in Vercel Dashboard:
+
+1. Go to Project Settings → Environment Variables
+2. Add variables (e.g., `NEXT_PUBLIC_API_URL`)
+3. Redeploy to apply changes
+
 ---
 
 ## GitHub Pages
 
-### Using GitHub Actions
+> **Note**: GitHub Pages only supports static sites (SSG)
 
-1. **Create `.github/workflows/deploy.yml`:**
+### NuxtJS on GitHub Pages
+
+#### Using GitHub Actions
+
+1. **Update nuxt.config.ts for GitHub Pages:**
+
+```typescript
+export default defineNuxtConfig({
+  app: {
+    baseURL: '/your-repo-name/', // Replace with your repo name
+    buildAssetsDir: 'assets',
+  },
+  // Use SSG
+  ssr: false
+})
+```
+
+2. **Create `.github/workflows/deploy.yml`:**
 
 ```yaml
 name: Deploy to GitHub Pages
@@ -241,26 +495,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
           
       - name: Install dependencies
         run: npm ci
         
       - name: Build
-        run: npm run build
+        run: npm run generate
         env:
           NODE_ENV: production
           
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: .output/public
           
   deploy:
     environment:
@@ -271,16 +525,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
-```
-
-1. **Update `vite.config.ts`:**
-
-```typescript
-export default defineConfig({
-  base: '/your-repo-name/', // GitHub Pages base path
-  // ... rest of config
-})
+        uses: actions/deploy-pages@v4
 ```
 
 1. **Enable GitHub Pages:**
